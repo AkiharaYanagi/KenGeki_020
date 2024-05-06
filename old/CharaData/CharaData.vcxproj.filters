@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Chara">
+      <UniqueIdentifier>{f21a6e96-6ace-410e-b106-469d342e4342}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{59334c7b-eb7e-48be-8f7c-420ef90dd7d8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Chara\Action.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\Behavior.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\Branch.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\Chara.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\Command.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\Compend.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\Effect.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\EffectGenerate.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\Route.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\Script.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\ScriptParam_Battle.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\ScriptParam_Staging.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Chara\Sequence.cpp">
+      <Filter>Chara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IO\LoadChara.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IO\LoadCharaBin.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IO\LoadCharaBinFunc.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IO\LoadCharaBinUtl.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IO\LoadCharaFunc.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IO\LoadCharaUtl.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\LoadCharaBinUtl.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LoadCharaFunc.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LoadCharaUtl.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IOCharaDefine.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LoadChara.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LoadCharaBin.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LoadCharaBinFunc.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Route.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Script.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScriptParam_Battle.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScriptParam_Staging.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Sequence.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EffectGenerate.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Action.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Behavior.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Branch.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Chara.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Chara_Const.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Command.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Compend.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Effect.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CharaData.h" />
+  </ItemGroup>
+</Project>
