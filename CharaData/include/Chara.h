@@ -52,13 +52,13 @@ namespace GAME
 //		Behavior		m_bhvMain;		//メイン スクリプト
 //		PVP_TxBs		m_pvpTxMain;	//メインイメージ テクスチャ配列
 //		PVP_Action		m_pvpAction;	//アクション配列
-		PAP_Tx			mpap_tx;		//メインイメージ テクスチャ配列
+		PAP_Tx			mpap_txMain;	//メインイメージ テクスチャ配列
 		PAP_Action		mpap_Action;	//アクション配列
 
 //		Garnish			m_bhvEf;		//EF スクリプト
 //		PVP_TxBs		m_pvpTxEf;		//EFイメージ テクスチャ配列
 		PAP_Tx			mpap_txEf;		//EFイメージ テクスチャ配列
-		PVP_Effect		m_pvpEf;		//エフェクト配列
+		PAP_Effect		mpap_Ef;		//エフェクト配列
 
 		VP_Command		m_vpCommand;	//コマンド配列
 		VP_Branch		m_vpBranch;		//ブランチ配列
@@ -69,25 +69,26 @@ namespace GAME
 		Chara ( const Chara & rhs ) = delete;
 		~Chara ();
 
-//		void Clear ();
+		void Clear ();
 
 		//-----------------------------------------------------------------
 		//メインイメージ テクスチャ配列ポインタ
 //		PVP_TxBs GetpvpMainTexture () const { return m_pvpTxMain; }
-		PVP_TxBs GetpvpMainTexture () const { return m_pvpTxMain; }
+		PAP_Tx GetpapTxMain () const { return mpap_txMain; }
 
 		//メインイメージ テクスチャ配列に追加
-		void AddpMainTexture ( P_TxBs pTexture ) { m_pvpTxMain->push_back ( pTexture ); }
+		void AddpMainTexture ( P_Tx pTexture ) { mpap_txMain->push_back ( pTexture ); }
 
 		//メインイメージ テクスチャポインタの取得
-		P_TxBs GetpMainTexture ( UINT index ) { return m_pvpTxMain->at ( index ); }
+		P_Tx GetpMainTexture ( UINT index ) { return mpap_txMain->at ( index ); }
 
 		//-----------------------------------------------------------------
 		//アクション配列ポインタを取得
-		PVP_Action GetpvpAction () { return m_pvpAction; }
+//		PVP_Action GetpvpAction () { return m_pvpAction; }
+		PAP_Action GetpvpAction () { return mpap_Action; }
 
 		//アクション配列に追加
-		void AddpAction ( P_Action pAction ) { m_pvpAction->push_back ( pAction ); }
+		void AddpAction ( P_Action pAction ) { mpap_Action->push_back ( pAction ); }
 
 		//アクション配列にまとめて追加
 		void AddpAction ( std::unique_ptr < P_Action [] > arypAction, rsize_t size );
@@ -99,42 +100,42 @@ namespace GAME
 		UINT GetActionID ( tstring name ) const;
 
 		//アクションポインタを取得
-		P_Action GetpAction ( UINT index ) { return m_pvpAction->at ( index ); }
+		P_Action GetpAction ( UINT index ) { return mpap_Action->at ( index ); }
 		P_Action GetpAction ( tstring name ) { return GetpAction ( GetActionID ( name ) ); }
 
 		//---------------------------------------------------------------------
 		//スクリプトポインタを取得
-		P_Script GetpScript ( UINT indexAction, UINT indexScript ) { return m_pvpAction->at ( indexAction )->GetpScript( indexScript ); }
+		P_Script GetpScript ( UINT indexAction, UINT indexScript ) { return mpap_Action->at ( indexAction )->GetpScript( indexScript ); }
 
 		//次スクリプトが存在するかどうか
 		bool IsNextScript ( UINT indexAction, UINT indexScript )
 		{
-			return m_pvpAction->at ( indexAction )->IsNextScript( indexScript );
+			return mpap_Action->at ( indexAction )->IsNextScript( indexScript );
 		}
 
 		//-----------------------------------------------------------------
 		//Efイメージ テクスチャ配列ポインタ
-		PVP_TxBs GetpvpEfTexture () const { return m_pvpTxEf; }
+		PAP_Tx GetpvpEfTexture () const { return mpap_txEf; }
 
 		//Efイメージ テクスチャ配列に追加
-		void AddpEfTexture ( P_TxBs pTexture ) { m_pvpTxEf->push_back ( pTexture ); }
+		void AddpEfTexture ( P_Tx pTexture ) { mpap_txEf->push_back ( pTexture ); }
 
 		//エフェクト配列にまとめて追加
 		void AddpEffect ( std::unique_ptr < P_Effect [] > arypEffect, rsize_t size );
 		void AddpEffect ( const std::vector < P_Effect > & arypEffect, rsize_t size );
 
 		//Efイメージ テクスチャポインタの取得
-		P_TxBs GetpEfTexture ( UINT index ) { return m_pvpTxEf->at ( index ); }
+		P_Tx GetpEfTexture ( UINT index ) { return mpap_txEf->at ( index ); }
 
 		//-----------------------------------------------------------------
 		//エフェクト配列に追加
-		void AddpEffect ( P_Effect pEffect ) { m_pvpEf->push_back ( pEffect ); }
+		void AddpEffect ( P_Effect pEffect ) { mpap_Ef->push_back ( pEffect ); }
 
 		//エフェクト配列ポインタを取得
-		PVP_Effect GetpvpEffect () { return m_pvpEf; }
+		PAP_Effect GetpvpEffect () { return mpap_Ef; }
 
 		//エフェクトポインタを取得
-		P_Effect GetpEffect ( UINT index ) { return m_pvpEf->at ( index ); }
+		P_Effect GetpEffect ( UINT index ) { return mpap_Ef->at ( index ); }
 
 		//---------------------------------------------------------------------
 		//コマンド配列に追加

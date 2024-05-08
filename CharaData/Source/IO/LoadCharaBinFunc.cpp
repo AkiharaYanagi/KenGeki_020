@@ -34,7 +34,7 @@ namespace GAME
 
 	void LoadCharaBinFunc::LoadCharaImage ( P_CH buf, UINT & pos, Chara & ch )
 	{
-		LoadImg ( buf, pos, ch.GetpvpMainTexture () );
+		LoadImg ( buf, pos, ch.GetpapTxMain () );
 		LoadImg ( buf, pos, ch.GetpvpEfTexture () );
 	}
 
@@ -148,7 +148,8 @@ namespace GAME
 		for ( UINT i = 0; i < nCmd; ++ i )
 		{
 			//コマンド名
-			aryCmd [ i ]->SetName ( m_utl.LoadText ( buf, pos ) );
+			s3d::String str = Unicode::FromWstring ( m_utl.LoadText ( buf, pos ) );
+			aryCmd [ i ]->SetName ( str );
 
 			//受付時間[byte]
 			byte lmtTime = buf [ pos ++ ];
@@ -333,12 +334,12 @@ namespace GAME
 
 
 	//イメージ
-	void LoadCharaBinFunc::LoadImg ( P_CH buf, UINT & pos, PVP_TxBs pvpTxBs )
+	void LoadCharaBinFunc::LoadImg ( P_CH buf, UINT & pos, PAP_Tx pvpTx )
 	{
 		//個数
 		UINT nImg = m_utl.LoadUInt ( buf, pos );
-		pvpTxBs->clear ();
-		pvpTxBs->resize ( nImg );
+		pvpTx->clear ();
+		pvpTx->resize ( nImg );
 
 		for ( UINT i = 0; i < nImg; ++ i )
 		{
@@ -348,14 +349,14 @@ namespace GAME
 
 
 			//メモリ上のデータからゲームテクスチャに変換
-			P_TxMem pTx = std::make_shared < TxMem > ( (LPCVOID)(buf.get() + pos), size );
+			P_Tx pTx = std::make_shared < s3d::Texture > ( (LPCVOID)(buf.get() + pos), size );
 			pos += size;
 
 
-
+			s3d::BinaryReader br;
 
 			//キャラ内部のテクスチャリストに加える
-			( *pvpTxBs ) [ i ] = pTx;
+			( *pvpTx ) [ i ] = pTx;
 		}
 
 	}

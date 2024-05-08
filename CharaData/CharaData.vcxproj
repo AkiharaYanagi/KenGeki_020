@@ -128,12 +128,8 @@
     <ClCompile Include="Source\Chara\ScriptParam_Battle.cpp" />
     <ClCompile Include="Source\Chara\ScriptParam_Staging.cpp" />
     <ClCompile Include="Source\Chara\Sequence.cpp" />
-    <ClCompile Include="Source\IO\LoadChara.cpp" />
-    <ClCompile Include="Source\IO\LoadCharaBin.cpp" />
-    <ClCompile Include="Source\IO\LoadCharaBinFunc.cpp" />
-    <ClCompile Include="Source\IO\LoadCharaBinUtl.cpp" />
-    <ClCompile Include="Source\IO\LoadCharaFunc.cpp" />
-    <ClCompile Include="Source\IO\LoadCharaUtl.cpp" />
+    <ClCompile Include="Source\IO\LoadCharaBinFunc_s3d.cpp" />
+    <ClCompile Include="Source\IO\LoadCharaBin_s3d.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -345,12 +341,8 @@
     <ClInclude Include="include\Effect.h" />
     <ClInclude Include="include\EffectGenerate.h" />
     <ClInclude Include="include\IOCharaDefine.h" />
-    <ClInclude Include="include\LoadChara.h" />
-    <ClInclude Include="include\LoadCharaBin.h" />
-    <ClInclude Include="include\LoadCharaBinFunc.h" />
-    <ClInclude Include="include\LoadCharaBinUtl.h" />
-    <ClInclude Include="include\LoadCharaFunc.h" />
-    <ClInclude Include="include\LoadCharaUtl.h" />
+    <ClInclude Include="include\LoadCharaBinFunc_s3d.h" />
+    <ClInclude Include="include\LoadCharaBin_s3d.h" />
     <ClInclude Include="include\Route.h" />
     <ClInclude Include="include\Script.h" />
     <ClInclude Include="include\ScriptParam_Battle.h" />

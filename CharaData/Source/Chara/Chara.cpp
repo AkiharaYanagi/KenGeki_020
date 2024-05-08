@@ -18,61 +18,61 @@ namespace GAME
 	Chara::Chara ()
 	{
 //		m_pvpTxMain = std::make_shared < VP_TxBs > ();
-		mpap_tx = std::make_shared < AP_Tx > ();
-		m_pvpAction = std::make_shared < VP_Action > ();
+		mpap_txMain = std::make_shared < AP_Tx > ();
+		mpap_Action = std::make_shared < AP_Action > ();
 //		m_pvpTxEf = std::make_shared < VP_TxBs > ();
 		mpap_txEf = std::make_shared < AP_Tx > ();
-		m_pvpEf = std::make_shared < VP_Effect > ();
+		mpap_Ef = std::make_shared < AP_Effect > ();
 	}
 
 	Chara::~Chara ()
 	{
 	}
 
-#if 0
 	void Chara::Clear ()
 	{
+#if 0
 		//再読込時はCharaごと行う
 		for ( auto p : * m_pvpTxMain ) { p->Rele (); } m_pvpTxMain->clear (); m_pvpTxMain.reset ();
 		for ( auto p : * m_pvpAction ) { p->Rele (); } m_pvpAction->clear (); m_pvpAction.reset ();
 		for ( auto p : * m_pvpTxEf ) { p->Rele (); } m_pvpTxEf->clear (); m_pvpTxEf.reset ();
 		for ( auto p : * m_pvpEf ) { p->Rele (); } m_pvpEf->clear (); m_pvpEf.reset ();
-	}
 #endif // 0
+	}
 
 	//---------------------------------------------------
 	//アクション配列にまとめて追加
 	void Chara::AddpAction ( std::unique_ptr < P_Action [] > arypAction, rsize_t size )
 	{
-		if ( ! m_pvpAction ) { return; }
+		if ( ! mpap_Action ) { return; }
 
-		m_pvpAction->clear ();
-		m_pvpAction->resize ( size );
+		mpap_Action->clear ();
+		mpap_Action->resize ( size );
 		for ( UINT i = 0; i < size; ++ i )
 		{
-			( *m_pvpAction ) [ i ] = arypAction [ i ];
+			( *mpap_Action ) [ i ] = arypAction [ i ];
 		}
 	}
 	void Chara::AddpAction ( std::shared_ptr < P_Action [] > arypAction, rsize_t size )
 	{
-		if ( ! m_pvpAction ) { return; }
+		if ( ! mpap_Action ) { return; }
 
-		m_pvpAction->clear ();
-		m_pvpAction->resize ( size );
+		mpap_Action->clear ();
+		mpap_Action->resize ( size );
 		for ( UINT i = 0; i < size; ++ i )
 		{
-			( *m_pvpAction ) [ i ] = arypAction [ i ];
+			( *mpap_Action ) [ i ] = arypAction [ i ];
 		}
 	}
 	void Chara::AddpAction ( const std::vector < P_Action > & arypAction, rsize_t size )
 	{
-		if ( ! m_pvpAction ) { return; }
+		if ( ! mpap_Action ) { return; }
 
-		m_pvpAction->clear ();
-		m_pvpAction->resize ( size );
+		mpap_Action->clear ();
+		mpap_Action->resize ( size );
 		for ( UINT i = 0; i < size; ++ i )
 		{
-			(*m_pvpAction) [ i ] = arypAction [ i ];
+			(*mpap_Action) [ i ] = arypAction [ i ];
 		}
 	}
 
@@ -80,24 +80,24 @@ namespace GAME
 	//エフェクト配列にまとめて追加
 	void Chara::AddpEffect ( std::unique_ptr < P_Effect [] > arypEffect, rsize_t size )
 	{
-		if ( ! m_pvpEf ) { return; }
+		if ( ! mpap_Ef ) { return; }
 
-		m_pvpEf->clear ();
-		m_pvpEf->resize ( size );
+		mpap_Ef->clear ();
+		mpap_Ef->resize ( size );
 		for ( UINT i = 0; i < size; ++ i )
 		{
-			m_pvpEf->at ( i ) = arypEffect [ i ];
+			mpap_Ef->at ( i ) = arypEffect [ i ];
 		}
 	}
 	void Chara::AddpEffect ( const std::vector < P_Effect > & arypEffect, rsize_t size )
 	{
-		if ( ! m_pvpEf ) { return; }
+		if ( ! mpap_Ef ) { return; }
 
-		m_pvpEf->clear ();
-		m_pvpEf->resize ( size );
+		mpap_Ef->clear ();
+		mpap_Ef->resize ( size );
 		for ( UINT i = 0; i < size; ++ i )
 		{
-			m_pvpEf->at ( i ) = arypEffect [ i ];
+			mpap_Ef->at ( i ) = arypEffect [ i ];
 		}
 	}
 
@@ -137,7 +137,7 @@ namespace GAME
 	UINT Chara::GetActionID ( tstring name ) const
 	{
 		UINT index = 0;
-		for ( auto p : *m_pvpAction )
+		for ( auto p : *mpap_Action )
 		{
 			tstring actionName = p->GetName (); 
 			if ( 0 == name.compare ( actionName ) )

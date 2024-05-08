@@ -35,6 +35,9 @@ namespace GAME
 	using VP_Effect = std::vector < P_Effect >;
 	using PVP_Effect = std::shared_ptr < VP_Effect >;
 
+	using AP_Effect = s3d::Array < P_Effect >;
+	using PAP_Effect = std::shared_ptr < AP_Effect >;
+
 
 }	//namespace GAME
 
