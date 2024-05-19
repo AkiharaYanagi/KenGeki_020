@@ -17,35 +17,35 @@ namespace GAME
 	}
 
 
-	void LoadCharaBinFunc::LoadChara ( P_CH buf, UINT & pos, Chara & ch )
+	void LoadCharaBinFunc::LoadChara ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
-		LoadCharaScript ( buf, pos, ch );
-		LoadCharaImage ( buf, pos, ch );
+		LoadCharaScript ( std::move ( buf ), pos, ch );
+		LoadCharaImage ( std::move ( buf ), pos, ch );
 	}
 
-	void LoadCharaBinFunc::LoadCharaScript ( P_CH buf, UINT & pos, Chara & ch )
+	void LoadCharaBinFunc::LoadCharaScript ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
-		LoadBehavior ( buf, pos, ch );	//Behavior
-		LoadGarnish ( buf, pos, ch );	//Garnish
-		LoadCommand ( buf, pos, ch );	//Command
-		LoadBranch ( buf, pos, ch );	//Branch
-		LoadRoute ( buf, pos, ch );		//Route
+		LoadBehavior ( std::move ( buf ), pos, ch );	//Behavior
+		LoadGarnish ( std::move ( buf ), pos, ch );	//Garnish
+		LoadCommand ( std::move ( buf ), pos, ch );	//Command
+		LoadBranch ( std::move ( buf ), pos, ch );	//Branch
+		LoadRoute ( std::move ( buf ), pos, ch );		//Route
 	}
 
-	void LoadCharaBinFunc::LoadCharaImage ( P_CH buf, UINT & pos, Chara & ch )
+	void LoadCharaBinFunc::LoadCharaImage ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
-		LoadImg ( buf, pos, ch.GetpapTxMain () );
-		LoadImg ( buf, pos, ch.GetpvpEfTexture () );
+		LoadImg ( std::move ( buf ), pos, ch.GetpapTxMain () );
+		LoadImg ( std::move ( buf ), pos, ch.GetpvpEfTexture () );
 	}
 
 
-	void LoadCharaBinFunc::LoadBehavior ( P_CH buf, UINT & pos, Chara & ch )
+	void LoadCharaBinFunc::LoadBehavior ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
 		//@afford メモリコントローラ
 		//先頭に 総アクション数, 総スクリプト数 を記述、必要時に該当分のアドレスを返す
 
 		//アクション個数 と メモリの確保
-		UINT nAct = m_utl.LoadUInt ( buf, pos );
+		UINT nAct = m_utl.LoadUInt ( std::move ( buf ), pos );
 
 #if 0
 		unique_ptr < Action [] > pi = make_unique < Action [] > ( nAct );
@@ -73,7 +73,7 @@ namespace GAME
 			P_Action pAct = aryAct [ iAct ];
 
 			//アクション
-			aryAct [ iAct ]->SetName ( m_utl.LoadText ( buf, pos ) );
+			aryAct [ iAct ]->SetName ( m_utl.LoadText ( std::move ( buf ), pos ) );
 
 
 //			TRACE_F ( _T ( "LoadCharaBin: %s\n" ), pAct->GetName ().c_str () );
@@ -106,7 +106,7 @@ namespace GAME
 		ch.AddpAction ( std::move ( aryAct ), nAct );
 	}
 	
-	void LoadCharaBinFunc::LoadGarnish ( P_CH buf, UINT & pos, Chara & ch )
+	void LoadCharaBinFunc::LoadGarnish ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
 		//エフェクト個数 と メモリの確保
 		UINT nEfc = m_utl.LoadUInt ( buf, pos );
@@ -137,7 +137,7 @@ namespace GAME
 		ch.AddpEffect ( aryEfc, nEfc );
 	}
 
-	void LoadCharaBinFunc::LoadCommand ( P_CH buf, UINT & pos, Chara & ch )
+	void LoadCharaBinFunc::LoadCommand ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
 		//コマンド個数 と メモリの確保
 		UINT nCmd = m_utl.LoadUInt ( buf, pos );
@@ -190,7 +190,7 @@ namespace GAME
 	}
 
 
-	void LoadCharaBinFunc::LoadBranch ( P_CH buf, UINT & pos, Chara & ch )
+	void LoadCharaBinFunc::LoadBranch ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
 		//ブランチ個数 と メモリの確保
 		UINT nBrc = m_utl.LoadUInt ( buf, pos );
@@ -216,7 +216,7 @@ namespace GAME
 	}
 
 
-	void LoadCharaBinFunc::LoadRoute ( P_CH buf, UINT & pos, Chara & ch )
+	void LoadCharaBinFunc::LoadRoute ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
 		//ルート個数 と メモリの確保
 		UINT nRut = m_utl.LoadUInt ( buf, pos );
@@ -238,7 +238,7 @@ namespace GAME
 		ch.AddaRoute ( std::move ( aryRut ), nRut );
 	}
 
-	void LoadCharaBinFunc::LoadScript ( P_CH buf, UINT & pos, Script & scp )
+	void LoadCharaBinFunc::LoadScript ( UP_BYTE buf, UINT & pos, Script & scp )
 	{
 		//イメージインデックス
 		UINT imdIndex = m_utl.LoadUInt ( buf, pos );
@@ -292,7 +292,7 @@ namespace GAME
 
 
 	//スクリプト・戦闘パラメータ
-	void LoadCharaBinFunc::LoadScpPrm_Btl ( P_CH buf, UINT & pos, Script & scp )
+	void LoadCharaBinFunc::LoadScpPrm_Btl ( UP_BYTE buf, UINT & pos, Script & scp )
 	{
 		scp.m_prmBattle.CalcState = (CLC_ST)m_utl.LoadInt ( buf, pos );
 
@@ -313,7 +313,7 @@ namespace GAME
 
 
 	//スクリプト・演出パラメータ
-	void LoadCharaBinFunc::LoadScpPrm_Stg ( P_CH buf, UINT & pos, Script & scp )
+	void LoadCharaBinFunc::LoadScpPrm_Stg ( UP_BYTE buf, UINT & pos, Script & scp )
 	{
 		scp.m_prmStaging.BlackOut		 = m_utl.LoadByte ( buf, pos );
 		scp.m_prmStaging.Vibration		 = m_utl.LoadByte ( buf, pos );
@@ -334,7 +334,7 @@ namespace GAME
 
 
 	//イメージ
-	void LoadCharaBinFunc::LoadImg ( P_CH buf, UINT & pos, PAP_Tx pvpTx )
+	void LoadCharaBinFunc::LoadImg ( UP_BYTE buf, UINT & pos, PAP_Tx pvpTx )
 	{
 		//個数
 		UINT nImg = m_utl.LoadUInt ( buf, pos );

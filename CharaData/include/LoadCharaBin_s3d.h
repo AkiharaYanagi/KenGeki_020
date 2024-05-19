@@ -8,7 +8,8 @@
 //-------------------------------------------------------------------------------------------------
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
-#include "LoadCharaBinFunc_s3d.h"
+//#include "LoadCharaBinFunc_s3d.h"
+#include "LoadCharaBinFunc.h"
 
 //-------------------------------------------------------------------------------------------------
 // 宣言
@@ -20,7 +21,8 @@ namespace GAME
 	//------------------------------------------------------
 	class LoadCharaBin_s3d
 	{
-		LoadCharaBinFunc_s3d		m_func;
+//		LoadCharaBinFunc_s3d	m_func;
+		LoadCharaBinFunc		m_func;
 
 		//try用
 		void _Load ( const s3d::String & filename,  Chara & chara );

@@ -63,7 +63,7 @@ namespace GAME
 
 
 		//全体を一時読込
-		std::unique_ptr < byte [] > buffer = std::make_unique < byte [] > ( scriptSize );
+		UP_BYTE buffer = std::make_unique < byte [] > ( scriptSize );
 		br.read ( buffer.get(), scriptSize );
 
 		//------------------------------------------

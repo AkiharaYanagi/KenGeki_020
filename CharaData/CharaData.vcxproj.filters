@@ -181,7 +181,10 @@
     <ClCompile Include="Source\IO\LoadCharaBin_s3d.cpp">
       <Filter>IO</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IO\LoadCharaBinFunc_s3d.cpp">
+    <ClCompile Include="Source\IO\LoadCharaBinUtl.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IO\LoadCharaBinFunc.cpp">
       <Filter>IO</Filter>
     </ClCompile>
   </ItemGroup>
@@ -872,7 +875,10 @@
     <ClInclude Include="include\LoadCharaBin_s3d.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="include\LoadCharaBinFunc_s3d.h">
+    <ClInclude Include="include\LoadCharaBinFunc.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LoadCharaBinUtl.h">
       <Filter>IO</Filter>
     </ClInclude>
   </ItemGroup>
