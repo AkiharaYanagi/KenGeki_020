@@ -82,6 +82,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <DelayLoadDLLs>advapi32.dll;crypt32.dll;dwmapi.dll;gdi32.dll;imm32.dll;ole32.dll;oleaut32.dll;opengl32.dll;shell32.dll;shlwapi.dll;user32.dll;winmm.dll;ws2_32.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\GameLib020\Library;$(SolutionDir)Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I /D /Y "$(OutDir)$(TargetFileName)" "$(ProjectDir)App"</Command>
@@ -411,6 +412,7 @@
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp" />
     <ClCompile Include="Source\FtgMain\BG.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting.cpp" />
     <ClCompile Include="Source\FtgMain\FtgMain.cpp" />

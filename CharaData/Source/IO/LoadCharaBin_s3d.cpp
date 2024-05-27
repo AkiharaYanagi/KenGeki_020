@@ -47,6 +47,7 @@ namespace GAME
 	//------------------------------------------
 	void LoadCharaBin_s3d::_Load ( const s3d::String & filename, Chara & chara )
 	{
+
 		//---------------------------------------------------------------------
 		//ファイル読込
 		s3d::BinaryReader br ( filename );

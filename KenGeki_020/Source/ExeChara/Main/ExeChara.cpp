@@ -55,12 +55,13 @@ namespace GAME
 	{
 	}
 
-#if 0
 	//基本タスク関数
 	void ExeChara::Move ()
 	{
+#if 0
 		m_tmrSlow.Move ();	//タイマ手動
 		TASK_VEC::Move ();
+#endif // 0
 	}
 
 	//===========================================================
@@ -75,6 +76,7 @@ namespace GAME
 	//	void ExeChara::PostScriptMove ();	//	スクリプト後処理
 	//===========================================================
 
+#if 0
 
 	//■	毎フレーム スクリプト前処理
 	void ExeChara::PreScriptMove () { m_actor.PreScriptMove (); }

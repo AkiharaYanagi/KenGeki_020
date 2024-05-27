@@ -16,22 +16,22 @@ namespace GAME
 		::setlocale ( LC_ALL, "japanese" );
 	}
 
-
+#if 0
 	//-----------------------------------------------------------------------
 	tstring LoadCharaBinUtl::LoadText ( UP_BYTE buf, UINT & pos )
 	{
 		//名前のサイズ
 		byte length = buf [ pos ++ ];	//Encoding.UTF8
 
-//		unique_ptr < char [] > arypChar = make_unique < char [] > ( length + 1 );
-//		memcpy_s ( arypChar.get(), length ,buf, length );
-		
-//		unique_ptr < TCHAR [] >  tbuf = make_unique < TCHAR [] > ( length + 1 );
-//		size_t _PptNumOfCharConverted = 0;
-//		errno_t err = ::mbstowcs_s ( &_PptNumOfCharConverted, tbuf.get (), length + 1, arypChar.get (), _TRUNCATE );
+		//		unique_ptr < char [] > arypChar = make_unique < char [] > ( length + 1 );
+		//		memcpy_s ( arypChar.get(), length ,buf, length );
+
+		//		unique_ptr < TCHAR [] >  tbuf = make_unique < TCHAR [] > ( length + 1 );
+		//		size_t _PptNumOfCharConverted = 0;
+		//		errno_t err = ::mbstowcs_s ( &_PptNumOfCharConverted, tbuf.get (), length + 1, arypChar.get (), _TRUNCATE );
 
 		//UTF8 -> wstring
-		std::string str ( buf.get() + pos, length );
+		std::string str ( (char*)buf.get() + pos, length );
 		std::wstring_convert < std::codecvt_utf8_utf16 < wchar_t > > converter;
 		tstring tstr = converter.from_bytes ( str );
 
@@ -40,6 +40,24 @@ namespace GAME
 
 		//取得した名前を返す
 		return tstr ;
+	}
+#endif // 0
+
+	//-----------------------------------------------------------------------
+	s3d::String LoadCharaBinUtl::LoadS3dString ( UP_BYTE buf, UINT & pos )
+	{
+		//名前のサイズ
+		byte length = buf [ pos ++ ];	//Encoding.UTF8
+
+		//UTF8 -> wstring
+		std::string str ( (char*)buf.get() + pos, length );
+		s3d::String s3dStr = Unicode::Widen ( str );
+
+		//位置を更新
+		pos += length;
+
+		//取得した名前を返す
+		return s3dStr;
 	}
 
 
@@ -80,23 +98,23 @@ namespace GAME
 
 	VEC2 LoadCharaBinUtl::LoadVec2 ( UP_BYTE buf, UINT & pos )
 	{
-		int pos_x = LoadInt ( buf, pos );
-		int pos_y = LoadInt ( buf, pos );
+		int pos_x = LoadInt ( std::move ( buf ), pos );
+		int pos_y = LoadInt ( std::move ( buf ), pos );
 		return VEC2 ( (float)pos_x, (float)pos_y );
 	}
 
 	//intで読んだ値を10.fで割る(0.1f掛ける)
 	VEC2 LoadCharaBinUtl::LoadVec2_Dev10F ( UP_BYTE buf, UINT & pos )
 	{
-		int pos_x = LoadInt ( buf, pos );
-		int pos_y = LoadInt ( buf, pos );
+		int pos_x = LoadInt ( std::move ( buf ), pos );
+		int pos_y = LoadInt ( std::move ( buf ), pos );
 		return VEC2 ( 0.1f * pos_x, 0.1f * pos_y );
 	}
 
 
 	RECT LoadCharaBinUtl::LoadRect ( UP_BYTE buf, UINT & pos )
 	{
-		//繝ェ繝医Ν繧ィ繝ウ繝ぅ繧「繝ウ隱ュ霎シ (byte[])0x67 0x45 0x23 0x01 -> (int)0x01234567
+		//リトルエンディアン読込 (byte[])0x67 0x45 0x23 0x01 -> (UINT)0x01234567
 		RECT rect = { 0 };
 		rsize_t size = sizeof ( RECT );
 		::memcpy_s ( &rect, size, buf.get () + pos, size );
@@ -112,7 +130,7 @@ namespace GAME
 		pvRect->resize ( n );
 		for ( UINT i = 0; i < n; ++ i )
 		{
-			( *pvRect ) [ i ] = LoadRect ( buf, pos );
+			( *pvRect ) [ i ] = LoadRect ( std::move ( buf ), pos );
 		}
 	}
 
@@ -133,11 +151,11 @@ namespace GAME
 
 	void LoadCharaBinUtl::LoadAryUint ( UP_BYTE buf, UINT & pos, V_UINT & refAryUint )
 	{
-		UINT size = LoadUInt ( buf, pos );
+		UINT size = LoadUInt ( std::move ( buf ), pos );
 		refAryUint.resize ( size );
 		for ( UINT i = 0; i < size; ++ i )
 		{
-			refAryUint [ i ] = LoadUInt ( buf, pos );
+			refAryUint [ i ] = LoadUInt ( std::move ( buf ), pos );
 		}
 	}
 

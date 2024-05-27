@@ -854,5 +854,8 @@
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp">
       <Filter>ExeChara\Disp</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp">
+      <Filter>ExeChara\Main</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

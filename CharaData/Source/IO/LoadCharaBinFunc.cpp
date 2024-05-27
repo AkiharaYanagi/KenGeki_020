@@ -36,6 +36,8 @@ namespace GAME
 	{
 		LoadImg ( std::move ( buf ), pos, ch.GetpapTxMain () );
 		LoadImg ( std::move ( buf ), pos, ch.GetpvpEfTexture () );
+#if 0
+#endif // 0
 	}
 
 
@@ -62,6 +64,7 @@ namespace GAME
 		for ( UINT i = 0; i < nAct; ++ i ) { aryAct [ i ].reset ( & aryShared [ i ] ); }
 #endif // 0
 
+
 		std::unique_ptr < P_Action [] > aryAct = std::make_unique < P_Action [] > ( nAct );
 //		std::vector < P_Action > aryAct ( nAct );
 		for ( UINT i = 0; i < nAct; ++ i ) { aryAct [ i ] = std::make_shared < Action > (); }
@@ -73,22 +76,22 @@ namespace GAME
 			P_Action pAct = aryAct [ iAct ];
 
 			//アクション
-			aryAct [ iAct ]->SetName ( m_utl.LoadText ( std::move ( buf ), pos ) );
+			aryAct [ iAct ]->SetName ( m_utl.LoadS3dString ( std::move ( buf ), pos ) );
 
 
 //			TRACE_F ( _T ( "LoadCharaBin: %s\n" ), pAct->GetName ().c_str () );
 //			TRACE_F ( _T ( "LoadCharaBin: %d\n" ), iAct );
 
 
-			aryAct [ iAct ]->SetNextID ( (UINT)m_utl.LoadUInt ( buf, pos ) );
+			aryAct [ iAct ]->SetNextID ( (UINT)m_utl.LoadUInt ( std::move ( buf ), pos ) );
 			aryAct [ iAct ]->SetCategory ( (ACTION_CATEGORY)buf [ pos ++ ] );
 			aryAct [ iAct ]->SetPosture ( (ACTION_POSTURE)buf [ pos ++ ] );
 			aryAct [ iAct ]->SetHitNum ( (UINT)buf [ pos ++ ] );
 			aryAct [ iAct ]->SetHitPitch ( (UINT)buf [ pos ++ ] );
-			aryAct [ iAct ]->SetBalance ( m_utl.LoadInt ( buf, pos ) );
+			aryAct [ iAct ]->SetBalance ( m_utl.LoadInt ( std::move ( buf ), pos ) );
 
 			//スクリプト個数 と メモリの確保
-			UINT nScp = m_utl.LoadUInt ( buf, pos );
+			UINT nScp = m_utl.LoadUInt ( std::move ( buf ), pos );
 
 			std::unique_ptr < P_Script [] > aryScp = std::make_unique < P_Script [] > ( nScp );
 			for ( UINT i = 0; i < nScp; ++ i ) { aryScp [ i ] = std::make_shared < Script > (); }
@@ -96,7 +99,7 @@ namespace GAME
 			for ( UINT iScp = 0; iScp < nScp; ++ iScp )
 			{
 				aryScp [ iScp ]->SetFrame ( iScp );
-				LoadScript ( buf, pos, (* aryScp [ iScp ]) );
+				LoadScript ( std::move ( buf ), pos, (* aryScp [ iScp ]) );
 			}
 
 			aryAct [ iAct ]->AddaScript ( std::move (aryScp), nScp );
@@ -104,12 +107,18 @@ namespace GAME
 
 //		ch.AddpAction ( aryAct, nAct );
 		ch.AddpAction ( std::move ( aryAct ), nAct );
+
 	}
+
+
+#if 0
+#endif // 0
+
 	
 	void LoadCharaBinFunc::LoadGarnish ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
 		//エフェクト個数 と メモリの確保
-		UINT nEfc = m_utl.LoadUInt ( buf, pos );
+		UINT nEfc = m_utl.LoadUInt ( std::move ( buf ), pos );
 
 		std::vector < P_Effect > aryEfc( nEfc );
 		for ( UINT i = 0; i < nEfc; ++ i ) { aryEfc [ i ] = std::make_shared < Effect > (); }
@@ -118,17 +127,17 @@ namespace GAME
 		for ( UINT iEfc = 0; iEfc < nEfc; ++ iEfc )
 		{
 			//エフェクト
-			aryEfc [ iEfc ]->SetName ( m_utl.LoadText ( buf, pos ) );
+			aryEfc [ iEfc ]->SetName ( m_utl.LoadS3dString ( std::move ( buf ), pos ) );
 
 			//スクリプト個数 と メモリの確保
-			UINT nScp = m_utl.LoadUInt ( buf, pos );
+			UINT nScp = m_utl.LoadUInt ( std::move ( buf ), pos );
 			std::unique_ptr < P_Script [] > aryScp = std::make_unique < P_Script [] > ( nScp );
 			for ( UINT i = 0; i < nScp; ++ i ) { aryScp [ i ] = std::make_shared < Script > (); }
 
 			for ( UINT iScp = 0; iScp < nScp; ++ iScp )
 			{
 				aryScp [ iScp ]->SetFrame ( iScp );
-				LoadScript ( buf, pos, ( * aryScp [ iScp ] ) );
+				LoadScript ( std::move ( buf ), pos, ( * aryScp [ iScp ] ) );
 			}
 
 			aryEfc [ iEfc ]->AddaScript ( std::move ( aryScp ), nScp );
@@ -140,7 +149,7 @@ namespace GAME
 	void LoadCharaBinFunc::LoadCommand ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
 		//コマンド個数 と メモリの確保
-		UINT nCmd = m_utl.LoadUInt ( buf, pos );
+		UINT nCmd = m_utl.LoadUInt ( std::move ( buf ), pos );
 		std::unique_ptr < P_Command[] > aryCmd = std::make_unique < P_Command[] > ( nCmd );
 		for ( UINT i = 0; i < nCmd; ++ i ) { aryCmd [ i ] = std::make_shared < Command > (); }
 
@@ -148,7 +157,7 @@ namespace GAME
 		for ( UINT i = 0; i < nCmd; ++ i )
 		{
 			//コマンド名
-			s3d::String str = Unicode::FromWstring ( m_utl.LoadText ( buf, pos ) );
+			s3d::String str = m_utl.LoadS3dString ( std::move ( buf ), pos );
 			aryCmd [ i ]->SetName ( str );
 
 			//受付時間[byte]
@@ -162,7 +171,7 @@ namespace GAME
 			{
 				//否定
 //				bool bNot = (bool)buf [ pos ++ ];
-				bool bNot = m_utl.LoadBool ( buf, pos );
+				bool bNot = m_utl.LoadBool ( std::move ( buf ), pos );
 
 				//レバー [ GameKey::LVR_NUM = 8 ]
 				KEY_ST lvr [ GameKey::LVR_NUM ] = { GameKeyCommand::GAME_KEY_WILD };
@@ -193,7 +202,7 @@ namespace GAME
 	void LoadCharaBinFunc::LoadBranch ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
 		//ブランチ個数 と メモリの確保
-		UINT nBrc = m_utl.LoadUInt ( buf, pos );
+		UINT nBrc = m_utl.LoadUInt ( std::move ( buf ), pos );
 		std::unique_ptr < P_Branch [] > aryBrc = std::make_unique < P_Branch [] > ( nBrc );
 		for ( UINT i = 0; i < nBrc; ++ i ) { aryBrc [ i ] = std::make_shared < Branch > (); }
 
@@ -203,14 +212,14 @@ namespace GAME
 			P_Branch brc = aryBrc [ i ];
 
 			//ブランチ名
-			brc->SetName ( m_utl.LoadText ( buf, pos ) );
+			brc->SetName ( m_utl.LoadS3dString ( std::move ( buf ), pos ) );
 
 			//条件
 			brc->SetCondition ( (BRANCH_CONDITION)buf [ pos ++ ] );
-			brc->SetIndexCommand ( m_utl.LoadUInt ( buf, pos ) );
-			brc->SetIndexSequence ( m_utl.LoadUInt ( buf, pos ) );
-			brc->SetIndexFrame ( m_utl.LoadUInt ( buf, pos ) );
-			brc->SetOther ( m_utl.LoadBool ( buf, pos ) );
+			brc->SetIndexCommand ( m_utl.LoadUInt ( std::move ( buf ), pos ) );
+			brc->SetIndexSequence ( m_utl.LoadUInt ( std::move ( buf ), pos ) );
+			brc->SetIndexFrame ( m_utl.LoadUInt ( std::move ( buf ), pos ) );
+			brc->SetOther ( m_utl.LoadBool ( std::move ( buf ), pos ) );
 		}
 		ch.AddaBranch ( std::move ( aryBrc ), nBrc );
 	}
@@ -219,7 +228,7 @@ namespace GAME
 	void LoadCharaBinFunc::LoadRoute ( UP_BYTE buf, UINT & pos, Chara & ch )
 	{
 		//ルート個数 と メモリの確保
-		UINT nRut = m_utl.LoadUInt ( buf, pos );
+		UINT nRut = m_utl.LoadUInt ( std::move ( buf ), pos );
 		std::unique_ptr < P_Route [] > aryRut = std::make_unique < P_Route [] > ( nRut );
 		for ( UINT i = 0; i < nRut; ++ i ) { aryRut [ i ] = std::make_shared < Route > (); }
 
@@ -229,10 +238,10 @@ namespace GAME
 			P_Route pr = aryRut [ i ];
 
 			//ルート名
-			aryRut [ i ]->SetName ( m_utl.LoadText ( buf, pos ) );
+			aryRut [ i ]->SetName ( m_utl.LoadS3dString ( std::move ( buf ), pos ) );
 
 			//ブランチIDリスト
-			m_utl.LoadAryUint ( buf, pos, aryRut [ i ]->GetvIDBranch () );
+			m_utl.LoadAryUint ( std::move ( buf ), pos, aryRut [ i ]->GetvIDBranch () );
 		}
 
 		ch.AddaRoute ( std::move ( aryRut ), nRut );
@@ -241,36 +250,36 @@ namespace GAME
 	void LoadCharaBinFunc::LoadScript ( UP_BYTE buf, UINT & pos, Script & scp )
 	{
 		//イメージインデックス
-		UINT imdIndex = m_utl.LoadUInt ( buf, pos );
+		UINT imdIndex = m_utl.LoadUInt ( std::move ( buf ), pos );
 		scp.SetImageIndex ( (UINT)imdIndex );
 
 		//位置
-		scp.SetPos ( m_utl.LoadVec2 ( buf, pos ) );
+		scp.SetPos ( m_utl.LoadVec2 ( std::move ( buf ), pos ) );
 
 		// [] ルートID
-		m_utl.LoadAryUint ( buf, pos, scp.GetvRouteID () );
+		m_utl.LoadAryUint ( std::move ( buf ), pos, scp.GetvRouteID () );
 
 		//枠
-		m_utl.LoadListRect ( buf, pos, scp.GetpvCRect () );
-		m_utl.LoadListRect ( buf, pos, scp.GetpvHRect () );
-		m_utl.LoadListRect ( buf, pos, scp.GetpvARect () );
-		m_utl.LoadListRect ( buf, pos, scp.GetpvORect () );
+		m_utl.LoadListRect ( std::move ( buf ), pos, scp.GetpvCRect () );
+		m_utl.LoadListRect ( std::move ( buf ), pos, scp.GetpvHRect () );
+		m_utl.LoadListRect ( std::move ( buf ), pos, scp.GetpvARect () );
+		m_utl.LoadListRect ( std::move ( buf ), pos, scp.GetpvORect () );
 
 		// [] エフェクト生成
-		UINT nIdEfGnrt = m_utl.LoadUInt ( buf, pos );
+		UINT nIdEfGnrt = m_utl.LoadUInt ( std::move ( buf ), pos );
 		for ( UINT i = 0; i < nIdEfGnrt; ++ i )
 		{
 			//設定用
 			P_EfGnrt pEfGnrt = std::make_shared < EffectGenerate > ();
 
 			//エフェクトID
-			pEfGnrt->SetIndex ( m_utl.LoadUInt ( buf, pos ) );
+			pEfGnrt->SetIndex ( m_utl.LoadUInt ( std::move ( buf ), pos ) );
 			//位置
-			int pos_x = m_utl.LoadInt ( buf, pos );
-			int pos_y = m_utl.LoadInt ( buf, pos );
+			int pos_x = m_utl.LoadInt ( std::move ( buf ), pos );
+			int pos_y = m_utl.LoadInt ( std::move ( buf ), pos );
 			pEfGnrt->SetPos ( VEC2 ( (float)pos_x, (float)pos_y ) );
 			//Z値
-			int z_per100F = (int)m_utl.LoadInt ( buf, pos );
+			int z_per100F = (int)m_utl.LoadInt ( std::move ( buf ), pos );
 			pEfGnrt->SetZ ( z_per100F * 0.01f );
 			//生成
 			pEfGnrt->SetGnrt ( (bool)buf [ pos ++ ] );
@@ -284,52 +293,52 @@ namespace GAME
 		}
 
 		//バトルパラメータ
-		LoadScpPrm_Btl ( buf, pos, scp );
+		LoadScpPrm_Btl ( std::move ( buf ), pos, scp );
 
 		//ステージング(演出)パラメータ
-		LoadScpPrm_Stg ( buf, pos, scp );
+		LoadScpPrm_Stg ( std::move ( buf ), pos, scp );
 	}
 
 
 	//スクリプト・戦闘パラメータ
 	void LoadCharaBinFunc::LoadScpPrm_Btl ( UP_BYTE buf, UINT & pos, Script & scp )
 	{
-		scp.m_prmBattle.CalcState = (CLC_ST)m_utl.LoadInt ( buf, pos );
+		scp.m_prmBattle.CalcState = (CLC_ST)m_utl.LoadInt ( std::move ( buf ), pos );
 
 		//@info 移動量を0.1f倍する
 //		scp.m_prmBattle.Vel = m_utl.LoadVec2 ( buf, pos );
 //		scp.m_prmBattle.Acc = m_utl.LoadVec2 ( buf, pos );
-		scp.m_prmBattle.Vel = m_utl.LoadVec2_Dev10F ( buf, pos );
-		scp.m_prmBattle.Acc = m_utl.LoadVec2_Dev10F ( buf, pos );
+		scp.m_prmBattle.Vel = m_utl.LoadVec2_Dev10F ( std::move ( buf ), pos );
+		scp.m_prmBattle.Acc = m_utl.LoadVec2_Dev10F ( std::move ( buf ), pos );
 
-		scp.m_prmBattle.Power = m_utl.LoadInt ( buf, pos );
+		scp.m_prmBattle.Power = m_utl.LoadInt ( std::move ( buf ), pos );
 
-		scp.m_prmBattle.Warp = m_utl.LoadInt ( buf, pos );
-		scp.m_prmBattle.Recoil_I = m_utl.LoadInt ( buf, pos );
-		scp.m_prmBattle.Recoil_E = m_utl.LoadInt ( buf, pos );
-		scp.m_prmBattle.Balance_I = m_utl.LoadInt ( buf, pos );
-		scp.m_prmBattle.Balance_E = m_utl.LoadInt ( buf, pos );
+		scp.m_prmBattle.Warp = m_utl.LoadInt ( std::move ( buf ), pos );
+		scp.m_prmBattle.Recoil_I = m_utl.LoadInt ( std::move ( buf ), pos );
+		scp.m_prmBattle.Recoil_E = m_utl.LoadInt ( std::move ( buf ), pos );
+		scp.m_prmBattle.Balance_I = m_utl.LoadInt ( std::move ( buf ), pos );
+		scp.m_prmBattle.Balance_E = m_utl.LoadInt ( std::move ( buf ), pos );
 	}
 
 
 	//スクリプト・演出パラメータ
 	void LoadCharaBinFunc::LoadScpPrm_Stg ( UP_BYTE buf, UINT & pos, Script & scp )
 	{
-		scp.m_prmStaging.BlackOut		 = m_utl.LoadByte ( buf, pos );
-		scp.m_prmStaging.Vibration		 = m_utl.LoadByte ( buf, pos );
-		scp.m_prmStaging.Stop			 = m_utl.LoadByte ( buf, pos );
+		scp.m_prmStaging.BlackOut		 = m_utl.LoadByte ( std::move ( buf ), pos );
+		scp.m_prmStaging.Vibration		 = m_utl.LoadByte ( std::move ( buf ), pos );
+		scp.m_prmStaging.Stop			 = m_utl.LoadByte ( std::move ( buf ), pos );
 
-		scp.m_prmStaging.Rotate			 = m_utl.LoadInt ( buf, pos );
-		scp.m_prmStaging.Rotate_center	 = m_utl.LoadVec2 ( buf, pos );
-		scp.m_prmStaging.AfterImage_N	 = m_utl.LoadByte ( buf, pos );
-		scp.m_prmStaging.AfterImage_time = m_utl.LoadByte ( buf, pos ); ;
-		scp.m_prmStaging.AfterImage_pitch = m_utl.LoadByte ( buf, pos ); ;
-		scp.m_prmStaging.Vibration_S	 = m_utl.LoadByte ( buf, pos );;
-		scp.m_prmStaging.Color			 = (_CLR)m_utl.LoadUInt ( buf, pos );
-		scp.m_prmStaging.Color_time		 = m_utl.LoadByte ( buf, pos );
+		scp.m_prmStaging.Rotate			 = m_utl.LoadInt ( std::move ( buf ), pos );
+		scp.m_prmStaging.Rotate_center	 = m_utl.LoadVec2 ( std::move ( buf ), pos );
+		scp.m_prmStaging.AfterImage_N	 = m_utl.LoadByte ( std::move ( buf ), pos );
+		scp.m_prmStaging.AfterImage_time = m_utl.LoadByte ( std::move ( buf ), pos ); ;
+		scp.m_prmStaging.AfterImage_pitch = m_utl.LoadByte ( std::move ( buf ), pos ); ;
+		scp.m_prmStaging.Vibration_S	 = m_utl.LoadByte ( std::move ( buf ), pos );;
+		scp.m_prmStaging.Color			 = (_CLR)m_utl.LoadUInt ( std::move ( buf ), pos );
+		scp.m_prmStaging.Color_time		 = m_utl.LoadByte ( std::move ( buf ), pos );
 
-		scp.m_prmStaging.Scaling		 = m_utl.LoadVec2 ( buf, pos );
-		scp.m_prmStaging.SE				 = m_utl.LoadUInt ( buf, pos );
+		scp.m_prmStaging.Scaling		 = m_utl.LoadVec2 ( std::move ( buf ), pos );
+		scp.m_prmStaging.SE				 = m_utl.LoadUInt ( std::move ( buf ), pos );
 	}
 
 
@@ -337,18 +346,30 @@ namespace GAME
 	void LoadCharaBinFunc::LoadImg ( UP_BYTE buf, UINT & pos, PAP_Tx pvpTx )
 	{
 		//個数
-		UINT nImg = m_utl.LoadUInt ( buf, pos );
+		UINT nImg = m_utl.LoadUInt ( std::move ( buf ), pos );
 		pvpTx->clear ();
 		pvpTx->resize ( nImg );
 
 		for ( UINT i = 0; i < nImg; ++ i )
 		{
 			//サイズを取得
-			UINT size = m_utl.LoadUInt ( buf, pos );
+			UINT size = m_utl.LoadUInt ( std::move ( buf ), pos );
 
+			UINT temp_pos = pos;
+#if 0
+			byte b0 = buf [ pos ++ ];
+			byte b1 = buf [ pos ++ ];
+			byte b2 = buf [ pos ++ ];
+			byte b3 = buf [ pos ++ ];
+#endif // 0
 
+			pos = temp_pos + size;
 
 			//メモリ上のデータからゲームテクスチャに変換
+//			s3d::Image img ();
+
+
+#if 0
 			P_Tx pTx = std::make_shared < s3d::Texture > ( (LPCVOID)(buf.get() + pos), size );
 			pos += size;
 
@@ -357,9 +378,12 @@ namespace GAME
 
 			//キャラ内部のテクスチャリストに加える
 			( *pvpTx ) [ i ] = pTx;
+#endif
 		}
 
 	}
+
+
 
 
 }	//namespace GAME

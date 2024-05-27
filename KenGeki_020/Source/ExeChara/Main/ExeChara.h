@@ -113,11 +113,10 @@ namespace GAME
 		ExeChara ( const ExeChara & rhs ) = delete;
 		~ExeChara ();
 
-#if 0
 		//===========================================================
 		//基本タスク関数　＆　初期化関連
 	public:
-		void ParamInit ( P_Param pParam );
+//		void ParamInit ( P_Param pParam );
 		void Load ();
 		void Init ();
 		void Move ();
@@ -128,6 +127,7 @@ namespace GAME
 		void LoadCharaData ();
 		void LoadInput ();
 		//===========================================================
+#if 0
 #endif // 0
 
 	public:

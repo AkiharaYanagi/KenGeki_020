@@ -875,10 +875,10 @@
     <ClInclude Include="include\LoadCharaBin_s3d.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="include\LoadCharaBinFunc.h">
+    <ClInclude Include="include\LoadCharaBinUtl.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="include\LoadCharaBinUtl.h">
+    <ClInclude Include="include\LoadCharaBinFunc.h">
       <Filter>IO</Filter>
     </ClInclude>
   </ItemGroup>

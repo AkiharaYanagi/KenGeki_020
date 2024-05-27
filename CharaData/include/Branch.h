@@ -32,7 +32,8 @@ namespace GAME
 	//---------------------------------------------------------------
 	class Branch
 	{
-		tstring		m_name;				//名前
+//		tstring		m_name;				//名前
+		s3d::String		m_name;				//名前
 		BRANCH_CONDITION		m_condition;	//分岐条件
 		UINT		m_indexCommand;		//条件コマンド配列添字
 		WP_Command	m_pCommand;			//条件コマンドポインタ
@@ -47,8 +48,10 @@ namespace GAME
 		~Branch ();
 
 		//名前
-		tstring GetName () const { return m_name; }
-		void SetName ( tstring name ) { m_name.assign ( name ); }
+//		tstring GetName () const { return m_name; }
+//		void SetName ( tstring name ) { m_name.assign ( name ); }
+		s3d::String GetName () const { return m_name; }
+		void SetName ( s3d::String name ) { m_name.assign ( name ); }
 
 		//分岐条件
 		void SetCondition ( BRANCH_CONDITION bc ) { m_condition = bc; }

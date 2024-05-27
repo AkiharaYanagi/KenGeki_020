@@ -97,11 +97,11 @@ namespace GAME
 
 		//---------------------------------------------------------------------
 		//名前からアクションIDを取得する(無いときは０を返す)
-		UINT GetActionID ( tstring name ) const;
+		UINT GetActionID ( s3d::String name ) const;
 
 		//アクションポインタを取得
 		P_Action GetpAction ( UINT index ) { return mpap_Action->at ( index ); }
-		P_Action GetpAction ( tstring name ) { return GetpAction ( GetActionID ( name ) ); }
+		P_Action GetpAction ( s3d::String name ) { return GetpAction ( GetActionID ( name ) ); }
 
 		//---------------------------------------------------------------------
 		//スクリプトポインタを取得

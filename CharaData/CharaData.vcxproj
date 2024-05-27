@@ -48,7 +48,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\Debug\Intermediate\</IntDir>
-    <TargetName>$(ProjectName)(debug)</TargetName>
+    <TargetName>$(ProjectName)_debug</TargetName>
     <LocalDebuggerWorkingDirectory>$(ProjectDir)App</LocalDebuggerWorkingDirectory>
     <IncludePath>$(SIV3D_0_6_13)\include;$(SIV3D_0_6_13)\include\ThirdParty;$(IncludePath)</IncludePath>
     <LibraryPath>$(SIV3D_0_6_13)\lib\Windows;$(LibraryPath)</LibraryPath>

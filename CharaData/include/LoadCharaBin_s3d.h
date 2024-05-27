@@ -21,16 +21,15 @@ namespace GAME
 	//------------------------------------------------------
 	class LoadCharaBin_s3d
 	{
-//		LoadCharaBinFunc_s3d	m_func;
 		LoadCharaBinFunc		m_func;
-
-		//try用
-		void _Load ( const s3d::String & filename,  Chara & chara );
 
 	public:
 		LoadCharaBin_s3d ( const s3d::String & filename,  Chara & chara );
 		LoadCharaBin_s3d ( const LoadCharaBin_s3d& rhs ) = delete;
 		~LoadCharaBin_s3d ();
+
+		//try用
+		void _Load ( const s3d::String & filename,  Chara & chara );
 	};
 
 

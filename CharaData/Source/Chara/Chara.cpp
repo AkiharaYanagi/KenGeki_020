@@ -134,12 +134,12 @@ namespace GAME
 
 
 	//---------------------------------------------------
-	UINT Chara::GetActionID ( tstring name ) const
+	UINT Chara::GetActionID ( s3d::String name ) const
 	{
 		UINT index = 0;
 		for ( auto p : *mpap_Action )
 		{
-			tstring actionName = p->GetName (); 
+			s3d::String actionName = p->GetName (); 
 			if ( 0 == name.compare ( actionName ) )
 			{
 				return index;

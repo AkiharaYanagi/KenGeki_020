@@ -20,6 +20,7 @@ namespace GAME
 	//------------------------------------------------------------
 	class LoadCharaBinFunc
 	{
+
 		LoadCharaBinUtl		m_utl;
 
 	public:
@@ -43,6 +44,9 @@ namespace GAME
 		void LoadScpPrm_Stg ( UP_BYTE buf, UINT & pos, Script & scp );
 
 		void LoadImg ( UP_BYTE buf, UINT & pos, PAP_Tx pvp_tx );
+#if 0
+#endif // 0
+
 
 	};
 

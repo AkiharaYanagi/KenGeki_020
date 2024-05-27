@@ -6,6 +6,8 @@
 #pragma once
 //#include "Game.h"
 #include "Chara.h"
+#include "Define_Siv3D.h"
+
 
 //-------------------------------------------------------------------------------------------------
 // 宣言
@@ -28,7 +30,8 @@ namespace GAME
 		~LoadCharaBinUtl () = default;
 
 		//----
-		tstring LoadText ( UP_BYTE buf, UINT & pos );
+//		tstring LoadText ( UP_BYTE buf, UINT & pos );
+		s3d::String LoadS3dString ( UP_BYTE buf, UINT & pos );
 		bool LoadBool ( UP_BYTE buf, UINT & pos );
 		byte LoadByte ( UP_BYTE buf, UINT & pos );
 		int LoadInt ( UP_BYTE buf, UINT & pos );
