@@ -18,6 +18,7 @@ namespace GAME
 	using P_BYTE = std::shared_ptr < byte [] >;
 	using UP_BYTE = std::unique_ptr < byte [] >;
 	using L_UINT = std::unique_ptr < UINT [] >;
+	using CUPR_BYTE = const UP_BYTE &;
 
 	//------------------------------------------------------------
 	//	LoadCharaBinで用いる関数群
@@ -31,17 +32,17 @@ namespace GAME
 
 		//----
 //		tstring LoadText ( UP_BYTE buf, UINT & pos );
-		s3d::String LoadS3dString ( UP_BYTE buf, UINT & pos );
-		bool LoadBool ( UP_BYTE buf, UINT & pos );
-		byte LoadByte ( UP_BYTE buf, UINT & pos );
-		int LoadInt ( UP_BYTE buf, UINT & pos );
-		UINT LoadUInt ( UP_BYTE buf, UINT & pos );
-		VEC2 LoadVec2 ( UP_BYTE buf, UINT & pos );
-		VEC2 LoadVec2_Dev10F ( UP_BYTE buf, UINT & pos );
-		RECT LoadRect ( UP_BYTE buf, UINT & pos );
-		void LoadListRect ( UP_BYTE buf, UINT & pos, PV_RECT pvRect );
-		L_UINT LoadAryUint ( UP_BYTE buf, UINT & pos, UINT & refLength );
-		void LoadAryUint ( UP_BYTE buf, UINT & pos, V_UINT & refAryUint );
+		s3d::String LoadS3dString ( CUPR_BYTE buf, UINT & pos );
+		bool LoadBool ( CUPR_BYTE buf, UINT & pos );
+		byte LoadByte ( CUPR_BYTE buf, UINT & pos );
+		int LoadInt ( CUPR_BYTE buf, UINT & pos );
+		UINT LoadUInt ( CUPR_BYTE buf, UINT & pos );
+		VEC2 LoadVec2 ( CUPR_BYTE buf, UINT & pos );
+		VEC2 LoadVec2_Dev10F ( CUPR_BYTE buf, UINT & pos );
+		RECT LoadRect ( CUPR_BYTE buf, UINT & pos );
+		void LoadListRect ( CUPR_BYTE buf, UINT & pos, PV_RECT pvRect );
+		L_UINT LoadAryUint ( CUPR_BYTE buf, UINT & pos, UINT & refLength );
+		void LoadAryUint ( CUPR_BYTE buf, UINT & pos, V_UINT & refAryUint );
 	};
 
 

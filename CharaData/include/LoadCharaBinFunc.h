@@ -28,26 +28,22 @@ namespace GAME
 		LoadCharaBinFunc ( const LoadCharaBinFunc & rhs ) = delete;
 		~LoadCharaBinFunc () = default;
 
-		void LoadChara ( UP_BYTE buf, UINT & pos, Chara & ch );
-		void LoadCharaScript ( UP_BYTE buf, UINT & pos, Chara & ch );
-		void LoadCharaImage ( UP_BYTE buf, UINT & pos, Chara & ch );
+		void LoadChara ( CUPR_BYTE buf, UINT & pos, Chara & ch );
+		void LoadCharaScript ( CUPR_BYTE buf, UINT & pos, Chara & ch );
+		void LoadCharaImage ( CUPR_BYTE buf, UINT & pos, Chara & ch );
 
-		void LoadBehavior ( UP_BYTE buf, UINT & pos, Chara & ch );
-		void LoadGarnish ( UP_BYTE buf, UINT & pos, Chara & ch );
+		void LoadBehavior ( CUPR_BYTE buf, UINT & pos, Chara & ch );
+		void LoadGarnish ( CUPR_BYTE buf, UINT & pos, Chara & ch );
 
-		void LoadCommand ( UP_BYTE buf, UINT & pos, Chara & ch );
-		void LoadBranch ( UP_BYTE buf, UINT & pos, Chara & ch );
-		void LoadRoute ( UP_BYTE buf, UINT & pos, Chara & ch );
+		void LoadCommand ( CUPR_BYTE buf, UINT & pos, Chara & ch );
+		void LoadBranch ( CUPR_BYTE buf, UINT & pos, Chara & ch );
+		void LoadRoute ( CUPR_BYTE buf, UINT & pos, Chara & ch );
 
-		void LoadScript ( UP_BYTE buf, UINT & pos, Script & scp );
-		void LoadScpPrm_Btl ( UP_BYTE buf, UINT & pos, Script & scp );
-		void LoadScpPrm_Stg ( UP_BYTE buf, UINT & pos, Script & scp );
+		void LoadScript ( CUPR_BYTE buf, UINT & pos, Script & scp );
+		void LoadScpPrm_Btl ( CUPR_BYTE buf, UINT & pos, Script & scp );
+		void LoadScpPrm_Stg ( CUPR_BYTE buf, UINT & pos, Script & scp );
 
-		void LoadImg ( UP_BYTE buf, UINT & pos, PAP_Tx pvp_tx );
-#if 0
-#endif // 0
-
-
+		void LoadImg ( CUPR_BYTE buf, UINT & pos, PAP_Tx pvp_tx );
 	};
 
 

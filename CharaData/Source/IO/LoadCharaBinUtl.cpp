@@ -18,7 +18,7 @@ namespace GAME
 
 #if 0
 	//-----------------------------------------------------------------------
-	tstring LoadCharaBinUtl::LoadText ( UP_BYTE buf, UINT & pos )
+	tstring LoadCharaBinUtl::LoadText ( CUPR_BYTE buf, UINT & pos )
 	{
 		//名前のサイズ
 		byte length = buf [ pos ++ ];	//Encoding.UTF8
@@ -44,14 +44,36 @@ namespace GAME
 #endif // 0
 
 	//-----------------------------------------------------------------------
-	s3d::String LoadCharaBinUtl::LoadS3dString ( UP_BYTE buf, UINT & pos )
+	s3d::String LoadCharaBinUtl::LoadS3dString ( CUPR_BYTE buf, UINT & pos )
 	{
 		//名前のサイズ
 		byte length = buf [ pos ++ ];	//Encoding.UTF8
 
+		//位置
+		char* index = (char*)buf.get() + pos;
+
 		//UTF8 -> wstring
-		std::string str ( (char*)buf.get() + pos, length );
+		// MultiByte -> WChar
+#if 0
+		std::unique_ptr < TCHAR[] > tbuf = std::make_unique < TCHAR[] > ( length );
+		size_t sizebuf = strlen ( index ) + 1;
+		size_t n = 0;
+		::mbstowcs_s ( & n, tbuf.get(), sizebuf, index, _TRUNCATE );
+		tstring tstr ( tbuf.get() );
+
+		std::string str ( index, length );
 		s3d::String s3dStr = Unicode::Widen ( str );
+#endif // 0
+
+#if 0
+		int tsize = ::MultiByteToWideChar ( CP_UTF8, 0, index, length, nullptr, 0 );
+		std::unique_ptr < TCHAR[] > tbuf = std::make_unique < TCHAR[] > ( tsize + 1 );
+		::MultiByteToWideChar ( CP_UTF8, 0, index, length, tbuf.get(), tsize + 1 );
+		tstring tstr ( tbuf.get() );
+		s3d::String s3dStr = Unicode::FromWstring ( tstr );
+#endif // 0
+
+		s3d::String s3dStr = Unicode::FromUTF8 ( index );
 
 		//位置を更新
 		pos += length;
@@ -61,21 +83,21 @@ namespace GAME
 	}
 
 
-	bool LoadCharaBinUtl::LoadBool ( UP_BYTE buf, UINT & pos )
+	bool LoadCharaBinUtl::LoadBool ( CUPR_BYTE buf, UINT & pos )
 	{
 		//bool値も1バイト読み込んでポインタを進め、値を返す
 		byte b = buf [ pos ++ ];	//1  or 0
 		return (bool)b;
 	}
 
-	byte LoadCharaBinUtl::LoadByte ( UP_BYTE buf, UINT & pos )
+	byte LoadCharaBinUtl::LoadByte ( CUPR_BYTE buf, UINT & pos )
 	{
 		//1バイト読み込んでポインタを進め、値を返す
 		byte b = buf [ pos ++ ];
 		return b;
 	}
 
-	int LoadCharaBinUtl::LoadInt ( UP_BYTE buf, UINT & pos )
+	int LoadCharaBinUtl::LoadInt ( CUPR_BYTE buf, UINT & pos )
 	{
 		//リトルエンディアン読込 (byte[])0x67 0x45 0x23 0x01 -> (int)0x01234567
 		int i = 0;
@@ -85,7 +107,7 @@ namespace GAME
 		return i;
 	}
 
-	UINT LoadCharaBinUtl::LoadUInt ( UP_BYTE buf, UINT & pos )
+	UINT LoadCharaBinUtl::LoadUInt ( CUPR_BYTE buf, UINT & pos )
 	{
 		//リトルエンディアン読込 (byte[])0x67 0x45 0x23 0x01 -> (UINT)0x01234567
 		UINT i = 0;
@@ -96,7 +118,7 @@ namespace GAME
 	}
 
 
-	VEC2 LoadCharaBinUtl::LoadVec2 ( UP_BYTE buf, UINT & pos )
+	VEC2 LoadCharaBinUtl::LoadVec2 ( CUPR_BYTE buf, UINT & pos )
 	{
 		int pos_x = LoadInt ( std::move ( buf ), pos );
 		int pos_y = LoadInt ( std::move ( buf ), pos );
@@ -104,7 +126,7 @@ namespace GAME
 	}
 
 	//intで読んだ値を10.fで割る(0.1f掛ける)
-	VEC2 LoadCharaBinUtl::LoadVec2_Dev10F ( UP_BYTE buf, UINT & pos )
+	VEC2 LoadCharaBinUtl::LoadVec2_Dev10F ( CUPR_BYTE buf, UINT & pos )
 	{
 		int pos_x = LoadInt ( std::move ( buf ), pos );
 		int pos_y = LoadInt ( std::move ( buf ), pos );
@@ -112,7 +134,7 @@ namespace GAME
 	}
 
 
-	RECT LoadCharaBinUtl::LoadRect ( UP_BYTE buf, UINT & pos )
+	RECT LoadCharaBinUtl::LoadRect ( CUPR_BYTE buf, UINT & pos )
 	{
 		//リトルエンディアン読込 (byte[])0x67 0x45 0x23 0x01 -> (UINT)0x01234567
 		RECT rect = { 0 };
@@ -123,7 +145,7 @@ namespace GAME
 	}
 
 	
-	void LoadCharaBinUtl::LoadListRect ( UP_BYTE buf, UINT & pos, PV_RECT pvRect )
+	void LoadCharaBinUtl::LoadListRect ( CUPR_BYTE buf, UINT & pos, PV_RECT pvRect )
 	{
 		UINT n = buf [ pos ++ ];
 		pvRect->clear ();
@@ -135,7 +157,7 @@ namespace GAME
 	}
 
 
-	L_UINT LoadCharaBinUtl::LoadAryUint ( UP_BYTE buf, UINT & pos, UINT & refLength )
+	L_UINT LoadCharaBinUtl::LoadAryUint ( CUPR_BYTE buf, UINT & pos, UINT & refLength )
 	{
 		refLength = buf [ pos ++ ];
 
@@ -149,7 +171,7 @@ namespace GAME
 	}
 
 
-	void LoadCharaBinUtl::LoadAryUint ( UP_BYTE buf, UINT & pos, V_UINT & refAryUint )
+	void LoadCharaBinUtl::LoadAryUint ( CUPR_BYTE buf, UINT & pos, V_UINT & refAryUint )
 	{
 		UINT size = LoadUInt ( std::move ( buf ), pos );
 		refAryUint.resize ( size );

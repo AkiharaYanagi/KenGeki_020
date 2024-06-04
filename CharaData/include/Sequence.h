@@ -22,12 +22,14 @@ namespace GAME
 	class Sequence
 	{
 //		tstring			m_name { _T("new_sequence") };			//名前
-		s3d::String		m_name { U"" };
+		s3d::String		m_name { U"new_sequence" };			//名前
 
+//		PVP_Script		m_pvpScript;		//スクリプト配列
+		PAP_Script		mpap_Script;		//スクリプト配列
 
-		PVP_Script		m_pvpScript;		//スクリプト配列
 		UINT			m_next { 0 };		//次シークエンスID
-		tstring			m_nextName { _T("next_sequence") };		//次シークエンス名
+//		tstring			m_nextName { _T("next_sequence") };		//次シークエンス名
+		s3d::String		m_nextName { U"next_sequence" };		//次シークエンス名
 
 	public:
 		Sequence ();

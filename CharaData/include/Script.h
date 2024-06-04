@@ -10,9 +10,10 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 //#include "Game.h"
-#include "Define.h"
-#include "Rect.h"
+//#include "Define.h"
+#include "Define_Siv3D.h"
 
+#include "Rect.h"
 #include "Chara_Const.h"
 #include "Route.h"
 #include "EffectGenerate.h"
@@ -105,6 +106,15 @@ namespace GAME
 	using P_Script = std::shared_ptr < Script >;
 	using VP_Script = std::vector < P_Script >;
 	using PVP_Script = std::shared_ptr < VP_Script >;
+
+	//P_Scriptの配列
+	using AP_Script = std::unique_ptr < P_Script [] >;
+
+
+	//s3d
+	using Ary_Script = s3d::Array < Script >;
+	using AP_Script = s3d::Array < P_Script >;
+	using PAP_Script = std::shared_ptr < AP_Script >;
 
 
 }	//namespace GAME
