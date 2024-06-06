@@ -43,6 +43,11 @@ namespace GAME
 	ExeChara::ExeChara ( PLAYER_ID m_playerID )
 		: m_playerID ( m_playerID )
 	{
+		//キャラデータ生成
+		m_pChara = std::make_shared < Chara > ();	//キャラデータ実体
+//		m_charaRect = make_shared < CharaRect > ();	//実効枠
+//		m_btlPrm.SetPlayerID ( m_playerID );	//バトルパラメータ
+
 		//表示
 		m_dispChara = std::make_shared < DispChara > ();
 //		m_dispChara->LoadPlayer ( m_playerID );	//表示(1P/2P側による位置)

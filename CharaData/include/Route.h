@@ -56,6 +56,7 @@ namespace GAME
 	using VP_Route = std::vector < P_Route >;
 	using PVP_Route = std::shared_ptr < VP_Route >;
 
+	using AUP_P_Route = std::unique_ptr < P_Route [] >;
 
 }	//namespace GAME
 

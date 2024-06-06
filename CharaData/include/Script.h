@@ -108,13 +108,13 @@ namespace GAME
 	using PVP_Script = std::shared_ptr < VP_Script >;
 
 	//P_Scriptの配列
-	using AP_Script = std::unique_ptr < P_Script [] >;
+	using AUP_P_Script = std::unique_ptr < P_Script [] >;
 
 
 	//s3d
-	using Ary_Script = s3d::Array < Script >;
-	using AP_Script = s3d::Array < P_Script >;
-	using PAP_Script = std::shared_ptr < AP_Script >;
+	using Ary_Scp = s3d::Array < Script >;
+	using AP_Scp = s3d::Array < P_Script >;
+	using PAP_Scp = std::shared_ptr < AP_Scp >;
 
 
 }	//namespace GAME

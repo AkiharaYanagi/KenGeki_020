@@ -91,7 +91,7 @@ namespace GAME
 			//スクリプト個数 と メモリの確保
 			UINT nScp = m_utl.LoadUInt ( buf, pos );
 
-			AP_Script aryScp = std::make_unique < P_Script [] > ( nScp );
+			AUP_P_Script aryScp = std::make_unique < P_Script [] > ( nScp );
 			for ( UINT i = 0; i < nScp; ++ i ) { aryScp [ i ] = std::make_shared < Script > (); }
 
 			for ( UINT iScp = 0; iScp < nScp; ++ iScp )
@@ -107,10 +107,6 @@ namespace GAME
 		ch.AddpAction ( std::move ( aryAct ), nAct );
 
 	}
-
-
-#if 0
-#endif // 0
 
 	
 	void LoadCharaBinFunc::LoadGarnish ( CUPR_BYTE buf, UINT & pos, Chara & ch )
@@ -214,9 +210,23 @@ namespace GAME
 
 			//条件
 			brc->SetCondition ( (BRANCH_CONDITION)buf [ pos ++ ] );
+
+			//条件コマンド名
+			brc->SetNameCommand ( m_utl.LoadS3dString ( buf, pos ) );
+
+			//条件コマンドインデックス
 			brc->SetIndexCommand ( m_utl.LoadUInt ( buf, pos ) );
+
+			//遷移先シークエン名
+			brc->SetNameSequence ( m_utl.LoadS3dString ( buf, pos ) );
+
+			//遷移先シークエンインデックス
 			brc->SetIndexSequence ( m_utl.LoadUInt ( buf, pos ) );
+
+			//遷移先スクリプト位置
 			brc->SetIndexFrame ( m_utl.LoadUInt ( buf, pos ) );
+
+			//同一で遷移
 			brc->SetOther ( m_utl.LoadBool ( buf, pos ) );
 		}
 		ch.AddaBranch ( std::move ( aryBrc ), nBrc );
@@ -227,7 +237,7 @@ namespace GAME
 	{
 		//ルート個数 と メモリの確保
 		UINT nRut = m_utl.LoadUInt ( buf, pos );
-		std::unique_ptr < P_Route [] > aryRut = std::make_unique < P_Route [] > ( nRut );
+		AUP_P_Route aryRut = std::make_unique < P_Route [] > ( nRut );
 		for ( UINT i = 0; i < nRut; ++ i ) { aryRut [ i ] = std::make_shared < Route > (); }
 
 		//実データ
@@ -364,9 +374,9 @@ namespace GAME
 			pos = temp_pos + size;
 
 			//メモリ上のデータからゲームテクスチャに変換
-//			s3d::Image img ();
+			s3d::Image img ();
 
-
+			s3d::BinaryReader br ();
 #if 0
 			P_Tx pTx = std::make_shared < s3d::Texture > ( (LPCVOID)(buf.get() + pos), size );
 			pos += size;

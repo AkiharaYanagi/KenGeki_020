@@ -35,10 +35,17 @@ namespace GAME
 //		tstring		m_name;				//名前
 		s3d::String		m_name;				//名前
 		BRANCH_CONDITION		m_condition;	//分岐条件
+
 		UINT		m_indexCommand;		//条件コマンド配列添字
+//		tstring		m_nameCommand { _T("cmd_name") };	//条件コマンド名前
+		s3d::String m_nameCommand { U"cmd_name" };	//条件コマンド名前
 		WP_Command	m_pCommand;			//条件コマンドポインタ
+
 		UINT		m_indexSequence;	//遷移先シークエンス添字
+//		tstring		m_nameSequence { _T("sqc_name") };	//遷移先シークエンス名前
+		s3d::String	m_nameSequence { U"sqc_name" };	//遷移先シークエンス名前
 		WP_Sqc		m_pSequence;		//遷移先シークエンスポインタ
+
 		UINT		m_indexFrame;		//遷移先スクリプト位置
 		bool		m_ohter;			//同一シークエンスで遷移可能かどうか
 
@@ -65,6 +72,10 @@ namespace GAME
 		void SetpCommand ( P_Command pCommand ) { m_pCommand = pCommand; }
 		WP_Command GetpCommand () const { return m_pCommand; }
 
+		//条件コマンド名
+		s3d::String GetNameCommand () const { return m_nameCommand; }
+		void SetNameCommand ( s3d::String name ) { m_nameCommand.assign ( name ); }
+
 		//遷移先シークエンス配列添字
 		void SetIndexSequence ( UINT index ) { m_indexSequence = index; }
 		UINT GetIndexSequence () const { return m_indexSequence; }
@@ -72,6 +83,10 @@ namespace GAME
 		//遷移先シークエンスポインタ
 		void SetpSequence ( P_Sqc pAction ) { m_pSequence = pAction; }
 		WP_Sqc GetpSequence () const { return m_pSequence; }
+
+		//遷移先シークエンス名
+		s3d::String GetNameSequence () const { return m_nameSequence; }
+		void SetNameSequence ( s3d::String name ) { m_nameSequence.assign ( name ); }
 
 		//遷移先スクリプト位置
 		void SetIndexFrame ( UINT index ) { m_indexFrame = index; }

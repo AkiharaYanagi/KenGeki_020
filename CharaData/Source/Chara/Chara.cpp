@@ -42,10 +42,8 @@ namespace GAME
 
 	//---------------------------------------------------
 	//アクション配列にまとめて追加
-	void Chara::AddpAction ( std::unique_ptr < P_Action [] > arypAction, rsize_t size )
+	void Chara::AddpAction ( AUP_P_Action arypAction, rsize_t size )
 	{
-		if ( ! mpap_Action ) { return; }
-
 		mpap_Action->clear ();
 		mpap_Action->resize ( size );
 		for ( UINT i = 0; i < size; ++ i )

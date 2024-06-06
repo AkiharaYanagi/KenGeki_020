@@ -73,6 +73,8 @@ namespace GAME
 	using VP_Action = std::vector < P_Action >;
 	using PVP_Action = std::shared_ptr < VP_Action >;
 
+	using AUP_P_Action = std::unique_ptr < P_Action [] >;
+
 	using AP_Action = s3d::Array < P_Action >;
 	using PAP_Action = std::shared_ptr < AP_Action >;
 

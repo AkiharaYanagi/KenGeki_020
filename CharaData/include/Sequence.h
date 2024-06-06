@@ -24,8 +24,8 @@ namespace GAME
 //		tstring			m_name { _T("new_sequence") };			//名前
 		s3d::String		m_name { U"new_sequence" };			//名前
 
-//		PVP_Script		m_pvpScript;		//スクリプト配列
-		PAP_Script		mpap_Script;		//スクリプト配列
+		PVP_Script		m_pvpScript;		//スクリプト配列
+//		PAP_Script		mpap_Script;		//スクリプト配列
 
 		UINT			m_next { 0 };		//次シークエンスID
 //		tstring			m_nextName { _T("next_sequence") };		//次シークエンス名
@@ -77,8 +77,10 @@ namespace GAME
 		void SetNextID (UINT id) { m_next = id; }
 
 		//次シークエンス名
-		tstring GetNextName () const { return m_nextName; }
-		void SetNextName ( tstring tstr ) { m_nextName = tstr; }
+//		tstring GetNextName () const { return m_nextName; }
+//		void SetNextName ( tstring tstr ) { m_nextName = tstr; }
+		s3d::String GetNextName () const { return m_nextName; }
+		void SetNextName ( s3d::String tstr ) { m_nextName = tstr; }
 	};
 
 	using WP_Sqc = std::weak_ptr < Sequence >;
