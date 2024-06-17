@@ -1,7 +1,10 @@
 *.exe
 *.lib
 *.idb
-
+*.mp4
+*.dat
+*.lib
+*.idb
 
 
 ## Ignore Visual Studio temporary files, build results, and
@@ -367,4 +370,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-Library/CharaData_debug.idb

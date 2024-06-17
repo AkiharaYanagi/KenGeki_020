@@ -34,6 +34,9 @@ namespace GAME
 		//背景
 		P_BG		m_bg;
 
+		//test EF
+		P_Grp		m_grp;
+
 		//=====================================================
 		//キャラ相互処理
 		P_MutualChara	m_mutualChara;

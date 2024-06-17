@@ -22,7 +22,13 @@ namespace GAME
 		//------------------------------------------------
 		//背景
 		m_bg = std::make_shared < BG > ();
-		AddpTask ( m_bg );
+//		AddpTask ( m_bg );
+
+
+		m_grp = std::make_shared < GrpBs > ();
+		m_grp->SetTextureName ( U"ef_004.png" );
+		m_grp->SetPos ( VEC2 ( 200, 300 ) );
+		AddpTask ( m_grp );
 
 		//=====================================================
 		//キャラ相互処理

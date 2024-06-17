@@ -792,6 +792,15 @@
     <ClInclude Include="Source\GameMain\stdafx.h">
       <Filter>GameMain</Filter>
     </ClInclude>
+    <ClInclude Include="Source\FtgMain\MutualChara.h">
+      <Filter>FtgMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\BG.h">
+      <Filter>FtgMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Decision.h">
+      <Filter>FtgMain</Filter>
+    </ClInclude>
     <ClInclude Include="Source\FtgMain\Fighting.h">
       <Filter>FtgMain</Filter>
     </ClInclude>
@@ -801,11 +810,20 @@
     <ClInclude Include="Source\FtgMain\FtgMain.h">
       <Filter>FtgMain</Filter>
     </ClInclude>
-    <ClInclude Include="Source\FtgMain\BG.h">
+    <ClInclude Include="Source\FtgMain\G_Ftg.h">
       <Filter>FtgMain</Filter>
     </ClInclude>
-    <ClInclude Include="Source\FtgMain\MutualChara.h">
-      <Filter>FtgMain</Filter>
+    <ClInclude Include="Source\ExeChara\BtlParam.h">
+      <Filter>ExeChara</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\TimerSlow.h">
+      <Filter>ExeChara</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\Main\ExCh_Actor.h">
+      <Filter>ExeChara\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\Main\ExCh_State.h">
+      <Filter>ExeChara\Main</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Main\ExeChara.h">
       <Filter>ExeChara\Main</Filter>
@@ -833,19 +851,40 @@
     <ClCompile Include="Source\GameMain\stdafx.cpp">
       <Filter>GameMain</Filter>
     </ClCompile>
+    <ClCompile Include="Source\FtgMain\BG.cpp">
+      <Filter>FtgMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Decision.cpp">
+      <Filter>FtgMain</Filter>
+    </ClCompile>
     <ClCompile Include="Source\FtgMain\Fighting.cpp">
       <Filter>FtgMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\FtgMain\FtgMain.cpp">
       <Filter>FtgMain</Filter>
     </ClCompile>
-    <ClCompile Include="Source\FtgMain\BG.cpp">
+    <ClCompile Include="Source\FtgMain\G_Ftg.cpp">
       <Filter>FtgMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\FtgMain\MutualChara.cpp">
       <Filter>FtgMain</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ExeChara\BtlParam.cpp">
+      <Filter>ExeChara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\TimerSlow.cpp">
+      <Filter>ExeChara</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExCh_Actor.cpp">
+      <Filter>ExeChara\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExCh_State.cpp">
+      <Filter>ExeChara\Main</Filter>
+    </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara.cpp">
+      <Filter>ExeChara\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp">
       <Filter>ExeChara\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp">
@@ -854,7 +893,7 @@
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp">
       <Filter>ExeChara\Disp</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp">
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit.cpp">
       <Filter>ExeChara\Main</Filter>
     </ClCompile>
   </ItemGroup>

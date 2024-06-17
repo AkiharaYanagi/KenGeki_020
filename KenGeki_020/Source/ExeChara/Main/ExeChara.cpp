@@ -17,42 +17,23 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-#if 0
-	//コンストラクタ
 	ExeChara::ExeChara ( PLAYER_ID m_playerID )
-		: m_pChara ( nullptr )
-		, m_playerID ( m_playerID ), m_name ( CHARA_TEST ), m_playerMode ( MODE_PLAYER )
-		, m_actionID ( 0 ), m_frame ( 0 )
-	{
-		//キャラデータ生成
-		m_pChara = make_shared < Chara > ();	//キャラデータ実体
-		m_charaRect = make_shared < CharaRect > ();	//実効枠
-		m_btlPrm.SetPlayerID ( m_playerID );	//バトルパラメータ
-
-		//表示
-		m_dispChara = make_shared < DispChara > ();
-		m_dispChara->LoadPlayer ( m_playerID );	//表示(1P/2P側による位置)
-		AddpTask ( m_dispChara );
-
-		//エフェクト監理
-		m_oprtEf = make_shared < OperateEffect > ();
-		AddpTask ( m_oprtEf );
-	}
-#endif // 0
-
-	ExeChara::ExeChara ( PLAYER_ID m_playerID )
-		: m_playerID ( m_playerID )
 	{
 		//キャラデータ生成
 		m_pChara = std::make_shared < Chara > ();	//キャラデータ実体
 //		m_charaRect = make_shared < CharaRect > ();	//実効枠
-//		m_btlPrm.SetPlayerID ( m_playerID );	//バトルパラメータ
+		m_btlPrm.SetPlayerID ( m_playerID );	//バトルパラメータ
 
 		//表示
 		m_dispChara = std::make_shared < DispChara > ();
 //		m_dispChara->LoadPlayer ( m_playerID );	//表示(1P/2P側による位置)
 		AddpTask ( m_dispChara );
 
+#if 0
+		//エフェクト監理
+		m_oprtEf = make_shared < OperateEffect > ();
+		AddpTask ( m_oprtEf );
+#endif // 0
 	}
 
 	//デストラクタ
@@ -65,8 +46,8 @@ namespace GAME
 	{
 #if 0
 		m_tmrSlow.Move ();	//タイマ手動
-		TASK_VEC::Move ();
 #endif // 0
+		TASK_VEC::Move ();
 	}
 
 	//===========================================================
@@ -322,6 +303,7 @@ namespace GAME
 		//スクリプトからのパラメータ反映
 		SetParamFromScript ();
 	}
+#endif // 0
 
 	//スクリプトからパラメータを反映する
 	void ExeChara::SetParamFromScript ()
@@ -343,6 +325,7 @@ namespace GAME
 		}
 	}
 
+#if 0
 	//====================================================================================
 
 	//-------------------------------------------------------------------------------------------------

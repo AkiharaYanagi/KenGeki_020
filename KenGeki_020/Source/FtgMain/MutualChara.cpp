@@ -28,10 +28,10 @@ namespace GAME
 		m_exeChara1 = std::make_shared < ExeChara > ( PLAYER_ID_1 );
 		m_exeChara2 = std::make_shared < ExeChara > ( PLAYER_ID_2 );
 
-#if 0
 		m_exeChara1->SetpOther ( m_exeChara2 );
 		m_exeChara2->SetpOther ( m_exeChara1 );
 
+#if 0
 		m_exeChara1->SetpParticle ( m_decision->GetpEfPart () );
 		m_exeChara2->SetpParticle ( m_decision->GetpEfPart () );
 #endif // 0
@@ -116,11 +116,13 @@ namespace GAME
 		SwithcCPU ();	//CPU操作切替
 		ResetMatch ();	//試合初期化
 		//---------------------------------------------------
+#endif // 0
 
 		//◆スクリプト前処理(入力、移動など)
 		m_exeChara1->PreScriptMove ();
 		m_exeChara2->PreScriptMove ();
 
+#if 0
 		//◆相互判定(ぶつかり枠)
 		Collision ();
 

@@ -15,15 +15,15 @@
 #include "../../FtgMain/FtgConst.h"
 #include "../Disp/DispChara.h"
 #include "CharaData.h"
+#include "../../GameMain/Param.h"
+#include "../BtlParam.h"
+#include "ExCh_Actor.h"
 #if 0
-#include "../GameMain/Param.h"
 #include "../FtgMain/G_Ftg.h"
 #include "Input/PlayerInput.h"
 #include "Input/CPUInput.h"
 #include "Effect/OperateEffect.h"
 #include "Rect/CharaRect.h"
-#include "BtlParam.h"
-#include "ExCh_Actor.h"
 #include "../FtgMain/Ef/EfPart.h"
 #include "../FtgMain/FtgGrp.h"
 #include "TimerSlow.h"
@@ -58,21 +58,25 @@ namespace GAME
 		//基本データ
 		P_Chara			m_pChara;		//キャラデータ
 		WP_ExeChara		m_pOther;		//相手キャラ(循環参照なのでweak_ptr)
+
 		PLAYER_ID		m_playerID { _PLAYER_NUM };		//プレイヤーID
-		PLAYER_MODE		m_playerMode;	//プレイヤーモード(人,CPU,ネットワーク)
-		CHARA_NAME		m_name;			//キャラ名
+		PLAYER_MODE		m_playerMode { MODE_PLAYER };	//プレイヤーモード(人,CPU,ネットワーク)
+		CHARA_NAME		m_name { CHARA_TEST };			//キャラ名
+
+		//------------------------------------------------
+		//パラメータ
+		BtlParam		m_btlPrm;		//バトルパラメータ	
 
 		//------------------------------------------------
 		//表示
 		P_DispChara		m_dispChara;	//キャラ全般表示
 #if 0
 		P_FtgGrp		m_pFtgGrp;		//全体画像処理
+#endif // 0
 
 		//------------------------------------------------
-		//入力
-		P_CharaInput	m_pCharaInput;	//入力
-		P_PlayerInput	m_pPlayerInput;		//プレイヤ
-		P_CPUInput		m_pCPUInput;		//CPU
+		//ゲーム進行状態(アクタ, ステートを保持する)
+		ExeChara_Actor	m_actor;
 
 		//------------------------------------------------
 		//スクリプト実行
@@ -81,29 +85,26 @@ namespace GAME
 		UINT			m_frame { 0 };		//実効内部フレーム(スクリプトID)
 		P_Script		m_pScript;			//実効スクリプトポインタ
 
+
+#if 0
+		//------------------------------------------------
+		//入力
+		P_CharaInput	m_pCharaInput;	//入力
+		P_PlayerInput	m_pPlayerInput;	//プレイヤ
+		P_CPUInput		m_pCPUInput;	//CPU
+
 		//------------------------------------------------
 		//枠
 		P_CharaRect		m_charaRect;	//枠セット
-
-		//------------------------------------------------
-		//パラメータ
-		BtlParam		m_btlPrm;		//バトルパラメータ	
 
 		//------------------------------------------------
 		//エフェクト監理
 		P_OprEf			m_oprtEf;
 
 		//------------------------------------------------
-		//ゲーム進行状態(アクタ, ステートを保持する)
-		ExeChara_Actor	m_actor;
-
-		//------------------------------------------------
 		//粒子エフェクト(参照)
 		P_EfPart	m_efPart;
 
-		//------------------------------------------------
-		//Fighting参照weak_ptr
-//		WP_FTG	mwp_fighting;
 
 #endif // 0
 
@@ -116,7 +117,7 @@ namespace GAME
 		//===========================================================
 		//基本タスク関数　＆　初期化関連
 	public:
-//		void ParamInit ( P_Param pParam );
+		void ParamInit ( P_Param pParam );
 		void Load ();
 		void Init ();
 		void Move ();
@@ -127,8 +128,6 @@ namespace GAME
 		void LoadCharaData ();
 		void LoadInput ();
 		//===========================================================
-#if 0
-#endif // 0
 
 	public:
 		//===========================================================
@@ -142,7 +141,6 @@ namespace GAME
 		//MutualChara::Decision ();		//	相互判定 (攻撃枠、ヒット枠)
 		void PostScriptMove ();			//	スクリプト後処理
 		//===========================================================
-#if 0
 
 
 		//===========================================================
@@ -153,9 +151,7 @@ namespace GAME
 		void TransitAction ();	//アクション移項
 		void CalcPos ();		// 位置計算		//ぶつかり後、位置の修正
 		void CheckLife ();		//ライフ判定
-#endif // 0
 		void UpdateGraphic ();	//グラフィック更新
-#if 0
 		void PreMove_Effect ();		//スクリプト処理 前 エフェクト動作
 		void PostMove_Effect ();	//スクリプト処理 後 エフェクト動作
 		void MoveTimer () { m_btlPrm.TimerMove (); }		//タイマ稼働
@@ -166,6 +162,7 @@ namespace GAME
 		//相手を設定
 		void SetpOther ( WP_ExeChara p ) { m_pOther = p; }
 
+#if 0
 		//全体画像処理を設定
 		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
 
@@ -207,6 +204,9 @@ namespace GAME
 		//枠
 	public:
 		P_CharaRect GetpCharaRect () const { return m_charaRect; }		//枠取得
+
+#endif // 0
+#if 0
 
 		void SetCollisionRect ();	//[PreMove] 位置から接触枠設定
 		void SetRect ();			//[PostMove] 相殺・攻撃・当り 枠設定
@@ -321,11 +321,12 @@ namespace GAME
 	//================================================
 	//	内部関数
 	//================================================
+#endif // 
 
 	public:
 		//アクション指定(Stateから指定)
-		void SetAction ( tstring action_name );
 		void SetAction ( UINT action_id );
+		void SetAction ( s3d::String action_name );
 		UINT Check_TransitAction_Condition ( BRANCH_CONDITION CONDITION ) const;	//アクション移行(条件チェック)
 
 	private:
@@ -340,6 +341,7 @@ namespace GAME
 		void ExeScript ();	//スクリプト通常処理
 		void SetParamFromScript ();	//スクリプトからパラメータを反映する
 		void SpecialAction ();		//特殊アクション指定
+#if 0
 
 		//-------------------------------------------------
 	public:

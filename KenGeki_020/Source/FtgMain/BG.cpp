@@ -9,7 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "BG.h"
 #include "FtgConst.h"	
-//#include "G_Ftg.h"	
+#include "G_Ftg.h"	
 
 
 //-------------------------------------------------------------------------------------------------
@@ -17,6 +17,11 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+	const float BG::BG_SIZE_W = 2048;
+	const float BG::BG_SIZE_H = 1024;
+	const float BG::BG_POS_X = 0 - ( 2048 - 1280 ) / 2;
+	const float BG::BG_POS_Y = 0 - ( 1024 - 960 );
+
 	BG::BG ()
 	{
 		//------------------------------------------------
@@ -27,7 +32,7 @@ namespace GAME
 		m_bg->SetTextureName ( U"BG0.png" );
 
 		m_bg->SetPos ( (float)BG_POS_X, (float)BG_POS_Y );
-//		m_bg->SetZ ( Z_BG );
+		m_bg->SetZ ( Z_BG );
 
 
 #if 0

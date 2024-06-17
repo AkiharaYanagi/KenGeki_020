@@ -393,13 +393,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\ExeChara\BtlParam.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h" />
+    <ClInclude Include="Source\ExeChara\Main\ExCh_Actor.h" />
+    <ClInclude Include="Source\ExeChara\Main\ExCh_State.h" />
     <ClInclude Include="Source\ExeChara\Main\ExeChara.h" />
+    <ClInclude Include="Source\ExeChara\TimerSlow.h" />
     <ClInclude Include="Source\FtgMain\BG.h" />
+    <ClInclude Include="Source\FtgMain\Decision.h" />
     <ClInclude Include="Source\FtgMain\Fighting.h" />
     <ClInclude Include="Source\FtgMain\FtgConst.h" />
     <ClInclude Include="Source\FtgMain\FtgMain.h" />
+    <ClInclude Include="Source\FtgMain\G_Ftg.h" />
     <ClInclude Include="Source\FtgMain\MutualChara.h" />
     <ClInclude Include="Source\GameMain\GameConst.h" />
     <ClInclude Include="Source\GameMain\GameMain.h" />
@@ -409,13 +415,20 @@
     <ClInclude Include="Source\GameMain\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\ExeChara\BtlParam.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExCh_Actor.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExCh_State.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit.cpp" />
+    <ClCompile Include="Source\ExeChara\TimerSlow.cpp" />
     <ClCompile Include="Source\FtgMain\BG.cpp" />
+    <ClCompile Include="Source\FtgMain\Decision.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting.cpp" />
     <ClCompile Include="Source\FtgMain\FtgMain.cpp" />
+    <ClCompile Include="Source\FtgMain\G_Ftg.cpp" />
     <ClCompile Include="Source\FtgMain\MutualChara.cpp" />
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp" />
     <ClCompile Include="Source\GameMain\Main.cpp" />

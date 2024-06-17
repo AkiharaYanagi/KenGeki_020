@@ -360,24 +360,27 @@ namespace GAME
 
 		for ( UINT i = 0; i < nImg; ++ i )
 		{
+			//名前を取得
+			s3d::String name = m_utl.LoadS3dString ( buf, pos );
+
 			//サイズを取得
 			UINT size = m_utl.LoadUInt ( buf, pos );
 
-			UINT temp_pos = pos;
 #if 0
+			UINT temp_pos = pos;
 			byte b0 = buf [ pos ++ ];
 			byte b1 = buf [ pos ++ ];
 			byte b2 = buf [ pos ++ ];
 			byte b3 = buf [ pos ++ ];
 #endif // 0
 
+#if 0
 			pos = temp_pos + size;
 
 			//メモリ上のデータからゲームテクスチャに変換
 			s3d::Image img ();
 
 			s3d::BinaryReader br ();
-#if 0
 			P_Tx pTx = std::make_shared < s3d::Texture > ( (LPCVOID)(buf.get() + pos), size );
 			pos += size;
 
@@ -387,6 +390,14 @@ namespace GAME
 			//キャラ内部のテクスチャリストに加える
 			( *pvpTx ) [ i ] = pTx;
 #endif
+
+			//ファイルからテクスチャを作成
+			P_Tx pTx = std::make_shared < s3d::Texture > ( U"Image/" + name );
+
+			//キャラ内部のテクスチャリストに加える
+			( *pvpTx ) [ i ] = pTx;
+
+			pos += size;
 		}
 
 	}

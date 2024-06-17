@@ -18,11 +18,11 @@ namespace GAME
 	//================================================
 	//	ロード関連 内部関数
 	//================================================
-#if 0
 
 	//シーンパラメータ関連初期化
 	void ExeChara::ParamInit ( P_Param pParam )
 	{
+#if 0
 
 		//ゲーム設定
 		GameSettingFile stg = pParam->GetGameSetting ();
@@ -38,8 +38,8 @@ namespace GAME
 		//表示
 		m_dispChara->ParamInit ( pParam );
 
-	}
 #endif // 0
+	}
 
 	//------------------------
 	//読込

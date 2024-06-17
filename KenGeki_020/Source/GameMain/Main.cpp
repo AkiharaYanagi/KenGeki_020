@@ -104,6 +104,22 @@ void Main()
 	//	s3d::Texture tx ( ( U"test.png") );
 
 
+
+	//test
+
+	ColorF color { 1.0, 1.0, 1.0, 1.0 };
+//	ColorF color { 1.0, 0.5, 0.5, 1.0 };
+	s3d::Texture ef1 ( U"ef_001.png" );
+	s3d::Texture ef4 ( U"ef_004.png" );
+
+	const PixelShader ps = HLSL { U"example/shader/hlsl/rgb_shift.hlsl", U"PS" };
+	const PixelShader ps_screen = HLSL { U"ScreenBlend.hlsl", U"PS" };
+
+	//動画テスト
+	const VideoTexture vidTx ( U"BG.mp4", Loop::Yes );
+	
+	 
+	//=========================================================================
 	//メインループ
 	bool init = F;
 	while ( System::Update() )
@@ -167,6 +183,9 @@ void Main()
 		emoji.scaled(0.75).mirrored(isPlayerFacingRight).drawAt(playerPosX, 540);
 #endif // 0
 
+#if 0
+#endif // 0
+
 		//初期化
 		if ( ! init )
 		{
@@ -175,8 +194,40 @@ void Main()
 		}
 
 
+		//動画テスト
+//		vidTx.advance ();
+		vidTx.draw ();
+
+
+		//ゲームメイン
 		gameMain.Move ();
 		gameMain.Draw ();
+
+
+
+
+		//ブレンドテスト
+
+#if 0
+		{
+			const ScopedColorMul2D colorMul { color };
+//			const ScopedRenderStates2D blend { BlendState::Multiplicative };
+			ef4.draw ( 250, 400 );
+			ef1.draw ( 30, 390 );
+
+			//イメージ
+			//ブレンド：スクリーン
+			// 1 - ( 1 - A )( 1 - B );
+
+		}
+#endif // 0
+
+		{
+			const ScopedCustomShader2D sader { ps };
+			ef1.draw ( 30, 390 );
+		}
+
+
 
 		//		tx.draw ( 200, 200 );
 
