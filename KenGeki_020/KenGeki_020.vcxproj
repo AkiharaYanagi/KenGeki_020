@@ -399,6 +399,7 @@
     <ClInclude Include="Source\ExeChara\Main\ExCh_Actor.h" />
     <ClInclude Include="Source\ExeChara\Main\ExCh_State.h" />
     <ClInclude Include="Source\ExeChara\Main\ExeChara.h" />
+    <ClInclude Include="Source\ExeChara\Rect\CharaRect.h" />
     <ClInclude Include="Source\ExeChara\TimerSlow.h" />
     <ClInclude Include="Source\FtgMain\BG.h" />
     <ClInclude Include="Source\FtgMain\Decision.h" />
@@ -422,7 +423,9 @@
     <ClCompile Include="Source\ExeChara\Main\ExCh_State.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Rect.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit.cpp" />
+    <ClCompile Include="Source\ExeChara\Rect\CharaRect.cpp" />
     <ClCompile Include="Source\ExeChara\TimerSlow.cpp" />
     <ClCompile Include="Source\FtgMain\BG.cpp" />
     <ClCompile Include="Source\FtgMain\Decision.cpp" />

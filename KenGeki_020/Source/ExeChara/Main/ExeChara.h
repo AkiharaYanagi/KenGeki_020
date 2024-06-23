@@ -11,19 +11,22 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
+
 #include "../../GameMain/GameConst.h"
-#include "../../FtgMain/FtgConst.h"
-#include "../Disp/DispChara.h"
-#include "CharaData.h"
 #include "../../GameMain/Param.h"
+#include "../../FtgMain/FtgConst.h"
+#include "../../FtgMain/G_Ftg.h"
+
+#include "CharaData.h"
+#include "../Disp/DispChara.h"
 #include "../BtlParam.h"
+#include "../Rect/CharaRect.h"
 #include "ExCh_Actor.h"
+
 #if 0
-#include "../FtgMain/G_Ftg.h"
 #include "Input/PlayerInput.h"
 #include "Input/CPUInput.h"
 #include "Effect/OperateEffect.h"
-#include "Rect/CharaRect.h"
 #include "../FtgMain/Ef/EfPart.h"
 #include "../FtgMain/FtgGrp.h"
 #include "TimerSlow.h"
@@ -86,6 +89,10 @@ namespace GAME
 		P_Script		m_pScript;			//実効スクリプトポインタ
 
 
+		//------------------------------------------------
+		//枠
+		P_CharaRect		m_charaRect;	//枠セット
+
 #if 0
 		//------------------------------------------------
 		//入力
@@ -94,19 +101,19 @@ namespace GAME
 		P_CPUInput		m_pCPUInput;	//CPU
 
 		//------------------------------------------------
-		//枠
-		P_CharaRect		m_charaRect;	//枠セット
-
-		//------------------------------------------------
 		//エフェクト監理
 		P_OprEf			m_oprtEf;
 
 		//------------------------------------------------
 		//粒子エフェクト(参照)
 		P_EfPart	m_efPart;
-
-
 #endif // 0
+
+		//------------------------------------------------
+		//相手変更指定の一時保存
+		//ヒット時など相手を変更するときに判定後、1P2P同時に適用する
+		s3d::String		m_nameChangeOther;	//変更する相手のアクション名 
+
 
 	public:
 		ExeChara () = delete;
@@ -147,14 +154,18 @@ namespace GAME
 		//***********************************************************
 		//Stateから呼ばれる状態別処理
 		//***********************************************************
-		void Input ();			//入力処理
-		void TransitAction ();	//アクション移項
-		void CalcPos ();		// 位置計算		//ぶつかり後、位置の修正
-		void CheckLife ();		//ライフ判定
-		void UpdateGraphic ();	//グラフィック更新
+		//PreScriptMove
+		void Input ();				//入力処理
+		void TransitAction ();		//アクション移項
+		void CalcPos ();			// 位置計算		//ぶつかり後、位置の修正
 		void PreMove_Effect ();		//スクリプト処理 前 エフェクト動作
+
+		//PostScriptMove
 		void PostMove_Effect ();	//スクリプト処理 後 エフェクト動作
-		void MoveTimer () { m_btlPrm.TimerMove (); }		//タイマ稼働
+		void MoveTimer ();			//タイマ稼働
+		void CheckLife ();			//ライフ判定
+		void UpdateGraphic ();		//グラフィック更新
+		void SE_Play ();			//SE再生
 		//===========================================================
 
 
@@ -165,6 +176,7 @@ namespace GAME
 #if 0
 		//全体画像処理を設定
 		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
+#endif // 0
 
 		//------------------------------------------------------------
 		//パラメータ
@@ -181,6 +193,7 @@ namespace GAME
 		void BackMoveX () { m_btlPrm.BackMoveX (); }	//重なりが解消されるまで位置に戻す
 		void LookOther () { m_btlPrm.LookOther (); }	//相手の方向を向く
 
+#if 0
 		//---------------------------------------------
 		//ライフ０チェック
 		bool IsZeroLife () const { return ( 0 >= m_btlPrm.GetLife () ); }
@@ -199,14 +212,13 @@ namespace GAME
 
 		//粒子エフェクト
 		void SetpParticle ( P_EfPart p ) { m_efPart = p; }
+#endif // 0
 
 		//===========================================================
 		//枠
 	public:
 		P_CharaRect GetpCharaRect () const { return m_charaRect; }		//枠取得
 
-#endif // 0
-#if 0
 
 		void SetCollisionRect ();	//[PreMove] 位置から接触枠設定
 		void SetRect ();			//[PostMove] 相殺・攻撃・当り 枠設定
@@ -226,6 +238,7 @@ namespace GAME
 		CHARA_NAME GetCharaName () const { return m_name; }
 		int GetLife () const { return m_btlPrm.GetLife (); }		//ライフ取得
 		ACTION_POSTURE GetPosture () const { return m_pAction->GetPosture (); }
+#if 0
 
 
 		//================================================
@@ -241,9 +254,10 @@ namespace GAME
 		void SetWait ( bool b ) { m_btlPrm.SetWait ( b ); }	//入力を停止
 		void SetStop ( bool b ) { m_btlPrm.SetStop ( b ); }	//描画更新を停止
 		void SetStopTimer ( UINT i ) { m_btlPrm.GetTmr_Stop ()->Start ( i ); }
-
+#endif // 0
 		//ヒットストップ
 		bool IsHitStop () { return m_btlPrm.IsHitStop (); }
+#if 0
 
 		//打合
 		bool GetClang () const { return m_btlPrm.GetClang (); }
@@ -268,6 +282,12 @@ namespace GAME
 		void OnHit ();
 		void OnEfHit ();
 		void OnDamaged_After ();	//相手ダメージ処理の後
+
+#endif // 0
+
+		//判定後、相手の強制変更
+		void ChangeOhter ();
+#if 0
 
 		//-------------------------------------------------
 		//スクリプトからの変更
@@ -306,6 +326,8 @@ namespace GAME
 		void OnDispRect ();
 		void OffDispRect ();
 
+#endif // 0
+#if 0
 		//入力表示切替
 		void OnDispInput ();
 		void OffDispInput ();
@@ -327,7 +349,13 @@ namespace GAME
 		//アクション指定(Stateから指定)
 		void SetAction ( UINT action_id );
 		void SetAction ( s3d::String action_name );
-		UINT Check_TransitAction_Condition ( BRANCH_CONDITION CONDITION ) const;	//アクション移行(条件チェック)
+		//アクション移行(条件チェック)
+		UINT Check_TransitAction_Condition ( BRANCH_CONDITION CONDITION ) const;
+		//アクション移行(条件チェック) 名前を返す
+//		tstring Check_TransitAction_Condition_str ( BRANCH_CONDITION CONDITION ) const;	
+		s3d::String Check_TransitAction_Condition_str ( BRANCH_CONDITION CONDITION ) const;	
+
+		bool TranditAction_Command_Special ();	//アクション移項（コマンドに関する処理）限定
 
 	private:
 		//アクションの移項

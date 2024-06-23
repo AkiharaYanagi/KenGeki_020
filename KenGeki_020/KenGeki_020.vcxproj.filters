@@ -143,6 +143,9 @@
     <Filter Include="ExeChara\Disp">
       <UniqueIdentifier>{016bcf1d-93fb-439d-a729-355f5571efa9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ExeChara\Rect">
+      <UniqueIdentifier>{e0151bd6-62c5-47c1-9aef-9358a63979e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -834,6 +837,9 @@
     <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h">
       <Filter>ExeChara\Disp</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ExeChara\Rect\CharaRect.h">
+      <Filter>ExeChara\Rect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -894,6 +900,12 @@
       <Filter>ExeChara\Disp</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit.cpp">
+      <Filter>ExeChara\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Rect\CharaRect.cpp">
+      <Filter>ExeChara\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Rect.cpp">
       <Filter>ExeChara\Main</Filter>
     </ClCompile>
   </ItemGroup>

@@ -102,7 +102,6 @@ namespace GAME
 		SetAction ( idAction );
 	}
 
-#if 0
 
 	//アクション移行(自身)
 	void  ExeChara::TransitAction_Condition_I ( BRANCH_CONDITION CONDITION, bool forced )
@@ -143,25 +142,26 @@ namespace GAME
 		//----------------------------------------------
 
 		//アクション名を取得
-		tstring nameAction = Check_TransitAction_Condition_str ( CONDITION );
+//		tstring nameAction = Check_TransitAction_Condition_str ( CONDITION );
+		s3d::String nameAction = Check_TransitAction_Condition_str ( CONDITION );
 
 		//該当無しは何もしない
-		if ( _T("") == nameAction ) { return; }
+		if ( U"" == nameAction ) { return; }
 
 		//=================================================================
 		//遷移先チェック
 		P_Action pAct = m_pOther.lock()->m_pChara->GetpAction ( nameAction );
 
 		//やられ状態のとき空中チェック
-		bool bDai = _T("ダメージ大") == nameAction ;
-		bool bSyou = _T("ダメージ小") == nameAction ;
+		bool bDai = U"ダメージ大" == nameAction ;
+		bool bSyou = U"ダメージ小" == nameAction ;
 
 		if ( bDai || bSyou )
 		{
 			ACTION_POSTURE ap = m_pOther.lock()->GetPosture ();
 			if ( ap == ACTION_POSTURE::AP_JUMP )
 			{
-				nameAction = _T("空中やられ");
+				nameAction = U"空中やられ";
 			}
 		}
 
@@ -217,7 +217,7 @@ namespace GAME
 
 
 	//アクション移行(条件チェック) 名前を返す
-	tstring ExeChara::Check_TransitAction_Condition_str ( BRANCH_CONDITION BRC_CND ) const
+	s3d::String ExeChara::Check_TransitAction_Condition_str ( BRANCH_CONDITION BRC_CND ) const
 	{
 		//キャラの持つルート,ブランチ,コマンドの参照
 		const VP_Route& vpRoute = m_pChara->GetvpRoute ();
@@ -238,7 +238,7 @@ namespace GAME
 				return vpBranch [ id ]->GetNameSequence ();
 			}
 		}
-		return _T("");
+		return U"";
 	}
 
 
@@ -254,15 +254,15 @@ namespace GAME
 		//------------------------------------------------
 		//◆移項限定処理
 		//ダッシュから次アクションに移項するとき、慣性を残す
-		if ( m_pChara->GetActionID ( _T ( "FrontDashStart" ) ) == m_actionID )
+		if ( m_pChara->GetActionID ( U"FrontDashStart" ) == m_actionID )
 		{
 			m_btlPrm.SetDashInertial ( VEC2 ( 10.f, 0 ) );
 		}
-		if ( m_pChara->GetActionID ( _T ( "FrontDash" ) ) == m_actionID )
+		if ( m_pChara->GetActionID ( U"FrontDash" ) == m_actionID )
 		{
 			m_btlPrm.SetDashInertial ( VEC2 ( 10.f, 0 ) );
 		}
-		if ( m_pChara->GetActionID ( _T ( "BackDash" ) ) == m_actionID )
+		if ( m_pChara->GetActionID ( U"BackDash" ) == m_actionID )
 		{
 			m_btlPrm.SetDashInertial ( VEC2 ( -8.f, 0 ) );
 		}
@@ -272,6 +272,7 @@ namespace GAME
 		m_btlPrm.EndAction ();
 		m_frame = 0;
 	}
+#if 0
 #endif // 0
 
 

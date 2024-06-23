@@ -323,8 +323,8 @@ namespace GAME
 
 		//---------------
 		//画面端 (キャラ表示補正)
-		float wall_L = FIELD_EDGE + G_FTG->GetWallLeft ();
-		float wall_R = G_FTG->GetWallRight () - FIELD_EDGE;
+		float wall_L = (float)FIELD_EDGE + G_FTG->GetWallLeft ();
+		float wall_R = G_FTG->GetWallRight () - (float)FIELD_EDGE;
 
 
 		//壁より先には移動しない
@@ -386,7 +386,7 @@ namespace GAME
 		if ( m_accel < 0 )
 		{
 			//ライフ残１０％補正
-			if ( LIFE_MAX * 0.1f < m_life )
+			if ( (float)LIFE_MAX * 0.1f < m_life )
 			{
 				m_life += m_accel / 100;
 			}
@@ -426,7 +426,7 @@ namespace GAME
 		VEC2 pos = GetPos ();
 
 		//位置が基準より下だったら
-		if ( PLAYER_BASE_Y < pos.y )
+		if ( (float)PLAYER_BASE_Y < pos.y )
 		{
 			//着地条件のブランチを取得
 			UINT indexAction = m_pExeChara.lock()->Check_TransitAction_Condition ( BRANCH_CONDITION::BRC_GRD );
@@ -439,18 +439,18 @@ namespace GAME
 			}
 
 			//位置が基準より下で立ち状態だったら
-			if ( m_pAction->IsName ( _T ( "立ち" ) ) )
+			if ( m_pAction->IsName ( U"立ち" ) )
 			{
 				Ground_Y ();
 			}
 		}
 
 		//位置が基準より上で立ち状態だったら
-		if ( PLAYER_BASE_Y > pos.y )
+		if ( (float)PLAYER_BASE_Y > pos.y )
 		{
-			if ( m_pAction->IsName  ( _T ( "立ち" ) ) )
+			if ( m_pAction->IsName  ( U"立ち" ) )
 			{
-				UINT indexAction = m_pChara->GetActionID ( _T("落下") );
+				UINT indexAction = m_pChara->GetActionID ( U"落下" );
 				m_pExeChara.lock()->SetAction ( indexAction );			//落下
 			}
 		}
@@ -519,13 +519,10 @@ namespace GAME
 	bool BtlParam::IsLookOther ()
 	{
 		//「振り向き」チェックする動作
-		if ( m_pAction->IsName ( _T("立ち")		) ) { return T; }
-		if ( m_pAction->IsName ( _T("前歩き")		) ) { return T; }
-		if ( m_pAction->IsName ( _T("後歩き")		) ) { return T; }
-		if ( m_pAction->IsName ( _T("着地")		) ) 
-		{
-			return T; 
-		}
+		if ( m_pAction->IsName ( U"立ち")		) { return T; }
+		if ( m_pAction->IsName ( U"前歩き")		) { return T; }
+		if ( m_pAction->IsName ( U"後歩き")		) { return T; }
+		if ( m_pAction->IsName ( U"着地")		) {	return T; }
 
 		return F;
 	}

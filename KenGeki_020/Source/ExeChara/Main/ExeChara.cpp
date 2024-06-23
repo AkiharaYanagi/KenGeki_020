@@ -17,11 +17,13 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+	//===========================================================
+	//コンストラクタ
 	ExeChara::ExeChara ( PLAYER_ID m_playerID )
 	{
 		//キャラデータ生成
 		m_pChara = std::make_shared < Chara > ();	//キャラデータ実体
-//		m_charaRect = make_shared < CharaRect > ();	//実効枠
+		m_charaRect = std::make_shared < CharaRect > ();	//実効枠
 		m_btlPrm.SetPlayerID ( m_playerID );	//バトルパラメータ
 
 		//表示
@@ -41,6 +43,8 @@ namespace GAME
 	{
 	}
 
+
+	//===========================================================
 	//基本タスク関数
 	void ExeChara::Move ()
 	{
@@ -49,6 +53,7 @@ namespace GAME
 #endif // 0
 		TASK_VEC::Move ();
 	}
+
 
 	//===========================================================
 	//***********************************************************
@@ -61,8 +66,8 @@ namespace GAME
 	//	//void MutualChara::Decision ();	//	相互判定 (攻撃枠、ヒット枠)
 	//	void ExeChara::PostScriptMove ();	//	スクリプト後処理
 	//===========================================================
+	//各処理で何を行い、何を飛ばすかはアクタがステートによって指定する
 
-#if 0
 
 	//■	毎フレーム スクリプト前処理
 	void ExeChara::PreScriptMove () { m_actor.PreScriptMove (); }
@@ -72,31 +77,36 @@ namespace GAME
 
 	//■	毎フレーム スクリプト後処理
 	void ExeChara::PostScriptMove () { m_actor.PostScriptMove (); }
-#endif // 0
 
 
-	void ExeChara::PreScriptMove () {}
-	void ExeChara::RectMove () {}
-	void ExeChara::PostScriptMove () {}
-
-#if 0
-
-	//各処理で何を行い、何を飛ばすかはアクタがステートによって指定する
-	
 	//===========================================================
 	//***********************************************************
 	//	Stateから呼ばれる状態別処理
 	//***********************************************************
+	//PreScriptMove
 	//	void Input ();			//入力処理
 	//	void TransitAction ();	//アクション移項
 	//	void CalcPos ();		// 位置計算		//ぶつかり後、位置の修正
-	//	void CheckLife ();		//ライフ判定
-	//	void UpdateGraphic ();	//グラフィック更新
 	//	void PreMove_Effect ();		//スクリプト処理 前 エフェクト動作
+
+	//PostScriptMove
 	//	void PostMove_Effect ();	//スクリプト処理 後 エフェクト動作
 	//	void MoveTimer () { m_btlPrm.TimerMove (); }		//タイマ稼働
+	//	void CheckLife ();		//ライフ判定
+	//	void UpdateGraphic ();	//グラフィック更新
+	//	void SE_Play ();
 	//===========================================================
+	void ExeChara::Input () {}
+	void ExeChara::TransitAction () {}
+	void ExeChara::CalcPos () {}
+	void ExeChara::PreMove_Effect () {}
 
+	void ExeChara::PostMove_Effect () {}
+	void ExeChara::MoveTimer () { m_btlPrm.TimerMove (); }		//タイマ稼働
+	void ExeChara::CheckLife () {}
+
+
+#if 0
 	//================================================
 	//入力処理
 	void ExeChara::Input ()
@@ -234,11 +244,11 @@ namespace GAME
 		m_btlPrm.SetBalanceMax ( b_max );
 	}
 
-	//====================================================================================
 
 #endif // 0
 
 
+	//====================================================================================
 	//グラフィック更新
 	void ExeChara::UpdateGraphic ()
 	{
@@ -248,6 +258,28 @@ namespace GAME
 		m_dispChara->Update ();
 	}
 
+	//SEの再生
+	void ExeChara::SE_Play ()
+	{
+		//ヒットストップ中は除く
+		if ( m_btlPrm.GetTmr_HitStop()->IsActive () )
+		{
+			return;
+		}
+#if 0
+		//スクリプトからSEのIDを取得
+		UINT id_se = m_pScript->m_prmStaging.SE;
+		//0は対象無しの値
+		if ( 0 != id_se )
+		{
+			SOUND->Play_SE ( (SE_ID)id_se );
+		}
+#endif // 0
+	}
+
+
+
+	//====================================================================================
 #if 0
 	//入力表示切替
 	void ExeChara::OnDispInput ()
