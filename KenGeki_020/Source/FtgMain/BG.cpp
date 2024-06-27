@@ -29,7 +29,7 @@ namespace GAME
 //		m_bg = make_shared < GrpAcv > ();
 		m_bg = std::make_shared < GrpBs > ();
 
-		m_bg->SetTextureName ( U"BG0.png" );
+		m_bg->AddTexture ( U"BG0.png" );
 
 		m_bg->SetPos ( (float)BG_POS_X, (float)BG_POS_Y );
 		m_bg->SetZ ( Z_BG );

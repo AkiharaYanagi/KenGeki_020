@@ -123,6 +123,8 @@ namespace GAME
 	//アクション移行 ( 自分攻撃、相手ヒット )
 	void  ExeChara::TransitAction_Condition_E ( BRANCH_CONDITION CONDITION, bool forced )
 	{
+		if ( forced ) { int i = 0; ++ i; }
+
 #if 0
 		UINT indexAction = Check_TransitAction_Condition ( CONDITION );
 
@@ -212,7 +214,7 @@ namespace GAME
 				return vpBranch [ id ]->GetIndexSequence ();
 			}
 		}
-		return NO_COMPLETE;
+		return (UINT)NO_COMPLETE;
 	}
 
 

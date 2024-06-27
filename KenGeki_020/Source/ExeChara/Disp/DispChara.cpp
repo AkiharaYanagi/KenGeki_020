@@ -17,6 +17,7 @@ namespace GAME
 
 	DispChara::DispChara ()
 	{
+		//キャラメイングラフィック
 		m_mainImage = std::make_shared < DispMainImage > ();
 		AddpTask ( m_mainImage );
 
@@ -52,13 +53,18 @@ namespace GAME
 		m_dispInput->LoadPlayer ( playerID );
 	}
 
+#endif // 0
+
+
 	//------------------------
 	//シーンパラメータ関連初期化
 	void DispChara::ParamInit ( P_Param pParam )
 	{
+#if 0
 		m_frontEnd->ParamInit ( pParam );
 		
 		OnRect ();
+#endif // 0
 
 #if 0
 
@@ -78,6 +84,7 @@ namespace GAME
 		m_mainImage->SetpChara ( pChara );
 	}
 
+#if 0
 	//枠データを設定
 	void DispChara::SetpCharaRect ( P_CharaRect pCharaRect )
 	{
@@ -85,21 +92,14 @@ namespace GAME
 	}
 #endif // 0
 
-	//全体更新
-	void DispChara::Update ()
-	{
-		//メイン
-//		m_mainImage->UpdateMainImage ( pScript, posChara, dirRight );
-		m_mainImage->Update ();
-	}
 
-#if 0
+
+	//全体更新
 	void DispChara::Update ( P_Action pAct, P_Script pScp, const BtlParam & btlprm, P_CharaInput pChIpt )
 	{
 		//メインイメージの更新
-		m_mainImage->SetColor ( btlprm.GetColor () );
-		UpdateMainImage ( pScp, btlprm.GetPos (), btlprm.GetDirRight () );
-
+		UpdateMainImage ( pScp, btlprm );
+#if 0
 		//ゲージ類更新
 		UpdateGauge ( btlprm );
 
@@ -112,15 +112,17 @@ namespace GAME
 		//アクション名更新
 		m_frontEnd->UpdateActionName ( pAct->GetName ().c_str () );
 //		m_frontEnd->UpdateActionName ( Format::GetFormatStr ( _T("Frame = %d"), pScp->GetFrame () ).get() );
+#endif // 0
 	}
 
 
-	//毎フレームにおけるメインイメージの更新
-	void DispChara::UpdateMainImage ( P_Script pScript, VEC2 posChara, bool dirRight )
+	void DispChara::UpdateMainImage ( P_Script pScript, const BtlParam & btlprm )
 	{
 		//メイン
-		m_mainImage->UpdateMainImage ( pScript, posChara, dirRight );
+		m_mainImage->SetColor ( btlprm.GetColor () );
+		m_mainImage->UpdateMainImage ( pScript, btlprm );
 
+#if 0
 		//影
 		float fDir = dirRight ? ( 1.f ) : ( -1.f );		//向き
 		float bx = G_Ftg::inst ()->GetPosMutualBase ().x;	//基準位置
@@ -133,8 +135,10 @@ namespace GAME
 
 		//フロントエンド更新
 		m_frontEnd->UpdateMainImage ( posChara );
+#endif // 0
 	}
 
+#if 0
 	//ゲージ類更新
 	void DispChara::UpdateGauge ( BtlParam btlPrm )
 	{

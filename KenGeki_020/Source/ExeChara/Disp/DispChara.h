@@ -9,12 +9,13 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
+#include "../../GameMain/Param.h"
 #include "DispMainImage.h"
-#if 0
 #include "Chara.h"
+#include "../BtlParam.h"
+#if 0
 #include "../../GameMain/GameConst.h"
 #include "../../FtgMain/G_Ftg.h"
-#include "../../GameMain/Param.h"
 #include "DispRect.h"
 #include "DispFrontEnd.h"
 #include "DispInput.h"
@@ -42,20 +43,18 @@ namespace GAME
 		DispChara ( const DispChara & rhs ) = delete;
 		~DispChara ();
 
-#if 0
 		void ParamInit ( P_Param pParam );
-
 
 		//キャラを設定する
 		void SetpChara ( const P_Chara pChara );
 
+#if 0
 		//表示枠設定
 		void SetpCharaRect ( P_CharaRect pCharaRect );
 #endif // 0
 
 		//更新
-//		void Update ( P_Action pAct, P_Script pScp, const BtlParam & btlprm, P_CharaInput pChIpt );
-		void Update ();
+		void Update ( P_Action pAct, P_Script pScp, const BtlParam & btlprm, P_CharaInput pChIpt );
 
 #if 0
 		//------------------------------------------------
@@ -89,8 +88,10 @@ namespace GAME
 
 
 	private:
+#endif // 0
 		//メインイメージの更新
-		void UpdateMainImage ( P_Script pScript, VEC2 ptChara, bool dirRight );
+		void UpdateMainImage ( P_Script pScript, const BtlParam & btlprm );
+#if 0
 
 		//ゲージ類更新
 		void UpdateGauge ( BtlParam btlPrm );

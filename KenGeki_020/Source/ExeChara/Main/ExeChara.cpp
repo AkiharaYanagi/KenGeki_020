@@ -252,10 +252,7 @@ namespace GAME
 	//グラフィック更新
 	void ExeChara::UpdateGraphic ()
 	{
-#if 0
 		m_dispChara->Update ( m_pAction, m_pScript, m_btlPrm, m_pCharaInput );
-#endif // 0
-		m_dispChara->Update ();
 	}
 
 	//SEの再生

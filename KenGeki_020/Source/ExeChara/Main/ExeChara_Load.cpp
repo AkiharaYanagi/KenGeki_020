@@ -48,11 +48,11 @@ namespace GAME
 		//--------------------------------------------
 		//m_pCharaのデータ読込
 		LoadCharaData ();
-#if 0
 
 		//--------------------------------------------
 		//キャラ表示初期化
 		m_dispChara->SetpChara ( m_pChara );
+#if 0
 		m_dispChara->SetpCharaRect ( m_charaRect );
 
 		//アクタ・ステートに用いる状態パラメータに登録

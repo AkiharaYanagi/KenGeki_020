@@ -393,6 +393,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\CharaInput.h" />
+    <ClInclude Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\CPUInput.h" />
+    <ClInclude Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\PlayerInput.h" />
     <ClInclude Include="Source\ExeChara\BtlParam.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h" />
@@ -416,6 +419,9 @@
     <ClInclude Include="Source\GameMain\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\CharaInput.cpp" />
+    <ClCompile Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\CPUInput.cpp" />
+    <ClCompile Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\PlayerInput.cpp" />
     <ClCompile Include="Source\ExeChara\BtlParam.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp" />
