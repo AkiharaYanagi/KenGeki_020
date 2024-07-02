@@ -9,6 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "DispMainImage.h"
 
+
 //-------------------------------------------------------------------------------------------------
 // 定義
 //-------------------------------------------------------------------------------------------------
@@ -41,7 +42,6 @@ namespace GAME
 
 		//位置
 		VEC2 posScript = pScript->GetPos ();
-		float fDir = dirRight ? ( 1.f ) : ( -1.f );		//向き
 		float bx = G_Ftg::inst ()->GetPosMutualBase ().x;	//基準位置
 		//		float x = bx + ptChara.x + fDir * posScript.x;	//反転位置補正
 		float x = bx + ptChara.x + posScript.x;	//->ScalingCenterの指定により位置補正は無し
@@ -54,6 +54,7 @@ namespace GAME
 
 
 #if 0
+		float fDir = dirRight ? ( 1.f ) : ( -1.f );		//向き
 		//回転
 		float rad = D3DX_PI * 0.01f * pScript->m_prmStaging.Rotate;
 		m_mainGraphic->SetRadian ( rad * fDir );

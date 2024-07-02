@@ -119,7 +119,6 @@ namespace GAME
 
 		void Update ( P_Action pAct, P_Script pScp ) { m_pAction = pAct; m_pScript = pScp; }
 
-		void SetPlayerID ( PLAYER_ID playerID );
 		void LoadTimer ();
 		void Init ();
 		void TimerMove ();
@@ -140,6 +139,7 @@ namespace GAME
 
 		//--------------------------------------------------------------------
 		//各パラメータ
+		GET_SET ( PLAYER_ID, GetPlayerID, SetPlayerID, m_playerID )	//プレイヤID
 		GET_SET ( VEC2, GetPos, SetPos, m_posChara )			//キャラ位置
 		GET_SET ( bool, GetDirRight, SetDirRight, m_dirRight )		//右正の向き
 		GET_SET ( VEC2, GetInertial, SetInertial, m_inertial )		//慣性

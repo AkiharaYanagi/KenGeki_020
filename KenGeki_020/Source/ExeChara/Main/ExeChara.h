@@ -23,9 +23,9 @@
 #include "../Rect/CharaRect.h"
 #include "ExCh_Actor.h"
 
+#include "../Input/PlayerInput.h"
+#include "../Input/CPUInput.h"
 #if 0
-#include "Input/PlayerInput.h"
-#include "Input/CPUInput.h"
 #include "Effect/OperateEffect.h"
 #include "../FtgMain/Ef/EfPart.h"
 #include "../FtgMain/FtgGrp.h"
@@ -93,13 +93,13 @@ namespace GAME
 		//枠
 		P_CharaRect		m_charaRect;	//枠セット
 
-#if 0
 		//------------------------------------------------
 		//入力
 		P_CharaInput	m_pCharaInput;	//入力
 		P_PlayerInput	m_pPlayerInput;	//プレイヤ
 		P_CPUInput		m_pCPUInput;	//CPU
 
+#if 0
 		//------------------------------------------------
 		//エフェクト監理
 		P_OprEf			m_oprtEf;
@@ -183,6 +183,8 @@ namespace GAME
 		//@todo スクリプトの持つ　ScriptParam_Battle と ExeCharaの持つ実効値 BtlPrm の整理
 
 		BtlParam GetBtlPrm () const { return m_btlPrm; }
+
+		bool IsPlayerID ( PLAYER_ID id ) { return m_btlPrm.GetPlayerID () == id; }
 
 		void SetPos ( VEC2 v ) { m_btlPrm.SetPos ( v ); }
 		VEC2 GetPos () const { return m_btlPrm.GetPos (); }		//位置を取得

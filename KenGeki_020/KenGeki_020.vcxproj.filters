@@ -837,19 +837,19 @@
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h">
       <Filter>ExeChara\Disp</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h">
-      <Filter>ExeChara\Disp</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ExeChara\Rect\CharaRect.h">
       <Filter>ExeChara\Rect</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\CPUInput.h">
+    <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h">
+      <Filter>ExeChara\Disp</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\Input\CharaInput.h">
       <Filter>ExeChara\Input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\PlayerInput.h">
+    <ClInclude Include="Source\ExeChara\Input\CPUInput.h">
       <Filter>ExeChara\Input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\CharaInput.h">
+    <ClInclude Include="Source\ExeChara\Input\PlayerInput.h">
       <Filter>ExeChara\Input</Filter>
     </ClInclude>
   </ItemGroup>
@@ -908,9 +908,6 @@
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp">
       <Filter>ExeChara\Disp</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp">
-      <Filter>ExeChara\Disp</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit.cpp">
       <Filter>ExeChara\Main</Filter>
     </ClCompile>
@@ -920,13 +917,16 @@
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Rect.cpp">
       <Filter>ExeChara\Main</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\CPUInput.cpp">
+    <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp">
+      <Filter>ExeChara\Disp</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Input\CPUInput.cpp">
       <Filter>ExeChara\Input</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\PlayerInput.cpp">
+    <ClCompile Include="Source\ExeChara\Input\PlayerInput.cpp">
       <Filter>ExeChara\Input</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\KenGeki\KenGeki\Source\ExeChara\Input\CharaInput.cpp">
+    <ClCompile Include="Source\ExeChara\Input\CharaInput.cpp">
       <Filter>ExeChara\Input</Filter>
     </ClCompile>
   </ItemGroup>

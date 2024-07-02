@@ -13,6 +13,9 @@
 #include "DispMainImage.h"
 #include "Chara.h"
 #include "../BtlParam.h"
+
+#include "../Input/CharaInput.h"
+
 #if 0
 #include "../../GameMain/GameConst.h"
 #include "../../FtgMain/G_Ftg.h"

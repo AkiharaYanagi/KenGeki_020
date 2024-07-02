@@ -116,7 +116,7 @@ void Main()
 	const PixelShader ps_screen = HLSL { U"ScreenBlend.hlsl", U"PS" };
 
 	//動画テスト
-	const VideoTexture vidTx ( U"BG.mp4", Loop::Yes );
+//	const VideoTexture vidTx ( U"BG.mp4", Loop::Yes );
 	
 	 
 	//=========================================================================
@@ -196,7 +196,7 @@ void Main()
 
 		//動画テスト
 //		vidTx.advance ();
-		vidTx.draw ();
+//		vidTx.draw ();
 
 
 		//ゲームメイン
