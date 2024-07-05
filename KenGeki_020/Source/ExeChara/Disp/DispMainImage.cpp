@@ -53,10 +53,10 @@ namespace GAME
 		P_Tx pTexture = mpap_Tx->at ( index );
 
 
-#if 0
 		float fDir = dirRight ? ( 1.f ) : ( -1.f );		//向き
-		//回転
-		float rad = D3DX_PI * 0.01f * pScript->m_prmStaging.Rotate;
+		float rad = D3DX_PI * 0.01f * pScript->m_prmStaging.Rotate;		//回転
+
+#if 0
 		m_mainGraphic->SetRadian ( rad * fDir );
 
 		//スクリプトからの指定がなければテクスチャの中心

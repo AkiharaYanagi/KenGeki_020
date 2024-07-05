@@ -50,18 +50,23 @@ namespace GAME
 		LoadCharaData ();
 
 		//--------------------------------------------
+		//アクタ・ステートに用いる状態パラメータに登録
+		m_actor.SetwpExeChara ( shared_from_this () );
+
+		//--------------------------------------------
 		//キャラ表示初期化
 		m_dispChara->SetpChara ( m_pChara );
 #if 0
 		m_dispChara->SetpCharaRect ( m_charaRect );
+#endif // 0
 
-		//アクタ・ステートに用いる状態パラメータに登録
-		m_actor.SetwpExeChara ( shared_from_this () );
-
+		//--------------------------------------------
 		//バトルパラメータに設定
 		m_btlPrm.SetpChara ( m_pChara );
 		m_btlPrm.SetwpExeChara ( shared_from_this (), m_pOther );
 
+#if 0
+		//--------------------------------------------
 		//エフェクト生成ベクタの生成
 		m_oprtEf->MakeEfList ( m_pChara );
 
@@ -74,8 +79,6 @@ namespace GAME
 	//初期化(複数回実行可能)
 	void ExeChara::Init ()
 	{
-#if 0
-
 		//アクション・スクリプト初期化
 		m_actionID = 0;
 		m_pAction = m_pChara->GetpAction ( m_actionID );
@@ -86,10 +89,7 @@ namespace GAME
 		m_btlPrm.Init ();
 		SetParamFromScript ();	//スクリプトからパラメータを反映する
 
-		//枠
-		m_charaRect->ResetAllRect ();
-
-		//状態
+		//アクタ
 		m_actor.Init ();
 
 		//表示
@@ -97,6 +97,11 @@ namespace GAME
 		//	再度Move()は呼ばれず(Init()は呼ばれる)、
 		//	Draw()が呼ばれるため、ここで手動の初期化が必要
 		m_dispChara->Update ( m_pAction, m_pScript, m_btlPrm, m_pCharaInput );
+
+
+#if 0
+		//枠
+		m_charaRect->ResetAllRect ();
 
 		//スロウタイマ
 		m_tmrSlow.Init ();
@@ -151,13 +156,15 @@ namespace GAME
 //		tstring name ( _T ( "charaBin.dat" ) );
 		s3d::String name ( U"charaBin.dat" );
 
-		if ( m_playerID == PLAYER_ID_1 )
+		PLAYER_ID id = m_btlPrm.GetPlayerID ();
+
+		if ( PLAYER_ID_1 == id )
 		{
 //			name.assign ( _T ( "charaBin.dat" ) );
 			name.assign ( U"chara_Sae_Bin.dat" );
 //			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
-		else if ( m_playerID == PLAYER_ID_2 )
+		else if ( PLAYER_ID_2 == id )
 		{
 //			name.assign ( _T ( "charaBin.dat" ) );
 			name.assign ( U"chara_Sae_Bin.dat" );
@@ -180,13 +187,13 @@ namespace GAME
 #endif // 0
 
 
-		if ( m_playerID == PLAYER_ID_1 )
+		if ( PLAYER_ID_1  == id )
 		{		
 			//バイナリデータ読込
 //			LoadCharaBin loadCharaBin ( name.c_str (), *m_pChara );
 			LoadCharaBin_s3d loadCharaBin ( name, * m_pChara );
 		}
-		else if ( m_playerID == PLAYER_ID_2 )
+		else if ( PLAYER_ID_2  == id )
 		{
 			//名前が同じ時、すでに読み込んであるキャラデータを参照する
 			if ( this->m_name == m_pOther.lock()->m_name )

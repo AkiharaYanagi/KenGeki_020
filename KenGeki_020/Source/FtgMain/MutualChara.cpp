@@ -92,8 +92,10 @@ namespace GAME
 
 	void MutualChara::Init ()
 	{
+#if 0
 		m_pParam->SetN_Act1p ( 0 );
 		m_pParam->SetN_Act2p ( 0 );
+#endif // 0
 
 		TASK_VEC::Init ();
 	}

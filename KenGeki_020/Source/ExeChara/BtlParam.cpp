@@ -96,11 +96,13 @@ namespace GAME
 		m_pOther = pOther;
 	}
 
+#if 0
 	void BtlParam::SetPlayerID ( PLAYER_ID playerID )
 	{
 		m_playerID = playerID;
 		PosInit ();
 	}
+#endif // 0
 
 	void BtlParam::LoadTimer ()
 	{

@@ -100,6 +100,7 @@ void Main()
 #endif // 0
 
 	gameMain.Load ();
+	gameMain.Init ();
 
 	//	s3d::Texture tx ( ( U"test.png") );
 
@@ -118,7 +119,7 @@ void Main()
 	//動画テスト
 //	const VideoTexture vidTx ( U"BG.mp4", Loop::Yes );
 	
-	 
+
 	//=========================================================================
 	//メインループ
 	bool init = F;
