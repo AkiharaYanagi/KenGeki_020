@@ -22,13 +22,13 @@ namespace GAME
 		//------------------------------------------------
 		//背景
 		m_bg = std::make_shared < BG > ();
-//		AddpTask ( m_bg );
+		AddpTask ( m_bg );
 
 
 		m_grp = std::make_shared < GrpBs > ();
 		m_grp->AddTexture ( U"ef_004.png" );
 		m_grp->SetPos ( VEC2 ( 200, 300 ) );
-		AddpTask ( m_grp );
+//		AddpTask ( m_grp );
 
 		//=====================================================
 		//キャラ相互処理
@@ -64,9 +64,7 @@ namespace GAME
 
 	void Fighting::ParamInit ( P_Param pParam )
 	{
-#if 0
 		m_mutualChara->ParamInit ( pParam );
-#endif // 0
 	}
 
 	void Fighting::Load ()
@@ -100,7 +98,8 @@ namespace GAME
 
 	void Fighting::Move ()
 	{
-			m_mutualChara->Conduct ();
+		m_mutualChara->Conduct ();
+
 #if 0
 		//--------------------------
 		//デモ分岐

@@ -15,7 +15,6 @@
 #include "../../GameMain/GameConst.h"
 #include "../../GameMain/Param.h"
 #include "../../FtgMain/FtgConst.h"
-#include "../../FtgMain/G_Ftg.h"
 
 #include "CharaData.h"
 #include "../Disp/DispChara.h"
@@ -26,6 +25,7 @@
 #include "../Input/PlayerInput.h"
 #include "../Input/CPUInput.h"
 #if 0
+#include "../../FtgMain/G_Ftg.h"
 #include "Effect/OperateEffect.h"
 #include "../FtgMain/Ef/EfPart.h"
 #include "../FtgMain/FtgGrp.h"
@@ -62,7 +62,6 @@ namespace GAME
 		P_Chara			m_pChara;		//キャラデータ
 		WP_ExeChara		m_pOther;		//相手キャラ(循環参照なのでweak_ptr)
 
-		PLAYER_ID		m_playerID { _PLAYER_NUM };		//プレイヤーID
 		PLAYER_MODE		m_playerMode { MODE_PLAYER };	//プレイヤーモード(人,CPU,ネットワーク)
 		CHARA_NAME		m_name { CHARA_TEST };			//キャラ名
 
@@ -341,11 +340,16 @@ namespace GAME
 		//CPU操作切替
 		void ControlCPU ();
 		void ControlPlayer ();
+#endif // 0
 
 	//================================================
 	//	内部関数
 	//================================================
-#endif // 
+	private:
+		void _Input ();		//入力
+		void _CalcPos ();	//スクリプトによる位置計算
+
+		//アクション
 
 	public:
 		//アクション指定(Stateから指定)
@@ -361,6 +365,8 @@ namespace GAME
 
 	private:
 		//アクションの移項
+		void _TransitAction ();	
+
 		void TransitAction_Condition_I ( BRANCH_CONDITION CONDITION, bool forced );	//条件をチェックして移行
 		void TransitAction_Condition_E ( BRANCH_CONDITION CONDITION, bool forced );	//条件をチェックして移行
 		bool TranditAction_Command ();	//アクション移項（コマンドに関する処理）

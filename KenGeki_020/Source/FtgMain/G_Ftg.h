@@ -88,7 +88,7 @@ namespace GAME
 	using  UP_G_Ftg = std::unique_ptr < G_Ftg >;
 
 
-#define G_FTG	G_Ftg::inst()
+#define G_FTG	G_Ftg::inst
 #define G_BASE_POS	G_Ftg::inst()->GetPosMutualBase
 
 

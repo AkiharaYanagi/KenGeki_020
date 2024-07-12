@@ -48,9 +48,10 @@ namespace GAME
 	{
 		//名前のサイズ
 		byte length = buf [ pos ++ ];	//Encoding.UTF8
+//		byte length = buf [ pos ];	//Encoding.UTF8
 
 		//位置
-		char* index = (char*)buf.get() + pos;
+//		char* index = (char*)buf.get() + pos;
 
 		//UTF8 -> wstring
 		// MultiByte -> WChar
@@ -73,10 +74,17 @@ namespace GAME
 		s3d::String s3dStr = Unicode::FromWstring ( tstr );
 #endif // 0
 
-		s3d::String s3dStr = Unicode::FromUTF8 ( index );
+
+//		s3d::String s3dStr = Unicode::FromUTF8 ( index );
+
+		std::string str ( (char*)buf.get() + pos, length );
+		s3d::String s3dStr = Unicode::FromUTF8 ( str );
+
 
 		//位置を更新
 		pos += length;
+//		size_t size_byte = s3dStr.size_bytes ();
+//		pos += size_byte;
 
 		//取得した名前を返す
 		return s3dStr;

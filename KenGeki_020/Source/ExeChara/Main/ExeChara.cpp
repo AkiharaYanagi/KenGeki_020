@@ -23,12 +23,12 @@ namespace GAME
 	{
 		//キャラデータ生成
 		m_pChara = std::make_shared < Chara > ();	//キャラデータ実体
-		m_charaRect = std::make_shared < CharaRect > ();	//実効枠
 		m_btlPrm.SetPlayerID ( m_playerID );	//バトルパラメータ
+		m_charaRect = std::make_shared < CharaRect > ();	//実効枠
 
 		//表示
 		m_dispChara = std::make_shared < DispChara > ();
-//		m_dispChara->LoadPlayer ( m_playerID );	//表示(1P/2P側による位置)
+		m_dispChara->LoadPlayer ( m_playerID );	//表示(1P/2P側による位置)
 		AddpTask ( m_dispChara );
 
 #if 0
@@ -96,113 +96,36 @@ namespace GAME
 	//	void UpdateGraphic ();	//グラフィック更新
 	//	void SE_Play ();
 	//===========================================================
-	void ExeChara::Input () {}
-	void ExeChara::TransitAction () {}
-	void ExeChara::CalcPos () {}
+	void ExeChara::Input () { _Input (); }
+	void ExeChara::TransitAction () { _TransitAction (); }
+	void ExeChara::CalcPos () { _CalcPos (); }
 	void ExeChara::PreMove_Effect () {}
-
+	//------------------------------------------------
 	void ExeChara::PostMove_Effect () {}
 	void ExeChara::MoveTimer () { m_btlPrm.TimerMove (); }		//タイマ稼働
 	void ExeChara::CheckLife () {}
 
 
-#if 0
 	//================================================
 	//入力処理
-	void ExeChara::Input ()
+	void ExeChara::_Input ()
 	{
 		//入力の更新
 		m_pCharaInput->Update ( GetDirRight () );
 	}
 
-	//================================================
-	// アクション移項(条件:コマンド, アクション終了)
-	void ExeChara::TransitAction ()
-	{
-		assert ( nullptr != m_pAction && nullptr != m_pScript );
 
-		//-----------------------------------------------------
-		// のけぞり時間はコマンドによる行動不可
-		if ( m_btlPrm.GetTmr_Lurch ()->IsActive () ) { return; }
-
-		//-----------------------------------------------------
-		// コマンドによる分岐
-		if ( TranditAction_Command () )
-		{
-			//分岐が成立していたら以降はチェックしない
-			return;
-		}
-
-		//-----------------------------------------------------
-		//現在スクリプトが現在アクションにおける最終フレーム ならば
-		if ( m_pAction->IsOverScript ( m_frame ) )
-		{
-			EndAction ();	//アクション終了処理
-			//次アクション m_frame = 0に遷移
-		}
-
-		//-----------------------------------------------------
-		// スクリプト通常処理
-		ExeScript ();
-
-
-		if ( m_playerID == PLAYER_ID_1 )
-		{
-			DBGOUT_WND_F ( 8, _T ( "tmrSlow.m_count = %d" ), m_tmrSlow.GetCount () );
-		}
-
-
-		//スロウのとき
-		if ( m_tmrSlow.GetValid () )
-		{
-			if ( m_tmrSlow.Next () )
-			{
-				++ m_frame;
-				m_actor.ShiftFighting ();
-			}
-			else
-			{
-				//スロウスキップ
-				m_actor.ShiftSlowSkip ();
-			}
-		}
-		else
-		{
-		//通常処理：スクリプトを１つ進める
-			++ m_frame;
-		}
-
-#if 0
-		//-----------------------------------------------------
-		//現在スクリプトが現在アクションにおける最終フレーム ならば
-		if ( m_pAction->IsOverScript ( m_frame ) )
-		{
-			EndAction ();	//アクション終了処理
-			ExeScript ();	//スクリプト通常処理
-
-			//スクリプト遷移時に１つ進める
-			++ m_frame;
-			return;			//終了
-		}
-
-		//-----------------------------------------------------
-		// スクリプト通常処理
-		ExeScript ();
-
-		//通常処理：スクリプトを１つ進める
-		++ m_frame;
-#endif // 0
-	}
 
 	//================================================
 	// 位置計算
-	void ExeChara::CalcPos ()
+	void ExeChara::_CalcPos ()
 	{
 		m_btlPrm.CalcBalance ( m_pScript );	//バランス処理
 		m_btlPrm.CalcPos ( m_pScript );		//位置計算
 		m_btlPrm.Landing ();	//着地
 	}
 
+#if 0
 	//================================================
 	//エフェクト
 	void ExeChara::PreMove_Effect ()
@@ -307,6 +230,7 @@ namespace GAME
 		m_actor.ShiftFighting ();
 	}
 
+#endif // 0
 	//================================================
 	//	内部関数
 	//================================================
@@ -332,7 +256,6 @@ namespace GAME
 		//スクリプトからのパラメータ反映
 		SetParamFromScript ();
 	}
-#endif // 0
 
 	//スクリプトからパラメータを反映する
 	void ExeChara::SetParamFromScript ()

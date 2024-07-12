@@ -325,8 +325,8 @@ namespace GAME
 
 		//---------------
 		//画面端 (キャラ表示補正)
-		float wall_L = (float)FIELD_EDGE + G_FTG->GetWallLeft ();
-		float wall_R = G_FTG->GetWallRight () - (float)FIELD_EDGE;
+		float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
+		float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
 
 
 		//壁より先には移動しない

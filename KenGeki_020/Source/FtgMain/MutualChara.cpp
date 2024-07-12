@@ -18,11 +18,8 @@ namespace GAME
 {
 	MutualChara::MutualChara ()
 	{
-#if 0
-
 		//判定 キャラに譲渡するためオブジェクトのみ先に確保
-		m_decision = make_shared < Decision > ();
-#endif // 0
+		m_decision = std::make_shared < Decision > ();
 
 		//キャラ
 		m_exeChara1 = std::make_shared < ExeChara > ( PLAYER_ID_1 );
@@ -39,11 +36,15 @@ namespace GAME
 		AddpTask ( m_exeChara1 );
 		AddpTask ( m_exeChara2 );
 
-#if 0
 		//判定
-		m_decision->SetpChara (m_exeChara1, m_exeChara2);
+		m_collision = std::make_shared < Collision > ();
+		m_collision->SetpChara ( m_exeChara1, m_exeChara2 );
+		AddpTask ( m_collision );
+
+		m_decision->SetpChara ( m_exeChara1, m_exeChara2 );
 		AddpTask ( m_decision );
 
+#if 0
 		//ヒットストップタイマー
 		m_tmrHitstop = make_shared < Timer > ();
 		m_tmrHitstop->SetTargetTime ( HITSTOP_TIME );
@@ -69,16 +70,11 @@ namespace GAME
 	}
 
 
-
-
 	void MutualChara::ParamInit ( P_Param pParam )
 	{
 		m_pParam = pParam;
-
-#if 0
 		m_exeChara1->ParamInit ( pParam );
 		m_exeChara2->ParamInit ( pParam );
-#endif // 0
 	}
 
 	void MutualChara::Load ()
@@ -124,9 +120,8 @@ namespace GAME
 		m_exeChara1->PreScriptMove ();
 		m_exeChara2->PreScriptMove ();
 
-#if 0
 		//◆相互判定(ぶつかり枠)
-		Collision ();
+		_Collision ();
 
 		//◆ぶつかり後、攻撃・ヒット判定枠を設定
 		m_exeChara1->RectMove ();
@@ -134,17 +129,15 @@ namespace GAME
 
 		//◆相互判定(攻撃・ヒット枠)
 		_Decision ();
-#endif // 0
-
 
 		//◆スクリプト後処理(グラフィック位置など)
 		m_exeChara1->PostScriptMove ();
 		m_exeChara2->PostScriptMove ();
-#if 0
 
 		//グラフィック共通
 		Grp ();
 
+#if 0
 		//シーン共通パラメータ記録
 		m_pParam->SetN_Life1p ( m_exeChara1->GetLife () );
 		m_pParam->SetN_Life2p ( m_exeChara2->GetLife () );
@@ -181,98 +174,14 @@ namespace GAME
 	//■#########################################################
 
 
+#endif // 0
+
 	//◆================================
 	//◆		相互判定(ぶつかり枠)
 	//◆================================
-	void MutualChara::Collision ()
+	void MutualChara::_Collision ()
 	{
-		//両者の接触枠を取得
-		P_CharaRect pCharaRect1p = m_exeChara1->GetpCharaRect ();
-		P_CharaRect pCharaRect2p = m_exeChara2->GetpCharaRect ();
-		PV_RECT pvRect1p = pCharaRect1p->GetpvCRect ();
-		PV_RECT pvRect2p = pCharaRect2p->GetpvCRect ();
-
-		//接触判定
-		//重なっているとき
-		if ( OverlapAryRect ( pvRect1p, pvRect2p ) )
-		{
-			bool dir1 = m_exeChara1->GetDirRight ();
-			bool dir2 = m_exeChara2->GetDirRight ();
-			VEC2 pos1_0 = m_exeChara1->GetPos ();
-			VEC2 pos2_0 = m_exeChara2->GetPos ();
-
-			m_exeChara1->BackPtX ();	//互いにx方向のみ位置を戻す
-			m_exeChara2->BackPtX ();
-
-			VEC2 pos1_1 = m_exeChara1->GetPos ();
-			VEC2 pos2_1 = m_exeChara2->GetPos ();
-
-			//さらに重なっているとき
-			if ( OverlapAryRect ( pvRect1p, pvRect2p ) )
-			{
-				//位置をさらに戻して(動作した後の位置)から補正する
-				if ( LeaveDir ( dir1, pos1_0.x, pos1_1.x ) )
-				{
-					m_exeChara1->SetPos ( pos1_0 );
-				}
-				if ( LeaveDir ( dir2, pos2_0.x, pos2_1.x ) )
-				{
-					m_exeChara2->SetPos ( pos2_0 );
-				}
-			}
-
-
-			int i = 0;
-			while ( OverlapAryRect ( pvRect1p, pvRect2p ) )
-			{
-				m_exeChara1->BackMoveX ();	//重なり微調整
-				m_exeChara2->BackMoveX ();
-
-				m_exeChara1->SetCollisionRect ();	//当り枠再設定
-				m_exeChara2->SetCollisionRect ();
-
-				pvRect1p = pCharaRect1p->GetpvCRect ();
-				pvRect2p = pCharaRect2p->GetpvCRect ();
-
-				if ( ++ i > 10 ) { break; }
-			}
-		}
-
-		//振向
-		m_exeChara1->LookOther ();
-		m_exeChara2->LookOther ();
-
-		//距離制限(画面端同士)
-		float p1x = m_exeChara1->GetPos ().x;
-		float p2x = m_exeChara2->GetPos ().x;
-		
-		// || P1 << P2			||
-		if ( p2x - p1x > GAME_WINDOW_WIDTH - FIELD_EDGE * 2 )
-		{
-			m_exeChara1->BackPtX ();	//互いに位置を戻す
-			m_exeChara2->BackPtX ();
-		}
-		// ||			P2 << P1 ||
-		else if ( p1x - p2x > GAME_WINDOW_WIDTH - FIELD_EDGE * 2 )
-		{
-			m_exeChara1->BackPtX ();	//互いに位置を戻す
-			m_exeChara2->BackPtX ();
-		}
-	}
-
-	bool MutualChara::LeaveDir ( bool dirRight, float pos0, float pos1 )
-	{
-		//離れる方向のとき
-		bool leave = F;
-		if ( dirRight )	//右向き左移動
-		{
-			if ( pos1 < pos0 ) leave = T;
-		}
-		else//左向き右移動
-		{
-			if ( pos0 < pos1 ) leave = T;
-		}
-		return leave;
+		m_collision->Do ();
 	}
 
 	//◆================================
@@ -283,11 +192,13 @@ namespace GAME
 		m_decision->Do ();
 	}
 
+
 	//◆================================
 	//◆		共通グラフィック
 	//◆================================
 	void MutualChara::Grp ()
 	{
+#if 0
 		//---------------------------------------------------
 		//暗転
 		UINT bo1 = m_exeChara1->GetBlackOut ();
@@ -326,14 +237,17 @@ namespace GAME
 			m_exeChara1->SetWhiteOut ( F );
 			m_exeChara2->SetWhiteOut ( F );
 		}
-		 
+
+#endif // 0
+
 		//---------------------------------------------------
 		//画面表示の基準位置を決定
 		VEC2 pos1p = m_exeChara1->GetPos ();
 		VEC2 pos2p = m_exeChara2->GetPos ();
-		G_Ftg::inst ()->CulcPosMutualBase ( pos1p, pos2p );
+		G_FTG()->CulcPosMutualBase ( pos1p, pos2p );
 	}
 
+#if 0
 
 
 	//------------------------------------------------------
@@ -681,6 +595,7 @@ namespace GAME
 
 
 #endif // 0
+
 
 }	//namespace GAME
 

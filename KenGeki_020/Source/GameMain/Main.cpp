@@ -91,6 +91,13 @@ void Main()
 
 	//	SivInput::Create();
 
+	//システム初期化
+	KeyConfig::Create ();
+	SivInput::Create ();
+	DebugOutGameWindow::Create ();
+
+
+
 	GameMain gameMain;
 
 #if 0
@@ -116,9 +123,16 @@ void Main()
 	const PixelShader ps = HLSL { U"example/shader/hlsl/rgb_shift.hlsl", U"PS" };
 	const PixelShader ps_screen = HLSL { U"ScreenBlend.hlsl", U"PS" };
 
+
+	//ブレンド用 レンダーテクスチャ
+	RenderTexture rd_tx{1280, 960, Palette::Lightgreen };
+
+
+
+
+
 	//動画テスト
 //	const VideoTexture vidTx ( U"BG.mp4", Loop::Yes );
-	
 
 	//=========================================================================
 	//メインループ
@@ -184,8 +198,6 @@ void Main()
 		emoji.scaled(0.75).mirrored(isPlayerFacingRight).drawAt(playerPosX, 540);
 #endif // 0
 
-#if 0
-#endif // 0
 
 		//初期化
 		if ( ! init )
@@ -195,20 +207,24 @@ void Main()
 		}
 
 
+		//毎回の更新
+		const Array<Input> & keys = Keyboard::GetAllInputs();
+		SivInput::Inst()->Update ( keys );
+
+
 		//動画テスト
 //		vidTx.advance ();
 //		vidTx.draw ();
 
 
+
 		//ゲームメイン
 		gameMain.Move ();
-		gameMain.Draw ();
-
+//		gameMain.Draw ();
 
 
 
 		//ブレンドテスト
-
 #if 0
 		{
 			const ScopedColorMul2D colorMul { color };
@@ -219,20 +235,45 @@ void Main()
 			//イメージ
 			//ブレンド：スクリーン
 			// 1 - ( 1 - A )( 1 - B );
+		}
 
+		{
+//			const ScopedCustomShader2D shader { ps };
+			const ScopedCustomShader2D shader { ps_screen };
+			ef1.draw ( 30, 390 );
 		}
 #endif // 0
 
+
+		//レンダーターゲット指定
 		{
-			const ScopedCustomShader2D sader { ps };
-			ef1.draw ( 30, 390 );
+			const s3d::ScopedRenderTarget2D target { rd_tx };
+
+
+			//ゲームメイン描画
+			gameMain.Draw ();
+
 		}
+		rd_tx.draw ();
+
+
+#if 0
+		//ピクセルシェーダ指定
+//		s3d::Graphics2D::SetPSTexture ( 1, rd_tx );	//適用テクスチャを指定
+		s3d::Graphics2D::SetPSTexture ( 1, ef1 );	//適用テクスチャを指定
+//		s3d::Graphics2D::SetPSTexture ( 1, ef4 );	//適用テクスチャを指定
+		{
+//			const s3d::ScopedCustomShader2D shader { ps };
+			const s3d::ScopedCustomShader2D shader { ps_screen };
+//			ef1.draw ( 30, 390 );
+//			ef4.draw ( 250, 400 );
+			rd_tx.draw ();
+		}
+#endif // 0
 
 
 
-		//		tx.draw ( 200, 200 );
-
-		//		SivInput::Inst()->Is_Keyboard ( SIK_Z );
+		DBGOUT_WND()->Draw ();
 	}
 }
 

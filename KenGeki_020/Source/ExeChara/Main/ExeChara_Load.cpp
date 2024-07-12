@@ -22,8 +22,13 @@ namespace GAME
 	//シーンパラメータ関連初期化
 	void ExeChara::ParamInit ( P_Param pParam )
 	{
-#if 0
+		//表示
+		m_dispChara->ParamInit ( pParam );
 
+		//入力 (プレイヤモードによる分岐)
+		LoadInput ();
+
+#if 0
 		//ゲーム設定
 		GameSettingFile stg = pParam->GetGameSetting ();
 
@@ -31,12 +36,6 @@ namespace GAME
 //		m_name = stg.GetName ( m_playerID );
 		m_name = pParam->GetCharaName ( m_playerID );
 		m_playerMode = stg.GetPlayerMode ( m_playerID );
-
-		//入力
-		LoadInput ();
-
-		//表示
-		m_dispChara->ParamInit ( pParam );
 
 #endif // 0
 	}
@@ -56,9 +55,7 @@ namespace GAME
 		//--------------------------------------------
 		//キャラ表示初期化
 		m_dispChara->SetpChara ( m_pChara );
-#if 0
 		m_dispChara->SetpCharaRect ( m_charaRect );
-#endif // 0
 
 		//--------------------------------------------
 		//バトルパラメータに設定
@@ -147,32 +144,31 @@ namespace GAME
 
 	void ExeChara::LoadCharaData ()
 	{
-
 		//--------------------------------------------
 		//m_pCharaのデータ読込
 
 		//名前からスクリプトファイルを指定してキャラのロード
-//		//※	D3DXのテクスチャを用いるためフォーカス変更時などに再設定(Reset())が必要
-//		tstring name ( _T ( "charaBin.dat" ) );
-		s3d::String name ( U"charaBin.dat" );
+		s3d::String name ( U"chara_Stand_Bin.dat" );
 
+		//名前の指定
 		PLAYER_ID id = m_btlPrm.GetPlayerID ();
-
 		if ( PLAYER_ID_1 == id )
 		{
 //			name.assign ( _T ( "charaBin.dat" ) );
+//			name.assign ( U"chara_Stand_Bin.dat" );
 			name.assign ( U"chara_Sae_Bin.dat" );
 //			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
 		else if ( PLAYER_ID_2 == id )
 		{
 //			name.assign ( _T ( "charaBin.dat" ) );
+//			name.assign ( U"chara_Stand_Bin.dat" );
 			name.assign ( U"chara_Sae_Bin.dat" );
 //			name.assign ( _T ( "chara_E0_Bin.dat" ) );
-
-			//@info　キャラが複数に渡るとき、リアクション技指定をIDでなく名前で指定しないと位置がずれる
 		}
-//
+
+		//@info　キャラが複数に渡るとき、リアクション技指定をIDでなく名前で指定しないと位置がずれる
+
 #if 0
 		//パラメータによるキャラの選択
 		switch ( m_name )
@@ -183,10 +179,9 @@ namespace GAME
 		case CHARA_SAE : name.assign ( _T ( "chara_Sae_Bin.dat" ) ); break;
 		default: break;
 		}
-
 #endif // 0
 
-
+		//キャラデータ読込
 		if ( PLAYER_ID_1  == id )
 		{		
 			//バイナリデータ読込
@@ -195,7 +190,7 @@ namespace GAME
 		}
 		else if ( PLAYER_ID_2  == id )
 		{
-			//名前が同じ時、すでに読み込んであるキャラデータを参照する
+			//1pと2pで名前が同じとき、既に読み込んであるキャラデータを参照する
 			if ( this->m_name == m_pOther.lock()->m_name )
 			{
 				m_pChara = m_pOther.lock()->m_pChara;
@@ -203,17 +198,20 @@ namespace GAME
 		}
 	}
 
+
 	void ExeChara::LoadInput ()
 	{
-#if 0
 		//キャラ入力(プレイヤー, CPU, Network)
-		m_pPlayerInput = make_shared < PlayerInput > ();
-		m_pPlayerInput->SetPlayer ( m_playerID );
+		m_pPlayerInput = std::make_shared < PlayerInput > ();
+		m_pPlayerInput->SetPlayer ( m_btlPrm.GetPlayerID () );
 
-		m_pCPUInput = make_shared < CPUInput > ( shared_from_this (), m_pOther );
+#if 0
+		m_pCPUInput = std::make_shared < CPUInput > ( shared_from_this (), m_pOther );
 		m_pCPUInput->SetPlayer ( m_playerID );
 		m_pCPUInput->Load ();
+#endif // 0
 
+#if 0
 		//プレイヤモード(入力種類)による初期化
 		switch ( m_playerMode )
 		{
@@ -223,6 +221,7 @@ namespace GAME
 		default: break;
 		}
 #endif // 0
+		m_pCharaInput = m_pPlayerInput;
 	}
 
 }	//namespace GAME

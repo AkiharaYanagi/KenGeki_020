@@ -49,7 +49,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Intermediate\$(ProjectName)\Debug\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\Debug\Intermediate\</IntDir>
-    <TargetName>$(ProjectName)(debug)</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
     <LocalDebuggerWorkingDirectory>$(ProjectDir)App</LocalDebuggerWorkingDirectory>
     <IncludePath>$(SIV3D_0_6_13)\include;$(SIV3D_0_6_13)\include\ThirdParty;$(IncludePath)</IncludePath>
     <LibraryPath>$(SIV3D_0_6_13)\lib\Windows;$(LibraryPath)</LibraryPath>
@@ -395,7 +395,11 @@
   <ItemGroup>
     <ClInclude Include="Source\ExeChara\BtlParam.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h" />
+    <ClInclude Include="Source\ExeChara\Disp\DispChara_Const.h" />
+    <ClInclude Include="Source\ExeChara\Disp\DispFrontEnd.h" />
+    <ClInclude Include="Source\ExeChara\Disp\DispInput.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h" />
+    <ClInclude Include="Source\ExeChara\Disp\DispRect.h" />
     <ClInclude Include="Source\ExeChara\Input\CharaInput.h" />
     <ClInclude Include="Source\ExeChara\Input\CPUInput.h" />
     <ClInclude Include="Source\ExeChara\Input\PlayerInput.h" />
@@ -405,6 +409,7 @@
     <ClInclude Include="Source\ExeChara\Rect\CharaRect.h" />
     <ClInclude Include="Source\ExeChara\TimerSlow.h" />
     <ClInclude Include="Source\FtgMain\BG.h" />
+    <ClInclude Include="Source\FtgMain\Collision.h" />
     <ClInclude Include="Source\FtgMain\Decision.h" />
     <ClInclude Include="Source\FtgMain\Fighting.h" />
     <ClInclude Include="Source\FtgMain\FtgConst.h" />
@@ -421,7 +426,10 @@
   <ItemGroup>
     <ClCompile Include="Source\ExeChara\BtlParam.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />
+    <ClCompile Include="Source\ExeChara\Disp\DispFrontEnd.cpp" />
+    <ClCompile Include="Source\ExeChara\Disp\DispInput.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp" />
+    <ClCompile Include="Source\ExeChara\Disp\DispRect.cpp" />
     <ClCompile Include="Source\ExeChara\Input\CharaInput.cpp" />
     <ClCompile Include="Source\ExeChara\Input\CPUInput.cpp" />
     <ClCompile Include="Source\ExeChara\Input\PlayerInput.cpp" />
@@ -430,10 +438,13 @@
     <ClCompile Include="Source\ExeChara\Main\ExeChara.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Rect.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Special.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit_Special.cpp" />
     <ClCompile Include="Source\ExeChara\Rect\CharaRect.cpp" />
     <ClCompile Include="Source\ExeChara\TimerSlow.cpp" />
     <ClCompile Include="Source\FtgMain\BG.cpp" />
+    <ClCompile Include="Source\FtgMain\Collision.cpp" />
     <ClCompile Include="Source\FtgMain\Decision.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting.cpp" />
     <ClCompile Include="Source\FtgMain\FtgMain.cpp" />

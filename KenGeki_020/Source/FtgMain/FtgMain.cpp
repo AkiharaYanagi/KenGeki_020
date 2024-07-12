@@ -75,6 +75,10 @@ namespace GAME
 
 	void FtgMain::Load ()
 	{
+		//格闘部分共通パラメータシングルトン生成
+		G_Ftg::Create ();
+
+
 		//遷移先指定にthisを保存
 		Scene::SetwpThis ( shared_from_this () );
 #if 0
@@ -88,8 +92,6 @@ namespace GAME
 	void FtgMain::ParamInit ()
 	{
 		m_fighting->ParamInit ( Scene::GetpParam () );
-#if 0
-#endif // 0
 
 		//BGM
 //		SOUND->Play_Loop_BGM ( BGM_Main );

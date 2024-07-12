@@ -364,7 +364,7 @@ namespace GAME
 			s3d::String name = m_utl.LoadS3dString ( buf, pos );
 
 			//サイズを取得
-			UINT size = m_utl.LoadUInt ( buf, pos );
+			UINT filesize = m_utl.LoadUInt ( buf, pos );
 
 #if 0
 			UINT temp_pos = pos;
@@ -391,13 +391,31 @@ namespace GAME
 			( *pvpTx ) [ i ] = pTx;
 #endif
 
+#if 0
 			//ファイルからテクスチャを作成
 			P_Tx pTx = std::make_shared < s3d::Texture > ( U"Image/" + name );
+
+
+			P_Tx pTx0 = std::make_shared < s3d::Texture > ( U"000_立ち_00.png" );
+			( *pvpTx ) [ i ] = pTx0;
+#endif // 0
+
+
+#if 0
+#endif // 0
+
+			//メモリ上からテクスチャに変換
+			s3d::MemoryReader mr ( (void*)(buf.get() + pos), filesize );
+			mr.setPos ( 0 );
+
+			P_Tx pTx = std::make_shared < s3d::Texture > ( std::move ( mr ) );
+
 
 			//キャラ内部のテクスチャリストに加える
 			( *pvpTx ) [ i ] = pTx;
 
-			pos += size;
+
+			pos += filesize;
 		}
 
 	}

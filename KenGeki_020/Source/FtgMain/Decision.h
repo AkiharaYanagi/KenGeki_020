@@ -1,6 +1,6 @@
 ﻿//=================================================================================================
 //
-//	デシジョン(判定)
+//	デシジョン( 攻撃・当たり 判定)
 //
 //=================================================================================================
 #pragma once
@@ -9,8 +9,8 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
+#include "../ExeChara/Main/ExeChara.h"
 #if 0
-#include "../ExeChara/ExeChara.h"
 #include "Ef/EfClang.h"
 #include "Ef/EfSpark.h"
 #include "Ef/EfParticle.h"
@@ -27,10 +27,10 @@ namespace GAME
 
 	class Decision : public TASK_VEC
 	{
-#if 0
 		//キャラエグゼ
 		P_ExeChara		m_pExeChara1p;
 		P_ExeChara		m_pExeChara2p;
+#if 0
 
 		//共通エフェクト
 		P_EfClang		m_efClang;
@@ -58,15 +58,18 @@ namespace GAME
 		Decision ( const Decision & rhs ) = delete;
 		~Decision ();
 
-#if 0
 
 		void SetpChara (P_ExeChara pExeChara1p, P_ExeChara pExeChara2p);
+#if 0
 		void SetpHitStop (P_Timer pHitstop);
 
 		P_EfPart GetpEfPart () const { return m_efPart; }
 		void Decision_EfPart ();
 
+#endif // 0
+
 		void Do ();
+#if 0
 
 
 	private:

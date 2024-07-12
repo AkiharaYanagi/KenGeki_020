@@ -8,6 +8,9 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "DispChara.h"
+#include "Chara.h"
+#include "../BtlParam.h"
+
 
 //-------------------------------------------------------------------------------------------------
 // 定義
@@ -21,15 +24,17 @@ namespace GAME
 		m_mainImage = std::make_shared < DispMainImage > ();
 		AddpTask ( m_mainImage );
 
-#if 0
-		m_dispRect = make_shared < DispRect > ();
+		//入力表示
+		m_dispInput = std::make_shared < DispInput > ();
+		AddpTask ( m_dispInput );
+
+		//枠
+		m_dispRect = std::make_shared < DispRect > ();
 		AddpTask ( m_dispRect );
 
+#if 0
 		m_frontEnd = make_shared < DispFrontEnd > ();
 		AddpTask ( m_frontEnd );
-
-		m_dispInput = make_shared < DispInput > ();
-		AddpTask ( m_dispInput );
 
 		//影
 		m_grpShadow = make_shared < GrpAcv > ();
@@ -45,15 +50,14 @@ namespace GAME
 	{
 	}
 
-#if 0
 	//プレイヤIDを設定
 	void DispChara::LoadPlayer ( PLAYER_ID playerID )
 	{
+#if 0
 		m_frontEnd->LoadPlayer ( playerID );
+#endif // 0
 		m_dispInput->LoadPlayer ( playerID );
 	}
-
-#endif // 0
 
 
 	//------------------------
@@ -84,27 +88,30 @@ namespace GAME
 		m_mainImage->SetpChara ( pChara );
 	}
 
-#if 0
 	//枠データを設定
 	void DispChara::SetpCharaRect ( P_CharaRect pCharaRect )
 	{
 		m_dispRect->SetCharaRect ( pCharaRect );
 	}
-#endif // 0
 
 
+	//---------------------------------------------------------------------
 
 	//全体更新
 	void DispChara::Update ( P_Action pAct, P_Script pScp, const BtlParam & btlprm, P_CharaInput pChIpt )
 	{
 		//メインイメージの更新
 		UpdateMainImage ( pScp, btlprm );
-#if 0
-		//ゲージ類更新
-		UpdateGauge ( btlprm );
+
+		//枠
+		m_dispRect->Update ();
 
 		//入力更新
 		UpdateInput ( pChIpt );
+
+#if 0
+		//ゲージ類更新
+		UpdateGauge ( btlprm );
 
 		//ヒット数更新
 		UpdateChainHitNum ( btlprm.GetChainHitNum () );
@@ -115,7 +122,9 @@ namespace GAME
 #endif // 0
 	}
 
+	//---------------------------------------------------------------------
 
+	//メインイメージの更新
 	void DispChara::UpdateMainImage ( P_Script pScript, const BtlParam & btlprm )
 	{
 		//メイン
@@ -130,13 +139,17 @@ namespace GAME
 		vecImgShadow.y = -0.f + 1.f * PLAYER_BASE_Y;	//y方向のみ指定
 		m_grpShadow->SetPos ( vecImgShadow );
 
-		//枠
-		m_dispRect->Update ();
-
 		//フロントエンド更新
 		m_frontEnd->UpdateMainImage ( posChara );
 #endif // 0
 	}
+
+	//入力更新
+	void DispChara::UpdateInput ( P_CharaInput p )
+	{
+		m_dispInput->UpdateInput ( p );
+	}
+
 
 #if 0
 	//ゲージ類更新

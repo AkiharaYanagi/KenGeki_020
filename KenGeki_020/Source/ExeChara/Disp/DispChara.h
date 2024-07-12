@@ -11,17 +11,14 @@
 #include "Game.h"
 #include "../../GameMain/Param.h"
 #include "DispMainImage.h"
-#include "Chara.h"
-#include "../BtlParam.h"
-
-#include "../Input/CharaInput.h"
+#include "DispInput.h"
+#include "DispRect.h"
 
 #if 0
+#include "DispFrontEnd.h"
 #include "../../GameMain/GameConst.h"
 #include "../../FtgMain/G_Ftg.h"
-#include "DispRect.h"
-#include "DispFrontEnd.h"
-#include "DispInput.h"
+#include "../Input/CharaInput.h"
 #endif // 0
 
 
@@ -33,11 +30,11 @@ namespace GAME
 	class DispChara : public TASK_VEC
 	{
 		P_DispMainImage	m_mainImage;	//メインイメージ
-#if 0
+		P_DispInput		m_dispInput;	//入力表示
 		P_DispRect		m_dispRect;		//枠
+#if 0
 		P_GrpAcv		m_grpShadow;	//影
 		P_DispFrontEnd	m_frontEnd;		//フロントエンド
-		P_DispInput		m_dispInput;	//入力表示
 
 #endif // 0
 
@@ -48,13 +45,14 @@ namespace GAME
 
 		void ParamInit ( P_Param pParam );
 
+		//プレイヤ側によりゲージ類の表示部のみ初期化
+		void LoadPlayer ( PLAYER_ID playerID );
+
 		//キャラを設定する
 		void SetpChara ( const P_Chara pChara );
 
-#if 0
 		//表示枠設定
 		void SetpCharaRect ( P_CharaRect pCharaRect );
-#endif // 0
 
 		//更新
 		void Update ( P_Action pAct, P_Script pScp, const BtlParam & btlprm, P_CharaInput pChIpt );
@@ -79,28 +77,25 @@ namespace GAME
 		void SetControl_PLAYER () { m_frontEnd->SetPlayer (); }
 		void SetControl_CPU () { m_frontEnd->SetCPU (); }
 
-		//ゲージ類の表示部のみ初期化
-		void LoadPlayer ( PLAYER_ID playerID );
-
 
 		//色変更
 		void SetColor ( _CLR clr ) { m_mainImage->SetColor ( clr ); }
 
 		//影化
-		void TurnShadow ( bool b ) { m_mainImage->TurnShade ( b ); }
+		void TurnShadow ( bool b ) { m_mainImage->TurnShadow ( b ); }
 
 
 	private:
 #endif // 0
 		//メインイメージの更新
 		void UpdateMainImage ( P_Script pScript, const BtlParam & btlprm );
-#if 0
-
-		//ゲージ類更新
-		void UpdateGauge ( BtlParam btlPrm );
 
 		//入力更新
-		void UpdateInput ( P_CharaInput p ) { m_dispInput->UpdateInput ( p ); }
+		void UpdateInput ( P_CharaInput p );
+
+#if 0
+		//ゲージ類更新
+		void UpdateGauge ( BtlParam btlPrm );
 
 		//ヒット数更新
 		void UpdateChainHitNum ( UINT n );

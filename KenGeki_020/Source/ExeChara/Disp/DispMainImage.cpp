@@ -8,6 +8,7 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "DispMainImage.h"
+#include "../../FtgMain/G_Ftg.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -18,9 +19,17 @@ namespace GAME
 
 	DispMainImage::DispMainImage ()
 	{
+#if 0
 		m_grp = std::make_shared < GrpBs > ();
+		m_grp->AddTexture ( U"000_立ち_00.png" );
 		m_grp->AddTexture ();	//対象テクスチャを１つ確保
 		AddpTask ( m_grp );
+#endif // 0
+
+		//メイングラフィック
+		m_mainGraphic = std::make_shared < GrpBs > ();
+		AddpTask ( m_mainGraphic );
+//		GRPLST_INSERT_MAIN ( m_mainGraphic );
 	}
 
 	DispMainImage::~DispMainImage ()
@@ -32,6 +41,12 @@ namespace GAME
 	{
 		//キャラのメインテクスチャアレイを設置
 		mpap_Tx = pChara->GetpapTxMain ();
+
+		m_mainGraphic->ClearTexture ();
+		for ( P_Tx ptx : *mpap_Tx )
+		{
+			m_mainGraphic->AddpTexture ( ptx );
+		}
 	}
 
 	//メインイメージの更新
@@ -40,11 +55,14 @@ namespace GAME
 		VEC2 ptChara = btlprm.GetPos();
 		bool dirRight = btlprm.GetDirRight ();
 
+		float fDir = dirRight ? ( 1.f ) : ( -1.f );		//向き
+//		float fDir = ( 1.f );		//向き
+
 		//位置
 		VEC2 posScript = pScript->GetPos ();
-		float bx = G_Ftg::inst ()->GetPosMutualBase ().x;	//基準位置
-		//		float x = bx + ptChara.x + fDir * posScript.x;	//反転位置補正
-		float x = bx + ptChara.x + posScript.x;	//->ScalingCenterの指定により位置補正は無し
+		float bx = G_BASE_POS ().x;	//基準位置
+		float x = bx + ptChara.x + fDir * posScript.x;	//反転位置補正
+//		float x = bx + ptChara.x + posScript.x;	//->ScalingCenterの指定により位置補正は無し
 		float y =  0 + ptChara.y + posScript.y;
 		VEC2 vecImg = VEC2 ( x, y );
 
@@ -53,10 +71,8 @@ namespace GAME
 		P_Tx pTexture = mpap_Tx->at ( index );
 
 
-		float fDir = dirRight ? ( 1.f ) : ( -1.f );		//向き
-		float rad = D3DX_PI * 0.01f * pScript->m_prmStaging.Rotate;		//回転
-
 #if 0
+		float rad = D3DX_PI * 0.01f * pScript->m_prmStaging.Rotate;		//回転
 		m_mainGraphic->SetRadian ( rad * fDir );
 
 		//スクリプトからの指定がなければテクスチャの中心
@@ -76,16 +92,16 @@ namespace GAME
 		//表示に反映
 		m_mainGraphic->SetPos ( vecImg );
 //		m_mainGraphic->SetScalingCenter ( center );
-//		m_mainGraphic->SetScaling ( 1.f * fDir, 1.f );
-		m_mainGraphic->SetpTexture ( pTexture );
+		m_mainGraphic->SetScaling ( 1.f * fDir, 1.f );
+
+//		m_mainGraphic->SetpTexture ( pTexture );
+		m_mainGraphic->SetIndexTexture ( index );
 	}
 
 
-	void DispMainImage::TurnShade ( bool b )
+	void DispMainImage::TurnShadow ( bool b )
 	{
-#if 0
 		m_mainGraphic->SetColor ( b ? 0xff000000 : 0xffffffff );
-#endif // 0
 	}
 
 

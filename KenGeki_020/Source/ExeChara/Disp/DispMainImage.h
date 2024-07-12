@@ -25,14 +25,10 @@ namespace GAME
 
 	class DispMainImage : public TASK_VEC
 	{
-//		P_GrpApTx	m_mainGraphic;		//メイングラフィック表示
 		P_Grp		m_mainGraphic;		//メイングラフィック表示
-#if 0
-		PVP_TxBs	m_pvpMainTexture;	//メインイメージのテクスチャリスト
-#endif // 0
-		PAP_Tx		mpap_Tx;
+		PAP_Tx		mpap_Tx;	//メインイメージのテクスチャリスト
 
-		P_Grp	m_grp;
+		P_Grp	m_grp;	//テスト
 
 	public:
 		DispMainImage ();
@@ -52,7 +48,7 @@ namespace GAME
 		}
 
 		//影化
-		void TurnShade ( bool b );
+		void TurnShadow ( bool b );
 
 	};
 

@@ -26,14 +26,12 @@ namespace GAME
 	{
 		//------------------------------------------------
 		//背景
-//		m_bg = make_shared < GrpAcv > ();
 		m_bg = std::make_shared < GrpBs > ();
-
-		m_bg->AddTexture ( U"BG0.png" );
-
-		m_bg->SetPos ( (float)BG_POS_X, (float)BG_POS_Y );
+		m_bg->AddTexture ( U"bg_B01.png" );
+//		m_bg->AddTexture ( U"BG0.png" );
+//		m_bg->SetPos ( (float)BG_POS_X, (float)BG_POS_Y );
+		m_bg->SetPos ( 0, BG_POS_Y );
 		m_bg->SetZ ( Z_BG );
-
 
 #if 0
 		//オブジェクト追加
@@ -207,11 +205,11 @@ namespace GAME
 			}
 		}
 
+#endif // 0
 		//--------------------------
 		//共通グラフィック処理
 		Grp ();
 
-#endif // 0
 		//--------------------------
 		TASK_LST::Move ();
 	}
@@ -220,7 +218,6 @@ namespace GAME
 	//	内部関数
 	//=============================================================
 
-#if 0
 
 
 	//共通グラフィック処理
@@ -265,8 +262,13 @@ namespace GAME
 		//背景位置補正
 		int nx = (int) G_BASE_POS ().x;
 		int disp_bg_x = nx % GAME_WIDTH;
+
+		DBGOUT_WND_F( U"BG_X = {}"_fmt( disp_bg_x ) );
+
 		m_bg->SetPos ( (float)disp_bg_x, (float)BG_POS_Y );
 
+
+#if 0
 		//サブ背景位置
 		int lx = disp_bg_x - GAME_WIDTH;
 		int rx = disp_bg_x + GAME_WIDTH;
@@ -276,15 +278,19 @@ namespace GAME
 		pOb->SetPos ( (float)sub_x, (float)BG_POS_Y );
 
 
+		//-------------------------------------------------------
 		//カベ位置
-		float wall_l = G_FTG->GetWallLeft ();
+		float wall_l = G_FTG()->GetWallLeft ();
 		m_wall_L->SetPos ( wall_l + G_BASE_POS ().x, 0 );
 
-		float wall_r = G_FTG->GetWallRight ();
+		float wall_r = G_FTG()->GetWallRight ();
 		m_wall_R->SetPos ( wall_r + G_BASE_POS ().x, 0 );
+#endif // 0
 	}
 
 
+
+#if 0
 	void BG::SetBlackOut ( UINT n )
 	{
 		m_tmrBlackOut->Start ( n );

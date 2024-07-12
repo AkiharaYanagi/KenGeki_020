@@ -45,13 +45,13 @@ namespace GAME
 	{
 	}
 
-#if 0
 
 	void Decision::SetpChara (P_ExeChara pExeChara1p, P_ExeChara pExeChara2p)
 	{
 		m_pExeChara1p = pExeChara1p;
 		m_pExeChara2p = pExeChara2p;
 	}
+#if 0
 
 	void Decision::SetpHitStop (P_Timer pHitstop)
 	{
@@ -59,9 +59,12 @@ namespace GAME
 	}
 
 
+#endif // 0
+
 	//相互判定
 	void Decision::Do ()
 	{
+#if 0
 		//------------------------------------------------------
 		//ヒットストップは何もしない
 		if ( m_tmrHitstop->IsActive () ) { return; }
@@ -353,10 +356,15 @@ namespace GAME
 			m_pExeChara2p->OnDamaged_After ();	//相手ダメージ後
 		}
 		//================================================================
+
+
+#endif // 0
+
 	}
 
 
 
+#if 0
 	//------------------------------------------------------
 	//	内部関数
 	//------------------------------------------------------

@@ -123,10 +123,6 @@ namespace GAME
 	//====================================================================
 	SceneManager::SceneManager()
 	{
-		//格闘部分共通パラメータシングルトン生成
-//		G_Ftg::Create ();
-
-
 		//テスト用 開始状態選択
 //		startMode = START_TITLE;
 //		startMode = START_CHARA_SELE;

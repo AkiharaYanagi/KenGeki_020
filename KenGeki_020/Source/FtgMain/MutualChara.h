@@ -12,10 +12,11 @@
 #include "FtgConst.h"
 #include "../GameMain/Param.h"
 #include "../ExeChara/Main/ExeChara.h"
+#include "Collision.h"
+#include "Decision.h"
 //#include "Fighting.h"
 //#include "G_Ftg.h"
 //#include "FtgGrp.h"
-//#include "Decision.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -29,16 +30,17 @@ namespace GAME
 	class MutualChara : public TASK_VEC
 	{
 		//シーン共有パラメータ
-		P_Param		m_pParam;
+		P_Param			m_pParam;
 
 		//キャラ
 		P_ExeChara		m_exeChara1;
 		P_ExeChara		m_exeChara2;
-#if 0
 
 		//判定クラス
-		P_Decision	m_decision;
+		P_Collision		m_collision;
+		P_Decision		m_decision;
 
+#if 0
 		//-------------------------------------------------
 		//ファイティング：1p2p共通スクリプト処理
 		UINT	m_scpStop {0};		//スクリプトからのストップ
@@ -68,11 +70,12 @@ namespace GAME
 
 		//スクリプトの毎フレーム処理
 		void Conduct ();
+		void Grp ();			//グラフィック共通
 #if 0
 		void Conduct_InStop ();	//停止コンダクト
-		void Collision ();		//重なり判定
-		void _Decision ();		//攻撃判定
-		void Grp ();			//グラフィック共通
+#endif // 0
+
+#if 0
 
 		//状態取得
 		BtlParam	GetBtlPrm1p () const { return m_exeChara1->GetBtlPrm (); }
@@ -123,10 +126,15 @@ namespace GAME
 //		void AssignWp ( WP_FTG wp ) const;
 
 
+#endif // 0
 	private:
 		//------------------------------------------------------
 		//	内部関数
 		//------------------------------------------------------
+
+
+		void _Collision ();		//重なり判定
+		void _Decision ();		//攻撃判定
 
 		//---------------------------------------
 		// Conduct
@@ -137,11 +145,6 @@ namespace GAME
 		void SwithcCPU ();			//2PをCPU操作切替
 		void ResetMatch ();			//試合初期化
 
-		//---------------------------------------
-		
-		//離れる方向かどうか
-		bool LeaveDir ( bool dirRight, float pos0, float pos1 );
-#endif // 0
 	};
 
 	using P_MutualChara = std::shared_ptr < MutualChara >;

@@ -20,8 +20,7 @@ namespace GAME
 	class BG : public TASK_LST
 	{
 		//背景
-//		P_GrpAcv		m_bg;
-		P_Grp		m_bg;
+		P_Grp			m_bg;
 
 #if 0
 		P_GrpAcv		m_bg_back;

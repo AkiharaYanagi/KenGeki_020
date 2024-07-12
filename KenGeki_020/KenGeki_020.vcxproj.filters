@@ -852,6 +852,21 @@
     <ClInclude Include="Source\ExeChara\Input\PlayerInput.h">
       <Filter>ExeChara\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ExeChara\Disp\DispInput.h">
+      <Filter>ExeChara\Disp</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\Disp\DispRect.h">
+      <Filter>ExeChara\Disp</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Collision.h">
+      <Filter>FtgMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\Disp\DispChara_Const.h">
+      <Filter>ExeChara\Disp</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\Disp\DispFrontEnd.h">
+      <Filter>ExeChara\Disp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -928,6 +943,24 @@
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Input\CharaInput.cpp">
       <Filter>ExeChara\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Special.cpp">
+      <Filter>ExeChara\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Disp\DispInput.cpp">
+      <Filter>ExeChara\Disp</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit_Special.cpp">
+      <Filter>ExeChara\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Disp\DispRect.cpp">
+      <Filter>ExeChara\Disp</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Collision.cpp">
+      <Filter>FtgMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Disp\DispFrontEnd.cpp">
+      <Filter>ExeChara\Disp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

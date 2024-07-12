@@ -18,7 +18,78 @@ namespace GAME
 	//================================================
 	//	アクション遷移
 	//================================================
+
+
+	// アクション移項(条件:コマンド, アクション終了)
+	void ExeChara::_TransitAction ()
+	{
+		assert ( nullptr != m_pAction && nullptr != m_pScript );
+
 #if 0
+
+		//-----------------------------------------------------
+		// のけぞり時間はコマンドによる行動不可
+		if ( m_btlPrm.GetTmr_Lurch ()->IsActive () ) { return; }
+#endif // 0
+
+		//-----------------------------------------------------
+		// コマンドによる分岐
+		if ( TranditAction_Command () )
+		{
+			//分岐が成立していたら以降はチェックしない
+			return;
+		}
+
+
+		//-----------------------------------------------------
+		//現在スクリプトが現在アクションにおける最終フレーム ならば
+		if ( m_pAction->IsOverScript ( m_frame ) )
+		{
+			EndAction ();	//アクション終了処理
+			//次アクション m_frame = 0に遷移
+		}
+
+		//-----------------------------------------------------
+		// スクリプト通常処理
+		ExeScript ();
+
+
+		//通常処理：スクリプトを１つ進める
+		++ m_frame;
+
+
+#if 0
+
+		//スロウのとき
+		if ( m_playerID == PLAYER_ID_1 )
+		{
+			DBGOUT_WND_F ( 8, _T ( "tmrSlow.m_count = %d" ), m_tmrSlow.GetCount () );
+		}
+
+		if ( m_tmrSlow.GetValid () )
+		{
+			if ( m_tmrSlow.Next () )
+			{
+				++ m_frame;
+				m_actor.ShiftFighting ();
+			}
+			else
+			{
+				//スロウスキップ
+				m_actor.ShiftSlowSkip ();
+			}
+		}
+		else
+		{
+			//通常処理：スクリプトを１つ進める
+			++ m_frame;
+		}
+
+#endif // 0
+
+
+	}
+
 	//アクション移項（コマンドに関する処理）
 	bool ExeChara::TranditAction_Command ()
 	{
@@ -28,7 +99,7 @@ namespace GAME
 		m_pCharaInput->MakeTransitIDList ( *m_pChara, m_pScript, m_btlPrm.GetDirRight () );
 		const std::vector < UINT > & vCompID = m_pCharaInput->GetvCompID ();
 
-		UINT transitID = NO_COMPLETE;
+		uint32 transitID = (uint32)NO_COMPLETE;
 		for ( UINT id : vCompID )
 		{
 			//遷移先チェック
@@ -77,10 +148,11 @@ namespace GAME
 			//終了
 			return T;
 		}
+#if 0
+#endif // 0
 
 		return F;
 	}
-#endif // 0
 
 
 	//アクションの移項(直接指定)
