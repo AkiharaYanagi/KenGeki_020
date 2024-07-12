@@ -64,7 +64,6 @@ namespace GAME
 	//相互判定
 	void Decision::Do ()
 	{
-#if 0
 		//------------------------------------------------------
 		//ヒットストップは何もしない
 		if ( m_tmrHitstop->IsActive () ) { return; }
@@ -102,12 +101,15 @@ namespace GAME
 		PV_RECT pvHRect1 = pCharaRect1p->GetpvHRect ();
 		PV_RECT pvHRect2 = pCharaRect2p->GetpvHRect ();
 
+#if 0
 		//エフェクトリストの取得
 		PLP_ExEf plpExEf1 = m_pExeChara1p->GetplpExEf ();
 		PLP_ExEf plpExEf2 = m_pExeChara2p->GetplpExEf ();
+#endif // 0
 
 		//重なり中心位置
 		VEC2 center = VEC2 (0, 0);
+#if 0
 
 		//------------------------------------------------------
 		//ダッシュぶつかり判定
@@ -154,12 +156,15 @@ namespace GAME
 
 
 
+#endif // 0
+
 		//------------------------------------------------------
 		//メインキャラ同士の本体相殺チェック
 
 		//攻撃・攻撃
 		bool offset_aa = OverlapAryRect_Center (pvARect1, pvARect2, center);
 
+#if 0
 		//攻撃・相殺判定
 		bool offset_ao = F;
 		bool offset_oa = F;

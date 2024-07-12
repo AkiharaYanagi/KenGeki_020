@@ -14,8 +14,8 @@
 #include "DispAccel.h"
 #include "../BtlParam.h"
 
-#include "Chara.h"
-#include "../../FtgMain/G_Ftg.h"
+//#include "Chara.h"
+//#include "../../FtgMain/G_Ftg.h"
 
 
 //-------------------------------------------------------------------------------------------------
