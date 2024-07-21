@@ -45,12 +45,6 @@ namespace GAME
 		AddpTask ( m_decision );
 
 #if 0
-		//ヒットストップタイマー
-		m_tmrHitstop = make_shared < Timer > ();
-		m_tmrHitstop->SetTargetTime ( HITSTOP_TIME );
-		AddpTask ( m_tmrHitstop );
-		m_decision->SetpHitStop ( m_tmrHitstop );
-
 		//デバッグ用枠表示
 #define DISP_RECT	0
 #if DISP_RECT

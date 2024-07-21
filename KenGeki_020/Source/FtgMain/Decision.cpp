@@ -18,6 +18,11 @@ namespace GAME
 {
 	Decision::Decision ()
 	{
+		//ヒットストップタイマー
+		m_tmrOffset_Hitstop = std::make_shared < Timer > ();
+		m_tmrOffset_Hitstop->SetTargetTime ( HITSTOP_TIME );
+		AddpTask ( m_tmrOffset_Hitstop );
+
 #if 0
 		//共通エフェクト
 		m_efClang = make_shared < EfClang > ();
@@ -51,36 +56,18 @@ namespace GAME
 		m_pExeChara1p = pExeChara1p;
 		m_pExeChara2p = pExeChara2p;
 	}
-#if 0
 
-	void Decision::SetpHitStop (P_Timer pHitstop)
-	{
-		m_tmrHitstop = pHitstop;
-	}
-
-
-#endif // 0
 
 	//相互判定
 	void Decision::Do ()
 	{
 		//------------------------------------------------------
-		//ヒットストップは何もしない
-		if ( m_tmrHitstop->IsActive () ) { return; }
-#if 0
-		//打合時は何もしない
-		if (m_exeChara1.GetClang () || m_exeChara2.GetClang ()) { return; }
-#endif // 0
+		//相殺ヒットストップ時は何もしない
+		if ( m_tmrOffset_Hitstop->IsActive () ) { return; }
 
 		//------------------------------------------------------
 		//粒子エフェクト取得
 //		Decision_EfPart ();
-
-		//------------------------------------------------------
-		//判定用一時変数
-
-		//判定送信用
-//		CLANG_DECISION_LR sendDecision = CD_OFF; 
 
 		//------------------------------------------------------
 		//枠の取得
@@ -109,8 +96,9 @@ namespace GAME
 
 		//重なり中心位置
 		VEC2 center = VEC2 (0, 0);
-#if 0
 
+
+#if 0
 		//------------------------------------------------------
 		//ダッシュぶつかり判定
 		//[D]:ダッシュにおける攻撃判定[A]
@@ -120,16 +108,16 @@ namespace GAME
 		//[D]-><-[D] : 特殊相殺
 		if (DcsAtoA (pCharaRect1p, pCharaRect2p, center))
 		{
-			m_pExeChara1p->OnDashBranch ();
-			m_pExeChara2p->OnDashBranch ();
+			m_pExeChara1p->OnDashOffset ();
+			m_pExeChara2p->OnDashOffset ();
 		}
-
 
 		//[D]->[A],[D]->[O] : 通常相殺
 		//[D]->[H] : 通常ヒットから互いにスクリプトでアクション移行
 
+#endif // 0
 
-
+#if 0
 		//------------------------------------------------------
 		//打合：攻撃判定と攻撃判定、または攻撃判定と相殺判定 (相殺と相殺は何もしない)
 
@@ -153,9 +141,6 @@ namespace GAME
 		//p2からp1へのチェック	
 		int powerEf2p = 0;
 		m_Efhit1P = DcsHitEf ( plpExEf2, pvHRect1, m_pExeChara1p, powerEf2p );
-
-
-
 #endif // 0
 
 		//------------------------------------------------------
@@ -164,7 +149,6 @@ namespace GAME
 		//攻撃・攻撃
 		bool offset_aa = OverlapAryRect_Center (pvARect1, pvARect2, center);
 
-#if 0
 		//攻撃・相殺判定
 		bool offset_ao = F;
 		bool offset_oa = F;
@@ -218,6 +202,7 @@ namespace GAME
 				hit1P = OverlapAryRect_Center ( pvARect2, pvHRect1, hit_center_1p );
 			}
 		}
+#if 0
 
 
 		//------------------------------------------------------
@@ -226,72 +211,6 @@ namespace GAME
 		//相殺処理
 		if ( bOffset )
 		{
-#if 0
-			//攻撃種類の取得
-			Action::ACTION_CATEGORY ac1p = m_exeChara1.GetActionCategory ();
-			Action::ACTION_CATEGORY ac2p = m_exeChara2.GetActionCategory ();
-
-			//攻撃種類の組合せ
-			UINT x = 0;
-			switch (ac1p)
-			{
-			case Action::ATTACK_L: x = 0; break;
-			case Action::ATTACK_M: x = 1; break;
-			case Action::ATTACK_H: x = 2; break;
-			default: 0; break;	//その他は"弱"扱い
-			}
-			UINT y = 0;
-			switch (ac2p)
-			{
-			case Action::ATTACK_L: y = 0; break;
-			case Action::ATTACK_M: y = 1; break;
-			case Action::ATTACK_H: y = 2; break;
-			default: 0; break;	//その他は"弱"扱い
-			}
-			UINT lurch1p = LURCH[x][y];
-			UINT lurch2p = LURCH[y][x];
-
-
-			//[縦][横]
-			const UINT c_indexDecision[3][3] =
-			{
-				//	{弱弱, 弱中, 弱強}, 
-				//	{中弱, 中中, 中強}, 
-				//	{強弱, 強中, 強強}
-	#if	0
-					{ CD_EQUAL, CD_RIGHT, CD_RIGHT },
-					{ CD_LEFT, CD_EQUAL, CD_RIGHT },
-					{ CD_LEFT, CD_LEFT, CD_EQUAL }
-	#endif	//0
-					//弱＞強
-					{ CD_EQUAL, CD_RIGHT, CD_LEFT },
-					{ CD_LEFT, CD_EQUAL, CD_RIGHT },
-					{ CD_RIGHT, CD_LEFT, CD_EQUAL }
-			};
-
-			//判定勝ちの方は打合のけぞりにならず、ヒットストップの後アクション続行(キャンセル可能)
-
-			//ExeCharaに通達
-			const CLANG_DECISION_WL c_decision_wl[3] = { CD_DRAW, CD_WIN, CD_LOSE };
-
-			m_exeChara1.OnClang (lurch1p, c_decision_wl[c_indexDecision[x][y]]);
-			m_exeChara2.OnClang (lurch2p, c_decision_wl[c_indexDecision[y][x]]);
-
-
-			//打合結果
-			const CLANG_DECISION_LR c_decision[3] = { CD_EQUAL, CD_LEFT, CD_RIGHT };
-
-			//打合結果表示 (打合結果勝負を左右に変換)
-			if (m_exeChara1.GetDirRight ())	//1Pが右向(左側：LEFT)
-			{
-				sendDecision = c_decision[c_indexDecision[x][y]];
-			}
-			else
-			{
-				sendDecision = c_decision[c_indexDecision[y][x]];
-			}
-#endif // 0
-
 			//打合時のエフェクト発生
 			m_efClang->On ( center );
 			m_efSpark->On ( center );
@@ -302,7 +221,7 @@ namespace GAME
 			SOUND->Play_SE ( SE_Btl_Clang );
 
 			//ヒットストップ開始
-			m_tmrHitstop->Start ();
+			m_tmrOffset_Hitstop->Start ();
 
 			if ( offset_ao )
 			{
@@ -321,6 +240,9 @@ namespace GAME
 			}
 		}
 
+#endif // 0
+
+#if 0
 		//------------------------------------------------------
 		//Efヒット処理
 		if (m_Efhit2P)
@@ -342,29 +264,37 @@ namespace GAME
 //			m_pExeChara1p->OnDamaged (powerEf2p);		//くらい状態・ダメージ処理
 			m_pExeChara1p->OnDamaged ();		//くらい状態・ダメージ処理
 		}
+#endif // 0
 
 		//================================================================
 		//メインヒット処理
-		if (hit2P)
+		if ( hit2P )
 		{
-			m_pExeChara1p->OnHit ();		//ヒット状態
-			m_efHit->On ( hit_center_2p );
+			m_pExeChara1p->OnHit ();			//ヒット状態
+//			m_efHit->On ( hit_center_2p );		//ヒットエフェクト
 			m_pExeChara2p->OnDamaged ();		//くらい状態・ダメージ処理
 			m_pExeChara1p->OnDamaged_After ();	//相手ダメージ後
 		}
 
-		if (hit1P)
+		if ( hit1P )
 		{
-			m_pExeChara2p->OnHit ();		//ヒット状態
-			m_efHit->On ( hit_center_1p );
+			m_pExeChara2p->OnHit ();			//ヒット状態
+//			m_efHit->On ( hit_center_1p );		//ヒットエフェクト
 			m_pExeChara1p->OnDamaged ();		//くらい状態・ダメージ処理
 			m_pExeChara2p->OnDamaged_After ();	//相手ダメージ後
 		}
+
+		//相手の変更を一時取得し、自分の処理が終了したあとに互いに上書きする
+		if ( hit2P )
+		{
+			m_pExeChara1p->ChangeOhter ();
+		}
+		if ( hit1P )
+		{
+			m_pExeChara2p->ChangeOhter ();
+		}
+
 		//================================================================
-
-
-#endif // 0
-
 	}
 
 

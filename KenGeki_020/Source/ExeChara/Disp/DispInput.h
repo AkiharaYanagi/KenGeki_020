@@ -30,10 +30,12 @@ namespace GAME
 		static const int32 CHIP_H;			//1個の高
 
 		P_PrmRect		m_bg;		//背景
+
 #if 0
 		P_GrpAcv		m_index;	//見出
-		P_GrpAcv		m_grp;		//入力表示
 #endif // 0
+
+		P_Grp			m_grpKey;		//入力表示
 		s3d::Array < P_Ob >		map_Ob;
 
 		int32			m_x { 0 };
@@ -45,7 +47,7 @@ namespace GAME
 		DispInput ( const DispInput & rhs ) = delete;
 		~DispInput ();
 
-		void Draw ();
+//		void Draw ();
 
 		void LoadPlayer ( PLAYER_ID playerID );
 

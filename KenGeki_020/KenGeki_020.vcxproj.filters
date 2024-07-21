@@ -867,6 +867,9 @@
     <ClInclude Include="Source\ExeChara\Disp\DispFrontEnd.h">
       <Filter>ExeChara\Disp</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ExeChara\Disp\DispGauge.h">
+      <Filter>ExeChara\Disp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -960,6 +963,12 @@
       <Filter>FtgMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\DispFrontEnd.cpp">
+      <Filter>ExeChara\Disp</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Event.cpp">
+      <Filter>ExeChara\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Disp\DispGauge.cpp">
       <Filter>ExeChara\Disp</Filter>
     </ClCompile>
   </ItemGroup>

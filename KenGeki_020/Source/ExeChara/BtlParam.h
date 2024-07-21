@@ -224,9 +224,9 @@ namespace GAME
 		void CalcBalance ( P_Script pScp );
 		void OnDamage ( int damage );	//ダメージ時
 
-		void OnClang_AA ();	//相殺時
-		void OnClang_AO ();	//相殺時
-		void OnClang_OA ();	//相殺時
+		void OnOffset_AA ();	//相殺時
+		void OnOffset_AO ();	//相殺時
+		void OnOffset_OA ();	//相殺時
 
 		void BackPt () { m_posChara = m_tempPt; }		//一つ前の位置に戻す
 		void BackPtX () { m_posChara.x = m_tempPt.x; }		//一つ前の位置に戻す

@@ -619,7 +619,7 @@ namespace GAME
 	}
 	
 	//相殺時
-	void BtlParam::OnClang_AA ()
+	void BtlParam::OnOffset_AA ()
 	{
 		m_clang = T;		//打合発生フラグ
 		m_tmrHitstop->Start ();		//ヒットストップの設定
@@ -629,24 +629,24 @@ namespace GAME
 	}
 
 	//相殺時
-	void BtlParam::OnClang_AO ()
+	void BtlParam::OnOffset_AO ()
 	{
 		m_clang = T;		//打合発生フラグ
 		m_tmrHitstop->Start ();		//ヒットストップの設定
 		m_tmrHitPitch->WaitStart ( HITSTOP_TIME );	//ヒット間隔のカウント
 
+		//@info 自分の攻撃が相殺したときは、内部ヒット数が増加する
 		++ m_hitNum;
 	}
 
 	//相殺時
-	void BtlParam::OnClang_OA ()
+	void BtlParam::OnOffset_OA ()
 	{
 		m_clang = T;		//打合発生フラグ
 		m_tmrHitstop->Start ();		//ヒットストップの設定
 		m_tmrHitPitch->WaitStart ( HITSTOP_TIME );	//ヒット間隔のカウント
 
 		//@info 自身が相殺判定で相手の攻撃を取ったとき、内部ヒット数は増加しない
-
 //		++ m_hitNum;
 	}
 

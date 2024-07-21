@@ -26,9 +26,8 @@ namespace GAME
 	{
 		//------------------------------------------------
 		//背景
-		m_bg = std::make_shared < GrpBs > ();
+		m_bg = std::make_shared < GameGraphic > ();
 		m_bg->AddTexture ( U"bg_B01.png" );
-//		m_bg->AddTexture ( U"BG0.png" );
 //		m_bg->SetPos ( (float)BG_POS_X, (float)BG_POS_Y );
 		m_bg->SetPos ( 0, BG_POS_Y );
 		m_bg->SetZ ( Z_BG );
@@ -41,7 +40,7 @@ namespace GAME
 #endif // 0
 
 		AddpTask ( m_bg );
-//		GRPLST_INSERT_MAIN ( m_bg );
+		GRPLST_INSERT ( m_bg );
 
 #if 0
 
@@ -158,7 +157,7 @@ namespace GAME
 		m_tmrWallBreak->Clear ();
 
 #endif // 0
-		TASK_LST::Init ();
+		TASK_VEC::Init ();
 	}
 
 
@@ -211,7 +210,7 @@ namespace GAME
 		Grp ();
 
 		//--------------------------
-		TASK_LST::Move ();
+		TASK_VEC::Move ();
 	}
 
 	//=============================================================
@@ -263,7 +262,7 @@ namespace GAME
 		int nx = (int) G_BASE_POS ().x;
 		int disp_bg_x = nx % GAME_WIDTH;
 
-		DBGOUT_WND_F( U"BG_X = {}"_fmt( disp_bg_x ) );
+//		DBGOUT_WND_F( U"BG_X = {}"_fmt( disp_bg_x ) );
 
 		m_bg->SetPos ( (float)disp_bg_x, (float)BG_POS_Y );
 

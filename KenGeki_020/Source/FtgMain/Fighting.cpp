@@ -25,7 +25,7 @@ namespace GAME
 		AddpTask ( m_bg );
 
 
-		m_grp = std::make_shared < GrpBs > ();
+		m_grp = std::make_shared < GameGraphic > ();
 		m_grp->AddTexture ( U"ef_004.png" );
 		m_grp->SetPos ( VEC2 ( 200, 300 ) );
 //		AddpTask ( m_grp );

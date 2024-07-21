@@ -25,22 +25,15 @@ namespace GAME
 
 	//コンストラクタ
 	DispInput::DispInput ()
-//		: m_timer ( 0 ), m_vel ( 1.f ), m_base_x ( 10 )
 	{
 		//---------------------------------------------------------------
 		//背景
 		m_bg = std::make_shared < PrmRect > ();
+//		m_bg->SetZ ( Z_SYS + 0.01f );
 		m_bg->SetColor ( ColorF ( 0.5f, 0.75f, 0.5f, 0.5f ) );
+		GRPLST_INSERT ( m_bg );
 
 #if 0
-		//---------------------------------------------------------------
-		//背景
-		m_bg->SetRect ( m_base_x, BASE_Y, CHIP_W * INPUT_NUM, CHIP_H * NUM_DISP_INPUT );
-		m_bg->SetZ ( Z_SYS + 0.01f );
-		m_bg->SetAllColor ( 0x8080a080 );
-		AddpTask ( m_bg );
-		GRPLST_INSERT_MAIN ( m_bg );
-
 		//---------------------------------------------------------------
 		//見出
 		m_index = make_shared < GrpAcv > ();
@@ -49,17 +42,26 @@ namespace GAME
 		m_index->SetZ ( Z_SYS );
 		AddpTask ( m_index );
 		GRPLST_INSERT_MAIN ( m_index );
+#endif // 0
 
 		//---------------------------------------------------------------
 		//キー入力
-		m_grp = make_shared < GrpAcv > ();
-		m_grp->AddTexture ( _T ( "10_10_white.png" ) );
-		m_grp->SetZ ( Z_SYS - 0.01f );
-		m_grp->ClearObject ();
+		m_grpKey = std::make_shared < GameGraphic > ();
+		m_grpKey->AddTexture ( U"10_10_white.png" );
+
+		m_grpKey->SetZ ( Z_SYS - 0.01f );
+		m_grpKey->SetPos ( 500, 200 );
+		m_grpKey->ClearObject ();
+#if 0
+		P_Ob pObject = std::make_shared < GameObject > ();
+		pObject->SetPos ( 500, 200 );
+		m_grpKey->AddpObject ( pObject );
 #endif // 0
 
-		//-----------------------------------------------------
-		//矩形管理 ( 12種類 * 60[FPS] )
+//		AddpTask ( m_grp );
+		GRPLST_INSERT ( m_grpKey );
+
+		//１マス ( 12種類 * 60[FPS] )
 		//縦 60FPS
 		for ( UINT frame = 0; frame < NUM_DISP_INPUT; ++ frame )
 		{
@@ -69,14 +71,14 @@ namespace GAME
 				P_Ob pOb = std::make_shared < GameObject > ();
 				pOb->SetPos ( m_x + 10.f * i, 10.f + 10 * frame );
 				map_Ob.push_back ( pOb );
+				m_grpKey->AddpObject ( pOb );
 
 				//初期値ランダム
 				pOb->SetValid ( 0 == rand () % 2  );
 			}
 		}
 
-//		AddpTask ( m_grp );
-//		GRPLST_INSERT_MAIN ( m_grp );
+
 		
 		//-----------------------------------------------------
 
@@ -157,12 +159,13 @@ namespace GAME
 		//---------------------------------------------------------------
 	}
 
+#if 0
 
 	//描画
 	void DispInput::Draw ()
 	{
 		//背景
-		m_bg->Draw ();
+//		m_bg->Draw ();
 
 		//キー入力
 		for ( P_Ob pOb: map_Ob )
@@ -177,8 +180,10 @@ namespace GAME
 			rect.draw ();
 		}
 
-		TASK_VEC::Draw ();
+//		TASK_VEC::Draw ();
 	}
+
+#endif // 0
 
 	//-------------------------------------
 	//内部利用

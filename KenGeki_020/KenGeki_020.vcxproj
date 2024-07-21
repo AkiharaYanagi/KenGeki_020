@@ -397,6 +397,7 @@
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara_Const.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispFrontEnd.h" />
+    <ClInclude Include="Source\ExeChara\Disp\DispGauge.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispInput.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispRect.h" />
@@ -427,6 +428,7 @@
     <ClCompile Include="Source\ExeChara\BtlParam.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispFrontEnd.cpp" />
+    <ClCompile Include="Source\ExeChara\Disp\DispGauge.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispInput.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispRect.cpp" />
@@ -436,6 +438,7 @@
     <ClCompile Include="Source\ExeChara\Main\ExCh_Actor.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExCh_State.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Event.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Rect.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Special.cpp" />

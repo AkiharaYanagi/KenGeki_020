@@ -22,7 +22,8 @@ namespace GAME
 {
 
 	//ゲームメインクラス
-	class GameMain	: public TASK_VEC
+//	class GameMain	: public TASK_VEC
+	class GameMain	: public GameMainBase
 	{
 #define GAME_MAIN_ONLY_TEST		0
 #if GAME_MAIN_ONLY_TEST
@@ -52,6 +53,9 @@ namespace GAME
 #endif	//GAME_MAIN_TEST
 		}
 	};
+
+
+	using UP_GameMain = std::unique_ptr < GameMain >;
 
 
 }	//namespace GAME

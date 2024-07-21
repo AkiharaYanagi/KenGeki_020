@@ -18,24 +18,20 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+#if 0
 	using VP_PrmRect = std::vector < P_PrmRect >;
 	using PVP_PrmRect = std::shared_ptr < VP_PrmRect >;
+#endif // 0
 
 	using AP_PrmRect = s3d::Array < P_PrmRect >;
 
 
 	class DispRect : public TASK_VEC
 	{
-		//参照実効枠
+		//参照するキャラ実効枠
 		P_CharaRect		mp_CharaRect;
 
 		//表示枠
-#if 0
-		PVP_PrmRect		m_pvpGrpCRect;
-		PVP_PrmRect		m_pvpGrpARect;
-		PVP_PrmRect		m_pvpGrpHRect;
-		PVP_PrmRect		m_pvpGrpORect;
-#endif // 0
 		AP_PrmRect		map_GrpCRect;
 		AP_PrmRect		map_GrpARect;
 		AP_PrmRect		map_GrpHRect;

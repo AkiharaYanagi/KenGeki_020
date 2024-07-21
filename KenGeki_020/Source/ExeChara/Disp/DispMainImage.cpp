@@ -27,9 +27,9 @@ namespace GAME
 #endif // 0
 
 		//メイングラフィック
-		m_mainGraphic = std::make_shared < GrpBs > ();
+		m_mainGraphic = std::make_shared < GameGraphic > ();
 		AddpTask ( m_mainGraphic );
-//		GRPLST_INSERT_MAIN ( m_mainGraphic );
+		GRPLST_INSERT ( m_mainGraphic );
 	}
 
 	DispMainImage::~DispMainImage ()

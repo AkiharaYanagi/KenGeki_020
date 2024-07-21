@@ -33,9 +33,9 @@ namespace GAME
 		P_DispGauge	m_gaugeLife;		//ライフゲージ
 		P_DispGauge	m_gaugeBalance;		//バランスゲージ
 		P_DispGauge	m_gaugeMana;		//マナゲージ
-		P_DispAccel	m_gaugeAccel;		//アクセルゲージ
 
 #if	0
+		P_DispAccel	m_gaugeAccel;		//アクセルゲージ
 		PrmRect		m_gaugeHitStop;			//ヒットストップ時間表示
 		PrmRect		m_gaugeLurch;			//のけぞり時間表示
 #endif	//0
@@ -51,15 +51,19 @@ namespace GAME
 			INPUT_CPU = 1,
 		};
 
+#if 0
 		P_GrpAcv	m_grp_Cst_Player1P2P;	//プレイヤ側 固定表示"1P""2P"
 		P_GrpAcv	m_grp_Cst_InputPlayerCOM;	//入力者 固定表示"CPU""Player"
 
 		P_GrpAcv	m_grp_CH_Player1P2P;	//キャラ近傍 プレイヤ表示"1P""2P"
 		P_GrpAcv	m_grp_CH_InputCOMPLayer;	//キャラ近傍 入力者表示"CPU""Player"
+#endif // 0
 
 		static VEC2 POS_PL_CP_1P;
 		static VEC2 POS_PL_CP_2P;
 
+
+#if 0
 		//-----------------------------------------------------
 		//ヒット数
 		P_GrpAcv	m_grpHitNum;		//"0"~"9"
@@ -68,6 +72,7 @@ namespace GAME
 		//-----------------------------------------------------
 		//アクション名
 		P_GrpStr	m_strAction;	
+#endif // 0
 
 	public:
 		DispFrontEnd ();
@@ -94,6 +99,7 @@ namespace GAME
 		void UpdateLurch ( VEC2 ptChara, bool dirRight, UINT lurch, UINT lurchTimer );
 #endif // 0
 
+#if 0
 		void SetPlayer ();
 		void SetCPU ();
 
@@ -104,9 +110,10 @@ namespace GAME
 		//表示切替
 		void On ();
 		void Off ();
+#endif // 0
 
 	private:
-		P_GrpAcv MakepGrpPlyr ( LPCTSTR pstr );
+		P_Grp MakepGrpPlyr ( s3d::String str );
 
 	};
 

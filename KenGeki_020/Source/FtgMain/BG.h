@@ -17,7 +17,7 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	class BG : public TASK_LST
+	class BG : public TASK_VEC
 	{
 		//背景
 		P_Grp			m_bg;
@@ -54,6 +54,7 @@ namespace GAME
 
 		void Init ();
 		void Move ();
+
 
 		//共通グラフィック処理
 		void Grp ();

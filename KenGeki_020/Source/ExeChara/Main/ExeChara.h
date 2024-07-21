@@ -194,17 +194,8 @@ namespace GAME
 		void BackMoveX () { m_btlPrm.BackMoveX (); }	//重なりが解消されるまで位置に戻す
 		void LookOther () { m_btlPrm.LookOther (); }	//相手の方向を向く
 
+
 #if 0
-		//---------------------------------------------
-		//ライフ０チェック
-		bool IsZeroLife () const { return ( 0 >= m_btlPrm.GetLife () ); }
-
-		bool CanBeThrown () const;		//投げられ判定
-		bool IsThrowAction () const;		//投げ判定
-		bool IsNotOffset () const;		//相殺しない判定
-		bool CanGaurd () const;		//ガードできる状態かどうか
-
-
 		//------------------------------------------------
 		//エフェクト
 
@@ -239,42 +230,58 @@ namespace GAME
 		CHARA_NAME GetCharaName () const { return m_name; }
 		int GetLife () const { return m_btlPrm.GetLife (); }		//ライフ取得
 		ACTION_POSTURE GetPosture () const { return m_pAction->GetPosture (); }
-#if 0
 
 
-		//================================================
+//==========================================================================
+// ExeChara_Event.cpp
+//==========================================================================
+
+		//----------------------
+		// 外部からの状態確認
+		//----------------------
+
+		//ライフ０チェック
+		bool IsZeroLife () const { return ( 0 >= m_btlPrm.GetLife () ); }
+
+		bool CanBeThrown () const;		//投げられ判定
+		bool IsThrowAction () const;		//投げ判定
+		bool IsNotOffset () const;		//相殺しない判定
+		bool CanGaurd () const;		//ガードできる状態かどうか
+
+		//特殊アクション（名前指定）
+		bool IsNameAction ( s3d::String nameAction ) const { return m_pAction->IsName ( nameAction ); }
+
+		//ヒットストップ
+		bool IsHitStop () { return m_btlPrm.IsHitStop (); }
+
+
+		//----------------------
 		//	外部からの状態変更
-		//================================================
+		//----------------------
 
 		//デモ用ステート指定
 		void StartGreeting () { m_actor.StartGreeting (); }
 		void StartGetReady () { m_actor.StartGetReady (); }
 		void StartFighting () { m_actor.StartFighting (); }
 
+#if 0
 		//一時停止
 		void SetWait ( bool b ) { m_btlPrm.SetWait ( b ); }	//入力を停止
 		void SetStop ( bool b ) { m_btlPrm.SetStop ( b ); }	//描画更新を停止
 		void SetStopTimer ( UINT i ) { m_btlPrm.GetTmr_Stop ()->Start ( i ); }
 #endif // 0
-		//ヒットストップ
-		bool IsHitStop () { return m_btlPrm.IsHitStop (); }
-#if 0
 
-		//打合
-		bool GetClang () const { return m_btlPrm.GetClang (); }
-		void SetClang ( bool b ) { m_btlPrm.SetClang ( b ); }
+		//----------------------
+		//	イベント
+		//----------------------
+
+		//ダッシュ相殺
+		void OnDashOffset ();
 
 		//相殺発生
-		void OnClang_AA ();	//自分：Attack, 相手：Attack
-		void OnClang_OA ();	//自分：Offset, 相手：Attack
-		void OnClang_AO ();	//自分：Attack, 相手：Offset
-
-		//相手・攻撃 → 自分・くらい
-		//くらい発生
-		bool IsDamaged_prm () const { return m_btlPrm.GetDamaged (); }
-		void SetDamaged ( bool b ) { m_btlPrm.SetDamaged ( b ); }
-		void OnDamaged ( int damage );
-		void OnDamaged ();
+		void OnOffset_AA ();	//自分：Attack, 相手：Attack
+		void OnOffset_OA ();	//自分：Offset, 相手：Attack
+		void OnOffset_AO ();	//自分：Attack, 相手：Offset
 
 		//自分・攻撃 -> 相手・くらい
 		//ヒット発生
@@ -282,14 +289,25 @@ namespace GAME
 		void SetHit ( bool b ) { m_btlPrm.SetHitEst ( b ); }
 		void OnHit ();
 		void OnEfHit ();
-		void OnDamaged_After ();	//相手ダメージ処理の後
 
-#endif // 0
+		//相手・攻撃 → 自分・くらい
+		//くらい発生
+		bool IsDamaged_prm () const { return m_btlPrm.GetDamaged (); }
+		void SetDamaged ( bool b ) { m_btlPrm.SetDamaged ( b ); }
+//		void OnDamaged ( int damage );
+		void OnDamaged ();
+		void OnDamaged_After ();	//相手ダメージ処理の後
 
 		//判定後、相手の強制変更
 		void ChangeOhter ();
-#if 0
 
+#if 0
+		//相殺
+		bool GetClang () const { return m_btlPrm.GetClang (); }
+		void SetClang ( bool b ) { m_btlPrm.SetClang ( b ); }
+#endif // 0
+
+#if 0
 		//-------------------------------------------------
 		//スクリプトからの変更
 		//暗転
@@ -316,6 +334,8 @@ namespace GAME
 
 		//------------------------------------------------
 		void OverEfPart ();	//EfPart重なり
+#endif // 0
+//==========================================================================
 
 		//-------------------------------------------------
 		//システム
@@ -327,7 +347,6 @@ namespace GAME
 		void OnDispRect ();
 		void OffDispRect ();
 
-#endif // 0
 #if 0
 		//入力表示切替
 		void OnDispInput ();
@@ -377,25 +396,13 @@ namespace GAME
 		void ExeScript ();	//スクリプト通常処理
 		void SetParamFromScript ();	//スクリプトからパラメータを反映する
 		void SpecialAction ();		//特殊アクション指定
-#if 0
-
-		//-------------------------------------------------
-	public:
-
-		//外部からの状態確認
-		//特殊アクション（名前指定）
-		bool IsNameAction ( tstring nameAction ) const { return m_pAction->IsName ( nameAction ); }
-
-		//ダッシュ分岐
-		void OnDashBranch ();
-
-	private:
 
 		//------------------------------------------------
 		//アクション体勢
-		bool Is_AP_Stand () { return m_pAction->GetPosture () == AP_STAND; }
-		bool Is_AP_Jump () { return m_pAction->GetPosture () == AP_JUMP; }
-		bool Is_AP_Crouch () { return m_pAction->GetPosture () == AP_CROUCH; }
+		bool Is_AP_Stand () const { return m_pAction->GetPosture () == AP_STAND; }
+		bool Is_AP_Jump () const { return m_pAction->GetPosture () == AP_JUMP; }
+		bool Is_AP_Crouch () const { return m_pAction->GetPosture () == AP_CROUCH; }
+
 
 		//------------------------------------------------
 		//アクションカテゴリ
@@ -422,6 +429,7 @@ namespace GAME
 		bool IsDotty ()		 const { return m_pAction->GetCategory ()  == AC_DOTTY; }
 		bool IsDamaged ()	 const { return m_pAction->GetCategory ()  == AC_DAMAGED; }
 
+#if 0
 	public:
 		//FightingオブジェクトのWPを設置
 //		void SetwpFighting ( WP_FTG wp );

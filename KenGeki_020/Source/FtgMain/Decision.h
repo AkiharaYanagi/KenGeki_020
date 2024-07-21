@@ -30,8 +30,11 @@ namespace GAME
 		//キャラエグゼ
 		P_ExeChara		m_pExeChara1p;
 		P_ExeChara		m_pExeChara2p;
-#if 0
 
+		//相殺ヒットストップ
+		P_Timer			m_tmrOffset_Hitstop;
+
+#if 0
 		//共通エフェクト
 		P_EfClang		m_efClang;
 		P_EfSpark		m_efSpark;
@@ -39,9 +42,6 @@ namespace GAME
 		P_EfPart		m_efPart;
 		P_EfHit			m_efHit;
 
-
-		//ヒットストップ
-		P_Timer	m_tmrHitstop;
 
 		//---------------------------------
 		//判定フラグ
@@ -58,11 +58,9 @@ namespace GAME
 		Decision ( const Decision & rhs ) = delete;
 		~Decision ();
 
-
 		void SetpChara (P_ExeChara pExeChara1p, P_ExeChara pExeChara2p);
-#if 0
-		void SetpHitStop (P_Timer pHitstop);
 
+#if 0
 		P_EfPart GetpEfPart () const { return m_efPart; }
 		void Decision_EfPart ();
 

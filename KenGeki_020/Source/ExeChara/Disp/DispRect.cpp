@@ -19,22 +19,6 @@ namespace GAME
 	DispRect::DispRect () 
 	{
 		//枠表示を初期化
-#if 0
-		m_pvpGrpCRect = make_shared < VP_PrmRect > ();
-		m_pvpGrpARect = make_shared < VP_PrmRect > ();
-		m_pvpGrpHRect = make_shared < VP_PrmRect > ();
-		m_pvpGrpORect = make_shared < VP_PrmRect > ();
-
-		for ( UINT i = 0; i < NUM_RECT; ++i )
-		{
-			m_pvpGrpCRect->push_back ( Make ( RECT_COLOR_C ) );
-			m_pvpGrpARect->push_back ( Make ( RECT_COLOR_A ) );
-			m_pvpGrpHRect->push_back ( Make ( RECT_COLOR_H ) );
-			m_pvpGrpORect->push_back ( Make ( RECT_COLOR_O ) );
-
-		}
-#endif // 0
-
 		for ( UINT i = 0; i < NUM_RECT; ++i )
 		{
 			map_GrpCRect.push_back ( Make ( RECT_COLOR_C ) );
@@ -42,11 +26,7 @@ namespace GAME
 			map_GrpARect.push_back ( Make ( RECT_COLOR_A ) );
 			map_GrpORect.push_back ( Make ( RECT_COLOR_O ) );
 		}
-
-		InitRect ();
-
-
-//		OnRect ();
+		OnRect ();
 	}
 
 	P_PrmRect DispRect::Make ( DWORD clr )
@@ -58,39 +38,18 @@ namespace GAME
 
 		P_PrmRect p = std::make_shared < PrmRect > ();
 		p->SetColor ( S3d_Utl::DWORD_to_Color ( clr ) );
-		p->SetSize ( s3d::Rect::size_type { 0, 0 } );
+		p->SetZero ();
+		p->SetZ ( Z_SYS );
 		p->Load ();
 		p->Move ();
 		AddpTask ( p );
-
-//		p->SetZ ( Z_SYS );
-//		GRPLST_INSERT_MAIN ( p );
+		GRPLST_INSERT ( p );
 
 		return p;
 	}
 
 	DispRect::~DispRect ()
 	{
-#if 0
-
-		//終了時にグラフィックタスクを外す
-		for ( UINT i = 0; i < NUM_RECT; ++i )
-		{
-			GRPLST_REMOVE_MAIN ( (*m_pvpGrpCRect)[i] );
-			GRPLST_REMOVE_MAIN ( (*m_pvpGrpARect)[i] );
-			GRPLST_REMOVE_MAIN ( (*m_pvpGrpHRect)[i] );
-			GRPLST_REMOVE_MAIN ( (*m_pvpGrpORect)[i] );
-		}
-		//解放
-		for ( UINT i = 0; i < NUM_RECT; ++i )
-		{
-			m_pvpGrpCRect->clear ();
-			m_pvpGrpARect->clear ();
-			m_pvpGrpHRect->clear ();
-			m_pvpGrpORect->clear ();
-		}
-
-#endif // 0
 	}
 
 	//実効枠設定
