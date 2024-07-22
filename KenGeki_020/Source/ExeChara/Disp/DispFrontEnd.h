@@ -69,10 +69,10 @@ namespace GAME
 		P_GrpAcv	m_grpHitNum;		//"0"~"9"
 		P_GrpAcv	m_grpStrHit;		//"Hit"
 
+#endif // 0
 		//-----------------------------------------------------
 		//アクション名
 		P_GrpStr	m_strAction;	
-#endif // 0
 
 	public:
 		DispFrontEnd ();
@@ -104,13 +104,13 @@ namespace GAME
 		void SetCPU ();
 
 		void UpdateHitNum ( UINT n );
+#endif // 0
 
-		void UpdateActionName ( LPCTSTR actionName );
+		void UpdateActionName ( s3d::String actionName );
 
 		//表示切替
 		void On ();
 		void Off ();
-#endif // 0
 
 	private:
 		P_Grp MakepGrpPlyr ( s3d::String str );

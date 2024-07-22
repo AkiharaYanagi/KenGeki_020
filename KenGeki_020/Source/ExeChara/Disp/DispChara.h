@@ -13,9 +13,9 @@
 #include "DispMainImage.h"
 #include "DispInput.h"
 #include "DispRect.h"
+#include "DispFrontEnd.h"
 
 #if 0
-#include "DispFrontEnd.h"
 #include "../../GameMain/GameConst.h"
 #include "../../FtgMain/G_Ftg.h"
 #include "../Input/CharaInput.h"
@@ -32,9 +32,9 @@ namespace GAME
 		P_DispMainImage	m_mainImage;	//メインイメージ
 		P_DispInput		m_dispInput;	//入力表示
 		P_DispRect		m_dispRect;		//枠
+		P_DispFrontEnd	m_frontEnd;		//フロントエンド
 #if 0
 		P_GrpAcv		m_grpShadow;	//影
-		P_DispFrontEnd	m_frontEnd;		//フロントエンド
 
 #endif // 0
 

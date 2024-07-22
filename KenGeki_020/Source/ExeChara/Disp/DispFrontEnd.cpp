@@ -125,16 +125,16 @@ namespace GAME
 		GRPLST_INSERT_MAIN ( m_grpStrHit );
 		AddpTask ( m_grpStrHit );
 
+#endif // 0
 
 		//アクション名
 		m_strAction = std::make_shared < GrpStr > ();
 		m_strAction->SetStr ( U"Action" );
 		m_strAction->SetPos ( VEC2 () );
 		m_strAction->SetZ ( Z_SHADOW );
-		m_strAction->SetFontColor ( 0xff0000ff, 0xffffffff );
-		GRPLST_INSERT_MAIN ( m_strAction );
+//		m_strAction->SetFontColor ( 0xff0000ff, 0xffffffff );
+		GRPLST_INSERT ( m_strAction );
 		AddpTask ( m_strAction );
-#endif // 0
 	}
 
 	//オブジェクト生成用
@@ -210,6 +210,7 @@ namespace GAME
 
 			pOb->SetPos ( VEC2 (  1280 - 384 - 0, 200 ) );
 		}
+#endif // 0
 
 
 		//アクション名
@@ -221,7 +222,6 @@ namespace GAME
 		{
 			m_strAction->SetPos ( VEC2 ( 640 + 390, 80 ) );
 		}
-#endif // 0
 
 	}
 
@@ -353,12 +353,12 @@ namespace GAME
 		}
 	}
 
+#endif // 0
 
-	void DispFrontEnd::UpdateActionName ( LPCTSTR actionName )
+	void DispFrontEnd::UpdateActionName ( s3d::String actionName )
 	{
 		m_strAction->SetStr ( actionName );
 	}
-#endif // 0
 
 
 #if 0
@@ -452,21 +452,22 @@ namespace GAME
 #endif // 0
 
 
-#if 0
 	void DispFrontEnd::On ()
 	{
 		m_gaugeLife->On ();
 		m_gaugeBalance->On ();
 		m_gaugeMana->On ();
-		m_gaugeAccel->On ();
 
+		m_strAction->SetValid ( T );
+#if 0
+		m_gaugeAccel->On ();
 		m_grp_Cst_Player1P2P->SetValid ( T );
 		m_grp_Cst_InputPlayerCOM->SetValid ( T );
 
 		m_grp_CH_Player1P2P->SetValid ( T );
 		m_grp_CH_InputCOMPLayer->SetValid ( T );
+#endif // 0
 
-		m_strAction->SetValid ( T );
 	}
 
 	void DispFrontEnd::Off ()
@@ -474,17 +475,18 @@ namespace GAME
 		m_gaugeLife->Off ();
 		m_gaugeBalance->Off ();
 		m_gaugeMana->Off ();
-		m_gaugeAccel->Off ();
 
+		m_strAction->SetValid ( F );
+#if 0
+		m_gaugeAccel->Off ();
 		m_grp_Cst_Player1P2P->SetValid ( F );
 		m_grp_Cst_InputPlayerCOM->SetValid ( F );
 
 		m_grp_CH_Player1P2P->SetValid ( F );
 		m_grp_CH_InputCOMPLayer->SetValid ( F );
-
-		m_strAction->SetValid ( F );
-	}
 #endif // 0
+
+	}
 
 
 }	//namespace GAME

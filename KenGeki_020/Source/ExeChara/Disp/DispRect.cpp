@@ -26,7 +26,10 @@ namespace GAME
 			map_GrpARect.push_back ( Make ( RECT_COLOR_A ) );
 			map_GrpORect.push_back ( Make ( RECT_COLOR_O ) );
 		}
+#if 0
 		OnRect ();
+#endif // 0
+		OffRect ();
 	}
 
 	P_PrmRect DispRect::Make ( DWORD clr )

@@ -27,7 +27,7 @@ namespace GAME
 		//------------------------------------------------
 		//背景
 		m_bg = std::make_shared < GameGraphic > ();
-		m_bg->AddTexture ( U"bg_B01.png" );
+		m_bg->AddTexture_FromArchive ( U"bg_B01.png" );
 //		m_bg->SetPos ( (float)BG_POS_X, (float)BG_POS_Y );
 		m_bg->SetPos ( 0, BG_POS_Y );
 		m_bg->SetZ ( Z_BG );

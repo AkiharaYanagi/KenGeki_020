@@ -127,22 +127,22 @@ namespace GAME
 
 	void DispGauge::SetTextureName_Frame ( s3d::String textureName )
 	{
-		m_grp_Frame->AddTexture ( textureName );
+		m_grp_Frame->AddTexture_FromArchive ( textureName );
 	}
 
 	void DispGauge::SetTextureName_Value ( s3d::String textureName )
 	{
-		m_grp_Value->AddTexture ( textureName );
+		m_grp_Value->AddTexture_FromArchive ( textureName );
 	}
 
 	void DispGauge::SetTextureName_Decrease ( s3d::String textureName )
 	{
-		m_grp_Decrease->AddTexture ( textureName );
+		m_grp_Decrease->AddTexture_FromArchive ( textureName );
 	}
 
 	void DispGauge::SetTextureName_White ( s3d::String textureName )
 	{
-		m_grp_White->AddTexture ( textureName );
+		m_grp_White->AddTexture_FromArchive ( textureName );
 	}
 
 	void DispGauge::SetColor_Frame ( _CLR c )

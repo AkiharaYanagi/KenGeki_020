@@ -32,12 +32,13 @@ namespace GAME
 		m_dispRect = std::make_shared < DispRect > ();
 		AddpTask ( m_dispRect );
 
-#if 0
-		m_frontEnd = make_shared < DispFrontEnd > ();
+		//フロントエンド
+		m_frontEnd = std::make_shared < DispFrontEnd > ();
 		AddpTask ( m_frontEnd );
 
+#if 0
 		//影
-		m_grpShadow = make_shared < GrpAcv > ();
+		m_grpShadow = std::make_shared < GrpAcv > ();
 		m_grpShadow->AddTexture ( _T ( "shadow.png" ) );
 		m_grpShadow->SetZ ( Z_SHADOW );
 		AddpTask ( m_grpShadow );
@@ -53,9 +54,7 @@ namespace GAME
 	//プレイヤIDを設定
 	void DispChara::LoadPlayer ( PLAYER_ID playerID )
 	{
-#if 0
 		m_frontEnd->LoadPlayer ( playerID );
-#endif // 0
 		m_dispInput->LoadPlayer ( playerID );
 	}
 
@@ -115,11 +114,11 @@ namespace GAME
 
 		//ヒット数更新
 		UpdateChainHitNum ( btlprm.GetChainHitNum () );
+#endif // 0
 
 		//アクション名更新
 		m_frontEnd->UpdateActionName ( pAct->GetName ().c_str () );
 //		m_frontEnd->UpdateActionName ( Format::GetFormatStr ( _T("Frame = %d"), pScp->GetFrame () ).get() );
-#endif // 0
 	}
 
 	//---------------------------------------------------------------------
@@ -138,10 +137,10 @@ namespace GAME
 		VEC2 vecImgShadow = VEC2 ( bx, 0 ) + posChara + VEC2 ( -128 + fDir * 12, 0 );
 		vecImgShadow.y = -0.f + 1.f * PLAYER_BASE_Y;	//y方向のみ指定
 		m_grpShadow->SetPos ( vecImgShadow );
+#endif // 0
 
 		//フロントエンド更新
-		m_frontEnd->UpdateMainImage ( posChara );
-#endif // 0
+		m_frontEnd->UpdateMainImage ( btlprm.GetPos() );
 	}
 
 	//入力更新
