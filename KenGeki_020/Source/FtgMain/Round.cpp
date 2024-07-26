@@ -26,7 +26,8 @@ namespace GAME
 	Round::Round ()
 	{
 //		m_roundDisp_1p = std::make_shared < GameGraphic > ( U"WinMark_Frame.png" );
-		m_roundDisp_1p->AddTexture ( U"WinMark_Win.png" );
+		m_roundDisp_1p = std::make_shared < GameGraphic > ();
+		m_roundDisp_1p->AddTexture_FromArchive ( U"WinMark_Win.png" );
 		m_roundDisp_1p->SetZ ( Z_SHADOW );
 		AddpTask ( m_roundDisp_1p );
 		GRPLST_INSERT ( m_roundDisp_1p );
@@ -40,7 +41,8 @@ namespace GAME
 		m_roundDisp_1p->AddpObject ( m_ob_1p1 );
 
 //		m_roundDisp_2p = std::make_shared < GameGraphic > ( U"WinMark_Frame.png" );
-		m_roundDisp_2p->AddTexture ( U"WinMark_Win.png" );
+		m_roundDisp_2p = std::make_shared < GameGraphic > ();
+		m_roundDisp_2p->AddTexture_FromArchive ( U"WinMark_Win.png" );
 		m_roundDisp_2p->SetZ ( Z_SHADOW );
 		AddpTask ( m_roundDisp_2p );
 		GRPLST_INSERT ( m_roundDisp_2p );

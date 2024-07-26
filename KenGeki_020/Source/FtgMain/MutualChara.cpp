@@ -44,19 +44,28 @@ namespace GAME
 		m_decision->SetpChara ( m_exeChara1, m_exeChara2 );
 		AddpTask ( m_decision );
 
-#if 0
-		//デバッグ用枠表示
+		//------------------------------------------------
+		//タイム
+		m_btlTime = std::make_shared < BattleTime > ();
+		AddpTask ( m_btlTime );
+
+		//------------------------------------------------
+		//ラウンド
+		m_round = std::make_shared < Round > ();
+		AddpTask ( m_round );
+
+
+		//------------------------------------------------
+		//デバッグ用枠表示初期切替
 #define DISP_RECT	0
 #if DISP_RECT
+		bDispRect = T;
 		m_exeChara1->OnDispRect ();
 		m_exeChara2->OnDispRect ();
 #else
 		m_exeChara1->OffDispRect ();
 		m_exeChara2->OffDispRect ();
 #endif // DISP_RECT
-
-
-#endif // 0
 	}
 
 	MutualChara::~MutualChara ()
@@ -73,20 +82,15 @@ namespace GAME
 
 	void MutualChara::Load ()
 	{
-#if 0
 		m_exeChara1->SetpFtgGrp ( m_pFtgGrp );
 		m_exeChara2->SetpFtgGrp ( m_pFtgGrp );
-#endif // 0
 		TASK_VEC::Load ();
 	}
 
 	void MutualChara::Init ()
 	{
-#if 0
 		m_pParam->SetN_Act1p ( 0 );
 		m_pParam->SetN_Act2p ( 0 );
-#endif // 0
-
 		TASK_VEC::Init ();
 	}
 
@@ -439,19 +443,6 @@ namespace GAME
 			}
 		}
 		pre_bDispRect = is_bDispRect;
-
-#if 0
-
-#if DISP_RECT
-		bDispRect = T;
-#else
-		m_exeChara1->OffDispRect ();
-		m_exeChara2->OffDispRect ();
-		bDispRect = F;
-#endif // DISP_RECT
-
-#endif // 0
-
 	}
 
 	//------------------------------------------------------

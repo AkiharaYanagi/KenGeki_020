@@ -44,9 +44,11 @@ namespace GAME
 		UINT	m_scpStop {0};		//スクリプトからのストップ
 
 		//特殊演出
+#if 0
 		UINT	m_blackOut {0};		//暗転
 		bool	m_whiteOut { F };	//白転
 		UINT	m_slow { 0 };		//スロー
+#endif // 0
 
 		//共通グラフィック
 		P_FtgGrp	m_pFtgGrp;

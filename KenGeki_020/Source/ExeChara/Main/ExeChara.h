@@ -24,11 +24,11 @@
 
 #include "../Input/PlayerInput.h"
 #include "../Input/CPUInput.h"
+#include "../FtgMain/FtgGrp.h"
 #if 0
 #include "../../FtgMain/G_Ftg.h"
 #include "Effect/OperateEffect.h"
 #include "../FtgMain/Ef/EfPart.h"
-#include "../FtgMain/FtgGrp.h"
 #include "TimerSlow.h"
 #endif // 0
 
@@ -72,9 +72,7 @@ namespace GAME
 		//------------------------------------------------
 		//表示
 		P_DispChara		m_dispChara;	//キャラ全般表示
-#if 0
 		P_FtgGrp		m_pFtgGrp;		//全体画像処理
-#endif // 0
 
 		//------------------------------------------------
 		//ゲーム進行状態(アクタ, ステートを保持する)
@@ -172,10 +170,8 @@ namespace GAME
 		//相手を設定
 		void SetpOther ( WP_ExeChara p ) { m_pOther = p; }
 
-#if 0
 		//全体画像処理を設定
 		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
-#endif // 0
 
 		//------------------------------------------------------------
 		//パラメータ
