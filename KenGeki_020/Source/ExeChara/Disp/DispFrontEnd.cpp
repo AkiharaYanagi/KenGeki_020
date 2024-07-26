@@ -130,11 +130,18 @@ namespace GAME
 		//アクション名
 		m_strAction = std::make_shared < GrpStr > ();
 		m_strAction->SetStr ( U"Action" );
-		m_strAction->SetPos ( VEC2 () );
-		m_strAction->SetZ ( Z_SHADOW );
-//		m_strAction->SetFontColor ( 0xff0000ff, 0xffffffff );
+		m_strAction->SetZ ( Z_MENU );
+		m_strAction->SetColorF ( s3d::ColorF { 0.8f, 0.8f, 1.f, 1.f } );
 		GRPLST_INSERT ( m_strAction );
 		AddpTask ( m_strAction );
+
+		//アクション名
+		m_strState = std::make_shared < GrpStr > ();
+		m_strState->SetStr ( U"State" );
+		m_strState->SetZ ( Z_MENU );
+		m_strState->SetColorF ( s3d::ColorF { 0.8f, 0.8f, 1.f, 1.f } );
+		GRPLST_INSERT ( m_strState );
+		AddpTask ( m_strState );
 	}
 
 	//オブジェクト生成用
@@ -151,6 +158,13 @@ namespace GAME
 
 	DispFrontEnd::~DispFrontEnd ()
 	{
+	}
+
+	void DispFrontEnd::Load ()
+	{
+		m_strAction->SetSize ( 40 );
+		m_strState->SetSize ( 40 );
+		TASK_VEC::Load ();
 	}
 
 
@@ -213,14 +227,16 @@ namespace GAME
 #endif // 0
 
 
-		//アクション名
+		//アクション名　位置
 		if ( PLAYER_ID_1 == playerID )
 		{
-			m_strAction->SetPos ( VEC2 ( 140, 80 ) );
+			m_strAction->SetPos ( VEC2 ( 140, 120 ) );
+			m_strState->SetPos ( VEC2 ( 140, 160 ) );
 		}
 		else if ( PLAYER_ID_2 == playerID )
 		{
-			m_strAction->SetPos ( VEC2 ( 640 + 390, 80 ) );
+			m_strAction->SetPos ( VEC2 ( 640 + 390, 120 ) );
+			m_strState->SetPos ( VEC2 ( 640 + 390, 160 ) );
 		}
 
 	}
@@ -360,6 +376,11 @@ namespace GAME
 		m_strAction->SetStr ( actionName );
 	}
 
+	void DispFrontEnd::UpdateStateName ( s3d::String stateName )
+	{
+		m_strState->SetStr ( stateName );
+	}
+
 
 #if 0
 	void DispChara::UpdateHitStop ( VEC2 ptChara, bool dirRight, UINT hitstop, UINT hitstopTimer )
@@ -459,6 +480,7 @@ namespace GAME
 		m_gaugeMana->On ();
 
 		m_strAction->SetValid ( T );
+		m_strState->SetValid ( T );
 #if 0
 		m_gaugeAccel->On ();
 		m_grp_Cst_Player1P2P->SetValid ( T );
@@ -477,6 +499,7 @@ namespace GAME
 		m_gaugeMana->Off ();
 
 		m_strAction->SetValid ( F );
+		m_strState->SetValid ( F );
 #if 0
 		m_gaugeAccel->Off ();
 		m_grp_Cst_Player1P2P->SetValid ( F );

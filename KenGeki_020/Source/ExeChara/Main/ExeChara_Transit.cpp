@@ -40,6 +40,10 @@ namespace GAME
 			return;
 		}
 
+		//-----------------------------------------------------
+		// 特殊条件による分岐
+		TranditAction_Special ();
+
 
 		//-----------------------------------------------------
 		//現在スクリプトが現在アクションにおける最終フレーム ならば
@@ -58,9 +62,9 @@ namespace GAME
 		++ m_frame;
 
 
+		//スロウのとき
 #if 0
 
-		//スロウのとき
 		if ( m_playerID == PLAYER_ID_1 )
 		{
 			DBGOUT_WND_F ( 8, _T ( "tmrSlow.m_count = %d" ), m_tmrSlow.GetCount () );
@@ -106,7 +110,7 @@ namespace GAME
 			P_Action pAct = m_pChara->GetpAction ( id );
 
 			//特殊アクション 除外 指定　：　不可能なら次をチェック
-			if ( ! TranditAction_Special ( pAct ) )
+			if ( ! TranditAction_Exclusion ( pAct ) )
 			{
 				continue;
 			}
@@ -148,8 +152,6 @@ namespace GAME
 			//終了
 			return T;
 		}
-#if 0
-#endif // 0
 
 		return F;
 	}
@@ -315,6 +317,35 @@ namespace GAME
 		return U"";
 	}
 
+	//-------------------------------------------------------------------------------------------------
+	void ExeChara::TranditAction_Special ()
+	{
+		//条件：壁到達のブランチをチェック
+		s3d::String ActionName = Check_TransitAction_Condition_str ( BRC_WALL );
+		if ( ActionName.compare ( U"" ) != 0 )
+		{
+			//位置
+//			float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
+			float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
+			if ( wall_R <= m_btlPrm.GetPos().x  )
+			{
+				//特定アクションの分岐
+				if ( m_pAction->IsName ( U"壁まで吹き飛び持続" ) )
+				{
+					//相手も遷移
+					//壁割後ホーミング移動
+					m_pOther.lock()->SetAction ( U"ホーミング" );
+
+					//ステートの変更
+					m_actor.ShiftWallBreak ();
+					m_pOther.lock()->m_actor.ShiftWallBreak ();
+				}
+
+				SetAction ( ActionName );	//遷移
+			}
+		}
+
+	}
 
 	//-------------------------------------------------------------------------------------------------
 
@@ -346,9 +377,6 @@ namespace GAME
 		m_btlPrm.EndAction ();
 		m_frame = 0;
 	}
-#if 0
-#endif // 0
-
 
 }	//namespace GAME
 

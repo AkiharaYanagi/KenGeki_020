@@ -157,6 +157,7 @@ namespace GAME
 //			name.assign ( _T ( "charaBin.dat" ) );
 //			name.assign ( U"chara_Stand_Bin.dat" );
 			name.assign ( U"chara_Sae_Bin.dat" );
+//			name.assign ( U"chara_Retsudou_Bin.dat" );
 //			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
 		else if ( PLAYER_ID_2 == id )
@@ -164,6 +165,7 @@ namespace GAME
 //			name.assign ( _T ( "charaBin.dat" ) );
 //			name.assign ( U"chara_Stand_Bin.dat" );
 			name.assign ( U"chara_Sae_Bin.dat" );
+//			name.assign ( U"chara_Retsudou_Bin.dat" );
 //			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
 

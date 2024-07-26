@@ -132,15 +132,16 @@ namespace GAME
 		TASK_LST::Move ();
 	}
 
-#if 0
 	void Fighting::TrainingRestart ()
 	{
-		m_pFtgGrp->Init ();
+//		m_pFtgGrp->Init ();
+
 		m_bg->Init ();
-		m_demoActor->StartFighting ();
+//		m_demoActor->StartFighting ();
 		m_mutualChara->TrainingInit ();
 	}
 
+#if 0
 	
 
 	//=============================================================

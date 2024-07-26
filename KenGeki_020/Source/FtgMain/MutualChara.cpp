@@ -99,14 +99,14 @@ namespace GAME
 	//■#########################################################
 	void MutualChara::Conduct ()
 	{
-#if 0
 		//---------------------------------------------------
 		//システム変更
-		SwitchRect ();	//枠表示切替
 		SwitchDispInput ();	//入力表示切替
+		SwitchRect ();	//枠表示切替
 		SwitchFrontEnd ();	//ゲージ類表示切替
-		SwithcCPU ();	//CPU操作切替
+#if 0
 		ResetMatch ();	//試合初期化
+		SwithcCPU ();	//CPU操作切替
 		//---------------------------------------------------
 #endif // 0
 
@@ -139,6 +139,11 @@ namespace GAME
 		m_pParam->SetN_Act2p ( m_exeChara2->GetBtlParam ().GetNActTrs () );
 
 #endif // 0
+
+		//test
+		float x1 = m_exeChara1->GetPos ().x;
+		float x2 = m_exeChara2->GetPos ().x;
+		DBGOUT_WND()->DebugOutf ( U"{}, {}"_fmt( x1, x2 ) );
 	}
 
 #if 0
@@ -235,10 +240,12 @@ namespace GAME
 #endif // 0
 
 		//---------------------------------------------------
-		//画面表示の基準位置を決定
+		//キャラ位置から画面表示の基準位置(カメラ)を決定
 		VEC2 pos1p = m_exeChara1->GetPos ();
 		VEC2 pos2p = m_exeChara2->GetPos ();
+
 		G_FTG()->CulcPosMutualBase ( pos1p, pos2p );
+
 	}
 
 #if 0
@@ -364,11 +371,42 @@ namespace GAME
 		return CHARA_NAME ();
 	}
 
+#endif // 0
 
 	//------------------------------------------------------
 	//	内部関数
 	//------------------------------------------------------
 
+
+	//------------------------------------------------------
+	//入力表示切替
+	void MutualChara::SwitchDispInput ()
+	{
+		static bool bDispInput = T;		//状態
+		static bool pre_bDispInput = F;	//前回押しているか
+		static bool is_bDispInput = F;	//今回押しているか
+
+		is_bDispInput = ( WND_UTL::AscKey ( '2' ) );
+
+		//今回押した瞬間ならば、1回のみ切替
+		if ( ! pre_bDispInput && is_bDispInput )	// false -> true
+		{
+			if ( ! bDispInput )
+			{
+				m_exeChara1->OnDispInput ();
+				m_exeChara2->OnDispInput ();
+				bDispInput = true;
+			}
+			else
+			{
+				m_exeChara1->OffDispInput ();
+				m_exeChara2->OffDispInput ();
+				bDispInput = false;
+			}
+		}
+
+		pre_bDispInput = is_bDispInput;
+	}
 
 	//------------------------------------------------------
 	//枠表示切替 
@@ -417,36 +455,6 @@ namespace GAME
 	}
 
 	//------------------------------------------------------
-	//入力表示切替
-	void MutualChara::SwitchDispInput ()
-	{
-		static bool bDispInput = T;		//状態
-		static bool pre_bDispInput = F;	//前回押しているか
-		static bool is_bDispInput = F;	//今回押しているか
-
-		is_bDispInput = ( WND_UTL::AscKey ( '2' ) );
-
-		//今回押した瞬間ならば、1回のみ切替
-		if ( ! pre_bDispInput && is_bDispInput )	// false -> true
-		{
-			if ( ! bDispInput )
-			{
-				m_exeChara1->OnDispInput ();
-				m_exeChara2->OnDispInput ();
-				bDispInput = true;
-			}
-			else
-			{
-				m_exeChara1->OffDispInput ();
-				m_exeChara2->OffDispInput ();
-				bDispInput = false;
-			}
-		}
-
-		pre_bDispInput = is_bDispInput;
-	}
-
-	//------------------------------------------------------
 	//ゲージ類表示切替
 	void MutualChara::SwitchFrontEnd ()
 	{
@@ -475,6 +483,8 @@ namespace GAME
 
 		pre_bFrontEnd = is_bFrontEnd;
 	}
+
+#if 0
 
 	//------------------------------------------------------
 	//CPU操作切替
@@ -540,14 +550,18 @@ namespace GAME
 		}
 	}
 
+
+#endif // 0
+
 	//トレーニングモード初期化
 	void MutualChara::TrainingInit ()
 	{
 		m_exeChara1->TrainingInit ();
 		m_exeChara2->TrainingInit ();
 
-		m_pFtgGrp->InitSlow ();
+//		m_pFtgGrp->InitSlow ();
 	}
+
 
 	//------------------------------------------------------
 	//	ExeChara両者操作
@@ -573,22 +587,154 @@ namespace GAME
 		m_exeChara2->StartFighting ();
 	}
 
-#if 0
-	void MutualChara::AssignWp ( WP_FTG wp ) const
-	{
-		m_exeChara1->SetwpFighting ( wp );
-		m_exeChara2->SetwpFighting ( wp );
-	}
-#endif // 0
+	//----------------------------------------------------
+	//	戦闘時間
+	//----------------------------------------------------
 
+	//タイム計測開始
+	void MutualChara::StartTime ()
+	{
+		m_btlTime->Start ();
+	}
+
+
+	//時間計測初期化
+	void MutualChara::TimeSet ()
+	{
+		m_btlTime->Set ();
+	}
+
+	//タイムアップ
+	void MutualChara::StartTimeUp ()
+	{
+		DecideWinner_FromLife();
+
+		m_exeChara1->StartTimeUp ();
+		m_exeChara2->StartTimeUp ();
+	}
+
+	//タイムアップ終了待機
+	void MutualChara::StartEndWait ()
+	{
+		m_exeChara1->StartEndWait ();
+		m_exeChara2->StartEndWait ();
+	}
+
+
+	//終了ステップ開始
+	void MutualChara::StartEnd ()
+	{
+	}
+
+
+
+	//両者待機状態
+	bool MutualChara::IsWait ()
+	{
+		bool b1 = m_exeChara1->IsWait ();
+		bool b2 = m_exeChara2->IsWait ();
+		return b1 && b2;
+	}
+
+	//----------------------------------------------------
+
+
+	//------------------------------------------------------
+	//	終了判定
+	//------------------------------------------------------
+
+	//ライフ０による終了
+	bool MutualChara::FinishCheck_ZeroLife ()
+	{
+		//終了判定
+		bool finish1p = m_exeChara1->IsZeroLife ();
+		bool finish2p = m_exeChara2->IsZeroLife ();
+
+		//どちらか、または両方ライフ０なら終了
+		if ( finish1p || finish2p )
+		{
+			PLAYER_ID plr = _PLAYER_NUM;
+			if ( finish1p && finish2p )
+			{
+				plr = _PLAYER_NUM;
+			}
+			else if ( ! finish1p && finish2p )
+			{
+				plr = PLAYER_ID_1;
+			}
+			else if ( finish1p && ! finish2p )
+			{
+				plr = PLAYER_ID_2;
+			}
+			//シーン共通パラメータ記録
+			m_pParam->SetWinner ( plr );
+			return T;
+		}
+
+		return F;
+	}
+
+	//タイムアップによる終了
+	bool MutualChara::FinishCheck_TimeUp ()
+	{
+		return m_btlTime->IsTimeUp ();
+	}
+
+
+
+#if 0
 	void MutualChara::RevertSlow ()
 	{
 		m_exeChara1->RevertSlow ();
 		m_exeChara2->RevertSlow ();
 	}
-
-
 #endif // 0
+
+	//残ライフで勝者決定
+	void MutualChara::DecideWinner_FromLife ()
+	{
+		//タイムアップ時、残り体力で勝者を決める
+		int life_1 = m_exeChara1->GetBtlPrm ().GetLife ();
+		int life_2 = m_exeChara2->GetBtlPrm ().GetLife ();
+
+
+		//1P勝利
+		if ( life_1 > life_2 )
+		{
+			m_exeChara1->SetAction ( U"Demo_Win" );
+			m_exeChara2->SetAction ( U"Demo_TimeUpLose" );
+
+			//ラウンド加算
+			m_round->AddRound_1p ();
+
+			//シーンパラメータに保存
+			m_pParam->SetWinner ( PLAYER_ID_1 );
+		}
+		//2P勝利
+		else if ( life_1 < life_2 )
+		{
+			m_exeChara1->SetAction ( U"Demo_TimeUpLose" );
+			m_exeChara2->SetAction ( U"Demo_Win" );
+
+			//ラウンド加算
+			m_round->AddRound_2p ();
+
+			//シーンパラメータに保存
+			m_pParam->SetWinner ( PLAYER_ID_2 );
+		}
+		//引き分け
+		else
+		{
+			m_exeChara1->SetAction ( U"Demo_Draw" );
+			m_exeChara2->SetAction ( U"Demo_Draw" );
+
+			//どちらもラウンド取得なし
+
+			//シーンパラメータに保存
+			m_pParam->SetWinner ( _PLAYER_NUM );	//Dra
+		}
+	}
+
 
 
 }	//namespace GAME

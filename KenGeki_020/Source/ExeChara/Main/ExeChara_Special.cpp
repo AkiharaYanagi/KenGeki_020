@@ -33,24 +33,13 @@ namespace GAME
 
 #endif // 0
 
-
-	//================================================
-	//	特定アクション中の処理
 	//================================================
 	//	特殊アクション指定処理
-
-
-
-	void ExeChara::SpecialAction () {}
-
-
-
-#if 0
-
+	//================================================
 	void ExeChara::SpecialAction ()
 	{
 		//-----------------------------------------------------
-		if ( IsNameAction ( _T ( "立ち" ) ) )
+		if ( IsNameAction ( U"立ち" ) )
 		{
 			//連続ヒット数のリセット
 			m_pOther.lock()->m_btlPrm.SetChainHitNum ( 0 );
@@ -65,6 +54,7 @@ namespace GAME
 			}
 		}
 
+#if 0
 		//-----------------------------------------------------
 		//アクセル増減　 ：　アクション中のバランス値を利用(今作品ではバランス発生に用いない)
 		int accel_value = m_pAction->GetBalance ();
@@ -246,11 +236,11 @@ namespace GAME
 				m_pOther.lock()->m_dispChara->TurnShadow ( F );
 			}
 		}
+#endif // 0
 
 	}
 
 
-#endif // 0
 
 
 }	//namespace GAME

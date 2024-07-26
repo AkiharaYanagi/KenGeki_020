@@ -102,7 +102,7 @@ namespace GAME
 		pExe->TransitAction ();		//アクション遷移
 		pExe->CalcPos ();			//位置計算
 		pExe->SetCollisionRect ();	//接触枠設定
-		//		pExe->OverEfPart ();		//EfPart重なり
+//		pExe->OverEfPart ();		//EfPart重なり
 		pExe->PreMove_Effect ();		//エフェクト生成と動作
 	}
 
@@ -182,6 +182,28 @@ namespace GAME
 
 
 	//------------------------------------------------
+	//バトル　壁割
+
+	void CHST_WallBreak::PreScriptMove ()
+	{
+		P_ExeChara pExe = GetwpExeChara ().lock ();
+		pExe->Input ();				//入力		
+//■ 	pExe->TransitAction ();		//アクション遷移
+//■		pExe->CalcPos ();			//位置計算
+		pExe->SetCollisionRect ();	//接触枠設定
+//■		pExe->PreMove_Effect ();	//エフェクト生成と動作
+	}
+
+	void CHST_WallBreak::PostScriptMove ()
+	{
+		P_ExeChara pExe = GetwpExeChara ().lock ();
+		pExe->PostMove_Effect ();	//エフェクト動作
+//■		pExe->MoveTimer ();			//タイマ稼働
+//■		pExe->CheckLife ();			//ライフ判定
+		pExe->UpdateGraphic ();		//グラフィックの更新
+	}
+
+	//------------------------------------------------
 	//バトル　スロウスキップ状態(スロウ時に飛ばすフレーム処理のとき)
 
 	void CHST_Slow_Skip::PreScriptMove ()
@@ -193,9 +215,9 @@ namespace GAME
 		if ( pExe->IsHitStop () ) { return; }
 
 		pExe->TransitAction ();		//アクション遷移
-//■		pExe->CalcPos ();			//位置計算
+		//■		pExe->CalcPos ();			//位置計算
 		pExe->SetCollisionRect ();	//接触枠設定
-//■		pExe->PreMove_Effect ();		//エフェクト生成と動作
+		//■		pExe->PreMove_Effect ();		//エフェクト生成と動作
 	}
 
 	void CHST_Slow_Skip::RectMove ()
@@ -208,7 +230,7 @@ namespace GAME
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();
 		pExe->PostMove_Effect ();	//エフェクト動作
-//■		pExe->MoveTimer ();			//タイマ稼働
+		//■		pExe->MoveTimer ();			//タイマ稼働
 		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 	}

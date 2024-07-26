@@ -19,17 +19,17 @@ namespace GAME
 
 	DispMainImage::DispMainImage ()
 	{
-#if 0
-		m_grp = std::make_shared < GrpBs > ();
-		m_grp->AddTexture ( U"000_立ち_00.png" );
-		m_grp->AddTexture ();	//対象テクスチャを１つ確保
-		AddpTask ( m_grp );
-#endif // 0
-
-		//メイングラフィック
+		//キャラメイングラフィック
 		m_mainGraphic = std::make_shared < GameGraphic > ();
 		AddpTask ( m_mainGraphic );
 		GRPLST_INSERT ( m_mainGraphic );
+
+		//影
+		m_grpShadow = std::make_shared < GameGraphic > ();
+		m_grpShadow->AddTexture_FromArchive ( U"shadow.png" );
+		m_grpShadow->SetZ ( Z_SHADOW );
+		AddpTask ( m_grpShadow );
+		GRPLST_INSERT ( m_grpShadow );
 	}
 
 	DispMainImage::~DispMainImage ()
@@ -96,6 +96,13 @@ namespace GAME
 
 //		m_mainGraphic->SetpTexture ( pTexture );
 		m_mainGraphic->SetIndexTexture ( index );
+
+		//---------------------------------------------------------
+		//影
+		VEC2 vecImgShadow = VEC2 ( bx, 0 ) + ptChara + VEC2 ( -128 + fDir * 12, 0 );
+		vecImgShadow.y = -0.f + (float)PLAYER_BASE_Y;	//y方向のみ指定
+		m_grpShadow->SetPos ( vecImgShadow );
+
 	}
 
 

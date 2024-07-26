@@ -14,6 +14,7 @@
 #include "DispInput.h"
 #include "DispRect.h"
 #include "DispFrontEnd.h"
+#include "../Main/ExCh_State.h"
 
 #if 0
 #include "../../GameMain/GameConst.h"
@@ -33,10 +34,6 @@ namespace GAME
 		P_DispInput		m_dispInput;	//入力表示
 		P_DispRect		m_dispRect;		//枠
 		P_DispFrontEnd	m_frontEnd;		//フロントエンド
-#if 0
-		P_GrpAcv		m_grpShadow;	//影
-
-#endif // 0
 
 	public:
 		DispChara ();
@@ -57,19 +54,21 @@ namespace GAME
 		//更新
 		void Update ( P_Action pAct, P_Script pScp, const BtlParam & btlprm, P_CharaInput pChIpt );
 
-#if 0
+		void UpdateStateName ( s3d::String stateName );
+
 		//------------------------------------------------
 		//@info 表示切替
 		//  ExeChara以下で行うと1P2Pで2回呼ばれるのでMutualCharaなどで呼び出す
+
+		void OnInput () { m_dispInput->On (); }
+		void OffInput () { m_dispInput->Off (); }
 		
 		void OnRect () { m_dispRect->OnRect (); }		//枠表示ON
 		void OffRect () { m_dispRect->OffRect (); }		//枠表示OFF
 
-		void OnInput () { m_dispInput->On (); }
-		void OffInput () { m_dispInput->Off (); }
-
 		void OnFrontEnd () { m_frontEnd->On (); }
 		void OffFrontEnd () { m_frontEnd->Off (); }
+#if 0
 
 		//------------------------------------------------
 
@@ -83,20 +82,20 @@ namespace GAME
 
 		//影化
 		void TurnShadow ( bool b ) { m_mainImage->TurnShadow ( b ); }
+#endif // 0
 
 
 	private:
-#endif // 0
 		//メインイメージの更新
 		void UpdateMainImage ( P_Script pScript, const BtlParam & btlprm );
 
 		//入力更新
 		void UpdateInput ( P_CharaInput p );
 
-#if 0
 		//ゲージ類更新
 		void UpdateGauge ( BtlParam btlPrm );
 
+#if 0
 		//ヒット数更新
 		void UpdateChainHitNum ( UINT n );
 #endif // 0

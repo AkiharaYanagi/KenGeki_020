@@ -73,6 +73,8 @@ namespace GAME
 		//-----------------------------------------------------
 		//アクション名
 		P_GrpStr	m_strAction;	
+		//ステート名
+		P_GrpStr	m_strState;	
 
 	public:
 		DispFrontEnd ();
@@ -80,6 +82,7 @@ namespace GAME
 		~DispFrontEnd ();
 
 		void ParamInit ( P_Param pParam );
+		void Load ();
 
 
 		//プレイヤ別(1p,2p)のゲージ類の表示部のみ初期化
@@ -106,7 +109,11 @@ namespace GAME
 		void UpdateHitNum ( UINT n );
 #endif // 0
 
+		//アクション名表示
 		void UpdateActionName ( s3d::String actionName );
+
+		//アクション名表示
+		void UpdateStateName ( s3d::String stateName );
 
 		//表示切替
 		void On ();

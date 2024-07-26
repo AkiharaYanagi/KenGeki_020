@@ -35,15 +35,6 @@ namespace GAME
 		//フロントエンド
 		m_frontEnd = std::make_shared < DispFrontEnd > ();
 		AddpTask ( m_frontEnd );
-
-#if 0
-		//影
-		m_grpShadow = std::make_shared < GrpAcv > ();
-		m_grpShadow->AddTexture ( _T ( "shadow.png" ) );
-		m_grpShadow->SetZ ( Z_SHADOW );
-		AddpTask ( m_grpShadow );
-		GRPLST_INSERT_MAIN ( m_grpShadow );
-#endif // 0
 	}
 
 
@@ -65,8 +56,6 @@ namespace GAME
 	{
 #if 0
 		m_frontEnd->ParamInit ( pParam );
-		
-		OnRect ();
 #endif // 0
 
 #if 0
@@ -108,17 +97,23 @@ namespace GAME
 		//入力更新
 		UpdateInput ( pChIpt );
 
-#if 0
 		//ゲージ類更新
 		UpdateGauge ( btlprm );
 
+#if 0
 		//ヒット数更新
 		UpdateChainHitNum ( btlprm.GetChainHitNum () );
 #endif // 0
 
 		//アクション名更新
 		m_frontEnd->UpdateActionName ( pAct->GetName ().c_str () );
-//		m_frontEnd->UpdateActionName ( Format::GetFormatStr ( _T("Frame = %d"), pScp->GetFrame () ).get() );
+	}
+
+
+	void DispChara::UpdateStateName ( s3d::String stateName )
+	{
+		//ステート名更新
+		m_frontEnd->UpdateStateName ( stateName );
 	}
 
 	//---------------------------------------------------------------------
@@ -129,15 +124,6 @@ namespace GAME
 		//メイン
 		m_mainImage->SetColor ( btlprm.GetColor () );
 		m_mainImage->UpdateMainImage ( pScript, btlprm );
-
-#if 0
-		//影
-		float fDir = dirRight ? ( 1.f ) : ( -1.f );		//向き
-		float bx = G_Ftg::inst ()->GetPosMutualBase ().x;	//基準位置
-		VEC2 vecImgShadow = VEC2 ( bx, 0 ) + posChara + VEC2 ( -128 + fDir * 12, 0 );
-		vecImgShadow.y = -0.f + 1.f * PLAYER_BASE_Y;	//y方向のみ指定
-		m_grpShadow->SetPos ( vecImgShadow );
-#endif // 0
 
 		//フロントエンド更新
 		m_frontEnd->UpdateMainImage ( btlprm.GetPos() );
@@ -150,13 +136,13 @@ namespace GAME
 	}
 
 
-#if 0
 	//ゲージ類更新
 	void DispChara::UpdateGauge ( BtlParam btlPrm )
 	{
 		m_frontEnd->UpdateGauge ( btlPrm );
 	}
 
+#if 0
 	//ヒット数更新
 	void DispChara::UpdateChainHitNum ( UINT n )
 	{

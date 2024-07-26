@@ -21,8 +21,11 @@ namespace GAME
 		m_Start = std::make_shared < CHST_Start > ();
 		m_Greeting = std::make_shared < CHST_Greeting > ();
 		m_GetReady = std::make_shared < CHST_GetReady > ();
+
 		m_Main = std::make_shared < CHST_Main > ();
 		m_Slow_Skip = std::make_shared < CHST_Slow_Skip > ();
+		m_WallBreak = std::make_shared < CHST_WallBreak > ();
+
 		m_EndWait = std::make_shared < CHST_EndWait > ();
 		m_Down = std::make_shared < CHST_Down > ();
 		m_DownWait = std::make_shared < CHST_DownWait > ();
@@ -35,8 +38,11 @@ namespace GAME
 		mvp_state.push_back ( m_Start );
 		mvp_state.push_back ( m_Greeting );
 		mvp_state.push_back ( m_GetReady );
+
 		mvp_state.push_back ( m_Main );
 		mvp_state.push_back ( m_Slow_Skip );
+		mvp_state.push_back ( m_WallBreak );
+
 		mvp_state.push_back ( m_EndWait );
 		mvp_state.push_back ( m_Down );
 		mvp_state.push_back ( m_DownWait );
@@ -112,6 +118,11 @@ namespace GAME
 	void ExeChara_Actor::ShiftSlowSkip ()
 	{
 		mp_state = m_Slow_Skip;
+	}
+
+	void ExeChara_Actor::ShiftWallBreak ()
+	{
+		mp_state = m_WallBreak;
 	}
 
 	//==========================================================

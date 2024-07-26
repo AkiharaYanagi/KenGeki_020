@@ -76,10 +76,14 @@ void Main()
 void Load ()
 {
 	//ウィンドウ設定
+
+	//ゲーム表示サイズ
 	s3d::Size size = s3d::Scene::Size ();
 	s3d::Scene::SetResizeMode ( s3d::ResizeMode::Virtual );
 	s3d::Scene::Resize ( 1280, 960 );
+//	s3d::Scene::Resize ( 1200, 900 );
 
+	//ウィンドウサイズ
 	s3d::Scene::SetResizeMode ( s3d::ResizeMode::Keep );
 	s3d::Window::Resize ( 1600, 900 );
 	s3d::Window::SetStyle ( s3d::WindowStyle::Sizable );

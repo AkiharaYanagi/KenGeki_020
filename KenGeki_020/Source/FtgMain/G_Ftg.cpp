@@ -46,10 +46,13 @@ namespace GAME
 		m_vel_resetPos = 40.f;
 	}
 
+
 	//キャラ位置による画面表示の基準位置
 	//毎フレーム動作
 	void G_Ftg:: CulcPosMutualBase ( VEC2 pos1p, VEC2 pos2p )
 	{
+#if 0
+		//--------------------------------------------------------------------
 		//キャラ位置
 		float averagex = (pos1p.x + pos2p.x) * 0.5f;	//中心
 		float window_half = GAME_WINDOW_WIDTH * 0.5f;	//表示ウィンドウの中心(半分)
@@ -59,7 +62,8 @@ namespace GAME
 
 		//基準の位置
 		float posMutualBase_x = window_half - averagex;
-
+		//--------------------------------------------------------------------
+#endif // 0
 
 		//特殊演出
 
@@ -82,6 +86,7 @@ namespace GAME
 		}
 #endif // 0
 
+#if 0
 
 		//画面端表示処理
 		float lx = 0 - m_wall_L;		//左寄
@@ -148,6 +153,16 @@ namespace GAME
 		
 		//------------------------------------------------------
 
+#endif // 0
+
+
+#if 0
+		//計算した画面表示補正位置を保存
+		m_posMutualBase = VEC2 ( posMutualBase_x, 0 );
+#endif // 0
+
+		//通常時
+		RevisedCamera ( pos1p, pos2p );
 	}
 
 	void G_Ftg::AddAccel ( int n )
@@ -156,6 +171,53 @@ namespace GAME
 		if ( m_accel < -100 ) { m_accel = -100; }
 		if ( 100 < m_accel ) { m_accel = 100; }
 	}
+
+
+	//カメラの画面端における補正位置
+	void G_Ftg::RevisedCamera ( VEC2 pos1p, VEC2 pos2p )
+	{
+		//--------------------------------------------------------------------
+		//キャラ位置
+		float averagex = (pos1p.x + pos2p.x) * 0.5f;	//中心
+		float window_half = GAME_WINDOW_WIDTH * 0.5f;	//表示ウィンドウの中心(半分)
+
+		//キャラの中心
+		m_chara_center_x = averagex;
+
+		//基準の位置
+		float posMutualBase_x = window_half - averagex;
+
+		//画面端表示処理
+		float lx = 0 - m_wall_L;		//左寄
+		float rx = GAME_WINDOW_WIDTH - m_wall_R;		//右寄
+		float cx = window_half - averagex;		//中央
+
+		//--------------------------------------------------------------------
+
+		//通常時
+
+		//左寄
+		//画面左端から表示半分左側のとき
+		if ( averagex < m_wall_L + window_half )
+		{
+			posMutualBase_x = lx;
+		}
+		//右寄
+		//画面右端から表示半分右側のとき
+		else if ( averagex > m_wall_R - window_half )
+		{
+			posMutualBase_x = rx;
+		}
+		//中央
+		else
+		{
+			posMutualBase_x = cx;
+		}
+
+		//計算した画面表示補正位置を保存
+		m_posMutualBase = VEC2 ( posMutualBase_x, 0 );
+	}
+
 
 
 }	//namespace GAME

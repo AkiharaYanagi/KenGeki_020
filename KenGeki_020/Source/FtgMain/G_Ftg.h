@@ -83,6 +83,11 @@ namespace GAME
 		void SetAccel ( int acc ) { m_accel = acc; }
 		void AddAccel ( int n );
 		int GetAccel () const { return m_accel; }
+
+
+	private:
+		//カメラの画面端における補正位置
+		void RevisedCamera ( VEC2 pos1p, VEC2 pos2p );
 	};
 
 	using  UP_G_Ftg = std::unique_ptr < G_Ftg >;

@@ -138,19 +138,18 @@ namespace GAME
 		m_charaRect->ResetAllRect ();
 	}
 
-#if 0
 	//枠表示切替
 	void ExeChara::OnDispRect ()
 	{
 		m_dispChara->OnRect ();
-		m_oprtEf->OnDispRect ();
+//		m_oprtEf->OnDispRect ();
 	}
 	void ExeChara::OffDispRect ()
 	{
 		m_dispChara->OffRect ();
-		m_oprtEf->OffDispRect ();
+//		m_oprtEf->OffDispRect ();
 	}
-#endif // 0
+
 
 }	//namespace GAME
 

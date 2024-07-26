@@ -263,6 +263,9 @@ namespace GAME
 		void StartGreeting () { m_actor.StartGreeting (); }
 		void StartGetReady () { m_actor.StartGetReady (); }
 		void StartFighting () { m_actor.StartFighting (); }
+		void StartTimeUp   () { m_actor.StartTimeUp (); }
+		void StartEndWait  () { m_actor.StartEndWait (); }
+
 
 #if 0
 		//一時停止
@@ -307,7 +310,6 @@ namespace GAME
 		void SetClang ( bool b ) { m_btlPrm.SetClang ( b ); }
 #endif // 0
 
-#if 0
 		//-------------------------------------------------
 		//スクリプトからの変更
 		//暗転
@@ -323,9 +325,10 @@ namespace GAME
 		void SetWhiteOut ( bool b ) { m_btlPrm.SetWhiteOut ( b ); }
 
 		//壁割
-		bool GetBreakWall () const { return m_btlPrm.GetWallBreak (); }
-		void SetBreakWall ( bool b ) { m_btlPrm.SetWallBreak ( b ); }
+		bool GetWallBreak () const { return m_btlPrm.GetWallBreak (); }
+		void SetWallBreak ( bool b ) { m_btlPrm.SetWallBreak ( b ); }
 
+#if 0
 #if 0
 		//のけぞり時間
 		void SetLurch ( UINT n ) { if ( 0 != n ) { m_lurch = n;  } }
@@ -343,19 +346,19 @@ namespace GAME
 		//トレーニングモード初期化
 		void TrainingInit ();
 
-		//枠表示切替
-		void OnDispRect ();
-		void OffDispRect ();
-
-#if 0
 		//入力表示切替
 		void OnDispInput ();
 		void OffDispInput ();
+
+		//枠表示切替
+		void OnDispRect ();
+		void OffDispRect ();
 
 		//最前面表示切替
 		void OnFrontEnd ();
 		void OffFrontEnd ();
 
+#if 0
 		//CPU操作切替
 		void ControlCPU ();
 		void ControlPlayer ();
@@ -381,6 +384,7 @@ namespace GAME
 		s3d::String Check_TransitAction_Condition_str ( BRANCH_CONDITION CONDITION ) const;	
 
 		bool TranditAction_Command_Special ();	//アクション移項（コマンドに関する処理）限定
+		void TranditAction_Special ();	//特殊条件移行
 
 	private:
 		//アクションの移項
@@ -389,7 +393,7 @@ namespace GAME
 		void TransitAction_Condition_I ( BRANCH_CONDITION CONDITION, bool forced );	//条件をチェックして移行
 		void TransitAction_Condition_E ( BRANCH_CONDITION CONDITION, bool forced );	//条件をチェックして移行
 		bool TranditAction_Command ();	//アクション移項（コマンドに関する処理）
-		bool TranditAction_Special ( P_Action pAct );	//特定アクションの判定
+		bool TranditAction_Exclusion ( P_Action pAct );	//特定アクションの除外
 		void EndAction ();	//アクション移項時、前アクションの最後の処理
 
 		//スクリプト処理
@@ -445,9 +449,12 @@ namespace GAME
 
 	public:
 		void RevertSlow ();
-
-
 #endif // 0
+
+
+		//終了のための待機状態かどうか
+		bool IsWait () { return IsStand (); }
+
 
 	};
 

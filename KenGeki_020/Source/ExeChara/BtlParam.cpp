@@ -324,16 +324,14 @@ namespace GAME
 		}
 
 		//---------------
-		//画面端 (キャラ表示補正)
+		//画面端 (キャラ移動補正)
 		float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
 		float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
 
 
 		//壁より先には移動しない
-#if 1
 		if ( m_posChara.x < wall_L ) { m_posChara.x = wall_L; }
 		if ( m_posChara.x > wall_R ) { m_posChara.x = wall_R; }
-#endif // 0
 
 		//---------------
 		//反動(ノックバック)

@@ -870,6 +870,21 @@
     <ClInclude Include="Source\ExeChara\Disp\DispGauge.h">
       <Filter>ExeChara\Disp</Filter>
     </ClInclude>
+    <ClInclude Include="Source\FtgMain\FtgGrp.h">
+      <Filter>FtgMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\FtgDemo_State.h">
+      <Filter>FtgMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\FtgDemo_Actor.h">
+      <Filter>FtgMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\BattleTime.h">
+      <Filter>FtgMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Round.h">
+      <Filter>FtgMain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -970,6 +985,21 @@
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\DispGauge.cpp">
       <Filter>ExeChara\Disp</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\FtgGrp.cpp">
+      <Filter>FtgMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\FtgDemo_Actor.cpp">
+      <Filter>FtgMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\FtgDemo_State.cpp">
+      <Filter>FtgMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\BattleTime.cpp">
+      <Filter>FtgMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Round.cpp">
+      <Filter>FtgMain</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

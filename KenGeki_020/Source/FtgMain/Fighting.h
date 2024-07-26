@@ -64,6 +64,9 @@ namespace GAME
 
 		void ParamInit ( P_Param pParam );
 
+
+		//トレーニング用リスタート
+		void TrainingRestart ();
 #if 0
 		bool IsEnd () const { return m_demoActor->IsEnd (); }
 
@@ -75,9 +78,6 @@ namespace GAME
 		//初期デモスキップ設定
 		void SetDemoOn () { m_demoSkip = F; }
 		void SetDemoSkip () { m_demoSkip = T; }
-
-		//トレーニング用リスタート
-		void TrainingRestart ();
 
 		//壁割り演出
 		void WallBreak_L () { m_bg->StartWallBreak_L (); }

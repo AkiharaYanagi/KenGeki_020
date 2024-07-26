@@ -28,7 +28,7 @@ namespace GAME
 		P_Grp		m_mainGraphic;		//メイングラフィック表示
 		PAP_Tx		mpap_Tx;	//メインイメージのテクスチャリスト
 
-		P_Grp	m_grp;	//テスト
+		P_Grp		m_grpShadow;	//影
 
 	public:
 		DispMainImage ();

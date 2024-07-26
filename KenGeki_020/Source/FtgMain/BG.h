@@ -20,7 +20,15 @@ namespace GAME
 	class BG : public TASK_VEC
 	{
 		//背景
-		P_Grp			m_bg;
+		P_Grp			m_bg_C;
+		P_Grp			m_bg_L;
+		P_Grp			m_bg_R;
+
+		P_PrmRect		m_test;
+
+		//test カベ表示 背景
+		P_Grp		m_wall_L;
+		P_Grp		m_wall_R;
 
 #if 0
 		P_GrpAcv		m_bg_back;
@@ -29,10 +37,6 @@ namespace GAME
 
 		P_PrmRect		m_bg_black;
 		P_PrmRect		m_bg_white;
-
-		//test カベ表示 背景
-		P_GrpAcv		m_wall_L;
-		P_GrpAcv		m_wall_R;
 
 		//サブ背景位置差分
 		float			m_subWall_dx { - GAME_WIDTH };

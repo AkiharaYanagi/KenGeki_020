@@ -175,6 +175,7 @@ namespace GAME
 	void ExeChara::UpdateGraphic ()
 	{
 		m_dispChara->Update ( m_pAction, m_pScript, m_btlPrm, m_pCharaInput );
+		m_dispChara->UpdateStateName ( m_actor.GetpState ()->GetName() );
 	}
 
 	//SEの再生
@@ -199,7 +200,7 @@ namespace GAME
 
 
 	//====================================================================================
-#if 0
+
 	//入力表示切替
 	void ExeChara::OnDispInput ()
 	{
@@ -213,6 +214,8 @@ namespace GAME
 	//最前面表示切替
 	void ExeChara::OnFrontEnd ()
 	{
+		//@todo OnFrontEnd()で配列エラー
+
 		m_dispChara->OnFrontEnd ();
 	}
 	void ExeChara::OffFrontEnd ()
@@ -220,6 +223,7 @@ namespace GAME
 		m_dispChara->OffFrontEnd ();
 	}
 
+#if 0
 	//================================================
 	//	外部からの状態(State)変更
 	//================================================
@@ -321,6 +325,9 @@ namespace GAME
 	}
 
 
+#endif // 0
+
+
 	//-------------------------------------------------------------------------------------------------
 	//トレーニングモード初期化
 	void ExeChara::TrainingInit ()
@@ -329,6 +336,8 @@ namespace GAME
 		m_btlPrm.TrainingInit ();
 	}
 
+
+#if 0
 	//CPU操作切替
 	void ExeChara::ControlCPU ()
 	{
@@ -341,16 +350,9 @@ namespace GAME
 		m_pCharaInput = m_pPlayerInput;
 		m_dispChara->SetControl_PLAYER ();
 	}
-
-#if 0
-	void ExeChara::SetwpFighting ( WP_FTG wp )
-	{
-		//mwp_fighting = wp;
-	}
 #endif // 0
 
 
-#endif // 0
 
 
 }	//namespace GAME

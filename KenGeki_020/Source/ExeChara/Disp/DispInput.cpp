@@ -216,19 +216,19 @@ namespace GAME
 
 	void DispInput::On ()
 	{
-#if 0
 		m_bg->SetValid ( T );
+		m_grpKey->SetValid ( T );
+#if 0
 		m_index->SetValid ( T );
-		m_grp->SetValid ( T );
 #endif // 0
 	}
 
 	void DispInput::Off ()
 	{
-#if 0
 		m_bg->SetValid ( F );
+		m_grpKey->SetValid ( F );
+#if 0
 		m_index->SetValid ( F );
-		m_grp->SetValid ( F );
 #endif // 0
 	}
 

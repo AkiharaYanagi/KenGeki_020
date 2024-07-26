@@ -95,16 +95,6 @@ namespace GAME
 
 		GAME_WIDTH_HALF = GAME_WIDTH / 2,		//ゲーム上で扱う幅
 
-#if 0
-		BG_SIZE_X = 2048,		//背景
-		BG_SIZE_Y = 1024,
-		BG_POS_X = 0 - ( 2048 - 1280 ) / 2,
-//		BG_POS_Y = 0 - ( 1024 - 960 ) / 2,
-//		BG_POS_Y = -64,
-//		BG_POS_Y = -128,
-		BG_POS_Y = 0,
-#endif // 0
-
 //		GROUND_Y = 750,			//地面高さ
 		GROUND_Y = 800,			//地面高さ
 		PLAYER_BASE_Y = GROUND_Y,

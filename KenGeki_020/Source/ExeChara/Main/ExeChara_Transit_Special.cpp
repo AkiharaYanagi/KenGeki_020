@@ -22,7 +22,7 @@ namespace GAME
 	//================================================
 	// 
 	//アクション移項（コマンドに関する処理）
-	bool ExeChara::TranditAction_Special ( P_Action pAct )
+	bool ExeChara::TranditAction_Exclusion ( P_Action pAct )
 	{
 		//------------------------------------------
 		//対象IDがバランス消費で移項不可能なら次へ
@@ -83,7 +83,7 @@ namespace GAME
 			}
 			
 			//特殊アクション 除外 指定　：　不可能なら次をチェック
-			if ( ! TranditAction_Special ( pAct ) )
+			if ( ! TranditAction_Exclusion ( pAct ) )
 			{
 				continue;
 			}

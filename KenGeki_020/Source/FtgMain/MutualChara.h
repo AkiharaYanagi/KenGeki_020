@@ -14,9 +14,10 @@
 #include "../ExeChara/Main/ExeChara.h"
 #include "Collision.h"
 #include "Decision.h"
-//#include "Fighting.h"
 //#include "G_Ftg.h"
-//#include "FtgGrp.h"
+#include "FtgGrp.h"
+#include "BattleTime.h"
+#include "Round.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -24,8 +25,6 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-//	using WP_FTG = std::weak_ptr < Fighting >;
-
 
 	class MutualChara : public TASK_VEC
 	{
@@ -40,7 +39,6 @@ namespace GAME
 		P_Collision		m_collision;
 		P_Decision		m_decision;
 
-#if 0
 		//-------------------------------------------------
 		//ファイティング：1p2p共通スクリプト処理
 		UINT	m_scpStop {0};		//スクリプトからのストップ
@@ -56,7 +54,12 @@ namespace GAME
 		//勝者
 		WINNER	m_winner { WINNER::WINNER_DRAW };
 
-#endif // 0
+		//-------------------------------------------------
+		//戦闘時間
+		P_BattleTime	m_btlTime;
+		//-------------------------------------------------
+		//ラウンド
+		P_Round		m_round;
 
 	public:
 		MutualChara ();
@@ -74,17 +77,58 @@ namespace GAME
 		void Conduct_InStop ();	//停止コンダクト
 #endif // 0
 
-#if 0
 
+		//----------------------------------------------------
 		//状態取得
 		BtlParam	GetBtlPrm1p () const { return m_exeChara1->GetBtlPrm (); }
 		BtlParam	GetBtlPrm2p () const { return m_exeChara2->GetBtlPrm (); }
 
+		//----------------------------------------------------
 		//状態変更
 		void StartGreeting ();		//開始デモ
 		void StartGetReady ();		//開始準備
 		void StartFighting ();		//戦闘開始
 
+		//----------------------------------------------------
+		//戦闘時間
+		void StartTime ();			//時間計測開始
+		void TimeSet ();			//時間計測初期化
+		void StartTimeUp ();		//タイムアップ
+		void StartEndWait ();		//タイムアップ終了待機
+		void StartEnd ();			//終了ステップ開始
+
+
+		//----------------
+		//終了判定
+		bool FinishCheck_ZeroLife ();	//格闘終了判定
+		bool FinishCheck_TimeUp ();		//時間終了
+
+		//残ライフで勝者決定
+		void DecideWinner_FromLife ();
+
+		//試合(マッチ)終了判定
+		bool IsEndMutch () { return m_round->IsEndMutch (); }
+
+		//----------------
+		//演出
+		UINT GetBlackOut () const { return m_blackOut; };	//暗転
+		void SetBlackOut ( UINT i )
+		{
+			m_blackOut = i;
+			m_exeChara1->SetBlackOut ( i );
+			m_exeChara2->SetBlackOut ( i );
+		};
+
+		UINT GetScpStop () const { return m_scpStop; };	//停止
+		void SetScpStop ( UINT i ) { m_scpStop = i; };
+
+		void RevertSlow ();	//スロウ解除
+
+		bool IsWait ();	//両者待機状態
+
+
+
+#if 0
 		bool CheckZeroLife ();	//格闘終了判定
 
 		UINT GetBlackOut () const { return m_blackOut; };	//暗転
@@ -107,9 +151,6 @@ namespace GAME
 
 		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
 
-		//トレーニングモード初期化
-		void TrainingInit ();
-
 		
 		//初期操作 プレイヤ/CPU 設定
 		void Set_1P_vs_2P ();
@@ -126,6 +167,11 @@ namespace GAME
 
 
 #endif // 0
+
+		//トレーニングモード初期化
+		void TrainingInit ();
+
+
 	private:
 		//------------------------------------------------------
 		//	内部関数

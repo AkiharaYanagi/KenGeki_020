@@ -20,27 +20,65 @@ namespace GAME
 	const float BG::BG_SIZE_W = 2048;
 	const float BG::BG_SIZE_H = 1024;
 	const float BG::BG_POS_X = 0 - ( 2048 - 1280 ) / 2;
-	const float BG::BG_POS_Y = 0 - ( 1024 - 960 );
+//	const float BG::BG_POS_Y = 0 - ( 1024 - 960 );
+	const float BG::BG_POS_Y = 0 - ( 1080 - 960 );
 
 	BG::BG ()
 	{
 		//------------------------------------------------
-		//背景
-		m_bg = std::make_shared < GameGraphic > ();
-		m_bg->AddTexture_FromArchive ( U"bg_B01.png" );
-//		m_bg->SetPos ( (float)BG_POS_X, (float)BG_POS_Y );
-		m_bg->SetPos ( 0, BG_POS_Y );
-		m_bg->SetZ ( Z_BG );
+		//背景 中
+		m_bg_C = std::make_shared < GameGraphic > ();
+		m_bg_C->AddTexture_FromArchive ( U"bg_B01_C.png" );
+		m_bg_C->SetPos ( 0, BG_POS_Y );
+		m_bg_C->SetZ ( Z_BG );
+		AddpTask ( m_bg_C );
+		GRPLST_INSERT ( m_bg_C );
 
-#if 0
-		//オブジェクト追加
-		m_bg->AddObject ();
-		P_Object pOb = m_bg->GetpvpObject ()->at ( 1 );
-		pOb->SetPos ( 200, BG_POS_Y );
-#endif // 0
+		//------------------------------------------------
+		//背景 左
+		m_bg_L = std::make_shared < GameGraphic > ();
+		m_bg_L->AddTexture_FromArchive ( U"bg_B01_L.png" );
+		m_bg_L->SetPos ( -2048, BG_POS_Y );
+		m_bg_L->SetZ ( Z_BG );
+		AddpTask ( m_bg_L );
+		GRPLST_INSERT ( m_bg_L );
 
-		AddpTask ( m_bg );
-		GRPLST_INSERT ( m_bg );
+		//------------------------------------------------
+		//背景 右
+		m_bg_R = std::make_shared < GameGraphic > ();
+		m_bg_R->AddTexture_FromArchive ( U"bg_B01_R.png" );
+		m_bg_R->SetPos ( 2048, BG_POS_Y );
+		m_bg_R->SetZ ( Z_BG );
+		AddpTask ( m_bg_R );
+		GRPLST_INSERT ( m_bg_R );
+
+		//------------------------------------------------
+
+		//test
+		m_test = std::make_shared < GamePrimitiveRect > ();
+		m_test->SetRect ( 10, 860, 100, 100 );
+		GRPLST_INSERT ( m_test );
+
+
+
+		//------------------------------------------------
+		//test 壁位置
+		m_wall_L = std::make_shared < GameGraphic > ();
+		m_wall_L->AddTexture_FromArchive ( U"test_kabe.png" );
+		m_wall_L->SetPos ( 0, 0 );
+		m_wall_L->SetZ ( Z_BG );
+		AddpTask ( m_wall_L );
+		GRPLST_INSERT ( m_wall_L );
+
+		m_wall_R = std::make_shared < GameGraphic > ();
+		m_wall_R->AddTexture_FromArchive ( U"test_kabe.png" );
+		m_wall_R->SetScaling ( -1.f, 1.f );
+		m_wall_R->SetPos ( GAME_WIDTH - 512, 0 );
+		m_wall_R->SetZ ( Z_BG );
+		AddpTask ( m_wall_R );
+		GRPLST_INSERT ( m_wall_R );
+
+
 
 #if 0
 
@@ -90,27 +128,6 @@ namespace GAME
 		AddpTask ( m_bg_white );
 		GRPLST_INSERT_MAIN ( m_bg_white );
 		m_bg_white->SetValid ( F );
-
-		//------------------------------------------------
-		//test
-		m_wall_L = make_shared < GrpAcv > ();
-		m_wall_L->AddTexture ( _T ( "test_kabe.png" ) );
-		m_wall_L->SetPos ( 0, 0 );
-		m_wall_L->SetZ ( Z_BG );
-		AddpTask ( m_wall_L );
-		GRPLST_INSERT_MAIN ( m_wall_L );
-
-		m_wall_R = make_shared < GrpAcv > ();
-		m_wall_R->AddTexture ( _T ( "test_kabe.png" ) );
-		m_wall_R->SetScaling ( -1.f, 1.f );
-		m_wall_R->SetPos ( GAME_WIDTH - 512, 0 );
-		m_wall_R->SetZ ( Z_BG );
-		AddpTask ( m_wall_R );
-		GRPLST_INSERT_MAIN ( m_wall_R );
-		
-
-		m_wall_L->SetValid ( F );
-		m_wall_R->SetValid ( F );
 
 
 		//------------------------------------------------
@@ -222,6 +239,69 @@ namespace GAME
 	//共通グラフィック処理
 	void BG::Grp ()
 	{
+		//-------------------------------------------------------
+		//背景位置補正
+		int nx = (int) G_BASE_POS ().x;
+//		int disp_bg_x = nx % GAME_WIDTH;
+		int disp_bg_x = nx;
+		int POINT = (1280 - 2048) / 2;	//切り替えポイント
+
+
+//		DBGOUT_WND_F( U"G_BASE_POS = {}"_fmt( disp_bg_x ) );
+
+		//Left
+		if ( disp_bg_x < POINT )
+		{
+			m_bg_L->SetPos ( (float)(disp_bg_x + 4096), BG_POS_Y );
+		}
+		else
+		{
+			m_bg_L->SetPos ( (float)(disp_bg_x - 2048), BG_POS_Y );
+		}
+
+		//Center
+		if ( disp_bg_x < POINT - 2048 )
+		{
+			m_bg_C->SetPos ( (float)(disp_bg_x + 4096 + 2048), BG_POS_Y );
+		}
+		else
+		{
+			m_bg_C->SetPos ( (float)disp_bg_x, BG_POS_Y );
+		}
+
+		//Right
+		if ( disp_bg_x < POINT - 4096 )
+		{
+			m_bg_R->SetPos ( (float)(disp_bg_x + 4096 + 4096 ), BG_POS_Y );
+		}
+		else
+		{
+			m_bg_R->SetPos ( (float)(disp_bg_x + 2048), BG_POS_Y );
+		}
+
+
+#if 0
+		//サブ背景位置
+		int lx = disp_bg_x - GAME_WIDTH;
+		int rx = disp_bg_x + GAME_WIDTH;
+		const int D = GAME_WINDOW_WIDTH - GAME_WIDTH;	//2048 - 1280 = 768
+		int sub_x = ( - disp_bg_x < 0 )? lx : rx ;
+		P_Object pOb = m_bg->GetpObject ( 1 );
+		pOb->SetPos ( (float)sub_x, (float)BG_POS_Y );
+
+
+#endif // 0
+		//-------------------------------------------------------
+		//カベ位置
+		float wall_l = G_FTG()->GetWallLeft ();
+		m_wall_L->SetPos ( wall_l + G_BASE_POS ().x, 0 );
+//		m_wall_L->SetPos ( 4096 + G_BASE_POS ().x, 0 );
+
+		float wall_r = G_FTG()->GetWallRight ();
+		m_wall_R->SetPos ( wall_r + G_BASE_POS ().x, 0 );
+//		m_wall_R->SetPos ( -2048 + G_BASE_POS ().x, 0 );
+
+
 #if 0
 		//-------------------------------------------------------
 		//暗転
@@ -256,34 +336,6 @@ namespace GAME
 			}
 		}
 
-#endif // 0
-		//-------------------------------------------------------
-		//背景位置補正
-		int nx = (int) G_BASE_POS ().x;
-		int disp_bg_x = nx % GAME_WIDTH;
-
-//		DBGOUT_WND_F( U"BG_X = {}"_fmt( disp_bg_x ) );
-
-		m_bg->SetPos ( (float)disp_bg_x, (float)BG_POS_Y );
-
-
-#if 0
-		//サブ背景位置
-		int lx = disp_bg_x - GAME_WIDTH;
-		int rx = disp_bg_x + GAME_WIDTH;
-		const int D = GAME_WINDOW_WIDTH - GAME_WIDTH;	//2048 - 1280 = 768
-		int sub_x = ( - disp_bg_x < 0 )? lx : rx ;
-		P_Object pOb = m_bg->GetpObject ( 1 );
-		pOb->SetPos ( (float)sub_x, (float)BG_POS_Y );
-
-
-		//-------------------------------------------------------
-		//カベ位置
-		float wall_l = G_FTG()->GetWallLeft ();
-		m_wall_L->SetPos ( wall_l + G_BASE_POS ().x, 0 );
-
-		float wall_r = G_FTG()->GetWallRight ();
-		m_wall_R->SetPos ( wall_r + G_BASE_POS ().x, 0 );
 #endif // 0
 	}
 
