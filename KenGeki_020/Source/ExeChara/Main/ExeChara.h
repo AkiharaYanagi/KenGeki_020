@@ -452,6 +452,7 @@ namespace GAME
 #endif // 0
 
 
+	public:
 		//終了のための待機状態かどうか
 		bool IsWait () { return IsStand (); }
 

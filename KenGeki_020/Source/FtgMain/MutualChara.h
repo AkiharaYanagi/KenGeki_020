@@ -48,6 +48,7 @@ namespace GAME
 		bool	m_whiteOut { F };	//白転
 		UINT	m_slow { 0 };		//スロー
 
+		//共通グラフィック
 		P_FtgGrp	m_pFtgGrp;
 
 		//-------------------------------------------------
@@ -111,6 +112,11 @@ namespace GAME
 
 		//----------------
 		//演出
+
+		//共通グラフィック
+		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
+
+
 		UINT GetBlackOut () const { return m_blackOut; };	//暗転
 		void SetBlackOut ( UINT i )
 		{

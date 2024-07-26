@@ -12,13 +12,8 @@
 #include "../GameMain/Scene.h"
 #include "BG.h"
 #include "MutualChara.h"
-
-#if 0
-
-#include "FtgDemo.h"
+#include "FtgDemo_Actor.h"
 #include "FtgGrp.h"
-
-#endif // 0
 
 
 //-------------------------------------------------------------------------------------------------
@@ -26,21 +21,15 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-//	using WP_FTG = std::weak_ptr < Fighting >;
-
 	class Fighting : public TASK_LST
 	{
 		//=====================================================
 		//背景
 		P_BG		m_bg;
 
-		//test EF
-		P_Grp		m_grp;
-
 		//=====================================================
 		//キャラ相互処理
 		P_MutualChara	m_mutualChara;
-#if 0
 
 		//=====================================================
 		//デモ
@@ -50,8 +39,6 @@ namespace GAME
 		//=====================================================
 		//画面共通グラフィック処理
 		P_FtgGrp		m_pFtgGrp ;
-
-#endif // 0
 
 	public:
 		Fighting ();
@@ -86,10 +73,11 @@ namespace GAME
 		//下位オブエジェクトにweak_ptrを渡す
 //		void AssignWp ( WP_FTG wp ) const;
 
+#endif // 0
+
 	private:
 		//共通グラフィック処理
 		void Grp ();
-#endif // 0
 	};
 
 	using P_FTG = std::shared_ptr < Fighting >;

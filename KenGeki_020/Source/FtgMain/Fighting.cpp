@@ -24,22 +24,15 @@ namespace GAME
 		m_bg = std::make_shared < BG > ();
 		AddpTask ( m_bg );
 
-
-		m_grp = std::make_shared < GameGraphic > ();
-		m_grp->AddTexture ( U"ef_004.png" );
-		m_grp->SetPos ( VEC2 ( 200, 300 ) );
-//		AddpTask ( m_grp );
-
 		//=====================================================
 		//キャラ相互処理
 		//=====================================================
 		m_mutualChara = std::make_shared < MutualChara > ();
 		AddpTask ( m_mutualChara );
 
-#if 0
 		//=====================================================
 		//デモ
-		m_demoActor = make_shared < FtgDemoActor > ();		m_demoActor->Load ();
+		m_demoActor = std::make_shared < FtgDemoActor > ();
 		m_demoActor->SetpMutualChara ( m_mutualChara );
 		AddpTask ( m_demoActor );
 
@@ -53,8 +46,7 @@ namespace GAME
 
 		//=====================================================
 		//画面共通グラフィック処理
-		m_pFtgGrp = make_shared < FtgGrp > ();
-#endif // 0
+		m_pFtgGrp = std::make_shared < FtgGrp > ();
 	}
 
 	Fighting::~Fighting ()
@@ -69,20 +61,19 @@ namespace GAME
 
 	void Fighting::Load ()
 	{
-#if 0
 		m_mutualChara->SetpFtgGrp ( m_pFtgGrp );
-#endif // 0
 		TASK_LST::Load ();
 	}
 
 	void Fighting::Init ()
 	{
+		//----------------------------------------
 		//基準 初期化
 		TASK_LST::Init ();
 
-#if 0
+		//----------------------------------------
 		//初期化後
-	
+		
 		//デモスキップ
 		if ( m_demoSkip )
 		{
@@ -92,15 +83,15 @@ namespace GAME
 		{
 			m_demoActor->StartGreeting ();
 		}
-#endif // 0
 	}
 
 
 	void Fighting::Move ()
 	{
+		//--------------------------
+		//キャラ共通一連動作
 		m_mutualChara->Conduct ();
 
-#if 0
 		//--------------------------
 		//デモ分岐
 		m_demoActor->Do ();
@@ -108,7 +99,7 @@ namespace GAME
 		//--------------------------
 		//両者処理
 
-
+#if 0
 		//暗転時は通常処理しない
 //		if ( m_bg->IsBlackOut () )
 		if ( m_pFtgGrp->GetBlackOut () )
@@ -121,27 +112,24 @@ namespace GAME
 			//暗転以外のとき、通常処理
 			m_mutualChara->Conduct ();
 		}
-
+#endif // 0
 
 		//--------------------------
 		//共通グラフィック処理
 		Grp ();
 
 		//--------------------------
-#endif // 0
 		TASK_LST::Move ();
 	}
 
 	void Fighting::TrainingRestart ()
 	{
-//		m_pFtgGrp->Init ();
-
+		m_pFtgGrp->Init ();
 		m_bg->Init ();
-//		m_demoActor->StartFighting ();
+		m_demoActor->StartFighting ();
 		m_mutualChara->TrainingInit ();
 	}
 
-#if 0
 	
 
 	//=============================================================
@@ -151,6 +139,7 @@ namespace GAME
 	//共通グラフィック処理
 	void Fighting::Grp ()
 	{
+#if 0
 		//----------------------------------------------------
 		//@todo 共通のフラグポインタを MutalChara -> ExeChara まで渡す
 	 
@@ -174,8 +163,6 @@ namespace GAME
 
 		//----------------------------------------------------
 		//スロー
-
-
 		if ( m_pFtgGrp->IsSlowStart () )
 		{
 			m_bg->SetBlackOut ( 60 );
@@ -187,6 +174,8 @@ namespace GAME
 			m_bg->OffBlackOut ();
 			m_mutualChara->RevertSlow ();
 		}
+#endif // 0
+
 		m_pFtgGrp->Move ();
 
 		//----------------------------------------------------
@@ -194,15 +183,7 @@ namespace GAME
 		m_bg->Grp ();
 	}
 
-#if 0
-	//weak_ptrを設置
-	void Fighting::AssignWp ( WP_FTG wp ) const
-	{
-		m_mutualChara->AssignWp ( wp );
-	}
-#endif // 0
 
 
-#endif // 0
 }	//namespace GAME
 
