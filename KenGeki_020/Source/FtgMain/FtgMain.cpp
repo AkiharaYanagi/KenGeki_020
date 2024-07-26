@@ -26,7 +26,6 @@ namespace GAME
 {
 	FtgMain::FtgMain ()
 	{
-
 		//戦闘
 		m_fighting = std::make_shared < Fighting > ();
 		AddpTask ( m_fighting );
@@ -62,11 +61,11 @@ namespace GAME
 		m_NowLoading->SetZ ( Z_FADE - 0.01f );
 		AddpTask ( m_NowLoading );
 		GRPLST_INSERT_MAIN ( m_NowLoading );
-#endif // 0
 
 
 		//----------------------------------------------------
 		//@info コンストラクタでshared_from_this()を用いない
+#endif // 0
 	}
 
 	FtgMain::~FtgMain ()

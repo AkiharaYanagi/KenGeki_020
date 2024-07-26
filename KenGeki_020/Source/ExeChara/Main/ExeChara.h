@@ -15,6 +15,7 @@
 #include "../../GameMain/GameConst.h"
 #include "../../GameMain/Param.h"
 #include "../../FtgMain/FtgConst.h"
+#include "../../FtgMain/FtgGrp.h"
 
 #include "CharaData.h"
 #include "../Disp/DispChara.h"
@@ -24,7 +25,6 @@
 
 #include "../Input/PlayerInput.h"
 #include "../Input/CPUInput.h"
-#include "../FtgMain/FtgGrp.h"
 #if 0
 #include "../../FtgMain/G_Ftg.h"
 #include "Effect/OperateEffect.h"

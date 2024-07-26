@@ -14,10 +14,10 @@
 #include "../ExeChara/Main/ExeChara.h"
 #include "Collision.h"
 #include "Decision.h"
-//#include "G_Ftg.h"
 #include "FtgGrp.h"
 #include "BattleTime.h"
 #include "Round.h"
+#include "MutualChara_Utility.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ namespace GAME
 		//共通グラフィック
 		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
 
-
+#if 0
 		UINT GetBlackOut () const { return m_blackOut; };	//暗転
 		void SetBlackOut ( UINT i )
 		{
@@ -131,6 +131,7 @@ namespace GAME
 		void SetScpStop ( UINT i ) { m_scpStop = i; };
 
 		void RevertSlow ();	//スロウ解除
+#endif // 0
 
 		bool IsWait ();	//両者待機状態
 
@@ -185,18 +186,22 @@ namespace GAME
 		//	内部関数
 		//------------------------------------------------------
 
+		//関数群
+		MutualChara_Utility			m_utl;
 
-		void _Collision ();		//重なり判定
-		void _Decision ();		//攻撃判定
+		void _Collision() { m_collision->Do (); }	//◆ 相互判定(ぶつかり枠)
+		void _Decision()  { m_decision->Do (); }	//◆ 相互判定(攻撃・ヒット枠)
 
 		//---------------------------------------
 		// Conduct
-		
+#if 0
 		void SwitchRect ();			//枠表示切替
 		void SwitchDispInput ();	//入力表示切替
 		void SwitchFrontEnd ();		//ゲージ類表示切替
 		void SwithcCPU ();			//2PをCPU操作切替
-		void ResetMatch ();			//試合初期化
+#endif // 0
+
+		void SaveParam();			//パラメータ記録
 
 	};
 

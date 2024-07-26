@@ -29,6 +29,7 @@ namespace GAME
 		P_FTG_DM_GetReady	m_GetReady;
 		P_FTG_DM_Attack		m_Attack;
 		P_FTG_DM_Main		m_Main;
+		P_FTG_DM_WallBreak	m_WallBreak;
 		P_FTG_DM_Down		m_Down;	
 		P_FTG_DM_TimeUp		m_TimeUp;		//タイムアップ
 		P_FTG_DM_TimeUpWait	m_TimeUpWait;		//タイムアップ	待機
@@ -67,6 +68,12 @@ namespace GAME
 		void Change_Main_To_TimeUp ();
 		void Change_TimeUp_To_Winner ();
 		void Change_Down_To_Greeting ();
+
+
+		//Start()を用いない一時変更
+		void Shift_Main_To_WallBreak ();
+		void Shift_WallBreak_To_Main ();
+
 		
 		void End_Down_To_Result ();
 		bool IsEnd () const { return m_bEnd; }

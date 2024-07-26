@@ -129,7 +129,6 @@ namespace GAME
 	//開始
 	FTG_DM_Attack::FTG_DM_Attack ()
 	{
-//		m_grpAttack = MakeGrpValue ( _T ( "Demo_Attack.png" ) );
 		m_grpAttack = MakeGrpValue ( _T ( "Demo_Fight.png" ) );
 		m_grpAttack->SetEnd ( 90 );
 	}
@@ -149,15 +148,22 @@ namespace GAME
 	//メイン
 	void FTG_DM_Main::Start ()
 	{
+		//戦闘開始
 		GetpMutualChara ()->StartFighting ();
 
-		//test
+		//時間計測開始
 		GetpMutualChara()->StartTime ();
 
 	}
 
 	void FTG_DM_Main::Do ()
 	{
+		//[一時] 壁割
+		if ( F )
+		{
+			GetwpFtgDemoActor().lock()->Shift_Main_To_WallBreak ();
+		}
+		
 		// 格闘終了判定
 		if ( GetpMutualChara()->FinishCheck_ZeroLife () )
 		{
@@ -175,12 +181,25 @@ namespace GAME
 
 	//------------------------------------------------
 	//特殊演出：壁割り
+	FTG_DM_WallBreak::FTG_DM_WallBreak ()
+	{
+		m_timer = std::make_shared < Timer > ( 20 );
+	}
+
 	void FTG_DM_WallBreak::Start ()
 	{
+		m_timer->Start ();
 	}
 
 	void FTG_DM_WallBreak::Do ()
 	{
+		m_timer->Move ();
+
+		if ( m_timer->IsLast() )
+		{
+			//通常状態へ移行
+			GetwpFtgDemoActor().lock()->Shift_WallBreak_To_Main();
+		}
 	}
 
 	//------------------------------------------------

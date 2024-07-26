@@ -885,6 +885,9 @@
     <ClInclude Include="Source\FtgMain\Round.h">
       <Filter>FtgMain</Filter>
     </ClInclude>
+    <ClInclude Include="Source\FtgMain\MutualChara_Utility.h">
+      <Filter>FtgMain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -999,6 +1002,9 @@
       <Filter>FtgMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\FtgMain\Round.cpp">
+      <Filter>FtgMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\MutualChara_Utility.cpp">
       <Filter>FtgMain</Filter>
     </ClCompile>
   </ItemGroup>

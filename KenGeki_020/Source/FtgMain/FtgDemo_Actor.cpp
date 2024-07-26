@@ -25,6 +25,7 @@ namespace GAME
 		m_GetReady = std::make_shared < FTG_DM_GetReady > ();
 		m_Attack = std::make_shared < FTG_DM_Attack > ();
 		m_Main = std::make_shared < FTG_DM_Main > ();
+		m_WallBreak = std::make_shared < FTG_DM_WallBreak > ();
 		m_Down = std::make_shared < FTG_DM_Down > ();
 		m_TimeUp = std::make_shared < FTG_DM_TimeUp > ();
 		m_TimeUpWait = std::make_shared < FTG_DM_TimeUpWait > ();
@@ -34,6 +35,7 @@ namespace GAME
 		mvp_FtgDemo.push_back ( m_GetReady );
 		mvp_FtgDemo.push_back ( m_Attack );
 		mvp_FtgDemo.push_back ( m_Main );
+		mvp_FtgDemo.push_back ( m_WallBreak );
 		mvp_FtgDemo.push_back ( m_Down );
 		mvp_FtgDemo.push_back ( m_TimeUp );
 		mvp_FtgDemo.push_back ( m_TimeUpWait );
@@ -132,6 +134,16 @@ namespace GAME
 		GetpMutualChara ()->StartGreeting ();
 		m_Greeting->Start ();
 		mp_FtgDemo = m_Greeting;
+	}
+
+	void FtgDemoActor::Shift_Main_To_WallBreak ()
+	{
+		mp_FtgDemo = m_WallBreak;
+	}
+
+	void FtgDemoActor::Shift_WallBreak_To_Main ()
+	{
+		mp_FtgDemo = m_Main;
 	}
 
 	void FtgDemoActor::End_Down_To_Result ()

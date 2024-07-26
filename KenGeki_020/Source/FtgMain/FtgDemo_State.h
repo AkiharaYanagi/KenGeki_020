@@ -134,7 +134,11 @@ namespace GAME
 	//特殊演出 (壁割り)
 	class FTG_DM_WallBreak : public FtgDemoState
 	{
+		//タイマ
+		P_Timer		m_timer;
+
 	public:
+		FTG_DM_WallBreak();
 		void Start ();
 		void Do ();
 	};

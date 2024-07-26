@@ -9,6 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "MutualChara.h"
 //#include "../GameMain/SoundConst.h"
+//#include "G_Ftg.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -35,6 +36,9 @@ namespace GAME
 
 		AddpTask ( m_exeChara1 );
 		AddpTask ( m_exeChara2 );
+
+		m_utl.SetpChara ( m_exeChara1, m_exeChara2 );
+
 
 		//判定
 		m_collision = std::make_shared < Collision > ();
@@ -105,14 +109,18 @@ namespace GAME
 	{
 		//---------------------------------------------------
 		//システム変更
+#if 0
 		SwitchDispInput ();	//入力表示切替
 		SwitchRect ();	//枠表示切替
 		SwitchFrontEnd ();	//ゲージ類表示切替
-#if 0
-		ResetMatch ();	//試合初期化
 		SwithcCPU ();	//CPU操作切替
-		//---------------------------------------------------
 #endif // 0
+		m_utl.SwitchDispInput ();
+		m_utl.SwitchRect ();
+		m_utl.SwitchFrontEnd ();
+//		m_utl.SwitchCPU ();
+
+		//---------------------------------------------------
 
 		//◆スクリプト前処理(入力、移動など)
 		m_exeChara1->PreScriptMove ();
@@ -135,25 +143,26 @@ namespace GAME
 		//グラフィック共通
 		Grp ();
 
-#if 0
 		//シーン共通パラメータ記録
-		m_pParam->SetN_Life1p ( m_exeChara1->GetLife () );
-		m_pParam->SetN_Life2p ( m_exeChara2->GetLife () );
-		m_pParam->SetN_Act1p ( m_exeChara1->GetBtlParam ().GetNActTrs () );
-		m_pParam->SetN_Act2p ( m_exeChara2->GetBtlParam ().GetNActTrs () );
+		SaveParam();
 
-#endif // 0
+
 
 		//test
 		float x1 = m_exeChara1->GetPos ().x;
 		float x2 = m_exeChara2->GetPos ().x;
 		DBGOUT_WND()->DebugOutf ( U"{}, {}"_fmt( x1, x2 ) );
+
+
+
 	}
+
+
 
 #if 0
 	//■#########################################################
 	
-	//一時停止時コンダクト
+	//一時停止中コンダクト
 	void MutualChara::Conduct_InStop ()
 	{
 		//---------------------------------------------------
@@ -162,7 +171,6 @@ namespace GAME
 		SwitchDispInput ();	//入力表示切替
 		SwitchFrontEnd ();	//ゲージ類表示切替
 		SwithcCPU ();	//CPU操作切替
-		ResetMatch ();	//試合初期化
 		//---------------------------------------------------
 
 		//◆スクリプト前処理(入力、移動など)
@@ -175,25 +183,8 @@ namespace GAME
 	}
 
 	//■#########################################################
-
-
 #endif // 0
 
-	//◆================================
-	//◆		相互判定(ぶつかり枠)
-	//◆================================
-	void MutualChara::_Collision ()
-	{
-		m_collision->Do ();
-	}
-
-	//◆================================
-	//◆		相互判定 (攻撃・ヒット枠)
-	//◆================================
-	void MutualChara::_Decision ()
-	{
-		m_decision->Do ();
-	}
 
 
 	//◆================================
@@ -252,9 +243,10 @@ namespace GAME
 
 	}
 
+
+
+
 #if 0
-
-
 	//------------------------------------------------------
 	//	終了判定
 	//------------------------------------------------------
@@ -381,7 +373,7 @@ namespace GAME
 	//	内部関数
 	//------------------------------------------------------
 
-
+#if 0
 	//------------------------------------------------------
 	//入力表示切替
 	void MutualChara::SwitchDispInput ()
@@ -474,6 +466,7 @@ namespace GAME
 
 		pre_bFrontEnd = is_bFrontEnd;
 	}
+#endif // 0
 
 #if 0
 
@@ -531,16 +524,6 @@ namespace GAME
 
 	//------------------------------------------------------
 
-	//試合初期化
-	void MutualChara::ResetMatch ()
-	{
-		if ( ::GetAsyncKeyState ( '0' ) & 0x0001 )
-		{
-			m_exeChara1->Init ();
-			m_exeChara2->Init ();
-		}
-	}
-
 
 #endif // 0
 
@@ -551,6 +534,16 @@ namespace GAME
 		m_exeChara2->TrainingInit ();
 
 //		m_pFtgGrp->InitSlow ();
+	}
+
+
+	//シーン共通パラメータ記録
+	void MutualChara::SaveParam()
+	{
+		m_pParam->SetN_Life1p ( m_exeChara1->GetLife () );
+		m_pParam->SetN_Life2p ( m_exeChara2->GetLife () );
+		m_pParam->SetN_Act1p ( m_exeChara1->GetBtlParam ().GetNActTrs () );
+		m_pParam->SetN_Act2p ( m_exeChara2->GetBtlParam ().GetNActTrs () );
 	}
 
 
@@ -672,15 +665,6 @@ namespace GAME
 	}
 
 
-
-#if 0
-	void MutualChara::RevertSlow ()
-	{
-		m_exeChara1->RevertSlow ();
-		m_exeChara2->RevertSlow ();
-	}
-#endif // 0
-
 	//残ライフで勝者決定
 	void MutualChara::DecideWinner_FromLife ()
 	{
@@ -725,6 +709,15 @@ namespace GAME
 			m_pParam->SetWinner ( _PLAYER_NUM );	//Dra
 		}
 	}
+
+
+#if 0
+	void MutualChara::RevertSlow ()
+	{
+		m_exeChara1->RevertSlow ();
+		m_exeChara2->RevertSlow ();
+	}
+#endif // 0
 
 
 
