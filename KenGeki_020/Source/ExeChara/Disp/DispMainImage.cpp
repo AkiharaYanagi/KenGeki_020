@@ -21,6 +21,7 @@ namespace GAME
 	{
 		//キャラメイングラフィック
 		m_mainGraphic = std::make_shared < GameGraphic > ();
+		m_mainGraphic->SetZ ( Z_CH );
 		AddpTask ( m_mainGraphic );
 		GRPLST_INSERT ( m_mainGraphic );
 

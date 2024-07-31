@@ -21,15 +21,19 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	class Fighting : public TASK_LST
+	class Fighting : public TASK_LST, public std::enable_shared_from_this < Fighting >
 	{
+		//=====================================================
+		//キャラ
+		P_ExeChara		m_exeChara1;
+		P_ExeChara		m_exeChara2;
+
+		//キャラ相互処理
+		P_MutualChara	m_mutualChara;
+
 		//=====================================================
 		//背景
 		P_BG		m_bg;
-
-		//=====================================================
-		//キャラ相互処理
-		P_MutualChara	m_mutualChara;
 
 		//=====================================================
 		//デモ
@@ -39,6 +43,10 @@ namespace GAME
 		//=====================================================
 		//画面共通グラフィック処理
 		P_FtgGrp		m_pFtgGrp ;
+
+		//=====================================================
+		//ステート名
+		P_GrpStr	m_strState;	
 
 	public:
 		Fighting ();

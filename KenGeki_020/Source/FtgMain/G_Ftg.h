@@ -73,6 +73,8 @@ namespace GAME
 		void SetNewWall ( bool b ) { m_bResetPos = b; }
 		void SetResetPos ( bool b ) { m_bResetPos = b; }
 
+		void ResetWall ();
+
 		//壁位置
 		float GetWallLeft () const { return m_wall_L; }
 		float GetWallRight () const { return m_wall_R; }

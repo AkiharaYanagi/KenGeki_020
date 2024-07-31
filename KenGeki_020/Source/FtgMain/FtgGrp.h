@@ -25,6 +25,11 @@ namespace GAME
 		Timer	m_tmrSlow;				//スロウ
 		Timer	m_tmrStop;	//ストップ
 
+		bool	m_wallbreak { F };	//壁割
+
+		bool	m_overdrive { F };	//超必殺演出
+
+
 	public:
 		FtgGrp ();
 		FtgGrp ( const FtgGrp & rhs ) = delete;
@@ -36,6 +41,8 @@ namespace GAME
 		GET_SET ( bool, GetBlackOut, SetBlackOut, m_BrackOut )
 		GET_SET ( bool, GetWhiteOut, SetWhiteOut, m_WhiteOut )
 		GET_SET ( bool, GetSlow, SetSlow, m_Slow )
+		GET_SET ( bool, GetOverDrive, SetOverDrive, m_overdrive )
+		GET_SET ( bool, GetWallBreak, SetWallBreak, m_wallbreak )
 
 
 		//---------------------------------------

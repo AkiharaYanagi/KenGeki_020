@@ -55,6 +55,10 @@ namespace GAME
 	{
 		m_pExeChara1p = pExeChara1p;
 		m_pExeChara2p = pExeChara2p;
+#if 0
+		m_exeChara1->SetpParticle ( m_decision->GetpEfPart () );
+		m_exeChara2->SetpParticle ( m_decision->GetpEfPart () );
+#endif // 0
 	}
 
 

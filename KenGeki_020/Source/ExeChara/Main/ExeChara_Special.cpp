@@ -54,6 +54,16 @@ namespace GAME
 			}
 		}
 
+
+
+		if ( IsNameAction ( U"超雷電蹴_発生" ) )
+		{
+			if ( m_pScript->GetFrame () == 1 )
+			{
+				m_pFtgGrp->SetOverDrive ( T );
+			}
+		}
+
 #if 0
 		//-----------------------------------------------------
 		//アクセル増減　 ：　アクション中のバランス値を利用(今作品ではバランス発生に用いない)

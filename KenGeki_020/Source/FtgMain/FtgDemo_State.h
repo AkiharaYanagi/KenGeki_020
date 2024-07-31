@@ -21,18 +21,24 @@ namespace GAME
 {
 	//=====================================================
 	//アクタ　前方宣言
+	class Fighting; using WP_Fighting = std::weak_ptr < Fighting >;
 	class FtgDemoActor; using WP_FtgDemoActor = std::weak_ptr < FtgDemoActor >;
 
 	//=====================================================
 	//param
 	class FtgDemoParam
 	{
-		P_MutualChara		m_mutualChara;
-		WP_FtgDemoActor		m_ftgDemoActor;
-		P_Param				m_pSceneParam;	//シーン共通パラメータ		
+		WP_Fighting			m_fighting;		//戦闘全般
+		P_MutualChara		m_mutualChara;	//キャラ相互
+		WP_FtgDemoActor		m_ftgDemoActor;	//アクタ（Weak_ptr）
+		P_Param				m_pSceneParam;	//シーン共通パラメータ
+		P_FtgGrp			m_ftgGrp;		//共通グラフィック処理
 
 	public:
-		
+
+		void SetwpFighting ( WP_Fighting p ) { m_fighting = p; }
+		WP_Fighting GetwpFighting () const { return m_fighting; }
+
 		void SetpMutualChara ( P_MutualChara p ) { m_mutualChara = p; }
 		P_MutualChara GetpMutualChara () const { return m_mutualChara; }
 
@@ -41,7 +47,11 @@ namespace GAME
 
 		void SetpSceneParam ( P_Param p ) { m_pSceneParam = p; }
 		P_Param GetpSceneParam () const { return m_pSceneParam; }
+
+		void SetpFtgGrp ( P_FtgGrp p ) { m_ftgGrp = p; }
+		P_FtgGrp GetpFtgGrp () const { return m_ftgGrp; }
 	};
+
 	using P_PRM_FTG_DEMO = std::shared_ptr < FtgDemoParam >;
 
 	//=====================================================
@@ -58,10 +68,13 @@ namespace GAME
 		virtual void Do () {}
 		void SetpPrm ( P_PRM_FTG_DEMO p ) { m_prmFtgDemo = p; }
 
-		P_GrpDemo MakeGrpValue ( LPCTSTR txName );
 		P_MutualChara GetpMutualChara () const { return m_prmFtgDemo->GetpMutualChara (); }
 		WP_FtgDemoActor GetwpFtgDemoActor () const { return m_prmFtgDemo->GetwpFtgDemoActor (); }
 
+		virtual s3d::String GetName () const { return s3d::String { U"FtgDemoState"}; }
+
+	protected:
+		P_GrpDemo MakeGrpValue ( LPCTSTR txName );	//内部オブジェクト作成用
 	};
 	using P_FtgDemo = std::shared_ptr < FtgDemoState >;
 
@@ -82,6 +95,7 @@ namespace GAME
 		~FTG_DM_Greeting () {}
 		void Start ();
 		void Do ();
+		s3d::String GetName () const { return s3d::String { U"FTG_DM_Greeting"}; }
 	};
 	using P_FTG_DM_Greeting = std::shared_ptr < FTG_DM_Greeting >;
 
@@ -102,6 +116,7 @@ namespace GAME
 		void Start ();
 		void Do ();
 		void Final ();
+		s3d::String GetName () const { return s3d::String { U"FTG_DM_GetReady"}; }
 	};
 	using P_FTG_DM_GetReady = std::shared_ptr < FTG_DM_GetReady >;
 
@@ -117,6 +132,7 @@ namespace GAME
 
 		void Start ();
 		void Do ();
+		s3d::String GetName () const { return s3d::String { U"FTG_DM_Attack"}; }
 	};
 	using P_FTG_DM_Attack = std::shared_ptr < FTG_DM_Attack >;
 
@@ -127,6 +143,7 @@ namespace GAME
 	public:
 		void Start ();
 		void Do ();
+		s3d::String GetName () const { return s3d::String { U"FTG_DM_Main"}; }
 	};
 	using P_FTG_DM_Main = std::shared_ptr < FTG_DM_Main >;
 
@@ -141,6 +158,7 @@ namespace GAME
 		FTG_DM_WallBreak();
 		void Start ();
 		void Do ();
+		s3d::String GetName () const { return s3d::String { U"FTG_DM_WallBreak"}; }
 	};
 	using P_FTG_DM_WallBreak = std::shared_ptr < FTG_DM_WallBreak >;
 
@@ -156,6 +174,7 @@ namespace GAME
 
 		void Start ();
 		void Do ();
+		s3d::String GetName () const { return s3d::String { U"FTG_DM_Down"}; }
 	};
 	using P_FTG_DM_Down = std::shared_ptr < FTG_DM_Down >;
 
@@ -171,6 +190,7 @@ namespace GAME
 
 		void Start ();
 		void Do ();
+		s3d::String GetName () const { return s3d::String { U"FTG_DM_TimeUpWait"}; }
 	};
 	using P_FTG_DM_TimeUpWait = std::shared_ptr < FTG_DM_TimeUpWait >;
 
@@ -186,6 +206,7 @@ namespace GAME
 
 		void Start ();
 		void Do ();
+		s3d::String GetName () const { return s3d::String { U"FTG_DM_TimeUp"}; }
 	};
 	using P_FTG_DM_TimeUp = std::shared_ptr < FTG_DM_TimeUp >;
 
@@ -208,6 +229,7 @@ namespace GAME
 
 		void Start ();
 		void Do ();
+		s3d::String GetName () const { return s3d::String { U"FTG_DM_Winner"}; }
 	};
 	using P_FTG_DM_Winner = std::shared_ptr < FTG_DM_Winner >;
 

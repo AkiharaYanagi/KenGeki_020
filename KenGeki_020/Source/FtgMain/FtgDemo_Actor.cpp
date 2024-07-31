@@ -8,7 +8,7 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "FtgDemo_Actor.h"
-#include <iomanip>	//std::setw(), std::setfill() など
+//#include <iomanip>	//std::setw(), std::setfill() など
 #include "../GameMain/SoundConst.h"
 
 
@@ -139,6 +139,7 @@ namespace GAME
 	void FtgDemoActor::Shift_Main_To_WallBreak ()
 	{
 		mp_FtgDemo = m_WallBreak;
+		m_WallBreak->Start ();		//タイマのため毎回スタートをかける
 	}
 
 	void FtgDemoActor::Shift_WallBreak_To_Main ()

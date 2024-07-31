@@ -58,8 +58,9 @@ namespace GAME
 		void Load ();
 		void Do ();
 
+		void SetwpFighting ( WP_Fighting wp ) { mp_Param->SetwpFighting ( wp ); }
 		void SetpMutualChara ( P_MutualChara p ) { mp_Param->SetpMutualChara ( p ); }
-//		void SetpMutualChara_Demo ( P_MutualChara_Demo p ) { mp_Param->SetpMutualChara_Demo ( p ); }
+		void SetpFtgGrp ( P_FtgGrp p ) { mp_Param->SetpFtgGrp ( p ); }
 
 		void Change_Greeting_To_GetReady ();
 		void Change_GetReady_To_Attack ();
@@ -77,6 +78,8 @@ namespace GAME
 		
 		void End_Down_To_Result ();
 		bool IsEnd () const { return m_bEnd; }
+
+		s3d::String GetName () const { return mp_FtgDemo->GetName (); }
 
 	private:
 		P_MutualChara GetpMutualChara () const { return mp_Param->GetpMutualChara (); }

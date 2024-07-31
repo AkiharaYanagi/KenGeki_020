@@ -135,11 +135,11 @@ namespace GAME
 		GRPLST_INSERT ( m_strAction );
 		AddpTask ( m_strAction );
 
-		//アクション名
+		//ステート名
 		m_strState = std::make_shared < GrpStr > ();
 		m_strState->SetStr ( U"State" );
 		m_strState->SetZ ( Z_MENU );
-		m_strState->SetColorF ( s3d::ColorF { 0.8f, 0.8f, 1.f, 1.f } );
+		m_strState->SetColorF ( s3d::ColorF { 0.0f, 0.0f, 0.5f, 1.f } );
 		GRPLST_INSERT ( m_strState );
 		AddpTask ( m_strState );
 	}

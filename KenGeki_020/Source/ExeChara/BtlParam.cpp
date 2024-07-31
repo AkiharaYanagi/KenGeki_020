@@ -329,9 +329,16 @@ namespace GAME
 		float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
 
 
+
+
 		//壁より先には移動しない
 		if ( m_posChara.x < wall_L ) { m_posChara.x = wall_L; }
 		if ( m_posChara.x > wall_R ) { m_posChara.x = wall_R; }
+#if 0
+#endif // 0
+
+
+
 
 		//---------------
 		//反動(ノックバック)

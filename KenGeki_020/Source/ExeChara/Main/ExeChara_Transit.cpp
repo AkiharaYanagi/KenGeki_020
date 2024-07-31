@@ -339,6 +339,9 @@ namespace GAME
 					//ステートの変更
 					m_actor.ShiftWallBreak ();
 					m_pOther.lock()->m_actor.ShiftWallBreak ();
+
+					//グラフィックからFTG全体に反映
+					m_pFtgGrp->SetWallBreak ( T );
 				}
 
 				SetAction ( ActionName );	//遷移

@@ -262,6 +262,7 @@ namespace GAME
 		void StartTimeUp   () { m_actor.StartTimeUp (); }
 		void StartEndWait  () { m_actor.StartEndWait (); }
 
+		void Shift_Fighting () { m_actor.ShiftFighting (); }
 
 #if 0
 		//一時停止

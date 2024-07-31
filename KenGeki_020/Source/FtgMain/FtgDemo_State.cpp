@@ -8,7 +8,6 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "FtgDemo_State.h"
-#include <iomanip>	//std::setw(), std::setfill() など
 #include "../GameMain/SoundConst.h"
 #include "FtgDemo_Actor.h"
 
@@ -159,7 +158,9 @@ namespace GAME
 	void FTG_DM_Main::Do ()
 	{
 		//[一時] 壁割
-		if ( F )
+		bool bOn = m_prmFtgDemo->GetpFtgGrp ()->GetWallBreak ();
+
+		if ( bOn )
 		{
 			GetwpFtgDemoActor().lock()->Shift_Main_To_WallBreak ();
 		}
@@ -189,15 +190,24 @@ namespace GAME
 	void FTG_DM_WallBreak::Start ()
 	{
 		m_timer->Start ();
+
+		//最初の１回目で条件をオフにしておく
+		m_prmFtgDemo->GetpFtgGrp()->SetWallBreak ( F );
 	}
 
 	void FTG_DM_WallBreak::Do ()
 	{
 		m_timer->Move ();
 
+		//終了
 		if ( m_timer->IsLast() )
 		{
+			//壁位置をリセット
+			G_Ftg::inst()->ResetWall ();
+
 			//通常状態へ移行
+			GetpMutualChara()->WallBreak_Action ( PLAYER_ID_1 );
+			GetpMutualChara()->Shift_Fighting ();
 			GetwpFtgDemoActor().lock()->Shift_WallBreak_To_Main();
 		}
 	}

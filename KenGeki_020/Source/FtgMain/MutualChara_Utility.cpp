@@ -26,6 +26,18 @@ namespace GAME
 	{
 		m_exeChara1 = p1;
 		m_exeChara2 = p2;
+
+		//------------------------------------------------
+		//デバッグ用枠表示初期切替
+#define DISP_RECT	1
+#if DISP_RECT
+//		bDispRect = T;
+		m_exeChara1->OnDispRect ();
+		m_exeChara2->OnDispRect ();
+#else
+		m_exeChara1->OffDispRect ();
+		m_exeChara2->OffDispRect ();
+#endif // DISP_RECT
 	}
 
 	//------------------------------------------------------

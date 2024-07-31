@@ -10,10 +10,8 @@
 #include "FtgMain.h"
 
 #if 0
-
 #include "../Title/Title.h"
 #include "../Result/Result.h"
-
 #endif // 0
 
 //#include "../GameMain/SoundConst.h"
@@ -127,10 +125,8 @@ namespace GAME
 		if ( m_fighting->IsEnd () )
 		{
 #if 0
-
 			//BGM
 			SOUND->Stop_BGM ( BGM_Main );
-
 			Scene::Transit_Result ();
 
 #endif // 0

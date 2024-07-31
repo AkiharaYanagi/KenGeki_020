@@ -25,10 +25,21 @@ namespace GAME
 		AddpTask ( m_bg );
 
 		//=====================================================
+		//キャラ
+		m_exeChara1 = std::make_shared < ExeChara > ( PLAYER_ID_1 );
+		m_exeChara2 = std::make_shared < ExeChara > ( PLAYER_ID_2 );
+
+		m_exeChara1->SetpOther ( m_exeChara2 );
+		m_exeChara2->SetpOther ( m_exeChara1 );
+
+		AddpTask ( m_exeChara1 );
+		AddpTask ( m_exeChara2 );
+
 		//キャラ相互処理
-		//=====================================================
 		m_mutualChara = std::make_shared < MutualChara > ();
 		AddpTask ( m_mutualChara );
+
+		m_mutualChara->SetpChara ( m_exeChara1, m_exeChara2 );
 
 		//=====================================================
 		//デモ
@@ -47,6 +58,15 @@ namespace GAME
 		//=====================================================
 		//画面共通グラフィック処理
 		m_pFtgGrp = std::make_shared < FtgGrp > ();
+
+		//=====================================================
+		//ステート名
+		m_strState = std::make_shared < GrpStr > ();
+		m_strState->SetStr ( U"State" );
+		m_strState->SetZ ( Z_MENU );
+		m_strState->SetColorF ( s3d::ColorF { 0.0f, 0.0f, 0.5f, 1.f } );
+		GRPLST_INSERT ( m_strState );
+		AddpTask ( m_strState );
 	}
 
 	Fighting::~Fighting ()
@@ -57,11 +77,23 @@ namespace GAME
 	void Fighting::ParamInit ( P_Param pParam )
 	{
 		m_mutualChara->ParamInit ( pParam );
+		m_exeChara1->ParamInit ( pParam );
+		m_exeChara2->ParamInit ( pParam );
 	}
 
 	void Fighting::Load ()
 	{
+		m_demoActor->SetwpFighting ( shared_from_this () );
+		m_demoActor->SetpFtgGrp ( m_pFtgGrp );
 		m_mutualChara->SetpFtgGrp ( m_pFtgGrp );
+		m_exeChara1->SetpFtgGrp ( m_pFtgGrp );
+		m_exeChara2->SetpFtgGrp ( m_pFtgGrp );
+
+
+		m_strState->SetSize ( 30 );
+		m_strState->SetPos ( VEC2 ( 640 - 120, 160 ) );
+
+
 		TASK_LST::Load ();
 	}
 
@@ -124,6 +156,7 @@ namespace GAME
 
 	void Fighting::TrainingRestart ()
 	{
+		G_Ftg::inst()->Init ();
 		m_pFtgGrp->Init ();
 		m_bg->Init ();
 		m_demoActor->StartFighting ();
@@ -181,6 +214,16 @@ namespace GAME
 		//----------------------------------------------------
 		//背景通常処理
 		m_bg->Grp ();
+
+
+		//共通グラフィックからステートの変更
+		if ( m_pFtgGrp->GetWallBreak () )
+		{
+			m_demoActor->Shift_Main_To_WallBreak ();
+		}
+
+		//ステート名
+		m_strState->SetStr ( m_demoActor->GetName () );
 	}
 
 

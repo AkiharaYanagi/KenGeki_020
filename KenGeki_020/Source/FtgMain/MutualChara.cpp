@@ -19,33 +19,12 @@ namespace GAME
 {
 	MutualChara::MutualChara ()
 	{
-		//判定 キャラに譲渡するためオブジェクトのみ先に確保
-		m_decision = std::make_shared < Decision > ();
-
-		//キャラ
-		m_exeChara1 = std::make_shared < ExeChara > ( PLAYER_ID_1 );
-		m_exeChara2 = std::make_shared < ExeChara > ( PLAYER_ID_2 );
-
-		m_exeChara1->SetpOther ( m_exeChara2 );
-		m_exeChara2->SetpOther ( m_exeChara1 );
-
-#if 0
-		m_exeChara1->SetpParticle ( m_decision->GetpEfPart () );
-		m_exeChara2->SetpParticle ( m_decision->GetpEfPart () );
-#endif // 0
-
-		AddpTask ( m_exeChara1 );
-		AddpTask ( m_exeChara2 );
-
-		m_utl.SetpChara ( m_exeChara1, m_exeChara2 );
-
-
-		//判定
+		//ぶつかり判定
 		m_collision = std::make_shared < Collision > ();
-		m_collision->SetpChara ( m_exeChara1, m_exeChara2 );
 		AddpTask ( m_collision );
 
-		m_decision->SetpChara ( m_exeChara1, m_exeChara2 );
+		//攻撃・ヒット判定
+		m_decision = std::make_shared < Decision > ();
 		AddpTask ( m_decision );
 
 		//------------------------------------------------
@@ -57,37 +36,31 @@ namespace GAME
 		//ラウンド
 		m_round = std::make_shared < Round > ();
 		AddpTask ( m_round );
-
-
-		//------------------------------------------------
-		//デバッグ用枠表示初期切替
-#define DISP_RECT	0
-#if DISP_RECT
-		bDispRect = T;
-		m_exeChara1->OnDispRect ();
-		m_exeChara2->OnDispRect ();
-#else
-		m_exeChara1->OffDispRect ();
-		m_exeChara2->OffDispRect ();
-#endif // DISP_RECT
 	}
 
 	MutualChara::~MutualChara ()
 	{
 	}
 
+	void MutualChara::SetpChara ( P_ExeChara p1, P_ExeChara p2 )
+	{
+		m_exeChara1 = p1;
+		m_exeChara2 = p2;
+		m_utl.SetpChara ( m_exeChara1, m_exeChara2 );
+		m_collision->SetpChara ( m_exeChara1, m_exeChara2 );
+		m_decision->SetpChara ( m_exeChara1, m_exeChara2 );
+	}
+
 
 	void MutualChara::ParamInit ( P_Param pParam )
 	{
 		m_pParam = pParam;
-		m_exeChara1->ParamInit ( pParam );
-		m_exeChara2->ParamInit ( pParam );
 	}
 
 	void MutualChara::Load ()
 	{
-		m_exeChara1->SetpFtgGrp ( m_pFtgGrp );
-		m_exeChara2->SetpFtgGrp ( m_pFtgGrp );
+		mp_vtx = std::make_unique < s3d::VideoTexture > ( U"raiden.mp4", s3d::Loop::No );
+		GrpLst::Inst()->SetupVtx ( std::move ( mp_vtx ) );
 		TASK_VEC::Load ();
 	}
 
@@ -109,12 +82,6 @@ namespace GAME
 	{
 		//---------------------------------------------------
 		//システム変更
-#if 0
-		SwitchDispInput ();	//入力表示切替
-		SwitchRect ();	//枠表示切替
-		SwitchFrontEnd ();	//ゲージ類表示切替
-		SwithcCPU ();	//CPU操作切替
-#endif // 0
 		m_utl.SwitchDispInput ();
 		m_utl.SwitchRect ();
 		m_utl.SwitchFrontEnd ();
@@ -127,14 +94,14 @@ namespace GAME
 		m_exeChara2->PreScriptMove ();
 
 		//◆相互判定(ぶつかり枠)
-		_Collision ();
+		m_collision->Do ();
 
 		//◆ぶつかり後、攻撃・ヒット判定枠を設定
 		m_exeChara1->RectMove ();
 		m_exeChara2->RectMove ();
 
 		//◆相互判定(攻撃・ヒット枠)
-		_Decision ();
+		m_decision->Do ();
 
 		//◆スクリプト後処理(グラフィック位置など)
 		m_exeChara1->PostScriptMove ();
@@ -240,6 +207,15 @@ namespace GAME
 		VEC2 pos2p = m_exeChara2->GetPos ();
 
 		G_FTG()->CulcPosMutualBase ( pos1p, pos2p );
+
+		//---------------------------------------------------
+		if ( m_pFtgGrp->GetOverDrive () )
+		{
+		//	s3d::ClearPrint();
+	//		mp_vtx->advance ();
+	//		mp_vtx->draw ();
+			GrpLst::Inst()->StartVtx ();
+		}
 
 	}
 
@@ -373,160 +349,6 @@ namespace GAME
 	//	内部関数
 	//------------------------------------------------------
 
-#if 0
-	//------------------------------------------------------
-	//入力表示切替
-	void MutualChara::SwitchDispInput ()
-	{
-		static bool bDispInput = T;		//状態
-		static bool pre_bDispInput = F;	//前回押しているか
-		static bool is_bDispInput = F;	//今回押しているか
-
-		is_bDispInput = ( WND_UTL::AscKey ( '2' ) );
-
-		//今回押した瞬間ならば、1回のみ切替
-		if ( ! pre_bDispInput && is_bDispInput )	// false -> true
-		{
-			if ( ! bDispInput )
-			{
-				m_exeChara1->OnDispInput ();
-				m_exeChara2->OnDispInput ();
-				bDispInput = true;
-			}
-			else
-			{
-				m_exeChara1->OffDispInput ();
-				m_exeChara2->OffDispInput ();
-				bDispInput = false;
-			}
-		}
-
-		pre_bDispInput = is_bDispInput;
-	}
-
-	//------------------------------------------------------
-	//枠表示切替 
-	//@info ExeCharaで呼ぶと1P2Pで２回呼ばれてしまう
-	void MutualChara::SwitchRect ()
-	{
-		static bool bDispRect = T;		//状態
-		static bool pre_bDispRect = F;	//前回押しているか
-		static bool is_bDispRect = F;	//今回押しているか
-
-		is_bDispRect = ( WND_UTL::AscKey ( '1' ) );
-
-		//@info キーボード入力は押しっぱなしで一定時間後連打状態になる
-		//TRACE_F ( _T ( "b = %d, pre = %d, is = %d\n" ), bDispRect ? 1 : 0, pre_bDispRect ? 1 : 0, is_bDispRect ? 1 : 0  );
-
-		//今回押した瞬間ならば、1回のみ切替
-		if ( ! pre_bDispRect && is_bDispRect )	// false -> true
-		{
-			if ( ! bDispRect )
-			{
-				m_exeChara1->OnDispRect ();
-				m_exeChara2->OnDispRect ();
-				bDispRect = T;
-			}
-			else
-			{
-				m_exeChara1->OffDispRect ();
-				m_exeChara2->OffDispRect ();
-				bDispRect = F;
-			}
-		}
-		pre_bDispRect = is_bDispRect;
-	}
-
-	//------------------------------------------------------
-	//ゲージ類表示切替
-	void MutualChara::SwitchFrontEnd ()
-	{
-		static bool bFrontEnd = T;		//状態
-		static bool pre_bFrontEnd = F;	//前回押しているか
-		static bool is_bFrontEnd = F;	//今回押しているか
-
-		is_bFrontEnd = ( WND_UTL::AscKey ( '3' ) );
-
-		//今回押した瞬間ならば、1回のみ切替
-		if ( ! pre_bFrontEnd && is_bFrontEnd )	// false -> true
-		{
-			if ( ! bFrontEnd )
-			{
-				m_exeChara1->OnFrontEnd ();
-				m_exeChara2->OnFrontEnd ();
-				bFrontEnd = true;
-			}
-			else
-			{
-				m_exeChara1->OffFrontEnd ();
-				m_exeChara2->OffFrontEnd ();
-				bFrontEnd = false;
-			}
-		}
-
-		pre_bFrontEnd = is_bFrontEnd;
-	}
-#endif // 0
-
-#if 0
-
-	//------------------------------------------------------
-	//CPU操作切替
-	void MutualChara::SwithcCPU ()
-	{
-		static bool cpu1 = F;
-		if ( WND_UTL::AscKey ( '6' ) )
-		{
-			cpu1 ^= T;
-			if ( cpu1 )
-			{
-				m_exeChara1->ControlCPU ();
-			}
-			else
-			{
-				m_exeChara1->ControlPlayer ();
-			}
-		}
-
-		static bool cpu2 = F;
-		if ( WND_UTL::AscKey ( '7' ) )
-		{
-			cpu2 ^= T;
-			if ( cpu2 )
-			{
-				m_exeChara2->ControlCPU ();
-			}
-			else
-			{
-				m_exeChara2->ControlPlayer ();
-			}
-		}
-	}
-
-	void MutualChara::Set_1P_vs_2P ()
-	{
-		m_exeChara1->ControlPlayer ();
-		m_exeChara2->ControlPlayer ();
-	}
-
-	void MutualChara::Set_1P_vs_CPU ()
-	{
-		m_exeChara1->ControlPlayer ();
-		m_exeChara2->ControlCPU ();
-	}
-
-	void MutualChara::Set_CPU_vs_CPU ()
-	{
-		m_exeChara1->ControlCPU ();
-		m_exeChara2->ControlCPU ();
-	}
-
-
-	//------------------------------------------------------
-
-
-#endif // 0
-
 	//トレーニングモード初期化
 	void MutualChara::TrainingInit ()
 	{
@@ -569,6 +391,28 @@ namespace GAME
 	{
 		m_exeChara1->StartFighting ();
 		m_exeChara2->StartFighting ();
+	}
+
+	//壁割後のアクション指定
+	void MutualChara::WallBreak_Action ( PLAYER_ID id )
+	{
+		if ( id == PLAYER_ID_1 )
+		{
+			m_exeChara1->SetAction ( U"壁割後ダッシュ" );
+			m_exeChara2->SetAction ( U"壁割吹き飛び" );
+		}
+		else
+		{
+			m_exeChara1->SetAction ( U"壁割吹き飛び" );
+			m_exeChara2->SetAction ( U"壁割後ダッシュ" );
+		}
+	}
+
+	//戦闘通常状態に戻る
+	void MutualChara::Shift_Fighting ()
+	{
+		m_exeChara1->Shift_Fighting ();
+		m_exeChara2->Shift_Fighting ();
 	}
 
 	//----------------------------------------------------

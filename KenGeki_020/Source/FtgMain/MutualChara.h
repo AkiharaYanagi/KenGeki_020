@@ -31,7 +31,7 @@ namespace GAME
 		//シーン共有パラメータ
 		P_Param			m_pParam;
 
-		//キャラ
+		//キャラ(参照)
 		P_ExeChara		m_exeChara1;
 		P_ExeChara		m_exeChara2;
 
@@ -53,6 +53,12 @@ namespace GAME
 		//共通グラフィック
 		P_FtgGrp	m_pFtgGrp;
 
+
+		//test 動画
+		std::unique_ptr < s3d::VideoTexture > mp_vtx;
+
+
+
 		//-------------------------------------------------
 		//勝者
 		WINNER	m_winner { WINNER::WINNER_DRAW };
@@ -68,6 +74,9 @@ namespace GAME
 		MutualChara ();
 		MutualChara ( const MutualChara & rhs ) = delete;
 		~MutualChara ();
+
+		//----------------------------------------------------
+		void SetpChara ( P_ExeChara p1, P_ExeChara p2 );
 
 		void ParamInit ( P_Param pParam );
 		void Load ();
@@ -91,6 +100,9 @@ namespace GAME
 		void StartGreeting ();		//開始デモ
 		void StartGetReady ();		//開始準備
 		void StartFighting ();		//戦闘開始
+
+		void WallBreak_Action ( PLAYER_ID id );	//壁割後のアクション指定
+		void Shift_Fighting ();		//戦闘通常状態に戻る
 
 		//----------------------------------------------------
 		//戦闘時間
@@ -118,6 +130,8 @@ namespace GAME
 		//共通グラフィック
 		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
 
+		bool IsWait ();	//両者待機状態
+
 #if 0
 		UINT GetBlackOut () const { return m_blackOut; };	//暗転
 		void SetBlackOut ( UINT i )
@@ -133,47 +147,21 @@ namespace GAME
 		void RevertSlow ();	//スロウ解除
 #endif // 0
 
-		bool IsWait ();	//両者待機状態
-
-
-
 #if 0
 		bool CheckZeroLife ();	//格闘終了判定
-
-		UINT GetBlackOut () const { return m_blackOut; };	//暗転
-		void SetBlackOut ( UINT i )
-		{
-			m_blackOut = i;
-			m_exeChara1->SetBlackOut ( i );
-			m_exeChara2->SetBlackOut ( i );
-		};
-
-		UINT GetScpStop () const { return m_scpStop; };	//停止
-		void SetScpStop ( UINT i ) { m_scpStop = i; };
-
-		void RevertSlow ();	//状態を元に戻す
-
 
 		//特殊演出
 		bool CheckWhiteOut () const { return m_whiteOut; }
 		void SetWhiteOut ( bool b ) { m_whiteOut = b; }
 
-		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
-
-		
 		//初期操作 プレイヤ/CPU 設定
 		void Set_1P_vs_2P ();
 		void Set_1P_vs_CPU ();
 		void Set_CPU_vs_CPU ();
 
-
 		//勝者
 		WINNER GetWinner () const { return m_winner; }
 		CHARA_NAME GetWinnerName () const;
-
-		//下位オブエジェクトにweak_ptrを渡す
-//		void AssignWp ( WP_FTG wp ) const;
-
 
 #endif // 0
 
@@ -188,18 +176,6 @@ namespace GAME
 
 		//関数群
 		MutualChara_Utility			m_utl;
-
-		void _Collision() { m_collision->Do (); }	//◆ 相互判定(ぶつかり枠)
-		void _Decision()  { m_decision->Do (); }	//◆ 相互判定(攻撃・ヒット枠)
-
-		//---------------------------------------
-		// Conduct
-#if 0
-		void SwitchRect ();			//枠表示切替
-		void SwitchDispInput ();	//入力表示切替
-		void SwitchFrontEnd ();		//ゲージ類表示切替
-		void SwithcCPU ();			//2PをCPU操作切替
-#endif // 0
 
 		void SaveParam();			//パラメータ記録
 
