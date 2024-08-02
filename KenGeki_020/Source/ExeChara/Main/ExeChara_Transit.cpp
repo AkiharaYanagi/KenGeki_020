@@ -324,10 +324,16 @@ namespace GAME
 		s3d::String ActionName = Check_TransitAction_Condition_str ( BRC_WALL );
 		if ( ActionName.compare ( U"" ) != 0 )
 		{
-			//位置
-//			float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
+			//壁位置
+			float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
 			float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
-			if ( wall_R <= m_btlPrm.GetPos().x  )
+
+
+			//壁位置に達していたら
+			bool b_R = wall_R <= m_btlPrm.GetPos().x;
+			bool b_L = m_btlPrm.GetPos().x <= wall_L;
+
+			if ( b_L || b_R )
 			{
 				//特定アクションの分岐
 				if ( m_pAction->IsName ( U"壁まで吹き飛び持続" ) )
@@ -347,7 +353,6 @@ namespace GAME
 				SetAction ( ActionName );	//遷移
 			}
 		}
-
 	}
 
 	//-------------------------------------------------------------------------------------------------

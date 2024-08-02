@@ -13,6 +13,7 @@
 #include "Game.h"
 #include "FtgConst.h"	
 #include "MutualChara.h"
+#include "WallBreak.h"
 
 //-------------------------------------------------------------------------------------------------
 // 宣言
@@ -74,7 +75,7 @@ namespace GAME
 		virtual s3d::String GetName () const { return s3d::String { U"FtgDemoState"}; }
 
 	protected:
-		P_GrpDemo MakeGrpValue ( LPCTSTR txName );	//内部オブジェクト作成用
+		P_GrpDemo MakeGrpValue ( s3d::String txName );	//内部オブジェクト作成用
 	};
 	using P_FtgDemo = std::shared_ptr < FtgDemoState >;
 
@@ -104,7 +105,6 @@ namespace GAME
 	class FTG_DM_GetReady : public FtgDemoState
 	{
 		P_GrpDemo		m_grpGetReady;
-//		P_GrpAcv		m_grpClock;
 		P_Timer			m_timer;
 		static const UINT		COUNT;
 		static const UINT		COUNT_D;
@@ -151,6 +151,9 @@ namespace GAME
 	//特殊演出 (壁割り)
 	class FTG_DM_WallBreak : public FtgDemoState
 	{
+		//壁割エフェクト
+		P_WallBreak		m_wallBreak;
+		
 		//タイマ
 		P_Timer		m_timer;
 

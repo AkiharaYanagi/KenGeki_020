@@ -423,6 +423,7 @@
     <ClInclude Include="Source\FtgMain\MutualChara.h" />
     <ClInclude Include="Source\FtgMain\MutualChara_Utility.h" />
     <ClInclude Include="Source\FtgMain\Round.h" />
+    <ClInclude Include="Source\FtgMain\WallBreak.h" />
     <ClInclude Include="Source\GameMain\GameConst.h" />
     <ClInclude Include="Source\GameMain\GameMain.h" />
     <ClInclude Include="Source\GameMain\GameSettingFile.h" />
@@ -465,6 +466,7 @@
     <ClCompile Include="Source\FtgMain\MutualChara.cpp" />
     <ClCompile Include="Source\FtgMain\MutualChara_Utility.cpp" />
     <ClCompile Include="Source\FtgMain\Round.cpp" />
+    <ClCompile Include="Source\FtgMain\WallBreak.cpp" />
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp" />
     <ClCompile Include="Source\GameMain\Main.cpp" />
     <ClCompile Include="Source\GameMain\Param.cpp" />

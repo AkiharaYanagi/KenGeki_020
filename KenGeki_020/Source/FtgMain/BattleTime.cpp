@@ -67,7 +67,7 @@ namespace GAME
 	void BattleTime::Init ()
 	{
 		m_time = START_TIME;
-		Stop ();
+		Start ();
 
 		TASK_VEC::Init ();
 	}

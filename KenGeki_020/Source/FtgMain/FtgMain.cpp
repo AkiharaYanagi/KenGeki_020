@@ -83,6 +83,12 @@ namespace GAME
 		m_pauseMenu->SetwpParentScene ( shared_from_this () );
 #endif // 0
 
+
+		//test
+//		DBGOUT_WND()->On ();
+		DBGOUT_WND()->Off ();
+
+
 		Scene::Load ();
 	}
 
@@ -110,6 +116,12 @@ namespace GAME
 			return;
 		}
 #endif // 0
+
+		//デモ リスタート
+		if ( WND_UTL::AscKey ( '0' ) )
+		{
+			m_fighting->DemoRestart ();
+		}
 
 		//トレーニングリセット
 		if ( CFG_PUSH_KEY ( P1_BTN6 ) || CFG_PUSH_KEY ( P2_BTN6 ) )

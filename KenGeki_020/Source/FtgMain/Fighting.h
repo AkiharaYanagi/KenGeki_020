@@ -59,6 +59,8 @@ namespace GAME
 
 		void ParamInit ( P_Param pParam );
 
+		//デモ リスタート
+		void DemoRestart ();
 
 		//トレーニング用リスタート
 		void TrainingRestart ();

@@ -48,7 +48,6 @@ namespace GAME
 
 		//初期ステート
 		mp_FtgDemo = m_Greeting;
-//		mp_FtgDemo = m_Main;
 
 		//デモ共通パラメータ
 		mp_Param = std::make_shared < FtgDemoParam > ();

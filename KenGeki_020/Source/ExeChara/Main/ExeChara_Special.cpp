@@ -54,6 +54,13 @@ namespace GAME
 			}
 		}
 
+		if ( IsNameAction ( U"ダウン" ) )
+		{
+			if ( m_pOther.lock()->IsNameAction ( U"足払い追撃ヒット" ) )
+			{
+				m_pOther.lock()->SetAction ( U"立ち" );
+			}
+		}
 
 
 		if ( IsNameAction ( U"超雷電蹴_発生" ) )

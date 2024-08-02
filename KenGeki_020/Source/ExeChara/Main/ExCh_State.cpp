@@ -28,7 +28,7 @@ namespace GAME
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
 
 		//アクション・スクリプト初期化
-		pExe->SetAction ( U"Start_Demo" );
+		pExe->SetAction ( U"開幕" );
 	}
 
 	void CHST_Greeting::PreScriptMove ()

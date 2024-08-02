@@ -894,6 +894,9 @@
     <ClInclude Include="Source\FtgMain\Round.h">
       <Filter>FtgMain\Mutual</Filter>
     </ClInclude>
+    <ClInclude Include="Source\FtgMain\WallBreak.h">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1012,6 +1015,9 @@
     </ClCompile>
     <ClCompile Include="Source\FtgMain\Round.cpp">
       <Filter>FtgMain\Mutual</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\WallBreak.cpp">
+      <Filter>FtgMain\Fighting</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

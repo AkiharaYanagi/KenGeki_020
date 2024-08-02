@@ -19,13 +19,10 @@ namespace GAME
 {
 	//=====================================================
 	//デモ表示　グラフィック基準のオブジェクト生成
-	P_GrpDemo FtgDemoState::MakeGrpValue ( LPCTSTR txName )
+	P_GrpDemo FtgDemoState::MakeGrpValue ( s3d::String txName )
 	{
 		P_GrpDemo pGrp = std::make_shared < GrpDemo > ();
-
-		tstring tstr ( txName );
-		pGrp->AddTexture ( Unicode::FromWstring ( tstr.c_str() ) );
-
+		pGrp->AddTexture_FromArchive ( txName );
 		pGrp->SetPos ( VEC2 ( 128, 400 ) );
 		pGrp->SetScalingCenter ( VEC2 ( 512, 128 ) );
 		pGrp->SetStartScaling ( VEC2 ( 1.3f, 1.3f ) );
@@ -45,7 +42,7 @@ namespace GAME
 	FTG_DM_Greeting::FTG_DM_Greeting ()
 	{
 		m_timer = std::make_shared < Timer > ();
-		m_timer->SetTargetTime ( 90 );
+		m_timer->SetTargetTime ( 120 );
 	}
 
 	void FTG_DM_Greeting::Start ()
@@ -71,28 +68,8 @@ namespace GAME
 
 	FTG_DM_GetReady::FTG_DM_GetReady ()
 	{
-		m_grpGetReady = MakeGrpValue ( _T ( "Demo_GetReady.png" ) );
+		m_grpGetReady = MakeGrpValue ( U"Demo_GetReady.png" );
 		m_grpGetReady->SetEnd ( COUNT );
-
-#if 0
-		m_grpClock = make_shared < GrpAcv > ();
-		m_grpClock->SetPos ( VEC2 ( 640 - 256, 300 ) );
-		m_grpClock->SetValid ( F );
-		m_grpClock->SetZ ( Z_EFF );
-		AddpTask ( m_grpClock );
-		GRPLST_INSERT_MAIN ( m_grpClock );
-
-		tostringstream toss;
-		tstring filename_base = _T ( "clock\\clock_" );
-		tstring ext = _T ( ".png" );
-
-		for ( UINT i = 1; i < 61; ++ i )
-		{
-			toss << filename_base << std::setw ( 2 ) << std::setfill ( _T ( '0' ) ) << i << ext;
-			m_grpClock->AddTexture ( toss.str () );
-			toss.str ( _T ( "" ) );
-		}
-#endif // 0
 
 		m_timer = std::make_shared < Timer > ();
 	}
@@ -102,21 +79,16 @@ namespace GAME
 		GetpMutualChara ()->StartGetReady ();
 
 		m_grpGetReady->Start ();
-//		m_grpClock->SetValid ( T );
 		m_timer->Start ();
 	}
 
 	void FTG_DM_GetReady::Final ()
 	{
-//		m_grpClock->SetValid ( F );
 	}
 
 	void FTG_DM_GetReady::Do ()
 	{
 		m_timer->Move ();
-//		UINT t = m_timer->GetTime ();
-//		UINT index = ( t + COUNT_D ) % 60;
-//		m_grpClock->SetIndexTexture ( index );
 
 		if ( ! m_grpGetReady->GetValid () )
 		{
@@ -128,7 +100,7 @@ namespace GAME
 	//開始
 	FTG_DM_Attack::FTG_DM_Attack ()
 	{
-		m_grpAttack = MakeGrpValue ( _T ( "Demo_Fight.png" ) );
+		m_grpAttack = MakeGrpValue ( U"Demo_Fight.png" );
 		m_grpAttack->SetEnd ( 90 );
 	}
 
@@ -184,11 +156,17 @@ namespace GAME
 	//特殊演出：壁割り
 	FTG_DM_WallBreak::FTG_DM_WallBreak ()
 	{
-		m_timer = std::make_shared < Timer > ( 20 );
+		m_wallBreak = std::make_shared < WallBreak > ();
+		AddpTask ( m_wallBreak );
+		m_timer = std::make_shared < Timer > ( 60 );
 	}
 
 	void FTG_DM_WallBreak::Start ()
 	{
+		//壁位置
+		float wall_R = G_Ftg::inst()->GetWallRight ();
+		m_wallBreak->SetPos ( wall_R - (float)GAME_WIDTH_HALF );
+		m_wallBreak->On ();
 		m_timer->Start ();
 
 		//最初の１回目で条件をオフにしておく
@@ -202,6 +180,8 @@ namespace GAME
 		//終了
 		if ( m_timer->IsLast() )
 		{
+			m_wallBreak->Off ();
+
 			//壁位置をリセット
 			G_Ftg::inst()->ResetWall ();
 
@@ -216,7 +196,7 @@ namespace GAME
 	//ダウン
 	FTG_DM_Down::FTG_DM_Down ()
 	{
-		m_grpDown = MakeGrpValue ( _T ( "Demo_Down.png" ) );
+		m_grpDown = MakeGrpValue ( U"Demo_Down.png" );
 		m_grpDown->SetEnd ( 120 );
 	}
 
@@ -244,7 +224,7 @@ namespace GAME
 	//タイムアップ 待機
 	FTG_DM_TimeUpWait::FTG_DM_TimeUpWait ()
 	{
-		m_grpTimeUp = MakeGrpValue ( _T ( "Demo_TimeUp.png" ) );
+		m_grpTimeUp = MakeGrpValue ( U"Demo_TimeUp.png" );
 		m_grpTimeUp->SetEnd ( 120 );
 	}
 
@@ -325,7 +305,7 @@ namespace GAME
 		AddpTask ( m_grp2p );
 		GRPLST_INSERT ( m_grp2p );
 
-		m_grpDraw = MakeGrpValue ( _T("Demo_Draw.png") );
+		m_grpDraw = MakeGrpValue ( U"Demo_Draw.png" );
 		m_grpDraw->SetScalingCenter ( VEC2 ( 256, 256 ) );
 		m_grpDraw->SetPos ( VEC2 ( 1.f * 1280 / 2 - 512 / 2, 300.f ) );
 		m_grpDraw->SetEnd ( 240 );

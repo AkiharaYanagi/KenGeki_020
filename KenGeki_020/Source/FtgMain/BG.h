@@ -24,8 +24,6 @@ namespace GAME
 		P_Grp			m_bg_L;
 		P_Grp			m_bg_R;
 
-		P_PrmRect		m_test;
-
 		//test カベ表示 背景
 		P_Grp		m_wall_L;
 		P_Grp		m_wall_R;

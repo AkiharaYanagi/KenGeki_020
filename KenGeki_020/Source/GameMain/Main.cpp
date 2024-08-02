@@ -113,7 +113,7 @@ void Init ()
 	//カーソル位置の取得
 	POINT cursorPos;
 	::GetCursorPos ( & cursorPos );
-	cursorPos.x -= 700;
+	cursorPos.x -= 550;
 	cursorPos.y -= 15;
 	s3d::Point pt { cursorPos.x, cursorPos.y };
 

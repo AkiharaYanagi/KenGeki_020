@@ -48,7 +48,7 @@ namespace GAME
 		//効果：背景を中央に移動する
 		bool	m_bResetPos { F };
 //		Timer	m_tmr_resetPos;
-		float	m_vel_resetPos { 30.f };
+		float	m_vel_resetPos { 10.f };
 
 		//壁移動中
 		bool	m_bWallMove { F };

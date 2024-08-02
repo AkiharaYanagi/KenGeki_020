@@ -68,6 +68,7 @@ namespace GAME
 	{
 		m_pParam->SetN_Act1p ( 0 );
 		m_pParam->SetN_Act2p ( 0 );
+		m_btlTime->Init ();
 		TASK_VEC::Init ();
 	}
 
@@ -118,7 +119,7 @@ namespace GAME
 		//test
 		float x1 = m_exeChara1->GetPos ().x;
 		float x2 = m_exeChara2->GetPos ().x;
-		DBGOUT_WND()->DebugOutf ( U"{}, {}"_fmt( x1, x2 ) );
+		DBGOUT_WND()->DebugOutf ( 0, U"{}, {}"_fmt( x1, x2 ) );
 
 
 
@@ -355,6 +356,8 @@ namespace GAME
 		m_exeChara1->TrainingInit ();
 		m_exeChara2->TrainingInit ();
 
+		Init ();
+//		m_utl.SwitchDispInput ();
 //		m_pFtgGrp->InitSlow ();
 	}
 

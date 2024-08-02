@@ -87,10 +87,14 @@ namespace GAME
 			{
 				posMutualBase_x += m_vel_resetPos;
 			}
-
-			if ( cx < m_posMutualBase.x )
+			else if ( cx < m_posMutualBase.x )
 			{
 				m_posMutualBase.x -= m_vel_resetPos;
+			}
+			else
+			{
+				//どちらでもないとき終了
+				m_bWallMove = F;
 			}
 		}
 		else
@@ -122,6 +126,7 @@ namespace GAME
 		DBGOUT_WND_F ( 0, U"m_posMutualBase.x = {}"_fmt( m_posMutualBase.x ) );
 		DBGOUT_WND_F ( 1, U"m_bWallMove.x = {}"_fmt( m_bWallMove ? 1 : 0 ) );
 		DBGOUT_WND_F ( 2, U"lx = {}, cx = {}, rx = {}"_fmt( lx, cx, rx ) );
+		DBGOUT_WND_F ( 3, U"Wall_L = {}, Wall_R = {}"_fmt( m_wall_L, m_wall_R ) );
 #if 0
 #endif // 0
 

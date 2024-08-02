@@ -54,11 +54,6 @@ namespace GAME
 
 		//------------------------------------------------
 
-		//test
-		m_test = std::make_shared < GamePrimitiveRect > ();
-		m_test->SetRect ( 10, 860, 100, 100 );
-		GRPLST_INSERT ( m_test );
-
 
 
 		//------------------------------------------------
