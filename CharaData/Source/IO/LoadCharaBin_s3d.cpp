@@ -61,7 +61,7 @@ namespace GAME
 		//全体のサイズ
 		UINT32 scriptSize = 0;
 		br.read ( scriptSize );
-
+		if ( scriptSize > 1000000000u ) { assert (0); };	//1[GB]以上はアサート
 
 		//全体を一時読込
 		UP_BYTE buffer = std::make_unique < byte [] > ( scriptSize );

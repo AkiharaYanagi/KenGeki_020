@@ -155,6 +155,9 @@
     <Filter Include="FtgMain\Fighting">
       <UniqueIdentifier>{fef6478c-9b6f-487d-92ff-0cf3293ad0e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Title">
+      <UniqueIdentifier>{d2e9a3e0-55f9-4628-9ab5-5750c027dbd4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">

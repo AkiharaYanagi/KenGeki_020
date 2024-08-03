@@ -8,7 +8,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\GameLib020\include\;$(SolutionDir)CharaData\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\GameLib020\Include\;$(SolutionDir)CharaData\Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)..\GameLib020\Library;$(SolutionDir)CharaData\library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

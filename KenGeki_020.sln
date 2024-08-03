@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KenGeki_020", "KenGeki_020\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CharaData", "CharaData\CharaData.vcxproj", "{D38541FE-8E0B-4980-9FEA-8AE5C2F85897}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "KenGeki_Setup", "KenGeki_Setup\KenGeki_Setup.vdproj", "{24659A7C-CFA6-4719-8567-733705AD363A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -34,6 +36,10 @@ Global
 		{D38541FE-8E0B-4980-9FEA-8AE5C2F85897}.Release|x64.Build.0 = Release|x64
 		{D38541FE-8E0B-4980-9FEA-8AE5C2F85897}.Release|x86.ActiveCfg = Release|x64
 		{D38541FE-8E0B-4980-9FEA-8AE5C2F85897}.Release|x86.Build.0 = Release|x64
+		{24659A7C-CFA6-4719-8567-733705AD363A}.Debug|x64.ActiveCfg = Debug
+		{24659A7C-CFA6-4719-8567-733705AD363A}.Debug|x86.ActiveCfg = Debug
+		{24659A7C-CFA6-4719-8567-733705AD363A}.Release|x64.ActiveCfg = Release
+		{24659A7C-CFA6-4719-8567-733705AD363A}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
