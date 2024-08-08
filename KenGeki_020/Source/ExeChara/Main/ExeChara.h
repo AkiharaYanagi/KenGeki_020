@@ -125,8 +125,7 @@ namespace GAME
 		void Load ();
 		void Init ();
 		void Move ();
-		void Reset ();	//復旧時
-		void _Reset ();
+
 	private:
 		//初期化
 		void LoadCharaData ();

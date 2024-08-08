@@ -368,3 +368,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 KenGeki_Setup/剣撃クロスゾーン_セットアップ.msi
+*.zip

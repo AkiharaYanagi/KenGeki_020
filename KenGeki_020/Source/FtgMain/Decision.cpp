@@ -206,7 +206,6 @@ namespace GAME
 				hit1P = OverlapAryRect_Center ( pvARect2, pvHRect1, hit_center_1p );
 			}
 		}
-#if 0
 
 
 		//------------------------------------------------------
@@ -215,6 +214,7 @@ namespace GAME
 		//相殺処理
 		if ( bOffset )
 		{
+#if 0
 			//打合時のエフェクト発生
 			m_efClang->On ( center );
 			m_efSpark->On ( center );
@@ -242,9 +242,9 @@ namespace GAME
 				m_pExeChara1p->OnClang_AA ();
 				m_pExeChara2p->OnClang_AA ();
 			}
+#endif // 0
 		}
 
-#endif // 0
 
 #if 0
 		//------------------------------------------------------

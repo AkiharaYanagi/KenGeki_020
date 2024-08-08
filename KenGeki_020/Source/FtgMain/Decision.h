@@ -35,12 +35,16 @@ namespace GAME
 		P_Timer			m_tmrOffset_Hitstop;
 
 #if 0
+
 		//共通エフェクト
 		P_EfClang		m_efClang;
 		P_EfSpark		m_efSpark;
 //		P_EfParticle	m_efParticle;
 		P_EfPart		m_efPart;
 		P_EfHit			m_efHit;
+#endif // 0
+
+#if 0
 
 
 		//---------------------------------

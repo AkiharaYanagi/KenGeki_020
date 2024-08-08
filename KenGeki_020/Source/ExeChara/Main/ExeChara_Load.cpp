@@ -108,39 +108,6 @@ namespace GAME
 		TASK_VEC::Init ();
 	}
 
-	//再設定
-	void ExeChara::Reset ()
-	{
-		_Reset ();	//復旧時
-
-		TASK_VEC::Reset ();
-	}
-
-	//------------------------
-	//復旧時の再設定
-	void ExeChara::_Reset ()
-	{
-#if 0
-
-		//テクスチャメモリ確保関連は再設定
-		Rele ();
-		m_pChara = make_shared < Chara > ();
-		Load ();
-		m_dispChara->SetpChara ( m_pChara );
-		m_oprtEf->MakeEfList ( m_pChara );
-
-		//アクション・スクリプト再取得
-		m_pAction = m_pChara->GetpAction ( m_actionID );
-		m_pScript = m_pAction->GetpScript ( m_frame );
-
-		//表示の更新
-		m_dispChara->Update ( m_pAction, m_pScript, m_btlPrm, m_pCharaInput );
-
-		//エフェクト 表示のみ
-		m_oprtEf->Disp ();
-
-#endif // 0
-	}
 
 	void ExeChara::LoadCharaData ()
 	{
@@ -155,16 +122,16 @@ namespace GAME
 		if ( PLAYER_ID_1 == id )
 		{
 //			name.assign ( _T ( "charaBin.dat" ) );
-//			name.assign ( U"chara_Stand_Bin.dat" );
-			name.assign ( U"chara_Sae_Bin.dat" );
+			name.assign ( U"chara_Ouka_Bin.dat" );
+//			name.assign ( U"chara_Sae_Bin.dat" );
 //			name.assign ( U"chara_Retsudou_Bin.dat" );
 //			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
 		else if ( PLAYER_ID_2 == id )
 		{
 //			name.assign ( _T ( "charaBin.dat" ) );
-//			name.assign ( U"chara_Stand_Bin.dat" );
-			name.assign ( U"chara_Sae_Bin.dat" );
+			name.assign ( U"chara_Ouka_Bin.dat" );
+//			name.assign ( U"chara_Sae_Bin.dat" );
 //			name.assign ( U"chara_Retsudou_Bin.dat" );
 //			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}

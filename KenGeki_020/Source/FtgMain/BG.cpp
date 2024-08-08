@@ -63,7 +63,7 @@ namespace GAME
 		m_wall_L->SetPos ( 0, 0 );
 		m_wall_L->SetZ ( Z_BG );
 		AddpTask ( m_wall_L );
-		GRPLST_INSERT ( m_wall_L );
+//		GRPLST_INSERT ( m_wall_L );
 
 		m_wall_R = std::make_shared < GameGraphic > ();
 		m_wall_R->AddTexture_FromArchive ( U"test_kabe.png" );
@@ -71,7 +71,7 @@ namespace GAME
 		m_wall_R->SetPos ( GAME_WIDTH - 512, 0 );
 		m_wall_R->SetZ ( Z_BG );
 		AddpTask ( m_wall_R );
-		GRPLST_INSERT ( m_wall_R );
+//		GRPLST_INSERT ( m_wall_R );
 
 
 
