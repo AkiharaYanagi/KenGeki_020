@@ -10,8 +10,9 @@
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
 #include "../ExeChara/Main/ExeChara.h"
-#if 0
+
 #include "Ef/EfClang.h"
+#if 0
 #include "Ef/EfSpark.h"
 #include "Ef/EfParticle.h"
 #include "Ef/EfPart.h"
@@ -34,10 +35,10 @@ namespace GAME
 		//相殺ヒットストップ
 		P_Timer			m_tmrOffset_Hitstop;
 
-#if 0
 
 		//共通エフェクト
 		P_EfClang		m_efClang;
+#if 0
 		P_EfSpark		m_efSpark;
 //		P_EfParticle	m_efParticle;
 		P_EfPart		m_efPart;

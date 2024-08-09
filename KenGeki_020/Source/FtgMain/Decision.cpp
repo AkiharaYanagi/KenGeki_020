@@ -23,12 +23,12 @@ namespace GAME
 		m_tmrOffset_Hitstop->SetTargetTime ( HITSTOP_TIME );
 		AddpTask ( m_tmrOffset_Hitstop );
 
-#if 0
 		//共通エフェクト
-		m_efClang = make_shared < EfClang > ();
+		m_efClang = std::make_shared < EfClang > ();
 		AddpTask ( m_efClang );
-		GRPLST_INSERT_MAIN ( m_efClang );
+		GRPLST_INSERT ( m_efClang );
 
+#if 0
 		m_efSpark = make_shared < EfSpark > ();
 		AddpTask ( m_efSpark );
 		GRPLST_INSERT_MAIN ( m_efSpark );
@@ -214,9 +214,9 @@ namespace GAME
 		//相殺処理
 		if ( bOffset )
 		{
-#if 0
 			//打合時のエフェクト発生
 			m_efClang->On ( center );
+#if 0
 			m_efSpark->On ( center );
 //			m_efParticle->On ( center );
 			m_efPart->On ( center );

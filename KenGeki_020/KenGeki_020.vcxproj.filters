@@ -158,6 +158,9 @@
     <Filter Include="Title">
       <UniqueIdentifier>{d2e9a3e0-55f9-4628-9ab5-5750c027dbd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FtgMain\Ef">
+      <UniqueIdentifier>{87b28ba4-5f40-43c7-b9eb-8b801e8c269b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -900,6 +903,9 @@
     <ClInclude Include="Source\FtgMain\WallBreak.h">
       <Filter>FtgMain\Fighting</Filter>
     </ClInclude>
+    <ClInclude Include="Source\FtgMain\Ef\EfClang.h">
+      <Filter>FtgMain\Ef</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1021,6 +1027,9 @@
     </ClCompile>
     <ClCompile Include="Source\FtgMain\WallBreak.cpp">
       <Filter>FtgMain\Fighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Ef\EfClang.cpp">
+      <Filter>FtgMain\Ef</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

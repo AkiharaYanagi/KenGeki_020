@@ -110,14 +110,8 @@ void Load ()
 //メインループ中の最初の１回のみの初期化
 void Init ()
 {
-	//カーソル位置の取得
-	POINT cursorPos;
-	::GetCursorPos ( & cursorPos );
-	cursorPos.x -= 550;
-	cursorPos.y -= 15;
-	s3d::Point pt { cursorPos.x, cursorPos.y };
-
-	s3d::Window::SetPos ( pt );
+	//カーソル位置にウィンドウを移動
+	WND_UTL::MoveWindow_toCursor ();
 }
 
 

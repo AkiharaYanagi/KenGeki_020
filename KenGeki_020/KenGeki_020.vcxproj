@@ -413,6 +413,7 @@
     <ClInclude Include="Source\FtgMain\BG.h" />
     <ClInclude Include="Source\FtgMain\Collision.h" />
     <ClInclude Include="Source\FtgMain\Decision.h" />
+    <ClInclude Include="Source\FtgMain\Ef\EfClang.h" />
     <ClInclude Include="Source\FtgMain\Fighting.h" />
     <ClInclude Include="Source\FtgMain\FtgConst.h" />
     <ClInclude Include="Source\FtgMain\FtgDemo_Actor.h" />
@@ -457,6 +458,7 @@
     <ClCompile Include="Source\FtgMain\BG.cpp" />
     <ClCompile Include="Source\FtgMain\Collision.cpp" />
     <ClCompile Include="Source\FtgMain\Decision.cpp" />
+    <ClCompile Include="Source\FtgMain\Ef\EfClang.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting.cpp" />
     <ClCompile Include="Source\FtgMain\FtgDemo_Actor.cpp" />
     <ClCompile Include="Source\FtgMain\FtgDemo_State.cpp" />
