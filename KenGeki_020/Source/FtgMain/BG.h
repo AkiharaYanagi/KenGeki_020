@@ -25,8 +25,11 @@ namespace GAME
 		P_Grp			m_bg_R;
 
 		//test カベ表示 背景
-		P_Grp		m_wall_L;
-		P_Grp		m_wall_R;
+		P_Grp			m_wall_L;
+		P_Grp			m_wall_R;
+
+		//［デバッグ用］入力説明
+		P_Grp			m_input;
 
 #if 0
 		P_GrpAcv		m_bg_back;

@@ -9,6 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
 #include "GameMain.h"
+#include "G_Ftg.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -37,6 +38,7 @@ void Main()
 	//読込
 	Load ();
 
+#if 0
 	//-------------------------------------
 	//test
 	ColorF color { 1.0, 1.0, 1.0, 1.0 };
@@ -47,12 +49,10 @@ void Main()
 	const PixelShader ps = HLSL { U"example/shader/hlsl/rgb_shift.hlsl", U"PS" };
 	const PixelShader ps_screen = HLSL { U"ScreenBlend.hlsl", U"PS" };
 
-	//-------------------------------------
-
-
 	//ブレンド用 レンダーテクスチャ
 	p_rd_tx = std::make_unique < RenderTexture > ( 1280, 960, Palette::Lightgreen );
-
+	//-------------------------------------
+#endif // 0
 
 	//========================================
 	//メインループ
@@ -75,23 +75,10 @@ void Main()
 //起動後１回のみの初期化
 void Load ()
 {
-	//ウィンドウ設定
-
-	//ゲーム表示サイズ
-	s3d::Size size = s3d::Scene::Size ();
-	s3d::Scene::SetResizeMode ( s3d::ResizeMode::Virtual );
-	s3d::Scene::Resize ( 1280, 960 );
-//	s3d::Scene::Resize ( 1200, 900 );
-
-	//ウィンドウサイズ
-	s3d::Scene::SetResizeMode ( s3d::ResizeMode::Keep );
-	s3d::Window::Resize ( 1600, 900 );
-	s3d::Window::SetStyle ( s3d::WindowStyle::Sizable );
-	s3d::Window::Centering ();
-
-	//マウス位置にウィンドウを移動
-	s3d::Point pt = s3d::Cursor::Pos () ;
-	s3d::Window::SetPos ( pt );
+	//-------------------------------------
+	//シーン共通
+	//格闘部分共通パラメータシングルトン生成
+	G_Ftg::Create ();
 
 	//-------------------------------------
 	//システム初期化
@@ -103,16 +90,61 @@ void Load ()
 	gameMain->Init ();
 
 	gameSystem.SetpGameMain ( std::move ( gameMain ) );
-
-
 }
 
 //メインループ中の最初の１回のみの初期化
 void Init ()
 {
+	//ウィンドウ設定
+
+	//ゲーム表示サイズ
+	s3d::Size size = s3d::Scene::Size ();
+	s3d::Scene::SetResizeMode ( s3d::ResizeMode::Virtual );
+	s3d::Scene::Resize ( 1280, 960 );
+//	s3d::Scene::Resize ( 1200, 900 );
+
+	//ウィンドウサイズ
+	s3d::Scene::SetResizeMode ( s3d::ResizeMode::Keep );
+//	s3d::Window::Resize ( 1600, 900 );
+	int32 wnd_w = 1728;
+	int32 wnd_h = 972;
+	s3d::Window::Resize ( wnd_w, wnd_h );	//16:9 で(1280,960)が入るサイズ
+	s3d::Window::SetStyle ( s3d::WindowStyle::Sizable );
+
+	//位置
+
+#define CURSOR_POS_START 0
+#if CURSOR_POS_START
+
+
+	//中央
+	s3d::Window::Centering ();
+
+
+#else
+
+	//マウス位置にウィンドウを移動
+	s3d::Point pt = s3d::Cursor::Pos () ;
+	s3d::Window::SetPos ( pt );
+
+	//ウィンドウ位置のモニタIDを取得
+	size_t monitorIndex = s3d::System::GetCurrentMonitorIndex ();
+	s3d::Array < s3d::MonitorInfo > a_mInfo = s3d::System::EnumerateMonitors ();
+	s3d::MonitorInfo mInfo = a_mInfo [ monitorIndex ];
+	s3d::Vec2 mCenter = mInfo.displayRect.center();
+	const int32 dev_y = - 32;
+	s3d::Window::SetPos ( (int32)mCenter.x - wnd_w / 2, dev_y + (int32)mCenter.y - wnd_h / 2 );
+
+
 	//カーソル位置にウィンドウを移動
-	WND_UTL::MoveWindow_toCursor ();
+//	WND_UTL::MoveWindow_toCursor ();
+
+
+#endif // 0
+
+
 }
+
 
 
 void Move ()

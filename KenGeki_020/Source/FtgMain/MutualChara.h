@@ -168,6 +168,11 @@ namespace GAME
 		//トレーニングモード初期化
 		void TrainingInit ();
 
+		//システム表示 切替
+		void SwitchDisp ();
+		void OnDisp ();
+		void OffDisp ();
+
 
 	private:
 		//------------------------------------------------------

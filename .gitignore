@@ -369,3 +369,4 @@ MigrationBackup/
 FodyWeavers.xsd
 KenGeki_Setup/剣撃クロスゾーン_セットアップ.msi
 *.zip
+/KenGeki_020/App/old

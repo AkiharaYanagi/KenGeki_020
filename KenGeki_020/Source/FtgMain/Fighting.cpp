@@ -9,6 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "Fighting.h"
 #include "FtgConst.h"	
+#include "../GameMain/G_Ftg.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -230,6 +231,32 @@ namespace GAME
 
 		//ステート名
 		m_strState->SetStr ( m_demoActor->GetName () );
+
+		static bool bDisp = T;		//状態
+		static bool pre_bDisp = F;	//前回押しているか
+		static bool is_bDisp = F;	//今回押しているか
+
+//		is_bDisp = ( WND_UTL::AscKey ( '4' ) );
+		//Asyncの判定２回目以降
+		is_bDisp = G_FTG()->GetSysDisp ();
+
+
+		//今回押した瞬間ならば、1回のみ切替
+		if ( ! pre_bDisp && is_bDisp )	// false -> true
+		{
+			if ( bDisp )
+			{
+				m_strState->SetValid ( F );
+				bDisp = false;
+			}
+			else
+			{
+				m_strState->SetValid ( T );
+				bDisp = true;
+			}
+		}
+
+		pre_bDisp = is_bDisp;
 	}
 
 

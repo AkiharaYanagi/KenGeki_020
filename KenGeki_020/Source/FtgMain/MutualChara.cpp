@@ -9,7 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "MutualChara.h"
 //#include "../GameMain/SoundConst.h"
-//#include "G_Ftg.h"
+#include "../GameMain/G_Ftg.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -87,6 +87,9 @@ namespace GAME
 		m_utl.SwitchRect ();
 		m_utl.SwitchFrontEnd ();
 //		m_utl.SwitchCPU ();
+
+		//表示切替
+		SwitchDisp ();
 
 		//---------------------------------------------------
 
@@ -210,14 +213,14 @@ namespace GAME
 		G_FTG()->CulcPosMutualBase ( pos1p, pos2p );
 
 		//---------------------------------------------------
+		//超必殺カットイン
 		if ( m_pFtgGrp->GetOverDrive () )
 		{
-		//	s3d::ClearPrint();
 	//		mp_vtx->advance ();
 	//		mp_vtx->draw ();
 			GrpLst::Inst()->StartVtx ();
+			m_pFtgGrp->SetOverDrive ( F );	//条件をオフ
 		}
-
 	}
 
 
@@ -402,11 +405,11 @@ namespace GAME
 		if ( id == PLAYER_ID_1 )
 		{
 			m_exeChara1->SetAction ( U"壁割後ダッシュ" );
-			m_exeChara2->SetAction ( U"壁割吹き飛び" );
+			m_exeChara2->SetAction ( U"壁割から吹き飛び" );
 		}
 		else
 		{
-			m_exeChara1->SetAction ( U"壁割吹き飛び" );
+			m_exeChara1->SetAction ( U"壁割から吹き飛び" );
 			m_exeChara2->SetAction ( U"壁割後ダッシュ" );
 		}
 	}
@@ -566,6 +569,45 @@ namespace GAME
 	}
 #endif // 0
 
+	void MutualChara::SwitchDisp ()
+	{
+		static bool bDisp = T;		//状態
+		static bool pre_bDisp = F;	//前回押しているか
+		static bool is_bDisp = F;	//今回押しているか
+
+		//		is_bDisp0 = ( WND_UTL::AscKey ( '4' ) );
+		//Asyncの判定２回目以降
+		is_bDisp = G_FTG()->GetSysDisp ();
+
+		//今回押した瞬間ならば、1回のみ切替
+		if ( ! pre_bDisp && is_bDisp )	// false -> true
+		{
+			if ( bDisp )
+			{
+				OffDisp ();
+				bDisp = false;
+			}
+			else
+			{
+				OnDisp ();
+				bDisp = true;
+			}
+		}
+
+		pre_bDisp = is_bDisp;
+	}
+
+	void MutualChara::OnDisp ()
+	{
+		m_btlTime->On ();
+		m_round->On ();
+	}
+
+	void MutualChara::OffDisp ()
+	{
+		m_btlTime->Off ();
+		m_round->Off ();
+	}
 
 
 }	//namespace GAME

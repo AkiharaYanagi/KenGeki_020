@@ -48,6 +48,9 @@ namespace GAME
 		//試合(マッチ)終了判定
 		bool IsEndMutch ();
 
+		void On ();
+		void Off ();
+
 	private:
 		static const float POS_BY;
 		static const float POS_BX10;

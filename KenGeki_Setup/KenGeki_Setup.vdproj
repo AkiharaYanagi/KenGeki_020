@@ -15,7 +15,19 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_1AAC68ABF9DF47EEADB7C3CC1AAEEE19"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2BB23F13470E4049BFD375257078ABF0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3F6316A6039F477382D0C627773B890D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -33,74 +45,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_511E7C5C6CCC97E72D99AD3A1157D186"
-        "OwnerKey" = "8:_551D80759FE546ACADEF0FEFAEF89BF5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_551D80759FE546ACADEF0FEFAEF89BF5"
+        "MsmKey" = "8:_847A8EEB57C64CFC8EA77BA29B4AD873"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7BCA5F0E69ABCC3DB14099CE5463B43A"
-        "OwnerKey" = "8:_8512AACA41274067B5E4A03527D115A6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8512AACA41274067B5E4A03527D115A6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B05737D3CACB7BAE50B2A5285FB29122"
-        "OwnerKey" = "8:_551D80759FE546ACADEF0FEFAEF89BF5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B76E6EA14B960F59CC09E0E7119E19CF"
-        "OwnerKey" = "8:_551D80759FE546ACADEF0FEFAEF89BF5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D5A0CC14099339BD736A8B685DAA1523"
-        "OwnerKey" = "8:_8512AACA41274067B5E4A03527D115A6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EAE3BDF7A854042E123793E4F08F6762"
-        "OwnerKey" = "8:_551D80759FE546ACADEF0FEFAEF89BF5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_ED9793B864444C9720D2F37A75E6F149"
-        "OwnerKey" = "8:_551D80759FE546ACADEF0FEFAEF89BF5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7BCA5F0E69ABCC3DB14099CE5463B43A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8512AACA41274067B5E4A03527D115A6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D5A0CC14099339BD736A8B685DAA1523"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -198,10 +144,50 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1AAC68ABF9DF47EEADB7C3CC1AAEEE19"
+            {
+            "SourcePath" = "8:..\\KenGeki_020\\App\\keyconfig.dat"
+            "TargetName" = "8:keyconfig.dat"
+            "Tag" = "8:"
+            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2BB23F13470E4049BFD375257078ABF0"
             {
             "SourcePath" = "8:..\\KenGeki_020\\App\\archive.dat"
             "TargetName" = "8:archive.dat"
+            "Tag" = "8:"
+            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3F6316A6039F477382D0C627773B890D"
+            {
+            "SourcePath" = "8:..\\KenGeki_020\\App\\GameSettings.exe"
+            "TargetName" = "8:GameSettings.exe"
             "Tag" = "8:"
             "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
             "Condition" = "8:"
@@ -258,72 +244,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_511E7C5C6CCC97E72D99AD3A1157D186"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_847A8EEB57C64CFC8EA77BA29B4AD873"
             {
-            "SourcePath" = "8:MF.dll"
-            "TargetName" = "8:MF.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7BCA5F0E69ABCC3DB14099CE5463B43A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:TRUE"
-            "AssemblyAsmDisplayName" = "8:SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=AMD64"
-                "ScatterAssemblies"
-                {
-                    "_7BCA5F0E69ABCC3DB14099CE5463B43A"
-                    {
-                    "Name" = "8:SlimDX.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:SlimDX.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8512AACA41274067B5E4A03527D115A6"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:KeyConfig, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_8512AACA41274067B5E4A03527D115A6"
-                    {
-                    "Name" = "8:KeyConfig.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\KenGeki_020\\App\\KeyConfig.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\KenGeki_020\\App\\raiden.mp4"
+            "TargetName" = "8:raiden.mp4"
             "Tag" = "8:"
             "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
             "Condition" = "8:"
@@ -338,117 +262,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B05737D3CACB7BAE50B2A5285FB29122"
-            {
-            "SourcePath" = "8:MFReadWrite.dll"
-            "TargetName" = "8:MFReadWrite.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B76E6EA14B960F59CC09E0E7119E19CF"
-            {
-            "SourcePath" = "8:MFPlat.DLL"
-            "TargetName" = "8:MFPlat.DLL"
-            "Tag" = "8:"
-            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D5A0CC14099339BD736A8B685DAA1523"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ScriptEditorUtility, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_D5A0CC14099339BD736A8B685DAA1523"
-                    {
-                    "Name" = "8:ScriptEditorUtility.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ScriptEditorUtility.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EAE3BDF7A854042E123793E4F08F6762"
-            {
-            "SourcePath" = "8:VERSION.dll"
-            "TargetName" = "8:VERSION.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED9793B864444C9720D2F37A75E6F149"
-            {
-            "SourcePath" = "8:d3d11.dll"
-            "TargetName" = "8:d3d11.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -508,7 +321,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:剣撃クロスゾーン"
         "ProductCode" = "8:{2AD345BC-E6F9-41BF-8FA7-1CD8FD4D7433}"
-        "PackageCode" = "8:{4DB77CAD-17A9-4A88-9FCB-C4EC048F598A}"
+        "PackageCode" = "8:{2B03AD5B-E7FA-4E2F-BC08-3FB966D9FC2D}"
         "UpgradeCode" = "8:{121A6B38-462B-4ED0-A1D5-5BEBB20D452B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -516,12 +329,12 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:KoseiDojo"
+        "Manufacturer" = "8:KouseiDojo"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:剣撃クロスゾーン_セットアップ"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:KoseiDojo"
+        "ARPCONTACT" = "8:KouseiDojo"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -1027,7 +840,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_551D80759FE546ACADEF0FEFAEF89BF5"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_C22E534A3EB84DF2926C5F7D127E0010"
             {
             "SourcePath" = "8:..\\Intermediate\\KenGeki_020\\Release\\KenGeki_020.exe"
             "TargetName" = "8:"

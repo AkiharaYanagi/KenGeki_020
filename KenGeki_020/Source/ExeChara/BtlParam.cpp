@@ -8,7 +8,7 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "BtlParam.h"
-#include "../FtgMain/G_Ftg.h"
+#include "../GameMain/G_Ftg.h"
 #include "Main/ExeChara.h"
 
 

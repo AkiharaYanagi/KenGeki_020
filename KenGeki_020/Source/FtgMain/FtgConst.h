@@ -131,7 +131,7 @@ namespace GAME
 		BALANCE_START = 5000,
 
 		MANA_MAX = 10000,
-		MANA_START = 1000,
+		MANA_START = MANA_MAX,
 		MANA_HALF = MANA_MAX / 2,
 
 		ACCEL_MAX = 1000,
@@ -141,6 +141,7 @@ namespace GAME
 		//停止
 //		HITSTOP_TIME = 15,
 		HITSTOP_TIME = 7,
+//		HITSTOP_TIME = 700,
 		DOWN_TIME = 120 + 60,
 		END_TIME = 60,
 	};

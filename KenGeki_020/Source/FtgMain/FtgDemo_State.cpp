@@ -10,6 +10,7 @@
 #include "FtgDemo_State.h"
 #include "../GameMain/SoundConst.h"
 #include "FtgDemo_Actor.h"
+#include "../GameMain/G_Ftg.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -130,9 +131,8 @@ namespace GAME
 	void FTG_DM_Main::Do ()
 	{
 		//[一時] 壁割
-		bool bOn = m_prmFtgDemo->GetpFtgGrp ()->GetWallBreak ();
-
-		if ( bOn )
+		bool bOnWallBreak = m_prmFtgDemo->GetpFtgGrp ()->GetWallBreak ();
+		if ( bOnWallBreak )
 		{
 			GetwpFtgDemoActor().lock()->Shift_Main_To_WallBreak ();
 		}
@@ -156,17 +156,19 @@ namespace GAME
 	//特殊演出：壁割り
 	FTG_DM_WallBreak::FTG_DM_WallBreak ()
 	{
-		m_wallBreak = std::make_shared < WallBreak > ();
-		AddpTask ( m_wallBreak );
+		m_wallBreakEf = std::make_shared < WallBreak > ();
+		AddpTask ( m_wallBreakEf );
 		m_timer = std::make_shared < Timer > ( 60 );
 	}
 
 	void FTG_DM_WallBreak::Start ()
 	{
-		//壁位置
+		//壁割エフェクト位置
 		float wall_R = G_Ftg::inst()->GetWallRight ();
-		m_wallBreak->SetPos ( wall_R - (float)GAME_WIDTH_HALF );
-		m_wallBreak->On ();
+		m_wallBreakEf->SetPos ( wall_R - (float)GAME_WIDTH_HALF );
+		m_wallBreakEf->On ();
+
+		//タイマスタート
 		m_timer->Start ();
 
 		//最初の１回目で条件をオフにしておく
@@ -180,13 +182,14 @@ namespace GAME
 		//終了
 		if ( m_timer->IsLast() )
 		{
-			m_wallBreak->Off ();
+			m_wallBreakEf->Off ();
 
 			//壁位置をリセット
 			G_Ftg::inst()->ResetWall ();
 
 			//通常状態へ移行
-			GetpMutualChara()->WallBreak_Action ( PLAYER_ID_1 );
+			PLAYER_ID WB_Player = m_prmFtgDemo->GetpFtgGrp()->GetWB_Player ();
+			GetpMutualChara()->WallBreak_Action ( WB_Player );
 			GetpMutualChara()->Shift_Fighting ();
 			GetwpFtgDemoActor().lock()->Shift_WallBreak_To_Main();
 		}

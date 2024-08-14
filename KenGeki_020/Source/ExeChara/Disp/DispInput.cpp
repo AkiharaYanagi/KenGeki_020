@@ -47,18 +47,10 @@ namespace GAME
 		//---------------------------------------------------------------
 		//キー入力
 		m_grpKey = std::make_shared < GameGraphic > ();
-		m_grpKey->AddTexture ( U"10_10_white.png" );
-
+		m_grpKey->AddTexture_FromArchive ( U"10_10_white.png" );
 		m_grpKey->SetZ ( Z_SYS - 0.01f );
 		m_grpKey->SetPos ( 500, 200 );
 		m_grpKey->ClearObject ();
-#if 0
-		P_Ob pObject = std::make_shared < GameObject > ();
-		pObject->SetPos ( 500, 200 );
-		m_grpKey->AddpObject ( pObject );
-#endif // 0
-
-//		AddpTask ( m_grp );
 		GRPLST_INSERT ( m_grpKey );
 
 		//１マス ( 12種類 * 60[FPS] )
@@ -73,8 +65,11 @@ namespace GAME
 				map_Ob.push_back ( pOb );
 				m_grpKey->AddpObject ( pOb );
 
+#if 0
 				//初期値ランダム
 				pOb->SetValid ( 0 == rand () % 2  );
+#endif // 0
+				pOb->SetValid ( F );
 			}
 		}
 
@@ -156,6 +151,7 @@ namespace GAME
 			++ i;
 		}
 
+
 		//---------------------------------------------------------------
 	}
 
@@ -219,6 +215,7 @@ namespace GAME
 		m_bg->SetValid ( T );
 		m_grpKey->SetValid ( T );
 #if 0
+		for ( P_Ob ob : map_Ob ) { ob->SetValid ( T ); }
 		m_index->SetValid ( T );
 #endif // 0
 	}
@@ -228,6 +225,7 @@ namespace GAME
 		m_bg->SetValid ( F );
 		m_grpKey->SetValid ( F );
 #if 0
+		for ( P_Ob ob : map_Ob ) { ob->SetValid ( F ); }
 		m_index->SetValid ( F );
 #endif // 0
 	}

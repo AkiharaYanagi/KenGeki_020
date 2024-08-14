@@ -26,7 +26,7 @@ namespace GAME
 		//共通エフェクト
 		m_efClang = std::make_shared < EfClang > ();
 		AddpTask ( m_efClang );
-		GRPLST_INSERT ( m_efClang );
+//		GRPLST_INSERT ( m_efClang );
 
 #if 0
 		m_efSpark = make_shared < EfSpark > ();

@@ -8,6 +8,8 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "MutualChara_Utility.h"
+#include "../GameMain/G_Ftg.h"
+
 
 //-------------------------------------------------------------------------------------------------
 // 定義
@@ -41,36 +43,6 @@ namespace GAME
 	}
 
 	//------------------------------------------------------
-	//入力表示切替
-	void MutualChara_Utility::SwitchDispInput ()
-	{
-		static bool bDispInput = T;		//状態
-		static bool pre_bDispInput = F;	//前回押しているか
-		static bool is_bDispInput = F;	//今回押しているか
-
-		is_bDispInput = ( WND_UTL::AscKey ( '2' ) );
-
-		//今回押した瞬間ならば、1回のみ切替
-		if ( ! pre_bDispInput && is_bDispInput )	// false -> true
-		{
-			if ( ! bDispInput )
-			{
-				m_exeChara1->OnDispInput ();
-				m_exeChara2->OnDispInput ();
-				bDispInput = true;
-			}
-			else
-			{
-				m_exeChara1->OffDispInput ();
-				m_exeChara2->OffDispInput ();
-				bDispInput = false;
-			}
-		}
-
-		pre_bDispInput = is_bDispInput;
-	}
-
-	//------------------------------------------------------
 	//枠表示切替 
 	//@info ExeCharaで呼ぶと1P2Pで２回呼ばれてしまう
 	void MutualChara_Utility::SwitchRect ()
@@ -79,7 +51,7 @@ namespace GAME
 		static bool pre_bDispRect = F;	//前回押しているか
 		static bool is_bDispRect = F;	//今回押しているか
 
-		is_bDispRect = ( WND_UTL::AscKey ( '1' ) );
+		is_bDispRect = ( WND_UTL::AscKey ( '2' ) );
 
 		//@info キーボード入力は押しっぱなしで一定時間後連打状態になる
 		//TRACE_F ( _T ( "b = %d, pre = %d, is = %d\n" ), bDispRect ? 1 : 0, pre_bDispRect ? 1 : 0, is_bDispRect ? 1 : 0  );
@@ -104,6 +76,36 @@ namespace GAME
 	}
 
 	//------------------------------------------------------
+	//入力表示切替
+	void MutualChara_Utility::SwitchDispInput ()
+	{
+		static bool bDispInput = T;		//状態
+		static bool pre_bDispInput = F;	//前回押しているか
+		static bool is_bDispInput = F;	//今回押しているか
+
+		is_bDispInput = ( WND_UTL::AscKey ( '3' ) );
+
+		//今回押した瞬間ならば、1回のみ切替
+		if ( ! pre_bDispInput && is_bDispInput )	// false -> true
+		{
+			if ( ! bDispInput )
+			{
+				m_exeChara1->OnDispInput ();
+				m_exeChara2->OnDispInput ();
+				bDispInput = true;
+			}
+			else
+			{
+				m_exeChara1->OffDispInput ();
+				m_exeChara2->OffDispInput ();
+				bDispInput = false;
+			}
+		}
+
+		pre_bDispInput = is_bDispInput;
+	}
+
+	//------------------------------------------------------
 	//ゲージ類表示切替
 	void MutualChara_Utility::SwitchFrontEnd ()
 	{
@@ -111,7 +113,11 @@ namespace GAME
 		static bool pre_bFrontEnd = F;	//前回押しているか
 		static bool is_bFrontEnd = F;	//今回押しているか
 
-		is_bFrontEnd = ( WND_UTL::AscKey ( '3' ) );
+
+		is_bFrontEnd = ( WND_UTL::AscKey ( '4' ) );
+		//Asyncの最初の１回
+		G_FTG()->SetSysDisp ( is_bFrontEnd );
+
 
 		//今回押した瞬間ならば、1回のみ切替
 		if ( ! pre_bFrontEnd && is_bFrontEnd )	// false -> true

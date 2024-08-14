@@ -12,12 +12,12 @@
 
 //状態遷移先
 #include "../FtgMain/FtgMain.h"
+#include "../Title/Title.h"
+#include "../Training/Training.h"
 
 #if 0
-#include "../Title/Title.h"
 #include "../CharaSele/CharaSele.h"
 #include "../Introduction/Introduction.h"
-#include "../Training/Training.h"
 #include "../Result/Result.h"
 #endif // 0
 
@@ -61,14 +61,28 @@ namespace GAME
 		return mwp_This.lock ();
 	}
 
-#if 0
 	//[シーン遷移] タイトルに戻る
 	void Scene::Transit_Title ()
 	{
 		GRPLST_CLEAR ();
-		mp_Transit = make_shared < Title > ();
-		GRPLST_LOAD ();
+		mp_Transit = std::make_shared < Title > ();
 	}
+
+	//[シーン遷移] ファイティングに移行
+	void Scene::Transit_Fighting ()
+	{
+		GRPLST_CLEAR ();
+		mp_Transit = std::make_shared < FtgMain > ();
+	}
+
+	//[シーン遷移] トレーニングに移行
+	void Scene::Transit_Training ()
+	{
+		GRPLST_CLEAR ();
+		mp_Transit = std::make_shared < Training > ();
+	}
+
+#if 0
 	
 	//[シーン遷移] キャラセレに移行
 	void Scene::Transit_CharaSele ()
@@ -78,14 +92,6 @@ namespace GAME
 		GRPLST_LOAD ();
 	}
 
-
-	//[シーン遷移] ファイティングに移行
-	void Scene::Transit_Fighting ()
-	{
-		GRPLST_CLEAR ();
-		mp_Transit = make_shared < FtgMain > ();
-		GRPLST_LOAD ();
-	}
 
 	void Scene::Transit_Fighting ( MUTCH_MODE mode )
 	{
@@ -110,24 +116,18 @@ namespace GAME
 		mp_Transit = make_shared < Intro_Img > ();
 		GRPLST_LOAD ();
 	}
-
-	//[シーン遷移] トレーニングに移行
-	void Scene::Transit_Training ()
-	{
-		GRPLST_CLEAR ();
-		mp_Transit = make_shared < Training > ();
-		GRPLST_LOAD ();
-	}
 #endif // 0
 
 	//====================================================================
 	SceneManager::SceneManager()
 	{
+		START_MODE startMode;
+
 		//テスト用 開始状態選択
 //		startMode = START_TITLE;
 //		startMode = START_CHARA_SELE;
-		START_MODE startMode = START_BATTLE;
-//		startMode = START_TRAINING;
+//		startMode = START_BATTLE;
+		startMode = START_TRAINING;
 #if 0
 //		startMode = START_INTRO;
 //		startMode = START_RESULT;
@@ -149,13 +149,11 @@ namespace GAME
 
 		switch ( startMode )
 		{
-#if 0
 		//---------------------------------------------
 		//タイトルから開始
 		case START_TITLE:
 			pScene = std::make_shared < Title > ();
 		break;
-#endif // 0
 
 		//---------------------------------------------
 		//バトルから開始
@@ -170,6 +168,13 @@ namespace GAME
 			pScene = std::make_shared < CharaSele > ();
 		break;
 #endif // 0
+
+		//---------------------------------------------
+		case START_TRAINING:
+			//トレーニングから開始
+			pScene = std::make_shared < Training > ();
+		break;
+
 
 		//---------------------------------------------
 		default: break;

@@ -12,7 +12,7 @@
 #include "../../GameMain/GameConst.h"
 #include "Chara.h"
 #include "../Input/CharaInput.h"
-//#include "../../FtgMain/G_Ftg.h"
+
 
 //-------------------------------------------------------------------------------------------------
 // 宣言

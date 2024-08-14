@@ -11,7 +11,7 @@
 #include "Game.h"
 #include "../../GameMain/GameConst.h"
 #include "../../FtgMain/FtgConst.h"
-#include "../G_Ftg.h"
+
 
 //-------------------------------------------------------------------------------------------------
 // 宣言

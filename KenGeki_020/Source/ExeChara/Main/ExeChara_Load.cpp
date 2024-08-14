@@ -117,21 +117,21 @@ namespace GAME
 		//名前からスクリプトファイルを指定してキャラのロード
 		s3d::String name ( U"chara_Stand_Bin.dat" );
 
-		//名前の指定
+		//[test] 名前の直接指定
 		PLAYER_ID id = m_btlPrm.GetPlayerID ();
 		if ( PLAYER_ID_1 == id )
 		{
 //			name.assign ( _T ( "charaBin.dat" ) );
-			name.assign ( U"chara_Ouka_Bin.dat" );
-//			name.assign ( U"chara_Sae_Bin.dat" );
+//			name.assign ( U"chara_Ouka_Bin.dat" );		m_name = CHARA_OUKA;
+			name.assign ( U"chara_Sae_Bin.dat" );		m_name = CHARA_SAE;
 //			name.assign ( U"chara_Retsudou_Bin.dat" );
 //			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
 		else if ( PLAYER_ID_2 == id )
 		{
 //			name.assign ( _T ( "charaBin.dat" ) );
-			name.assign ( U"chara_Ouka_Bin.dat" );
-//			name.assign ( U"chara_Sae_Bin.dat" );
+			name.assign ( U"chara_Ouka_Bin.dat" );		m_name = CHARA_OUKA;
+//			name.assign ( U"chara_Sae_Bin.dat" );		m_name = CHARA_SAE;
 //			name.assign ( U"chara_Retsudou_Bin.dat" );
 //			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
@@ -162,7 +162,11 @@ namespace GAME
 			//1pと2pで名前が同じとき、既に読み込んであるキャラデータを参照する
 			if ( this->m_name == m_pOther.lock()->m_name )
 			{
-				m_pChara = m_pOther.lock()->m_pChara;
+//				m_pChara = m_pOther.lock()->m_pChara;
+			}
+			else
+			{
+				LoadCharaBin_s3d loadCharaBin ( name, * m_pChara );
 			}
 		}
 	}

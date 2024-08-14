@@ -9,7 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "Round.h"
 #include "FtgConst.h"	
-#include "G_Ftg.h"	
+#include "../GameMain/G_Ftg.h"	
 
 
 //-------------------------------------------------------------------------------------------------
@@ -103,6 +103,27 @@ namespace GAME
 	bool Round::IsEndMutch ()
 	{
 		return ( m_round_1p == m_targetRound || m_round_2p == m_targetRound );
+	}
+
+
+	void Round::On ()
+	{
+		m_roundDisp_1p->SetValid ( T );
+		m_roundDisp_2p->SetValid ( T );
+		m_ob_1p0->SetValid ( T );
+		m_ob_1p1->SetValid ( T );
+		m_ob_2p0->SetValid ( T );
+		m_ob_2p1->SetValid ( T );
+	}
+
+	void Round::Off ()
+	{
+		m_roundDisp_1p->SetValid ( F );
+		m_roundDisp_2p->SetValid ( F );
+		m_ob_1p0->SetValid ( F );
+		m_ob_1p1->SetValid ( F );
+		m_ob_2p0->SetValid ( F );
+		m_ob_2p1->SetValid ( F );
 	}
 
 

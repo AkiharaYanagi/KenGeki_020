@@ -24,19 +24,23 @@ namespace GAME
 	//アクション移項（コマンドに関する処理）
 	bool ExeChara::TranditAction_Exclusion ( P_Action pAct )
 	{
-		//------------------------------------------
-		//対象IDがバランス消費で移項不可能なら次へ
-
-#if 0
-
+		//pActが次のアクション
+		
 		//------------------------------------------
 		//空中ダッシュ回数による遷移不可処理
-		if ( pAct->IsName ( _T ( "空中ダッシュ" ) ) )
+		bool AirDash = pAct->IsName ( U"空中ダッシュ" );
+		bool LowAirDash = pAct->IsName ( U"低空ダッシュ" );
+		if ( AirDash || LowAirDash )
 		{
 			UINT n = m_btlPrm.GetNAirDash ();
 			if ( 0 < n )
 			{ return F; }
 		}
+
+#if 0
+		//------------------------------------------
+		//対象IDがバランス消費で移項不可能なら次へ
+
 
 		//超必　遷移チェック
 		if ( pAct->IsName ( _T ( "超必殺発動" ) ) || pAct->IsName ( _T ( "超必B発動" ) ) )

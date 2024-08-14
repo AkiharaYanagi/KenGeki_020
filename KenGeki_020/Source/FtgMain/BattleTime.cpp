@@ -9,7 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "BattleTime.h"
 #include "FtgConst.h"	
-#include "G_Ftg.h"	
+#include "../GameMain/G_Ftg.h"	
 
 
 //-------------------------------------------------------------------------------------------------
@@ -121,6 +121,23 @@ namespace GAME
 		m_battle_time_02->SetIndexTexture ( index_02 );
 
 	}
+
+	void BattleTime::On ()
+	{
+		m_time_bg->SetValid ( T );
+		m_battle_time_01->SetValid ( T );
+		m_battle_time_02->SetValid ( T );
+		m_battle_time->SetValid ( T );
+	}
+
+	void BattleTime::Off ()
+	{
+		m_time_bg->SetValid ( F );
+		m_battle_time_01->SetValid ( F );
+		m_battle_time_02->SetValid ( F );
+		m_battle_time->SetValid ( F );
+	}
+
 
 }	//namespace GAME
 

@@ -54,6 +54,7 @@ namespace GAME
 			}
 		}
 
+		//-----------------------------------------------------
 		if ( IsNameAction ( U"ダウン" ) )
 		{
 			if ( m_pOther.lock()->IsNameAction ( U"足払い追撃ヒット" ) )
@@ -62,7 +63,26 @@ namespace GAME
 			}
 		}
 
+		//-----------------------------------------------------
+		//空中ダッシュ, 低空ダッシュ
+		bool AirDash = IsNameAction ( U"空中ダッシュ" );
+		bool LowAirDash = IsNameAction ( U"低空ダッシュ" );
+		if ( AirDash || LowAirDash )
+		{
+			if ( m_frame == 0 )
+			{
+				m_btlPrm.SetNAirDash ( 1 );
+			}
+			//回数リセットは "着地" 時
+		}
 
+		//@info DBGOUT_WND_F は　ExeChara中で用いると２P側で上書きされる
+		if ( IsPlayerID( PLAYER_ID_1 ) )
+		{
+			DBGOUT_WND_F( 8, U"AirDash = {}"_fmt( m_btlPrm.GetNAirDash() ) );
+		}
+
+		//-----------------------------------------------------
 		if ( IsNameAction ( U"超雷電蹴_発生" ) )
 		{
 			if ( m_pScript->GetFrame () == 1 )
@@ -120,23 +140,6 @@ namespace GAME
 		}
 
 
-		//-----------------------------------------------------
-		//空中ダッシュ
-		if ( IsNameAction ( _T ( "空中ダッシュ" ) ) )
-		{
-			if ( m_frame == 0 )
-			{
-				m_btlPrm.SetNAirDash ( 1 );
-			}
-			//回数リセットは "着地" 時
-		}
-#if 0
-		//@info DBGOUT_WND_F は　ExeChara中で用いると２P側で上書きされる
-		if ( m_playerID == PLAYER_ID_1 )
-		{
-			DBGOUT_WND_F ( 8, _T ( "AirDash = %d" ), m_btlPrm.GetNAirDash () );
-		}
-#endif // 0
 
 		if ( IsNameAction ( _T ( "空中ダッシュ小攻撃" ) ) 
 			||  IsNameAction ( _T ( "空中ダッシュ中攻撃" ) ) 

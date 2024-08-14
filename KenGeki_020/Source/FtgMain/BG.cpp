@@ -9,7 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "BG.h"
 #include "FtgConst.h"	
-#include "G_Ftg.h"	
+#include "../GameMain/G_Ftg.h"	
 
 
 //-------------------------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ namespace GAME
 		m_wall_L->SetPos ( 0, 0 );
 		m_wall_L->SetZ ( Z_BG );
 		AddpTask ( m_wall_L );
-//		GRPLST_INSERT ( m_wall_L );
+		//		GRPLST_INSERT ( m_wall_L );
 
 		m_wall_R = std::make_shared < GameGraphic > ();
 		m_wall_R->AddTexture_FromArchive ( U"test_kabe.png" );
@@ -71,7 +71,17 @@ namespace GAME
 		m_wall_R->SetPos ( GAME_WIDTH - 512, 0 );
 		m_wall_R->SetZ ( Z_BG );
 		AddpTask ( m_wall_R );
-//		GRPLST_INSERT ( m_wall_R );
+		//		GRPLST_INSERT ( m_wall_R );
+
+
+		//------------------------------------------------
+		//test 入力説明
+		m_input = std::make_shared < GameGraphic > ();
+		m_input->AddTexture_FromArchive ( U"Input.png" );
+		m_input->SetPos ( 320, 300 );
+		m_input->SetZ ( Z_BG );
+		AddpTask ( m_input );
+		GRPLST_INSERT ( m_input );
 
 
 
@@ -332,6 +342,32 @@ namespace GAME
 		}
 
 #endif // 0
+
+
+
+		static bool bDisp = T;		//状態
+		static bool pre_Input = F;	//前回押しているか
+		static bool is_Input = F;	//今回押しているか
+
+		is_Input = ( WND_UTL::AscKey ( '1' ) );
+
+		//今回押した瞬間ならば、1回のみ切替
+		if ( ! pre_Input && is_Input )	// false -> true
+		{
+			if ( bDisp )
+			{
+				m_input->SetValid ( F );
+				bDisp = false;
+			}
+			else
+			{
+				m_input->SetValid ( T );
+				bDisp = true;
+			}
+		}
+
+		pre_Input = is_Input;
+
 	}
 
 

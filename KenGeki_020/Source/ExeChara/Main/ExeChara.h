@@ -172,23 +172,7 @@ namespace GAME
 		//全体画像処理を設定
 		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
 
-		//------------------------------------------------------------
-		//パラメータ
-		//@todo スクリプトの持つ　ScriptParam_Battle と ExeCharaの持つ実効値 BtlPrm の整理
-
-		BtlParam GetBtlPrm () const { return m_btlPrm; }
-
-		bool IsPlayerID ( PLAYER_ID id ) { return m_btlPrm.GetPlayerID () == id; }
-
-		void SetPos ( VEC2 v ) { m_btlPrm.SetPos ( v ); }
-		VEC2 GetPos () const { return m_btlPrm.GetPos (); }		//位置を取得
-		bool GetDirRight () const { return m_btlPrm.GetDirRight (); }	//向きを取得
-		void SetDirRight ( bool b ) { m_btlPrm.SetDirRight ( b ); }		//立ち状態で向きを設定
-
-		void BackPtX () { m_btlPrm.BackPtX (); }		//一つ前の位置に戻す
-		void BackMoveX () { m_btlPrm.BackMoveX (); }	//重なりが解消されるまで位置に戻す
-		void LookOther () { m_btlPrm.LookOther (); }	//相手の方向を向く
-
+		//---------------------------------------------
 
 #if 0
 		//------------------------------------------------
@@ -216,28 +200,44 @@ namespace GAME
 		void SetHitRect ();		//当り枠設定
 		//===========================================================
 
-	public:
-		//---------------------------------------------
-		//各値取得
-		P_Script GetpScript () { return m_pScript; }
-		BtlParam GetBtlParam () const { return m_btlPrm; };
-
-		CHARA_NAME GetCharaName () const { return m_name; }
-		int GetLife () const { return m_btlPrm.GetLife (); }		//ライフ取得
-		ACTION_POSTURE GetPosture () const { return m_pAction->GetPosture (); }
-
 
 //==========================================================================
 // ExeChara_Event.cpp
 //==========================================================================
 
+	public:
 		//----------------------
 		// 外部からの状態確認
 		//----------------------
 
+		//各値取得
+		PLAYER_ID GetPlayerID () const { return m_btlPrm.GetPlayerID (); }
+		bool IsPlayerID ( PLAYER_ID id ) { return m_btlPrm.GetPlayerID () == id; }
+		CHARA_NAME GetCharaName () const { return m_name; }
+
+		P_Script GetpScript () { return m_pScript; }
+		ACTION_POSTURE GetPosture () const { return m_pAction->GetPosture (); }
+
+		//パラメータ
+		//@todo スクリプトの持つ　ScriptParam_Battle と ExeCharaの持つ実効値 BtlPrm の整理
+		BtlParam GetBtlParam () const { return m_btlPrm; };
+		BtlParam GetBtlPrm () const { return m_btlPrm; }
+
+		void SetPos ( VEC2 v ) { m_btlPrm.SetPos ( v ); }
+		VEC2 GetPos () const { return m_btlPrm.GetPos (); }		//位置を取得
+		bool GetDirRight () const { return m_btlPrm.GetDirRight (); }	//向きを取得
+		void SetDirRight ( bool b ) { m_btlPrm.SetDirRight ( b ); }		//立ち状態で向きを設定
+
+		void BackPtX () { m_btlPrm.BackPtX (); }		//一つ前の位置に戻す
+		void BackMoveX () { m_btlPrm.BackMoveX (); }	//重なりが解消されるまで位置に戻す
+		void LookOther () { m_btlPrm.LookOther (); }	//相手の方向を向く
+
+		int GetLife () const { return m_btlPrm.GetLife (); }		//ライフ取得
 		//ライフ０チェック
 		bool IsZeroLife () const { return ( 0 >= m_btlPrm.GetLife () ); }
 
+
+		//------------------------------------------------------------
 		bool CanBeThrown () const;		//投げられ判定
 		bool IsThrowAction () const;		//投げ判定
 		bool IsNotOffset () const;		//相殺しない判定

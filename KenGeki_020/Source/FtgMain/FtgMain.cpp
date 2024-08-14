@@ -8,11 +8,13 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "FtgMain.h"
+#include "../Title/Title.h"
 
 #if 0
-#include "../Title/Title.h"
 #include "../Result/Result.h"
 #endif // 0
+
+#include "../GameMain/G_Ftg.h"
 
 //#include "../GameMain/SoundConst.h"
 
@@ -72,9 +74,8 @@ namespace GAME
 
 	void FtgMain::Load ()
 	{
-		//格闘部分共通パラメータシングルトン生成
-		G_Ftg::Create ();
-
+		//戦闘共通
+		G_Ftg::inst()->Init ();
 
 		//遷移先指定にthisを保存
 		Scene::SetwpThis ( shared_from_this () );
@@ -85,8 +86,8 @@ namespace GAME
 
 
 		//test
-//		DBGOUT_WND()->On ();
-		DBGOUT_WND()->Off ();
+		DBGOUT_WND()->On ();
+//		DBGOUT_WND()->Off ();
 
 
 		Scene::Load ();
@@ -124,7 +125,10 @@ namespace GAME
 		}
 
 		//トレーニングリセット
-		if ( CFG_PUSH_KEY ( P1_BTN6 ) || CFG_PUSH_KEY ( P2_BTN6 ) )
+		bool p1Reset = CFG_PUSH_KEY ( P1_BTN6 );
+		bool p2Reset = CFG_PUSH_KEY ( P2_BTN6 );
+		bool sysReset = WND_UTL::AscKey ( VK_BACK );
+		if ( p1Reset || p2Reset || sysReset )
 		{
 			m_fighting->TrainingRestart ();
 		}

@@ -26,6 +26,7 @@ namespace GAME
 		Timer	m_tmrStop;	//ストップ
 
 		bool	m_wallbreak { F };	//壁割
+		PLAYER_ID	m_WB_Plyaer { _PLAYER_NUM };	//壁を割ったプレイヤ
 
 		bool	m_overdrive { F };	//超必殺演出
 
@@ -43,6 +44,7 @@ namespace GAME
 		GET_SET ( bool, GetSlow, SetSlow, m_Slow )
 		GET_SET ( bool, GetOverDrive, SetOverDrive, m_overdrive )
 		GET_SET ( bool, GetWallBreak, SetWallBreak, m_wallbreak )
+		GET_SET ( PLAYER_ID, GetWB_Player, SetWB_Player, m_WB_Plyaer )
 
 
 		//---------------------------------------

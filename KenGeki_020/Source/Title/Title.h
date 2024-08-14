@@ -20,15 +20,29 @@ namespace GAME
 
 	class Title : public Scene, public std::enable_shared_from_this < Title >
 	{
-		P_PrmRect	m_rect;
 		P_Grp		m_bg;
-		P_Grp		m_Start;
-
-		P_PrmRect	m_fade_in;
-		UINT		m_wait_in;
+		P_Grp		m_menu;
+		P_Grp		m_cursor;
 
 		P_PrmRect	m_fade_out;
 		UINT		m_wait_out;
+
+#if 0
+		P_PrmRect	m_fade_in;
+		UINT		m_wait_in;
+
+		P_PrmRect	m_rect;
+		P_Grp		m_Start;
+#endif // 0
+
+		//シーン選択
+		enum TITLE_TO
+		{
+			TITLE_TO_BATTLE,
+			TITLE_TO_TRAINING,
+		};
+
+		TITLE_TO	m_to { TITLE_TO_BATTLE };
 
 	public:
 		Title ();

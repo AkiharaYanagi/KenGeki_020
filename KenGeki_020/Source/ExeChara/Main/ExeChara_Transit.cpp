@@ -8,6 +8,7 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "ExeChara.h"
+#include "../../GameMain/G_Ftg.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -318,6 +319,7 @@ namespace GAME
 	}
 
 	//-------------------------------------------------------------------------------------------------
+	// 特殊条件による分岐
 	void ExeChara::TranditAction_Special ()
 	{
 		//条件：壁到達のブランチをチェック
@@ -336,7 +338,9 @@ namespace GAME
 			if ( b_L || b_R )
 			{
 				//特定アクションの分岐
-				if ( m_pAction->IsName ( U"壁まで吹き飛び持続" ) )
+				bool b0 = m_pAction->IsName ( U"壁まで吹き飛び" );
+				bool b1 = m_pAction->IsName ( U"壁まで吹き飛び持続" );
+				if ( b0 || b1 )
 				{
 					//相手も遷移
 					//壁割後ホーミング移動
@@ -348,6 +352,7 @@ namespace GAME
 
 					//グラフィックからFTG全体に反映
 					m_pFtgGrp->SetWallBreak ( T );
+					m_pFtgGrp->SetWB_Player ( m_btlPrm.GetPlayerID() );
 				}
 
 				SetAction ( ActionName );	//遷移
