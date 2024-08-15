@@ -8,7 +8,7 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "ExeChara.h"
-#include "../../FtgMain/Fighting.h"
+#include "../../FtgMain/Fighting/Fighting.h"
 //#include "../../GameMain/SoundConst.h"
 
 

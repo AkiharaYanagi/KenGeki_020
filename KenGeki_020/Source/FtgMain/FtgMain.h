@@ -10,7 +10,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
 #include "../GameMain/Scene.h"
-#include "Fighting.h"
+#include "Fighting/Fighting.h"
 
 #if 0
 #include "../Menu/PauseMenu.h"

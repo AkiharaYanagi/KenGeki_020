@@ -19,8 +19,8 @@
 namespace GAME
 {
 	//定数
-	const float Training::BX = ( 1280 - 256 ) * 0.5f;
-	const float Training::BY = 170.f;
+	const float Training::BX = ( 1280 - 206 ) * 0.5f;
+	const float Training::BY = 190.f;
 	const float Training::BX_KI = ( 1280 - 512 ) * 0.5f;
 	const float Training::BY_KI = 900.f;
 
@@ -38,6 +38,8 @@ namespace GAME
 		//戦闘
 		m_fighting = std::make_shared < Fighting > ();
 		AddpTask ( m_fighting );
+		m_fighting->SetActiveTimer ( F );
+
 
 #if 0
 		//キー説明
@@ -104,6 +106,11 @@ namespace GAME
 		SOUND->Stop_BGM ( BGM_Main );
 		SOUND->Play_Loop_BGM ( BGM_Main );
 #endif // 0
+
+
+		//test
+		//		DBGOUT_WND()->On ();
+		DBGOUT_WND()->Off ();
 
 		Scene::Load ();
 	}

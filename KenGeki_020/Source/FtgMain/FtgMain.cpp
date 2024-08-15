@@ -86,8 +86,8 @@ namespace GAME
 
 
 		//test
-		DBGOUT_WND()->On ();
-//		DBGOUT_WND()->Off ();
+//		DBGOUT_WND()->On ();
+		DBGOUT_WND()->Off ();
 
 
 		Scene::Load ();

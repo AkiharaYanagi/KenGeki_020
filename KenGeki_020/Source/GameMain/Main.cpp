@@ -32,9 +32,15 @@ GameSystem gameSystem;
 std::unique_ptr < RenderTexture > p_rd_tx;
 
 
+//test
+std::unique_ptr < s3d::Audio > audio;
+
+
+
 //メインループ
 void Main()
 {
+
 	//読込
 	Load ();
 
@@ -141,6 +147,20 @@ void Init ()
 
 
 #endif // 0
+
+
+
+	//test
+	
+//	audio = std::make_unique < s3d::Audio > (  U"Sound\\00_Gaba.wav", s3d::Loop::Yes );
+
+
+	s3d::BinaryReader br { U"Sound\\00_Gaba.wav" };
+	audio = std::make_unique < s3d::Audio > ( s3d::Wave { std::move ( br ) } , s3d::Loop::Yes );
+
+
+	audio->play ();
+
 
 
 }

@@ -876,42 +876,6 @@
     <ClInclude Include="Source\ExeChara\Disp\DispGauge.h">
       <Filter>ExeChara\Disp</Filter>
     </ClInclude>
-    <ClInclude Include="Source\FtgMain\Collision.h">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\Decision.h">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\MutualChara_Utility.h">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\MutualChara.h">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\FtgDemo_Actor.h">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\FtgDemo_State.h">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\Fighting.h">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\BattleTime.h">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\FtgGrp.h">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\BG.h">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\Round.h">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FtgMain\WallBreak.h">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClInclude>
     <ClInclude Include="Source\FtgMain\Ef\EfClang.h">
       <Filter>FtgMain\Ef</Filter>
     </ClInclude>
@@ -923,6 +887,42 @@
     </ClInclude>
     <ClInclude Include="Source\GameMain\G_Ftg.h">
       <Filter>GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Mutual\Decision.h">
+      <Filter>FtgMain\Mutual</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Mutual\MutualChara.h">
+      <Filter>FtgMain\Mutual</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Mutual\MutualChara_Utility.h">
+      <Filter>FtgMain\Mutual</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Mutual\Collision.h">
+      <Filter>FtgMain\Mutual</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\BattleTime.h">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\BG.h">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\Fighting.h">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\FtgDemo_Actor.h">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\FtgDemo_State.h">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\FtgGrp.h">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\Round.h">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\WallBreak.h">
+      <Filter>FtgMain\Fighting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1007,42 +1007,6 @@
     <ClCompile Include="Source\ExeChara\Disp\DispGauge.cpp">
       <Filter>ExeChara\Disp</Filter>
     </ClCompile>
-    <ClCompile Include="Source\FtgMain\Collision.cpp">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\Decision.cpp">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\MutualChara_Utility.cpp">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\MutualChara.cpp">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\Fighting.cpp">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\FtgDemo_Actor.cpp">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\FtgDemo_State.cpp">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\BattleTime.cpp">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\FtgGrp.cpp">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\BG.cpp">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\Round.cpp">
-      <Filter>FtgMain\Mutual</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\WallBreak.cpp">
-      <Filter>FtgMain\Fighting</Filter>
-    </ClCompile>
     <ClCompile Include="Source\FtgMain\Ef\EfClang.cpp">
       <Filter>FtgMain\Ef</Filter>
     </ClCompile>
@@ -1054,6 +1018,42 @@
     </ClCompile>
     <ClCompile Include="Source\GameMain\G_Ftg.cpp">
       <Filter>GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Mutual\Decision.cpp">
+      <Filter>FtgMain\Mutual</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Mutual\MutualChara.cpp">
+      <Filter>FtgMain\Mutual</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Mutual\MutualChara_Utility.cpp">
+      <Filter>FtgMain\Mutual</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Mutual\Collision.cpp">
+      <Filter>FtgMain\Mutual</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\BG.cpp">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\Fighting.cpp">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\FtgDemo_Actor.cpp">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\FtgDemo_State.cpp">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\FtgGrp.cpp">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\Round.cpp">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\BattleTime.cpp">
+      <Filter>FtgMain\Fighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\WallBreak.cpp">
+      <Filter>FtgMain\Fighting</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

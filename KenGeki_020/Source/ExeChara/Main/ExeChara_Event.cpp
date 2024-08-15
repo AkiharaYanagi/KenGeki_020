@@ -131,7 +131,7 @@ namespace GAME
 #endif // 0
 
 		//指定アクションのとき　「不可」
-		if ( pAct->IsName ( U"ガード" ) ) { return F; }
+		if ( pAct->IsName ( U"ガード大" ) ) { return F; }
 		if ( pAct->IsName ( U"投げやられ" ) ) { return F; }
 
 		//アクション態勢が"AP_JUMP"は「不可」
@@ -197,7 +197,6 @@ namespace GAME
 
 		//-------------------------------------------------
 		//ガード判定
-#if 0
 		//後方向が入力されているとき
 		if ( m_pCharaInput->IsLvr4 () )
 		{
@@ -208,9 +207,29 @@ namespace GAME
 			//----------------------------
 
 			//アクション変更
-			SetAction ( _T("ガード") );
+//			SetAction ( U"ガード小" );
+			s3d::String gaurd_Name = U"ガード小";
+
+			int32 gaurd_id = s3d::Random ( 2 );
+#if 0
+			static int32 gaurd_id = 0;
+			if ( ++ gaurd_id >= 3 ) { gaurd_id = 0; }
+#endif // 0
+
+			switch ( gaurd_id )
+			{
+			case 0: gaurd_Name = U"ガード小"; break;
+			case 1: gaurd_Name = U"ガード中"; break;
+			case 2: gaurd_Name = U"ガード大"; break;
+			}
+
+			//相手の「相手の変更先アクション」を指定
+			m_pOther.lock ()->m_nameChangeOther = gaurd_Name;
+
+
 			return;
 		}
+#if 0
 #endif // 0
 
 		//-------------------------------------------------

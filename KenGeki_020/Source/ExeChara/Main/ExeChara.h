@@ -15,7 +15,7 @@
 #include "../../GameMain/GameConst.h"
 #include "../../GameMain/Param.h"
 #include "../../FtgMain/FtgConst.h"
-#include "../../FtgMain/FtgGrp.h"
+#include "../../FtgMain/Fighting/FtgGrp.h"
 
 #include "CharaData.h"
 #include "../Disp/DispChara.h"
