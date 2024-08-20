@@ -54,9 +54,6 @@ namespace GAME
 		P_FtgGrp	m_pFtgGrp;
 
 
-		//test 動画
-		std::unique_ptr < s3d::VideoTexture > mp_vtx;
-
 
 
 		//-------------------------------------------------

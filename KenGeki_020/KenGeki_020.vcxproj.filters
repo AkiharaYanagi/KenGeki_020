@@ -170,6 +170,9 @@
     <Filter Include="Training">
       <UniqueIdentifier>{e322ace2-6588-4a6f-8acf-34bcaf95f707}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ExeChara\Effect">
+      <UniqueIdentifier>{8f3a288a-6504-4a71-88f2-097feedc5b76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -924,6 +927,27 @@
     <ClInclude Include="Source\FtgMain\Fighting\WallBreak.h">
       <Filter>FtgMain\Fighting</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ExeChara\Effect\DispEffect.h">
+      <Filter>ExeChara\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\Effect\ExeEffect.h">
+      <Filter>ExeChara\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\Effect\OperateEffect.h">
+      <Filter>ExeChara\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameMain\SoundConst.h">
+      <Filter>GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\CharaSele_Player.h">
+      <Filter>CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\CharaSeleConst.h">
+      <Filter>CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\CharaSele.h">
+      <Filter>CharaSele</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1054,6 +1078,21 @@
     </ClCompile>
     <ClCompile Include="Source\FtgMain\Fighting\WallBreak.cpp">
       <Filter>FtgMain\Fighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Effect\DispEffect.cpp">
+      <Filter>ExeChara\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Effect\ExeEffect.cpp">
+      <Filter>ExeChara\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Effect\OperateEffect.cpp">
+      <Filter>ExeChara\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\CharaSele_Player.cpp">
+      <Filter>CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\CharaSele.cpp">
+      <Filter>CharaSele</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

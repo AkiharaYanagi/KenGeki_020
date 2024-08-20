@@ -59,6 +59,7 @@ namespace GAME
 		//=====================================================
 		//画面共通グラフィック処理
 		m_pFtgGrp = std::make_shared < FtgGrp > ();
+		AddpTask ( m_pFtgGrp );
 
 		//=====================================================
 		//ステート名
@@ -105,6 +106,7 @@ namespace GAME
 		m_strState->SetSize ( 30 );
 		m_strState->SetPos ( VEC2 ( 640 - 110, 145 ) );
 
+		m_pFtgGrp->Load ();
 
 		TASK_LST::Load ();
 	}
@@ -353,6 +355,7 @@ namespace GAME
 #endif // 0
 
 
+		//----------------------------------------------------
 		//表示切替
 		SwitchDisp ();
 
@@ -364,6 +367,7 @@ namespace GAME
 		m_bg->Grp ();
 
 
+		//----------------------------------------------------
 		//共通グラフィックからステートの変更
 		if ( m_pFtgGrp->GetWallBreak () )
 		{

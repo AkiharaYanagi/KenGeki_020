@@ -49,8 +49,6 @@ namespace GAME
 
 	void MutualChara::Load ()
 	{
-		mp_vtx = std::make_unique < s3d::VideoTexture > ( U"raiden.mp4", s3d::Loop::No );
-		GrpLst::Inst()->SetupVtx ( std::move ( mp_vtx ) );
 		TASK_VEC::Load ();
 	}
 
@@ -198,15 +196,6 @@ namespace GAME
 
 		G_FTG()->CulcPosMutualBase ( pos1p, pos2p );
 
-		//---------------------------------------------------
-		//超必殺カットイン
-		if ( m_pFtgGrp->GetOverDrive () )
-		{
-	//		mp_vtx->advance ();
-	//		mp_vtx->draw ();
-			GrpLst::Inst()->StartVtx ();
-			m_pFtgGrp->SetOverDrive ( F );	//条件をオフ
-		}
 	}
 
 

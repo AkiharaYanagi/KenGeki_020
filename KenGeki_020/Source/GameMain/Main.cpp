@@ -118,50 +118,13 @@ void Init ()
 	s3d::Window::SetStyle ( s3d::WindowStyle::Sizable );
 
 	//位置
-
 #define CURSOR_POS_START 0
 #if CURSOR_POS_START
-
-
-	//中央
-	s3d::Window::Centering ();
-
-
+	s3d::Window::Centering ();	//モニタ中央
 #else
-
-	//マウス位置にウィンドウを移動
-	s3d::Point pt = s3d::Cursor::Pos () ;
-	s3d::Window::SetPos ( pt );
-
-	//ウィンドウ位置のモニタIDを取得
-	size_t monitorIndex = s3d::System::GetCurrentMonitorIndex ();
-	s3d::Array < s3d::MonitorInfo > a_mInfo = s3d::System::EnumerateMonitors ();
-	s3d::MonitorInfo mInfo = a_mInfo [ monitorIndex ];
-	s3d::Vec2 mCenter = mInfo.displayRect.center();
-	const int32 dev_y = - 32;
-	s3d::Window::SetPos ( (int32)mCenter.x - wnd_w / 2, dev_y + (int32)mCenter.y - wnd_h / 2 );
-
-
-	//カーソル位置にウィンドウを移動
-//	WND_UTL::MoveWindow_toCursor ();
-
-
+	//カーソル位置のモニタの中心
+	WND_UTL::MoveWindow_toCenter_onCursor ();
 #endif // 0
-
-
-
-	//test
-	
-//	audio = std::make_unique < s3d::Audio > (  U"Sound\\00_Gaba.wav", s3d::Loop::Yes );
-
-
-	s3d::BinaryReader br { U"Sound\\00_Gaba.wav" };
-	audio = std::make_unique < s3d::Audio > ( s3d::Wave { std::move ( br ) } , s3d::Loop::Yes );
-
-
-	audio->play ();
-
-
 
 }
 

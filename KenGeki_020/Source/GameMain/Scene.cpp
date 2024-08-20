@@ -14,9 +14,9 @@
 #include "../FtgMain/FtgMain.h"
 #include "../Title/Title.h"
 #include "../Training/Training.h"
+#include "../CharaSele/CharaSele.h"
 
 #if 0
-#include "../CharaSele/CharaSele.h"
 #include "../Introduction/Introduction.h"
 #include "../Result/Result.h"
 #endif // 0
@@ -82,15 +82,14 @@ namespace GAME
 		mp_Transit = std::make_shared < Training > ();
 	}
 
-#if 0
 	
 	//[シーン遷移] キャラセレに移行
 	void Scene::Transit_CharaSele ()
 	{
 		GRPLST_CLEAR ();
-		mp_Transit = make_shared < CharaSele > ();
-		GRPLST_LOAD ();
+		mp_Transit = std::make_shared < CharaSele > ();
 	}
+#if 0
 
 
 	void Scene::Transit_Fighting ( MUTCH_MODE mode )
@@ -125,9 +124,9 @@ namespace GAME
 
 		//テスト用 開始状態選択
 //		startMode = START_TITLE;
-//		startMode = START_CHARA_SELE;
+		startMode = START_CHARA_SELE;
 //		startMode = START_BATTLE;
-		startMode = START_TRAINING;
+//		startMode = START_TRAINING;
 #if 0
 //		startMode = START_INTRO;
 //		startMode = START_RESULT;
@@ -161,13 +160,11 @@ namespace GAME
 			pScene = std::make_shared < FtgMain > ();
 		break;
 
-#if 0
 		//---------------------------------------------
 		//キャラセレから開始
 		case START_CHARA_SELE:
 			pScene = std::make_shared < CharaSele > ();
 		break;
-#endif // 0
 
 		//---------------------------------------------
 		case START_TRAINING:

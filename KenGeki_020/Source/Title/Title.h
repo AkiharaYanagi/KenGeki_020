@@ -24,10 +24,14 @@ namespace GAME
 		P_Grp		m_menu;
 		P_Grp		m_cursor;
 
+		P_FadeRect	m_fade_in;
+		P_FadeRect	m_fade_out;
+		uint32		m_plus_wait { 0 };
+
+#if 0
 		P_PrmRect	m_fade_out;
 		UINT		m_wait_out;
 
-#if 0
 		P_PrmRect	m_fade_in;
 		UINT		m_wait_in;
 
@@ -56,6 +60,8 @@ namespace GAME
 
 		P_GameScene Transit ();
 
+	private:
+		void Select ();
 	};
 
 	using P_Title = std::shared_ptr < Title >;

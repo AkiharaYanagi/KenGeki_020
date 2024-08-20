@@ -8,7 +8,7 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "Title.h"
-//#include "../GameMain/SoundConst.h"
+#include "../GameMain/SoundConst.h"
 
 //遷移先
 #include "../FtgMain/FtgMain.h"
@@ -45,6 +45,23 @@ namespace GAME
 		m_cursor->SetZ ( Z_CH );
 		AddpTask ( m_cursor );
 		GRPLST_INSERT ( m_cursor );
+
+		//カーソル位置
+		m_cursor->SetPos ( 480.f, 800.f + 80 * (int32)m_to );
+
+
+		//フェードイン
+		m_fade_in = std::make_shared < FadeRect > ();
+		m_fade_in->SetWhiteIn ( 60 );
+		AddpTask ( m_fade_in );
+		GRPLST_INSERT ( m_fade_in );
+
+		//フェードアウト
+		m_fade_out = std::make_shared < FadeRect > ();
+		m_fade_out->SetAfterClear ( F );
+		AddpTask ( m_fade_out );
+		GRPLST_INSERT ( m_fade_out );
+
 
 #if 0
 		m_rect = std::make_shared < PrmRect > ();
@@ -98,34 +115,11 @@ namespace GAME
 
 	void Title::Move ()
 	{
-		//キー上下でシーンを選択
-		if ( CFG_PUSH_KEY ( P1_UP ) || CFG_PUSH_KEY ( P2_UP ) )
-		{
-			switch ( m_to )
-			{
-			case TITLE_TO_BATTLE:
-				m_to = TITLE_TO_TRAINING;
-				break;
-			case TITLE_TO_TRAINING:
-				m_to = TITLE_TO_BATTLE;
-				break;
-			}
-		}
-		if ( CFG_PUSH_KEY ( P1_DOWN ) || CFG_PUSH_KEY ( P2_DOWN ) )
-		{
-			switch ( m_to )
-			{
-			case TITLE_TO_BATTLE:
-				m_to = TITLE_TO_TRAINING;
-				break;
-			case TITLE_TO_TRAINING:
-				m_to = TITLE_TO_BATTLE;
-				break;
-			}
-		}
+		if ( m_fade_in->IsActive () ) { Scene::Move (); return; }
+		if ( m_fade_out->IsActive () ) { Scene::Move (); return; }
 
-		//カーソル位置
-		m_cursor->SetPos ( 480.f, 800.f + 80 * (int32)m_to );
+		//選択
+		Select ();
 
 
 #if 0
@@ -175,27 +169,75 @@ namespace GAME
 		//キー1でシーンを進める
 		if ( CFG_PUSH_KEY ( P1_BTN0 ) || CFG_PUSH_KEY ( P2_BTN0 ) )
 		{
-#if 0
-			SOUND->Play_SE ( SE_Sys_EnterFighting );
+			SOUND->Play_SE ( SE_Sys_Enter );
 
 			//フェード開始
-			m_fade_out->SetFade ( 8, _CLR ( 0x00000000UL ), _CLR ( 0xff000000UL ) );	//開始値、目標値を手動設定
-			m_wait_out = 1;
-#endif // 0
+			m_fade_out->SetBlackOut ( 16 );
+		}
 
+		//フェード待機後、遷移開始
+		if ( m_fade_out->IsLast () )
+		{
+			++ m_plus_wait;
+		}
+
+		if ( m_plus_wait > 0 )
+		{
+			if ( m_plus_wait > 30 )
+			{
+				switch ( m_to )
+				{
+				case TITLE_TO_BATTLE:
+					Scene::Transit_Fighting ();
+					break;
+				case TITLE_TO_TRAINING:
+					Scene::Transit_Training ();
+					break;
+				}
+
+				m_plus_wait = 0;
+			}
+
+			++ m_plus_wait;
+		}
+
+
+		return Scene::Transit ();
+	}
+
+
+	void Title::Select ()
+	{
+		//キー上下でシーンを選択
+		if ( CFG_PUSH_KEY ( P1_UP ) || CFG_PUSH_KEY ( P2_UP ) )
+		{
 			switch ( m_to )
 			{
 			case TITLE_TO_BATTLE:
-				Scene::Transit_Fighting ();
+				m_to = TITLE_TO_TRAINING;
 				break;
 			case TITLE_TO_TRAINING:
-				Scene::Transit_Training ();
+				m_to = TITLE_TO_BATTLE;
 				break;
 			}
-
+			SOUND->Play_SE ( SE_Sys_Select );
+		}
+		if ( CFG_PUSH_KEY ( P1_DOWN ) || CFG_PUSH_KEY ( P2_DOWN ) )
+		{
+			switch ( m_to )
+			{
+			case TITLE_TO_BATTLE:
+				m_to = TITLE_TO_TRAINING;
+				break;
+			case TITLE_TO_TRAINING:
+				m_to = TITLE_TO_BATTLE;
+				break;
+			}
+			SOUND->Play_SE ( SE_Sys_Select );
 		}
 
-		return Scene::Transit ();
+		//カーソル位置
+		m_cursor->SetPos ( 480.f, 800.f + 80 * (int32)m_to );
 	}
 
 

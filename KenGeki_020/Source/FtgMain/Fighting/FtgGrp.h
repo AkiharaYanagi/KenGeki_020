@@ -17,7 +17,7 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	class FtgGrp
+	class FtgGrp : public TASK_VEC
 	{
 		bool	m_BrackOut { F };		//暗転
 		bool	m_WhiteOut { F };		//白転
@@ -30,12 +30,17 @@ namespace GAME
 
 		bool	m_overdrive { F };	//超必殺演出
 
+		//test 動画
+		std::unique_ptr < s3d::VideoTexture > mp_vtx;
+
+		P_FadeRect	m_fade_white;
 
 	public:
 		FtgGrp ();
 		FtgGrp ( const FtgGrp & rhs ) = delete;
 		~FtgGrp ();
 
+		void Load ();
 		void Init ();
 		void Move ();
 

@@ -28,6 +28,7 @@ namespace GAME
 		MUTCH_MODE		m_mutchMode { MODE_PLAYER_PLAYER };
 		CHARA_NAME		m_chara_name_1p { CHARA_TEST };
 		CHARA_NAME		m_chara_name_2p { CHARA_TEST };
+		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };
 
 		//リザルト用
 		PLAYER_ID		m_winner { _PLAYER_NUM };		//勝者
@@ -66,6 +67,9 @@ namespace GAME
 			return CHARA_TEST;
 		}
 		void SetRandomChara ();
+
+		void SetStageName ( STAGE_NAME stage_name ) { m_stage_name = stage_name; } 
+		STAGE_NAME GetStageName () const { return m_stage_name; }
 
 
 		//リザルト用

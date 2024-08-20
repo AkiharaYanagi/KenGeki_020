@@ -394,6 +394,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\CharaSele\CharaSele.h" />
+    <ClInclude Include="Source\CharaSele\CharaSeleConst.h" />
+    <ClInclude Include="Source\CharaSele\CharaSele_Player.h" />
     <ClInclude Include="Source\ExeChara\BtlParam.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara_Const.h" />
@@ -402,6 +405,9 @@
     <ClInclude Include="Source\ExeChara\Disp\DispInput.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispRect.h" />
+    <ClInclude Include="Source\ExeChara\Effect\DispEffect.h" />
+    <ClInclude Include="Source\ExeChara\Effect\ExeEffect.h" />
+    <ClInclude Include="Source\ExeChara\Effect\OperateEffect.h" />
     <ClInclude Include="Source\ExeChara\Input\CharaInput.h" />
     <ClInclude Include="Source\ExeChara\Input\CPUInput.h" />
     <ClInclude Include="Source\ExeChara\Input\PlayerInput.h" />
@@ -431,11 +437,14 @@
     <ClInclude Include="Source\GameMain\G_Ftg.h" />
     <ClInclude Include="Source\GameMain\Param.h" />
     <ClInclude Include="Source\GameMain\Scene.h" />
+    <ClInclude Include="Source\GameMain\SoundConst.h" />
     <ClInclude Include="Source\GameMain\stdafx.h" />
     <ClInclude Include="Source\Title\Title.h" />
     <ClInclude Include="Source\Training\Training.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\CharaSele\CharaSele.cpp" />
+    <ClCompile Include="Source\CharaSele\CharaSele_Player.cpp" />
     <ClCompile Include="Source\ExeChara\BtlParam.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispFrontEnd.cpp" />
@@ -443,6 +452,9 @@
     <ClCompile Include="Source\ExeChara\Disp\DispInput.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispRect.cpp" />
+    <ClCompile Include="Source\ExeChara\Effect\DispEffect.cpp" />
+    <ClCompile Include="Source\ExeChara\Effect\ExeEffect.cpp" />
+    <ClCompile Include="Source\ExeChara\Effect\OperateEffect.cpp" />
     <ClCompile Include="Source\ExeChara\Input\CharaInput.cpp" />
     <ClCompile Include="Source\ExeChara\Input\CPUInput.cpp" />
     <ClCompile Include="Source\ExeChara\Input\PlayerInput.cpp" />
