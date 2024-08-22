@@ -29,41 +29,22 @@ namespace GAME
 		P_GrpBlink		m_cursor1p;
 		P_GrpBlink		m_cursor2p;
 
+		//選択ID
 		CHARA_SELE_ID	m_chslct_id_1p { CHSLID_00 };	//現在位置1p
 		CHARA_SELE_ID	m_chslct_id_2p { CHSLID_02 };	//現在位置2p
 
-#if 0
-		//キャラ枠位置
-		std::vector < ChSlct >		mv_pos;
+		//プレイヤー毎位置
+		P_ChSele_Pl		m_chsl_pl_1p;
+		P_ChSele_Pl		m_chsl_pl_2p;
 
-
-		//キャラ立絵
-		P_GrpAcv		m_chara_1p;
-		P_GrpAcv		m_chara_2p;
-
-		//選択キャラ名(パラメータ)
-		CHARA_NAME		m_charaName1p { CHARA_OUKA };	//１Pキャラ名
-		CHARA_NAME		m_charaName2p { CHARA_OUKA };	//２Pキャラ名
-
-		bool m_bDecide1p { F };	//1P側決定(1Pコントローラで2P側を操作)
-		bool m_bDecide2p { F };	//2P側決定
-
-		P_FadeRect		m_fade;
+		//フェード
+		P_FadeRect		m_fade_toTitle;
+		P_FadeRect		m_fade_toFighting;
 		bool			m_endWait { F };
 
 		//モード保存
 		MUTCH_MODE		m_mode { MODE_PLAYER_PLAYER };
 
-#endif // 0
-
-		P_ChSele_Pl		m_chsl_pl_1p;
-		P_ChSele_Pl		m_chsl_pl_2p;
-
-#if 0
-		P_PrmRect		m_fade_out;
-		UINT			m_wait_out_title { 0 };
-		UINT			m_wait_out_fighting { 0 };
-#endif // 0
 
 		//ステージセレクト
 		P_Grp			m_stageSelect;
@@ -83,6 +64,7 @@ namespace GAME
 
 	private:
 		STAGE_NAME GetStageName ();
+
 	};
 
 

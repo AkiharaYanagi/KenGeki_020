@@ -39,7 +39,7 @@ namespace GAME
 	//解放
 	void OperateEffect::Rele ()
 	{
-		m_plpExeEffect->clear();
+//		m_plpExeEffect->clear();
 		TASK_VEC::Rele ();
 	}
 

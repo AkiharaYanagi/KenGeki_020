@@ -8,7 +8,7 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "ExeChara.h"
-//#include "../GameMain/SoundConst.h"
+#include "../../GameMain/SoundConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -30,27 +30,14 @@ namespace GAME
 		m_dispChara->LoadPlayer ( m_playerID );	//表示(1P/2P側による位置)
 		AddpTask ( m_dispChara );
 
-#if 0
 		//エフェクト監理
-		m_oprtEf = make_shared < OperateEffect > ();
+		m_oprtEf = std::make_shared < OperateEffect > ();
 		AddpTask ( m_oprtEf );
-#endif // 0
 	}
 
 	//デストラクタ
 	ExeChara::~ExeChara ()
 	{
-	}
-
-
-	//===========================================================
-	//基本タスク関数
-	void ExeChara::Move ()
-	{
-#if 0
-		m_tmrSlow.Move ();	//タイマ手動
-#endif // 0
-		TASK_VEC::Move ();
 	}
 
 
@@ -95,54 +82,59 @@ namespace GAME
 	//	void UpdateGraphic ();	//グラフィック更新
 	//	void SE_Play ();
 	//===========================================================
-	void ExeChara::Input () { _Input (); }
-	void ExeChara::TransitAction () { _TransitAction (); }
-	void ExeChara::CalcPos () { _CalcPos (); }
-	void ExeChara::PreMove_Effect () {}
-	//------------------------------------------------
-	void ExeChara::PostMove_Effect () {}
-	void ExeChara::MoveTimer () { m_btlPrm.TimerMove (); }		//タイマ稼働
-	void ExeChara::CheckLife () {}
 
 
 	//================================================
 	//入力処理
-	void ExeChara::_Input ()
+	void ExeChara::Input ()
 	{
 		//入力の更新
 		m_pCharaInput->Update ( GetDirRight () );
 	}
 
-
+	//================================================
+	//アクションの移項
+	//	void TransitAction ();
+	//	-> "ExeChara_Transit.cpp"
 
 	//================================================
 	// 位置計算
-	void ExeChara::_CalcPos ()
+	void ExeChara::CalcPos ()
 	{
 		m_btlPrm.CalcBalance ( m_pScript );	//バランス処理
 		m_btlPrm.CalcPos ( m_pScript );		//位置計算
 		m_btlPrm.Landing ();	//着地
 	}
 
-#if 0
 	//================================================
-	//エフェクト
+	//エフェクト スクリプト処理 前
 	void ExeChara::PreMove_Effect ()
 	{
-		m_oprtEf->PreMove ( m_pScript, m_btlPrm );
+//		m_oprtEf->PreMove ( m_pScript, m_btlPrm );
 	}
 
+	//================================================
+	//エフェクト スクリプト処理 後
 	void ExeChara::PostMove_Effect ()
 	{
-		m_oprtEf->PostMove ( m_btlPrm );
+//		m_oprtEf->PostMove ( m_btlPrm );
+	}
 
-		//サウンドエフェクト
+	//================================================
+	//タイマ稼働
+	void ExeChara::MoveTimer ()
+	{
+		m_btlPrm.TimerMove ();
+#if 0
+		m_tmrSlow.Move ();	//タイマ手動
+#endif // 0
 	}
 
 	//================================================
 	//ライフ判定
 	void ExeChara::CheckLife ()
 	{
+#if 0
 		//自分がライフ０
 		if ( 0 >= m_btlPrm.GetLife () )
 		{
@@ -164,10 +156,10 @@ namespace GAME
 		int life = m_btlPrm.GetLife ();
 		int b_max = BALANCE_START + ( LIFE_MAX - life ) / 2;
 		m_btlPrm.SetBalanceMax ( b_max );
+#endif // 0
 	}
 
 
-#endif // 0
 
 
 	//====================================================================================
@@ -178,7 +170,7 @@ namespace GAME
 		m_dispChara->UpdateStateName ( m_actor.GetpState ()->GetName() );
 	}
 
-	//SEの再生
+	//サウンドエフェクトの再生
 	void ExeChara::SE_Play ()
 	{
 		//ヒットストップ中は除く
@@ -186,7 +178,7 @@ namespace GAME
 		{
 			return;
 		}
-#if 0
+
 		//スクリプトからSEのIDを取得
 		UINT id_se = m_pScript->m_prmStaging.SE;
 		//0は対象無しの値
@@ -194,7 +186,6 @@ namespace GAME
 		{
 			SOUND->Play_SE ( (SE_ID)id_se );
 		}
-#endif // 0
 	}
 
 

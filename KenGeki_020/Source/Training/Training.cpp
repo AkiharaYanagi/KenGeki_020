@@ -105,8 +105,8 @@ namespace GAME
 #endif // 0
 
 		//SOUND
-		SOUND->Stop_BGM ( BGM_GABA );
-		SOUND->Play_Loop_BGM ( BGM_GABA );
+//		SOUND->Stop_BGM ( BGM_GABA );
+//		SOUND->Play_Loop_BGM ( BGM_GABA );
 
 
 		//test

@@ -62,13 +62,11 @@ namespace GAME
 		m_btlPrm.SetpChara ( m_pChara );
 		m_btlPrm.SetwpExeChara ( shared_from_this (), m_pOther );
 
-#if 0
 		//--------------------------------------------
 		//エフェクト生成ベクタの生成
 		m_oprtEf->MakeEfList ( m_pChara );
 
-#endif // 0
-
+		//--------------------------------------------
 		TASK_VEC::Load ();
 	}
 

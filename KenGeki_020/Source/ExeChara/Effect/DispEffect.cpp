@@ -30,10 +30,12 @@ namespace GAME
 
 	DispEffect::~DispEffect ()
 	{
+#if 0
 		//終了時にグラフィックタスクを外す
 		EraseTask ( m_dispRect );
 		EraseTask ( m_grp );
 		GRPLST_REMOVE ( m_grp );
+#endif // 0
 	}
 
 

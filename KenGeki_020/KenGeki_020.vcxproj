@@ -444,6 +444,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\CharaSele\CharaSele.cpp" />
+    <ClCompile Include="Source\CharaSele\CharaSeleConst.cpp" />
     <ClCompile Include="Source\CharaSele\CharaSele_Player.cpp" />
     <ClCompile Include="Source\ExeChara\BtlParam.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />

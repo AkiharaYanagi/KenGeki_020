@@ -25,10 +25,11 @@
 
 #include "../Input/PlayerInput.h"
 #include "../Input/CPUInput.h"
+
+#include "../Effect/OperateEffect.h"
+//#include "../FtgMain/Ef/EfPart.h"
+
 #if 0
-#include "../../FtgMain/G_Ftg.h"
-#include "Effect/OperateEffect.h"
-#include "../FtgMain/Ef/EfPart.h"
 #include "TimerSlow.h"
 #endif // 0
 
@@ -96,11 +97,11 @@ namespace GAME
 		P_PlayerInput	m_pPlayerInput;	//プレイヤ
 		P_CPUInput		m_pCPUInput;	//CPU
 
-#if 0
 		//------------------------------------------------
 		//エフェクト監理
 		P_OprEf			m_oprtEf;
 
+#if 0
 		//------------------------------------------------
 		//粒子エフェクト(参照)
 		P_EfPart	m_efPart;
@@ -124,7 +125,6 @@ namespace GAME
 		void ParamInit ( P_Param pParam );
 		void Load ();
 		void Init ();
-		void Move ();
 
 	private:
 		//初期化
@@ -364,10 +364,6 @@ namespace GAME
 	//	内部関数
 	//================================================
 	private:
-		void _Input ();		//入力
-		void _CalcPos ();	//スクリプトによる位置計算
-
-		//アクション
 
 	public:
 		//アクション指定(Stateから指定)
@@ -384,8 +380,6 @@ namespace GAME
 
 	private:
 		//アクションの移項
-		void _TransitAction ();	
-
 		void TransitAction_Condition_I ( BRANCH_CONDITION CONDITION, bool forced );	//条件をチェックして移行
 		void TransitAction_Condition_E ( BRANCH_CONDITION CONDITION, bool forced );	//条件をチェックして移行
 		bool TranditAction_Command ();	//アクション移項（コマンドに関する処理）

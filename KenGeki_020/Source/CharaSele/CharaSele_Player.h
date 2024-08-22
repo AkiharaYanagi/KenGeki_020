@@ -20,16 +20,19 @@ namespace GAME
 	class CharaSele_Player : public TASK_VEC
 	{
 		PLAYER_ID		m_player_id { PLAYER_ID_1 };	//プレイヤ識別
-		CHARA_SELE_ID	m_chsl_id { CHSLID_00 };			//キャラ選択ID
+		CHARA_SELE_ID	m_chsl_id { CHSLID_00 };		//キャラ選択ID
 		P_Grp			m_chara_stand;					//キャラ立絵
+		bool			m_decided { F };				//決定
 		P_Grp			m_chara_stand_light;			//キャラ立絵(明度)
 		P_Grp			m_chara_stand_shade;			//キャラ立絵(影)
 		P_Grp			m_chara_name;					//キャラ名前
 		P_GrpBlink		m_cursor;						//カーソル
-		bool			m_decided { F };				//決定
-		static const ChSlct		m_pos [ CHARA_SELE_NUM ];	//枠位置
 		float			m_x { 0 };		//カットイン位置
 		UINT			m_wait { 0 };	//決定ウェイト
+
+		//定数
+		static const uint32		CHARA_SELE_NUM = 12;		//個数
+		static const ChSlct		m_pos [ CHARA_SELE_NUM ];	//枠位置
 
 	public:
 		CharaSele_Player ();
@@ -60,6 +63,46 @@ namespace GAME
 		bool CanSelect ();	//選択可能かどうか
 		void SetCharaStand ( CHARA_SELE_ID id );
 		void HiddenCharaStand ();
+
+
+		//位置定数
+		static const float	FACE_X_0;
+		static const float	FACE_X_1;
+		static const float	FACE_X_2;
+		static const float	FACE_Y_0;
+		static const float	FACE_Y_1;
+		static const float	FACE_Y_2;
+		static const float	FACE_Y_3;
+
+		static const float	LOGO_NUM;
+		static const float	LOGO_W;
+		static const float	LOGO_L_START_Y;
+		static const float	LOGO_L_VEL_X;
+		static const float	LOGO_R_START_Y;
+		static const float	LOGO_R_VEL_X;
+
+		//カーソル
+		static const float	SELECT_1P_POS_X;	//基準点 + 枠中心 + 画像半分
+		static const float	SELECT_1P_POS_Y;
+		static const float	SELECT_2P_POS_X;	//基準点 + 枠中心 + 画像半分
+		static const float	SELECT_2P_POS_Y;
+
+		//キャラ立ち絵
+		static const float	CHARA_1P_POS_X;
+		static const float	CHARA_1P_POS_Y;
+		static const float	CHARA_2P_POS_X;
+		static const float	CHARA_2P_POS_Y;
+
+		static const float	CUTIN_X;
+		static const float	CUTIN_VX;
+
+		//キャラ名前
+		static const float	CHARA_NAME_1P_X;
+		static const float	CHARA_NAME_1P_Y;
+		static const float	CHARA_NAME_2P_X;
+		static const float	CHARA_NAME_2P_Y;
+
+		static const float	POS0_X;
 	};
 
 

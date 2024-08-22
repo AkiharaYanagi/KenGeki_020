@@ -50,13 +50,10 @@ namespace GAME
 	class Chara
 	{
 //		Behavior		m_bhvMain;		//メイン スクリプト
-//		PVP_TxBs		m_pvpTxMain;	//メインイメージ テクスチャ配列
-//		PVP_Action		m_pvpAction;	//アクション配列
 		PAP_Tx			mpap_txMain;	//メインイメージ テクスチャ配列
 		PAP_Action		mpap_Action;	//アクション配列
 
 //		Garnish			m_bhvEf;		//EF スクリプト
-//		PVP_TxBs		m_pvpTxEf;		//EFイメージ テクスチャ配列
 		PAP_Tx			mpap_txEf;		//EFイメージ テクスチャ配列
 		PAP_Effect		mpap_Ef;		//エフェクト配列
 

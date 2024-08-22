@@ -16,59 +16,64 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	//枠位置定数
-	const ChSlct CharaSele_Player::m_pos [ CHARA_SELE_NUM ] = 
-	{
-		{ CHSLID_00, CHARA_OUKA, FACE_X_0, FACE_Y_0, CHSLID_09, CHSLID_03, CHSLID_02, CHSLID_01 }, 
-		{ CHSLID_01, CHARA_TEST, FACE_X_1, FACE_Y_0, CHSLID_10, CHSLID_04, CHSLID_00, CHSLID_02 }, 
-		{ CHSLID_02, CHARA_SAE , FACE_X_2, FACE_Y_0, CHSLID_11, CHSLID_05, CHSLID_01, CHSLID_00 }, 
-		{ CHSLID_03, CHARA_TEST, FACE_X_0, FACE_Y_1, CHSLID_00, CHSLID_06, CHSLID_05, CHSLID_04 }, 
-		{ CHSLID_04, CHARA_TEST, FACE_X_1, FACE_Y_1, CHSLID_01, CHSLID_07, CHSLID_03, CHSLID_05 }, 
-		{ CHSLID_05, CHARA_TEST, FACE_X_2, FACE_Y_1, CHSLID_02, CHSLID_08, CHSLID_04, CHSLID_03 },  
-		{ CHSLID_06, CHARA_TEST, FACE_X_0, FACE_Y_2, CHSLID_03, CHSLID_09, CHSLID_08, CHSLID_07 }, 
-		{ CHSLID_07, CHARA_TEST, FACE_X_1, FACE_Y_2, CHSLID_04, CHSLID_10, CHSLID_06, CHSLID_08 }, 
-		{ CHSLID_08, CHARA_TEST, FACE_X_2, FACE_Y_2, CHSLID_05, CHSLID_11, CHSLID_07, CHSLID_06 }, 
-		{ CHSLID_09, CHARA_TEST, FACE_X_0, FACE_Y_3, CHSLID_06, CHSLID_00, CHSLID_11, CHSLID_10 }, 
-		{ CHSLID_10, CHARA_TEST, FACE_X_1, FACE_Y_3, CHSLID_07, CHSLID_01, CHSLID_09, CHSLID_11 }, 
-		{ CHSLID_11, CHARA_TEST, FACE_X_2, FACE_Y_3, CHSLID_08, CHSLID_02, CHSLID_10, CHSLID_09 }, 
-	};
+	//---------------------------------------------------------
+	// @info	switch文の条件に用いるとき、externで別ファイルに記述するとコンパイルエラーとなるので
+	//			同ファイルに記述する。
+	//---------------------------------------------------------
+	//キャラ枠位置( 0 ~ 11 )
+	const CHARA_SELE_ID		 CHSLID_00 = 0;
+	const CHARA_SELE_ID		 CHSLID_01 = 1;
+	const CHARA_SELE_ID		 CHSLID_02 = 2;
+	const CHARA_SELE_ID		 CHSLID_03 = 3;
+	const CHARA_SELE_ID		 CHSLID_04 = 4;
+	const CHARA_SELE_ID		 CHSLID_05 = 5;
+	const CHARA_SELE_ID		 CHSLID_06 = 6;
+	const CHARA_SELE_ID		 CHSLID_07 = 7;
+	const CHARA_SELE_ID		 CHSLID_08 = 8;
+	const CHARA_SELE_ID		 CHSLID_09 = 9;
+	const CHARA_SELE_ID		 CHSLID_10 = 10;
+	const CHARA_SELE_ID		 CHSLID_11 = 11;
+
+	//	const CHARA_SELE_ID		 CHARA_SELE_NUM = 12;
+	//	const CHARA_SELE_ID	CharaSele_Player::CHARA_SELE_NUM = 12;
+
+
 
 
 	CharaSele_Player::CharaSele_Player ()
 	{
 		//キャラ立絵
 		m_chara_stand = std::make_shared < GameGraphic > ();
-		m_chara_stand->AddTexture ( U"Stand_Ouka.png" );
-		m_chara_stand->AddTexture ( U"0.png" );	//Padding
-		m_chara_stand->AddTexture ( U"Stand_Sae.png" );
+		m_chara_stand->AddTexture_FromArchive ( U"Stand_Ouka.png" );
+		m_chara_stand->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
+		m_chara_stand->AddTexture_FromArchive ( U"Stand_Sae.png" );
 		AddpTask ( m_chara_stand );
 		GRPLST_INSERT ( m_chara_stand );
 
 		//キャラ立絵(明度)
 		m_chara_stand_light = std::make_shared < GameGraphic > ();
-		m_chara_stand_light->AddTexture ( U"Stand_Ouka_light.png" );
-		m_chara_stand_light->AddTexture ( U"0.png" );	//Padding
-		m_chara_stand_light->AddTexture ( U"Stand_Sae_light.png" );
+		m_chara_stand_light->AddTexture_FromArchive ( U"Stand_Ouka_light.png" );
+		m_chara_stand_light->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
+		m_chara_stand_light->AddTexture_FromArchive ( U"Stand_Sae_light.png" );
 		AddpTask ( m_chara_stand_light );
 		GRPLST_INSERT ( m_chara_stand_light );
 		m_chara_stand_light->SetValid ( F );
 
 		//キャラ名前
 		m_chara_name = std::make_shared < GameGraphic > ();
-		m_chara_name->AddTexture ( U"Name_Ouka.png" );
-		m_chara_name->AddTexture ( U"0.png" );	//Padding
-		m_chara_name->AddTexture ( U"Name_Sae.png" );
+		m_chara_name->AddTexture_FromArchive ( U"Name_Ouka.png" );
+		m_chara_name->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
+		m_chara_name->AddTexture_FromArchive ( U"Name_Sae.png" );
 		AddpTask ( m_chara_name );
 		GRPLST_INSERT ( m_chara_name );
 
 		//カーソル
 		m_cursor = std::make_shared < GrpBlink > ();
-		m_cursor->AddTexture ( U"CharaSele_Cursor_1p.png" );
-		m_cursor->AddTexture ( U"CharaSele_Cursor_2p.png" );
+		m_cursor->AddTexture_FromArchive ( U"CharaSele_Cursor_1p.png" );
+		m_cursor->AddTexture_FromArchive ( U"CharaSele_Cursor_2p.png" );
 		m_cursor->SetTimer ( 15 );
 		AddpTask ( m_cursor );
 		GRPLST_INSERT ( m_cursor );
-
 	}
 
 	CharaSele_Player::~CharaSele_Player ()
@@ -164,7 +169,7 @@ namespace GAME
 
 	CHARA_NAME CharaSele_Player::GetName () const
 	{
-		return m_pos [ m_chsl_id ].Name;
+		return m_pos[m_chsl_id].Name;
 	}
 
 
@@ -222,6 +227,7 @@ namespace GAME
 			if ( CFG_PUSH_KEY ( P2_BTN0 ) ) { Decide (); }
 		}
 	}
+
 
 	void CharaSele_Player::Input_Decided ()
 	{

@@ -124,9 +124,9 @@ namespace GAME
 
 		//テスト用 開始状態選択
 //		startMode = START_TITLE;
-		startMode = START_CHARA_SELE;
+//		startMode = START_CHARA_SELE;
 //		startMode = START_BATTLE;
-//		startMode = START_TRAINING;
+		startMode = START_TRAINING;
 #if 0
 //		startMode = START_INTRO;
 //		startMode = START_RESULT;

@@ -1094,5 +1094,8 @@
     <ClCompile Include="Source\CharaSele\CharaSele.cpp">
       <Filter>CharaSele</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CharaSele\CharaSeleConst.cpp">
+      <Filter>CharaSele</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

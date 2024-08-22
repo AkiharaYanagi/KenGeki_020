@@ -22,7 +22,7 @@ namespace GAME
 
 
 	// アクション移項(条件:コマンド, アクション終了)
-	void ExeChara::_TransitAction ()
+	void ExeChara::TransitAction ()
 	{
 		assert ( nullptr != m_pAction && nullptr != m_pScript );
 
