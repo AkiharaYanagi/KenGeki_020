@@ -40,7 +40,7 @@ namespace GAME
 		m_charaRect = std::make_shared < CharaRect > ();
 
 		//表示
-		m_dispEffect = std::make_shared < DispEffect > ( pChara->GetpvpEfTexture (), pEfGnrt->GetZ () );
+		m_dispEffect = std::make_shared < DispEffect > ( pChara->GetpapEfTexture (), pEfGnrt->GetZ () );
 		AddpTask ( m_dispEffect );
 	}
 

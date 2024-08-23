@@ -81,7 +81,6 @@ namespace GAME
 
 		//-----------------------------------------------------------------
 		//アクション配列ポインタを取得
-//		PVP_Action GetpvpAction () { return m_pvpAction; }
 		PAP_Action GetpvpAction () { return mpap_Action; }
 
 		//アクション配列に追加
@@ -112,7 +111,7 @@ namespace GAME
 
 		//-----------------------------------------------------------------
 		//Efイメージ テクスチャ配列ポインタ
-		PAP_Tx GetpvpEfTexture () const { return mpap_txEf; }
+		PAP_Tx GetpapEfTexture () const { return mpap_txEf; }
 
 		//Efイメージ テクスチャ配列に追加
 		void AddpEfTexture ( P_Tx pTexture ) { mpap_txEf->push_back ( pTexture ); }

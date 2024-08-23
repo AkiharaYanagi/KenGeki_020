@@ -30,7 +30,11 @@ namespace GAME
 		DispEffect ( PAP_Tx papEfTx, float z );
 		DispEffect ( const DispEffect & rhs ) = delete;
 		~DispEffect ();
-		
+
+		//元データの設定
+		void SetpChara ( P_Chara pChara );
+
+
 		//有効フラグ設定
 		void SetValid ( bool b ) { m_grp->SetValid ( b ); }
 
