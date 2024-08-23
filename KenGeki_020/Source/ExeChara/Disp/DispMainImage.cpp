@@ -69,7 +69,7 @@ namespace GAME
 
 		//IDチェックはスクリプト作成時、ロード時に行う
 		UINT index = pScript->GetImageIndex ();
-		P_Tx pTexture = mpap_Tx->at ( index );
+//		P_Tx pTexture = mpap_Tx->at ( index );
 
 
 #if 0

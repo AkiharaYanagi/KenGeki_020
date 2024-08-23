@@ -55,7 +55,7 @@ namespace GAME
 	{
 		//キャラポインタを保存
 		m_pChara = p;
-		m_pvpEfTexture = p->GetpvpEfTexture ();
+		m_pvpEfTexture = p->GetpapEfTexture ();
 		m_vpBranch = p->GetvpBranch ();
 		m_vpRoute = p->GetvpRoute ();
 

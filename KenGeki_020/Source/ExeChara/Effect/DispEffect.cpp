@@ -38,13 +38,22 @@ namespace GAME
 #endif // 0
 	}
 
+	void DispEffect::SetpChara(P_Chara pChara)
+	{
+		//キャラのエフェクトテクスチャアレイを設置
+		mpap_EfTx = pChara->GetpapEfTexture ();
+
+		m_grp->ClearTexture ();
+		for ( P_Tx ptx : * mpap_EfTx )
+		{
+			m_grp->AddpTexture ( ptx );
+		}
+	}
+
 
 	void DispEffect::Update ( P_Script pScript, VEC2 ptEf, bool dirRight )
 	{
 		//Disp：スクリプトのイメージ表示位置
-
-		//テクスチャの取得
-		P_Tx pEfTx = mpap_EfTx->at ( pScript->GetImageIndex() );
 
 		//位置 (エフェクトのゲーム位置＋スクリプトの表示位置(*向き)＋キャラによる画面補正位置)
 		float fDir = dirRight ? (1.f) : (-1.f);
@@ -75,10 +84,15 @@ namespace GAME
 		m_grp->SetScalingCenter ( center );
 #endif // 0
 
+		//テクスチャの取得
+		UINT index = pScript->GetImageIndex ();
+//		P_Tx pEfTx = mpap_EfTx->at ( pScript->GetImageIndex() );
+
 		//表示に反映
 		m_grp->SetPos ( vecEfImg );
 		m_grp->SetScaling ( m_w * fDir, 1.f );
-		m_grp->SetpTexture ( pEfTx );
+//		m_grp->SetpTexture ( pEfTx );
+		m_grp->SetIndexTexture ( index );
 	}
 
 	void DispEffect::SetpCharaRect ( P_CharaRect pCharaRect )
