@@ -129,8 +129,8 @@ namespace GAME
 		{
 //			name.assign ( _T ( "charaBin.dat" ) );
 //			name.assign ( U"chara_Ouka_Bin.dat" );		m_name = CHARA_OUKA;
-			name.assign ( U"chara_Sae_Bin.dat" );		m_name = CHARA_SAE;
-//			name.assign ( U"chara_Retsudou_Bin.dat" );
+//			name.assign ( U"chara_Sae_Bin.dat" );		m_name = CHARA_SAE;
+			name.assign ( U"chara_Retsudou_Bin.dat" );
 //			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
 

@@ -110,14 +110,14 @@ namespace GAME
 	//エフェクト スクリプト処理 前
 	void ExeChara::PreMove_Effect ()
 	{
-//		m_oprtEf->PreMove ( m_pScript, m_btlPrm );
+		m_oprtEf->PreMove ( m_pScript, m_btlPrm );
 	}
 
 	//================================================
 	//エフェクト スクリプト処理 後
 	void ExeChara::PostMove_Effect ()
 	{
-//		m_oprtEf->PostMove ( m_btlPrm );
+		m_oprtEf->PostMove ( m_btlPrm );
 	}
 
 	//================================================
