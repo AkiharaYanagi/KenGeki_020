@@ -104,9 +104,13 @@ namespace GAME
 		m_fighting->Set_1P_vs_2P ();
 #endif // 0
 
+#if 0
+
 		//SOUND
 		SOUND->Stop_BGM ( BGM_GABA );
 		SOUND->Play_Loop_BGM ( BGM_GABA );
+
+#endif // 0
 
 
 		//test

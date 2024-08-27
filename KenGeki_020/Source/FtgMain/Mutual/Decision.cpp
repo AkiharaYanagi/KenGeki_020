@@ -8,7 +8,7 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "Decision.h"
-//#include "../GameMain/SoundConst.h"
+#include "../../GameMain/SoundConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -27,6 +27,10 @@ namespace GAME
 		m_efClang = std::make_shared < EfClang > ();
 		AddpTask ( m_efClang );
 //		GRPLST_INSERT ( m_efClang );
+//		SDRLST_INSERT ( m_efClang );
+
+		m_efClang->On( VEC2 ( 0, 0 ) );
+
 
 #if 0
 		m_efSpark = make_shared < EfSpark > ();
@@ -59,6 +63,11 @@ namespace GAME
 		m_exeChara1->SetpParticle ( m_decision->GetpEfPart () );
 		m_exeChara2->SetpParticle ( m_decision->GetpEfPart () );
 #endif // 0
+	}
+
+	void Decision::Load ()
+	{
+		TASK_VEC::Load ();
 	}
 
 
@@ -215,34 +224,37 @@ namespace GAME
 		if ( bOffset )
 		{
 			//打合時のエフェクト発生
-			m_efClang->On ( center );
+//			m_efClang->On ( center );
+			m_efClang->On ( VEC2 ( 0, 0 ) );
+
+			//SE
+			SOUND->Play_SE ( SE_Btl_Clang );
+
+
 #if 0
 			m_efSpark->On ( center );
 //			m_efParticle->On ( center );
 			m_efPart->On ( center );
-
-			//SE
-			SOUND->Play_SE ( SE_Btl_Clang );
+#endif // 0
 
 			//ヒットストップ開始
 			m_tmrOffset_Hitstop->Start ();
 
 			if ( offset_ao )
 			{
-				m_pExeChara1p->OnClang_AO ();
-				m_pExeChara2p->OnClang_OA ();
+				m_pExeChara1p->OnOffset_AO ();
+				m_pExeChara2p->OnOffset_OA ();
 			}
 			else if ( offset_oa )
 			{
-				m_pExeChara1p->OnClang_OA ();
-				m_pExeChara2p->OnClang_AO ();
+				m_pExeChara1p->OnOffset_OA ();
+				m_pExeChara2p->OnOffset_AO ();
 			}
 			else
 			{
-				m_pExeChara1p->OnClang_AA ();
-				m_pExeChara2p->OnClang_AA ();
+				m_pExeChara1p->OnOffset_AA ();
+				m_pExeChara2p->OnOffset_AA ();
 			}
-#endif // 0
 		}
 
 

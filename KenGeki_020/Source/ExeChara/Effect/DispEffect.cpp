@@ -34,8 +34,8 @@ namespace GAME
 		//終了時にグラフィックタスクを外す
 		EraseTask ( m_dispRect );
 		EraseTask ( m_grp );
-		GRPLST_REMOVE ( m_grp );
 #endif // 0
+		GRPLST_REMOVE ( m_grp );
 	}
 
 	void DispEffect::SetpChara(P_Chara pChara)

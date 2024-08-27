@@ -49,14 +49,18 @@ namespace GAME
 		SE_Sys_Cancel,
 		SE_Sys_Lock,
 		SE_Sys_EnterFighting,
-#if 0
-
-		SE_Btl_HardFacePunch,
-		SE_Btl_Clang,
-		SE_Btl_Hit,
+		SE_Btl_Hit_L,
+		SE_Btl_Hit_M,
+		SE_Btl_Hit_H,
+		SE_Btl_Jump,
 		SE_Btl_Landing,
 		SE_Btl_Dash,
-		SE_Btl_Jump,
+		SE_Btl_Air,
+		SE_Btl_break,
+		SE_Btl_Light,
+		SE_Btl_Clang,
+#if 0
+
 #endif // 0
 	};
 

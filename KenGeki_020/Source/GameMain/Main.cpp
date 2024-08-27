@@ -135,10 +135,13 @@ void Move ()
 	//---------------------------------------------------
 	// 動作
 	//---------------------------------------------------
+#if 0
 
 	//毎回の更新
 	const Array<Input> & keys = s3d::Keyboard::GetAllInputs();
 	SivInput::Inst()->Update ( keys );
+
+#endif // 0
 
 	//ゲームメイン
 	gameSystem.Move ();

@@ -38,6 +38,7 @@ namespace GAME
 
 		//共通エフェクト
 		P_EfClang		m_efClang;
+
 #if 0
 		P_EfSpark		m_efSpark;
 //		P_EfParticle	m_efParticle;
@@ -64,6 +65,8 @@ namespace GAME
 		~Decision ();
 
 		void SetpChara (P_ExeChara pExeChara1p, P_ExeChara pExeChara2p);
+
+		void Load ();
 
 #if 0
 		P_EfPart GetpEfPart () const { return m_efPart; }

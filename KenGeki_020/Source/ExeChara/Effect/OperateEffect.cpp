@@ -199,15 +199,7 @@ namespace GAME
 	//エフェクトリストに新規追加
 	void OperateEffect::AddListEffect ( P_Effect pEffect, P_EfGnrt pEfGnrt, VEC2 ptChara, bool dirRight )
 	{
-//		UINT NUM_GRP0 = GrpLst::Inst()->GetNumList();
-
-
-		P_ExEf pExeEffect = make_shared < ExeEffect > ( pEffect, m_pChara, pEfGnrt, ptChara, dirRight );
-
-
-//		UINT NUM_GRP1 = GrpLst::Inst()->GetNumList();
-
-
+		P_ExEf pExeEffect = std::make_shared < ExeEffect > ( pEffect, m_pChara, pEfGnrt, ptChara, dirRight );
 		m_plpExeEffect->push_back ( pExeEffect );
 		AddpTask ( pExeEffect );	//タスクリスト
 	}

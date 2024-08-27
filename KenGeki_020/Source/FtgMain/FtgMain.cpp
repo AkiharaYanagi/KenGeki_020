@@ -9,14 +9,13 @@
 //-------------------------------------------------------------------------------------------------
 #include "FtgMain.h"
 #include "../Title/Title.h"
+#include "../GameMain/G_Ftg.h"
+#include "../GameMain/SoundConst.h"
 
 #if 0
 #include "../Result/Result.h"
 #endif // 0
 
-#include "../GameMain/G_Ftg.h"
-
-//#include "../GameMain/SoundConst.h"
 
 
 //-------------------------------------------------------------------------------------------------

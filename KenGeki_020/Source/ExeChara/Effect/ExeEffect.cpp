@@ -41,6 +41,7 @@ namespace GAME
 
 		//表示
 		m_dispEffect = std::make_shared < DispEffect > ( pChara->GetpapEfTexture (), pEfGnrt->GetZ () );
+		m_dispEffect->SetpChara ( pChara );
 		AddpTask ( m_dispEffect );
 	}
 
