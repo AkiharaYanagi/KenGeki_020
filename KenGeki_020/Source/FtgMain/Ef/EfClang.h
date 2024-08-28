@@ -19,18 +19,12 @@
 namespace GAME
 {
 	//相殺時エフェクト
-
-//	class EfClang : public GrpEf
 	class EfClang : public TASK_VEC
 	{
-		uint32		m_index { 0 };
-
-
 		P_GrpEf	m_thunder0;
 		P_GrpEf	m_thunder1;
 		P_GrpEf	m_circle;
 		P_GrpEf	m_impact;
-
 
 	public:
 		EfClang ();

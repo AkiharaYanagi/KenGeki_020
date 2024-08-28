@@ -224,11 +224,20 @@ namespace GAME
 		if ( bOffset )
 		{
 			//打合時のエフェクト発生
-//			m_efClang->On ( center );
-			m_efClang->On ( VEC2 ( 0, 0 ) );
+			m_efClang->On ( center );
+//			m_efClang->On ( VEC2 ( 0, 0 ) );
 
 			//SE
 			SOUND->Play_SE ( SE_Btl_Clang );
+
+
+
+
+
+			//@todo フォント読込を減らす
+
+
+
 
 
 #if 0
