@@ -50,9 +50,10 @@ namespace GAME
 
 		//ステージセレクト
 		m_stageSelect = std::make_shared < GameGraphic > ();
-		m_stageSelect->AddTexture_FromArchive ( U"stage_select_0.png" );
-		m_stageSelect->AddTexture_FromArchive ( U"stage_select_1.png" );
-		m_stageSelect->AddTexture_FromArchive ( U"stage_select_2.png" );
+		//m_stageSelect->AddTexture_FromArchive ( U"stage_select_0.png" );
+		//m_stageSelect->AddTexture_FromArchive ( U"stage_select_1.png" );
+		//m_stageSelect->AddTexture_FromArchive ( U"stage_select_2.png" );
+		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Evening.png" );
 		m_stageSelect->SetPos ( VEC2 ( 640 - 128, 400 ) );
 		m_stageSelect->SetZ ( Z_BG - 0.1f );
 		AddpTask ( m_stageSelect );

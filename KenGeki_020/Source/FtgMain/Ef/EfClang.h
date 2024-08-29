@@ -26,6 +26,9 @@ namespace GAME
 		P_GrpEf	m_circle;
 		P_GrpEf	m_impact;
 
+		P_GrpEf m_test;
+		double	m_r { 0 };
+
 	public:
 		EfClang ();
 		EfClang ( const EfClang & rhs ) = delete;

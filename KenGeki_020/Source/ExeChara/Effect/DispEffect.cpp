@@ -58,8 +58,8 @@ namespace GAME
 		//位置 (エフェクトのゲーム位置＋スクリプトの表示位置(*向き)＋キャラによる画面補正位置)
 		float fDir = dirRight ? (1.f) : (-1.f);
 		VEC2 tempImgPos = pScript->GetPos ();
-//		VEC2 imgPos = VEC2( fDir * tempImgPos.x, tempImgPos.y );
-		VEC2 imgPos = VEC2( tempImgPos.x, tempImgPos.y );
+		VEC2 imgPos = VEC2( fDir * tempImgPos.x, tempImgPos.y );
+//		VEC2 imgPos = VEC2( tempImgPos.x, tempImgPos.y );
 		VEC2 vecEfImg = ptEf + imgPos + G_BASE_POS ();
 
 		//回転

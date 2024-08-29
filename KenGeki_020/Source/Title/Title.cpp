@@ -183,12 +183,13 @@ namespace GAME
 
 		if ( m_plus_wait > 0 )
 		{
-			if ( m_plus_wait > 30 )
+			if ( m_plus_wait > 15 )
 			{
 				switch ( m_to )
 				{
 				case TITLE_TO_BATTLE:
-					Scene::Transit_Fighting ();
+					Scene::Transit_CharaSele ();
+//					Scene::Transit_Fighting ();
 					break;
 				case TITLE_TO_TRAINING:
 					Scene::Transit_Training ();

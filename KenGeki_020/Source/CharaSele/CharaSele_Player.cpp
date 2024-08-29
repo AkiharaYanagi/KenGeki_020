@@ -44,17 +44,17 @@ namespace GAME
 	{
 		//キャラ立絵
 		m_chara_stand = std::make_shared < GameGraphic > ();
-		m_chara_stand->AddTexture_FromArchive ( U"Stand_Ouka.png" );
+		m_chara_stand->AddTexture_FromArchive ( U"CharaSele\\Stand_Ouka.png" );
 		m_chara_stand->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
-		m_chara_stand->AddTexture_FromArchive ( U"Stand_Sae.png" );
+		m_chara_stand->AddTexture_FromArchive ( U"CharaSele\\Stand_Sae.png" );
 		AddpTask ( m_chara_stand );
 		GRPLST_INSERT ( m_chara_stand );
 
 		//キャラ立絵(明度)
 		m_chara_stand_light = std::make_shared < GameGraphic > ();
-		m_chara_stand_light->AddTexture_FromArchive ( U"Stand_Ouka_light.png" );
+		m_chara_stand_light->AddTexture_FromArchive ( U"CharaSele\\Stand_Ouka_light.png" );
 		m_chara_stand_light->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
-		m_chara_stand_light->AddTexture_FromArchive ( U"Stand_Sae_light.png" );
+		m_chara_stand_light->AddTexture_FromArchive ( U"CharaSele\\Stand_Sae_light.png" );
 		AddpTask ( m_chara_stand_light );
 		GRPLST_INSERT ( m_chara_stand_light );
 		m_chara_stand_light->SetValid ( F );

@@ -622,38 +622,50 @@ namespace GAME
 		m_white_damage = 0;
 #endif // 0
 	}
-	
-	//相殺時
+
+
+	//============================================================
+	//相殺時 (自分：攻撃、相手：攻撃)
 	void BtlParam::OnOffset_AA ()
 	{
-		m_clang = T;		//打合発生フラグ
-		m_tmrHitstop->Start ();		//ヒットストップの設定
-		m_tmrHitPitch->WaitStart ( HITSTOP_TIME );	//ヒット間隔のカウント
-
-		++ m_hitNum;
-	}
-
-	//相殺時
-	void BtlParam::OnOffset_AO ()
-	{
-		m_clang = T;		//打合発生フラグ
-		m_tmrHitstop->Start ();		//ヒットストップの設定
-		m_tmrHitPitch->WaitStart ( HITSTOP_TIME );	//ヒット間隔のカウント
+		OnOffset_Common ();
 
 		//@info 自分の攻撃が相殺したときは、内部ヒット数が増加する
 		++ m_hitNum;
 	}
 
-	//相殺時
+	//相殺時 (自分：攻撃、相手：相殺)
+	void BtlParam::OnOffset_AO ()
+	{
+		OnOffset_Common ();
+
+		//@info 自分の攻撃が相殺したときは、内部ヒット数が増加する
+		++ m_hitNum;
+	}
+
+	//相殺時 (自分：相殺、相手：攻撃)
 	void BtlParam::OnOffset_OA ()
+	{
+		OnOffset_Common ();
+
+		//@info 自身が相殺判定で相手の攻撃を取ったとき、内部ヒット数は増加しない
+		//		++ m_hitNum;
+	}
+
+	//相殺時共通
+	void BtlParam::OnOffset_Common ()
 	{
 		m_clang = T;		//打合発生フラグ
 		m_tmrHitstop->Start ();		//ヒットストップの設定
 		m_tmrHitPitch->WaitStart ( HITSTOP_TIME );	//ヒット間隔のカウント
 
-		//@info 自身が相殺判定で相手の攻撃を取ったとき、内部ヒット数は増加しない
-//		++ m_hitNum;
+		//-------------------------------------------------
+		//ノックバック処理		// 値は (float) = (int)1/10
+		float recoil_i = 0.1f * m_pScript->m_prmBattle.Recoil_I;
+		SetAccRecoil ( recoil_i );
+
 	}
+	//============================================================
 
 
 	//ヒット時
