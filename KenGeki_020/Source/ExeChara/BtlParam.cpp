@@ -110,7 +110,7 @@ namespace GAME
 		m_tmrHitstop	= std::make_shared < Timer > ( HITSTOP_TIME );	//ヒットストップ
 		m_tmrDown		= std::make_shared < Timer > ( DOWN_TIME );		//ダウンタイマ
 		m_tmrEnd		= std::make_shared < Timer > ( END_TIME );		//終了状態タイマ
-		m_tmrStop		= std::make_shared < Timer > ();		//ストップタイマ
+		m_tmrScpStop		= std::make_shared < Timer > ();		//ストップタイマ
 		m_tmrHitPitch	= std::make_shared < Timer > ();		//ヒット間隔タイマ
 		m_tmrLurch		= std::make_shared < Timer > ();		//のけぞりタイマ
 		m_tmrWhiteDamage = std::make_shared < Timer > ();	//白ダメージ
@@ -118,7 +118,7 @@ namespace GAME
 		m_timers.push_back ( m_tmrHitstop );
 		m_timers.push_back ( m_tmrDown );
 		m_timers.push_back ( m_tmrEnd );
-		m_timers.push_back ( m_tmrStop );
+		m_timers.push_back ( m_tmrScpStop );
 		m_timers.push_back ( m_tmrHitPitch );
 		m_timers.push_back ( m_tmrLurch );
 		m_timers.push_back ( m_tmrWhiteDamage );
@@ -656,8 +656,8 @@ namespace GAME
 	void BtlParam::OnOffset_Common ()
 	{
 		m_clang = T;		//打合発生フラグ
-		m_tmrHitstop->Start ();		//ヒットストップの設定
-		m_tmrHitPitch->WaitStart ( HITSTOP_TIME );	//ヒット間隔のカウント
+		m_tmrHitstop->Start ( OFFSET_TIME );		//ヒットストップの設定
+		HitPitchWaitStart ( OFFSET_TIME );
 
 		//-------------------------------------------------
 		//ノックバック処理		// 値は (float) = (int)1/10
@@ -672,21 +672,21 @@ namespace GAME
 	void BtlParam::OnHit ()
 	{
 		m_hitEst = T;		//攻撃成立フラグ
-		m_tmrHitstop->Start ();		//ヒットストップの設定
+		m_tmrHitstop->Start ( HITSTOP_TIME );		//ヒットストップの設定
 
 //		m_tmrHitPitch->WaitStart ( HITSTOP_TIME );	//ヒット間隔のカウント
 		//※ヒットストップ分を待機してからスタート
-		HitPitchWaitStart ();
+		HitPitchWaitStart ( HITSTOP_TIME );
 
 		++ m_hitNum;
 
 		++ m_chainHitNum;
 	}
 
-	void BtlParam::HitPitchWaitStart ()
+	void BtlParam::HitPitchWaitStart ( UINT time )
 	{
 		m_tmrHitPitch->Clear ();
-		m_tmrHitPitch->WaitStart ( HITSTOP_TIME );	//ヒット間隔のカウント
+		m_tmrHitPitch->WaitStart ( time );	//ヒット間隔のカウント
 	}
 
 

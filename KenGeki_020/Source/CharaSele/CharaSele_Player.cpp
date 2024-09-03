@@ -47,6 +47,7 @@ namespace GAME
 		m_chara_stand->AddTexture_FromArchive ( U"CharaSele\\Stand_Ouka.png" );
 		m_chara_stand->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
 		m_chara_stand->AddTexture_FromArchive ( U"CharaSele\\Stand_Sae.png" );
+		m_chara_stand->AddTexture_FromArchive ( U"CharaSele\\Stand_Retsudou.png" );
 		AddpTask ( m_chara_stand );
 		GRPLST_INSERT ( m_chara_stand );
 
@@ -55,15 +56,17 @@ namespace GAME
 		m_chara_stand_light->AddTexture_FromArchive ( U"CharaSele\\Stand_Ouka_light.png" );
 		m_chara_stand_light->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
 		m_chara_stand_light->AddTexture_FromArchive ( U"CharaSele\\Stand_Sae_light.png" );
+		m_chara_stand_light->AddTexture_FromArchive ( U"CharaSele\\Stand_Retsudou_light.png" );
 		AddpTask ( m_chara_stand_light );
 		GRPLST_INSERT ( m_chara_stand_light );
 		m_chara_stand_light->SetValid ( F );
 
 		//キャラ名前
 		m_chara_name = std::make_shared < GameGraphic > ();
-		m_chara_name->AddTexture_FromArchive ( U"Name_Ouka.png" );
+		m_chara_name->AddTexture_FromArchive ( U"CharaSele\\Name_Ouka.png" );
 		m_chara_name->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
-		m_chara_name->AddTexture_FromArchive ( U"Name_Sae.png" );
+		m_chara_name->AddTexture_FromArchive ( U"CharaSele\\Name_Sae.png" );
+		m_chara_name->AddTexture_FromArchive ( U"CharaSele\\Name_Retsudou.png" );
 		AddpTask ( m_chara_name );
 		GRPLST_INSERT ( m_chara_name );
 
@@ -128,7 +131,7 @@ namespace GAME
 		case CHSLID_00: SetCharaStand ( CHSLID_00 ); break;
 		case CHSLID_01: HiddenCharaStand ();break;
 		case CHSLID_02: SetCharaStand ( CHSLID_02 ); break;
-		case CHSLID_03: HiddenCharaStand ();break;
+		case CHSLID_03: SetCharaStand ( CHSLID_03 ); break;
 		case CHSLID_04: HiddenCharaStand ();break;
 		case CHSLID_05: HiddenCharaStand ();break;
 		case CHSLID_06: HiddenCharaStand ();break;
@@ -305,7 +308,7 @@ namespace GAME
 		case CHSLID_00: return T;
 		case CHSLID_01: break;
 		case CHSLID_02: return T;
-		case CHSLID_03: break;
+		case CHSLID_03: return T;
 		case CHSLID_04: break;
 		case CHSLID_05: break;
 		case CHSLID_06: break;

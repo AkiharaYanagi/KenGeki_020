@@ -28,6 +28,18 @@ namespace GAME
 		P_FadeRect	m_fade_out;
 		uint32		m_plus_wait { 0 };
 
+		float		m_cursor_scaling_vy { 0.05f };
+		float		m_cursor_scaling_y { 1.f };
+
+
+		std::unique_ptr < s3d::VideoTexture >		m_test;
+
+		s3d::Array < int32 > delays;
+		s3d::Array < s3d::Texture > txs;
+
+		P_Grp		m_charaTest;
+
+
 #if 0
 		P_PrmRect	m_fade_out;
 		UINT		m_wait_out;

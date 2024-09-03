@@ -173,6 +173,12 @@
     <Filter Include="ExeChara\Effect">
       <UniqueIdentifier>{8f3a288a-6504-4a71-88f2-097feedc5b76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{8c660644-32f9-48d3-9ee3-d163e1475d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Result">
+      <UniqueIdentifier>{d941e349-8041-4e9a-8f26-da1cc8d2c4d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -948,6 +954,9 @@
     <ClInclude Include="Source\CharaSele\CharaSele.h">
       <Filter>CharaSele</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Result\Result.h">
+      <Filter>Result</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1096,6 +1105,9 @@
     </ClCompile>
     <ClCompile Include="Source\CharaSele\CharaSeleConst.cpp">
       <Filter>CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Result\Result.cpp">
+      <Filter>Result</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

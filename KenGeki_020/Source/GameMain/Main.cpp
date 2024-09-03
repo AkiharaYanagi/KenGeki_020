@@ -40,7 +40,6 @@ std::unique_ptr < s3d::Audio > audio;
 //メインループ
 void Main()
 {
-
 	//読込
 	Load ();
 

@@ -27,6 +27,7 @@ namespace GAME
 		P_GrpEf	m_impact;
 
 		P_GrpEf m_test;
+//		P_Grp m_test;
 		double	m_r { 0 };
 
 	public:
@@ -38,6 +39,10 @@ namespace GAME
 		void Move ();
 
 		void On ( VEC2 center );
+
+
+	private:
+		void SetScale ( P_Grp pGrp, const VEC2 & v );
 	};
 
 	using P_EfClang = std::shared_ptr < EfClang >;

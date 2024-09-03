@@ -215,7 +215,8 @@ namespace GAME
 		bool IsPlayerID ( PLAYER_ID id ) { return m_btlPrm.GetPlayerID () == id; }
 		CHARA_NAME GetCharaName () const { return m_name; }
 
-		P_Script GetpScript () { return m_pScript; }
+		P_Action GetpAction () const { return m_pAction; }
+		P_Script GetpScript () const { return m_pScript; }
 		ACTION_POSTURE GetPosture () const { return m_pAction->GetPosture (); }
 
 		//パラメータ

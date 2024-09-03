@@ -101,20 +101,16 @@ namespace GAME
 		//シーン共通パラメータ記録
 		SaveParam();
 
-
-
+#if 0
 		//test
 		float x1 = m_exeChara1->GetPos ().x;
 		float x2 = m_exeChara2->GetPos ().x;
 		DBGOUT_WND()->DebugOutf ( 0, U"{}, {}"_fmt( x1, x2 ) );
-
-
-
+#endif // 0
 	}
 
 
 
-#if 0
 	//■#########################################################
 	
 	//一時停止中コンダクト
@@ -122,10 +118,10 @@ namespace GAME
 	{
 		//---------------------------------------------------
 		//システム変更
-		SwitchRect ();	//枠表示切替
-		SwitchDispInput ();	//入力表示切替
-		SwitchFrontEnd ();	//ゲージ類表示切替
-		SwithcCPU ();	//CPU操作切替
+		m_utl.SwitchDispInput ();
+		m_utl.SwitchRect ();
+		m_utl.SwitchFrontEnd ();
+		//		m_utl.SwitchCPU ();
 		//---------------------------------------------------
 
 		//◆スクリプト前処理(入力、移動など)
@@ -135,11 +131,17 @@ namespace GAME
 		//◆画像の更新
 		m_exeChara1->UpdateGraphic ();
 		m_exeChara2->UpdateGraphic ();
+
+		//---------------------------------------------------
+		//グラフィック共通
+		Grp ();
+
+		//シーン共通パラメータ記録
+		SaveParam();
+
 	}
 
 	//■#########################################################
-#endif // 0
-
 
 
 	//◆================================

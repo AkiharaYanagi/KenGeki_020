@@ -15,13 +15,10 @@
 #include "../Title/Title.h"
 #include "../Training/Training.h"
 #include "../CharaSele/CharaSele.h"
-
-#if 0
-#include "../Introduction/Introduction.h"
 #include "../Result/Result.h"
-#endif // 0
+//#include "../Introduction/Introduction.h"
 
-//#include "../GameMain/SoundConst.h"
+#include "../GameMain/SoundConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -89,6 +86,14 @@ namespace GAME
 		GRPLST_CLEAR ();
 		mp_Transit = std::make_shared < CharaSele > ();
 	}
+
+	//[シーン遷移] リザルトに移行
+	void Scene::Transit_Result ()
+	{
+		GRPLST_CLEAR ();
+		mp_Transit = std::make_shared < Result > ();
+	}
+
 #if 0
 
 
@@ -98,14 +103,6 @@ namespace GAME
 		GetpParam ()->SetMutchMode ( mode );
 	}
 
-
-	//[シーン遷移] リザルトに移行
-	void Scene::Transit_Result ()
-	{
-		GRPLST_CLEAR ();
-		mp_Transit = make_shared < Result > ();
-		GRPLST_LOAD ();
-	}
 
 	//[シーン遷移] イントロに移行
 	void Scene::Transit_Intro ()
@@ -126,10 +123,11 @@ namespace GAME
 //		startMode = START_TITLE;
 //		startMode = START_CHARA_SELE;
 //		startMode = START_BATTLE;
-		startMode = START_TRAINING;
+//		startMode = START_TRAINING;
+		startMode = START_RESULT;
+
 #if 0
 //		startMode = START_INTRO;
-//		startMode = START_RESULT;
 //		startMode = START_DEMO;
 //		startMode = TEST_VOID;
 #endif // 0
@@ -172,6 +170,11 @@ namespace GAME
 			pScene = std::make_shared < Training > ();
 		break;
 
+		//---------------------------------------------
+		case START_RESULT:
+			//リザルトから開始
+			pScene = std::make_shared < Result > ();
+		break;
 
 		//---------------------------------------------
 		default: break;
@@ -180,40 +183,11 @@ namespace GAME
 
 
 #if 0
-
-		switch ( startMode )
-		{
 		case START_TITLE_INTRO:
 			//タイトルから開始
 			pScene = make_shared < Title > ();
 			break;
 
-		case START_INTRO:
-
-
-			//イントロから開始
-//			pScene = make_shared < Introduction > ();
-			pScene = make_shared < Intro_Img > ();
-
-			
-			break;
-
-		case START_BATTLE:
-			//バトルから開始
-			pScene = make_shared < FtgMain > ();
-			break;
-
-		case START_RESULT:
-			//リザルトから開始
-			pScene = make_shared < Result > ();
-			break;
-
-		case START_TRAINING:
-			//トレーニングから開始
-			pScene = make_shared < Training > ();
-			break;
-
-#if 0
 		case START_DEMO:
 			//デモから開始
 			pScene = make_shared < Title > ();
@@ -225,9 +199,6 @@ namespace GAME
 			break;
 #endif // 0
 
-		}
-
-#endif // 0
 
 		//シーンの設定
 		SetScene ( pScene );

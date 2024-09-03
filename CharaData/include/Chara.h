@@ -92,7 +92,7 @@ namespace GAME
 		void AddpAction ( const std::vector < P_Action > & arypAction, rsize_t size );
 
 		//---------------------------------------------------------------------
-		//名前からアクションIDを取得する(無いときは０を返す)
+		//名前からアクションIDを取得する(無いときはNO_ACTION(0x7FFF0001)を返す)
 		UINT GetActionID ( s3d::String name ) const;
 
 		//アクションポインタを取得

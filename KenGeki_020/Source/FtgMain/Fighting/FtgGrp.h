@@ -19,11 +19,12 @@ namespace GAME
 {
 	class FtgGrp : public TASK_VEC
 	{
-		bool	m_BrackOut { F };		//暗転
-		bool	m_WhiteOut { F };		//白転
-		bool	m_Slow { F };			//スロウ
-		Timer	m_tmrSlow;				//スロウ
-		Timer	m_tmrStop;	//ストップ
+		bool	m_ScpStop { F };	//一時停止
+		bool	m_BrackOut { F };	//暗転
+		bool	m_WhiteOut { F };	//白転
+		bool	m_Slow { F };		//スロウ
+		Timer	m_tmrSlow;			//スロウ
+		Timer	m_tmrStop;			//ストップ
 
 		bool	m_wallbreak { F };	//壁割
 		PLAYER_ID	m_WB_Plyaer { _PLAYER_NUM };	//壁を割ったプレイヤ
@@ -44,6 +45,7 @@ namespace GAME
 		void Init ();
 		void Move ();
 
+		GET_SET ( bool, GetScpStop, SetScpStop, m_ScpStop )
 		GET_SET ( bool, GetBlackOut, SetBlackOut, m_BrackOut )
 		GET_SET ( bool, GetWhiteOut, SetWhiteOut, m_WhiteOut )
 		GET_SET ( bool, GetSlow, SetSlow, m_Slow )

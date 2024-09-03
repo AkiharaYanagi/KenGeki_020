@@ -196,6 +196,25 @@ namespace GAME
 		P_Script pScpOther = m_pOther.lock ()->m_pScript;
 
 		//-------------------------------------------------
+		//当て身成立
+		if ( IsNameAction ( U"竜巻必殺" ) )
+		{
+			UINT frame = m_pScript->GetFrame ();
+			if ( 5 < frame )
+			{
+				//SetAction ( U"当て身成立" );	//遷移
+				//相手の「相手の変更先アクション」を指定
+				m_pOther.lock ()->m_nameChangeOther = U"当て身成立";
+
+				//自分
+				m_btlPrm.GetTmr_HitStop ()->Start ( 30 );	//ヒットストップの設定
+				//相手
+				m_pOther.lock()->m_btlPrm.GetTmr_HitStop ()->Start ( 60 );	//ヒットストップの設定
+			}
+			return;
+		}
+
+		//-------------------------------------------------
 		//ガード判定
 		//後方向が入力されているとき
 		if ( m_pCharaInput->IsLvr4 () )
@@ -250,8 +269,25 @@ namespace GAME
 		m_btlPrm.SetBalance ( bl - b_e );
 
 		//-------------------------------------------------
+		//ヒットストップ
+
+		//相手スクリプトによる追加止め時間
+		P_Action pAct = m_pOther.lock()->GetpAction();
+		P_Script pScp = m_pOther.lock()->GetpScript();
+		int warp = pScp->m_prmBattle.Warp;
+
+		UINT stopTime = HITSTOP_TIME;
+		if( warp != 0 )
+		{
+			stopTime += warp;
+		}
+
+		m_btlPrm.GetTmr_HitStop ()->Start ( stopTime );	//ヒットストップの設定
+
+
+		//-------------------------------------------------
 		//その他　効果
-		m_btlPrm.GetTmr_HitStop ()->Start ();			//ヒットストップの設定
+		// スクリプトが進まないヒットストップ中も見るのでフラグでチェックする
 //		m_btlPrm.SetFirstEf ( true );			//初回のみエフェクト発生
 		m_btlPrm.SetFirstSE ( true );			//初回のみSE発生
 	}

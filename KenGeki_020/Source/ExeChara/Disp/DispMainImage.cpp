@@ -100,7 +100,7 @@ namespace GAME
 
 		//---------------------------------------------------------
 		//影
-		VEC2 vecImgShadow = VEC2 ( bx, 0 ) + ptChara + VEC2 ( -128 + fDir * 12, 0 );
+		VEC2 vecImgShadow = VEC2 ( bx, 0 ) + ptChara + VEC2 ( -160 + fDir * 12, 0 );
 		vecImgShadow.y = -0.f + (float)PLAYER_BASE_Y;	//y方向のみ指定
 		m_grpShadow->SetPos ( vecImgShadow );
 

@@ -33,6 +33,7 @@ namespace GAME
 
 	void FtgGrp::Load ()
 	{
+		//test 動画
 		mp_vtx = std::make_unique < s3d::VideoTexture > ( U"raiden.mp4", s3d::Loop::No );
 		GrpLst::Inst()->SetupVtx ( std::move ( mp_vtx ) );
 

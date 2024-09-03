@@ -82,7 +82,7 @@ namespace GAME
 
 
 		VP_Timer	m_timers;			//タイマ監理
-		P_Timer		m_tmrStop;			//全体ストップタイマ
+		P_Timer		m_tmrScpStop;		//全体ストップタイマ
 		P_Timer		m_tmrHitstop;		//ヒットストップタイマ
 		P_Timer		m_tmrDown;			//ダウンタイマ
 		P_Timer		m_tmrEnd;			//終了状態タイマ
@@ -190,7 +190,7 @@ namespace GAME
 
 		//--------------------------------------------------------------------
 		//タイマ
-		P_Timer GetTmr_Stop () { return m_tmrStop; }
+		P_Timer GetTmr_ScpStop () { return m_tmrScpStop; }
 		P_Timer GetTmr_HitStop () { return m_tmrHitstop; }
 		P_Timer GetTmr_HitPitch () { return m_tmrHitPitch; }
 		P_Timer GetTmr_Down () { return m_tmrDown; }
@@ -220,7 +220,7 @@ namespace GAME
 		//----
 		//処理まとめ
 		void OnHit ();	//ヒット時
-		void HitPitchWaitStart ();	//ヒット間隔再スタート
+		void HitPitchWaitStart ( UINT time );	//ヒット間隔再スタート
 		void CalcBalance ( P_Script pScp );
 		void OnDamage ( int damage );	//ダメージ時
 

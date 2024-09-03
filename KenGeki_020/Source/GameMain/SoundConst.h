@@ -59,9 +59,7 @@ namespace GAME
 		SE_Btl_break,
 		SE_Btl_Light,
 		SE_Btl_Clang,
-#if 0
-
-#endif // 0
+		SE_Btl_Extract_sword,
 	};
 
 }

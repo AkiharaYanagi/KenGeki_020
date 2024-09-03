@@ -223,7 +223,8 @@ namespace GAME
 		s3d::String nameAction = Check_TransitAction_Condition_str ( CONDITION );
 
 		//該当無しは何もしない
-		if ( U"" == nameAction ) { return; }
+		UINT index = m_pOther.lock()->m_pChara->GetActionID ( nameAction );
+		if ( NO_ACTION == index ) { return; }
 
 		//=================================================================
 		//遷移先チェック

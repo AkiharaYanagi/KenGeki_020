@@ -57,7 +57,6 @@ namespace GAME
 
 		void ParamInit ();
 		void Load ();
-		void Init ();
 		void Move ();
 
 		P_GameScene Transit ();

@@ -50,10 +50,9 @@ namespace GAME
 
 		//ステージセレクト
 		m_stageSelect = std::make_shared < GameGraphic > ();
-		//m_stageSelect->AddTexture_FromArchive ( U"stage_select_0.png" );
-		//m_stageSelect->AddTexture_FromArchive ( U"stage_select_1.png" );
-		//m_stageSelect->AddTexture_FromArchive ( U"stage_select_2.png" );
 		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Evening.png" );
+		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Noon.png" );
+		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Night.png" );
 		m_stageSelect->SetPos ( VEC2 ( 640 - 128, 400 ) );
 		m_stageSelect->SetZ ( Z_BG - 0.1f );
 		AddpTask ( m_stageSelect );
@@ -83,42 +82,15 @@ namespace GAME
 
 	P_GameScene CharaSele::Transit ()
 	{
-		//BackSpaceで戻る
+		//BackSpaceでタイトルに戻る
 		if ( WND_UTL::AscKey ( VK_BACK ) )
 		{
 			SOUND->Play_SE ( SE_Sys_Cancel );
 
 			//フェード開始
-			m_fade_toTitle->SetBlackOut ( 68 );
+			m_fade_toTitle->SetBlackOut ( 8 );
 		}
 
-		return Scene::Transit (); 
-	}
-
-
-	void CharaSele::ParamInit ()
-	{
-	}
-	
-
-	void CharaSele::Init ()
-	{
-		Scene::Init (); 
-	}
-
-	void CharaSele::Move ()
-	{
-
-		//----------------------------------------------------------
-		//キャラ選択、ステージ選択をパラメータに記録
-		P_Param pPrm = Scene::GetpParam ();
-		pPrm->SetCharaName1p ( m_chsl_pl_1p->GetName() );
-		pPrm->SetCharaName2p ( m_chsl_pl_2p->GetName() );
-		pPrm->SetStageName ( GetStageName () );
-
-
-		//----------------------------------------------------------
-		//フェードアウト中
 		//タイトルに移行
 		if ( m_fade_toTitle->IsActive() )
 		{
@@ -128,6 +100,7 @@ namespace GAME
 				Scene::Transit_Title ();
 			}
 		}
+
 		//戦闘に移行
 		if ( m_fade_toFighting->IsActive () )
 		{
@@ -138,11 +111,40 @@ namespace GAME
 			}
 		}
 
-		//----------------------------------------------------------
+		return Scene::Transit (); 
+	}
 
-#if 0
+
+	void CharaSele::ParamInit ()
+	{
+	}
+
+	void CharaSele::Move ()
+	{
+		//----------------------------------------------------------
+		//キャラ選択、ステージ選択をパラメータに記録
+		P_Param pPrm = Scene::GetpParam ();
+		pPrm->SetCharaName1p ( m_chsl_pl_1p->GetName() );
+		pPrm->SetCharaName2p ( m_chsl_pl_2p->GetName() );
+		pPrm->SetStageName ( GetStageName () );
+
+		//----------------------------------------------------------
+		//フェードアウト中の待機と遷移
+		if ( m_fade_toTitle->IsActive() )
+		{
+			Scene::Move (); 
+			return;
+		}
+
+		//戦闘に移行
+		if ( m_fade_toFighting->IsActive () )
+		{
+			Scene::Move (); 
+			return;
+		}
+
+		//----------------------------------------------------------
 		//決定
-		bool b0 = ( m_wait_out_fighting == 0 );
 		bool b1 = m_chsl_pl_1p->IsDecided ();
 		bool b2 = m_chsl_pl_2p->IsDecided ();
 
@@ -162,9 +164,11 @@ namespace GAME
 
 			if ( CFG_PUSH_KEY ( P1_BTN0 ) )
 			{
+				SOUND->Play_SE ( SE_Sys_Enter );
 				m_stageDecide = T;
 			}
 		}
+
 		if ( b2 )
 		{
 			if ( CFG_PUSH_KEY ( P2_LEFT ) )
@@ -180,18 +184,18 @@ namespace GAME
 
 			if ( CFG_PUSH_KEY ( P2_BTN0 ) )
 			{
+				SOUND->Play_SE ( SE_Sys_Enter );
 				m_stageDecide = T;
 			}
 		}
 
-		//両者決定したらFtgMainに移行
-		if ( b0 && b1 && b2 && m_stageDecide )
+		//両者とステージを決定したらFtgMainに移行
+		if ( b1 && b2 && m_stageDecide )
 		{ 
 			//フェード開始
-			m_fade_out->SetFade ( 8, _CLR ( 0x00000000UL ), _CLR ( 0xff000000UL ) );	//開始値、目標値を手動設定
-			m_wait_out_fighting = 1;
+			m_fade_toFighting->SetBlackOut ( 8 );
 		}
-#endif // 0
+
 
 		Scene::Move (); 
 	}

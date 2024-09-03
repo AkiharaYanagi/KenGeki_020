@@ -142,6 +142,7 @@ namespace GAME
 //		HITSTOP_TIME = 15,
 		HITSTOP_TIME = 7,
 //		HITSTOP_TIME = 700,
+		OFFSET_TIME = 14,
 		DOWN_TIME = 120 + 60,
 		END_TIME = 60,
 	};

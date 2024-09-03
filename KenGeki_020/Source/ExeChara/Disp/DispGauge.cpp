@@ -72,25 +72,25 @@ namespace GAME
 
 		//枠
 		m_grp_Frame = std::make_shared < GameGraphic > ();
-		m_grp_Frame->SetScalingCenter ( VEC2 ( 0, 64.f ) );
+//		m_grp_Frame->SetScalingCenter ( VEC2 ( 0, 64.f ) );
 		AddpTask ( m_grp_Frame );
 		GRPLST_INSERT ( m_grp_Frame );
 
 		//減少分(赤)
 		m_grp_Decrease = std::make_shared < GameGraphic > ();
-		m_grp_Decrease->SetScalingCenter ( VEC2 ( 0, 64.f ) );
+//		m_grp_Decrease->SetScalingCenter ( VEC2 ( 0, 64.f ) );
 		AddpTask ( m_grp_Decrease );
 		GRPLST_INSERT ( m_grp_Decrease );
 
 		//回復分(白)
 		m_grp_White = std::make_shared < GameGraphic > ();
-		m_grp_White->SetScalingCenter ( VEC2 ( 0, 64.f ) );
+//		m_grp_White->SetScalingCenter ( VEC2 ( 0, 64.f ) );
 		AddpTask ( m_grp_White );
 		GRPLST_INSERT ( m_grp_White );
 
 		//値
 		m_grp_Value = std::make_shared < GameGraphic > ();
-		m_grp_Value->SetScalingCenter ( VEC2 ( 0, 64.f ) );
+//		m_grp_Value->SetScalingCenter ( VEC2 ( 0, 64.f ) );
 		AddpTask ( m_grp_Value );
 		GRPLST_INSERT ( m_grp_Value );
 	}

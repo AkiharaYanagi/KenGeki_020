@@ -20,34 +20,64 @@ namespace GAME
 	{
 		m_impact = std::make_shared < GrpEf > ();
 		AddpTask ( m_impact );
-		SDRLST_INSERT ( m_impact );
+//		SDRLST_INSERT ( m_impact );
 
 		m_circle = std::make_shared < GrpEf > ();
 		AddpTask ( m_circle );
-		SDRLST_INSERT ( m_circle );
+//		SDRLST_INSERT ( m_circle );
 
 		m_thunder0 = std::make_shared < GrpEf > ();
 		AddpTask ( m_thunder0 );
-		SDRLST_INSERT ( m_thunder0 );
+//		SDRLST_INSERT ( m_thunder0 );
 
 		m_thunder1 = std::make_shared < GrpEf > ();
 		AddpTask ( m_thunder1 );
-		SDRLST_INSERT ( m_thunder1 );
+//		SDRLST_INSERT ( m_thunder1 );
 
 
-		m_test = std::make_shared < GrpEf > ();
-		AddpTask ( m_test );
-		SDRLST_INSERT ( m_test );
-//		GRPLST_INSERT ( m_test );
-
-
-		VEC2 base { -800, -800 };
+		VEC2 base { -400, -400 };
 		m_impact->SetBase ( base );
 		m_circle->SetBase ( base );
 		m_thunder0->SetBase ( base );
 		m_thunder1->SetBase ( base );
 
-		m_test->SetBase ( VEC2 ( 400, 400 ) );
+#if 0
+		m_impact->SetValid ( T );
+		m_circle->SetValid ( T );
+		m_thunder0->SetValid ( T );
+		m_thunder1->SetValid ( T );
+
+		VEC2 pos { 1000, 1000 };
+		m_impact->SetPos ( pos );
+		m_circle->SetPos ( pos );
+		m_thunder0->SetPos ( pos );
+		m_thunder1->SetPos ( pos );
+#endif // 0
+
+		VEC2 rtt_cnt { 400, 400 };
+		m_impact->SetRotationCenter ( rtt_cnt );
+		m_circle->SetRotationCenter ( rtt_cnt );
+		m_thunder0->SetRotationCenter ( rtt_cnt );
+		m_thunder1->SetRotationCenter ( rtt_cnt );
+
+
+		VEC2 scl_cnt { 400, 400 };
+		const VEC2 scl { 12.f, 2.f };
+		SetScale ( m_impact, scl );
+		SetScale ( m_circle, scl );
+		SetScale ( m_thunder0, scl );
+		SetScale ( m_thunder1, scl );
+
+//		m_test = std::make_shared < GameGraphic > ();
+		m_test = std::make_shared < GrpEf > ();
+		AddpTask ( m_test );
+//		SDRLST_INSERT ( m_test );
+//		GRPLST_INSERT ( m_test );
+
+		m_test->SetPos ( VEC2 ( 0, 0 ) );
+//		m_test->SetBase ( VEC2 ( 400, 400 ) );
+		m_test->SetRotationCenter ( VEC2 ( 200, 200 ) );
+		m_test->SetValid ( T );
 
 	}
 
@@ -165,7 +195,7 @@ namespace GAME
 
 
 
-		m_test->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder0\\Ef_Thunder0_10.png" );
+		m_test->AddTexture_FromArchive ( U"Ef_Test.png" );
 
 
 		TASK_VEC::Load ();
@@ -178,29 +208,60 @@ namespace GAME
 	void EfClang::Move ()
 	{
 		m_impact->SetDispBase ( G_BASE_POS () );
-		m_impact->Advance ();
-
 		m_circle->SetDispBase ( G_BASE_POS () );
-		m_circle->Advance ();
-
 		m_thunder0->SetDispBase ( G_BASE_POS () );
-		m_thunder0->Advance ();
-
 		m_thunder1->SetDispBase ( G_BASE_POS () );
+
+		m_impact->Advance ();
+		m_circle->Advance ();
+		m_thunder0->Advance ();
 		m_thunder1->Advance ();
+
+#if 0
+		m_impact->SetValid ( T );
+		m_circle->SetValid ( T );
+		m_thunder0->SetValid ( T );
+		m_thunder1->SetValid ( T );
+#endif // 0
+
+#if 0
+
+		double r = s3d::Random ( 0.f, D3DX_PI_TWICE );
+		m_thunder1->SetRadian ( (float)r );
+
 
 //		m_test->SetDispBase ( G_BASE_POS () );
 //		m_thunder1->Advance ();
 
-		m_r += 0.01;
-		m_test->SetRadian ( m_r );
+		m_r += 0.1;
+		m_test->SetRadian ( (float)m_r );
+
+		m_test->Move();
+
+#endif // 0
 
 
 		TASK_VEC::Move ();
+
+#if 0
+		VEC2 pos { 0, 0 };
+		m_impact->SetPos ( pos );
+		m_circle->SetPos ( pos );
+		m_thunder0->SetPos ( pos );
+		m_thunder1->SetPos ( pos );
+#endif // 0
 	}
 
 	void EfClang::On ( VEC2 center )
 	{
+		m_r = s3d::Random ( 0.f, D3DX_PI_TWICE );
+		m_impact->SetRadian ( (float)m_r );
+		m_circle->SetRadian ( (float)m_r );
+		m_thunder0->SetRadian ( (float)m_r );
+		m_thunder1->SetRadian ( (float)m_r );
+
+
+
 		m_impact->SetRevised ( center );
 		m_impact->On ();
 
@@ -213,8 +274,21 @@ namespace GAME
 		m_thunder1->SetRevised ( center );
 		m_thunder1->On ();
 
+#if 0
+#endif // 0
+
 //		m_test->SetRevised ( center );
 //		m_thunder1->On ();
 	}
+
+	void EfClang::SetScale ( P_Grp pGrp, const VEC2 & v )
+	{
+		PAP_Ob papOb = pGrp->Getpap_ob ();
+		for ( P_Ob pOb : * papOb )
+		{
+			pOb->SetScaling ( v );
+		}
+	}
+
 
 }

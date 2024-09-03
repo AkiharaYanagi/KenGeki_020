@@ -258,16 +258,24 @@ namespace GAME
 		//アクションとスクリプトをパラメータに渡す
 		m_btlPrm.Update ( m_pAction, m_pScript );
 
+
+		//------------------------------------------------
+		//	全体演出
 		//------------------------------------------------
 		//暗転
 		m_btlPrm.SetBlackOut ( m_pScript->m_prmStaging.BlackOut );
 
 		//------------------------------------------------
-		//スクリプト停止
-		if ( ! m_btlPrm.GetTmr_Stop ()->IsActive () )
+		//スクリプトからの停止
+		//	タイマの状態を確認しないと同じスクリプトを調べ続けてしまう
+		if ( ! m_btlPrm.GetTmr_ScpStop ()->IsActive () )
 		{
-			//スクリプトからの停止
-			m_btlPrm.SetScpStop ( m_pScript->m_prmStaging.Stop );
+			UINT scpStop = m_pScript->m_prmStaging.Stop;
+			m_btlPrm.SetScpStop ( scpStop );
+			if ( scpStop > 0 )
+			{
+//				m_pFtgGrp->SetScpStop ( T );
+			}
 		}
 	}
 

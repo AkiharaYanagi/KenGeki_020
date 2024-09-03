@@ -30,21 +30,21 @@ namespace GAME
 		m_bg->SetPos ( 0, 0 );
 		m_bg->SetZ ( Z_BG );
 		AddpTask ( m_bg );
-		GRPLST_INSERT ( m_bg );
+//		GRPLST_INSERT ( m_bg );
 
 		m_menu = std::make_shared < GameGraphic > ();
 		m_menu->AddTexture_FromArchive ( U"title_menu.png" );
 		m_menu->SetPos ( 580, 800 );
 		m_menu->SetZ ( Z_CH );
 		AddpTask ( m_menu );
-		GRPLST_INSERT ( m_menu );
+//		GRPLST_INSERT ( m_menu );
 
 		m_cursor = std::make_shared < GameGraphic > ();
 		m_cursor->AddTexture_FromArchive ( U"title_cursor.png" );
 		m_cursor->SetPos ( 480, 840 );
 		m_cursor->SetZ ( Z_CH );
 		AddpTask ( m_cursor );
-		GRPLST_INSERT ( m_cursor );
+//		GRPLST_INSERT ( m_cursor );
 
 		//カーソル位置
 		m_cursor->SetPos ( 480.f, 800.f + 80 * (int32)m_to );
@@ -52,15 +52,15 @@ namespace GAME
 
 		//フェードイン
 		m_fade_in = std::make_shared < FadeRect > ();
-		m_fade_in->SetWhiteIn ( 60 );
+		m_fade_in->SetWhiteIn ( 8 );
 		AddpTask ( m_fade_in );
-		GRPLST_INSERT ( m_fade_in );
+//		GRPLST_INSERT ( m_fade_in );
 
 		//フェードアウト
 		m_fade_out = std::make_shared < FadeRect > ();
 		m_fade_out->SetAfterClear ( F );
 		AddpTask ( m_fade_out );
-		GRPLST_INSERT ( m_fade_out );
+//		GRPLST_INSERT ( m_fade_out );
 
 
 #if 0
@@ -103,14 +103,55 @@ namespace GAME
 		GRPLST_INSERT_MAIN ( m_fade_out );
 		m_wait_out = 0;
 #endif // 0
+
+		m_charaTest = std::make_shared < GameGraphic > ();
+		m_charaTest->AddTexture_FromArchive ( U"CharaSele\\Stand_Retsudou.png" );
+		m_charaTest->SetPos ( -100, 100 );
+		AddpTask ( m_charaTest );
+//		GRPLST_INSERT ( m_charaTest );
+		GrpLst::Inst()->SetpPostDraw ( m_charaTest );
+
 	}
 
 	Title::~Title ()
 	{
 	}
 
+	void Title::Load ()
+	{
+		//==================================================
+		//	Scene共通
+		//==================================================
+		//遷移先を自身に設定
+		//	(コンストラクタでは shared_from_this() が使えないため、Load() で呼び出す)
+		Scene::SetwpThis ( shared_from_this () );
+		//==================================================
+
+
+
+		std::shared_ptr < s3d::AnimatedGIFReader >	m_gif = std::make_shared < s3d::AnimatedGIFReader > ( U"Result.gif" );
+		s3d::Array < s3d::Image > images;
+
+		m_gif->read ( images, delays );
+		txs =
+			images.map ( [](const Image& image)
+			{
+				return s3d::Texture { image };
+			} );
+		images.clear ();
+
+
+		Scene::Load ();
+	}
+
+
 	void Title::ParamInit ()
 	{
+		m_test = std::make_unique < s3d::VideoTexture > ( U"Result.mp4", s3d::Loop::Yes );
+		//m_test = std::make_unique < s3d::VideoTexture > ( U"raiden.mp4", s3d::Loop::No );
+//		GrpLst::Inst()->Clear ();
+		GrpLst::Inst()->SetupVtx ( std::move ( m_test ) );
+//		GrpLst::Inst()->StartVtx ();
 	}
 
 	void Title::Move ()
@@ -121,6 +162,12 @@ namespace GAME
 		//選択
 		Select ();
 
+		//カーソル回転
+		m_cursor_scaling_y += m_cursor_scaling_vy;
+		if ( m_cursor_scaling_y >= 1.f ) { m_cursor_scaling_vy = - 0.01f; }
+		if (m_cursor_scaling_y <= -1.f) { m_cursor_scaling_vy = 0.01f; }
+
+		m_cursor->SetScaling ( 1.f, m_cursor_scaling_y );
 
 #if 0
 		//フェードイン中
@@ -149,19 +196,12 @@ namespace GAME
 
 #endif // 0
 		Scene::Move ();
-	}
 
-	void Title::Load ()
-	{
-		//==================================================
-		//	Scene共通
-		//==================================================
-		//遷移先を自身に設定
-		//	(コンストラクタでは shared_from_this() が使えないため、Load() で呼び出す)
-		Scene::SetwpThis ( shared_from_this () );
-		//==================================================
 
-		Scene::Load ();
+
+		const double t = s3d::Scene::Time();
+		const size_t frameIndex = s3d::AnimatedGIFReader::GetFrameIndex ( t, delays );
+		txs [ frameIndex ].scaled( 1.34f, 1.34f ).draw ( 0, 0 );
 	}
 
 	P_GameScene Title::Transit ()

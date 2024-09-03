@@ -75,9 +75,7 @@ namespace GAME
 		//スクリプトの毎フレーム処理
 		void Conduct ();
 		void Grp ();			//グラフィック共通
-#if 0
-		void Conduct_InStop ();	//停止コンダクト
-#endif // 0
+		void Conduct_InStop ();	//一時停止コンダクト
 
 
 		//----------------------------------------------------

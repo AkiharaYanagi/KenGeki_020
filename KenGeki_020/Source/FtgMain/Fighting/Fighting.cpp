@@ -138,15 +138,25 @@ namespace GAME
 	void Fighting::Move ()
 	{
 		//--------------------------
-		//キャラ共通一連動作
-		m_mutualChara->Conduct ();
-
-		//--------------------------
 		//デモ分岐
 		m_demoActor->Do ();
 
 		//--------------------------
 		//両者処理
+
+		//一時停止
+		if ( m_pFtgGrp->GetScpStop () )
+		{
+			//キャラ共通一連動作
+			//入力のみ
+			m_mutualChara->Conduct_InStop ();
+		}
+		else
+		{
+			//キャラ共通一連動作
+			m_mutualChara->Conduct ();
+		}
+		//--------------------------
 
 #if 0
 		//暗転時は通常処理しない
