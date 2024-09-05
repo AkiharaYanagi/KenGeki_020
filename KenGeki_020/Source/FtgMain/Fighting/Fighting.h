@@ -101,9 +101,10 @@ namespace GAME
 		//試合(マッチ)終了判定
 		bool IsEndMutch () { return m_round->IsEndMutch (); }
 
-#if 0
+		//終了
 		bool IsEnd () const { return m_demoActor->IsEnd (); }
 
+#if 0
 		//初期操作 プレイヤ/CPU 設定
 		void Set_1P_vs_2P () { m_mutualChara->Set_1P_vs_2P (); }
 		void Set_1P_vs_CPU () { m_mutualChara->Set_1P_vs_CPU (); }

@@ -47,6 +47,7 @@ namespace GAME
 		m_fade_toFighting = std::make_shared < FadeRect > ();
 		AddpTask ( m_fade_toFighting );
 		GRPLST_INSERT ( m_fade_toFighting );
+		m_fade_toFighting->SetAfterClear ( F );
 
 		//ステージセレクト
 		m_stageSelect = std::make_shared < GameGraphic > ();
@@ -92,23 +93,28 @@ namespace GAME
 		}
 
 		//タイトルに移行
-		if ( m_fade_toTitle->IsActive() )
+		if ( m_fade_toTitle->IsLast () )
 		{
-			if ( m_fade_toTitle->IsLast () )
-			{
-				SOUND->Stop_BGM ( BGM_CHARA_SELE );
-				Scene::Transit_Title ();
-			}
+			SOUND->Stop_BGM ( BGM_CHARA_SELE );
+			Scene::Transit_Title ();
 		}
 
 		//戦闘に移行
-		if ( m_fade_toFighting->IsActive () )
+		//フェード待機後、遷移開始
+		if ( m_fade_toFighting->IsLast () )
 		{
-			if ( m_fade_toFighting->IsLast () )
+			++ m_plus_wait;
+		}
+
+		if ( m_plus_wait > 0 )
+		{
+			if ( m_plus_wait > 15 )
 			{
 				SOUND->Stop_BGM ( BGM_CHARA_SELE );
 				Scene::Transit_Fighting ();
+				m_plus_wait = 0;
 			}
+			++ m_plus_wait;
 		}
 
 		return Scene::Transit (); 
@@ -193,7 +199,7 @@ namespace GAME
 		if ( b1 && b2 && m_stageDecide )
 		{ 
 			//フェード開始
-			m_fade_toFighting->SetBlackOut ( 8 );
+			m_fade_toFighting->StartBlackOut ( 8 );
 		}
 
 

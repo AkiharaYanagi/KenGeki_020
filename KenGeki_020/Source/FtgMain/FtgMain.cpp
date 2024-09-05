@@ -135,23 +135,21 @@ namespace GAME
 		//通常動作
 		Scene::Move ();
 
-#if 0
-		//終了チェック
-		if ( m_fighting->IsEnd () )
-		{
-#if 0
-			//BGM
-			SOUND->Stop_BGM ( BGM_Main );
-			Scene::Transit_Result ();
-
-#endif // 0
-		}
-#endif // 0
 	}
 
 	//状態遷移
 	P_GameScene FtgMain::Transit ()
 	{
+		//終了チェック
+		if ( m_fighting->IsEnd () )
+		{
+			//BGM終了
+			//SOUND->Stop_BGM ( BGM_Main );
+
+			//シーン遷移
+			Scene::Transit_Result ();
+		}
+
 		return Scene::Transit ();
 	}
 	

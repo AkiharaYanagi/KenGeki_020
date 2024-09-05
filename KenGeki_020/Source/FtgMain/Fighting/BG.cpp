@@ -83,6 +83,8 @@ namespace GAME
 		AddpTask ( m_input );
 		GRPLST_INSERT ( m_input );
 
+		m_input->SetValid ( F );
+
 
 
 #if 0
@@ -345,7 +347,8 @@ namespace GAME
 
 
 
-		static bool bDisp = T;		//状態
+//		static bool bDisp = T;		//状態
+		static bool bDisp = F;		//状態
 		static bool pre_Input = F;	//前回押しているか
 		static bool is_Input = F;	//今回押しているか
 

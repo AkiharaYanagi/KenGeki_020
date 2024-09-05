@@ -32,24 +32,13 @@ namespace GAME
 		float		m_cursor_scaling_y { 1.f };
 
 
-		std::unique_ptr < s3d::VideoTexture >		m_test;
+//		std::unique_ptr < s3d::VideoTexture >		m_test;
 
-		s3d::Array < int32 > delays;
-		s3d::Array < s3d::Texture > txs;
+//		s3d::Array < int32 > delays;
+//		s3d::Array < s3d::Texture > txs;
 
-		P_Grp		m_charaTest;
+//		P_Grp		m_charaTest;
 
-
-#if 0
-		P_PrmRect	m_fade_out;
-		UINT		m_wait_out;
-
-		P_PrmRect	m_fade_in;
-		UINT		m_wait_in;
-
-		P_PrmRect	m_rect;
-		P_Grp		m_Start;
-#endif // 0
 
 		//シーン選択
 		enum TITLE_TO

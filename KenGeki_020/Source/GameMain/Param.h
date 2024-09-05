@@ -30,6 +30,9 @@ namespace GAME
 		CHARA_NAME		m_chara_name_2p { CHARA_TEST };
 		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };
 
+		//キャラ事前読込
+
+
 		//リザルト用
 		PLAYER_ID		m_winner { _PLAYER_NUM };		//勝者
 		int		m_n_life_1p { 0 };		//残ライフ

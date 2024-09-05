@@ -40,7 +40,8 @@ namespace GAME
 		//フェード
 		P_FadeRect		m_fade_toTitle;
 		P_FadeRect		m_fade_toFighting;
-		bool			m_endWait { F };
+//		bool			m_endWait { F };
+		uint32			m_plus_wait { 0 };
 
 		//モード保存
 		MUTCH_MODE		m_mode { MODE_PLAYER_PLAYER };

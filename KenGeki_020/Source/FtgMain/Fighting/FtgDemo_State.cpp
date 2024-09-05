@@ -215,13 +215,17 @@ namespace GAME
 	{
 		if ( ! m_grpDown->GetValid () )
 		{
+#if 0
 			//新規開始
 			GetpMutualChara ()->StartFighting ();
 			GetwpFtgDemoActor ().lock ()->Change_Down_To_Greeting ();
+#endif // 0
+
 #if 0
+#endif // 0
 			//タイトルに戻る
 			GetwpFtgDemoActor ().lock ()->End_Down_To_Result ();
-#endif // 0
+
 		}
 	}
 

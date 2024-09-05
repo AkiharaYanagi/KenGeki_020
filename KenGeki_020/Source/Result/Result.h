@@ -20,12 +20,14 @@ namespace GAME
 
 	class Result : public Scene, public std::enable_shared_from_this < Result >
 	{
-		P_Grp	m_test;
-//		std::unique_ptr < s3d::VideoTexture >		m_bg;
+		P_GrpMovie		m_mov;		//背景ムービー
+		P_Grp			m_chara;	//キャラ画像
+		P_Grp			m_state;	//ステート(数値群)
+		P_Grp			m_Msg;		//メッセージ
 
-		P_GrpMovie		m_mov;
-
-		P_Grp	m_chara;
+		P_FadeRect		m_fade_in;
+		P_FadeRect		m_fade_out;
+		uint32			m_plus_wait { 0 };
 
 	public:
 		Result ();
