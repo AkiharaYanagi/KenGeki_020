@@ -88,6 +88,10 @@ namespace GAME
 //		DBGOUT_WND()->On ();
 		DBGOUT_WND()->Off ();
 
+		//BGM
+		SOUND->Stop_BGM ( BGM_GABA );
+		SOUND->Play_Loop_BGM ( BGM_GABA );
+
 
 		Scene::Load ();
 	}
@@ -145,6 +149,7 @@ namespace GAME
 		{
 			//BGM終了
 			//SOUND->Stop_BGM ( BGM_Main );
+			SOUND->Stop_BGM ( BGM_GABA );
 
 			//シーン遷移
 			Scene::Transit_Result ();

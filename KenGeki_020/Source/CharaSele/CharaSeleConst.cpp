@@ -44,7 +44,7 @@ namespace GAME
 
 	//キャラ立ち絵
 	const float	CharaSele_Player::CHARA_1P_POS_X = -300;
-	const float	CharaSele_Player::CHARA_1P_POS_Y = 100;
+	const float	CharaSele_Player::CHARA_1P_POS_Y = 50;
 	const float	CharaSele_Player::CHARA_2P_POS_X = 500;
 	const float	CharaSele_Player::CHARA_2P_POS_Y = 50;
 

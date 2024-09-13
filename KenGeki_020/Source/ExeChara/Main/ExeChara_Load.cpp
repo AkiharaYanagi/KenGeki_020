@@ -22,6 +22,9 @@ namespace GAME
 	//シーンパラメータ関連初期化
 	void ExeChara::ParamInit ( P_Param pParam )
 	{
+		//保存
+		m_pParam = pParam;
+
 		//キャラ表示
 		m_dispChara->ParamInit ( pParam );
 
@@ -46,7 +49,15 @@ namespace GAME
 	{
 		//--------------------------------------------
 		//m_pCharaのデータ読込
-		LoadCharaData ();
+		//ゲームパラメータで最初に読み込み済みかどうか
+		if ( m_pParam->IsReadChara () )
+		{
+			LoadCharaData ();
+		}
+		else
+		{
+			LoadCharaData_test ();
+		}
 
 		//--------------------------------------------
 		//アクタ・ステートに用いる状態パラメータに登録
@@ -107,38 +118,34 @@ namespace GAME
 	}
 
 
-	void ExeChara::LoadCharaData ()
+	void ExeChara::LoadCharaData_test ()
 	{
-		//--------------------------------------------
-		//m_pCharaのデータ読込
-
 		//名前からスクリプトファイルを指定してキャラのロード
 		s3d::String name ( U"chara_Stand_Bin.dat" );
 
 		PLAYER_ID id = m_btlPrm.GetPlayerID ();
-#if 0
 
 		//[test] 名前の直接指定
 		if ( PLAYER_ID_1 == id )
 		{
-//			name.assign ( U"charaBin.dat" );
+			//			name.assign ( U"charaBin.dat" );
 			name.assign ( U"chara_Ouka_Bin.dat" );		m_name = CHARA_OUKA;
-//			name.assign ( U"chara_Sae_Bin.dat" );		m_name = CHARA_SAE;
-//			name.assign ( U"chara_Retsudou_Bin.dat" );		m_name = CHARA_RETSUDOU;
-//			name.assign ( _T ( "chara_E0_Bin.dat" ) );
+			//			name.assign ( U"chara_Sae_Bin.dat" );		m_name = CHARA_SAE;
+			//			name.assign ( U"chara_Retsudou_Bin.dat" );		m_name = CHARA_RETSUDOU;
+			//			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
 		else if ( PLAYER_ID_2 == id )
 		{
-//			name.assign ( _T ( "charaBin.dat" ) );
-//			name.assign ( U".dat" );		m_name = CHARA_OUKA;
+			//			name.assign ( _T ( "charaBin.dat" ) );
+			//			name.assign ( U".dat" );		m_name = CHARA_OUKA;
 			name.assign ( U"chara_Sae_Bin.dat" );		m_name = CHARA_SAE;
-//			name.assign ( U"chara_Retsudou_Bin.dat" );		m_name = CHARA_RETSUDOU;
-//			name.assign ( _T ( "chara_E0_Bin.dat" ) );
+			//			name.assign ( U"chara_Retsudou_Bin.dat" );		m_name = CHARA_RETSUDOU;
+			//			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
 
-#endif // 0
 
 		//@info　キャラが複数に渡るとき、リアクション技指定をIDでなく名前で指定しないと位置がずれる
+
 
 		//パラメータによるキャラの選択
 		switch ( m_name )
@@ -154,7 +161,6 @@ namespace GAME
 		if ( PLAYER_ID_1  == id )
 		{		
 			//バイナリデータ読込
-//			LoadCharaBin loadCharaBin ( name.c_str (), *m_pChara );
 			LoadCharaBin_s3d loadCharaBin ( name, * m_pChara );
 		}
 		else if ( PLAYER_ID_2  == id )
@@ -169,6 +175,30 @@ namespace GAME
 				LoadCharaBin_s3d loadCharaBin ( name, * m_pChara );
 			}
 		}
+
+	}
+
+
+	void ExeChara::LoadCharaData ()
+	{
+		//--------------------------------------------
+		//m_pCharaのデータ読込
+
+		if ( m_name == CHARA_TEST )
+		{
+			m_name = CHARA_SAE;
+		}
+
+		//パラメータによるキャラの選択
+		switch ( m_name )
+		{
+		case CHARA_OUKA:		m_pChara = m_pParam->GetpChara_Ouka ();			break;
+		case CHARA_SAE:			m_pChara = m_pParam->GetpChara_Sae ();			 break;
+		case CHARA_RETSUDOU:	m_pChara = m_pParam->GetpChara_Retsudou ();		 break;
+		case CHARA_GABADARUGA:	m_pChara = m_pParam->GetpChara_Retsudou2 ();		 break;
+		default: break;
+		}
+
 	}
 
 

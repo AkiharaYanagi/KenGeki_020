@@ -86,6 +86,58 @@ namespace GAME
 		m_input->SetValid ( F );
 
 
+		//------------------------------------------------
+		m_front = std::make_shared < GrpEf > ();
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_00.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_01.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_02.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_03.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_04.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_05.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_06.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_07.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_08.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_09.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_10.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_11.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_12.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_13.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_14.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_15.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_16.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_17.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_18.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_19.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_20.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_21.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_22.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_23.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_24.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_25.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_26.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_27.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_28.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_29.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_30.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_31.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_32.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_33.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_34.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_35.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_36.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_37.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_38.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_39.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_40.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_41.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_42.png" );
+		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_43.png" );
+		m_front->SetBase ( VEC2 ( 600, 600 ) );
+		m_front->SetZ ( Z_SYS );
+		m_front->On ();
+		AddpTask ( m_front );
+		GRPLST_INSERT ( m_front );
+
 
 #if 0
 
@@ -187,6 +239,9 @@ namespace GAME
 
 	void BG::Move ()
 	{
+		m_front->SetDispBase ( G_BASE_POS () );
+		m_front->NextIndexTexture ();
+
 #if 0
 		//--------------------------
 		//暗転

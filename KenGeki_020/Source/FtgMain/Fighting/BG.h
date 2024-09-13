@@ -31,6 +31,8 @@ namespace GAME
 		//［デバッグ用］入力説明
 		P_Grp			m_input;
 
+		P_GrpEf			m_front;
+
 #if 0
 		P_GrpAcv		m_bg_back;
 		P_GrpAcv		m_bg_middle;

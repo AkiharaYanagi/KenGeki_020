@@ -24,17 +24,8 @@ void Init ();
 void Move ();
 void Draw ();
 
-
 //ゲームシステム
 GameSystem gameSystem;
-
-//ブレンド用 レンダーテクスチャ
-std::unique_ptr < RenderTexture > p_rd_tx;
-
-
-//test
-std::unique_ptr < s3d::Audio > audio;
-
 
 
 //メインループ
@@ -42,22 +33,6 @@ void Main()
 {
 	//読込
 	Load ();
-
-#if 0
-	//-------------------------------------
-	//test
-	ColorF color { 1.0, 1.0, 1.0, 1.0 };
-//	ColorF color { 1.0, 0.5, 0.5, 1.0 };
-	s3d::Texture ef1 ( U"ef_001.png" );
-	s3d::Texture ef4 ( U"ef_004.png" );
-
-	const PixelShader ps = HLSL { U"example/shader/hlsl/rgb_shift.hlsl", U"PS" };
-	const PixelShader ps_screen = HLSL { U"ScreenBlend.hlsl", U"PS" };
-
-	//ブレンド用 レンダーテクスチャ
-	p_rd_tx = std::make_unique < RenderTexture > ( 1280, 960, Palette::Lightgreen );
-	//-------------------------------------
-#endif // 0
 
 	//========================================
 	//メインループ
@@ -94,6 +69,7 @@ void Load ()
 	gameMain->Load ();
 	gameMain->Init ();
 
+	//ゲームシステムにメインを追加
 	gameSystem.SetpGameMain ( std::move ( gameMain ) );
 }
 
@@ -129,80 +105,21 @@ void Init ()
 
 
 
+//---------------------------------------------------
+// 動作
+//---------------------------------------------------
 void Move ()
 {
-	//---------------------------------------------------
-	// 動作
-	//---------------------------------------------------
-#if 0
-
-	//毎回の更新
-	const Array<Input> & keys = s3d::Keyboard::GetAllInputs();
-	SivInput::Inst()->Update ( keys );
-
-#endif // 0
-
 	//ゲームメイン
 	gameSystem.Move ();
 }
 
 
-
+//---------------------------------------------------
+// 描画
+//---------------------------------------------------
 void Draw ()
 {
-	//---------------------------------------------------
-	// 描画
-	//---------------------------------------------------
-
+	//ゲームメイン
 	gameSystem.Draw ();
-
-	//ブレンドテスト
-#if 0
-	{
-		const ScopedColorMul2D colorMul { color };
-		//			const ScopedRenderStates2D blend { BlendState::Multiplicative };
-		ef4.draw ( 250, 400 );
-		ef1.draw ( 30, 390 );
-
-		//イメージ
-		//ブレンド：スクリーン
-		// 1 - ( 1 - A )( 1 - B );
-}
-
-	{
-		//			const ScopedCustomShader2D shader { ps };
-		const ScopedCustomShader2D shader { ps_screen };
-		ef1.draw ( 30, 390 );
-	}
-#endif // 0
-
-
-	//レンダーターゲット指定
-#if 0
-	{
-		const s3d::ScopedRenderTarget2D target { * p_rd_tx };
-
-		//ゲームメイン描画
-		gameSystem.Draw ();
-
-	}
-	p_rd_tx->draw ();
-#endif // 0
-
-
-	//ピクセルシェーダ指定
-#if 0
-	//		s3d::Graphics2D::SetPSTexture ( 1, rd_tx );	//適用テクスチャを指定
-	s3d::Graphics2D::SetPSTexture ( 1, ef1 );	//適用テクスチャを指定
-	//		s3d::Graphics2D::SetPSTexture ( 1, ef4 );	//適用テクスチャを指定
-	{
-		//			const s3d::ScopedCustomShader2D shader { ps };
-		const s3d::ScopedCustomShader2D shader { ps_screen };
-		//			ef1.draw ( 30, 390 );
-		//			ef4.draw ( 250, 400 );
-		rd_tx.draw ();
-	}
-#endif // 0
-
-
 }

@@ -4,26 +4,8 @@
     <Filter Include="GameMain">
       <UniqueIdentifier>{7941956b-e8c1-47d6-9ef3-35ce0236b1c1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ExeChara">
-      <UniqueIdentifier>{12eb0527-5618-4718-b505-7ab260bfe14e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ExeChara\Main">
-      <UniqueIdentifier>{8bfbc1b3-8eae-41ca-956a-4b97af5e21f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ExeChara\Disp">
-      <UniqueIdentifier>{016bcf1d-93fb-439d-a729-355f5571efa9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ExeChara\Rect">
-      <UniqueIdentifier>{e0151bd6-62c5-47c1-9aef-9358a63979e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ExeChara\Input">
-      <UniqueIdentifier>{fe37328b-e3a5-4083-8d35-0269422846ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00_Document">
       <UniqueIdentifier>{81599f2d-2ebc-4f00-a021-5317fff0b08e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ExeChara\Effect">
-      <UniqueIdentifier>{8f3a288a-6504-4a71-88f2-097feedc5b76}</UniqueIdentifier>
     </Filter>
     <Filter Include="Menu">
       <UniqueIdentifier>{8c660644-32f9-48d3-9ee3-d163e1475d5f}</UniqueIdentifier>
@@ -179,6 +161,24 @@
     <Filter Include="99_Resource Files\example\xml">
       <UniqueIdentifier>{adda71c0-38fa-4ca2-91b9-e1e4039183dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03_FtgMain\ExeChara">
+      <UniqueIdentifier>{12eb0527-5618-4718-b505-7ab260bfe14e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_FtgMain\ExeChara\Main">
+      <UniqueIdentifier>{8bfbc1b3-8eae-41ca-956a-4b97af5e21f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_FtgMain\ExeChara\Disp">
+      <UniqueIdentifier>{016bcf1d-93fb-439d-a729-355f5571efa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_FtgMain\ExeChara\Rect">
+      <UniqueIdentifier>{e0151bd6-62c5-47c1-9aef-9358a63979e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_FtgMain\ExeChara\Input">
+      <UniqueIdentifier>{fe37328b-e3a5-4083-8d35-0269422846ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_FtgMain\ExeChara\Effect">
+      <UniqueIdentifier>{8f3a288a-6504-4a71-88f2-097feedc5b76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -308,7 +308,7 @@
     <Text Include="App\example\LICENSE.txt">
       <Filter>99_Resource Files\example</Filter>
     </Text>
-    <Text Include="やること.txt">
+    <Text Include="App\◆開発用　修正点・変更点.txt">
       <Filter>00_Document</Filter>
     </Text>
   </ItemGroup>
@@ -838,52 +838,52 @@
       <Filter>03_FtgMain</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\BtlParam.h">
-      <Filter>ExeChara</Filter>
+      <Filter>03_FtgMain\ExeChara</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\TimerSlow.h">
-      <Filter>ExeChara</Filter>
+      <Filter>03_FtgMain\ExeChara</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Main\ExCh_Actor.h">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Main\ExCh_State.h">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Main\ExeChara.h">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Rect\CharaRect.h">
-      <Filter>ExeChara\Rect</Filter>
+      <Filter>03_FtgMain\ExeChara\Rect</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Input\CharaInput.h">
-      <Filter>ExeChara\Input</Filter>
+      <Filter>03_FtgMain\ExeChara\Input</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Input\CPUInput.h">
-      <Filter>ExeChara\Input</Filter>
+      <Filter>03_FtgMain\ExeChara\Input</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Input\PlayerInput.h">
-      <Filter>ExeChara\Input</Filter>
+      <Filter>03_FtgMain\ExeChara\Input</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Disp\DispInput.h">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Disp\DispRect.h">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Disp\DispChara_Const.h">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Disp\DispFrontEnd.h">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Disp\DispGauge.h">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClInclude>
     <ClInclude Include="Source\FtgMain\Ef\EfClang.h">
       <Filter>03_FtgMain\Ef</Filter>
@@ -934,13 +934,13 @@
       <Filter>03_FtgMain\Fighting</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Effect\DispEffect.h">
-      <Filter>ExeChara\Effect</Filter>
+      <Filter>03_FtgMain\ExeChara\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Effect\ExeEffect.h">
-      <Filter>ExeChara\Effect</Filter>
+      <Filter>03_FtgMain\ExeChara\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Source\ExeChara\Effect\OperateEffect.h">
-      <Filter>ExeChara\Effect</Filter>
+      <Filter>03_FtgMain\ExeChara\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameMain\SoundConst.h">
       <Filter>GameMain</Filter>
@@ -978,67 +978,67 @@
       <Filter>03_FtgMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\BtlParam.cpp">
-      <Filter>ExeChara</Filter>
+      <Filter>03_FtgMain\ExeChara</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\TimerSlow.cpp">
-      <Filter>ExeChara</Filter>
+      <Filter>03_FtgMain\ExeChara</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExCh_Actor.cpp">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExCh_State.cpp">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara.cpp">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit.cpp">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Rect\CharaRect.cpp">
-      <Filter>ExeChara\Rect</Filter>
+      <Filter>03_FtgMain\ExeChara\Rect</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Rect.cpp">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Input\CPUInput.cpp">
-      <Filter>ExeChara\Input</Filter>
+      <Filter>03_FtgMain\ExeChara\Input</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Input\PlayerInput.cpp">
-      <Filter>ExeChara\Input</Filter>
+      <Filter>03_FtgMain\ExeChara\Input</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Input\CharaInput.cpp">
-      <Filter>ExeChara\Input</Filter>
+      <Filter>03_FtgMain\ExeChara\Input</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Special.cpp">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\DispInput.cpp">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit_Special.cpp">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\DispRect.cpp">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\DispFrontEnd.cpp">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Event.cpp">
-      <Filter>ExeChara\Main</Filter>
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\DispGauge.cpp">
-      <Filter>ExeChara\Disp</Filter>
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
     <ClCompile Include="Source\FtgMain\Ef\EfClang.cpp">
       <Filter>03_FtgMain\Ef</Filter>
@@ -1089,13 +1089,13 @@
       <Filter>03_FtgMain\Fighting</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Effect\DispEffect.cpp">
-      <Filter>ExeChara\Effect</Filter>
+      <Filter>03_FtgMain\ExeChara\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Effect\ExeEffect.cpp">
-      <Filter>ExeChara\Effect</Filter>
+      <Filter>03_FtgMain\ExeChara\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Effect\OperateEffect.cpp">
-      <Filter>ExeChara\Effect</Filter>
+      <Filter>03_FtgMain\ExeChara\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Source\CharaSele\CharaSele_Player.cpp">
       <Filter>02_CharaSele</Filter>

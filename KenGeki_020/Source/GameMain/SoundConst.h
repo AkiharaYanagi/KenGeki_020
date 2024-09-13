@@ -25,11 +25,6 @@ namespace GAME
 	//BGM
 	enum BGM_ID
 	{
-//		BGM_Title,
-//		BGM_Intro,
-//		BGM_Main,
-//		BGM_Result,
-//		BGM_CharaSele,
 		BGM_GABA,
 		BGM_TOMOE,
 		BGM_OUKA,
@@ -37,7 +32,9 @@ namespace GAME
 		BGM_ENEMY0,
 		BGM_FERA,
 
-		BGM_CHARA_SELE,
+		BGM_Title,
+		BGM_CharaSele,
+		BGM_Result,
 	};
 
 	//SE

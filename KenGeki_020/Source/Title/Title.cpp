@@ -56,7 +56,7 @@ namespace GAME
 		AddpTask ( m_fade_in );
 		GRPLST_INSERT ( m_fade_in );
 
-		m_fade_in->StartWhiteIn ( 8 );
+		m_fade_in->StartWhiteIn ( 30 );
 
 		//フェードアウト
 		m_fade_out = std::make_shared < FadeRect > ();
@@ -79,7 +79,20 @@ namespace GAME
 		Scene::SetwpThis ( shared_from_this () );
 		//==================================================
 
+
 		Scene::Load ();
+
+		//BGM
+		SOUND->Stop_BGM ( BGM_Title );
+		SOUND->Play_Loop_BGM ( BGM_Title );
+
+
+
+
+		TRACE_F ( (LPCTSTR) KeyConfig::Inst()->ToString().toWstr().c_str() );
+
+
+
 	}
 
 
@@ -130,10 +143,12 @@ namespace GAME
 				switch ( m_to )
 				{
 				case TITLE_TO_BATTLE:
+					SOUND->Stop_BGM ( BGM_Title );
 					Scene::Transit_CharaSele ();
 //					Scene::Transit_Fighting ();
 					break;
 				case TITLE_TO_TRAINING:
+					SOUND->Stop_BGM ( BGM_Title );
 					Scene::Transit_Training ();
 					break;
 				}

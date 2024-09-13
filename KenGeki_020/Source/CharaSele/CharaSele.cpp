@@ -75,8 +75,8 @@ namespace GAME
 		//==================================================
 
 		//SOUND
-		SOUND->Stop_BGM ( BGM_CHARA_SELE );
-		SOUND->Play_Loop_BGM ( BGM_CHARA_SELE );
+		SOUND->Stop_BGM ( BGM_CharaSele );
+		SOUND->Play_Loop_BGM ( BGM_CharaSele );
 
 		Scene::Load ();
 	}
@@ -95,7 +95,7 @@ namespace GAME
 		//タイトルに移行
 		if ( m_fade_toTitle->IsLast () )
 		{
-			SOUND->Stop_BGM ( BGM_CHARA_SELE );
+			SOUND->Stop_BGM ( BGM_CharaSele );
 			Scene::Transit_Title ();
 		}
 
@@ -110,7 +110,7 @@ namespace GAME
 		{
 			if ( m_plus_wait > 15 )
 			{
-				SOUND->Stop_BGM ( BGM_CHARA_SELE );
+				SOUND->Stop_BGM ( BGM_CharaSele );
 				Scene::Transit_Fighting ();
 				m_plus_wait = 0;
 			}

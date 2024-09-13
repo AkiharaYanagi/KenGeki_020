@@ -13,6 +13,8 @@
 #include "GameConst.h"
 #include "GameSettingFile.h"
 //#include "SceneCommon.h"
+#include "Chara.h"
+
 
 //-------------------------------------------------------------------------------------------------
 // 宣言
@@ -31,7 +33,11 @@ namespace GAME
 		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };
 
 		//キャラ事前読込
-
+		P_Chara			m_pChara_Ouka;
+		P_Chara			m_pChara_Sae;
+		P_Chara			m_pChara_Retsudou;
+		P_Chara			m_pChara_Retsudou_2;
+		bool			m_read_chara { F };
 
 		//リザルト用
 		PLAYER_ID		m_winner { _PLAYER_NUM };		//勝者
@@ -51,6 +57,14 @@ namespace GAME
 		//ゲーム設定 ( 外部ファイル読込 )
 		GameSettingFile GetGameSetting () const { return m_setting; }
 		void SetSettingFile ( GameSettingFile stg ) { m_setting = stg; }
+
+		//データ事前読込1
+		void LoadCharaData ();
+		P_Chara GetpChara_Ouka () const { return m_pChara_Ouka; }
+		P_Chara GetpChara_Sae () const { return m_pChara_Sae; }
+		P_Chara GetpChara_Retsudou () const { return m_pChara_Retsudou; }
+		P_Chara GetpChara_Retsudou2 () const { return m_pChara_Retsudou_2; }
+		bool IsReadChara () const { return m_read_chara; }
 
 		//内部設定
 		void SetMutchMode ( MUTCH_MODE mode );

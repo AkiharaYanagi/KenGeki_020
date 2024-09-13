@@ -70,6 +70,9 @@ namespace GAME
 		//パラメータ
 		BtlParam		m_btlPrm;		//バトルパラメータ	
 
+		//シーン共有パラメータ
+		P_Param			m_pParam;
+
 		//------------------------------------------------
 		//表示
 		P_DispChara		m_dispChara;	//キャラ全般表示
@@ -129,6 +132,7 @@ namespace GAME
 	private:
 		//初期化
 		void LoadCharaData ();
+		void LoadCharaData_test ();
 		void LoadInput ();
 		//===========================================================
 

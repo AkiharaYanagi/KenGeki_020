@@ -50,9 +50,9 @@ float4 PS(s3d::PSInput input) : SV_TARGET
     float4 texColor1 = g_texture1.Sample(g_sampler1, input.uv.xy);
 	
 //	texColor0.rgb = (texColor0.rgb * 0.5 + texColor1.rgb * 0.5);
-	texColor0.rgb = 1 - (1 - texColor0.rgb) * (1 - texColor1.rgb);
+//	texColor0.rgb = 1 - (1 - texColor0.rgb) * (1 - texColor1.rgb);
 //    texColor0.rgba = texColor0.rgba * texColor1.rgba;
-//	texColor1.rgb = 1 - (1 - texColor0.rgb) * (1 - texColor1.rgb);
+	texColor1.rgb = 1 - (1 - texColor0.rgb) * (1 - texColor1.rgb);
 //    texColor1.rgb = 1 - (1 - texColor0.rgb) * (1 - texColor1.rgb);
 
 //    texColor1.a = texColor0.a + texColor1.a;
@@ -65,6 +65,6 @@ float4 PS(s3d::PSInput input) : SV_TARGET
 //    return float4(1.0, 1.0, 1.0, a);
 //	return texColor0;
 	
-//	return (texColor1 * input.color) + g_colorAdd;
-	return (texColor0 * input.color) + g_colorAdd;
+//	return (texColor0 * input.color) + g_colorAdd;
+	return (texColor1 * input.color) + g_colorAdd;
 }

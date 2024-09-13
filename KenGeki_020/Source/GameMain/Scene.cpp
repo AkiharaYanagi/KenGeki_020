@@ -140,6 +140,9 @@ namespace GAME
 		startMode = stgs.GetStartMode ();
 #endif // 0
 
+		//キャラデータを事前読込
+		m_pParam->LoadCharaData ();
+
 
 		//開始シーンの選択
 		P_Scene pScene = nullptr;

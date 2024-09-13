@@ -56,7 +56,7 @@ namespace GAME
 		AddpTask ( m_fade_in );
 		GRPLST_INSERT ( m_fade_in );
 
-		m_fade_in->StartBlackIn ( 8 );
+		m_fade_in->StartBlackIn ( 16 );
 
 		//フェードアウト
 		m_fade_out = std::make_shared < FadeRect > ();
@@ -78,6 +78,8 @@ namespace GAME
 		//	(コンストラクタでは shared_from_this() が使えないため、Load() で呼び出す)
 		Scene::SetwpThis ( shared_from_this () );
 		//==================================================
+
+
 
 		Scene::Load ();
 	}
@@ -104,6 +106,14 @@ namespace GAME
 
 	void Result::Move ()
 	{
+		//フェードのラストでBGM開始
+		if ( m_fade_in->IsLast () )
+		{
+			//BGM
+			SOUND->Stop_BGM ( BGM_Result );
+			SOUND->Play_BGM ( BGM_Result );
+		}
+
 		//フェード中は何もしない
 		if ( m_fade_in->IsActive () ) { Scene::Move (); return; }
 		if ( m_fade_out->IsActive () ) { Scene::Move (); return; }
@@ -132,6 +142,8 @@ namespace GAME
 		{
 			if ( m_plus_wait > 15 )
 			{
+				SOUND->Stop_BGM ( BGM_Result );
+
 				Scene::Transit_Title ();
 				m_plus_wait = 0;
 			}
