@@ -30,6 +30,9 @@ void Main()
 		//1回のみ初期化
 		if ( ! init ) { Init (); init = T; }
 
+		//入力の更新
+		SivInput::Inst()->Update ();
+
 		//動作
 		ctrl_KeyConfig.Move ();
 

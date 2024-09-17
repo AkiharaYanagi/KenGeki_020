@@ -120,10 +120,10 @@ namespace GAME
 		START_MODE startMode;
 
 		//テスト用 開始状態選択
-		startMode = START_TITLE;
+//		startMode = START_TITLE;
 //		startMode = START_CHARA_SELE;
 //		startMode = START_BATTLE;
-//		startMode = START_TRAINING;
+		startMode = START_TRAINING;
 //		startMode = START_RESULT;
 
 #if 0

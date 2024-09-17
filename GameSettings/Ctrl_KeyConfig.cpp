@@ -62,7 +62,6 @@ namespace GAME
 		if ( FileSystem::Exists ( FILE_NAME ) )
 		{
 			Load ( s3d::FilePath ( FILE_NAME ) );
-			strDiag.assign (U"読み込みました.");
 		}
 		else
 		{
@@ -113,6 +112,8 @@ namespace GAME
 		device_inputs [ 21 ].SetKeyboard ( SIK_H );
 		device_inputs [ 22 ].SetKeyboard ( SIK_J );
 		device_inputs [ 23 ].SetKeyboard ( SIK_K );
+
+		selected_index = 0;
 	}
 
 
@@ -171,6 +172,13 @@ namespace GAME
 			s3d::Optional < FilePath > path = s3d::Dialog::OpenFile ( { s3d::FileFilter::AllFiles() } );
 			ctrl_KeyConfig.Load ( path );
 #endif // 0
+		}
+
+		//デフォルトボタン
+		if ( s3d::SimpleGUI::Button ( U"デフォルト" , s3d::Vec2 ( 320, 400 ) ) )
+		{
+			Init ();
+			ResetDiStr ();
 		}
 	}
 
@@ -332,6 +340,18 @@ namespace GAME
 
 			default:break;
 			}
+
+			strDiag.assign (U"読み込みました.");
+		}
+	}
+
+
+	void Ctrl_KeyConfig::ResetDiStr ()
+	{
+		for ( size_t i = 0; i < di_strs.size (); ++ i )
+		{
+			DeviceInput di = device_inputs [ i ];
+			di_strs [ i ] = DeviceInput_ToString ( di );
 		}
 	}
 

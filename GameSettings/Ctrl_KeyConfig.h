@@ -62,6 +62,8 @@ namespace GAME
 
 	private:
 		static const char32_t * FILE_NAME;
+
+		void ResetDiStr ();
 	};
 
 

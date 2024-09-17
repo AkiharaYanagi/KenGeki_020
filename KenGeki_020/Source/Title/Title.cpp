@@ -79,7 +79,6 @@ namespace GAME
 		Scene::SetwpThis ( shared_from_this () );
 		//==================================================
 
-
 		Scene::Load ();
 
 		//BGM
@@ -166,6 +165,12 @@ namespace GAME
 
 	void Title::Select ()
 	{
+		if ( CFG_PUSH_KEY ( P2_UP ) )
+		{
+			int i = 0;
+		}
+
+
 		//キー上下でシーンを選択
 		if ( CFG_PUSH_KEY ( P1_UP ) || CFG_PUSH_KEY ( P2_UP ) )
 		{
@@ -180,6 +185,7 @@ namespace GAME
 			}
 			SOUND->Play_SE ( SE_Sys_Select );
 		}
+
 		if ( CFG_PUSH_KEY ( P1_DOWN ) || CFG_PUSH_KEY ( P2_DOWN ) )
 		{
 			switch ( m_to )

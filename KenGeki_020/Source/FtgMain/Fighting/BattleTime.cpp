@@ -45,6 +45,7 @@ namespace GAME
 		m_battle_time->AddTexture_FromArchive ( U"time\\time_8.png" );
 		m_battle_time->AddTexture_FromArchive ( U"time\\time_9.png" );
 
+		m_battle_time->SetZ ( Z_EFB );
 		AddpTask ( m_battle_time );
 		GRPLST_INSERT ( m_battle_time );
 
