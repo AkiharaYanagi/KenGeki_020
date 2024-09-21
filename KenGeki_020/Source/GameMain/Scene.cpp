@@ -140,8 +140,17 @@ namespace GAME
 		startMode = stgs.GetStartMode ();
 #endif // 0
 
+
+
+
 		//キャラデータを事前読込
 		m_pParam->LoadCharaData ();
+
+
+		//デバッグ表示オン/オフ
+		DBGOUT_WND_ON ();
+//		DBGOUT_WND_OFF ();
+
 
 
 		//開始シーンの選択

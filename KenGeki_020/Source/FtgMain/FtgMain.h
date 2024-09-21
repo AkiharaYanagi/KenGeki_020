@@ -37,6 +37,7 @@ namespace GAME
 		P_GrpStr		m_NowLoading;
 #endif // 0
 
+
 	public:
 		FtgMain ();
 		FtgMain ( const FtgMain & rhs ) = delete;

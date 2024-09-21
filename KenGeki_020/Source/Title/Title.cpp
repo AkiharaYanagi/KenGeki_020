@@ -26,11 +26,18 @@ namespace GAME
 		//グラフィック初期化
 		//---------------------------------------------------
 		m_bg = std::make_shared < GameGraphic > ();
-		m_bg->AddTexture_FromArchive ( U"title_logo.png" );
-		m_bg->SetPos ( 0, 0 );
+		m_bg->AddTexture_FromArchive ( U"title_bg.png" );
+		m_bg->SetPos ( m_bg_x, 0 );
 		m_bg->SetZ ( Z_BG );
 		AddpTask ( m_bg );
 		GRPLST_INSERT ( m_bg );
+
+		m_logo = std::make_shared < GameGraphic > ();
+		m_logo->AddTexture_FromArchive ( U"title_logo.png" );
+		m_logo->SetPos ( 0, 0 );
+		m_logo->SetZ ( Z_BG );
+		AddpTask ( m_logo );
+		GRPLST_INSERT ( m_logo );
 
 		m_menu = std::make_shared < GameGraphic > ();
 		m_menu->AddTexture_FromArchive ( U"title_menu.png" );
@@ -101,6 +108,12 @@ namespace GAME
 
 	void Title::Move ()
 	{
+		//背景スクロール
+		m_bg_x -= 64.f;
+		if (m_bg_x < (-7680 + 1920) ) { m_bg_x = 0; }
+		m_bg->SetPos ( m_bg_x, 0 );
+
+
 		//フェード中は何もしない
 		if ( m_fade_in->IsActive () ) { Scene::Move (); return; }
 		if ( m_fade_out->IsActive () ) { Scene::Move (); return; }
@@ -167,9 +180,13 @@ namespace GAME
 	{
 		if ( CFG_PUSH_KEY ( P2_UP ) )
 		{
-			int i = 0;
+			int i = 0; (void)i;
 		}
 
+		if ( CFG_IS_KEY ( P1_UP ) )
+		{
+			int i = 0; (void)i;
+		}
 
 		//キー上下でシーンを選択
 		if ( CFG_PUSH_KEY ( P1_UP ) || CFG_PUSH_KEY ( P2_UP ) )

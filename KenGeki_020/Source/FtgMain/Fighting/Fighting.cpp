@@ -26,9 +26,9 @@ namespace GAME
 		AddpTask ( m_bg );
 
 		//=====================================================
-		//キャラ
-		m_exeChara1 = std::make_shared < ExeChara > ( PLAYER_ID_1 );
+		//キャラ (GrpLstの登録順により前面に描画される)
 		m_exeChara2 = std::make_shared < ExeChara > ( PLAYER_ID_2 );
+		m_exeChara1 = std::make_shared < ExeChara > ( PLAYER_ID_1 );
 
 		m_exeChara1->SetpOther ( m_exeChara2 );
 		m_exeChara2->SetpOther ( m_exeChara1 );

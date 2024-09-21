@@ -18,10 +18,13 @@ namespace GAME
 		: mpap_EfTx ( papEfTx )
 	{
 		//メイングラフィック
-		m_grp = std::make_shared < GameGraphic > ();
+//		m_grp = std::make_shared < GameGraphic > ();
+		m_grp = std::make_shared < GrpEfShd > ();
 		m_grp->SetZ ( z );	//初期位置
+		m_grp->On ();
 		AddpTask ( m_grp );
 		GRPLST_INSERT ( m_grp );
+//		SDRLST_INSERT ( m_grp );
 
 		//枠表示
 		m_dispRect = std::make_shared < DispRect > ();
@@ -36,6 +39,7 @@ namespace GAME
 		EraseTask ( m_grp );
 #endif // 0
 		GRPLST_REMOVE ( m_grp );
+//		SDRLST_REMOVE ( m_grp );
 	}
 
 	void DispEffect::SetpChara(P_Chara pChara)

@@ -48,7 +48,6 @@ namespace GAME
 		static const float	BX_KI;
 		static const float	BY_KI;
 
-
 	public:
 		Training ();
 		Training ( const Training & rhs ) = delete;

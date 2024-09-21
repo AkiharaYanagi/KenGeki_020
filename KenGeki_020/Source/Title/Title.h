@@ -21,6 +21,9 @@ namespace GAME
 	class Title : public Scene, public std::enable_shared_from_this < Title >
 	{
 		P_Grp		m_bg;
+		float		m_bg_x { 0 };
+
+		P_Grp		m_logo;
 		P_Grp		m_menu;
 		P_Grp		m_cursor;
 
