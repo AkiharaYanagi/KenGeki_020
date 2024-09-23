@@ -263,7 +263,12 @@ namespace GAME
 		//	全体演出
 		//------------------------------------------------
 		//暗転
-		m_btlPrm.SetBlackOut ( m_pScript->m_prmStaging.BlackOut );
+		//m_btlPrm.SetBlackOut ( m_pScript->m_prmStaging.BlackOut );
+		UINT blackOut = m_pScript->m_prmStaging.BlackOut;
+		if ( blackOut > 0 )
+		{
+			m_pFtgGrp->StartBlackOut ( blackOut );
+		}
 
 		//------------------------------------------------
 		//スクリプトからの停止

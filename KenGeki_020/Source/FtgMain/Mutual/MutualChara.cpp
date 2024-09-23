@@ -101,12 +101,6 @@ namespace GAME
 		//シーン共通パラメータ記録
 		SaveParam();
 
-#if 0
-		//test
-		float x1 = m_exeChara1->GetPos ().x;
-		float x2 = m_exeChara2->GetPos ().x;
-		DBGOUT_WND()->DebugOutf ( 0, U"{}, {}"_fmt( x1, x2 ) );
-#endif // 0
 	}
 
 
@@ -149,7 +143,6 @@ namespace GAME
 	//◆================================
 	void MutualChara::Grp ()
 	{
-#if 0
 		//---------------------------------------------------
 		//暗転
 		UINT bo1 = m_exeChara1->GetBlackOut ();
@@ -163,6 +156,7 @@ namespace GAME
 			m_exeChara1->SetBlackOut ( 0 );
 			m_exeChara2->SetBlackOut ( 0 );
 		}
+#if 0
 
 		//---------------------------------------------------
 		//スクリプトからの停止

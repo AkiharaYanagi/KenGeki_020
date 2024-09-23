@@ -38,8 +38,10 @@ namespace GAME
 #endif // 0
 
 		//選択キャラ名前・モードを取得
-//		m_name = pParam->GetCharaName ( m_btlPrm.GetPlayerID () );
 //		m_playerMode = stg.GetPlayerMode ( m_playerID );
+// 
+//		m_name = pParam->GetCharaName ( m_btlPrm.GetPlayerID () );
+//		m_name = CHARA_SAE;
 		m_name = CHARA_RETSUDOU;
 
 	}

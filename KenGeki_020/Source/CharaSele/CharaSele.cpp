@@ -51,8 +51,8 @@ namespace GAME
 
 		//ステージセレクト
 		m_stageSelect = std::make_shared < GameGraphic > ();
-		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Evening.png" );
 		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Noon.png" );
+		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Evening.png" );
 		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Night.png" );
 		m_stageSelect->SetPos ( VEC2 ( 640 - 128, 400 ) );
 		m_stageSelect->SetZ ( Z_BG - 0.1f );
@@ -211,14 +211,12 @@ namespace GAME
 	{
 		STAGE_NAME ret = STAGE_YUUHINO_HARA;
 
-#if 0
 		switch ( m_stageSelect->Getpap_ob()->at ( 0 )->GetIndexTexture () )
 		{
 		case 0: ret = STAGE_ASAHINO_HARA; break;
 		case 1: ret = STAGE_YUUHINO_HARA; break;
 		case 2: ret = STAGE_YORUNO_HARA; break;
 		}
-#endif // 0
 
 		return ret;
 	}

@@ -44,8 +44,8 @@ namespace GAME
 		UINT	m_scpStop {0};		//スクリプトからのストップ
 
 		//特殊演出
-#if 0
 		UINT	m_blackOut {0};		//暗転
+#if 0
 		bool	m_whiteOut { F };	//白転
 		UINT	m_slow { 0 };		//スロー
 #endif // 0
@@ -122,7 +122,6 @@ namespace GAME
 
 		bool IsWait ();	//両者待機状態
 
-#if 0
 		UINT GetBlackOut () const { return m_blackOut; };	//暗転
 		void SetBlackOut ( UINT i )
 		{
@@ -130,6 +129,7 @@ namespace GAME
 			m_exeChara1->SetBlackOut ( i );
 			m_exeChara2->SetBlackOut ( i );
 		};
+#if 0
 
 		UINT GetScpStop () const { return m_scpStop; };	//停止
 		void SetScpStop ( UINT i ) { m_scpStop = i; };

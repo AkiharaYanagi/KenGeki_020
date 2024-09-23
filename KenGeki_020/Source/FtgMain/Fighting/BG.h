@@ -9,6 +9,8 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
+#include "../../GameMain/GameConst.h"
+#include "../../GameMain/Param.h"
 #include "../FtgConst.h"	
 
 
@@ -19,6 +21,9 @@ namespace GAME
 {
 	class BG : public TASK_VEC
 	{
+		//種類
+		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };
+		
 		//背景
 		P_Grp			m_bg_C;
 		P_Grp			m_bg_L;
@@ -39,14 +44,11 @@ namespace GAME
 		P_GrpAcv		m_bg_middle;
 		P_GrpAcv		m_bg_front;
 
-		P_PrmRect		m_bg_black;
 		P_PrmRect		m_bg_white;
 
 		//サブ背景位置差分
 		float			m_subWall_dx { - GAME_WIDTH };
 
-		//タイマ
-		P_Timer			m_tmrBlackOut;		//暗転
 		P_Timer			m_tmrWhiteOut;		//白転
 
 		//壁割り
@@ -55,25 +57,38 @@ namespace GAME
 		UINT			m_indexTexture { 0 };
 #endif // 0
 
+		//タイマ
+//		P_Timer			m_tmrBlackOut;		//暗転
+		P_PrmRect		m_bg_black;			//暗転用
+
+
 	public:
 		BG ();
 		BG ( const BG & rhs ) = delete;
 		~BG ();
 
+
+		void ParamInit ( P_Param pParam );
 		void Init ();
 		void Move ();
 
+		//ステージ名設定
+		void SetStageName ( STAGE_NAME name )
+		{
+			m_stage_name = name;
+		}
 
 		//共通グラフィック処理
 		void Grp ();
 
+		//暗転
+		void SetBlackOut ( bool b );
+		void OnBlackOut ();
+		void OffBlackOut ();
+
 #if 0
 		//条件確認
 		bool IsBlackOut () const { return m_tmrBlackOut->IsActive (); }
-
-		//暗転
-		void SetBlackOut ( UINT n );
-		void OffBlackOut ();
 
 		//白転
 		void SetWhiteOut ( UINT n );
@@ -87,6 +102,8 @@ namespace GAME
 		static const float BG_SIZE_H;
 		static const float BG_POS_X;
 		static const float BG_POS_Y;
+
+		void LoadFrontOb ();
 	};
 
 	using P_BG = std::shared_ptr < BG >;

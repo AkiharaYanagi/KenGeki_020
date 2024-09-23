@@ -20,8 +20,8 @@ namespace GAME
 {
 	class DispEffect : public TASK_VEC
 	{
-		//P_Grp			m_grp;			//グラフィック表示
-		P_GrpEfShd		m_grp;			//グラフィック表示
+		P_Grp			m_grp;			//グラフィック表示
+		//P_GrpEfShd		m_grp;			//グラフィック表示
 		PAP_Tx			mpap_EfTx;		//エフェクトイメージのテクスチャリスト
 		P_DispRect		m_dispRect;		//エフェクト枠表示
 
@@ -50,8 +50,8 @@ namespace GAME
 		//枠非表示
 		void OffRect () { m_dispRect->OffRect (); }
 
-//		P_Grp GetpGrp () { return m_grp; }
-		P_GrpEfShd GetpGrp () { return m_grp; }
+		P_Grp GetpGrp () { return m_grp; }
+//		P_GrpEfShd GetpGrp () { return m_grp; }
 
 		void SetW ( float w ) { m_w = w; }
 	};

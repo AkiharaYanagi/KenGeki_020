@@ -92,6 +92,8 @@ namespace GAME
 		m_mutualChara->ParamInit ( pParam );
 		m_exeChara1->ParamInit ( pParam );
 		m_exeChara2->ParamInit ( pParam );
+
+		m_bg->ParamInit ( pParam );
 	}
 
 	void Fighting::Load ()
@@ -143,9 +145,11 @@ namespace GAME
 
 		//--------------------------
 		//両者処理
+		bool bStop =  m_pFtgGrp->GetScpStop ();
+		bool bBlackOut = m_pFtgGrp->IsActive_BlackOut ();
 
 		//一時停止
-		if ( m_pFtgGrp->GetScpStop () )
+		if ( bStop || bBlackOut )
 		{
 			//キャラ共通一連動作
 			//入力のみ
@@ -156,9 +160,9 @@ namespace GAME
 			//キャラ共通一連動作
 			m_mutualChara->Conduct ();
 		}
+#if 0
 		//--------------------------
 
-#if 0
 		//暗転時は通常処理しない
 //		if ( m_bg->IsBlackOut () )
 		if ( m_pFtgGrp->GetBlackOut () )
@@ -327,18 +331,25 @@ namespace GAME
 	//共通グラフィック処理
 	void Fighting::Grp ()
 	{
-#if 0
 		//----------------------------------------------------
-		//@todo 共通のフラグポインタを MutalChara -> ExeChara まで渡す
+		//@info 共通のフラグポインタを MutalChara -> ExeChara まで渡す
 	 
 		//----------------------------------------------------
 		//暗転
-		UINT blackOut = m_mutualChara->GetBlackOut ();
-		if ( 0 != blackOut )
+		bool bBlackOut = m_pFtgGrp->IsActive_BlackOut ();
+//		UINT blackOut = m_mutualChara->GetBlackOut ();
+		if ( bBlackOut )
 		{
-			m_bg->SetBlackOut ( blackOut );
-			m_mutualChara->SetBlackOut ( 0 );
+			//m_bg->SetBlackOut ( blackOut );
+			//m_mutualChara->SetBlackOut ( 0 );
+			m_bg->OnBlackOut ();
 		}
+		else
+		{
+			m_bg->OffBlackOut ();
+		}
+
+#if 0
 
 		//----------------------------------------------------
 		//白転
