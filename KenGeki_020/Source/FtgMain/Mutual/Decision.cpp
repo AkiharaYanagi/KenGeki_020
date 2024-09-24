@@ -230,16 +230,6 @@ namespace GAME
 			//SE
 			SOUND->Play_SE ( SE_Btl_Clang );
 
-
-
-
-
-			//@todo フォント読込を減らす
-
-
-
-
-
 #if 0
 			m_efSpark->On ( center );
 //			m_efParticle->On ( center );

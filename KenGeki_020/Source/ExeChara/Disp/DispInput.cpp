@@ -15,7 +15,7 @@
 namespace GAME
 {
 	//キー入力表示個数
-	//@todo CharaInputの入力保存数と同一なので統合する
+	//@info CharaInputの入力保存数と同一なので統合
 	const uint32 DispInput::NUM_DISP_INPUT = 20;
 	const int32 DispInput::BASE_X = 10;
 	const int32 DispInput::BASE_Y = 150;

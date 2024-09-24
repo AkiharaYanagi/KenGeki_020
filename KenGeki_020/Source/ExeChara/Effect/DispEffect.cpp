@@ -18,10 +18,10 @@ namespace GAME
 		: mpap_EfTx ( papEfTx )
 	{
 		//メイングラフィック
-		m_grp = std::make_shared < GameGraphic > ();
-//		m_grp = std::make_shared < GrpEfShd > ();
+//		m_grp = std::make_shared < GameGraphic > ();
+		m_grp = std::make_shared < GrpEfShd > ();
+		m_grp->On ();
 		m_grp->SetZ ( z );	//初期位置
-///		m_grp->On ();
 		AddpTask ( m_grp );
 		GRPLST_INSERT ( m_grp );
 
@@ -92,10 +92,15 @@ namespace GAME
 //		P_Tx pEfTx = mpap_EfTx->at ( pScript->GetImageIndex() );
 
 		//表示に反映
-		m_grp->SetPos ( vecEfImg );
+//		m_grp->SetPos ( vecEfImg );
+
+		m_grp->SetBase ( vecEfImg );	//Grp "Ef" Shdは基本位置指定をBaseで行う
+
 		m_grp->SetScaling ( m_w * fDir, 1.f );
 //		m_grp->SetpTexture ( pEfTx );
 		m_grp->SetIndexTexture ( index );
+
+		m_grp->Draw ();
 	}
 
 	void DispEffect::SetpCharaRect ( P_CharaRect pCharaRect )
