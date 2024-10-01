@@ -106,6 +106,12 @@ namespace GAME
 		mp_state->Start ();
 	}
 
+	void ExeChara_Actor::StartWinner ()
+	{
+//		mp_state = m_EndWait;
+		mp_state->Start ();
+	}
+
 
 	//==========================================================
 	//メイン中一時遷移		(Start()を実行しない)

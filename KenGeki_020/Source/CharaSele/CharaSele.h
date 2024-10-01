@@ -25,6 +25,15 @@ namespace GAME
 		//BG
 		P_Grp			m_bg;
 
+		//Scroll
+		P_Grp			m_scroll;
+		float			m_scrl_y { 0 };
+		P_Grp			m_scroll_Stage;
+		float			m_scrlStg_x { 0 };
+
+		//CharaFace
+		P_Grp			m_charaFace;
+
 		//カーソル
 		P_GrpBlink		m_cursor1p;
 		P_GrpBlink		m_cursor2p;
@@ -63,6 +72,7 @@ namespace GAME
 		P_GameScene Transit ();
 
 	private:
+		void Input ();
 		STAGE_NAME GetStageName ();
 
 	};

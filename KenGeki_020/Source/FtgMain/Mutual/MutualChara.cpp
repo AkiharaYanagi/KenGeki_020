@@ -401,6 +401,13 @@ namespace GAME
 		return b1 && b2;
 	}
 
+	//勝者表示
+	void MutualChara::StartWinner ()
+	{
+		m_exeChara1->StartWinner ();
+		m_exeChara2->StartWinner ();
+	}
+
 	//----------------------------------------------------
 
 

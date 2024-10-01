@@ -79,6 +79,17 @@ namespace GAME
 		//ラウンド
 		m_round = std::make_shared < Round > ();
 		AddpTask ( m_round );
+
+
+
+		//test
+		m_testStr = std::make_shared < GrpStr > ();
+		m_testStr->SetStr ( U"test." );
+		AddpTask ( m_testStr );
+		GRPLST_INSERT ( m_testStr );
+
+
+
 	}
 
 	Fighting::~Fighting ()
@@ -180,6 +191,11 @@ namespace GAME
 		//--------------------------
 		//共通グラフィック処理
 		Grp ();
+
+
+
+		m_testStr->Draw ();
+
 
 		//--------------------------
 		TASK_LST::Move ();

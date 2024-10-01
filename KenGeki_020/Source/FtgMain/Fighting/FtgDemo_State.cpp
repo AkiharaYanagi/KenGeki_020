@@ -215,6 +215,9 @@ namespace GAME
 	{
 		if ( ! m_grpDown->GetValid () )
 		{
+			//ダウンから勝者表示へ
+			GetwpFtgDemoActor ().lock ()->Change_Down_To_Winner ();
+
 #if 0
 			//新規開始
 			GetpMutualChara ()->StartFighting ();
@@ -222,9 +225,9 @@ namespace GAME
 #endif // 0
 
 #if 0
-#endif // 0
-			//タイトルに戻る
+			//リザルトに移行
 			GetwpFtgDemoActor ().lock ()->End_Down_To_Result ();
+#endif // 0
 
 		}
 	}

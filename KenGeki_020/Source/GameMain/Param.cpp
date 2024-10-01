@@ -22,10 +22,8 @@ namespace GAME
 		//ゲーム設定ファイル開始
 		m_setting.Load ();
 
-		m_pChara_Ouka = std::make_shared < Chara > ();	//キャラデータ実体
-		m_pChara_Sae = std::make_shared < Chara > ();	//キャラデータ実体
-		m_pChara_Retsudou = std::make_shared < Chara > ();	//キャラデータ実体
-		m_pChara_Retsudou_2 = std::make_shared < Chara > ();	//キャラデータ実体
+		m_chara_name_1p = m_setting.GetName1p ();
+		m_chara_name_2p = m_setting.GetName2p ();
 	}
 
 	//コピーコンストラクタ
@@ -38,7 +36,7 @@ namespace GAME
 	{
 	}
 
-	void Param::LoadCharaData ()
+	void Param::LoadCharaData_All ()
 	{
 		LoadCharaBin_s3d lcb_0 ( U"chara_Ouka_Bin.dat", * m_pChara_Ouka );
 		LoadCharaBin_s3d lcb_1 ( U"chara_Sae_Bin.dat", * m_pChara_Sae );
@@ -109,9 +107,45 @@ namespace GAME
 
 	void Param::SetRandomChara ()
 	{
-
 	}
 
+
+	P_Chara Param::GetpChara_Ouka ()
+	{
+		if ( m_pChara_Ouka == nullptr )
+		{
+			m_pChara_Ouka = std::make_shared < Chara > ();	//キャラデータ実体
+			LoadCharaBin_s3d lcb_0 ( U"chara_Ouka_Bin.dat", * m_pChara_Ouka );
+		}
+		return m_pChara_Ouka;
+	}
+
+	P_Chara Param::GetpChara_Sae ()
+	{
+		if ( m_pChara_Sae == nullptr )
+		{
+			m_pChara_Sae = std::make_shared < Chara > ();	//キャラデータ実体
+			LoadCharaBin_s3d lcb_1 ( U"chara_Sae_Bin.dat", * m_pChara_Sae );
+		}
+		return m_pChara_Sae;
+	}
+
+	P_Chara Param::GetpChara_Retsudou ()
+	{
+		if ( m_pChara_Retsudou == nullptr )
+		{
+			m_pChara_Retsudou = std::make_shared < Chara > ();	//キャラデータ実体
+			LoadCharaBin_s3d lcb_1 ( U"chara_Sae_Bin.dat", * m_pChara_Retsudou );
+		}
+		return m_pChara_Retsudou;
+	}
+
+	P_Chara Param::GetpChara_Retsudou2 ()
+	{
+		m_pChara_Retsudou_2 = std::make_shared < Chara > ();	//キャラデータ実体
+		//		LoadCharaBin_s3d lcb_3 ( U"chara_Retsudou_Bin.dat", * m_pChara_Retsudou_2 );
+		return m_pChara_Retsudou_2;
+	}
 
 }	//namespace GAME
 

@@ -29,6 +29,36 @@ namespace GAME
 		AddpTask ( m_bg );
 		GRPLST_INSERT ( m_bg );
 
+		//Scroll
+		m_scroll = std::make_shared < GameGraphic > ();
+		m_scroll->SetShader ( T );
+		m_scroll->AddTexture_FromArchive ( U"CharaSele_Scroll.png" );
+		m_scroll->SetPos ( 0, 0 );
+		m_scroll->SetZ ( Z_BG );
+		AddpTask ( m_scroll );
+		GRPLST_INSERT ( m_scroll );
+
+		//Scroll Stage
+		m_scroll_Stage = std::make_shared < GameGraphic > ();
+		m_scroll_Stage->SetShader ( T );
+		m_scroll_Stage->AddTexture_FromArchive ( U"CharaSele_Scroll_Stage.png" );
+		m_scroll_Stage->SetPos ( 0, 400 );
+		m_scroll_Stage->SetZ ( Z_BG );
+		AddpTask ( m_scroll_Stage );
+		GRPLST_INSERT ( m_scroll_Stage );
+
+
+
+		//CharaFace
+		m_charaFace = std::make_shared < GameGraphic > ();
+		m_charaFace->AddTexture_FromArchive ( U"CharaFace.png" );
+		m_charaFace->SetPos ( (1280 - 455) / 2, 70 );
+		m_charaFace->SetZ ( Z_BG );
+		AddpTask ( m_charaFace );
+		GRPLST_INSERT ( m_charaFace );
+
+
+
 		//プレイヤ別の位置など
 		m_chsl_pl_1p = std::make_shared < CharaSele_Player > ();
 		m_chsl_pl_1p->PlayerInit ( PLAYER_ID_1 );
@@ -47,14 +77,13 @@ namespace GAME
 		m_fade_toFighting = std::make_shared < FadeRect > ();
 		AddpTask ( m_fade_toFighting );
 		GRPLST_INSERT ( m_fade_toFighting );
-		m_fade_toFighting->SetAfterClear ( F );
 
 		//ステージセレクト
 		m_stageSelect = std::make_shared < GameGraphic > ();
 		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Noon.png" );
 		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Evening.png" );
 		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Night.png" );
-		m_stageSelect->SetPos ( VEC2 ( 640 - 128, 400 ) );
+		m_stageSelect->SetPos ( VEC2 ( 640 - 128, 450 ) );
 		m_stageSelect->SetZ ( Z_BG - 0.1f );
 		AddpTask ( m_stageSelect );
 		GRPLST_INSERT ( m_stageSelect );
@@ -83,15 +112,6 @@ namespace GAME
 
 	P_GameScene CharaSele::Transit ()
 	{
-		//BackSpaceでタイトルに戻る
-		if ( WND_UTL::AscKey ( VK_BACK ) )
-		{
-			SOUND->Play_SE ( SE_Sys_Cancel );
-
-			//フェード開始
-			m_fade_toTitle->SetBlackOut ( 8 );
-		}
-
 		//タイトルに移行
 		if ( m_fade_toTitle->IsLast () )
 		{
@@ -111,7 +131,18 @@ namespace GAME
 			if ( m_plus_wait > 15 )
 			{
 				SOUND->Stop_BGM ( BGM_CharaSele );
-				Scene::Transit_Fighting ();
+
+				P_Param pPrm = Scene::GetpParam ();
+
+				if ( MODE_MAIN == pPrm->GetGameMode () )
+				{
+					Scene::Transit_Fighting ();
+				}
+				else if ( MODE_TRAINING == pPrm->GetGameMode () )
+				{
+					Scene::Transit_Training ();
+				}
+
 				m_plus_wait = 0;
 			}
 			++ m_plus_wait;
@@ -127,6 +158,15 @@ namespace GAME
 
 	void CharaSele::Move ()
 	{
+		//背景スクロール
+		m_scrl_y -= 20;
+		if ( m_scrl_y < - 960 ) { m_scrl_y = 0; }
+		m_scroll->SetPos ( 0, m_scrl_y );
+
+		m_scrlStg_x -= 20;
+		if ( m_scrlStg_x < - 1280 ) { m_scrlStg_x = 0; }
+		m_scroll_Stage->SetPos ( m_scrlStg_x, 400 );
+
 		//----------------------------------------------------------
 		//キャラ選択、ステージ選択をパラメータに記録
 		P_Param pPrm = Scene::GetpParam ();
@@ -150,6 +190,25 @@ namespace GAME
 		}
 
 		//----------------------------------------------------------
+
+		Input ();
+
+
+		Scene::Move (); 
+	}
+
+
+	void CharaSele::Input ()
+	{
+		//BackSpaceでタイトルに戻る (ESCは直接終了)
+		if ( WND_UTL::AscKey ( VK_BACK ) )
+		{
+			SOUND->Play_SE ( SE_Sys_Cancel );
+
+			//フェード開始
+			m_fade_toTitle->SetBlackOut ( 8 );
+		}
+
 		//決定
 		bool b1 = m_chsl_pl_1p->IsDecided ();
 		bool b2 = m_chsl_pl_2p->IsDecided ();
@@ -199,11 +258,9 @@ namespace GAME
 		if ( b1 && b2 && m_stageDecide )
 		{ 
 			//フェード開始
-			m_fade_toFighting->StartBlackOut ( 8 );
+			m_fade_toFighting->StartBlackOut ( 16 );
 		}
 
-
-		Scene::Move (); 
 	}
 
 

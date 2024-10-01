@@ -18,10 +18,6 @@ namespace GAME
 {
 	//コンストラクタ
 	GameSettingFile::GameSettingFile ()
-		: m_startMode ( START_BATTLE )
-		, m_playerMode1p ( MODE_PLAYER ), m_playerMode2p ( MODE_PLAYER )
-		, m_name1p ( CHARA_TEST ), m_name2p ( CHARA_TEST )
-		, m_demo ( F )
 	{
 	}
 
@@ -110,8 +106,8 @@ namespace GAME
 		m_startMode = START_BATTLE;
 		m_playerMode1p = MODE_PLAYER;
 		m_playerMode2p = MODE_PLAYER;
-		m_name1p = CHARA_TEST;
-		m_name2p = CHARA_TEST;
+		m_name1p = CHARA_OUKA;
+		m_name2p = CHARA_OUKA;
 		m_demo = F;
 	}
 

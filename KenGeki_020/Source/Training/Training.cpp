@@ -113,10 +113,6 @@ namespace GAME
 #endif // 0
 
 
-		//test
-		//DBGOUT_WND()->On ();
-		DBGOUT_WND()->Off ();
-
 		Scene::Load ();
 	}
 

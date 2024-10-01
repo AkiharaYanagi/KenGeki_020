@@ -92,6 +92,8 @@ namespace GAME
 		void WallBreak_Action ( PLAYER_ID id );	//壁割後のアクション指定
 		void Shift_Fighting ();		//戦闘通常状態に戻る
 
+		void StartWinner ();		//勝者表示
+
 		//----------------------------------------------------
 #if 0
 		//戦闘時間

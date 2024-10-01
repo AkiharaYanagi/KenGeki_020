@@ -268,6 +268,8 @@ namespace GAME
 
 		void Shift_Fighting () { m_actor.ShiftFighting (); }
 
+		void StartWinner () { }
+
 #if 0
 		//一時停止
 		void SetWait ( bool b ) { m_btlPrm.SetWait ( b ); }	//入力を停止

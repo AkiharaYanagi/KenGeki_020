@@ -63,6 +63,8 @@ namespace GAME
 		void StartTimeUp ();
 		void StartEndWait ();
 
+		void StartWinner ();
+
 		//メイン中一時遷移		(Start()を実行しない)
 		void ShiftFighting ();
 		void ShiftSlowSkip ();

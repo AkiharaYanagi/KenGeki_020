@@ -31,18 +31,19 @@ namespace GAME
 		//入力 (プレイヤモードによる分岐)
 		LoadInput ();
 
-#if 0
-		//ゲーム設定
+
+		//ゲーム設定ファイル
 		GameSettingFile stg = pParam->GetGameSetting ();
-//		m_name = stg.GetName ( m_playerID );
-#endif // 0
+
 
 		//選択キャラ名前・モードを取得
 //		m_playerMode = stg.GetPlayerMode ( m_playerID );
-// 
-//		m_name = pParam->GetCharaName ( m_btlPrm.GetPlayerID () );
+
+
+//		m_name = stg.GetName ( m_playerID );
+		m_name = pParam->GetCharaName ( m_btlPrm.GetPlayerID () );
 //		m_name = CHARA_SAE;
-		m_name = CHARA_RETSUDOU;
+//		m_name = CHARA_RETSUDOU;
 
 	}
 
@@ -52,6 +53,7 @@ namespace GAME
 	{
 		//--------------------------------------------
 		//m_pCharaのデータ読込
+#if 0
 		//ゲームパラメータで最初に読み込み済みかどうか
 		if ( m_pParam->IsReadChara () )
 		{
@@ -61,6 +63,9 @@ namespace GAME
 		{
 			LoadCharaData_test ();
 		}
+#endif // 0
+		LoadCharaData ();
+
 
 		//--------------------------------------------
 		//アクタ・ステートに用いる状態パラメータに登録
@@ -186,11 +191,6 @@ namespace GAME
 	{
 		//--------------------------------------------
 		//m_pCharaのデータ読込
-
-		if ( m_name == CHARA_TEST )
-		{
-			m_name = CHARA_SAE;
-		}
 
 		//パラメータによるキャラの選択
 		switch ( m_name )

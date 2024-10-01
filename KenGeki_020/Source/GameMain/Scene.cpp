@@ -122,29 +122,21 @@ namespace GAME
 		//テスト用 開始状態選択
 //		startMode = START_TITLE;
 //		startMode = START_CHARA_SELE;
-//		startMode = START_BATTLE;
-		startMode = START_TRAINING;
+		startMode = START_BATTLE;
+//		startMode = START_TRAINING;
 //		startMode = START_RESULT;
 
-#if 0
-//		startMode = START_INTRO;
-//		startMode = START_DEMO;
-//		startMode = TEST_VOID;
-#endif // 0
 
+		//ゲーム共通パラメータ
+		m_pParam = std::make_shared < Param > ();
 
 		//最初のシーンを設定ファイルから取得する
-		m_pParam = std::make_shared < Param > ();	//パラメータ
-#if 0
 		GameSettingFile stgs = m_pParam->GetGameSetting ();
 		startMode = stgs.GetStartMode ();
-#endif // 0
-
-
-
 
 		//キャラデータを事前読込
-		m_pParam->LoadCharaData ();
+//		m_pParam->LoadCharaData_All ();
+
 
 
 		//デバッグ表示オン/オフ

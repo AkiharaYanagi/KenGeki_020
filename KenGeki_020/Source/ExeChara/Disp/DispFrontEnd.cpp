@@ -376,6 +376,7 @@ namespace GAME
 	void DispFrontEnd::UpdateActionName ( s3d::String actionName )
 	{
 		m_strAction->SetStr ( actionName );
+//		m_strAction->Draw ();
 	}
 
 	void DispFrontEnd::UpdateStateName ( s3d::String stateName )

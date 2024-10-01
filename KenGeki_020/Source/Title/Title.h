@@ -35,14 +35,6 @@ namespace GAME
 		float		m_cursor_scaling_y { 1.f };
 
 
-//		std::unique_ptr < s3d::VideoTexture >		m_test;
-
-//		s3d::Array < int32 > delays;
-//		s3d::Array < s3d::Texture > txs;
-
-//		P_Grp		m_charaTest;
-
-
 		//シーン選択
 		enum TITLE_TO
 		{
@@ -65,7 +57,7 @@ namespace GAME
 		P_GameScene Transit ();
 
 	private:
-		void Select ();
+		void Input ();
 	};
 
 	using P_Title = std::shared_ptr < Title >;

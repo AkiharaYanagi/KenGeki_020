@@ -27,16 +27,17 @@ namespace GAME
 		GameSettingFile		m_setting;
 
 		//内部設定
+		GAME_MODE		m_gameMode { MODE_TRAINING };
 		MUTCH_MODE		m_mutchMode { MODE_PLAYER_PLAYER };
 		CHARA_NAME		m_chara_name_1p { CHARA_TEST };
 		CHARA_NAME		m_chara_name_2p { CHARA_TEST };
 		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };
 
 		//キャラ事前読込
-		P_Chara			m_pChara_Ouka;
-		P_Chara			m_pChara_Sae;
-		P_Chara			m_pChara_Retsudou;
-		P_Chara			m_pChara_Retsudou_2;
+		P_Chara			m_pChara_Ouka { nullptr };
+		P_Chara			m_pChara_Sae { nullptr };
+		P_Chara			m_pChara_Retsudou { nullptr };
+		P_Chara			m_pChara_Retsudou_2 { nullptr };
 		bool			m_read_chara { F };
 
 		//リザルト用
@@ -58,24 +59,27 @@ namespace GAME
 		GameSettingFile GetGameSetting () const { return m_setting; }
 		void SetSettingFile ( GameSettingFile stg ) { m_setting = stg; }
 
-		//データ事前読込1
-		void LoadCharaData ();
-		P_Chara GetpChara_Ouka () const { return m_pChara_Ouka; }
-		P_Chara GetpChara_Sae () const { return m_pChara_Sae; }
-		P_Chara GetpChara_Retsudou () const { return m_pChara_Retsudou; }
-		P_Chara GetpChara_Retsudou2 () const { return m_pChara_Retsudou_2; }
-		bool IsReadChara () const { return m_read_chara; }
-
 		//内部設定
+		void SetGameMode ( GAME_MODE mode ) { m_gameMode = mode; }
+		GAME_MODE GetGameMode () const { return m_gameMode; }
+
 		void SetMutchMode ( MUTCH_MODE mode );
 		void SetMutchMode ( PLAYER_MODE mode1p, PLAYER_MODE mode2p );
 		MUTCH_MODE GetMutchMode () const { return m_mutchMode; }
 
 		PLAYER_MODE GetPlayerMode ( PLAYER_ID id ) const;
 
-		void SetCharaName1p ( CHARA_NAME name ) { m_chara_name_1p = name; }
+		void SetCharaName1p ( CHARA_NAME name )
+		{
+			m_setting.SetCharaName1p ( name );
+			m_chara_name_1p = name;
+		}
 		CHARA_NAME GetCharaName1p () const { return m_chara_name_1p; }
-		void SetCharaName2p ( CHARA_NAME name ) { m_chara_name_2p = name; }
+		void SetCharaName2p ( CHARA_NAME name )
+		{
+			m_setting.SetCharaName2p ( name );
+			m_chara_name_2p = name;
+		}
 		CHARA_NAME GetCharaName2p () const { return m_chara_name_2p; }
 		CHARA_NAME GetCharaName ( PLAYER_ID id )
 		{
@@ -87,6 +91,15 @@ namespace GAME
 
 		void SetStageName ( STAGE_NAME stage_name ) { m_stage_name = stage_name; } 
 		STAGE_NAME GetStageName () const { return m_stage_name; }
+
+
+		//データ事前読込1
+		void LoadCharaData_All ();
+		P_Chara GetpChara_Ouka ();
+		P_Chara GetpChara_Sae ();
+		P_Chara GetpChara_Retsudou ();
+		P_Chara GetpChara_Retsudou2 ();
+		bool IsReadChara () const { return m_read_chara; }
 
 
 		//リザルト用

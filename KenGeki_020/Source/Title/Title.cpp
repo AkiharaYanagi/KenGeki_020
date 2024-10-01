@@ -91,14 +91,6 @@ namespace GAME
 		//BGM
 		SOUND->Stop_BGM ( BGM_Title );
 		SOUND->Play_Loop_BGM ( BGM_Title );
-
-
-
-
-		TRACE_F ( (LPCTSTR) KeyConfig::Inst()->ToString().toWstr().c_str() );
-
-
-
 	}
 
 
@@ -108,18 +100,12 @@ namespace GAME
 
 	void Title::Move ()
 	{
+		//常時演出
+		
 		//背景スクロール
 		m_bg_x -= 64.f;
 		if (m_bg_x < (-7680 + 1920) ) { m_bg_x = 0; }
 		m_bg->SetPos ( m_bg_x, 0 );
-
-
-		//フェード中は何もしない
-		if ( m_fade_in->IsActive () ) { Scene::Move (); return; }
-		if ( m_fade_out->IsActive () ) { Scene::Move (); return; }
-
-		//選択
-		Select ();
 
 		//カーソル回転
 		m_cursor_scaling_y += m_cursor_scaling_vy;
@@ -128,40 +114,47 @@ namespace GAME
 
 		m_cursor->SetScaling ( 1.f, m_cursor_scaling_y );
 
-		//キー1でシーンを進める
-		if ( CFG_PUSH_KEY ( P1_BTN0 ) || CFG_PUSH_KEY ( P2_BTN0 ) )
-		{
-			SOUND->Play_SE ( SE_Sys_Enter );
 
-			//フェード開始
-			m_fade_out->StartBlackOut ( 16 );
-		}
+		//フェード中は入力を受付しない
+		if ( m_fade_in->IsActive () ) { Scene::Move (); return; }
+		if ( m_fade_out->IsActive () ) { Scene::Move (); return; }
+
+
+		//入力
+		Input ();
 
 		Scene::Move ();
 	}
 
 	P_GameScene Title::Transit ()
 	{
-		//フェード待機後、遷移開始
+		//フェード待機開始
 		if ( m_fade_out->IsLast () )
 		{
 			++ m_plus_wait;
 		}
 
+		//フェード待機後、遷移
 		if ( m_plus_wait > 0 )
 		{
 			if ( m_plus_wait > 15 )
 			{
+				//ゲーム共通パラメータ
+				P_Param pParam = Scene::GetpParam ();
+
 				switch ( m_to )
 				{
 				case TITLE_TO_BATTLE:
 					SOUND->Stop_BGM ( BGM_Title );
+					pParam->SetGameMode ( GAME_MODE::MODE_MAIN );
 					Scene::Transit_CharaSele ();
 //					Scene::Transit_Fighting ();
 					break;
 				case TITLE_TO_TRAINING:
 					SOUND->Stop_BGM ( BGM_Title );
-					Scene::Transit_Training ();
+					pParam->SetGameMode ( GAME_MODE::MODE_TRAINING );
+					Scene::Transit_CharaSele ();
+//					Scene::Transit_Training ();
 					break;
 				}
 
@@ -176,18 +169,8 @@ namespace GAME
 	}
 
 
-	void Title::Select ()
+	void Title::Input ()
 	{
-		if ( CFG_PUSH_KEY ( P2_UP ) )
-		{
-			int i = 0; (void)i;
-		}
-
-		if ( CFG_IS_KEY ( P1_UP ) )
-		{
-			int i = 0; (void)i;
-		}
-
 		//キー上下でシーンを選択
 		if ( CFG_PUSH_KEY ( P1_UP ) || CFG_PUSH_KEY ( P2_UP ) )
 		{
@@ -219,6 +202,17 @@ namespace GAME
 
 		//カーソル位置
 		m_cursor->SetPos ( 480.f, 800.f + 80 * (int32)m_to );
+
+
+		//キー1でシーンを進める
+		if ( CFG_PUSH_KEY ( P1_BTN0 ) || CFG_PUSH_KEY ( P2_BTN0 ) )
+		{
+			SOUND->Play_SE ( SE_Sys_Enter );
+
+			//フェード開始
+			m_fade_out->StartBlackOut ( 16 );
+		}
+
 	}
 
 

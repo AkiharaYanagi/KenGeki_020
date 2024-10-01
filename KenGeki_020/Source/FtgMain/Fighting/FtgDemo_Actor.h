@@ -62,21 +62,22 @@ namespace GAME
 		void SetpMutualChara ( P_MutualChara p ) { mp_Param->SetpMutualChara ( p ); }
 		void SetpFtgGrp ( P_FtgGrp p ) { mp_Param->SetpFtgGrp ( p ); }
 
-		void Change_Greeting_To_GetReady ();
-		void Change_GetReady_To_Attack ();
-		void Change_Main_To_Down ();
-		void Change_Main_To_TimeUpWait ();
-		void Change_Main_To_TimeUp ();
-		void Change_TimeUp_To_Winner ();
-		void Change_Down_To_Greeting ();
+		void Change_Greeting_To_GetReady ();	//挨拶から準備へ
+		void Change_GetReady_To_Attack ();		//準備から開始へ
+		void Change_Main_To_Down ();			//メインからダウンへ
+		void Change_Main_To_TimeUpWait ();		//メインから時間切れ待機へ
+		void Change_Main_To_TimeUp ();			//メインから時間切れへ
+		void Change_TimeUp_To_Winner ();		//時間切れから勝者表示へ
+		void Change_Down_To_Greeting ();		//ダウンから挨拶へ
+		void Change_Down_To_Winner ();			//ダウンから勝者表示へ
 
 
 		//Start()を用いない一時変更
-		void Shift_Main_To_WallBreak ();
-		void Shift_WallBreak_To_Main ();
+		void Shift_Main_To_WallBreak ();	//メインから壁割
+		void Shift_WallBreak_To_Main ();	//壁割からメイン
 
 		
-		void End_Down_To_Result ();
+		void End_Down_To_Result ();		//戦闘終了によりリザルトへシーン移行
 		bool IsEnd () const { return m_bEnd; }
 
 		s3d::String GetName () const { return mp_FtgDemo->GetName (); }

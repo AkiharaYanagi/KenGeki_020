@@ -135,6 +135,14 @@ namespace GAME
 		mp_FtgDemo = m_Greeting;
 	}
 
+	//ダウンから勝者表示へ
+	void FtgDemoActor::Change_Down_To_Winner ()
+	{
+		GetpMutualChara ()->StartWinner ();
+		m_Winner->Start ();
+		mp_FtgDemo = m_Winner;
+	}
+
 	void FtgDemoActor::Shift_Main_To_WallBreak ()
 	{
 		mp_FtgDemo = m_WallBreak;

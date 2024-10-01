@@ -127,6 +127,11 @@ namespace GAME
 		//タイマ切替
 		void SetActiveTimer ( bool b ) { m_btlTime->SetActive ( b ); }
 
+
+		//test
+		P_GrpStr		m_testStr;
+
+
 	private:
 		//共通グラフィック処理
 		void Grp ();
