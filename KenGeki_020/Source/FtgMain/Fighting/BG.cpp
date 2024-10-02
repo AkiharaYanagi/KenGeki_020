@@ -31,7 +31,7 @@ namespace GAME
 		m_bg_C->SetPos ( 0, BG_POS_Y );
 		m_bg_C->SetZ ( Z_BG );
 		AddpTask ( m_bg_C );
-//		GRPLST_INSERT ( m_bg_C );
+		GRPLST_INSERT ( m_bg_C );
 
 		//------------------------------------------------
 		//背景 左

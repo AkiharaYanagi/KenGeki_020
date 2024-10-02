@@ -135,7 +135,7 @@ namespace GAME
 		if ( m_pChara_Retsudou == nullptr )
 		{
 			m_pChara_Retsudou = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb_1 ( U"chara_Sae_Bin.dat", * m_pChara_Retsudou );
+			LoadCharaBin_s3d lcb_1 ( U"chara_Retsudou_Bin.dat", * m_pChara_Retsudou );
 		}
 		return m_pChara_Retsudou;
 	}

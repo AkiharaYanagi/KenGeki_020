@@ -129,7 +129,7 @@ namespace GAME
 	void ExeChara::LoadCharaData_test ()
 	{
 		//名前からスクリプトファイルを指定してキャラのロード
-		s3d::String name ( U"chara_Stand_Bin.dat" );
+		s3d::String filename ( U"chara_Stand_Bin.dat" );
 
 		PLAYER_ID id = m_btlPrm.GetPlayerID ();
 
@@ -137,7 +137,7 @@ namespace GAME
 		if ( PLAYER_ID_1 == id )
 		{
 			//			name.assign ( U"charaBin.dat" );
-			name.assign ( U"chara_Ouka_Bin.dat" );		m_name = CHARA_OUKA;
+			filename.assign ( U"chara_Ouka_Bin.dat" );		m_name = CHARA_OUKA;
 			//			name.assign ( U"chara_Sae_Bin.dat" );		m_name = CHARA_SAE;
 			//			name.assign ( U"chara_Retsudou_Bin.dat" );		m_name = CHARA_RETSUDOU;
 			//			name.assign ( _T ( "chara_E0_Bin.dat" ) );
@@ -146,7 +146,7 @@ namespace GAME
 		{
 			//			name.assign ( _T ( "charaBin.dat" ) );
 			//			name.assign ( U".dat" );		m_name = CHARA_OUKA;
-			name.assign ( U"chara_Sae_Bin.dat" );		m_name = CHARA_SAE;
+			filename.assign ( U"chara_Sae_Bin.dat" );		m_name = CHARA_SAE;
 			//			name.assign ( U"chara_Retsudou_Bin.dat" );		m_name = CHARA_RETSUDOU;
 			//			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
@@ -158,10 +158,10 @@ namespace GAME
 		//パラメータによるキャラの選択
 		switch ( m_name )
 		{
-		case CHARA_OUKA:		name.assign ( U"chara_Ouka_Bin.dat" ); break;
-		case CHARA_SAE:			name.assign ( U"chara_Sae_Bin.dat" ); break;
-		case CHARA_RETSUDOU:	name.assign ( U"chara_Retsudou_Bin.dat" ); break;
-		case CHARA_GABADARUGA:	name.assign ( U"charaBin.dat" ); break;
+		case CHARA_OUKA:		filename.assign ( U"chara_Ouka_Bin.dat" ); break;
+		case CHARA_SAE:			filename.assign ( U"chara_Sae_Bin.dat" ); break;
+		case CHARA_RETSUDOU:	filename.assign ( U"chara_Retsudou_Bin.dat" ); break;
+		case CHARA_GABADARUGA:	filename.assign ( U"charaBin.dat" ); break;
 		default: break;
 		}
 
@@ -169,7 +169,7 @@ namespace GAME
 		if ( PLAYER_ID_1  == id )
 		{		
 			//バイナリデータ読込
-			LoadCharaBin_s3d loadCharaBin ( name, * m_pChara );
+			LoadCharaBin_s3d loadCharaBin ( filename, * m_pChara );
 		}
 		else if ( PLAYER_ID_2  == id )
 		{
@@ -180,7 +180,7 @@ namespace GAME
 			}
 			else
 			{
-				LoadCharaBin_s3d loadCharaBin ( name, * m_pChara );
+				LoadCharaBin_s3d loadCharaBin ( filename, * m_pChara );
 			}
 		}
 
