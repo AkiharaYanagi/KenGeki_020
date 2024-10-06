@@ -443,6 +443,7 @@
     <ClInclude Include="Source\GameMain\SoundConst.h" />
     <ClInclude Include="Source\GameMain\stdafx.h" />
     <ClInclude Include="Source\Result\Result.h" />
+    <ClInclude Include="Source\Result\ResultMenu.h" />
     <ClInclude Include="Source\Title\Title.h" />
     <ClInclude Include="Source\Training\Training.h" />
   </ItemGroup>
@@ -500,6 +501,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\Result\Result.cpp" />
+    <ClCompile Include="Source\Result\ResultMenu.cpp" />
     <ClCompile Include="Source\Title\Title.cpp" />
     <ClCompile Include="Source\Training\Training.cpp" />
   </ItemGroup>

@@ -1,14 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="GameMain">
-      <UniqueIdentifier>{7941956b-e8c1-47d6-9ef3-35ce0236b1c1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00_Document">
       <UniqueIdentifier>{81599f2d-2ebc-4f00-a021-5317fff0b08e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Menu">
-      <UniqueIdentifier>{8c660644-32f9-48d3-9ee3-d163e1475d5f}</UniqueIdentifier>
     </Filter>
     <Filter Include="01_Title">
       <UniqueIdentifier>{d2e9a3e0-55f9-4628-9ab5-5750c027dbd4}</UniqueIdentifier>
@@ -178,6 +172,15 @@
     </Filter>
     <Filter Include="03_FtgMain\ExeChara\Effect">
       <UniqueIdentifier>{8f3a288a-6504-4a71-88f2-097feedc5b76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="80_Common">
+      <UniqueIdentifier>{8c660644-32f9-48d3-9ee3-d163e1475d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="80_Common\Menu">
+      <UniqueIdentifier>{ec3a3105-7921-4124-bc76-4e15b09fa2d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="90_GameMain">
+      <UniqueIdentifier>{7941956b-e8c1-47d6-9ef3-35ce0236b1c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -814,22 +817,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameMain\GameConst.h">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameMain\GameMain.h">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameMain\GameSettingFile.h">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameMain\Param.h">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameMain\Scene.h">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameMain\stdafx.h">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClInclude>
     <ClInclude Include="Source\FtgMain\FtgConst.h">
       <Filter>03_FtgMain</Filter>
@@ -895,7 +898,7 @@
       <Filter>04_Training</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameMain\G_Ftg.h">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClInclude>
     <ClInclude Include="Source\FtgMain\Mutual\Decision.h">
       <Filter>03_FtgMain\Mutual</Filter>
@@ -943,7 +946,7 @@
       <Filter>03_FtgMain\ExeChara\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameMain\SoundConst.h">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClInclude>
     <ClInclude Include="Source\CharaSele\CharaSele_Player.h">
       <Filter>02_CharaSele</Filter>
@@ -957,22 +960,25 @@
     <ClInclude Include="Source\Result\Result.h">
       <Filter>05_Result</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Result\ResultMenu.h">
+      <Filter>05_Result</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameMain\Main.cpp">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameMain\Param.cpp">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameMain\Scene.cpp">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameMain\stdafx.cpp">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\FtgMain\FtgMain.cpp">
       <Filter>03_FtgMain</Filter>
@@ -1050,7 +1056,7 @@
       <Filter>04_Training</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameMain\G_Ftg.cpp">
-      <Filter>GameMain</Filter>
+      <Filter>90_GameMain</Filter>
     </ClCompile>
     <ClCompile Include="Source\FtgMain\Mutual\Decision.cpp">
       <Filter>03_FtgMain\Mutual</Filter>
@@ -1107,6 +1113,9 @@
       <Filter>02_CharaSele</Filter>
     </ClCompile>
     <ClCompile Include="Source\Result\Result.cpp">
+      <Filter>05_Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Result\ResultMenu.cpp">
       <Filter>05_Result</Filter>
     </ClCompile>
   </ItemGroup>

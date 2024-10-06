@@ -72,9 +72,10 @@ namespace GAME
 
 		//カーソル
 		m_cursor = std::make_shared < GrpBlink > ();
-		m_cursor->AddTexture_FromArchive ( U"CharaSele_Cursor_1p.png" );
-		m_cursor->AddTexture_FromArchive ( U"CharaSele_Cursor_2p.png" );
+		m_cursor->AddTexture_FromArchive ( U"CharaSele\\CharaSele_Cursor_1p.png" );
+		m_cursor->AddTexture_FromArchive ( U"CharaSele\\CharaSele_Cursor_2p.png" );
 		m_cursor->SetTimer ( 15 );
+		m_cursor->SetZ ( Z_SYS );
 		AddpTask ( m_cursor );
 		GRPLST_INSERT ( m_cursor );
 	}

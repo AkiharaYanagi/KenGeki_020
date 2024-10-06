@@ -140,8 +140,8 @@ namespace GAME
 
 
 		//デバッグ表示オン/オフ
-//		DBGOUT_WND_ON ();
-		DBGOUT_WND_OFF ();
+		DBGOUT_WND_ON ();
+//		DBGOUT_WND_OFF ();
 
 
 

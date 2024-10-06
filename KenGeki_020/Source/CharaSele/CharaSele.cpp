@@ -8,8 +8,8 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "CharaSele.h"
-#include "../Title/Title.h"
-#include "../FtgMain/Fighting/Fighting.h"
+//#include "../Title/Title.h"
+//#include "../FtgMain/Fighting/Fighting.h"
 //#include "../Training/Training.h"
 #include "../GameMain/SoundConst.h"
 
@@ -19,11 +19,29 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+#pragma region CONST
+
+	const float CharaSele::TXT_CHSL_X = 640 - 286 / 2;
+	const float CharaSele::TXT_CHSL_Y = 5;
+	const float CharaSele::TXT_STSL_X = 640 - 272 / 2;
+	const float CharaSele::TXT_STSL_Y = 400;
+	const float CharaSele::TXT_BGM_X  = 640 - 184 / 2;
+	const float CharaSele::TXT_BGM_Y  = 500;
+	const float CharaSele::TXT_INST_X = 640 - 516 / 2;
+	const float CharaSele::TXT_INST_Y = 820;
+
+	const float CharaSele::CH_STT_X_1P = 400;
+	const float CharaSele::CH_STT_X_2P = 800;
+	const float CharaSele::CH_STT_Y = 5;
+
+#pragma endregion
+
+
 	CharaSele::CharaSele ()
 	{
 		//BG
 		m_bg = std::make_shared < GameGraphic > ();
-		m_bg->AddTexture_FromArchive ( U"CharaSele_BG.png" );
+		m_bg->AddTexture_FromArchive ( U"CharaSele\\CharaSele_BG.png" );
 		m_bg->SetPos ( 0, 0 );
 		m_bg->SetZ ( Z_BG );
 		AddpTask ( m_bg );
@@ -32,7 +50,7 @@ namespace GAME
 		//Scroll
 		m_scroll = std::make_shared < GameGraphic > ();
 		m_scroll->SetShader ( T );
-		m_scroll->AddTexture_FromArchive ( U"CharaSele_Scroll.png" );
+		m_scroll->AddTexture_FromArchive ( U"CharaSele\\CharaSele_Scroll.png" );
 		m_scroll->SetPos ( 0, 0 );
 		m_scroll->SetZ ( Z_BG );
 		AddpTask ( m_scroll );
@@ -41,7 +59,7 @@ namespace GAME
 		//Scroll Stage
 		m_scroll_Stage = std::make_shared < GameGraphic > ();
 		m_scroll_Stage->SetShader ( T );
-		m_scroll_Stage->AddTexture_FromArchive ( U"CharaSele_Scroll_Stage.png" );
+		m_scroll_Stage->AddTexture_FromArchive ( U"CharaSele\\CharaSele_Scroll_Stage.png" );
 		m_scroll_Stage->SetPos ( 0, 400 );
 		m_scroll_Stage->SetZ ( Z_BG );
 		AddpTask ( m_scroll_Stage );
@@ -51,9 +69,9 @@ namespace GAME
 
 		//CharaFace
 		m_charaFace = std::make_shared < GameGraphic > ();
-		m_charaFace->AddTexture_FromArchive ( U"CharaFace.png" );
+		m_charaFace->AddTexture_FromArchive ( U"CharaSele\\CharaFace.png" );
 		m_charaFace->SetPos ( (1280 - 455) / 2, 70 );
-		m_charaFace->SetZ ( Z_BG );
+		m_charaFace->SetZ ( Z_EFF );
 		AddpTask ( m_charaFace );
 		GRPLST_INSERT ( m_charaFace );
 
@@ -67,6 +85,23 @@ namespace GAME
 		m_chsl_pl_2p = std::make_shared < CharaSele_Player > ();
 		m_chsl_pl_2p->PlayerInit ( PLAYER_ID_2 );
 		AddpTask ( m_chsl_pl_2p );
+
+
+		//現在状態
+		m_state_1p = std::make_shared < GrpBlink > ();
+		m_state_1p->AddTexture_FromArchive ( U"CharaSele\\1P.png" );
+		m_state_1p->SetPos ( CH_STT_X_1P, TXT_CHSL_Y );
+		m_state_1p->SetBlinkTime ( 20 );
+		AddpTask ( m_state_1p );
+		GRPLST_INSERT ( m_state_1p );
+
+		m_state_2p = std::make_shared < GrpBlink > ();
+		m_state_2p->AddTexture_FromArchive ( U"CharaSele\\2P.png" );
+		m_state_2p->SetPos ( CH_STT_X_2P, TXT_CHSL_Y );
+		m_state_2p->SetBlinkTime ( 20 );
+		AddpTask ( m_state_2p );
+		GRPLST_INSERT ( m_state_2p );
+
 
 
 		//フェードアウト
@@ -84,9 +119,44 @@ namespace GAME
 		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Evening.png" );
 		m_stageSelect->AddTexture_FromArchive ( U"BG_Preview_Night.png" );
 		m_stageSelect->SetPos ( VEC2 ( 640 - 128, 450 ) );
-		m_stageSelect->SetZ ( Z_BG - 0.1f );
+		m_stageSelect->SetZ ( Z_EFF );
 		AddpTask ( m_stageSelect );
 		GRPLST_INSERT ( m_stageSelect );
+
+
+		//文字表示
+		m_txt_CharacterSelect = std::make_shared < GrpBlink > ();
+		m_txt_CharacterSelect->AddTexture_FromArchive ( U"CharaSele\\Text_CHARACTER_SELECT.png" );
+		m_txt_CharacterSelect->SetPos ( VEC2 ( TXT_CHSL_X, TXT_CHSL_Y ) );
+		m_txt_CharacterSelect->SetZ ( Z_SYS );
+		m_txt_CharacterSelect->Start ();
+		AddpTask ( m_txt_CharacterSelect );
+		GRPLST_INSERT ( m_txt_CharacterSelect );
+
+		m_txt_StageSelect = std::make_shared < GrpBlink > ();
+		m_txt_StageSelect->AddTexture_FromArchive ( U"CharaSele\\Text_STAGE_SELECT.png" );
+		m_txt_StageSelect->SetPos ( VEC2 ( TXT_STSL_X, TXT_STSL_Y ) );
+		m_txt_StageSelect->SetZ ( Z_SYS );
+		m_txt_StageSelect->Stop ();
+		AddpTask ( m_txt_StageSelect );
+		GRPLST_INSERT ( m_txt_StageSelect );
+
+		m_txt_BGMSelect = std::make_shared < GrpBlink > ();
+		m_txt_BGMSelect->AddTexture_FromArchive ( U"CharaSele\\Text_BGM_SELECT.png" );
+		m_txt_BGMSelect->SetPos ( VEC2 ( TXT_BGM_X, TXT_BGM_Y ) );
+		m_txt_BGMSelect->SetZ ( Z_SYS );
+		m_txt_BGMSelect->Stop ();
+		AddpTask ( m_txt_BGMSelect );
+		GRPLST_INSERT ( m_txt_BGMSelect );
+
+
+		//操作説明
+		m_inst = std::make_shared < GameGraphic > ();
+		m_inst->AddTexture_FromArchive ( U"CharaSele\\Inst_CharaSele.png" );
+		m_inst->SetPos ( VEC2 ( TXT_INST_X, TXT_INST_Y ) );
+		m_inst->SetZ ( Z_SYS );
+		AddpTask ( m_inst );
+		GRPLST_INSERT ( m_inst );
 	}
 
 	CharaSele::~CharaSele ()
@@ -216,6 +286,12 @@ namespace GAME
 		//片方が決定したらステージセレクト
 		if ( b1 )
 		{
+			//点滅
+			m_txt_StageSelect->Start ();
+
+			//状態
+			m_state_1p->SetPos ( CH_STT_X_1P, TXT_STSL_Y );
+
 			if ( CFG_PUSH_KEY ( P1_LEFT ) )
 			{
 				m_stageSelect->PrevIndexTexture ();
@@ -233,9 +309,19 @@ namespace GAME
 				m_stageDecide = T;
 			}
 		}
+		else
+		{
+			//状態
+			m_state_1p->SetPos ( CH_STT_X_1P, TXT_CHSL_Y );
+		}
 
 		if ( b2 )
 		{
+			//点滅
+			m_txt_StageSelect->Start ();
+
+			m_state_2p->SetPos ( CH_STT_X_2P, TXT_STSL_Y );
+
 			if ( CFG_PUSH_KEY ( P2_LEFT ) )
 			{
 				m_stageSelect->PrevIndexTexture ();
@@ -252,6 +338,11 @@ namespace GAME
 				SOUND->Play_SE ( SE_Sys_Enter );
 				m_stageDecide = T;
 			}
+		}
+		else
+		{
+			//状態
+			m_state_2p->SetPos ( CH_STT_X_2P, TXT_CHSL_Y );
 		}
 
 		//両者とステージを決定したらFtgMainに移行

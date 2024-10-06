@@ -100,6 +100,9 @@ namespace GAME
 	void Fighting::ParamInit ( P_Param pParam )
 	{
 		m_pParam = pParam;
+
+		m_demoActor->ParamLoad ( pParam );
+
 		m_mutualChara->ParamInit ( pParam );
 		m_exeChara1->ParamInit ( pParam );
 		m_exeChara2->ParamInit ( pParam );
@@ -116,7 +119,7 @@ namespace GAME
 		m_exeChara2->SetpFtgGrp ( m_pFtgGrp );
 
 
-		m_strState->SetSize ( 30 );
+		m_strState->SetSize ( G_Font::SIZE_40 );
 		m_strState->SetPos ( VEC2 ( 640 - 110, 145 ) );
 
 		m_pFtgGrp->Load ();

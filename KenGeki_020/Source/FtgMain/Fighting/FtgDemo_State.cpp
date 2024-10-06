@@ -292,7 +292,7 @@ namespace GAME
 		AddpTask ( m_dispTimer );
 
 		m_grpWinner = std::make_shared < GrpDemo > ();
-		m_grpWinner ->AddTexture ( U"Demo_Winner.png" );
+		m_grpWinner ->AddTexture_FromArchive ( U"Demo_Winner.png" );
 //		m_grpWinner->SetScalingCenter ( VEC2 ( 512, 128 ) );
 		m_grpWinner->SetPos ( VEC2 ( 1.f * 1280 / 2 - 1024 / 2, 200.f ) );
 		m_grpWinner->SetEnd ( 240 );
@@ -301,7 +301,7 @@ namespace GAME
 		GRPLST_INSERT ( m_grpWinner );
 
 		m_grp1p = std::make_shared < GrpDemo > ();
-		m_grp1p ->AddTexture ( U"Demo_1P.png" );
+		m_grp1p ->AddTexture_FromArchive ( U"Demo_1P.png" );
 //		m_grp1p->SetScalingCenter ( VEC2 ( 128, 128 ) );
 		m_grp1p->SetPos ( VEC2 ( 1.f * 1280 / 2 - 256 / 2, 400.f ) );
 		m_grp1p->SetEnd ( 240 );
@@ -310,7 +310,7 @@ namespace GAME
 		GRPLST_INSERT ( m_grp1p );
 
 		m_grp2p = std::make_shared < GrpDemo > ();
-		m_grp2p ->AddTexture ( U"Demo_2P.png" );
+		m_grp2p ->AddTexture_FromArchive ( U"Demo_2P.png" );
 //		m_grp2p->SetScalingCenter ( VEC2 ( 128, 128 ) );
 		m_grp2p->SetPos ( VEC2 ( 1.f * 1280 / 2 - 256 / 2, 400.f ) );
 		m_grp2p->SetEnd ( 240 );
@@ -354,13 +354,13 @@ namespace GAME
 
 	void FTG_DM_Winner::Do ()
 	{
-		//一定時間で次へ
+		//フェード開始
 		if ( m_dispTimer->IsLast () )
 		{
 			m_fade->Start ();
 		}
 
-		//フェード開始
+		//一定時間で次へ
 		if ( m_fade->IsActive () )
 		{
 			if ( m_fade->IsLast () )
@@ -372,7 +372,8 @@ namespace GAME
 				}
 				else
 				{
-					GetwpFtgDemoActor ().lock ()->Change_Down_To_Greeting ();
+//					GetwpFtgDemoActor ().lock ()->Change_Down_To_Greeting ();
+					GetwpFtgDemoActor().lock ()->End_Down_To_Result ();
 				}
 			}
 		}

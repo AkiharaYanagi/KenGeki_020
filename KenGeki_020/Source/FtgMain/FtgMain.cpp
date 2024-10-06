@@ -89,8 +89,10 @@ namespace GAME
 		DBGOUT_WND()->Off ();
 
 		//BGM
-		SOUND->Stop_BGM ( BGM_GABA );
-		SOUND->Play_Loop_BGM ( BGM_GABA );
+		//SOUND->Stop_BGM ( BGM_GABA );
+		//SOUND->Play_Loop_BGM ( BGM_GABA );
+		SOUND->Stop_BGM ( BGM_TOMOE );
+		SOUND->Play_Loop_BGM ( BGM_TOMOE );
 
 
 		Scene::Load ();

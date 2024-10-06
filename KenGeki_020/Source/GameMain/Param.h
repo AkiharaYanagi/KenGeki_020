@@ -41,7 +41,7 @@ namespace GAME
 		bool			m_read_chara { F };
 
 		//リザルト用
-		PLAYER_ID		m_winner { _PLAYER_NUM };		//勝者
+		PLAYER_ID		m_winner { PLAYER_ID_1 };		//勝者
 		int		m_n_life_1p { 0 };		//残ライフ
 		int		m_n_life_2p { 0 };		//
 		int		m_n_input_1p { 0 };		//入力数
@@ -49,6 +49,10 @@ namespace GAME
 		int		m_n_act_1p { 0 };		//アクション回数
 		int		m_n_act_2p { 0 };		//
 		int		m_n_offset { 0 };		//相殺数
+		int		m_n_max_chain_1p { 0 };		//連撃数
+		int		m_n_max_chain_2p { 0 };		//
+		int		m_n_max_damege_1p { 0 };		//最大連撃力
+		int		m_n_max_damege_2p { 0 };		//
 
 	public:
 		Param ();
@@ -120,6 +124,11 @@ namespace GAME
 		int GetN_Act1p () const { return m_n_act_1p; }
 		void SetN_Act2p ( int n ) { m_n_act_2p = n; }
 		int GetN_Act2p () const { return m_n_act_2p; }
+
+		GET_SET ( int, Get_MAX_DMG_1P, Set_MAX_DMG_1P, m_n_max_damege_1p	)		//最大ダメージ
+		GET_SET ( int, Get_MAX_DMG_2P, Set_MAX_DMG_2P, m_n_max_damege_2p	)		//最大ダメージ
+		GET_SET ( int, Get_MAX_CHN_1P, Set_MAX_CHN_1P, m_n_max_chain_1p	)		//連撃数
+		GET_SET ( int, Get_MAX_CHN_2P, Set_MAX_CHN_2P, m_n_max_chain_2p	)		//連撃数
 	};
 
 	using P_Param = std::shared_ptr < Param >;

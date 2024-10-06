@@ -133,6 +133,7 @@ namespace GAME
 		m_strAction = std::make_shared < GrpStr > ();
 		m_strAction->SetStr ( U"Action" );
 		m_strAction->SetZ ( Z_MENU );
+		m_strAction->SetSize ( G_Font::SIZE_40 );
 		m_strAction->SetColorF ( s3d::ColorF { 0.8f, 0.8f, 1.f, 1.f } );
 		GRPLST_INSERT ( m_strAction );
 		AddpTask ( m_strAction );
@@ -141,6 +142,7 @@ namespace GAME
 		m_strState = std::make_shared < GrpStr > ();
 		m_strState->SetStr ( U"State" );
 		m_strState->SetZ ( Z_MENU );
+		m_strState->SetSize ( G_Font::SIZE_40 );
 		m_strState->SetColorF ( s3d::ColorF { 0.0f, 0.0f, 0.5f, 1.f } );
 		GRPLST_INSERT ( m_strState );
 		AddpTask ( m_strState );
@@ -164,8 +166,8 @@ namespace GAME
 
 	void DispFrontEnd::Load ()
 	{
-		m_strAction->SetSize ( 40 );
-		m_strState->SetSize ( 40 );
+		m_strAction->SetSize ( G_Font::SIZE_40 );
+		m_strState->SetSize ( G_Font::SIZE_40 );
 		TASK_VEC::Load ();
 	}
 
