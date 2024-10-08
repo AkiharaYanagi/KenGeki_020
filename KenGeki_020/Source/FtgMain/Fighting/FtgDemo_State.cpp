@@ -203,6 +203,8 @@ namespace GAME
 	FTG_DM_Down::FTG_DM_Down ()
 	{
 		m_grpDown = MakeGrpValue ( U"Demo_Down.png" );
+		m_grpDown->SetPos ( VEC2 ( ( WINDOW_WIDTH - 617 ) * 0.5f, 400.f ) );
+		m_grpDown->SetValid ( F );
 		m_grpDown->SetEnd ( 120 );
 	}
 
@@ -238,6 +240,8 @@ namespace GAME
 	FTG_DM_TimeUpWait::FTG_DM_TimeUpWait ()
 	{
 		m_grpTimeUp = MakeGrpValue ( U"Demo_TimeUp.png" );
+		m_grpTimeUp->SetPos ( VEC2 ( ( WINDOW_WIDTH - 1024 ) * 0.5f, 400.f ) );
+		m_grpTimeUp->SetValid ( F );
 		m_grpTimeUp->SetEnd ( 120 );
 	}
 
@@ -293,7 +297,6 @@ namespace GAME
 
 		m_grpWinner = std::make_shared < GrpDemo > ();
 		m_grpWinner ->AddTexture_FromArchive ( U"Demo_Winner.png" );
-//		m_grpWinner->SetScalingCenter ( VEC2 ( 512, 128 ) );
 		m_grpWinner->SetPos ( VEC2 ( 1.f * 1280 / 2 - 1024 / 2, 200.f ) );
 		m_grpWinner->SetEnd ( 240 );
 		m_grpWinner->SetValid ( F );
@@ -302,7 +305,6 @@ namespace GAME
 
 		m_grp1p = std::make_shared < GrpDemo > ();
 		m_grp1p ->AddTexture_FromArchive ( U"Demo_1P.png" );
-//		m_grp1p->SetScalingCenter ( VEC2 ( 128, 128 ) );
 		m_grp1p->SetPos ( VEC2 ( 1.f * 1280 / 2 - 256 / 2, 400.f ) );
 		m_grp1p->SetEnd ( 240 );
 		m_grp1p->SetValid ( F );
@@ -332,6 +334,7 @@ namespace GAME
 	void FTG_DM_Winner::Start ()
 	{
 		m_dispTimer->Start ();
+		GetpMutualChara ()->StartWinner ( );
 
 		//勝者表示
 		P_Param p = m_prmFtgDemo->GetpSceneParam ();
@@ -339,14 +342,19 @@ namespace GAME
 		{
 		case PLAYER_ID_1:
 			m_grpWinner->Start ();
-			m_grp1p->Start (); break;
+			m_grp1p->Start ();
+			GetwpFighting().lock()->AddRound_1p ();
+			break;
 
 		case PLAYER_ID_2:
 			m_grpWinner->Start ();
-			m_grp2p->Start (); break;
+			m_grp2p->Start ();
+			GetwpFighting().lock()->AddRound_2p ();
+			break;
 
 		case _PLAYER_NUM:
-			m_grpDraw->Start (); break;
+			m_grpDraw->Start ();
+			break;
 
 		default: break;
 		}
@@ -365,15 +373,25 @@ namespace GAME
 		{
 			if ( m_fade->IsLast () )
 			{
+				//目標ラウンド取得なら
 				bool b = GetwpFighting().lock()->IsEndMutch ();
 				if ( b )
 				{
+					//各種終了
+					m_fade->Off ();
+					SOUND->All_Stop ();
+
+					//リザルトへ移行
 					GetwpFtgDemoActor().lock ()->End_Down_To_Result ();
 				}
 				else
 				{
-//					GetwpFtgDemoActor ().lock ()->Change_Down_To_Greeting ();
-					GetwpFtgDemoActor().lock ()->End_Down_To_Result ();
+					m_fade->Off ();
+
+					GetwpFighting().lock()->Init();
+
+					//準備から開始
+					GetwpFtgDemoActor ().lock ()->Change_Winner_To_GetReady ();
 				}
 			}
 		}

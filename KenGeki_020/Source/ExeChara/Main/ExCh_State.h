@@ -147,7 +147,7 @@ namespace GAME
 	public:
 		void Start ();
 		void PreScriptMove ();
-		void RectMove ();
+		//■ void RectMove ();
 		void PostScriptMove ();
 	};
 	using P_CHST_EndWait = std::shared_ptr < CHST_EndWait >;
@@ -158,7 +158,7 @@ namespace GAME
 	{
 	public:
 		void PreScriptMove () {}
-		void RectMove () {}
+		//■ void RectMove () {}
 		void PostScriptMove () {}
 	};
 	using P_CHST_Down = std::shared_ptr < CHST_Down >;
@@ -169,7 +169,7 @@ namespace GAME
 	{
 	public:
 		void PreScriptMove () {}
-		void ScriptRectMove () {}
+		//■ void ScriptRectMove () {}
 		void PostScriptMove () {}
 	};
 	using P_CHST_DownWait = std::shared_ptr < CHST_DownWait >;
@@ -179,18 +179,20 @@ namespace GAME
 	{
 	public:
 		void PreScriptMove () {}
-		void RectMove () {}
+		//■ void RectMove () {}
 		void PostScriptMove () {}
 	};
 	using P_CHST_WinWait = std::shared_ptr < CHST_WinWait >;
 	//------------------------------------------------
 
+	//勝者表示
 	class CHST_Win : public ExeChara_State
 	{
 	public:
-		void PreScriptMove () {}
-		void RectMove () {}
-		void PostScriptMove () {}
+		void Start ();
+		void PreScriptMove ();
+		//■ void RectMove () {}
+		void PostScriptMove ();
 	};
 	using P_CHST_Win = std::shared_ptr < CHST_Win >;
 	//------------------------------------------------
@@ -199,7 +201,7 @@ namespace GAME
 	{
 	public:
 		void PreScriptMove () {}
-		void RectMove () {}
+		//■ void RectMove () {}
 		void PostScriptMove () {}
 	};
 	using P_CHST_WinEnd = std::shared_ptr < CHST_WinEnd >;
@@ -210,7 +212,7 @@ namespace GAME
 	public:
 		void Start ();
 		void PreScriptMove ();
-		void RectMove () {}
+		//■ void RectMove () {}
 		void PostScriptMove ();
 	};
 	using P_CHST_TimeUp = std::shared_ptr < CHST_TimeUp >;

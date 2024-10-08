@@ -70,6 +70,7 @@ namespace GAME
 		void Change_TimeUp_To_Winner ();		//時間切れから勝者表示へ
 		void Change_Down_To_Greeting ();		//ダウンから挨拶へ
 		void Change_Down_To_Winner ();			//ダウンから勝者表示へ
+		void Change_Winner_To_GetReady ();		//勝者表示から準備へ
 
 
 		//Start()を用いない一時変更

@@ -10,9 +10,6 @@
 #include "Title.h"
 #include "../GameMain/SoundConst.h"
 
-//遷移先
-#include "../FtgMain/FtgMain.h"
-
 
 //-------------------------------------------------------------------------------------------------
 // 定義
@@ -26,28 +23,28 @@ namespace GAME
 		//グラフィック初期化
 		//---------------------------------------------------
 		m_bg = std::make_shared < GameGraphic > ();
-		m_bg->AddTexture_FromArchive ( U"title_bg.png" );
+		m_bg->AddTexture_FromArchive ( U"Title\\title_bg.png" );
 		m_bg->SetPos ( m_bg_x, 0 );
 		m_bg->SetZ ( Z_BG );
 		AddpTask ( m_bg );
 		GRPLST_INSERT ( m_bg );
 
 		m_logo = std::make_shared < GameGraphic > ();
-		m_logo->AddTexture_FromArchive ( U"title_logo.png" );
-		m_logo->SetPos ( 0, 0 );
+		m_logo->AddTexture_FromArchive ( U"Title\\title_logo.png" );
+		m_logo->SetPos ( ( WINDOW_WIDTH - 648 ) * 0.5f, 0 );
 		m_logo->SetZ ( Z_BG );
 		AddpTask ( m_logo );
 		GRPLST_INSERT ( m_logo );
 
 		m_menu = std::make_shared < GameGraphic > ();
-		m_menu->AddTexture_FromArchive ( U"title_menu.png" );
+		m_menu->AddTexture_FromArchive ( U"Title\\title_menu.png" );
 		m_menu->SetPos ( 580, 800 );
 		m_menu->SetZ ( Z_CH );
 		AddpTask ( m_menu );
 		GRPLST_INSERT ( m_menu );
 
 		m_cursor = std::make_shared < GameGraphic > ();
-		m_cursor->AddTexture_FromArchive ( U"title_cursor.png" );
+		m_cursor->AddTexture_FromArchive ( U"Title\\title_cursor.png" );
 		m_cursor->SetPos ( 480, 840 );
 		m_cursor->SetScalingCenter ( 0, 16 );
 		m_cursor->SetZ ( Z_CH );

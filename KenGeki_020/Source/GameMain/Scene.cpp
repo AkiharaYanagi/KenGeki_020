@@ -16,7 +16,6 @@
 #include "../Training/Training.h"
 #include "../CharaSele/CharaSele.h"
 #include "../Result/Result.h"
-//#include "../Introduction/Introduction.h"
 
 #include "../GameMain/SoundConst.h"
 
@@ -78,6 +77,13 @@ namespace GAME
 		GRPLST_CLEAR ();
 		mp_Transit = std::make_shared < Training > ();
 	}
+#if 0
+	void Scene::Transit_Fighting ( MUTCH_MODE mode )
+	{
+		Transit_Fighting ();
+		GetpParam ()->SetMutchMode ( mode );
+	}
+#endif // 0
 
 	
 	//[シーン遷移] キャラセレに移行
@@ -94,25 +100,6 @@ namespace GAME
 		mp_Transit = std::make_shared < Result > ();
 	}
 
-#if 0
-
-
-	void Scene::Transit_Fighting ( MUTCH_MODE mode )
-	{
-		Transit_Fighting ();
-		GetpParam ()->SetMutchMode ( mode );
-	}
-
-
-	//[シーン遷移] イントロに移行
-	void Scene::Transit_Intro ()
-	{
-		GRPLST_CLEAR ();
-//		mp_Transit = make_shared < Introduction > ();
-		mp_Transit = make_shared < Intro_Img > ();
-		GRPLST_LOAD ();
-	}
-#endif // 0
 
 	//====================================================================
 	SceneManager::SceneManager()
@@ -134,14 +121,15 @@ namespace GAME
 		GameSettingFile stgs = m_pParam->GetGameSetting ();
 		startMode = stgs.GetStartMode ();
 
+
 		//キャラデータを事前読込
-//		m_pParam->LoadCharaData_All ();
+		m_pParam->LoadCharaData_All ();
 
 
 
 		//デバッグ表示オン/オフ
-		DBGOUT_WND_ON ();
-//		DBGOUT_WND_OFF ();
+//		DBGOUT_WND_ON ();
+		DBGOUT_WND_OFF ();
 
 
 
@@ -185,13 +173,7 @@ namespace GAME
 
 		}
 
-
 #if 0
-		case START_TITLE_INTRO:
-			//タイトルから開始
-			pScene = make_shared < Title > ();
-			break;
-
 		case START_DEMO:
 			//デモから開始
 			pScene = make_shared < Title > ();

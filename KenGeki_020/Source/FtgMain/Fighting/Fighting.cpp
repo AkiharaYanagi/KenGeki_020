@@ -49,7 +49,7 @@ namespace GAME
 		AddpTask ( m_demoActor );
 
 		//Debug用　開始デモをスキップ切替
-#define DEMO_ON		0
+#define DEMO_ON		1
 #if DEMO_ON
 		m_demoSkip = F;
 #else
@@ -80,16 +80,6 @@ namespace GAME
 		m_round = std::make_shared < Round > ();
 		AddpTask ( m_round );
 
-
-
-		//test
-		m_testStr = std::make_shared < GrpStr > ();
-		m_testStr->SetStr ( U"test." );
-		AddpTask ( m_testStr );
-		GRPLST_INSERT ( m_testStr );
-
-
-
 	}
 
 	Fighting::~Fighting ()
@@ -102,11 +92,9 @@ namespace GAME
 		m_pParam = pParam;
 
 		m_demoActor->ParamLoad ( pParam );
-
 		m_mutualChara->ParamInit ( pParam );
 		m_exeChara1->ParamInit ( pParam );
 		m_exeChara2->ParamInit ( pParam );
-
 		m_bg->ParamInit ( pParam );
 	}
 
@@ -194,11 +182,6 @@ namespace GAME
 		//--------------------------
 		//共通グラフィック処理
 		Grp ();
-
-
-
-		m_testStr->Draw ();
-
 
 		//--------------------------
 		TASK_LST::Move ();

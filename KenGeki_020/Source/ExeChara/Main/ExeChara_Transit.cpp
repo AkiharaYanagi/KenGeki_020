@@ -173,7 +173,11 @@ namespace GAME
 	void ExeChara::SetAction ( s3d::String action_name )
 	{
 		UINT idAction = m_pChara->GetActionID ( action_name );
-		if ( NO_ACTION == idAction ) { assert ( T ); }
+		if ( NO_ACTION == idAction )
+		{
+			TRACE_F ( _T("▼▼▼ アクション名呼び出しエラー.%s"), action_name.c_str() );
+			assert ( T );
+		}
 		SetAction ( idAction );
 	}
 

@@ -143,6 +143,18 @@ namespace GAME
 		mp_FtgDemo = m_Winner;
 	}
 
+	//勝者表示から準備へ
+	void FtgDemoActor::Change_Winner_To_GetReady ()
+	{
+		m_GetReady->Start ();
+		mp_FtgDemo = m_GetReady;
+	}
+
+
+
+
+	//一時変更
+
 	void FtgDemoActor::Shift_Main_To_WallBreak ()
 	{
 		mp_FtgDemo = m_WallBreak;

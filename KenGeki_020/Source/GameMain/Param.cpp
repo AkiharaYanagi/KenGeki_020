@@ -24,6 +24,7 @@ namespace GAME
 
 		m_chara_name_1p = m_setting.GetName1p ();
 		m_chara_name_2p = m_setting.GetName2p ();
+
 	}
 
 	//コピーコンストラクタ
@@ -38,10 +39,11 @@ namespace GAME
 
 	void Param::LoadCharaData_All ()
 	{
-		LoadCharaBin_s3d lcb_0 ( U"chara_Ouka_Bin.dat", * m_pChara_Ouka );
-		LoadCharaBin_s3d lcb_1 ( U"chara_Sae_Bin.dat", * m_pChara_Sae );
-		LoadCharaBin_s3d lcb_2 ( U"chara_Retsudou_Bin.dat", * m_pChara_Retsudou );
-//		LoadCharaBin_s3d lcb_3 ( U"chara_Retsudou_Bin.dat", * m_pChara_Retsudou_2 );
+		//キャラ事前読込
+		m_pChara_Ouka = GetpChara_Ouka ();
+		m_pChara_Sae = GetpChara_Sae ();
+		m_pChara_Retsudou = GetpChara_Retsudou ();
+//		m_pChara_Retsudou_2 = GetpChara_Retsudou2 ();
 
 		m_read_chara = T;
 	}

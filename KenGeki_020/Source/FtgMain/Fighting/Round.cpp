@@ -26,6 +26,7 @@ namespace GAME
 	Round::Round ()
 	{
 		m_roundDisp_1p = std::make_shared < GameGraphic > ();
+		m_roundDisp_1p->AddTexture_FromArchive ( U"WinMark_Frame.png" );
 		m_roundDisp_1p->AddTexture_FromArchive ( U"WinMark_Win.png" );
 		m_roundDisp_1p->SetZ ( Z_SHADOW );
 		AddpTask ( m_roundDisp_1p );
@@ -40,6 +41,7 @@ namespace GAME
 		m_roundDisp_1p->AddpObject ( m_ob_1p1 );
 
 		m_roundDisp_2p = std::make_shared < GameGraphic > ();
+		m_roundDisp_2p->AddTexture_FromArchive ( U"WinMark_Frame.png" );
 		m_roundDisp_2p->AddTexture_FromArchive ( U"WinMark_Win.png" );
 		m_roundDisp_2p->SetZ ( Z_SHADOW );
 		AddpTask ( m_roundDisp_2p );
@@ -61,12 +63,48 @@ namespace GAME
 
 	void Round::Init ()
 	{
+		//m_round_1p = 0;
+		//m_round_2p = 0;
 		TASK_VEC::Init ();
 	}
 
 
 	void Round::Move ()
 	{
+		//ラウンド現在数で表示を切替
+		switch ( m_round_1p )
+		{
+		case 0:
+			m_ob_1p0->SetValid ( F );
+			m_ob_1p1->SetValid ( F );
+			break;
+		case 1:
+			m_ob_1p0->SetValid ( T );
+			m_ob_1p1->SetValid ( F );
+			break;
+		case 2:
+			m_ob_1p0->SetValid ( T );
+			m_ob_1p1->SetValid ( T );
+			break;
+		}
+
+		switch ( m_round_2p )
+		{
+		case 0:
+			m_ob_2p0->SetValid ( F );
+			m_ob_2p1->SetValid ( F );
+			break;
+		case 1:
+			m_ob_2p0->SetValid ( T );
+			m_ob_2p1->SetValid ( F );
+			break;
+		case 2:
+			m_ob_2p0->SetValid ( T );
+			m_ob_2p1->SetValid ( T );
+			break;
+		}
+
+
 		TASK_VEC::Move ();
 	}
 

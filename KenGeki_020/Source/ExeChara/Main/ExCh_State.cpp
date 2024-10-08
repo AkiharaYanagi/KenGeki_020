@@ -48,6 +48,7 @@ namespace GAME
 		pExe->MoveTimer ();		//タイマ稼働
 //■		pExe->CheckLife ();		//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
+		pExe->SE_Play ();			//SEの再生
 	}
 
 
@@ -78,6 +79,7 @@ namespace GAME
 		pExe->MoveTimer ();		//タイマ稼働
 //■		pExe->CheckLife ();		//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
+		pExe->SE_Play ();			//SEの再生
 	}
 
 
@@ -201,6 +203,7 @@ namespace GAME
 //■		pExe->MoveTimer ();			//タイマ稼働
 //■		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
+		pExe->SE_Play ();			//SEの再生
 	}
 
 	//------------------------------------------------
@@ -233,6 +236,7 @@ namespace GAME
 		//■		pExe->MoveTimer ();			//タイマ稼働
 		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
+		pExe->SE_Play ();			//SEの再生
 	}
 
 	//------------------------------------------------
@@ -259,6 +263,7 @@ namespace GAME
 		pExe->MoveTimer ();		//タイマ稼働
 		//■		pExe->CheckLife ();		//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
+		pExe->SE_Play ();			//SEの再生
 	}
 
 	//------------------------------------------------
@@ -278,12 +283,6 @@ namespace GAME
 		pExe->PreMove_Effect ();		//エフェクト生成と動作
 	}
 
-	void CHST_EndWait::RectMove ()
-	{
-		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
-		//■		pExe->SetRect ();		//枠設定
-	}
-
 	void CHST_EndWait::PostScriptMove ()
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
@@ -291,6 +290,42 @@ namespace GAME
 		pExe->MoveTimer ();		//タイマ稼働
 		//■		pExe->CheckLife ();		//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
+		pExe->SE_Play ();			//SEの再生
+	}
+
+	//------------------------------------------------
+	//勝者表示
+	void CHST_Win::Start ()
+	{
+		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
+		pExe->Init ();
+		//アクション・スクリプト初期化
+		pExe->SetAction ( U"Demo_Win" );
+	}
+
+	void CHST_Win::PreScriptMove ()
+	{
+		P_ExeChara pExe = GetwpExeChara ().lock ();
+		//■		pExe->Input ();				//入力		
+
+		//ヒットストップ時は以降を飛ばす
+		if ( pExe->IsHitStop () ) { return; }
+
+		pExe->TransitAction ();		//アクション遷移
+		pExe->CalcPos ();			//位置計算
+		//■		pExe->SetCollisionRect ();	//接触枠設定
+		//■		pExe->OverEfPart ();		//EfPart重なり
+		pExe->PreMove_Effect ();		//エフェクト生成と動作
+	}
+
+	void CHST_Win::PostScriptMove ()
+	{
+		P_ExeChara pExe = GetwpExeChara ().lock ();
+		pExe->PostMove_Effect ();	//エフェクト動作
+		pExe->MoveTimer ();			//タイマ稼働
+		//■		pExe->CheckLife ();			//ライフ判定
+		pExe->UpdateGraphic ();		//グラフィックの更新
+		pExe->SE_Play ();			//SEの再生
 	}
 
 

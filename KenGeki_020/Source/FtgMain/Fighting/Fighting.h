@@ -98,6 +98,10 @@ namespace GAME
 		//時間終了時、残ライフで勝者決定
 		void DecideWinner_FromLife ();
 
+		//ラウンド取得
+		void AddRound_1p () { m_round->AddRound_1p (); }
+		void AddRound_2p () { m_round->AddRound_2p (); }
+
 		//試合(マッチ)終了判定
 		bool IsEndMutch () { return m_round->IsEndMutch (); }
 
@@ -126,10 +130,6 @@ namespace GAME
 
 		//タイマ切替
 		void SetActiveTimer ( bool b ) { m_btlTime->SetActive ( b ); }
-
-
-		//test
-		P_GrpStr		m_testStr;
 
 
 	private:
