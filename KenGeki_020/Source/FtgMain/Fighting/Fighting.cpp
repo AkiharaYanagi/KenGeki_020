@@ -110,8 +110,6 @@ namespace GAME
 		m_strState->SetSize ( G_Font::SIZE_40 );
 		m_strState->SetPos ( VEC2 ( 640 - 110, 145 ) );
 
-		m_pFtgGrp->Load ();
-
 		TASK_LST::Load ();
 	}
 
@@ -147,37 +145,35 @@ namespace GAME
 
 		//--------------------------
 		//両者処理
-		bool bStop =  m_pFtgGrp->GetScpStop ();
-		bool bBlackOut = m_pFtgGrp->IsActive_BlackOut ();
 
-		//一時停止
-		if ( bStop || bBlackOut )
-		{
-			//キャラ共通一連動作
-			//入力のみ
-			m_mutualChara->Conduct_InStop ();
-		}
-		else
-		{
-			//キャラ共通一連動作
-			m_mutualChara->Conduct ();
-		}
 #if 0
-		//--------------------------
-
-		//暗転時は通常処理しない
-//		if ( m_bg->IsBlackOut () )
-		if ( m_pFtgGrp->GetBlackOut () )
+		//一時停止
+		if ( bStop )
 		{
-			//入力のみ
-			m_mutualChara->Conduct_InStop ();
+			//キャラ共通一連動作	//入力のみ
+//			m_mutualChara->Conduct_InStop ();
 		}
 		else
 		{
-			//暗転以外のとき、通常処理
-			m_mutualChara->Conduct ();
+			//キャラ共通一連動作
+//			m_mutualChara->Conduct ();
 		}
 #endif // 0
+
+		//@info 一時停止をConduct_InStop()ではなくキャラステートで分類する
+		bool bStop =  m_pFtgGrp->IsActive_ScpStop ();
+		if ( bStop )
+		{
+			m_mutualChara->ShiftScpStop ();
+		}
+		else
+		{
+			m_mutualChara->ShiftFighting ();
+		}
+
+		//キャラ共通一連動作
+		m_mutualChara->Conduct ();
+
 
 		//--------------------------
 		//共通グラフィック処理
@@ -292,8 +288,8 @@ namespace GAME
 		//1P勝利
 		if ( life_1 > life_2 )
 		{
-			m_exeChara1->SetAction ( U"Demo_Win" );
-			m_exeChara2->SetAction ( U"Demo_TimeUpLose" );
+			m_exeChara1->SetAction ( U"勝利" );
+			m_exeChara2->SetAction ( U"時間切れ敗北" );
 
 			//ラウンド加算
 			m_round->AddRound_1p ();
@@ -304,8 +300,8 @@ namespace GAME
 		//2P勝利
 		else if ( life_1 < life_2 )
 		{
-			m_exeChara1->SetAction ( U"Demo_TimeUpLose" );
-			m_exeChara2->SetAction ( U"Demo_Win" );
+			m_exeChara1->SetAction ( U"時間切れ敗北" );
+			m_exeChara2->SetAction ( U"勝利" );
 
 			//ラウンド加算
 			m_round->AddRound_2p ();
@@ -316,8 +312,8 @@ namespace GAME
 		//引き分け
 		else
 		{
-			m_exeChara1->SetAction ( U"Demo_Draw" );
-			m_exeChara2->SetAction ( U"Demo_Draw" );
+			m_exeChara1->SetAction ( U"引分" );
+			m_exeChara2->SetAction ( U"引分" );
 
 			//どちらもラウンド取得なし
 
@@ -381,9 +377,6 @@ namespace GAME
 		//----------------------------------------------------
 		//表示切替
 		SwitchDisp ();
-
-		//----------------------------------------------------
-		m_pFtgGrp->Move ();
 
 		//----------------------------------------------------
 		//背景通常処理

@@ -42,7 +42,7 @@ namespace GAME
 		//----------------------------------------------------
 
 		P_PrmRect p = std::make_shared < PrmRect > ();
-		p->SetColor ( S3d_Utl::DWORD_to_Color ( clr ) );
+		p->SetColor ( s3d_UTL::DWORD_to_Color ( clr ) );
 		p->SetZero ();
 		p->SetZ ( Z_SYS );
 		p->Load ();

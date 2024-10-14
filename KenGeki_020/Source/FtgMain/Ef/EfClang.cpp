@@ -18,28 +18,92 @@ namespace GAME
 {
 	EfClang::EfClang ()
 	{
-		m_impact = std::make_shared < GrpEfShd > ();
+		m_impact = std::make_shared < GrpEf > ();
+		m_impact->SetShader ( T );
+		m_impact->Off ();
+		m_impact->SetbCenterOfTx ( T );
 		AddpTask ( m_impact );
 		GRPLST_INSERT ( m_impact );
 
-		m_circle = std::make_shared < GrpEfShd > ();
+		m_circle = std::make_shared < GrpEf > ();
+		m_circle->SetShader ( T );
+		m_circle->Off ();
+		m_circle->SetbCenterOfTx ( T );
 		AddpTask ( m_circle );
 		GRPLST_INSERT ( m_circle );
 
-		m_thunder0 = std::make_shared < GrpEfShd > ();
+
+		//雷エフェクト
+		m_thunder0 = std::make_shared < GrpEf > ();
+//		m_thunder0->AddTexture_FromArchive ( U"Ef_Test.png" );
+
+//		m_thunder0->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder0\\Ef_Thunder0_06.png" );
+		m_thunder0->SetShader ( T );
+
+		//オブジェクトを追加
+		m_thunder0->AddObject ();
+		P_Ob pOb = m_thunder0->Getpap_ob ()->at ( 1 );
+
+		m_thunder0->SetbCenterOfTx ( F );
+
+		//m_thunder0->SetBase ( VEC2 ( 0, 0 ) );
+		m_thunder0->SetBase ( VEC2 ( 600, 600 ) );
+		m_thunder0->SetRevised ( VEC2 ( -800, -800 ) );		//Scalingで2倍したテクスチャの中心位置
+
+		m_thunder0->Getpap_ob ()->at ( 0 )->SetbScalingCntrOfTx ( F );
+		pOb->SetbRotationCntrOfTx ( F );
+		m_thunder0->SetScaling ( VEC2 ( 2.f, 2.f ) );
+		pOb->SetScaling ( VEC2 ( 2.f, 2.f ) );
+
+		m_thunder0->Getpap_ob ()->at ( 0 )->SetbRotationCntrOfTx ( F );
+		pOb->SetbRotationCntrOfTx ( F );
+//		m_thunder0->SetRotationCenter ( VEC2 ( 400, 400 ) );
+//		m_thunder0->SetRotationCenter ( VEC2 ( 600, 600 ) );
+		m_thunder0->SetRotationCenter ( VEC2 ( 800, 800 ) );
+		pOb->SetRotationCenter ( VEC2 ( 800, 800 ) );
+
+//		m_thunder0->On ();
 		AddpTask ( m_thunder0 );
 		GRPLST_INSERT ( m_thunder0 );
 
-		m_thunder1 = std::make_shared < GrpEfShd > ();
+
+		//-------------------------------
+		//test
+		m_test = std::make_shared < GrpEf > ();
+		m_test->AddTexture_FromArchive ( U"Ef_Test.png" );
+//		m_test->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder0\\Ef_Thunder0_06.png" );
+		m_test->SetShader ( T );
+		m_test->SetbCenterOfTx ( T );
+
+//		m_test->SetPos ( VEC2 ( 100, 100 ) );
+		m_test->SetBase ( VEC2 ( 600, 600 ) );
+//		m_test->SetBase ( VEC2 ( 400, 400 ) );
+//		m_test->SetBase ( VEC2 ( 0, 0 ) );
+
+//		m_test->SetScaling ( VEC2 ( 2.f, 2.f ) );
+//		m_test->SetRotationCenter ( VEC2 ( 800, 800) );
+
+//		m_test->On ();
+		m_test->Off ();
+		AddpTask ( m_test );
+//		GRPLST_INSERT ( m_test );
+
+
+
+#if 0
+		m_thunder1 = std::make_shared < GrpEf > ();
+//		m_thunder1->SetShader ( T );
 		AddpTask ( m_thunder1 );
-		GRPLST_INSERT ( m_thunder1 );
+//		GRPLST_INSERT ( m_thunder1 );
+#endif // 0
 
 
-		m_impact->SetValid ( T );
-		m_circle->SetValid ( T );
-		m_thunder0->SetValid ( T );
-		m_thunder1->SetValid ( T );
+		m_impact->Off ();
+		m_circle->Off ();
+		m_thunder0->Off ();
 
+
+#if 0
 		VEC2 base { -400, -400 };
 		m_impact->SetBase ( base );
 		m_circle->SetBase ( base );
@@ -51,8 +115,14 @@ namespace GAME
 		m_circle->SetRotationCenter ( rtt_cnt );
 		m_thunder0->SetRotationCenter ( rtt_cnt );
 		m_thunder1->SetRotationCenter ( rtt_cnt );
+#endif // 0
 
 #if 0
+		m_impact->SetValid ( T );
+		m_circle->SetValid ( T );
+		m_thunder0->SetValid ( T );
+		m_thunder1->SetValid ( T );
+
 		VEC2 pos { 1000, 1000 };
 		m_impact->SetPos ( pos );
 		m_circle->SetPos ( pos );
@@ -70,19 +140,6 @@ namespace GAME
 #endif // 0
 
 
-#if 0
-//		m_test = std::make_shared < GameGraphic > ();
-		m_test = std::make_shared < GrpEfShd > ();
-		AddpTask ( m_test );
-		GRPLST_INSERT ( m_test );
-
-		m_test->SetPos ( VEC2 ( 0, 0 ) );
-		m_test->SetBase ( VEC2 ( 400, 400 ) );
-//		m_test->SetRotationCenter ( VEC2 ( 200, 200 ) );
-		m_test->SetValid ( T );
-
-		m_test->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Circle\\Ef_Circle_11.png" );
-#endif // 0
 	}
 
 	EfClang::~EfClang ()
@@ -145,6 +202,10 @@ namespace GAME
 		m_circle->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Circle\\Ef_Circle_23.png" );
 		m_circle->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Circle\\Ef_Circle_24.png" );
 
+
+
+#if 1
+
 		m_thunder0->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder0\\Ef_Thunder0_00.png" );
 		m_thunder0->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder0\\Ef_Thunder0_01.png" );
 		m_thunder0->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder0\\Ef_Thunder0_02.png" );
@@ -171,6 +232,9 @@ namespace GAME
 		m_thunder0->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder0\\Ef_Thunder0_23.png" );
 		m_thunder0->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder0\\Ef_Thunder0_24.png" );
 
+#endif // 0
+
+#if 0
 		m_thunder1->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder1\\Ef_Thunder1_00.png" );
 		m_thunder1->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder1\\Ef_Thunder1_01.png" );
 		m_thunder1->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder1\\Ef_Thunder1_02.png" );
@@ -196,6 +260,7 @@ namespace GAME
 		m_thunder1->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder1\\Ef_Thunder1_22.png" );
 		m_thunder1->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder1\\Ef_Thunder1_23.png" );
 		m_thunder1->AddTexture_FromArchive ( U"Ef_Clang\\Ef_Thunder1\\Ef_Thunder1_24.png" );
+#endif // 0
 
 
 
@@ -211,15 +276,31 @@ namespace GAME
 
 	void EfClang::Move ()
 	{
+#if 0
+		static float rad = 0.1f;
+		rad += 0.1f;
+
+		m_r = s3d::Random ( 0.f, D3DX_PI_TWICE );
+
+		m_thunder0->SetRadian ( m_r );
+
+		float rnd_rad = s3d::Random ( 0.f, D3DX_PI_TWICE );
+		P_Ob pOb = m_thunder0->Getpap_ob ()->at ( 1 );
+		pOb->SetRadian ( rnd_rad );
+
+		//		m_test->SetRadian ( rad );
+#endif // 0
+
+
 		m_impact->SetDispBase ( G_BASE_POS () );
 		m_circle->SetDispBase ( G_BASE_POS () );
 		m_thunder0->SetDispBase ( G_BASE_POS () );
-		m_thunder1->SetDispBase ( G_BASE_POS () );
+//		m_thunder1->SetDispBase ( G_BASE_POS () );
 
 		m_impact->Advance ();
 		m_circle->Advance ();
 		m_thunder0->Advance ();
-		m_thunder1->Advance ();
+//		m_thunder1->Advance ();
 
 #if 0
 		m_impact->SetValid ( T );
@@ -240,7 +321,6 @@ namespace GAME
 		m_r += 0.1;
 		m_test->SetRadian ( (float)m_r );
 
-		m_test->Move();
 
 #endif // 0
 
@@ -260,38 +340,42 @@ namespace GAME
 //		m_test->SetValid ( T );
 //		m_test->SetDispBase ( G_BASE_POS () );
 
-
+//		m_thunder0->Draw ();
+//		m_test->Draw();
 	}
 
 	void EfClang::On ( VEC2 center )
 	{
-#if 0
-
 		m_r = s3d::Random ( 0.f, D3DX_PI_TWICE );
-		m_impact->SetRadian ( (float)m_r );
-		m_circle->SetRadian ( (float)m_r );
+
+		//m_impact->SetRadian ( (float)m_r );
+		//m_circle->SetRadian ( (float)m_r );
+
 		m_thunder0->SetRadian ( (float)m_r );
-		m_thunder1->SetRadian ( (float)m_r );
 
-#endif // 0
+		float rnd_rad = s3d::Random ( 0.f, D3DX_PI_TWICE );
+		P_Ob pOb = m_thunder0->Getpap_ob ()->at ( 1 );
+		pOb->SetRadian ( rnd_rad );
+
+		//m_thunder1->SetRadian ( (float)m_r );
 
 
-
+#if 0
 		m_impact->SetRevised ( center );
-		m_impact->On ();
-
 		m_circle->SetRevised ( center );
-		m_circle->On ();
-
 		m_thunder0->SetRevised ( center );
-		m_thunder0->On ();
-
 		m_thunder1->SetRevised ( center );
-		m_thunder1->On ();
+#endif // 0
+		m_impact->SetBase ( center );
+		m_circle->SetBase ( center );
+		m_thunder0->SetBase ( center );
+		//		m_thunder1->SetBase ( center );
 
 
-//		m_test->SetRevised ( center );
-//		m_test->On ();
+		m_impact->On ();
+		m_circle->On ();
+		m_thunder0->On ();
+//		m_thunder1->On ();
 	}
 
 	void EfClang::SetScale ( P_Grp pGrp, const VEC2 & v )

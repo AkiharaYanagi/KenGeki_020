@@ -708,6 +708,14 @@ namespace GAME
 	{
 		m_white_damage = 0;
 	}
+
+
+	//敗北処理
+	void BtlParam::SetLose ()
+	{
+		m_white_damage = 0;
+		m_life = 0;
+	}
 }
 
 //namespace GAME

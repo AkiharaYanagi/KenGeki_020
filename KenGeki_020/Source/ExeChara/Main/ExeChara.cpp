@@ -125,9 +125,6 @@ namespace GAME
 	void ExeChara::MoveTimer ()
 	{
 		m_btlPrm.TimerMove ();
-#if 0
-		m_tmrSlow.Move ();	//タイマ手動
-#endif // 0
 	}
 
 	//================================================
@@ -139,7 +136,7 @@ namespace GAME
 		if ( 0 >= m_btlPrm.GetLife () )
 		{
 			//ダウン状態に強制変更
-			SetAction ( _T("Demo_Down") );
+			SetAction ( _T("敗北ダウン浮き") );
 			m_btlPrm.GetTmr_Down ()->Start ();
 #if 0
 			//test
@@ -167,7 +164,7 @@ namespace GAME
 	void ExeChara::UpdateGraphic ()
 	{
 		m_dispChara->Update ( m_pAction, m_pScript, m_btlPrm, m_pCharaInput );
-		m_dispChara->UpdateStateName ( m_actor.GetpState ()->GetName() );
+		m_dispChara->UpdateStateName ( m_actor.GetStateName() );
 	}
 
 	//サウンドエフェクトの再生
@@ -184,7 +181,8 @@ namespace GAME
 		//0は対象無しの値
 		if ( 0 != id_se )
 		{
-			SOUND->Play_SE ( (SE_ID)id_se );
+			//SOUND->Play_SE ( (SE_ID)id_se );
+			SND_PLAY_ONESHOT_SE ( (uint32)id_se );
 		}
 	}
 
@@ -233,6 +231,10 @@ namespace GAME
 	//==================================================
 	//スクリプト通常処理
 	//==================================================
+	//アクションの移項
+	//	void TransitAction ();
+	//	-> "ExeChara_Transit.cpp"
+
 	void ExeChara::ExeScript ()
 	{
 		//------------------------------------------------
@@ -263,7 +265,6 @@ namespace GAME
 		//	全体演出
 		//------------------------------------------------
 		//暗転
-		//m_btlPrm.SetBlackOut ( m_pScript->m_prmStaging.BlackOut );
 		UINT blackOut = m_pScript->m_prmStaging.BlackOut;
 		if ( blackOut > 0 )
 		{
@@ -273,13 +274,19 @@ namespace GAME
 		//------------------------------------------------
 		//スクリプトからの停止
 		//	タイマの状態を確認しないと同じスクリプトを調べ続けてしまう
-		if ( ! m_btlPrm.GetTmr_ScpStop ()->IsActive () )
+		//if ( ! m_btlPrm.GetTmr_ScpStop ()->IsActive () )
+		if ( ! m_pFtgGrp->IsActive_ScpStop () )
 		{
 			UINT scpStop = m_pScript->m_prmStaging.Stop;
 			m_btlPrm.SetScpStop ( scpStop );
 			if ( scpStop > 0 )
 			{
-//				m_pFtgGrp->SetScpStop ( T );
+				//共通に通知
+				m_pFtgGrp->StartScpStop ( scpStop );
+
+				//互いにシフト
+				//ShiftScpStop ();
+				//m_pOther.lock ()->ShiftScpStop ();
 			}
 		}
 	}

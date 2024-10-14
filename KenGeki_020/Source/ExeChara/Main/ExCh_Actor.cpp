@@ -23,6 +23,8 @@ namespace GAME
 		m_GetReady = std::make_shared < CHST_GetReady > ();
 
 		m_Main = std::make_shared < CHST_Main > ();
+
+		m_ScpStop = std::make_shared < CHST_ScpStop > ();
 		m_Slow_Skip = std::make_shared < CHST_Slow_Skip > ();
 		m_WallBreak = std::make_shared < CHST_WallBreak > ();
 
@@ -40,8 +42,10 @@ namespace GAME
 		mvp_state.push_back ( m_GetReady );
 
 		mvp_state.push_back ( m_Main );
-		mvp_state.push_back ( m_Slow_Skip );
+
+		mvp_state.push_back ( m_ScpStop );
 		mvp_state.push_back ( m_WallBreak );
+		mvp_state.push_back ( m_Slow_Skip );
 
 		mvp_state.push_back ( m_EndWait );
 		mvp_state.push_back ( m_Down );
@@ -53,7 +57,6 @@ namespace GAME
 
 		//初期ステート
 		mp_state = m_Start;
-//		mp_state = m_Main;
 
 		//パラメータ
 		mp_param = std::make_shared < ExeChara_Param > ();
@@ -65,11 +68,7 @@ namespace GAME
 
 	void ExeChara_Actor::Init ()
 	{
-//		mp_state = m_Start;
 		mp_state = m_Main;
-
-		//test
-//		mp_state = m_Slow_Skip;
 	}
 
 
@@ -106,9 +105,15 @@ namespace GAME
 		mp_state->Start ();
 	}
 
+	void ExeChara_Actor::StartDown ()
+	{
+		mp_state = m_Down;
+		mp_state->Start ();
+	}
+
 	void ExeChara_Actor::StartWinner ()
 	{
-//		mp_state = m_EndWait;
+		mp_state = m_Win;
 		mp_state->Start ();
 	}
 
@@ -119,6 +124,11 @@ namespace GAME
 	void ExeChara_Actor::ShiftFighting ()
 	{
 		mp_state = m_Main;
+	}
+
+	void ExeChara_Actor::ShiftScpStop ()
+	{
+		mp_state = m_ScpStop;
 	}
 
 	void ExeChara_Actor::ShiftSlowSkip ()

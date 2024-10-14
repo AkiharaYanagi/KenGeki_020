@@ -54,7 +54,7 @@ namespace GAME
 		bool	m_bWallMove { F };
 
 		//アクセル値
-		int		m_accel { 0 };		// [P1] -100 から 100 [P2]
+//		int		m_accel { 0 };		// [P1] -100 から 100 [P2]
 
 		//システム表示
 		bool	m_sysDisp { T };
@@ -85,9 +85,9 @@ namespace GAME
 		void SetWallMove ( bool b ) { m_bWallMove = b; }
 
 		//アクセル値
-		void SetAccel ( int acc ) { m_accel = acc; }
-		void AddAccel ( int n );
-		int GetAccel () const { return m_accel; }
+//		void SetAccel ( int acc ) { m_accel = acc; }
+//		void AddAccel ( int n );
+//		int GetAccel () const { return m_accel; }
 
 		//システム表示
 		GET_SET ( bool, GetSysDisp, SetSysDisp, m_sysDisp )

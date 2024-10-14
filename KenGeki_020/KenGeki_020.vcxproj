@@ -166,6 +166,7 @@
     <Text Include="App\example\txt\kr.txt" />
     <Text Include="App\example\txt\sc.txt" />
     <Text Include="App\example\video\river.txt" />
+    <Text Include="App\[共通デモアクション].txt" />
     <Text Include="App\◆開発用　修正点・変更点.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -401,6 +402,7 @@
     <ClInclude Include="Source\CharaSele\CharaSeleConst.h" />
     <ClInclude Include="Source\CharaSele\CharaSele_Player.h" />
     <ClInclude Include="Source\ExeChara\BtlParam.h" />
+    <ClInclude Include="Source\ExeChara\Disp\DispAccel.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara_Const.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispFrontEnd.h" />
@@ -440,8 +442,10 @@
     <ClInclude Include="Source\GameMain\G_Ftg.h" />
     <ClInclude Include="Source\GameMain\Param.h" />
     <ClInclude Include="Source\GameMain\Scene.h" />
+    <ClInclude Include="Source\GameMain\SeConst.h" />
     <ClInclude Include="Source\GameMain\SoundConst.h" />
     <ClInclude Include="Source\GameMain\stdafx.h" />
+    <ClInclude Include="Source\GameMain\VoiceConst.h" />
     <ClInclude Include="Source\Result\Result.h" />
     <ClInclude Include="Source\Result\ResultMenu.h" />
     <ClInclude Include="Source\Title\Title.h" />
@@ -452,6 +456,7 @@
     <ClCompile Include="Source\CharaSele\CharaSeleConst.cpp" />
     <ClCompile Include="Source\CharaSele\CharaSele_Player.cpp" />
     <ClCompile Include="Source\ExeChara\BtlParam.cpp" />
+    <ClCompile Include="Source\ExeChara\Disp\DispAccel.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispFrontEnd.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispGauge.cpp" />

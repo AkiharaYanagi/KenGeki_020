@@ -8,7 +8,7 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "Decision.h"
-#include "../../GameMain/SoundConst.h"
+#include "../../GameMain/SeConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -23,14 +23,22 @@ namespace GAME
 		m_tmrOffset_Hitstop->SetTargetTime ( HITSTOP_TIME );
 		AddpTask ( m_tmrOffset_Hitstop );
 
-		//共通エフェクト
+		//相殺エフェクト
 		m_efClang = std::make_shared < EfClang > ();
-		AddpTask ( m_efClang );
-//		GRPLST_INSERT ( m_efClang );
-//		SDRLST_INSERT ( m_efClang );
-
 		m_efClang->On( VEC2 ( 0, 0 ) );
+		AddpTask ( m_efClang );
 
+
+		//ヒットエフェクト
+		m_efHit = std::make_shared < GrpEf > ();
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit.png" );
+		m_efHit->SetBase ( VEC2 ( 0, 0 ) );
+		m_efHit->SetRevised ( VEC2 ( -200, -200 ) );
+		m_efHit->SetColor ( _CLR ( 0xc0ffffff ) );
+		m_efHit->SetZ ( Z_EFF );
+		m_efHit->SetShader ( T );
+		AddpTask ( m_efHit );
+		GRPLST_INSERT ( m_efHit );
 
 #if 0
 		m_efSpark = make_shared < EfSpark > ();
@@ -44,9 +52,6 @@ namespace GAME
 		AddpTask ( m_efPart );
 		GRPLST_INSERT_MAIN ( m_efPart );
 
-		m_efHit = make_shared < EfHit > ();
-		AddpTask ( m_efHit );
-		GRPLST_INSERT_MAIN ( m_efHit );
 #endif // 0
 	}
 
@@ -65,6 +70,11 @@ namespace GAME
 #endif // 0
 	}
 
+	void Decision::Init ()
+	{
+		TASK_VEC::Init ();
+	}
+
 	void Decision::Load ()
 	{
 		TASK_VEC::Load ();
@@ -74,6 +84,12 @@ namespace GAME
 	//相互判定
 	void Decision::Do ()
 	{
+		//------------------------------------------------------
+		//ExeCharaステートにより、演出時は何もしない
+		bool skip1p = m_pExeChara1p->SkipDecision ();
+		bool skip2p = m_pExeChara2p->SkipDecision ();
+		if ( skip1p || skip2p ) { return; }
+
 		//------------------------------------------------------
 		//相殺ヒットストップ時は何もしない
 		if ( m_tmrOffset_Hitstop->IsActive () ) { return; }
@@ -225,10 +241,12 @@ namespace GAME
 		{
 			//打合時のエフェクト発生
 			m_efClang->On ( center );
-//			m_efClang->On ( VEC2 ( 0, 0 ) );
 
 			//SE
-			SOUND->Play_SE ( SE_Btl_Clang );
+			SND_PLAY_ONESHOT_SE ( SE_Btl_Clang );
+
+			//記録
+			m_pParam->AddOffset ( 1 );
 
 #if 0
 			m_efSpark->On ( center );
@@ -286,18 +304,28 @@ namespace GAME
 		if ( hit2P )
 		{
 			m_pExeChara1p->OnHit ();			//ヒット状態
-//			m_efHit->On ( hit_center_2p );		//ヒットエフェクト
 			m_pExeChara2p->OnDamaged ();		//くらい状態・ダメージ処理
 			m_pExeChara1p->OnDamaged_After ();	//相手ダメージ後
+
+			hit_center_2p.x += (+50 + s3d::RandomInt32() % 100);
+			hit_center_2p.y += (-50 + s3d::RandomInt32() % 100);
+			m_efHit->On ();		//ヒットエフェクト
+			m_efHit->Start ( hit_center_2p, 16 );		//ヒットエフェクト
 		}
 
 		if ( hit1P )
 		{
 			m_pExeChara2p->OnHit ();			//ヒット状態
-//			m_efHit->On ( hit_center_1p );		//ヒットエフェクト
 			m_pExeChara1p->OnDamaged ();		//くらい状態・ダメージ処理
 			m_pExeChara2p->OnDamaged_After ();	//相手ダメージ後
+
+			hit_center_1p.x += (+50 + s3d::RandomInt32() % 100);
+			hit_center_1p.y += (-50 + s3d::RandomInt32() % 100);
+			m_efHit->On ();		//ヒットエフェクト
+			m_efHit->Start ( hit_center_1p, 16 );		//ヒットエフェクト
 		}
+
+		m_efHit->SetDispBase ( G_BASE_POS() );
 
 		//相手の変更を一時取得し、自分の処理が終了したあとに互いに上書きする
 		if ( hit2P )

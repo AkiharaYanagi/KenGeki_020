@@ -61,11 +61,9 @@ namespace GAME
 		m_gaugeMana->OffWhite ();
 		AddpTask ( m_gaugeMana );
 
-#if 0
 		//アクセルゲージ
 		m_gaugeAccel = std::make_shared < DispAccel > ();
 		AddpTask ( m_gaugeAccel );
-#endif // 0
 
 
 		//-----------------------------------------------------
@@ -101,34 +99,35 @@ namespace GAME
 		m_pGrpAry->InsertTask ( & m_gaugeLurch );
 #endif	//0
 
-#if 0
 		//ヒット数
-		m_grpHitNum = std::make_shared < GrpAcv > ();
-		m_grpHitNum->AddTexture ( U"hit\\0.png" );
-		m_grpHitNum->AddTexture ( U"hit\\1.png" );
-		m_grpHitNum->AddTexture ( U"hit\\2.png" );
-		m_grpHitNum->AddTexture ( U"hit\\3.png" );
-		m_grpHitNum->AddTexture ( U"hit\\4.png" );
-		m_grpHitNum->AddTexture ( U"hit\\5.png" );
-		m_grpHitNum->AddTexture ( U"hit\\6.png" );
-		m_grpHitNum->AddTexture ( U"hit\\7.png" );
-		m_grpHitNum->AddTexture ( U"hit\\8.png" );
-		m_grpHitNum->AddTexture ( U"hit\\9.png" );
+		m_grpHitNum = std::make_shared < GameGraphic > ();
+		m_grpHitNum->AddTexture_FromArchive ( U"hit\\0.png" );
+		m_grpHitNum->AddTexture_FromArchive ( U"hit\\1.png" );
+		m_grpHitNum->AddTexture_FromArchive ( U"hit\\2.png" );
+		m_grpHitNum->AddTexture_FromArchive ( U"hit\\3.png" );
+		m_grpHitNum->AddTexture_FromArchive ( U"hit\\4.png" );
+		m_grpHitNum->AddTexture_FromArchive ( U"hit\\5.png" );
+		m_grpHitNum->AddTexture_FromArchive ( U"hit\\6.png" );
+		m_grpHitNum->AddTexture_FromArchive ( U"hit\\7.png" );
+		m_grpHitNum->AddTexture_FromArchive ( U"hit\\8.png" );
+		m_grpHitNum->AddTexture_FromArchive ( U"hit\\9.png" );
 		m_grpHitNum->SetZ ( Z_EFB + 0.01f );
-		GRPLST_INSERT_MAIN ( m_grpHitNum );
+		m_grpHitNum->SetValid ( F );
 		AddpTask ( m_grpHitNum );
+		GRPLST_INSERT ( m_grpHitNum );
 
 		//ヒット数２桁目
 		m_grpHitNum->AddObject ();
 
-		m_grpStrHit = std::make_shared < GrpAcv > ();
-		m_grpStrHit->AddTexture ( U"Hit.png" );
+		m_grpStrHit = std::make_shared < GameGraphic > ();
+		m_grpStrHit->AddTexture_FromArchive ( U"Hit.png" );
 		m_grpStrHit->SetZ ( Z_EFB + 0.01f );
-		GRPLST_INSERT_MAIN ( m_grpStrHit );
+		m_grpStrHit->SetValid ( F );
 		AddpTask ( m_grpStrHit );
+		GRPLST_INSERT ( m_grpStrHit );
 
-#endif // 0
 
+		//------------------------------------------------------
 		//アクション名
 		m_strAction = std::make_shared < GrpStr > ();
 		m_strAction->SetStr ( U"Action" );
@@ -179,9 +178,8 @@ namespace GAME
 		m_gaugeLife->LoadPlayer ( playerID );
 		m_gaugeBalance->LoadPlayer ( playerID );
 		m_gaugeMana->LoadPlayer ( playerID );
-
-#if 0
 		m_gaugeAccel->LoadPlayer ( playerID );
+#if 0
 
 
 		//プレイヤー別初期化位置
@@ -211,9 +209,9 @@ namespace GAME
 		m_gaugeLurch.SetRect ( 0, 0, 0, 0 );
 #endif // 0
 
-#if 0
+
 		//ヒット数
-		P_Object pOb = m_grpHitNum->GetpObject ( 1 );
+		P_Ob pOb = m_grpHitNum->GetpObject ( 1 );
 		if ( PLAYER_ID_1 == playerID )
 		{
 			m_grpHitNum->SetPos ( VEC2 ( 100, 200 ) );
@@ -228,7 +226,6 @@ namespace GAME
 
 			pOb->SetPos ( VEC2 (  1280 - 384 - 0, 200 ) );
 		}
-#endif // 0
 
 
 		//アクション名　位置
@@ -304,10 +301,9 @@ namespace GAME
 
 		//マナ
 		m_gaugeMana->Update ( btlPrm.GetMana () );
-#if 0
+
 		//アクセル
 		m_gaugeAccel->Update ( btlPrm.GetAccel () );
-#endif // 0
 	}
 
 	void DispFrontEnd::UpdateMainImage ( VEC2 posChara )
@@ -338,17 +334,15 @@ namespace GAME
 
 	}
 
-#if 0
 
 	//ヒット数
 	void DispFrontEnd::UpdateHitNum ( UINT n )
 	{
 		if ( n < 0 || 100 <= n ) { return; }
 
-
 		int n1 = n % 10;	//1桁目
 		int n2 = (n / 10) % 10;	//2桁目
-		P_Object pOb = m_grpHitNum->GetpObject ( 1 );
+		P_Ob pOb = m_grpHitNum->GetpObject ( 1 );
 
 		m_grpHitNum->SetIndexTexture ( n1 );
 
@@ -373,8 +367,8 @@ namespace GAME
 		}
 	}
 
-#endif // 0
-
+	//-------------------------------------------------------------------
+	//状態表示
 	void DispFrontEnd::UpdateActionName ( s3d::String actionName )
 	{
 		m_strAction->SetStr ( actionName );
@@ -486,8 +480,8 @@ namespace GAME
 
 		m_strAction->SetValid ( T );
 		m_strState->SetValid ( T );
-#if 0
 		m_gaugeAccel->On ();
+#if 0
 		m_grp_Cst_Player1P2P->SetValid ( T );
 		m_grp_Cst_InputPlayerCOM->SetValid ( T );
 
@@ -505,8 +499,9 @@ namespace GAME
 
 		m_strAction->SetValid ( F );
 		m_strState->SetValid ( F );
-#if 0
+
 		m_gaugeAccel->Off ();
+#if 0
 		m_grp_Cst_Player1P2P->SetValid ( F );
 		m_grp_Cst_InputPlayerCOM->SetValid ( F );
 

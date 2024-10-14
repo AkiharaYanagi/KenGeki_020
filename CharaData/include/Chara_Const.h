@@ -75,7 +75,11 @@ namespace GAME
 
 		//他、特殊フラグをゲームメインで設定できる
 		BRC_FLG_0, BRC_FLG_1, BRC_FLG_2, BRC_FLG_3, BRC_FLG_4, BRC_FLG_5, BRC_FLG_6, BRC_FLG_7, 
-		BRC_FLG_8, BRC_FLG_9, BRC_FLG_10, BRC_FLG_11, BRC_FLG_12, BRC_FLG_13, BRC_FLG_14, BRC_FLG_15, 
+		BRC_FLG_8, BRC_FLG_9, BRC_FLG_10, BRC_FLG_11, BRC_FLG_12, BRC_FLG_13, BRC_FLG_14, BRC_FLG_15,
+
+		//FLG_O : 相殺フラグ
+
+
 	};
 
 	//他検索用

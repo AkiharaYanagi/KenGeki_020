@@ -10,6 +10,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
 #include "CharaSeleConst.h"
+#include "../GameMain/Param.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -19,6 +20,7 @@ namespace GAME
 {
 	class CharaSele_Player : public TASK_VEC
 	{
+		P_Param			m_pParam;
 		PLAYER_ID		m_player_id { PLAYER_ID_1 };	//プレイヤ識別
 		CHARA_SELE_ID	m_chsl_id { CHSLID_00 };		//キャラ選択ID
 		P_Grp			m_chara_stand;					//キャラ立絵
@@ -39,6 +41,7 @@ namespace GAME
 		CharaSele_Player ( const CharaSele_Player & rhs ) = delete;
 		~CharaSele_Player ();
 
+		void ParamInit ( P_Param p );
 		void PlayerInit ( PLAYER_ID id );
 
 		void Move ();

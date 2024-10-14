@@ -42,6 +42,9 @@ namespace GAME
 		//フレーム毎における入力の保存
 		virtual void Update ( bool dirRight );
 
+		//入力をクリア
+		void ClearInput ();
+
 		//キー入力配列の参照
 		const V_GAME_KEY & GetvGameKey () const { return m_vGameKey; }
 

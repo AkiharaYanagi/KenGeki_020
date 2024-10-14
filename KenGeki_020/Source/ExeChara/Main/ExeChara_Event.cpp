@@ -36,12 +36,18 @@ namespace GAME
 	void ExeChara::OnOffset_AO ()
 	{
 		m_btlPrm.OnOffset_AO ();
+
+		//共通
+		OnOffset_Common ();
 	}
 
 	//相殺発生	//自分：Offset, 相手：Attack
 	void ExeChara::OnOffset_OA ()
 	{
 		m_btlPrm.OnOffset_OA ();
+
+		//共通
+		OnOffset_Common ();
 	}
 
 	//相殺発生	//自分：Attack, 相手：Attack
@@ -63,7 +69,42 @@ namespace GAME
 
 		//パラメータ
 		m_btlPrm.OnOffset_AA ();
+
+		//共通
+		OnOffset_Common ();
 	}
+
+	//相殺発生	//自分：Offset, 相手：Attack
+	void ExeChara::OnOffset_Common ()
+	{
+		//キャラの持つルート,ブランチの参照
+		const VP_Route vpRoute = m_pChara->GetvpRoute ();
+		const VP_Branch vpBranch = m_pChara->GetvpBranch ();
+
+		//スクリプトの持つルートリスト
+		for ( UINT indexRoute : m_pScript->GetcvRouteID () )
+		{
+			//ルートの取得
+			P_Route pRut = vpRoute [ indexRoute ];
+			const V_UINT vBranchID = vpRoute [ indexRoute ]->GetcvIDBranch ();
+
+			//対象のブランチリスト
+			for ( UINT indexBranch : vBranchID )
+			{
+				//ブランチの取得
+				P_Branch pBrc = vpBranch [ indexBranch ];
+
+				//"条件：相殺時" 以外は飛ばす
+				if ( BRC_FLG_0 != pBrc->GetCondition () ) { continue; }
+
+				//対象アクションに移行
+				UINT id = vpBranch [ indexBranch ]->GetIndexSequence ();
+				SetAction ( id );
+			}
+		}
+	}
+
+
 	//----------------------------------------------
 
 

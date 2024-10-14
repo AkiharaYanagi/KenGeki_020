@@ -10,7 +10,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
 #include "../../ExeChara/Main/ExeChara.h"
-
+#include "../../GameMain/Param.h"
 #include "../Ef/EfClang.h"
 #if 0
 #include "Ef/EfSpark.h"
@@ -32,18 +32,23 @@ namespace GAME
 		P_ExeChara		m_pExeChara1p;
 		P_ExeChara		m_pExeChara2p;
 
+		//パラメータ
+		P_Param			m_pParam;
+
 		//相殺ヒットストップ
 		P_Timer			m_tmrOffset_Hitstop;
 
+		//相殺回数
+//		int32			m_nOffset { 0 };
 
 		//共通エフェクト
 		P_EfClang		m_efClang;
+		P_GrpEf			m_efHit;
 
 #if 0
 		P_EfSpark		m_efSpark;
 //		P_EfParticle	m_efParticle;
 		P_EfPart		m_efPart;
-		P_EfHit			m_efHit;
 #endif // 0
 
 #if 0
@@ -64,8 +69,10 @@ namespace GAME
 		Decision ( const Decision & rhs ) = delete;
 		~Decision ();
 
+		void SetpParam ( P_Param p ) { m_pParam = p; }
 		void SetpChara (P_ExeChara pExeChara1p, P_ExeChara pExeChara2p);
 
+		void Init ();
 		void Load ();
 
 #if 0

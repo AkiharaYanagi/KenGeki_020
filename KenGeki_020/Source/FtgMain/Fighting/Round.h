@@ -52,6 +52,8 @@ namespace GAME
 		void Off ();
 
 	private:
+		static const uint32 TX_0;
+		static const uint32 TX_1;
 		static const float POS_BY;
 		static const float POS_BX10;
 		static const float POS_BX11;

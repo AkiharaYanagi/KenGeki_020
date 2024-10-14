@@ -95,10 +95,8 @@ namespace GAME
 		//ゲージ類更新
 		void UpdateGauge ( BtlParam btlPrm );
 
-#if 0
 		//ヒット数更新
 		void UpdateChainHitNum ( UINT n );
-#endif // 0
 	};
 
 

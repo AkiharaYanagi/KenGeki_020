@@ -26,6 +26,7 @@ namespace GAME
 		P_GrpDemo pGrp = std::make_shared < GrpDemo > ();
 		pGrp->AddTexture_FromArchive ( txName );
 		pGrp->SetPos ( VEC2 ( 128, 400 ) );
+		//@info		GrpDemoのScalingCenterはテクスチャの中心になる
 //		pGrp->SetScalingCenter ( VEC2 ( 512, 128 ) );
 		pGrp->SetStartScaling ( VEC2 ( 1.3f, 1.3f ) );
 		pGrp->SetSecondVel ( VEC2 ( -0.001f, -0.001f ) );
@@ -193,44 +194,73 @@ namespace GAME
 			//通常状態へ移行
 			PLAYER_ID WB_Player = m_prmFtgDemo->GetpFtgGrp()->GetWB_Player ();
 			GetpMutualChara()->WallBreak_Action ( WB_Player );
-			GetpMutualChara()->Shift_Fighting ();
+			GetpMutualChara()->ShiftFighting ();
 			GetwpFtgDemoActor().lock()->Shift_WallBreak_To_Main();
 		}
 	}
 
 	//------------------------------------------------
-	//ダウン
+	//敗北ダウン
 	FTG_DM_Down::FTG_DM_Down ()
 	{
 		m_grpDown = MakeGrpValue ( U"Demo_Down.png" );
 		m_grpDown->SetPos ( VEC2 ( ( WINDOW_WIDTH - 617 ) * 0.5f, 400.f ) );
 		m_grpDown->SetValid ( F );
 		m_grpDown->SetEnd ( 120 );
+
+		m_timer = std::make_shared < Timer > ( 120 );
+
+
+		//@todo 決着時ライフ０　（白ダメージ処理なし）
+		//@todo デモ開始時に入力なし　GetReady時に移動できないようにする
 	}
 
 	void FTG_DM_Down::Start ()
 	{
+		//勝者側を待機状態にする	 / 敗者側をダウンにする
+		GetpMutualChara ()->StartEndWait ();
+
+		//Demo
 		m_grpDown->Start ();
 	}
 
 	void FTG_DM_Down::Do ()
 	{
-		if ( ! m_grpDown->GetValid () )
+		//タイマ
+		m_timer->Move ();
+
+		//タイマ稼働時
+		if ( m_timer->IsActive () )
 		{
-			//ダウンから勝者表示へ
-			GetwpFtgDemoActor ().lock ()->Change_Down_To_Winner ();
+			//タイマ終了時
+			if ( m_timer->IsLast () )
+			{
+				//表示消し
+				m_grpDown->SetValid ( F );
 
-#if 0
-			//新規開始
-			GetpMutualChara ()->StartFighting ();
-			GetwpFtgDemoActor ().lock ()->Change_Down_To_Greeting ();
-#endif // 0
+				m_timer->Clear ();
 
-#if 0
-			//リザルトに移行
-			GetwpFtgDemoActor ().lock ()->End_Down_To_Result ();
-#endif // 0
+				//ダウンから勝者表示へ
+				GetwpFtgDemoActor ().lock ()->Change_Down_To_Winner ();
 
+	#if 0
+				//新規開始
+				GetpMutualChara ()->StartFighting ();
+				GetwpFtgDemoActor ().lock ()->Change_Down_To_Greeting ();
+
+				//リザルトに移行
+				GetwpFtgDemoActor ().lock ()->End_Down_To_Result ();
+	#endif // 0
+			}
+		}
+		else //非稼働時
+		{
+			//キャラステートが敗北ダウン持続に入ったらタイマスタート
+	//		if ( ! m_grpDown->GetValid () )
+			if ( GetpMutualChara ()->IsDown_Calm () )
+			{
+				m_timer->Start ();
+			}
 		}
 	}
 
@@ -326,7 +356,7 @@ namespace GAME
 		m_grpDraw->SetEnd ( 240 );
 
 		m_fade = std::make_shared < FadeRect > ();
-		m_fade->SetTime ( 16 );
+		m_fade->SetTime ( 8 );
 		AddpTask ( m_fade );
 		GRPLST_INSERT ( m_fade );
 	}
@@ -379,7 +409,7 @@ namespace GAME
 				{
 					//各種終了
 					m_fade->Off ();
-					SOUND->All_Stop ();
+					SND_STOP_ALL_BGM ();
 
 					//リザルトへ移行
 					GetwpFtgDemoActor().lock ()->End_Down_To_Result ();
@@ -388,6 +418,7 @@ namespace GAME
 				{
 					m_fade->Off ();
 
+					//初期化
 					GetwpFighting().lock()->Init();
 
 					//準備から開始

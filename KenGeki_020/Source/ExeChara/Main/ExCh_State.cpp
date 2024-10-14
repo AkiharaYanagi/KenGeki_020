@@ -20,6 +20,32 @@ namespace GAME
 	// ※凡例
 	//■	：他ステートと比較して外してある項目
  	//------------------------------------------------
+	//
+	// 
+	//=====================================================
+	//共通：入力なしPreScriptMove
+	void ExeChara_State::PreScriptMove_NoInput ()
+	{
+		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
+		//■		pExe->Input ();				//入力		
+		pExe->TransitAction ();		//アクション遷移
+		pExe->CalcPos ();			//位置計算
+		pExe->SetCollisionRect ();	//接触枠設定
+		pExe->PreMove_Effect ();		//エフェクト生成と動作
+	}
+
+	//共通：ライフ判定なしPostScriptMove
+	void ExeChara_State::PostScriptMove_NoLifeCheck ()
+	{
+		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
+		pExe->PostMove_Effect ();		//エフェクト生成と動作
+		pExe->MoveTimer ();		//タイマ稼働
+		//■		pExe->CheckLife ();		//ライフ判定
+		pExe->UpdateGraphic ();		//グラフィックの更新
+		pExe->SE_Play ();			//SEの再生
+	}
+
+	//=====================================================
 
 	//------------------------------------------------
 	//開始時挨拶
@@ -33,22 +59,12 @@ namespace GAME
 
 	void CHST_Greeting::PreScriptMove ()
 	{
-		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
-//■		pExe->Input ();				//入力		
-		pExe->TransitAction ();		//アクション遷移
-		pExe->CalcPos ();			//位置計算
-//■		pExe->SetCollisionRect ();	//接触枠設定
-		pExe->PreMove_Effect ();		//エフェクト生成と動作
+		PreScriptMove_NoInput ();
 	}
 
 	void CHST_Greeting::PostScriptMove ()
 	{
-		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
-		pExe->PostMove_Effect ();		//エフェクト生成と動作
-		pExe->MoveTimer ();		//タイマ稼働
-//■		pExe->CheckLife ();		//ライフ判定
-		pExe->UpdateGraphic ();		//グラフィックの更新
-		pExe->SE_Play ();			//SEの再生
+		PostScriptMove_NoLifeCheck ();
 	}
 
 
@@ -59,11 +75,13 @@ namespace GAME
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
 
 		//アクション・スクリプト初期化
-		pExe->SetAction ( U"Start_N" );
+		pExe->SetAction ( U"開幕待機" );
 	}
 
 	void CHST_GetReady::PreScriptMove ()
 	{
+		//@info 入力は可能
+
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
 		pExe->Input ();				//入力		
 		pExe->TransitAction ();		//アクション遷移
@@ -74,12 +92,7 @@ namespace GAME
 
 	void CHST_GetReady::PostScriptMove ()
 	{
-		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
-		pExe->PostMove_Effect ();		//エフェクト生成と動作
-		pExe->MoveTimer ();		//タイマ稼働
-//■		pExe->CheckLife ();		//ライフ判定
-		pExe->UpdateGraphic ();		//グラフィックの更新
-		pExe->SE_Play ();			//SEの再生
+		PostScriptMove_NoLifeCheck ();
 	}
 
 
@@ -184,24 +197,47 @@ namespace GAME
 
 
 	//------------------------------------------------
+	//バトル　一時停止
+
+	void CHST_ScpStop::PreScriptMove ()
+	{
+		P_ExeChara pExe = GetwpExeChara ().lock ();
+		pExe->Input ();				//入力		
+		//■ 	pExe->TransitAction ();		//アクション遷移
+		//■		pExe->CalcPos ();			//位置計算
+		//■		pExe->SetCollisionRect ();	//接触枠設定
+		//■		pExe->PreMove_Effect ();	//エフェクト生成と動作
+	}
+
+	void CHST_ScpStop::PostScriptMove ()
+	{
+		P_ExeChara pExe = GetwpExeChara ().lock ();
+		//■		pExe->PostMove_Effect ();	//エフェクト動作
+		//■		pExe->MoveTimer ();			//タイマ稼働
+		//■		pExe->CheckLife ();			//ライフ判定
+		pExe->UpdateGraphic ();		//グラフィックの更新
+		//■		pExe->SE_Play ();			//SEの再生
+	}
+
+	//------------------------------------------------
 	//バトル　壁割
 
 	void CHST_WallBreak::PreScriptMove ()
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();
 		pExe->Input ();				//入力		
-//■ 	pExe->TransitAction ();		//アクション遷移
-//■		pExe->CalcPos ();			//位置計算
+		//■ 	pExe->TransitAction ();		//アクション遷移
+		//■		pExe->CalcPos ();			//位置計算
 		pExe->SetCollisionRect ();	//接触枠設定
-//■		pExe->PreMove_Effect ();	//エフェクト生成と動作
+		//■		pExe->PreMove_Effect ();	//エフェクト生成と動作
 	}
 
 	void CHST_WallBreak::PostScriptMove ()
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();
 		pExe->PostMove_Effect ();	//エフェクト動作
-//■		pExe->MoveTimer ();			//タイマ稼働
-//■		pExe->CheckLife ();			//ライフ判定
+		//■		pExe->MoveTimer ();			//タイマ稼働
+		//■		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 		pExe->SE_Play ();			//SEの再生
 	}
@@ -231,12 +267,7 @@ namespace GAME
 
 	void CHST_Slow_Skip::PostScriptMove ()
 	{
-		P_ExeChara pExe = GetwpExeChara ().lock ();
-		pExe->PostMove_Effect ();	//エフェクト動作
-		//■		pExe->MoveTimer ();			//タイマ稼働
-		pExe->CheckLife ();			//ライフ判定
-		pExe->UpdateGraphic ();		//グラフィックの更新
-		pExe->SE_Play ();			//SEの再生
+		PostScriptMove_NoLifeCheck ();
 	}
 
 	//------------------------------------------------
@@ -244,26 +275,17 @@ namespace GAME
 	void CHST_TimeUp::Start ()
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
+		pExe->ClearInput ();
 	}
 
 	void CHST_TimeUp::PreScriptMove ()
 	{
-		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
-		//■		pExe->Input ();				//入力		
-		pExe->TransitAction ();		//アクション遷移
-		pExe->CalcPos ();			//位置計算
-		//■		pExe->SetCollisionRect ();	//接触枠設定
-		pExe->PreMove_Effect ();		//エフェクト生成と動作
+		PreScriptMove_NoInput ();
 	}
 
 	void CHST_TimeUp::PostScriptMove ()
 	{
-		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
-		pExe->PostMove_Effect ();		//エフェクト生成と動作
-		pExe->MoveTimer ();		//タイマ稼働
-		//■		pExe->CheckLife ();		//ライフ判定
-		pExe->UpdateGraphic ();		//グラフィックの更新
-		pExe->SE_Play ();			//SEの再生
+		PostScriptMove_NoLifeCheck ();
 	}
 
 	//------------------------------------------------
@@ -271,26 +293,46 @@ namespace GAME
 	void CHST_EndWait::Start ()
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
+		pExe->ClearInput ();
 	}
 
 	void CHST_EndWait::PreScriptMove ()
 	{
-		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
-		//■		pExe->Input ();				//入力		
-		pExe->TransitAction ();		//アクション遷移
-		pExe->CalcPos ();			//位置計算
-		pExe->SetCollisionRect ();	//接触枠設定
-		pExe->PreMove_Effect ();		//エフェクト生成と動作
+		PreScriptMove_NoInput ();
 	}
 
 	void CHST_EndWait::PostScriptMove ()
 	{
+		PostScriptMove_NoLifeCheck ();
+	}
+
+	//------------------------------------------------
+	//敗北ダウン状態
+	void CHST_Down::Start ()
+	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
-		pExe->PostMove_Effect ();		//エフェクト生成と動作
-		pExe->MoveTimer ();		//タイマ稼働
-		//■		pExe->CheckLife ();		//ライフ判定
-		pExe->UpdateGraphic ();		//グラフィックの更新
-		pExe->SE_Play ();			//SEの再生
+		pExe->ClearInput ();
+		pExe->SetLose ();
+
+		//アクション・スクリプト初期化
+		pExe->SetAction ( U"敗北ダウン浮き" );
+	}
+
+	void CHST_Down::PreScriptMove ()
+	{
+		PreScriptMove_NoInput ();
+	}
+
+	void CHST_Down::Do ()
+	{
+		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
+		//アクション・スクリプト初期化
+		pExe->IsNameAction ( U"敗北ダウン" );
+	}
+
+	void CHST_Down::PostScriptMove ()
+	{
+		PostScriptMove_NoLifeCheck ();
 	}
 
 	//------------------------------------------------
@@ -298,34 +340,18 @@ namespace GAME
 	void CHST_Win::Start ()
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
-		pExe->Init ();
-		//アクション・スクリプト初期化
-		pExe->SetAction ( U"Demo_Win" );
+		//アクション指定移行
+		pExe->SetAction ( U"勝利" );
 	}
 
 	void CHST_Win::PreScriptMove ()
 	{
-		P_ExeChara pExe = GetwpExeChara ().lock ();
-		//■		pExe->Input ();				//入力		
-
-		//ヒットストップ時は以降を飛ばす
-		if ( pExe->IsHitStop () ) { return; }
-
-		pExe->TransitAction ();		//アクション遷移
-		pExe->CalcPos ();			//位置計算
-		//■		pExe->SetCollisionRect ();	//接触枠設定
-		//■		pExe->OverEfPart ();		//EfPart重なり
-		pExe->PreMove_Effect ();		//エフェクト生成と動作
+		PreScriptMove_NoInput ();
 	}
 
 	void CHST_Win::PostScriptMove ()
 	{
-		P_ExeChara pExe = GetwpExeChara ().lock ();
-		pExe->PostMove_Effect ();	//エフェクト動作
-		pExe->MoveTimer ();			//タイマ稼働
-		//■		pExe->CheckLife ();			//ライフ判定
-		pExe->UpdateGraphic ();		//グラフィックの更新
-		pExe->SE_Play ();			//SEの再生
+		PostScriptMove_NoLifeCheck ();
 	}
 
 

@@ -53,9 +53,6 @@ namespace GAME
 		//共通グラフィック
 		P_FtgGrp	m_pFtgGrp;
 
-
-
-
 		//-------------------------------------------------
 		//勝者
 		WINNER	m_winner { WINNER::WINNER_DRAW };
@@ -90,8 +87,11 @@ namespace GAME
 		void StartFighting ();		//戦闘開始
 
 		void WallBreak_Action ( PLAYER_ID id );	//壁割後のアクション指定
-		void Shift_Fighting ();		//戦闘通常状態に戻る
+		void ShiftFighting ();		//戦闘通常状態に戻る
+		void ShiftScpStop ();		//一時停止
 
+		void StartEndWait ();		//終了待機
+		bool IsDown_Calm ();		//敗北ダウン安定状態
 		void StartWinner ();		//勝者表示
 
 		//----------------------------------------------------
@@ -124,6 +124,7 @@ namespace GAME
 
 		bool IsWait ();	//両者待機状態
 
+#if 0
 		UINT GetBlackOut () const { return m_blackOut; };	//暗転
 		void SetBlackOut ( UINT i )
 		{
@@ -131,7 +132,6 @@ namespace GAME
 			m_exeChara1->SetBlackOut ( i );
 			m_exeChara2->SetBlackOut ( i );
 		};
-#if 0
 
 		UINT GetScpStop () const { return m_scpStop; };	//停止
 		void SetScpStop ( UINT i ) { m_scpStop = i; };

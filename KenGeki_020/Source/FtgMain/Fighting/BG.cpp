@@ -170,6 +170,12 @@ namespace GAME
 	{
 	}
 
+	void BG::Load ()
+	{
+		TASK_VEC::Load ();
+	}
+
+
 
 	void BG::ParamInit ( P_Param pParam )
 	{
@@ -413,15 +419,11 @@ namespace GAME
 
 	void BG::OnBlackOut ()
 	{
-		//		m_tmrBlackOut->Start ( n );
-//		m_bg->SetValid ( F );
-//		m_bg_blackout->SetValid ( T );
 		m_bg_black->SetValid ( T );
 	}
 
 	void BG::OffBlackOut ()
 	{
-//		m_tmrBlackOut->Clear ();
 		m_bg_black->SetValid ( F );
 	}
 

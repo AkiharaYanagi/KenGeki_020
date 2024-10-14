@@ -9,6 +9,8 @@
 //-------------------------------------------------------------------------------------------------
 #include "Title.h"
 #include "../GameMain/SoundConst.h"
+#include "../GameMain/VoiceConst.h"
+#include "../GameMain/SeConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -17,6 +19,34 @@
 namespace GAME
 {
 
+#pragma region CONST
+
+	const float Title::BG_X = 0;
+	const float Title::BG_Y = 0;
+	const float Title::BG_VX = -64.f;
+	const float Title::BG_P = (-7680 + 1920);
+
+	const float Title::LOGO_X = ( WINDOW_WIDTH - 648 ) * 0.5f;
+	const float Title::LOGO_Y = 0;
+
+	const float Title::MENU_X = 580;
+	const float Title::MENU_Y = 800 - 7;
+
+	const float Title::CURSOR_X = 480;
+	const float Title::CURSOR_Y = 800;
+	const float Title::CURSOR_P = 70;
+
+	const float Title::INST_X = 0;
+	const float Title::INST_Y = 960 - 27;
+
+	const uint32 Title::FADE_IN_T = 16;
+	const uint32 Title::FADE_OUT_T = 16;
+
+	const uint32 Title::TITLE_CALL_WAIT = 2;
+
+#pragma endregion
+
+
 	Title::Title ()
 	{
 		//---------------------------------------------------
@@ -24,35 +54,42 @@ namespace GAME
 		//---------------------------------------------------
 		m_bg = std::make_shared < GameGraphic > ();
 		m_bg->AddTexture_FromArchive ( U"Title\\title_bg.png" );
-		m_bg->SetPos ( m_bg_x, 0 );
+		m_bg->SetPos ( BG_X, BG_Y );
 		m_bg->SetZ ( Z_BG );
 		AddpTask ( m_bg );
 		GRPLST_INSERT ( m_bg );
 
 		m_logo = std::make_shared < GameGraphic > ();
 		m_logo->AddTexture_FromArchive ( U"Title\\title_logo.png" );
-		m_logo->SetPos ( ( WINDOW_WIDTH - 648 ) * 0.5f, 0 );
+		m_logo->SetPos ( LOGO_X, LOGO_Y );
 		m_logo->SetZ ( Z_BG );
 		AddpTask ( m_logo );
 		GRPLST_INSERT ( m_logo );
 
 		m_menu = std::make_shared < GameGraphic > ();
 		m_menu->AddTexture_FromArchive ( U"Title\\title_menu.png" );
-		m_menu->SetPos ( 580, 800 );
+		m_menu->SetPos ( MENU_X, MENU_Y );
 		m_menu->SetZ ( Z_CH );
 		AddpTask ( m_menu );
 		GRPLST_INSERT ( m_menu );
 
 		m_cursor = std::make_shared < GameGraphic > ();
 		m_cursor->AddTexture_FromArchive ( U"Title\\title_cursor.png" );
-		m_cursor->SetPos ( 480, 840 );
-		m_cursor->SetScalingCenter ( 0, 16 );
+		m_cursor->SetPos ( CURSOR_X, CURSOR_Y );
+		m_cursor->SetScalingCenter ( 0, 12.5f );
 		m_cursor->SetZ ( Z_CH );
 		AddpTask ( m_cursor );
 		GRPLST_INSERT ( m_cursor );
 
+		m_inst = std::make_shared < GameGraphic > ();
+		m_inst->AddTexture_FromArchive ( U"Title\\Inst_Title.png" );
+		m_inst->SetPos ( INST_X, INST_Y );
+		m_inst->SetZ ( Z_CH );
+		AddpTask ( m_inst );
+		GRPLST_INSERT ( m_inst );
+
 		//カーソル位置
-		m_cursor->SetPos ( 480.f, 800.f + 80 * (int32)m_to );
+		m_cursor->SetPos ( CURSOR_X, CURSOR_Y + CURSOR_P * (int32)m_to );
 
 
 		//フェードイン
@@ -60,13 +97,20 @@ namespace GAME
 		AddpTask ( m_fade_in );
 		GRPLST_INSERT ( m_fade_in );
 
-		m_fade_in->StartWhiteIn ( 30 );
+		m_fade_in->StartWhiteIn ( FADE_IN_T );
 
 		//フェードアウト
 		m_fade_out = std::make_shared < FadeRect > ();
 		m_fade_out->SetAfterClear ( F );
 		AddpTask ( m_fade_out );
 		GRPLST_INSERT ( m_fade_out );
+
+
+		//タイマ
+		m_tmr_title_bgm = std::make_shared < Timer > ( FADE_IN_T );
+		m_tmr_title_bgm->Start ();
+		m_tmr_title_call = std::make_shared < Timer > ( TITLE_CALL_WAIT );
+		m_tmr_title_call->Start ();
 	}
 
 	Title::~Title ()
@@ -85,9 +129,6 @@ namespace GAME
 
 		Scene::Load ();
 
-		//BGM
-		SOUND->Stop_BGM ( BGM_Title );
-		SOUND->Play_Loop_BGM ( BGM_Title );
 	}
 
 
@@ -99,10 +140,27 @@ namespace GAME
 	{
 		//常時演出
 		
+		//タイマ
+		m_tmr_title_bgm->Move ();
+		if ( m_tmr_title_bgm->IsLast () )
+		{
+			SND()->Test ();
+
+			//BGM
+			SND_STOP_ALL_BGM ();
+			SND_PLAY_LOOP_BGM ( BGM_Title );
+		}
+
+		m_tmr_title_call->Move ();
+		if ( m_tmr_title_call->IsLast () )
+		{
+			SND_PLAY_ONESHOT_VC ( VC_00_TITLE_CALL );
+		}
+
 		//背景スクロール
-		m_bg_x -= 64.f;
-		if (m_bg_x < (-7680 + 1920) ) { m_bg_x = 0; }
-		m_bg->SetPos ( m_bg_x, 0 );
+		m_bg_x += BG_VX;
+		if ( m_bg_x < BG_P ) { m_bg_x = BG_X; }
+		m_bg->SetPos ( m_bg_x, BG_Y );
 
 		//カーソル回転
 		m_cursor_scaling_y += m_cursor_scaling_vy;
@@ -134,7 +192,7 @@ namespace GAME
 		//フェード待機後、遷移
 		if ( m_plus_wait > 0 )
 		{
-			if ( m_plus_wait > 15 )
+			if ( m_plus_wait > FADE_OUT_T - 1 )
 			{
 				//ゲーム共通パラメータ
 				P_Param pParam = Scene::GetpParam ();
@@ -142,13 +200,13 @@ namespace GAME
 				switch ( m_to )
 				{
 				case TITLE_TO_BATTLE:
-					SOUND->Stop_BGM ( BGM_Title );
+					SND_STOP_ALL_BGM ();
 					pParam->SetGameMode ( GAME_MODE::MODE_MAIN );
 					Scene::Transit_CharaSele ();
 //					Scene::Transit_Fighting ();
 					break;
 				case TITLE_TO_TRAINING:
-					SOUND->Stop_BGM ( BGM_Title );
+					SND_STOP_ALL_BGM ();
 					pParam->SetGameMode ( GAME_MODE::MODE_TRAINING );
 					Scene::Transit_CharaSele ();
 //					Scene::Transit_Training ();
@@ -168,7 +226,11 @@ namespace GAME
 
 	void Title::Input ()
 	{
-		//キー上下でシーンを選択
+		//----------------------------
+		//	キー上下でシーンを選択
+		//----------------------------
+
+		//キー上
 		if ( CFG_PUSH_KEY ( P1_UP ) || CFG_PUSH_KEY ( P2_UP ) )
 		{
 			switch ( m_to )
@@ -180,9 +242,11 @@ namespace GAME
 				m_to = TITLE_TO_BATTLE;
 				break;
 			}
-			SOUND->Play_SE ( SE_Sys_Select );
+
+			SND_PLAY_ONESHOT_SE ( SE_select_move );
 		}
 
+		//キー下
 		if ( CFG_PUSH_KEY ( P1_DOWN ) || CFG_PUSH_KEY ( P2_DOWN ) )
 		{
 			switch ( m_to )
@@ -194,20 +258,21 @@ namespace GAME
 				m_to = TITLE_TO_BATTLE;
 				break;
 			}
-			SOUND->Play_SE ( SE_Sys_Select );
+
+			SND_PLAY_ONESHOT_SE ( SE_select_move );
 		}
 
-		//カーソル位置
-		m_cursor->SetPos ( 480.f, 800.f + 80 * (int32)m_to );
+		//カーソル位置更新
+		m_cursor->SetPos ( CURSOR_X, CURSOR_Y + CURSOR_P * (int32)m_to );
 
 
 		//キー1でシーンを進める
 		if ( CFG_PUSH_KEY ( P1_BTN0 ) || CFG_PUSH_KEY ( P2_BTN0 ) )
 		{
-			SOUND->Play_SE ( SE_Sys_Enter );
+			SND_PLAY_ONESHOT_SE ( SE_select_decide );
 
 			//フェード開始
-			m_fade_out->StartBlackOut ( 16 );
+			m_fade_out->StartBlackOut ( FADE_OUT_T );
 		}
 
 	}

@@ -10,6 +10,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "Param.h"
 #include "LoadCharaBin_s3d.h"
+#include "../FtgMain/FtgConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -148,6 +149,26 @@ namespace GAME
 		//		LoadCharaBin_s3d lcb_3 ( U"chara_Retsudou_Bin.dat", * m_pChara_Retsudou_2 );
 		return m_pChara_Retsudou_2;
 	}
+
+
+
+	void Param::ResetBattleParam ()
+	{
+		//リザルト用
+		m_winner = PLAYER_ID_1;		//勝者
+		m_n_life_1p = LIFE_START;	//残ライフ
+		m_n_life_2p = LIFE_START;	//
+		m_n_input_1p = 0;			//入力数
+		m_n_input_2p = 0;			//
+		m_n_act_1p = 0;				//アクション回数
+		m_n_act_2p = 0;				//
+		m_n_offset = 0;				//相殺数
+		m_n_max_chain_1p = 0;		//連撃数
+		m_n_max_chain_2p = 0;		//
+		m_n_max_damege_1p = 0;		//最大連撃力
+		m_n_max_damege_2p = 0;		//
+	}
+
 
 }	//namespace GAME
 

@@ -21,14 +21,16 @@ namespace GAME
 	//相殺時エフェクト
 	class EfClang : public TASK_VEC
 	{
-		P_GrpEfShd		m_thunder0;
-		P_GrpEfShd		m_thunder1;
-		P_GrpEfShd		m_circle;
-		P_GrpEfShd		m_impact;
+		P_GrpEf		m_thunder0;
+//		P_GrpEf		m_thunder1;
+		P_GrpEf		m_circle;
+		P_GrpEf		m_impact;
 
-//		P_GrpEfShd		 m_test;
-//		P_Grp m_test;
 		double	m_r { 0 };
+
+
+		P_GrpEf		m_test;
+
 
 	public:
 		EfClang ();

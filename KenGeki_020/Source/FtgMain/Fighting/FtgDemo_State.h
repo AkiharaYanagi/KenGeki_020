@@ -170,7 +170,8 @@ namespace GAME
 	//ダウン
 	class FTG_DM_Down : public FtgDemoState
 	{
-		P_GrpDemo		m_grpDown;
+		P_GrpDemo	m_grpDown;
+		P_Timer		m_timer;	//タイマ
 	public:
 		FTG_DM_Down ();
 		FTG_DM_Down ( const FTG_DM_Down & rhs ) = delete;

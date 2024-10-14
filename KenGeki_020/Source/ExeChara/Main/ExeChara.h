@@ -265,10 +265,16 @@ namespace GAME
 		void StartFighting () { m_actor.StartFighting (); }
 		void StartTimeUp   () { m_actor.StartTimeUp (); }
 		void StartEndWait  () { m_actor.StartEndWait (); }
+		void StartDown		() { m_actor.StartDown (); }
+		bool IsDown_Calm () { return IsNameAction ( U"敗北ダウン" ); }
+		void StartWinner	() { m_actor.StartWinner (); }
 
-		void Shift_Fighting () { m_actor.ShiftFighting (); }
+		void ShiftFighting () { m_actor.ShiftFighting (); }
+		void ShiftScpStop () { m_actor.ShiftScpStop (); }
 
-		void StartWinner () { }
+		bool SkipDecision () const { return m_actor.SkipDecision (); }
+		void ClearInput () { m_pCharaInput->ClearInput (); }
+		void SetLose () { m_btlPrm.SetLose (); }
 
 #if 0
 		//一時停止
@@ -288,6 +294,7 @@ namespace GAME
 		void OnOffset_AA ();	//自分：Attack, 相手：Attack
 		void OnOffset_OA ();	//自分：Offset, 相手：Attack
 		void OnOffset_AO ();	//自分：Attack, 相手：Offset
+		void OnOffset_Common ();	//共通
 
 		//自分・攻撃 -> 相手・くらい
 		//ヒット発生
@@ -313,8 +320,13 @@ namespace GAME
 		void SetClang ( bool b ) { m_btlPrm.SetClang ( b ); }
 #endif // 0
 
+
+
+
 		//-------------------------------------------------
 		//スクリプトからの変更
+		//@info FtgGrpに移行
+#if 0
 		//暗転
 		UINT GetBlackOut () const { return m_btlPrm.GetBlackOut (); }
 		void SetBlackOut ( UINT i ) { m_btlPrm.SetBlackOut ( i ); }
@@ -330,6 +342,8 @@ namespace GAME
 		//壁割
 		bool GetWallBreak () const { return m_btlPrm.GetWallBreak (); }
 		void SetWallBreak ( bool b ) { m_btlPrm.SetWallBreak ( b ); }
+
+#endif // 0
 
 #if 0
 #if 0

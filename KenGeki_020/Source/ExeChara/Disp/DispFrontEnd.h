@@ -34,8 +34,8 @@ namespace GAME
 		P_DispGauge	m_gaugeBalance;		//バランスゲージ
 		P_DispGauge	m_gaugeMana;		//マナゲージ
 
-#if	0
 		P_DispAccel	m_gaugeAccel;		//アクセルゲージ
+#if	0
 		PrmRect		m_gaugeHitStop;			//ヒットストップ時間表示
 		PrmRect		m_gaugeLurch;			//のけぞり時間表示
 #endif	//0
@@ -63,13 +63,11 @@ namespace GAME
 		static VEC2 POS_PL_CP_2P;
 
 
-#if 0
 		//-----------------------------------------------------
 		//ヒット数
-		P_GrpAcv	m_grpHitNum;		//"0"~"9"
-		P_GrpAcv	m_grpStrHit;		//"Hit"
+		P_Grp		m_grpHitNum;		//"0"~"9"
+		P_Grp		m_grpStrHit;		//"Hit"
 
-#endif // 0
 		//-----------------------------------------------------
 		//アクション名
 		P_GrpStr	m_strAction;	
@@ -105,9 +103,10 @@ namespace GAME
 #if 0
 		void SetPlayer ();
 		void SetCPU ();
-
-		void UpdateHitNum ( UINT n );
 #endif // 0
+
+		//ヒット数
+		void UpdateHitNum ( UINT n );
 
 		//アクション名表示
 		void UpdateActionName ( s3d::String actionName );

@@ -19,8 +19,9 @@ namespace GAME
 	{
 //		//メイングラフィック
 //		m_grp = std::make_shared < GameGraphic > ();
-		m_grp = std::make_shared < GrpEfShd > ();
-		m_grp->On ();
+		m_grp = std::make_shared < GrpEf > ();
+		m_grp->SetbCenterOfTx ( F );
+//		m_grp->On ();
 		m_grp->SetZ ( z );	//初期位置
 		AddpTask ( m_grp );
 		GRPLST_INSERT ( m_grp );

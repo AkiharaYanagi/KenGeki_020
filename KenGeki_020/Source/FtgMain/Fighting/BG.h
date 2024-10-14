@@ -69,6 +69,7 @@ namespace GAME
 
 
 		void ParamInit ( P_Param pParam );
+		void Load ();
 		void Init ();
 		void Move ();
 

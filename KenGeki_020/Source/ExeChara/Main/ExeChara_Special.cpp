@@ -9,7 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "ExeChara.h"
 #include "../../FtgMain/Fighting/Fighting.h"
-//#include "../../GameMain/SoundConst.h"
+#include "../../GameMain/SeConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -100,12 +100,20 @@ namespace GAME
 			}
 		}
 
+		//-----------------------------------------------------
+		if ( IsNameAction ( U"乱舞超必殺技発生" ) )
+		{
+			if ( m_pScript->GetFrame () == 0 )
+			{
+				SND_PLAY_ONESHOT_SE ( SE_Btl_Light );
+			}
+		}
 
-#if 0
+
 		//-----------------------------------------------------
 		//アクセル増減　 ：　アクション中のバランス値を利用(今作品ではバランス発生に用いない)
 		int accel_value = m_pAction->GetBalance ();
-		if ( 0 == accel_value )
+		if ( 0 == accel_value ) //スクリプト中で指定なし(==0)
 		{
 			//カテゴリ一括
 			if ( IsAttacking () ) {	m_btlPrm.AddAccel ( 3 ); }	//通常攻撃
@@ -117,12 +125,22 @@ namespace GAME
 				m_btlPrm.DirZeroAccel ( 3 );	//アクセル 沈静化
 			}
 		}
-		else
+		else if ( 0 < accel_value ) //プラス時
 		{
 			m_btlPrm.AddAccel ( accel_value );
 		}
+		else //マイナス時
+		{
+			//０：基本状態は沈静化
+			//m_btlPrm.DirZeroAccel ( 3 );	//アクセル 沈静化
+
+			//マイナス分
+			m_btlPrm.AddAccel ( accel_value - 3 );
+		}
 
 
+
+#if 0
 
 		//-----------------------------------------------------
 		//足払い追撃終了

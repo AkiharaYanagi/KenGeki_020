@@ -143,6 +143,18 @@ namespace GAME
 	}
 
 
+	void CharaInput::ClearInput ()
+	{
+		//@info clear()は配列を０にする
+		//m_vGameKey.clear ();
+
+		for ( size_t i = 0; i < m_vGameKeyNum; ++ i )
+		{
+			m_vGameKey [ i ].ClearKey ();
+		}
+	}
+
+
 	//------------------------------------------------------------------------------------
 	//ルートリストをチェックして各種ブランチのコマンドが達成されていたら
 	//遷移先のアクションIDを返す

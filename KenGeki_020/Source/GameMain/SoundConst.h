@@ -1,7 +1,7 @@
 ﻿//=================================================================================================
 //
 // SoundConst ファイル
-//		音声ファイル指定用 定数
+//		BGMファイル指定用 定数
 //
 //=================================================================================================
 #pragma once
@@ -18,46 +18,18 @@ namespace GAME
 	//------------------------------------------
 	// 定数宣言
 	//------------------------------------------
-	//Soundフォルダ、SEフォルダ内の読込ファイル順(ABC)にIDが振られる
-	//フォルダ内では順序保持のためにID(連番)を付けるが、
-	//enumでは変更可能性のためIDを付けない
 
 	//BGM
-	enum BGM_ID
-	{
-		BGM_GABA,
-		BGM_TOMOE,
-		BGM_OUKA,
-		BGM_RETSU,
-		BGM_ENEMY0,
-		BGM_FERA,
-
-		BGM_Title,
-		BGM_CharaSele,
-		BGM_Result,
-	};
-
-	//SE
-	enum SE_ID
-	{
-		SE_Sys_Pdding,
-		SE_Sys_Select,
-		SE_Sys_Enter,
-		SE_Sys_Cancel,
-		SE_Sys_Lock,
-		SE_Sys_EnterFighting,
-		SE_Btl_Hit_L,
-		SE_Btl_Hit_M,
-		SE_Btl_Hit_H,
-		SE_Btl_Jump,
-		SE_Btl_Landing,
-		SE_Btl_Dash,
-		SE_Btl_Air,
-		SE_Btl_break,
-		SE_Btl_Light,
-		SE_Btl_Clang,
-		SE_Btl_Extract_sword,
-	};
+	constexpr char32_t BGM_GABA []		= U"00_BGM_GABA.wav";
+	constexpr char32_t BGM_SAE []		= U"01_BGM_SAE.wav";
+	constexpr char32_t BGM_OUKA []		= U"02_BGM_OUKA.wav";
+	constexpr char32_t BGM_RETSU []		= U"03_BGM_RETSU.wav";
+	constexpr char32_t BGM_ENEMY0 []	= U"04_BGM_ENEMY0.wav";
+	constexpr char32_t BGM_FERA []		= U"05_BGM_FERA.wav";
+	constexpr char32_t BGM_Title []		= U"10_BGM_Title.wav";
+	constexpr char32_t BGM_CharaSele []	= U"11_BGM_CharaSele.wav";
+	constexpr char32_t BGM_Result []	= U"12_BGM_Result.wav";
+	constexpr char32_t BGM_TitleCall []	= U"13_TitleCall.wav";
 
 }
 

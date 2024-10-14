@@ -45,6 +45,7 @@ namespace GAME
 	void MutualChara::ParamInit ( P_Param pParam )
 	{
 		m_pParam = pParam;
+		m_decision->SetpParam ( pParam );
 	}
 
 	void MutualChara::Load ()
@@ -54,8 +55,6 @@ namespace GAME
 
 	void MutualChara::Init ()
 	{
-		m_pParam->SetN_Act1p ( 0 );
-		m_pParam->SetN_Act2p ( 0 );
 		TASK_VEC::Init ();
 	}
 
@@ -143,6 +142,7 @@ namespace GAME
 	//◆================================
 	void MutualChara::Grp ()
 	{
+#if 0
 		//---------------------------------------------------
 		//暗転
 		UINT bo1 = m_exeChara1->GetBlackOut ();
@@ -156,7 +156,6 @@ namespace GAME
 			m_exeChara1->SetBlackOut ( 0 );
 			m_exeChara2->SetBlackOut ( 0 );
 		}
-#if 0
 
 		//---------------------------------------------------
 		//スクリプトからの停止
@@ -190,6 +189,7 @@ namespace GAME
 		VEC2 pos1p = m_exeChara1->GetPos ();
 		VEC2 pos2p = m_exeChara2->GetPos ();
 
+		//共通変数に保存
 		G_FTG()->CulcPosMutualBase ( pos1p, pos2p );
 
 	}
@@ -370,6 +370,13 @@ namespace GAME
 		m_exeChara2->StartFighting ();
 	}
 
+	//一時停止
+	void MutualChara::ShiftScpStop ()
+	{
+		m_exeChara1->ShiftScpStop ();
+		m_exeChara2->ShiftScpStop ();
+	}
+
 	//壁割後のアクション指定
 	void MutualChara::WallBreak_Action ( PLAYER_ID id )
 	{
@@ -386,12 +393,11 @@ namespace GAME
 	}
 
 	//戦闘通常状態に戻る
-	void MutualChara::Shift_Fighting ()
+	void MutualChara::ShiftFighting ()
 	{
-		m_exeChara1->Shift_Fighting ();
-		m_exeChara2->Shift_Fighting ();
+		m_exeChara1->ShiftFighting ();
+		m_exeChara2->ShiftFighting ();
 	}
-
 
 	//両者待機状態
 	bool MutualChara::IsWait ()
@@ -401,11 +407,59 @@ namespace GAME
 		return b1 && b2;
 	}
 
+
+	//終了待機
+	void MutualChara::StartEndWait ()
+	{
+		PLAYER_ID winner = m_pParam->GetWinner ();
+
+		//勝者側を待機状態にする
+		//敗者側をダウンにする
+
+		if ( PLAYER_ID_1 == winner )
+		{
+			m_exeChara1->StartEndWait ();
+			m_exeChara2->StartDown ();
+		}
+		else if ( PLAYER_ID_2 == winner )
+		{
+			m_exeChara1->StartDown ();
+			m_exeChara2->StartEndWait ();
+		}
+	}
+
+	bool MutualChara::IsDown_Calm ()
+	{
+		PLAYER_ID winner = m_pParam->GetWinner ();
+
+		//敗者側のダウンが落ち着いたらTを返す
+
+		if ( PLAYER_ID_1 == winner )
+		{
+			return m_exeChara2->IsDown_Calm ();
+		}
+		else if ( PLAYER_ID_2 == winner )
+		{
+			return m_exeChara1->IsDown_Calm ();
+		}
+		return F;
+	}
+
 	//勝者表示
 	void MutualChara::StartWinner ()
 	{
-		m_exeChara1->StartWinner ();
-		m_exeChara2->StartWinner ();
+		PLAYER_ID winner = m_pParam->GetWinner ();
+
+		//勝者表示に変更
+		if ( PLAYER_ID_1 == winner )
+		{
+			m_exeChara1->StartWinner ();
+		}
+		else if ( PLAYER_ID_2 == winner )
+		{
+			m_exeChara2->StartWinner ();
+		}
+
 	}
 
 	//----------------------------------------------------

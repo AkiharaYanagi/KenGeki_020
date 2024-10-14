@@ -25,8 +25,10 @@ namespace GAME
 		P_CHST_GetReady		m_GetReady;
 
 		P_CHST_Main			m_Main;
-		P_CHST_Slow_Skip	m_Slow_Skip;
+
+		P_CHST_ScpStop		m_ScpStop;
 		P_CHST_WallBreak	m_WallBreak;
+		P_CHST_Slow_Skip	m_Slow_Skip;
 
 		P_CHST_EndWait		m_EndWait;
 		P_CHST_Down			m_Down;
@@ -55,6 +57,7 @@ namespace GAME
 		void SetwpExeChara ( WP_ExeChara p ) { mp_param->SetwpExeChara ( p ); }
 
 		P_ExeChara_State GetpState () { return mp_state; }
+		s3d::String GetStateName () { return mp_state->GetName(); }
 
 		//状態変更	(Start()を実行する)
 		void StartGreeting ();
@@ -62,11 +65,13 @@ namespace GAME
 		void StartFighting ();
 		void StartTimeUp ();
 		void StartEndWait ();
+		void StartDown ();
 
 		void StartWinner ();
 
 		//メイン中一時遷移		(Start()を実行しない)
 		void ShiftFighting ();
+		void ShiftScpStop ();
 		void ShiftSlowSkip ();
 		void ShiftWallBreak ();
 
@@ -83,6 +88,9 @@ namespace GAME
 		void PreScriptMove ();
 		void RectMove ();
 		void PostScriptMove ();
+
+		//Decision()の最初に呼ばれ、処理をスキップするかどうか
+		bool SkipDecision () const { return mp_state->SkipDecision (); }
 	};
 
 

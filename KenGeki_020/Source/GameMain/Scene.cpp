@@ -107,9 +107,9 @@ namespace GAME
 		START_MODE startMode;
 
 		//テスト用 開始状態選択
-//		startMode = START_TITLE;
+		startMode = START_TITLE;
 //		startMode = START_CHARA_SELE;
-		startMode = START_BATTLE;
+//		startMode = START_BATTLE;
 //		startMode = START_TRAINING;
 //		startMode = START_RESULT;
 
@@ -122,13 +122,16 @@ namespace GAME
 		startMode = stgs.GetStartMode ();
 
 
-		//キャラデータを事前読込
-		m_pParam->LoadCharaData_All ();
+		if ( startMode == START_TITLE )
+		{
+			//全キャラデータを事前読込
+			// ここで読込しないとき、バトルメインでキャラの個別読込
+			m_pParam->LoadCharaData_All ();
+		}
 
 
-
-		//デバッグ表示オン/オフ
-//		DBGOUT_WND_ON ();
+		//デバッグ表示オン/オフ 初期状態
+//		DBGOUT_WND_ON (); 
 		DBGOUT_WND_OFF ();
 
 
@@ -202,6 +205,37 @@ namespace GAME
 		pScene->ParamInit ();
 
 		GameSceneManager::Load ();
+	}
+
+	void SceneManager::Move ()
+	{
+		//デバッグ表示切替トグル
+		static bool bDispDebug = T;
+		static bool pre_bDispDebug = F;
+		static bool is_bDispDebug = F;
+
+		is_bDispDebug = ( WND_UTL::AscKey ( VK_F8 ) );
+
+		//今回押した瞬間ならば、1回のみ切替
+		if ( ! pre_bDispDebug && is_bDispDebug )	// false -> true
+		{
+			if ( bDispDebug )
+			{
+				//デバッグ表示オフ
+				DBGOUT_WND_OFF ();
+				bDispDebug = F;
+			}
+			else
+			{
+				//デバッグ表示オン
+				DBGOUT_WND_ON ();
+				bDispDebug = T;
+			}
+		}
+		//今回の保存
+		pre_bDispDebug = is_bDispDebug;
+
+		GameSceneManager::Move ();
 	}
 
 

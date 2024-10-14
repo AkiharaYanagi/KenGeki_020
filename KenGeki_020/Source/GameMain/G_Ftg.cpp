@@ -180,13 +180,14 @@ namespace GAME
 	}
 
 
-
+#if 0
 	void G_Ftg::AddAccel ( int n )
 	{
 		m_accel += n;
 		if ( m_accel < -100 ) { m_accel = -100; }
 		if ( 100 < m_accel ) { m_accel = 100; }
 	}
+#endif // 0
 
 
 	//カメラの画面端における補正位置

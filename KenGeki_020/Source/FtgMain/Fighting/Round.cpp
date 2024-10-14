@@ -17,6 +17,9 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+	const uint32 Round::TX_0 = 0;
+	const uint32 Round::TX_1 = 1;
+
 	const float Round::POS_BY = 105;
 	const float Round::POS_BX10 = 640 - 100;
 	const float Round::POS_BX11 = 640 - 100 - 40;
@@ -75,32 +78,32 @@ namespace GAME
 		switch ( m_round_1p )
 		{
 		case 0:
-			m_ob_1p0->SetValid ( F );
-			m_ob_1p1->SetValid ( F );
+			m_ob_1p0->SetIndexTexture ( TX_0 );
+			m_ob_1p1->SetIndexTexture ( TX_0 );
 			break;
 		case 1:
-			m_ob_1p0->SetValid ( T );
-			m_ob_1p1->SetValid ( F );
+			m_ob_1p0->SetIndexTexture ( TX_1 );
+			m_ob_1p1->SetIndexTexture ( TX_0 );
 			break;
 		case 2:
-			m_ob_1p0->SetValid ( T );
-			m_ob_1p1->SetValid ( T );
+			m_ob_1p0->SetIndexTexture ( TX_1 );
+			m_ob_1p1->SetIndexTexture ( TX_1 );
 			break;
 		}
 
 		switch ( m_round_2p )
 		{
 		case 0:
-			m_ob_2p0->SetValid ( F );
-			m_ob_2p1->SetValid ( F );
+			m_ob_2p0->SetIndexTexture ( TX_0 );
+			m_ob_2p1->SetIndexTexture ( TX_0 );
 			break;
 		case 1:
-			m_ob_2p0->SetValid ( T );
-			m_ob_2p1->SetValid ( F );
+			m_ob_2p0->SetIndexTexture ( TX_1 );
+			m_ob_2p1->SetIndexTexture ( TX_0 );
 			break;
 		case 2:
-			m_ob_2p0->SetValid ( T );
-			m_ob_2p1->SetValid ( T );
+			m_ob_2p0->SetIndexTexture ( TX_1 );
+			m_ob_2p1->SetIndexTexture ( TX_1 );
 			break;
 		}
 

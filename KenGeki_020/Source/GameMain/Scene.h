@@ -124,6 +124,7 @@ namespace GAME
 		~SceneManager ();
 
 		void Load ();
+		void Move ();
 
 		//シーン共通パラメータ
 		void SetpParam ( P_Param&& pParam ) { m_pParam = pParam; }

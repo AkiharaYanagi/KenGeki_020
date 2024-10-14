@@ -239,12 +239,16 @@ namespace GAME
 		float ln = UNIT_LGS * m_value;	//表示長さ
 		float ln_d = UNIT_LGS * m_dcr;	//ダメージ表示長さ
 
+		//０のときは非表示
+		m_grp_Value->SetValid ( m_value != 0 );
+
 		//表示
 		if ( PLAYER_ID_1 == m_playerID )
 		{
 			//@info テクスチャレクトを変更するとき、テクスチャサイズは変更しない
 			m_grp_Value->SetPos ( x + P + w, Y );
 			m_grp_Value->SetRectF ( s3d::RectF { P, 0, (LONG)(ln + P), H } );
+//			m_grp_Value->SetRectF ( s3d::RectF { P, 0, (LONG)(ln), H } );
 
 			m_grp_Decrease->SetPos ( x + P + w, Y );
 			m_grp_Decrease->SetRectF ( s3d::RectF { P, 0, (LONG)(ln_d + P), H } );
@@ -256,6 +260,7 @@ namespace GAME
 
 			m_grp_Value->SetPos ( p2_bx, Y );
 			m_grp_Value->SetRectF ( s3d::RectF { P, 0, (LONG)(ln + P), H } );
+//			m_grp_Value->SetRectF ( s3d::RectF { P, 0, (LONG)(ln), H } );
 
 			m_grp_Decrease->SetPos ( p2_bx, Y );
 			m_grp_Decrease->SetRectF ( s3d::RectF { P, 0, (LONG)(ln_d + P), H } );
@@ -281,6 +286,10 @@ namespace GAME
 //		LONG vl = (LONG)m_grp_Value->GetpObject(0)->GetRectF ().w;
 //		LONG vr = (LONG)m_grp_Value->GetpObject(0)->GetRectF ().x;
 //		float vw = (float)( vr - vl );
+
+		//０のときは非表示
+		m_grp_White->SetValid ( white != 0 );
+
 
 		if ( PLAYER_ID_1 == m_playerID )
 		{
@@ -397,6 +406,9 @@ namespace GAME
 		{
 //			DBGOUT_WND_F ( 6, _T ( "bDisp = %d, wait = %02d, bStart = %d" ), bDisp ? 1: 0, m_wait, bStart ? 1: 0 );
 		}
+
+		//０のときは非表示
+		m_grp_Decrease->SetValid ( m_dcr <= 0 );
 	}
 
 

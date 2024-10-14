@@ -21,7 +21,7 @@ namespace GAME
 	class DispEffect : public TASK_VEC
 	{
 		//P_Grp			m_grp;			//グラフィック表示
-		P_GrpEfShd		m_grp;			//グラフィック表示
+		P_GrpEf			m_grp;			//グラフィック表示
 		PAP_Tx			mpap_EfTx;		//エフェクトイメージのテクスチャリスト
 		P_DispRect		m_dispRect;		//エフェクト枠表示
 

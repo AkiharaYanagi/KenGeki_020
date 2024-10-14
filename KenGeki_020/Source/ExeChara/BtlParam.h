@@ -239,6 +239,8 @@ namespace GAME
 
 		void DecisionWhiteDamage ();	//白ダメージ確定
 
+		void SetLose ();	//敗北処理
+
 	private:
 		// 慣性の減少
 		void DecreaseInertial ( float d, VEC2 & inertial );

@@ -8,7 +8,7 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "CharaSele_Player.h"
-#include "../GameMain/SoundConst.h"
+#include "../GameMain/SeConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -81,6 +81,10 @@ namespace GAME
 	}
 
 	CharaSele_Player::~CharaSele_Player ()
+	{
+	}
+
+	void CharaSele_Player::ParamInit ( P_Param p )
 	{
 	}
 
@@ -259,7 +263,9 @@ namespace GAME
 		m_chara_stand->SetValid ( T );
 		m_chara_stand_light->SetValid ( F );
 		m_cursor->Start ();
-		SOUND->Play_SE ( SE_Sys_Cancel );
+
+		SND_PLAY_ONESHOT_SE ( SE_select_Cancel );
+
 		m_wait = 0;
 	}
 
@@ -279,7 +285,7 @@ namespace GAME
 			m_chara_stand->SetPos ( m_x, CHARA_2P_POS_Y );
 		}
 
-		SOUND->Play_SE ( SE_Sys_Select );
+		SND_PLAY_ONESHOT_SE ( SE_select_move );
 	}
 
 	//決定時
@@ -288,7 +294,7 @@ namespace GAME
 		//選択可能かどうか
 		if ( ! CanSelect () )
 		{
-			SOUND->Play_SE ( SE_Sys_Lock );
+			SND_PLAY_ONESHOT_SE ( SE_select_Lock );
 			return;
 		}
 
@@ -296,7 +302,9 @@ namespace GAME
 		m_chara_stand->SetValid ( F );
 		m_chara_stand_light->SetValid ( T );
 		m_cursor->Stop ();
-		SOUND->Play_SE ( SE_Sys_Enter );
+
+		SND_PLAY_ONESHOT_SE ( SE_select_decide );
+
 		m_wait = 1;	//待機スタート
 	}
 

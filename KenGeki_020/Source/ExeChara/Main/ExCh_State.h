@@ -52,12 +52,19 @@ namespace GAME
 		virtual void PreScriptMove () {}
 		virtual void RectMove () {}
 		virtual void PostScriptMove () {}
+		virtual bool SkipDecision () const { return F; }
 
-		virtual s3d::String GetName () { return U"State"; }
+		virtual s3d::String GetName () const { return U"State"; }
 
 		void SetpPrm ( P_ExeChara_Param p ) { mp_PrmExeChara = p; }
 
 		WP_ExeChara GetwpExeChara () const { return mp_PrmExeChara->GetwpExeChara (); }
+
+		//共通：入力なしPreScriptMove
+		void PreScriptMove_NoInput ();
+		//共通：ライフ判定なしPostScriptMove
+		void PostScriptMove_NoLifeCheck ();
+
 	};
 	using P_ExeChara_State = std::shared_ptr < ExeChara_State >;
 	using VP_ExeChara_State = std::vector < P_ExeChara_State >;
@@ -72,6 +79,7 @@ namespace GAME
 	class CHST_Start : public ExeChara_State
 	{
 	public:
+		s3d::String GetName () const { return U"Start"; }
 	};
 	using P_CHST_Start = std::shared_ptr < CHST_Start >;
 
@@ -82,9 +90,11 @@ namespace GAME
 	class CHST_Greeting : public ExeChara_State
 	{
 	public:
+		s3d::String GetName () const { return U"Greeting"; }
 		void Start ();
 		void PreScriptMove ();
 		void PostScriptMove ();
+		bool SkipDecision () const { return T; }
 	};
 	using P_CHST_Greeting = std::shared_ptr < CHST_Greeting >;
 
@@ -94,9 +104,11 @@ namespace GAME
 	class CHST_GetReady : public ExeChara_State
 	{
 	public:
+		s3d::String GetName () const { return U"GetReady"; }
 		void Start ();
 		void PreScriptMove ();
 		void PostScriptMove ();
+		bool SkipDecision () const { return T; }
 	};
 	using P_CHST_GetReady = std::shared_ptr < CHST_GetReady >;
 
@@ -107,7 +119,7 @@ namespace GAME
 	class CHST_Main : public ExeChara_State
 	{
 	public:
-		s3d::String GetName () { return U"BattleMain"; }
+		s3d::String GetName () const { return U"BattleMain"; }
 		void Start ();
 		void PreScriptMove ();
 		void RectMove ();
@@ -116,11 +128,23 @@ namespace GAME
 	using P_CHST_Main = std::shared_ptr < CHST_Main >;
 
 	//------------------------------------------------
+	//バトル　一時停止
+	class CHST_ScpStop : public ExeChara_State
+	{
+	public:
+		s3d::String GetName () const { return U"Stop"; }
+		void PreScriptMove ();
+		void PostScriptMove ();
+		bool SkipDecision () const { return T; }
+	};
+	using P_CHST_ScpStop = std::shared_ptr < CHST_ScpStop >;
+
+	//------------------------------------------------
 	//バトル　壁割
 	class CHST_WallBreak : public ExeChara_State
 	{
 	public:
-		s3d::String GetName () { return U"WallBreak"; }
+		s3d::String GetName () const { return U"WallBreak"; }
 		void PreScriptMove ();
 		void PostScriptMove ();
 	};
@@ -131,7 +155,7 @@ namespace GAME
 	class CHST_Slow_Skip : public ExeChara_State
 	{
 	public:
-		s3d::String GetName () { return U"SlowSkip"; }
+		s3d::String GetName () const { return U"SlowSkip"; }
 		void PreScriptMove ();
 		void RectMove ();
 		void PostScriptMove ();
@@ -149,17 +173,21 @@ namespace GAME
 		void PreScriptMove ();
 		//■ void RectMove ();
 		void PostScriptMove ();
+		bool SkipDecision () const { return T; }
 	};
 	using P_CHST_EndWait = std::shared_ptr < CHST_EndWait >;
 	//------------------------------------------------
 
-	//ダウン状態
+	//敗北ダウン状態
 	class CHST_Down : public ExeChara_State
 	{
 	public:
-		void PreScriptMove () {}
+		void Start ();
+		void PreScriptMove ();
 		//■ void RectMove () {}
-		void PostScriptMove () {}
+		void Do ();
+		void PostScriptMove ();
+		bool SkipDecision () const { return T; }
 	};
 	using P_CHST_Down = std::shared_ptr < CHST_Down >;
 	//------------------------------------------------
@@ -171,6 +199,7 @@ namespace GAME
 		void PreScriptMove () {}
 		//■ void ScriptRectMove () {}
 		void PostScriptMove () {}
+		bool SkipDecision () const { return T; }
 	};
 	using P_CHST_DownWait = std::shared_ptr < CHST_DownWait >;
 	//------------------------------------------------
@@ -181,6 +210,7 @@ namespace GAME
 		void PreScriptMove () {}
 		//■ void RectMove () {}
 		void PostScriptMove () {}
+		bool SkipDecision () const { return T; }
 	};
 	using P_CHST_WinWait = std::shared_ptr < CHST_WinWait >;
 	//------------------------------------------------
@@ -193,6 +223,7 @@ namespace GAME
 		void PreScriptMove ();
 		//■ void RectMove () {}
 		void PostScriptMove ();
+		bool SkipDecision () const { return T; }
 	};
 	using P_CHST_Win = std::shared_ptr < CHST_Win >;
 	//------------------------------------------------
@@ -203,6 +234,7 @@ namespace GAME
 		void PreScriptMove () {}
 		//■ void RectMove () {}
 		void PostScriptMove () {}
+		bool SkipDecision () const { return T; }
 	};
 	using P_CHST_WinEnd = std::shared_ptr < CHST_WinEnd >;
 	//------------------------------------------------
@@ -214,6 +246,7 @@ namespace GAME
 		void PreScriptMove ();
 		//■ void RectMove () {}
 		void PostScriptMove ();
+		bool SkipDecision () const { return T; }
 	};
 	using P_CHST_TimeUp = std::shared_ptr < CHST_TimeUp >;
 	//------------------------------------------------

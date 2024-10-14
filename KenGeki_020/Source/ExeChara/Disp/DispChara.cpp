@@ -100,10 +100,8 @@ namespace GAME
 		//ゲージ類更新
 		UpdateGauge ( btlprm );
 
-#if 0
 		//ヒット数更新
 		UpdateChainHitNum ( btlprm.GetChainHitNum () );
-#endif // 0
 
 		//アクション名更新
 		m_frontEnd->UpdateActionName ( pAct->GetName ().c_str () );
@@ -142,15 +140,12 @@ namespace GAME
 		m_frontEnd->UpdateGauge ( btlPrm );
 	}
 
-#if 0
 	//ヒット数更新
 	void DispChara::UpdateChainHitNum ( UINT n )
 	{
 		m_frontEnd->UpdateHitNum ( n );
 	}
 
-
-#endif // 0
 
 }	//namespace GAME
 

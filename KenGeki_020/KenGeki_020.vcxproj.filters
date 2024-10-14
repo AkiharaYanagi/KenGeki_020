@@ -314,6 +314,9 @@
     <Text Include="App\◆開発用　修正点・変更点.txt">
       <Filter>00_Document</Filter>
     </Text>
+    <Text Include="App\[共通デモアクション].txt">
+      <Filter>00_Document</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="App\dll\soundtouch\SoundTouch_x64.dll">
@@ -963,6 +966,15 @@
     <ClInclude Include="Source\Result\ResultMenu.h">
       <Filter>05_Result</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ExeChara\Disp\DispAccel.h">
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameMain\VoiceConst.h">
+      <Filter>90_GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameMain\SeConst.h">
+      <Filter>90_GameMain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1117,6 +1129,9 @@
     </ClCompile>
     <ClCompile Include="Source\Result\ResultMenu.cpp">
       <Filter>05_Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Disp\DispAccel.cpp">
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

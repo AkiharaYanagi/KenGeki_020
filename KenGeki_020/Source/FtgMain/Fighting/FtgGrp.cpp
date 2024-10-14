@@ -17,10 +17,6 @@ namespace GAME
 {
 	FtgGrp::FtgGrp ()
 	{
-		m_tmrSlow.Clear ();
-		m_tmrStop.Clear ();
-		m_tmrBlackOut.Clear ();
-
 		m_fade_white = std::make_shared < FadeRect > ();
 		TASK_VEC::AddpTask ( m_fade_white );
 		GRPLST_INSERT ( m_fade_white );
@@ -43,18 +39,18 @@ namespace GAME
 
 	void FtgGrp::Init ()
 	{
-		m_tmrSlow.Init ();
-		m_tmrStop.Init ();
+		m_tmrScpStop.Init ();
 		m_tmrBlackOut.Init ();
+		m_tmrSlow.Init ();
 
 		TASK_VEC::Init ();
 	}
 
 	void FtgGrp::Move ()
 	{
-		m_tmrSlow.Move ();
-		m_tmrStop.Move ();
+		m_tmrScpStop.Move ();
 		m_tmrBlackOut.Move ();
+		m_tmrSlow.Move ();
 
 		//---------------------------------------------------
 		//超必殺カットイン

@@ -103,6 +103,10 @@ namespace GAME
 		m_btlPrm.Init ();
 		SetParamFromScript ();	//スクリプトからパラメータを反映する
 
+		//入力
+		m_pCharaInput->ClearInput ();
+
+
 		//アクタ
 		m_actor.Init ();
 
