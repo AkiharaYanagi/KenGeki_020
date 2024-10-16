@@ -176,6 +176,7 @@ namespace GAME
 			return;
 		}
 
+#if 0
 		//スクリプトからSEのIDを取得
 		UINT id_se = m_pScript->m_prmStaging.SE;
 		//0は対象無しの値
@@ -184,6 +185,22 @@ namespace GAME
 			//SOUND->Play_SE ( (SE_ID)id_se );
 			SND_PLAY_ONESHOT_SE ( (uint32)id_se );
 		}
+#endif // 0
+
+		//SE
+		const s3d::String se_name =  m_pScript->m_prmStaging.SE_Name;
+		if ( se_name.compare ( U"" ) != 0 )
+		{
+			SND_PLAY_ONESHOT_SE ( se_name );		//名前から再生
+		}
+
+		//VC
+		const s3d::String vc_name =  m_pScript->m_prmStaging.VC_Name;
+		if ( vc_name.compare ( U"" ) != 0 )
+		{
+			SND_PLAY_ONESHOT_VC ( vc_name );		//名前から再生
+		}
+
 	}
 
 

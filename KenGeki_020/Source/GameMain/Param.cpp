@@ -18,6 +18,12 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+
+	constexpr char32_t CHARA_DAT_OUKA []		= U"chara_Ouka_Bin2.dat";
+	constexpr char32_t CHARA_DAT_SAE []			= U"chara_Sae_Bin2.dat";
+	constexpr char32_t CHARA_DAT_RETSUDOU []	= U"chara_Retsudou_Bin2.dat";
+
+
 	Param::Param ()
 	{
 		//ゲーム設定ファイル開始
@@ -118,7 +124,7 @@ namespace GAME
 		if ( m_pChara_Ouka == nullptr )
 		{
 			m_pChara_Ouka = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb_0 ( U"chara_Ouka_Bin.dat", * m_pChara_Ouka );
+			LoadCharaBin_s3d lcb_0 ( CHARA_DAT_OUKA, * m_pChara_Ouka );
 		}
 		return m_pChara_Ouka;
 	}
@@ -128,7 +134,7 @@ namespace GAME
 		if ( m_pChara_Sae == nullptr )
 		{
 			m_pChara_Sae = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb_1 ( U"chara_Sae_Bin.dat", * m_pChara_Sae );
+			LoadCharaBin_s3d lcb_1 ( CHARA_DAT_SAE, * m_pChara_Sae );
 		}
 		return m_pChara_Sae;
 	}
@@ -138,7 +144,7 @@ namespace GAME
 		if ( m_pChara_Retsudou == nullptr )
 		{
 			m_pChara_Retsudou = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb_1 ( U"chara_Retsudou_Bin.dat", * m_pChara_Retsudou );
+			LoadCharaBin_s3d lcb_1 ( CHARA_DAT_RETSUDOU, * m_pChara_Retsudou );
 		}
 		return m_pChara_Retsudou;
 	}

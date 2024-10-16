@@ -56,6 +56,13 @@ namespace GAME
 		PVP_EfGnrt	m_pvpEfGnrt;	//Efジェネレートリスト
 
 	public:
+
+		//値
+		ScriptParam_Battle		m_prmBattle;	//戦闘パラメータ
+		ScriptParam_Staging		m_prmStaging;	//演出パラメータ
+		s3d::Array < int >		m_versatile;	//汎用パラメータ
+
+
 		Script ();
 		Script ( const Script & rhs ) = delete;
 		~Script ();
@@ -96,10 +103,6 @@ namespace GAME
 		void AddARect ( RECT arect ) { m_pvARect->push_back ( arect ); }
 		void AddHRect ( RECT hrect ) { m_pvHRect->push_back ( hrect ); }
 		void AddORect ( RECT orect ) { m_pvORect->push_back ( orect ); }
-
-		//値
-		ScriptParam_Battle		m_prmBattle;	//戦闘パラメータ
-		ScriptParam_Staging		m_prmStaging;	//演出パラメータ
 	};
 
 

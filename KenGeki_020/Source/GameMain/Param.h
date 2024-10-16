@@ -134,6 +134,8 @@ namespace GAME
 		GET_SET ( int, Get_MAX_DMG_2P, Set_MAX_DMG_2P, m_n_max_damege_2p	)		//最大ダメージ
 		GET_SET ( int, Get_MAX_CHN_1P, Set_MAX_CHN_1P, m_n_max_chain_1p	)		//連撃数
 		GET_SET ( int, Get_MAX_CHN_2P, Set_MAX_CHN_2P, m_n_max_chain_2p	)		//連撃数
+
+
 	};
 
 	using P_Param = std::shared_ptr < Param >;

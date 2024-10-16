@@ -137,6 +137,7 @@ namespace GAME
 
 		PLAYER_ID id = m_btlPrm.GetPlayerID ();
 
+#if 0
 		//[test] 名前の直接指定
 		if ( PLAYER_ID_1 == id )
 		{
@@ -154,6 +155,7 @@ namespace GAME
 			//			name.assign ( U"chara_Retsudou_Bin.dat" );		m_name = CHARA_RETSUDOU;
 			//			name.assign ( _T ( "chara_E0_Bin.dat" ) );
 		}
+#endif // 0
 
 
 		//@info　キャラが複数に渡るとき、リアクション技指定をIDでなく名前で指定しないと位置がずれる
@@ -162,10 +164,10 @@ namespace GAME
 		//パラメータによるキャラの選択
 		switch ( m_name )
 		{
-		case CHARA_OUKA:		filename.assign ( U"chara_Ouka_Bin.dat" ); break;
-		case CHARA_SAE:			filename.assign ( U"chara_Sae_Bin.dat" ); break;
-		case CHARA_RETSUDOU:	filename.assign ( U"chara_Retsudou_Bin.dat" ); break;
-		case CHARA_GABADARUGA:	filename.assign ( U"charaBin.dat" ); break;
+		case CHARA_OUKA:		filename.assign ( U"chara_Ouka_Bin1.dat" ); break;
+		case CHARA_SAE:			filename.assign ( U"chara_Sae_Bin1.dat" ); break;
+		case CHARA_RETSUDOU:	filename.assign ( U"chara_Retsudou_Bin1.dat" ); break;
+//		case CHARA_GABADARUGA:	filename.assign ( U"charaBin.dat" ); break;
 		default: break;
 		}
 

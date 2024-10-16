@@ -1,0 +1,17 @@
+﻿SE_00_padding.wav
+SE_01_選択_移動.wav
+SE_02_選択_決定.wav
+SE_03_選択_否定.wav
+SE_04_選択_不可.wav
+SE_05_キーン.wav
+SE_06_HIt_L.wav
+SE_07_HIt_M.wav
+SE_08_Hit_H.wav
+SE_09_ジャンプ.wav
+SE_10_着地.wav
+SE_11_ダッシュ.wav
+SE_12_風切りA.wav
+SE_13_ブレーキ.wav
+SE_14_キラーン.wav
+SE_15_打ち合い.wav
+SE_16_抜刀.wav

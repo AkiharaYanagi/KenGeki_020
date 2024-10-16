@@ -25,7 +25,6 @@ namespace GAME
 
 		//相殺エフェクト
 		m_efClang = std::make_shared < EfClang > ();
-		m_efClang->On( VEC2 ( 0, 0 ) );
 		AddpTask ( m_efClang );
 
 

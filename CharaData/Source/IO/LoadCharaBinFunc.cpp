@@ -257,9 +257,18 @@ namespace GAME
 
 	void LoadCharaBinFunc::LoadScript ( CUPR_BYTE buf, UINT & pos, Script & scp )
 	{
+		//グループ (Editorで用いる値)
+		int group = m_utl.LoadInt ( buf, pos );
+		(void)group;
+
 		//イメージインデックス
 		UINT imdIndex = m_utl.LoadUInt ( buf, pos );
-		scp.SetImageIndex ( (UINT)imdIndex );
+		scp.SetImageIndex ( imdIndex );
+
+		//イメージ名
+		s3d::String imgName { m_utl.LoadS3dString ( buf, pos ) };
+		(void)imgName;
+
 
 		//位置
 		scp.SetPos ( m_utl.LoadVec2 ( buf, pos ) );
@@ -305,6 +314,13 @@ namespace GAME
 
 		//ステージング(演出)パラメータ
 		LoadScpPrm_Stg ( buf, pos, scp );
+
+		//汎用パラメータ
+		for ( int i = 0; i < 16; ++ i )
+		{
+			int value = m_utl.LoadInt ( buf, pos );
+			scp.m_versatile [ i ] = value;
+		}
 	}
 
 
@@ -326,6 +342,8 @@ namespace GAME
 		scp.m_prmBattle.Recoil_E = m_utl.LoadInt ( buf, pos );
 		scp.m_prmBattle.Balance_I = m_utl.LoadInt ( buf, pos );
 		scp.m_prmBattle.Balance_E = m_utl.LoadInt ( buf, pos );
+
+		scp.m_prmBattle.DirectDamage = m_utl.LoadInt ( buf, pos );
 	}
 
 
@@ -347,6 +365,9 @@ namespace GAME
 
 		scp.m_prmStaging.Scaling		 = m_utl.LoadVec2 ( buf, pos );
 		scp.m_prmStaging.SE				 = m_utl.LoadUInt ( buf, pos );
+
+		scp.m_prmStaging.SE_Name		 = m_utl.LoadS3dString ( buf, pos );
+		scp.m_prmStaging.VC_Name		 = m_utl.LoadS3dString ( buf, pos );
 	}
 
 
