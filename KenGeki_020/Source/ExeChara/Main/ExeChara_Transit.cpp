@@ -267,6 +267,16 @@ namespace GAME
 
 	void ExeChara::ChangeOhter ()
 	{
+		//対象なしのときアサート
+		assert ( m_pOther.lock ()->ExitActionName ( m_nameChangeOther ) );
+
+		//ノーリアクション
+		if ( 0 == m_nameChangeOther.compare ( U"ノーリアクション" ) )
+		{
+			//変更せず続行
+			return;
+		}
+
 		//相手を変更
 		m_pOther.lock ()->SetAction ( m_nameChangeOther );	//遷移
 		m_pOther.lock ()->m_btlPrm.SetForcedChange ( T );	//強制

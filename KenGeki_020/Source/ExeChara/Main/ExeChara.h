@@ -27,6 +27,7 @@
 #include "../Input/CPUInput.h"
 
 #include "../Effect/OperateEffect.h"
+#include "../../FtgMain/Ef/EfSouha.h"
 //#include "../FtgMain/Ef/EfPart.h"
 
 #if 0
@@ -115,6 +116,9 @@ namespace GAME
 		//ヒット時など相手を変更するときに判定後、1P2P同時に適用する
 		s3d::String		m_nameChangeOther;	//変更する相手のアクション名 
 
+
+		//剣撃走破
+		P_EfSouha		m_efSouha;
 
 	public:
 		ExeChara () = delete;
@@ -249,7 +253,10 @@ namespace GAME
 		bool CanGaurd () const;		//ガードできる状態かどうか
 
 		//特殊アクション（名前指定）
-		bool IsNameAction ( s3d::String nameAction ) const { return m_pAction->IsName ( nameAction ); }
+		bool IsNameAction ( s3d::String name ) const { return m_pAction->IsName ( name ); }
+
+		//アクションが存在するかどうか
+		bool ExitActionName ( s3d::String name ) const { return m_pChara->ExistAction ( name ); }
 
 		//ヒットストップ
 		bool IsHitStop () { return m_btlPrm.IsHitStop (); }

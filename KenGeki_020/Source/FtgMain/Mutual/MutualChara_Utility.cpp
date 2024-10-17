@@ -31,7 +31,7 @@ namespace GAME
 
 		//------------------------------------------------
 		//デバッグ用枠表示初期切替
-#define DISP_RECT	0
+#define DISP_RECT	1
 #if DISP_RECT
 //		bDispRect = T;
 		m_exeChara1->OnDispRect ();

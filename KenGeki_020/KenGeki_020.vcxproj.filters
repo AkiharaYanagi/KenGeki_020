@@ -975,6 +975,9 @@
     <ClInclude Include="Source\GameMain\SeConst.h">
       <Filter>90_GameMain</Filter>
     </ClInclude>
+    <ClInclude Include="Source\FtgMain\Ef\EfSouha.h">
+      <Filter>03_FtgMain\Ef</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1132,6 +1135,9 @@
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\DispAccel.cpp">
       <Filter>03_FtgMain\ExeChara\Disp</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Ef\EfSouha.cpp">
+      <Filter>03_FtgMain\Ef</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

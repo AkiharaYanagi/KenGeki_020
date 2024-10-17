@@ -49,7 +49,7 @@ namespace GAME
 		AddpTask ( m_demoActor );
 
 		//Debug用　開始デモをスキップ切替
-#define DEMO_ON		1
+#define DEMO_ON		0
 #if DEMO_ON
 		m_demoSkip = F;
 #else
@@ -192,6 +192,7 @@ namespace GAME
 	void Fighting::TrainingRestart ()
 	{
 		G_Ftg::inst()->Init ();
+		m_btlTime->Init ();
 		m_pFtgGrp->Init ();
 		m_bg->Init ();
 		m_demoActor->StartFighting ();

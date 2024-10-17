@@ -147,6 +147,19 @@ namespace GAME
 		return NO_ACTION;
 	}
 
+	bool Chara::ExistAction ( s3d::String name ) const
+	{
+		for ( auto p : * mpap_Action )
+		{
+			s3d::String actionName = p->GetName ();
+			if ( 0 == name.compare ( actionName ) )
+			{
+				return T;
+			}
+		}
+		return F;
+	}
+
 
 }	//namespace GAME
 

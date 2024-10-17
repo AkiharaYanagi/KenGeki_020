@@ -422,6 +422,7 @@
     <ClInclude Include="Source\ExeChara\Rect\CharaRect.h" />
     <ClInclude Include="Source\ExeChara\TimerSlow.h" />
     <ClInclude Include="Source\FtgMain\Ef\EfClang.h" />
+    <ClInclude Include="Source\FtgMain\Ef\EfSouha.h" />
     <ClInclude Include="Source\FtgMain\Fighting\BattleTime.h" />
     <ClInclude Include="Source\FtgMain\Fighting\BG.h" />
     <ClInclude Include="Source\FtgMain\Fighting\Fighting.h" />
@@ -481,6 +482,7 @@
     <ClCompile Include="Source\ExeChara\Rect\CharaRect.cpp" />
     <ClCompile Include="Source\ExeChara\TimerSlow.cpp" />
     <ClCompile Include="Source\FtgMain\Ef\EfClang.cpp" />
+    <ClCompile Include="Source\FtgMain\Ef\EfSouha.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\BattleTime.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\BG.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\Fighting.cpp" />

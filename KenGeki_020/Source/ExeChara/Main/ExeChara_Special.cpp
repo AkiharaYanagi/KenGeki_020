@@ -82,6 +82,28 @@ namespace GAME
 			DBGOUT_WND_F( 8, U"AirDash = {}"_fmt( m_btlPrm.GetNAirDash() ) );
 		}
 
+
+		//-----------------------------------------------------
+		if ( IsNameAction ( U"剣撃走破" ) )
+		{
+			//エフェクト発生
+			if ( m_pScript->GetFrame () == 5 )
+			{
+				VEC2 pos = m_btlPrm.GetPos ();
+				pos.y += -250;
+				m_efSouha->On ( pos );
+			}
+		}
+
+		if ( IsNameAction ( U"剣撃走破成立" ) )
+		{
+			//同一アクション内3ヒットで終了
+			if ( 4 == m_btlPrm.GetHitNum () )
+			{
+				SetAction ( U"剣撃走破ヒット" );
+			}
+		}
+
 		//-----------------------------------------------------
 		if ( IsNameAction ( U"超雷電蹴_発生" ) )
 		{

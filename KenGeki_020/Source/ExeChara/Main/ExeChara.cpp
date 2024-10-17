@@ -33,6 +33,11 @@ namespace GAME
 		//エフェクト監理
 		m_oprtEf = std::make_shared < OperateEffect > ();
 		AddpTask ( m_oprtEf );
+
+		//エフェクト剣撃走破
+		m_efSouha = std::make_shared < EfSouha > ();
+		AddpTask ( m_efSouha );
+		GRPLST_INSERT ( m_efSouha );
 	}
 
 	//デストラクタ

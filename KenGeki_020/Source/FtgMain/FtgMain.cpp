@@ -90,10 +90,8 @@ namespace GAME
 
 		//BGM
 		SND_STOP_ALL_BGM ();
-		//SOUND->Stop_BGM ( BGM_GABA );
-		//SOUND->Play_Loop_BGM ( BGM_GABA );
-		//SOUND->Stop_BGM ( BGM_TOMOE );
-		SND_PLAY_LOOP_BGM ( BGM_SAE );
+		SND_PLAY_LOOP_BGM ( BGM_GABA );
+		//SND_PLAY_LOOP_BGM ( BGM_SAE );
 
 
 		Scene::Load ();

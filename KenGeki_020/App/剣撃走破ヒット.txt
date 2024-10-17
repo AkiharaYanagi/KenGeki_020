@@ -1,0 +1,272 @@
+﻿		<Script Group="1" ImageName="後方ジャンプ_00.png" ImageID="60" X="-229" Y="-522" CLC_ST="1" VX="0" VY="0" AX="0" AY="0" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="2" ImageName="後方ジャンプ_01.png" ImageID="61" X="-234" Y="-478" CLC_ST="1" VX="0" VY="0" AX="0" AY="0" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="3" ImageName="後方ジャンプ_02.png" ImageID="62" X="-247" Y="-433" CLC_ST="1" VX="0" VY="0" AX="0" AY="0" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="4" ImageName="後方ジャンプ_03.png" ImageID="63" X="-233" Y="-442" CLC_ST="1" VX="0" VY="0" AX="0" AY="0" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="5" ImageName="後方ジャンプ_04.png" ImageID="64" X="-217" Y="-471" CLC_ST="1" VX="0" VY="0" AX="0" AY="0" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="6" ImageName="後方ジャンプ_05.png" ImageID="65" X="-230" Y="-472" CLC_ST="1" VX="0" VY="0" AX="0" AY="0" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="7" ImageName="後方ジャンプ_06.png" ImageID="66" X="-259" Y="-453" CLC_ST="1" VX="0" VY="0" AX="0" AY="0" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="8" ImageName="後方ジャンプ_07.png" ImageID="67" X="-240" Y="-467" CLC_ST="1" VX="0" VY="0" AX="0" AY="0" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="9" ImageName="後方ジャンプ_08.png" ImageID="68" X="-243" Y="-462" CLC_ST="1" VX="0" VY="0" AX="0" AY="0" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="10" ImageName="後方ジャンプ_09.png" ImageID="69" X="-222" Y="-464" CLC_ST="0" VX="0" VY="0" AX="0" AY="5" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="10" ImageName="後方ジャンプ_09.png" ImageID="69" X="-222" Y="-464" CLC_ST="0" VX="0" VY="0" AX="0" AY="5" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="10" ImageName="後方ジャンプ_09.png" ImageID="69" X="-222" Y="-464" CLC_ST="0" VX="0" VY="0" AX="0" AY="5" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="10" ImageName="後方ジャンプ_09.png" ImageID="69" X="-222" Y="-464" CLC_ST="0" VX="0" VY="0" AX="0" AY="5" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="10" ImageName="後方ジャンプ_09.png" ImageID="69" X="-222" Y="-464" CLC_ST="0" VX="0" VY="0" AX="0" AY="5" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="10" ImageName="後方ジャンプ_09.png" ImageID="69" X="-222" Y="-464" CLC_ST="0" VX="0" VY="0" AX="0" AY="5" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
+		<Script Group="10" ImageName="後方ジャンプ_09.png" ImageID="69" X="-222" Y="-464" CLC_ST="0" VX="0" VY="0" AX="0" AY="5" Power="0" Warp="0" Recoil_I="0" Recoil_E="0" Blance_I="0" Blance_E="0" BlackOut="0" Vibration="0" Stop="0" Rotate="0" RotateX="0" RotateY="0" AfterImage_pitch="0" AfterImage_N="0" AfterImage_time="0" Vibration_S="0" Color="Color [A=255, R=255, G=255, B=255]" Color_time="0" ScalingX="0" ScalingY="0" SE="0">
+			<RouteList>
+				<Route Name="着地" ID="27"></Route>
+			</RouteList>
+			<EfGenerateList Num="0">
+			</EfGenerateList>
+			<CollisionRectList Num="1">
+				<CollisionRect X="-50" Y="-350" W="120" H="350"></CollisionRect>
+			</CollisionRectList>
+			<AttackRectList Num="0">
+			</AttackRectList>
+			<HitRectList Num="1">
+				<HitRect X="-60" Y="-360" W="130" H="370"></HitRect>
+			</HitRectList>
+			<OffsetRectList Num="0">
+			</OffsetRectList>
+		</Script>
