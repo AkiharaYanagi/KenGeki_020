@@ -133,8 +133,8 @@ namespace GAME
 
 
 		//-----------------------------------------------------
-		//アクセル増減　 ：　アクション中のバランス値を利用(今作品ではバランス発生に用いない)
-		int accel_value = m_pAction->GetBalance ();
+		//アクセル増減　 ：　アクション中のアクセル値を利用
+		int accel_value = m_pAction->GetAccel ();
 		if ( 0 == accel_value ) //スクリプト中で指定なし(==0)
 		{
 			//カテゴリ一括

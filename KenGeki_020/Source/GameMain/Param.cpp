@@ -19,9 +19,9 @@
 namespace GAME
 {
 
-	constexpr char32_t CHARA_DAT_OUKA []		= U"chara_Ouka_Bin2.dat";
-	constexpr char32_t CHARA_DAT_SAE []			= U"chara_Sae_Bin2.dat";
-	constexpr char32_t CHARA_DAT_RETSUDOU []	= U"chara_Retsudou_Bin2.dat";
+	constexpr char32_t CHARA_DAT_OUKA []		= U"chara_Ouka_Bin.dat";
+	constexpr char32_t CHARA_DAT_SAE []			= U"chara_Sae_Bin.dat";
+	constexpr char32_t CHARA_DAT_RETSUDOU []	= U"chara_Retsudou_Bin.dat";
 
 
 	Param::Param ()

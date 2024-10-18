@@ -21,7 +21,7 @@ namespace GAME
 	//================================================
 
 
-	// アクション移項(条件:コマンド, アクション終了)
+	// アクション移項(条件:コマンド, 特殊, アクション終了)
 	void ExeChara::TransitAction ()
 	{
 		assert ( nullptr != m_pAction && nullptr != m_pScript );
@@ -123,7 +123,7 @@ namespace GAME
 			break;
 		}
 
-		//コマンドが完成していたら
+		//コマンドが完成かつ移行条件がOKなら
 		if ( NO_COMPLETE != transitID )
 		{
 			//現在アクションとして最後の処理
@@ -134,8 +134,8 @@ namespace GAME
 			P_Script pscr = pact->GetpScript ( 0 );
 
 			//バランス処理
-			int bl_a = pact->GetBalance ();		//アクション消費バランス
-			m_btlPrm.AddBalance ( bl_a );
+//			int bl_a = pact->GetBalance ();		//アクション消費バランス
+//			m_btlPrm.AddBalance ( bl_a );
 
 			//アクション遷移
 			m_actionID = transitID;

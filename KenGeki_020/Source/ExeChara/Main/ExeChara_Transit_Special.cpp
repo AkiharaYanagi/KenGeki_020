@@ -22,14 +22,13 @@ namespace GAME
 	//================================================
 	// 
 	//アクション移項（コマンドに関する処理）
-	bool ExeChara::TranditAction_Exclusion ( P_Action pAct )
+	//引数：	pNext 次のアクション
+	bool ExeChara::TranditAction_Exclusion ( P_Action pNextAct )
 	{
-		//pActが次のアクション
-		
 		//------------------------------------------
 		//空中ダッシュ回数による遷移不可処理
-		bool AirDash = pAct->IsName ( U"空中ダッシュ" );
-		bool LowAirDash = pAct->IsName ( U"低空ダッシュ" );
+		bool AirDash = pNextAct->IsName ( U"空中ダッシュ" );
+		bool LowAirDash = pNextAct->IsName ( U"低空ダッシュ" );
 		if ( AirDash || LowAirDash )
 		{
 			UINT n = m_btlPrm.GetNAirDash ();
@@ -37,17 +36,33 @@ namespace GAME
 			{ return F; }
 		}
 
-#if 0
 		//------------------------------------------
 		//対象IDがバランス消費で移項不可能なら次へ
+		int balance = pNextAct->GetBalance ();
+
+		//バランス消費
+		if ( m_btlPrm.GetBalance() >= balance )
+		{
+			//必要量があれば消費して遷移する
+			m_btlPrm.AddBalance ( balance );
+		}
+		else
+		{
+			return F; //足りないとき遷移しない
+		}
+
+		//------------------------------------------
+		//対象IDがマナ消費で移項不可能なら次へ
 
 
-		//超必　遷移チェック
-		if ( pAct->IsName ( _T ( "超必殺発動" ) ) || pAct->IsName ( _T ( "超必B発動" ) ) )
+		//マナ使用アクション　遷移チェック
+		int mana = pNextAct->GetMana ();
+		if ( mana != 0 )
 		{
 			//マナ消費
-			if ( m_btlPrm.GetMana () >= MANA_HALF )
+			if ( m_btlPrm.GetMana () >= mana )
 			{
+				//必要量があれば消費して遷移する
 				m_btlPrm.AddMana ( - MANA_MAX / 2 );
 			}
 			else //足りないとき遷移しない
@@ -56,15 +71,14 @@ namespace GAME
 			}
 		}
 
-#endif // 0
-
-		//不可能なら次をチェック
 		//------------------------------------------
 
+		//このアクションが不可能なら次をチェック
 		return T;
 	}
 
 
+#if 0
 
 	//アクション移項（コマンドに関する処理）限定
 	bool ExeChara::TranditAction_Command_Special ()
@@ -132,6 +146,8 @@ namespace GAME
 
 		return F;
 	}
+
+#endif // 0
 
 
 

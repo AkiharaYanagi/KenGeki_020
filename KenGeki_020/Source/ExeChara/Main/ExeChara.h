@@ -403,7 +403,7 @@ namespace GAME
 //		tstring Check_TransitAction_Condition_str ( BRANCH_CONDITION CONDITION ) const;	
 		s3d::String Check_TransitAction_Condition_str ( BRANCH_CONDITION CONDITION ) const;	
 
-		bool TranditAction_Command_Special ();	//アクション移項（コマンドに関する処理）限定
+//		bool TranditAction_Command_Special ();	//アクション移項（コマンドに関する処理）限定
 		void TranditAction_Special ();	//特殊条件移行
 
 	private:
@@ -411,7 +411,7 @@ namespace GAME
 		void TransitAction_Condition_I ( BRANCH_CONDITION CONDITION, bool forced );	//条件をチェックして移行
 		void TransitAction_Condition_E ( BRANCH_CONDITION CONDITION, bool forced );	//条件をチェックして移行
 		bool TranditAction_Command ();	//アクション移項（コマンドに関する処理）
-		bool TranditAction_Exclusion ( P_Action pAct );	//特定アクションの除外
+		bool TranditAction_Exclusion ( P_Action pNextAct );	//特定アクションの除外
 		void EndAction ();	//アクション移項時、前アクションの最後の処理
 
 		//スクリプト処理

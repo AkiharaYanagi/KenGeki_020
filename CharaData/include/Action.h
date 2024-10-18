@@ -9,7 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
-//#include "Game.h"
+#include "Define.h"
 #include "Chara_Const.h"
 #include "Sequence.h"
 
@@ -37,17 +37,39 @@ namespace GAME
 	
 	class Action : public Sequence
 	{
+	public:
+		enum		{ VRS_SIZE = 16, };
+
+	private:
 		ACTION_CATEGORY		m_category;		//アクション属性
 		ACTION_POSTURE		m_posture;		//アクション体勢
-		UINT				m_hitNum;		//ヒット数
-		UINT				m_hitPitch;		//ヒット間隔
-		int					m_balance;		//バランス値
+		UINT		m_hitNum;				//ヒット数
+		UINT		m_hitPitch;				//ヒット間隔
+		int			m_balance;				//バランス値
+		int			m_mana;					//マナ値
+		int			m_accel;				//アクセル値
+
+		int			m_versatile [ VRS_SIZE ];		//汎用パラメータ
 
 	public:
 		Action ();
 		Action ( const Action & rhs ) = delete;
 		~Action ();
 
+		//--------------------------------------------------------------------
+		//各パラメータ
+		GET_SET ( ACTION_CATEGORY, GetCategory, SetCategory, m_category )	//アクション属性
+		GET_SET ( ACTION_POSTURE, GetPosture, SetPosture, m_posture )		//アクション体勢
+		GET_SET ( UINT, GetHitNum, SetHitNum, m_hitNum )		//ヒット数
+		GET_SET ( UINT, GetHitPitch, SetHitPitch, m_hitPitch )	//ヒット間隔
+		GET_SET ( int, GetBalance, SetBalance, m_balance )		//バランス値
+		GET_SET ( int, GetMana, SetMana, m_mana )				//マナ値
+		GET_SET ( int, GetAccel, SetAccel, m_accel )			//アクセル値
+
+		int GetVersatile ( size_t index ) const;
+		void SetVersatile ( size_t index, int value );
+
+#if 0
 		//アクション属性
 		ACTION_CATEGORY GetCategory () const { return m_category; }
 		void SetCategory ( ACTION_CATEGORY category ) { m_category = category; }
@@ -67,7 +89,8 @@ namespace GAME
 		//バランス値
 		int GetBalance () { return m_balance; }
 		void SetBalance ( int i ) { m_balance = i; }
-};
+#endif // 0
+	};
 
 	using P_Action = std::shared_ptr < Action >;
 	using VP_Action = std::vector < P_Action >;

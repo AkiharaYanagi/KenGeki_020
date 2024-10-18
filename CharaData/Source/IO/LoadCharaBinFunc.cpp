@@ -75,18 +75,20 @@ namespace GAME
 
 			//アクション
 			aryAct [ iAct ]->SetName ( m_utl.LoadS3dString ( buf, pos ) );
-
-
-//			TRACE_F ( _T ( "LoadCharaBin: %s\n" ), pAct->GetName ().c_str () );
-//			TRACE_F ( _T ( "LoadCharaBin: %d\n" ), iAct );
-
-
 			aryAct [ iAct ]->SetNextID ( (UINT)m_utl.LoadUInt ( buf, pos ) );
 			aryAct [ iAct ]->SetCategory ( (ACTION_CATEGORY)buf [ pos ++ ] );
 			aryAct [ iAct ]->SetPosture ( (ACTION_POSTURE)buf [ pos ++ ] );
 			aryAct [ iAct ]->SetHitNum ( (UINT)buf [ pos ++ ] );
 			aryAct [ iAct ]->SetHitPitch ( (UINT)buf [ pos ++ ] );
 			aryAct [ iAct ]->SetBalance ( m_utl.LoadInt ( buf, pos ) );
+			aryAct [ iAct ]->SetMana ( m_utl.LoadInt ( buf, pos ) );
+			aryAct [ iAct ]->SetAccel ( m_utl.LoadInt ( buf, pos ) );
+
+			for ( size_t i = 0; i < Action::VRS_SIZE; ++ i )
+			{
+				int value = m_utl.LoadInt ( buf, pos );
+				aryAct [ iAct ]->SetVersatile ( i, value );
+			}
 
 			//スクリプト個数 と メモリの確保
 			UINT nScp = m_utl.LoadUInt ( buf, pos );
