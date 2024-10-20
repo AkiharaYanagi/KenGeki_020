@@ -87,6 +87,31 @@ namespace GAME
 
 		//--------------------------------------------
 		TASK_VEC::Load ();
+
+
+#if 0
+
+		TRACE_F ( _T("\n\n\n\n\n") );
+		TRACE_F ( _T("■■■■■■■■■■■■■■■■■■■■■■■■\n") );
+		TRACE_F ( _T("■■■■■■■■■■■■■■■■■■■■■■■■\n") );
+		TRACE_F ( _T("■■■■■■■■■■■■■■■■■■■■■■■■\n") );
+
+		int count = 0;
+		for ( P_Action pAct : * m_pChara->GetpvpAction () )
+		{
+			for ( P_Script pScp : * pAct->GetpvpScript () )
+			{
+				s3d::String se_name = pScp->m_prmStaging.SE_Name;
+				if ( 0 != se_name.compare ( U"" ) )
+				{
+					TRACE_F ( _T("%s\n"), pScp->m_prmStaging.SE_Name.toWstr().c_str() );
+				}
+				++ count;
+			}
+		}
+		TRACE_F ( _T("%d\n"), count );
+
+#endif // 0
 	}
 
 	//------------------------
@@ -217,11 +242,9 @@ namespace GAME
 		m_pPlayerInput = std::make_shared < PlayerInput > ();
 		m_pPlayerInput->SetPlayer ( m_btlPrm.GetPlayerID () );
 
-#if 0
 		m_pCPUInput = std::make_shared < CPUInput > ( shared_from_this (), m_pOther );
-		m_pCPUInput->SetPlayer ( m_playerID );
+		m_pCPUInput->SetPlayer ( m_btlPrm.GetPlayerID () );
 		m_pCPUInput->Load ();
-#endif // 0
 
 #if 0
 		//プレイヤモード(入力種類)による初期化

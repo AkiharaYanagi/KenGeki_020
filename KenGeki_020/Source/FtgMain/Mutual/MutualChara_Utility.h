@@ -34,7 +34,7 @@ namespace GAME
 		void SwitchRect ();			//枠表示切替
 		void SwitchDispInput ();	//入力表示切替
 		void SwitchFrontEnd ();		//ゲージ類表示切替
-		void SwithcCPU ();			//2PをCPU操作切替
+		void SwitchCPU ();			//2PをCPU操作切替
 	};
 
 

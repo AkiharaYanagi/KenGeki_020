@@ -72,6 +72,7 @@ namespace GAME
 		WP_Fighting GetwpFighting () const { return m_prmFtgDemo->GetwpFighting (); }
 		P_MutualChara GetpMutualChara () const { return m_prmFtgDemo->GetpMutualChara (); }
 		WP_FtgDemoActor GetwpFtgDemoActor () const { return m_prmFtgDemo->GetwpFtgDemoActor (); }
+		P_FtgGrp GetpFtgGrp () const { return m_prmFtgDemo->GetpFtgGrp (); }
 
 		virtual s3d::String GetName () const { return s3d::String { U"FtgDemoState"}; }
 
@@ -122,26 +123,12 @@ namespace GAME
 	using P_FTG_DM_GetReady = std::shared_ptr < FTG_DM_GetReady >;
 
 	//------------------------------------------------
-	//開始
-	class FTG_DM_Attack : public FtgDemoState
-	{
-		P_GrpDemo		m_grpAttack;
-	public:
-		FTG_DM_Attack ();
-		FTG_DM_Attack ( const FTG_DM_Attack & rhs ) = delete;
-		~FTG_DM_Attack () {}
-
-		void Start ();
-		void Do ();
-		s3d::String GetName () const { return s3d::String { U"FTG_DM_Attack"}; }
-	};
-	using P_FTG_DM_Attack = std::shared_ptr < FTG_DM_Attack >;
-
-	//------------------------------------------------
 	//メイン
 	class FTG_DM_Main : public FtgDemoState
 	{
+		P_GrpDemo		m_grpAttack;
 	public:
+		FTG_DM_Main ();
 		void Start ();
 		void Do ();
 		s3d::String GetName () const { return s3d::String { U"FTG_DM_Main"}; }
@@ -149,17 +136,35 @@ namespace GAME
 	using P_FTG_DM_Main = std::shared_ptr < FTG_DM_Main >;
 
 	//------------------------------------------------
+	//特殊演出 (一時停止)
+	class FTG_DM_ScpStop : public FtgDemoState
+	{
+		//壁割エフェクト
+		P_WallBreak		m_wallBreakEf;
+
+		//タイマ
+		P_Timer		m_timer;
+
+	public:
+		FTG_DM_ScpStop () {}
+		void Start ();
+		void Do ();
+		s3d::String GetName () const { return s3d::String { U"FTG_DM_ScpStop"}; }
+	};
+	using P_FTG_DM_ScpStop = std::shared_ptr < FTG_DM_ScpStop >;
+
+	//------------------------------------------------
 	//特殊演出 (壁割り)
 	class FTG_DM_WallBreak : public FtgDemoState
 	{
 		//壁割エフェクト
 		P_WallBreak		m_wallBreakEf;
-		
+
 		//タイマ
 		P_Timer		m_timer;
 
 	public:
-		FTG_DM_WallBreak();
+		FTG_DM_WallBreak ();
 		void Start ();
 		void Do ();
 		s3d::String GetName () const { return s3d::String { U"FTG_DM_WallBreak"}; }

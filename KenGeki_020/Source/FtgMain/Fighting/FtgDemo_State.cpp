@@ -61,6 +61,9 @@ namespace GAME
 		{
 			GetwpFtgDemoActor ().lock ()->Change_Greeting_To_GetReady ();
 		}
+
+		//キャラ共通一連動作
+		GetpMutualChara()->Conduct_InDemo ();
 	}
 
 	//------------------------------------------------
@@ -95,57 +98,61 @@ namespace GAME
 
 		if ( ! m_grpGetReady->GetValid () )
 		{
-			GetwpFtgDemoActor ().lock ()->Change_GetReady_To_Attack ();
+			GetwpFtgDemoActor ().lock ()->Change_GetReady_To_Main ();
 		}
+
+		//キャラ共通一連動作
+		GetpMutualChara()->Conduct_InDemo ();
 	}
 
 	//------------------------------------------------
-	//開始
-	FTG_DM_Attack::FTG_DM_Attack ()
+	//メイン
+	FTG_DM_Main::FTG_DM_Main ()
 	{
 		m_grpAttack = MakeGrpValue ( U"Demo_Fight.png" );
 		m_grpAttack->SetEnd ( 90 );
 	}
 
-	void FTG_DM_Attack::Start ()
-	{
-		m_grpAttack->Start ();
 
-		//時間計測開始
-//		GetwpFighting().lock()->StartTime ();
-	}
-
-	void FTG_DM_Attack::Do ()
-	{
-		m_grpAttack->Move ();
-	}
-
-	//------------------------------------------------
-	//メイン
 	void FTG_DM_Main::Start ()
 	{
+		//Fight! 表示
+		m_grpAttack->Start ();
+
 		//戦闘開始
 		GetpMutualChara ()->StartFighting ();
 
 		//時間計測開始
-//		GetwpFighting().lock()->StartTime ();
-
+		GetwpFighting().lock()->StartTime ();
 	}
 
 	void FTG_DM_Main::Do ()
 	{
+		m_grpAttack->Move ();
+
+		P_MutualChara pMutual = GetpMutualChara ();
+
+		//一時停止
+		bool bStop =  GetpFtgGrp()->IsActive_ScpStop ();
+		if ( bStop )
+		{
+			pMutual->ShiftScpStop ();
+		}
+		else
+		{
+			pMutual->ShiftFighting ();
+		}
+
 		//[一時] 壁割
-		bool bOnWallBreak = m_prmFtgDemo->GetpFtgGrp ()->GetWallBreak ();
+		bool bOnWallBreak = GetpFtgGrp()->GetWallBreak ();
 		if ( bOnWallBreak )
 		{
 			GetwpFtgDemoActor().lock()->Shift_Main_To_WallBreak ();
 		}
-		
+
 		// 格闘終了判定
 		if ( GetwpFighting().lock()->FinishCheck_ZeroLife () )
 		{
-			//GetpMutualChara ()->Stop ( true );
-			//GetpMutualChara ()->SetEndWait ();
 			GetwpFtgDemoActor ().lock ()->Change_Main_To_Down ();
 		}
 
@@ -154,6 +161,22 @@ namespace GAME
 		{
 			GetwpFtgDemoActor ().lock ()->Change_Main_To_TimeUpWait ();
 		}
+
+
+		//キャラ共通一連動作
+		pMutual->Conduct ();
+	}
+
+	//------------------------------------------------
+	//特殊演出 (一時停止)
+	void FTG_DM_ScpStop::Start ()
+	{
+	}
+
+	void FTG_DM_ScpStop::Do ()
+	{
+		//キャラ共通一連動作
+		GetpMutualChara()->Conduct_InStop ();
 	}
 
 	//------------------------------------------------
@@ -197,6 +220,9 @@ namespace GAME
 			GetpMutualChara()->ShiftFighting ();
 			GetwpFtgDemoActor().lock()->Shift_WallBreak_To_Main();
 		}
+
+		//キャラ共通一連動作
+		GetpMutualChara ()->Conduct_InStop ();
 	}
 
 	//------------------------------------------------
@@ -209,16 +235,15 @@ namespace GAME
 		m_grpDown->SetEnd ( 120 );
 
 		m_timer = std::make_shared < Timer > ( 120 );
-
-
-		//@todo 決着時ライフ０　（白ダメージ処理なし）
-		//@todo デモ開始時に入力なし　GetReady時に移動できないようにする
 	}
 
 	void FTG_DM_Down::Start ()
 	{
 		//勝者側を待機状態にする	 / 敗者側をダウンにする
 		GetpMutualChara ()->StartEndWait ();
+
+		//戦闘時間を停止
+		GetwpFighting().lock()->StopTimer ();
 
 		//Demo
 		m_grpDown->Start ();
@@ -242,26 +267,19 @@ namespace GAME
 
 				//ダウンから勝者表示へ
 				GetwpFtgDemoActor ().lock ()->Change_Down_To_Winner ();
-
-	#if 0
-				//新規開始
-				GetpMutualChara ()->StartFighting ();
-				GetwpFtgDemoActor ().lock ()->Change_Down_To_Greeting ();
-
-				//リザルトに移行
-				GetwpFtgDemoActor ().lock ()->End_Down_To_Result ();
-	#endif // 0
 			}
 		}
 		else //非稼働時
 		{
 			//キャラステートが敗北ダウン持続に入ったらタイマスタート
-	//		if ( ! m_grpDown->GetValid () )
 			if ( GetpMutualChara ()->IsDown_Calm () )
 			{
 				m_timer->Start ();
 			}
 		}
+
+		//キャラ共通一連動作
+		GetpMutualChara ()->Conduct_InDemo ();
 	}
 
 
@@ -292,6 +310,9 @@ namespace GAME
 			//タイムアップ
 			GetwpFtgDemoActor ().lock ()->Change_Main_To_TimeUp ();
 		}
+
+		//キャラ共通一連動作
+		GetpMutualChara ()->Conduct_InDemo ();
 	}
 
 	//------------------------------------------------
@@ -315,6 +336,9 @@ namespace GAME
 		{
 			GetwpFtgDemoActor ().lock ()->Change_TimeUp_To_Winner ();
 		}
+
+		//キャラ共通一連動作
+		GetpMutualChara ()->Conduct_InDemo ();
 	}
 
 
@@ -426,6 +450,9 @@ namespace GAME
 				}
 			}
 		}
+
+		//キャラ共通一連動作
+		GetpMutualChara ()->Conduct_InDemo ();
 	}
 
 

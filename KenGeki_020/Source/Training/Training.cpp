@@ -104,14 +104,10 @@ namespace GAME
 		m_fighting->Set_1P_vs_2P ();
 #endif // 0
 
-#if 0
-
-		//SOUND
-		SOUND->Stop_BGM ( BGM_GABA );
-		SOUND->Play_Loop_BGM ( BGM_GABA );
-
-#endif // 0
-
+		//BGM
+		SND_STOP_ALL_BGM ();
+		SND_PLAY_LOOP_BGM ( BGM_GABA );
+		//SND_PLAY_LOOP_BGM ( BGM_SAE );
 
 		Scene::Load ();
 	}
@@ -161,7 +157,7 @@ namespace GAME
 		//BackSpaceで戻る
 		if ( WND_UTL::AscKey ( VK_BACK ) )
 		{
-//			SOUND->Stop_BGM ( BGM_Main );
+			SND_STOP_ALL_BGM ();
 			GetwpThis().lock ()->Transit_Title ();
 		}
 

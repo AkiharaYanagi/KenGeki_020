@@ -69,7 +69,7 @@ namespace GAME
 
 		void StartWinner ();
 
-		//メイン中一時遷移		(Start()を実行しない)
+		//メイン中一時遷移	
 		void ShiftFighting ();
 		void ShiftScpStop ();
 		void ShiftSlowSkip ();

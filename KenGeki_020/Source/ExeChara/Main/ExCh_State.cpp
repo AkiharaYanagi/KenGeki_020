@@ -31,7 +31,8 @@ namespace GAME
 		pExe->TransitAction ();		//アクション遷移
 		pExe->CalcPos ();			//位置計算
 		pExe->SetCollisionRect ();	//接触枠設定
-		pExe->PreMove_Effect ();		//エフェクト生成と動作
+		pExe->Generate_Effect ();	//エフェクト生成
+		pExe->PreMove_Effect ();	//エフェクト動作
 	}
 
 	//共通：ライフ判定なしPostScriptMove
@@ -43,6 +44,8 @@ namespace GAME
 		//■		pExe->CheckLife ();		//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 		pExe->SE_Play ();			//SEの再生
+
+		pExe->SetFirstSE ( F );		//SE再生フラグ
 	}
 
 	//=====================================================
@@ -87,7 +90,8 @@ namespace GAME
 		pExe->TransitAction ();		//アクション遷移
 		pExe->CalcPos ();			//位置計算
 //■		pExe->SetCollisionRect ();	//接触枠設定
-		pExe->PreMove_Effect ();		//エフェクト生成と動作
+		pExe->Generate_Effect ();	//エフェクト生成
+		pExe->PreMove_Effect ();	//エフェクト動作
 	}
 
 	void CHST_GetReady::PostScriptMove ()
@@ -118,66 +122,9 @@ namespace GAME
 		pExe->CalcPos ();			//位置計算
 		pExe->SetCollisionRect ();	//接触枠設定
 //		pExe->OverEfPart ();		//EfPart重なり
-		pExe->PreMove_Effect ();		//エフェクト生成と動作
+		pExe->Generate_Effect ();	//エフェクト生成
+		pExe->PreMove_Effect ();	//エフェクト動作
 	}
-
-	// AlwaysMove () アクションとスクリプトによらない一定の処理
-#if 0
-	void ExeChara::AlwaysMove ()
-	{
-		//ダメージ分のライフ表示減少
-		int dmg = m_btlPrm.GetDamage ();
-		if ( 0 < dmg ) { m_btlPrm.SetDamage ( dmg - 1 ); }
-
-		//---------------------------------------------------
-		//デモカウント
-		//ダウン状態のとき
-		if ( CHST_DOWN == m_charaState )
-		{
-			if ( ! m_btlPrm.GetTmr_Down ()->IsActive () )
-			{
-				m_charaState = CHST_DOWN_END;
-			}
-		}
-
-		//勝利待機状態のとき
-		if ( CHST_WIN_WAIT == m_charaState )
-		{
-#if 0
-			//地上ニュートラルなら
-			if ( IsBasicAction ( BA_STAND ) )
-			{
-				//勝利状態に移行
-				m_actionID = m_pChara->GetBsAction ( BA_WIN );
-				TransitAction ( m_actionID );
-				m_tmrEnd->Start ();
-				m_charaState = CHST_WIN;
-			}
-#endif // 0
-		}
-
-		//勝利状態のとき
-		if ( CHST_WIN == m_charaState )
-		{
-			//if ( ! m_tmrEnd->IsActive () )
-			if ( ! m_btlPrm.GetTmr_End ()->IsActive () )
-			{
-				m_charaState = CHST_WIN_END;
-			}
-		}
-		//---------------------------------------------------
-		//SE
-		if ( m_btlPrm.GetFirstEf () )
-		{
-			SOUND->Play ( SE_Hit );
-			m_btlPrm.SetFirstEf ( F );
-		}
-
-		//---------------------------------------------------
-		//入力
-		Input ();
-	}
-#endif // 0
 
 	void CHST_Main::RectMove ()
 	{
@@ -193,30 +140,55 @@ namespace GAME
 		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 		pExe->SE_Play ();			//SEの再生
+
+		pExe->SetFirstSE ( F );		//SE再生フラグ
 	}
 
 
 	//------------------------------------------------
 	//バトル　一時停止
 
+	void CHST_ScpStop::Start ()
+	{
+		WP_ExeChara wpExeCh = GetwpExeChara ();
+		UINT stop = wpExeCh.lock()->GetBtlPrm ().GetScpStop ();
+		m_timer.Start ( stop );
+	}
+
 	void CHST_ScpStop::PreScriptMove ()
 	{
+		//タイマ
+		m_timer.Move ();
+		if ( m_timer.IsLast () )
+		{
+			//終了時に通常バトルにシフト
+			GetwpActor ().lock()->ShiftFighting ();
+		}
+
+		//一連処理
 		P_ExeChara pExe = GetwpExeChara ().lock ();
 		pExe->Input ();				//入力		
 		//■ 	pExe->TransitAction ();		//アクション遷移
 		//■		pExe->CalcPos ();			//位置計算
 		//■		pExe->SetCollisionRect ();	//接触枠設定
-		//■		pExe->PreMove_Effect ();	//エフェクト生成と動作
+
+		//エフェクト生成のみ１回だけ、動作は毎回
+		pExe->Generate_Effect_once ();	//エフェクト生成
+		pExe->PreMove_Effect ();	//エフェクト動作
 	}
 
 	void CHST_ScpStop::PostScriptMove ()
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();
-		//■		pExe->PostMove_Effect ();	//エフェクト動作
+		pExe->PostMove_Effect ();	//エフェクト動作
 		//■		pExe->MoveTimer ();			//タイマ稼働
 		//■		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
-		//■		pExe->SE_Play ();			//SEの再生
+
+		//SEは再生してフラグを続投（通常時にOFF）
+		pExe->SE_Play ();			//SEの再生
+		pExe->GetBtlPrm().SetFirstSE ( T );		//SE再生フラグ
+
 	}
 
 	//------------------------------------------------
@@ -229,7 +201,9 @@ namespace GAME
 		//■ 	pExe->TransitAction ();		//アクション遷移
 		//■		pExe->CalcPos ();			//位置計算
 		pExe->SetCollisionRect ();	//接触枠設定
-		//■		pExe->PreMove_Effect ();	//エフェクト生成と動作
+
+		pExe->Generate_Effect ();	//エフェクト生成
+		pExe->PreMove_Effect ();	//エフェクト動作
 	}
 
 	void CHST_WallBreak::PostScriptMove ()
@@ -256,7 +230,8 @@ namespace GAME
 		pExe->TransitAction ();		//アクション遷移
 		//■		pExe->CalcPos ();			//位置計算
 		pExe->SetCollisionRect ();	//接触枠設定
-		//■		pExe->PreMove_Effect ();		//エフェクト生成と動作
+		pExe->Generate_Effect ();	//エフェクト生成
+		//■		pExe->PreMove_Effect ();	//エフェクト動作
 	}
 
 	void CHST_Slow_Skip::RectMove ()

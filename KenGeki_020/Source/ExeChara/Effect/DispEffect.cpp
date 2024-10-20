@@ -21,10 +21,15 @@ namespace GAME
 //		m_grp = std::make_shared < GameGraphic > ();
 		m_grp = std::make_shared < GrpEf > ();
 		m_grp->SetbCenterOfTx ( F );
-//		m_grp->On ();
 		m_grp->SetZ ( z );	//初期位置
+
 		AddpTask ( m_grp );
 		GRPLST_INSERT ( m_grp );
+
+		//最初から表示
+		m_grp->On ();
+		m_grp->SetShader ( T );
+
 
 		//枠表示
 		m_dispRect = std::make_shared < DispRect > ();
@@ -33,8 +38,8 @@ namespace GAME
 
 	DispEffect::~DispEffect ()
 	{
-#if 0
 		//終了時にグラフィックタスクを外す
+#if 0
 		EraseTask ( m_dispRect );
 		EraseTask ( m_grp );
 #endif // 0
@@ -65,6 +70,9 @@ namespace GAME
 		VEC2 imgPos = VEC2( fDir * tempImgPos.x, tempImgPos.y );
 //		VEC2 imgPos = VEC2( tempImgPos.x, tempImgPos.y );
 		VEC2 vecEfImg = ptEf + imgPos + G_BASE_POS ();
+
+		//test
+		vecEfImg = VEC2 ( 0, 0 );
 
 		//回転
 		float rad = D3DX_PI * 0.01f * pScript->m_prmStaging.Rotate;

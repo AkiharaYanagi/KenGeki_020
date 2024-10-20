@@ -105,18 +105,12 @@ namespace GAME
 		//エフェクト監理
 		P_OprEf			m_oprtEf;
 
-#if 0
-		//------------------------------------------------
-		//粒子エフェクト(参照)
-		P_EfPart	m_efPart;
-#endif // 0
-
 		//------------------------------------------------
 		//相手変更指定の一時保存
 		//ヒット時など相手を変更するときに判定後、1P2P同時に適用する
 		s3d::String		m_nameChangeOther;	//変更する相手のアクション名 
 
-
+		//------------------------------------------------
 		//剣撃走破
 		P_EfSouha		m_efSouha;
 
@@ -162,6 +156,8 @@ namespace GAME
 		void Input ();				//入力処理
 		void TransitAction ();		//アクション移項
 		void CalcPos ();			// 位置計算		//ぶつかり後、位置の修正
+		void Generate_Effect ();	//スクリプト処理 前 エフェクト生成
+		void Generate_Effect_once ();	//スクリプト処理 前 エフェクト生成 １回のみ
 		void PreMove_Effect ();		//スクリプト処理 前 エフェクト動作
 
 		//PostScriptMove
@@ -229,7 +225,6 @@ namespace GAME
 
 		//パラメータ
 		//@todo スクリプトの持つ　ScriptParam_Battle と ExeCharaの持つ実効値 BtlPrm の整理
-		BtlParam GetBtlParam () const { return m_btlPrm; };
 		BtlParam GetBtlPrm () const { return m_btlPrm; }
 
 		void SetPos ( VEC2 v ) { m_btlPrm.SetPos ( v ); }
@@ -244,6 +239,11 @@ namespace GAME
 		int GetLife () const { return m_btlPrm.GetLife (); }		//ライフ取得
 		//ライフ０チェック
 		bool IsZeroLife () const { return ( 0 >= m_btlPrm.GetLife () ); }
+
+		//SEの初回チェック
+		void SetFirstSE ( bool b ) { m_btlPrm.SetFirstSE ( b ); }
+		//ボイスの再生指定
+		void PlayVoice ( const s3d::String & vc_name );
 
 
 		//------------------------------------------------------------
@@ -382,11 +382,9 @@ namespace GAME
 		void OnFrontEnd ();
 		void OffFrontEnd ();
 
-#if 0
 		//CPU操作切替
 		void ControlCPU ();
 		void ControlPlayer ();
-#endif // 0
 
 	//================================================
 	//	内部関数

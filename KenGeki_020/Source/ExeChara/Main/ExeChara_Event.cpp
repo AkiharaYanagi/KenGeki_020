@@ -151,9 +151,18 @@ namespace GAME
 		m_btlPrm.SetAccRecoil ( recoil_i );
 
 		//-----------------------------------------------------
-		//ゲージ増減
-		int p = m_pScript->m_prmBattle.Power;
-		m_btlPrm.AddMana ( p );
+		//ゲージ増減 (超必殺以外)
+		if ( ! IsActCtg ( AC_OVERDRIVE ) )
+		{
+			//攻撃値をマナ増加に加算
+			int p = m_pScript->m_prmBattle.Power;
+
+			//アクセルゲージ補正 ( -1.000倍 ~ +2.000倍 )
+			//( -500 ~ +1000 )
+			double dp = p * 0.002f * m_btlPrm.GetAccel();
+
+			m_btlPrm.AddMana ( (int)dp );
+		}
 
 		//-----------------------------------------------------
 		//パラメータ

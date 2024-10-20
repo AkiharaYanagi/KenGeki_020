@@ -59,6 +59,8 @@ namespace GAME
 		void SetpPrm ( P_ExeChara_Param p ) { mp_PrmExeChara = p; }
 
 		WP_ExeChara GetwpExeChara () const { return mp_PrmExeChara->GetwpExeChara (); }
+		WP_ExeChara_Actor GetwpActor () const { return mp_PrmExeChara->GetwpExeChara_Actor (); }
+
 
 		//共通：入力なしPreScriptMove
 		void PreScriptMove_NoInput ();
@@ -131,8 +133,10 @@ namespace GAME
 	//バトル　一時停止
 	class CHST_ScpStop : public ExeChara_State
 	{
+		Timer		m_timer;
 	public:
 		s3d::String GetName () const { return U"Stop"; }
+		void Start ();
 		void PreScriptMove ();
 		void PostScriptMove ();
 		bool SkipDecision () const { return T; }

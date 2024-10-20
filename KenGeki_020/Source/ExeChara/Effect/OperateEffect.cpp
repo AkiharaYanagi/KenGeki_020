@@ -39,7 +39,7 @@ namespace GAME
 	//解放
 	void OperateEffect::Rele ()
 	{
-//		m_plpExeEffect->clear();
+		m_plpExeEffect->clear();
 		TASK_VEC::Rele ();
 	}
 
@@ -91,7 +91,7 @@ namespace GAME
 
 
 	//スクリプト処理 前 エフェクト全体の動作
-	void OperateEffect::PreMove ( P_Script pScp, BtlParam & btlprm )
+	void OperateEffect::Generate ( P_Script pScp, BtlParam & btlPrm )
 	{
 #if 0
 		//	初回チェックはスクリプト側からは必要ないので、エフェクト内で処理する
@@ -110,8 +110,24 @@ namespace GAME
 			}
 		}
 #endif // 0
-		
-		GenerateEffect ( pScp, btlprm );
+
+		DBGOUT_WND_F ( 6, U"OperateEffect::m_bGenerate{}"_fmt( m_bGenerate ) );
+
+		//生成済みのとき何もしないで返す
+		//ExeCharaの通常状態で解除
+		//ExeCharaの一時停止中はそのまま
+		if ( m_bGenerate ) { return; }
+
+		//生成
+		GenerateEffect ( pScp, btlPrm );
+		m_bGenerate = T;	//生成済み
+	}
+
+
+	//スクリプト処理 前 エフェクト全体の動作
+	void OperateEffect::PreMove ( P_Script pScp, BtlParam & btlPrm )
+	{
+		(void)btlPrm;
 
 		//各エフェクトの動作
 		for ( auto p : * m_plpExeEffect ) { p->PreScriptMove (); }
@@ -119,14 +135,14 @@ namespace GAME
 
 
 	//スクリプト処理 後 エフェクト全体の動作
-	void OperateEffect::PostMove ( BtlParam & btlprm )
+	void OperateEffect::PostMove ( BtlParam & btlPrm )
 	{
 		//DBGOUT_WND_F は　ExeChara中で用いると２P側で上書きされる
 		//DBGOUT_WND_F ( 8, _T ( "GRPLST->size() = %d" ), GrpLst::Inst()->GetNumList() );
 
 
 		//各エフェクトの動作
-		for ( auto p : * m_plpExeEffect ) { p->PostScriptMove ( btlprm ); }
+		for ( auto p : * m_plpExeEffect ) { p->PostScriptMove ( btlPrm ); }
 
 
 		//終了処理

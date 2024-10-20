@@ -133,10 +133,6 @@ namespace GAME
 			P_Action pact = m_pChara->GetpAction ( transitID );
 			P_Script pscr = pact->GetpScript ( 0 );
 
-			//バランス処理
-//			int bl_a = pact->GetBalance ();		//アクション消費バランス
-//			m_btlPrm.AddBalance ( bl_a );
-
 			//アクション遷移
 			m_actionID = transitID;
 

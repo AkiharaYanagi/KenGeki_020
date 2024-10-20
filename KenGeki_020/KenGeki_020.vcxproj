@@ -415,6 +415,8 @@
     <ClInclude Include="Source\ExeChara\Effect\OperateEffect.h" />
     <ClInclude Include="Source\ExeChara\Input\CharaInput.h" />
     <ClInclude Include="Source\ExeChara\Input\CPUInput.h" />
+    <ClInclude Include="Source\ExeChara\Input\NewCPUInput.h" />
+    <ClInclude Include="Source\ExeChara\Input\NewCPUInput_Act.h" />
     <ClInclude Include="Source\ExeChara\Input\PlayerInput.h" />
     <ClInclude Include="Source\ExeChara\Main\ExCh_Actor.h" />
     <ClInclude Include="Source\ExeChara\Main\ExCh_State.h" />
@@ -469,6 +471,8 @@
     <ClCompile Include="Source\ExeChara\Effect\OperateEffect.cpp" />
     <ClCompile Include="Source\ExeChara\Input\CharaInput.cpp" />
     <ClCompile Include="Source\ExeChara\Input\CPUInput.cpp" />
+    <ClCompile Include="Source\ExeChara\Input\NewCPUInput.cpp" />
+    <ClCompile Include="Source\ExeChara\Input\NewCPUInput_Act.cpp" />
     <ClCompile Include="Source\ExeChara\Input\PlayerInput.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExCh_Actor.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExCh_State.cpp" />

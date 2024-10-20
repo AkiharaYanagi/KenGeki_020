@@ -153,7 +153,7 @@ namespace GAME
 		GET_SET ( int, GetLife, SetLife, m_life	)			//ライフ
 		GET_SET ( int, GetBalance, SetBalance, m_balance )	//バランス
 		GET_SET ( int, GetMana, SetMana, m_mana )			//マナ
-		GET_SET ( int, GetAccel, SetAccel, m_accel )		//アクセル
+		GET_SET ( int, GetAccel, SetAccel, m_accel )		//アクセル ( -500 ~ +1000 )
 		GET_SET ( int, GetBalanceMax, SetBalanceMax, m_balance_max )	//バランス最大値
 		GET_SET ( int, GetWhiteDamage, SetWhiteDamage, m_white_damage )	//白ダメージ
 		GET_SET ( int, GetPower, SetPower, m_power )		//実効攻撃値

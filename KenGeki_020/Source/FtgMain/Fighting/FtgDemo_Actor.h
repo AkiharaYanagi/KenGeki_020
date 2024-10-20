@@ -27,7 +27,6 @@ namespace GAME
 		//ステート
 		P_FTG_DM_Greeting	m_Greeting;
 		P_FTG_DM_GetReady	m_GetReady;
-		P_FTG_DM_Attack		m_Attack;
 		P_FTG_DM_Main		m_Main;
 		P_FTG_DM_WallBreak	m_WallBreak;
 		P_FTG_DM_Down		m_Down;	
@@ -63,7 +62,7 @@ namespace GAME
 		void SetpFtgGrp ( P_FtgGrp p ) { mp_Param->SetpFtgGrp ( p ); }
 
 		void Change_Greeting_To_GetReady ();	//挨拶から準備へ
-		void Change_GetReady_To_Attack ();		//準備から開始へ
+		void Change_GetReady_To_Main ();		//準備から開始へ
 		void Change_Main_To_Down ();			//メインからダウンへ
 		void Change_Main_To_TimeUpWait ();		//メインから時間切れ待機へ
 		void Change_Main_To_TimeUp ();			//メインから時間切れへ

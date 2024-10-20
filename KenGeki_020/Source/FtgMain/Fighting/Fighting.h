@@ -90,6 +90,8 @@ namespace GAME
 		void StartEndWait ();		//タイムアップ終了待機
 		void StartEnd ();			//終了ステップ開始
 
+		void StopTimer ();			//タイマ停止
+
 		//----------------
 		//終了判定
 		bool FinishCheck_ZeroLife ();	//格闘終了判定

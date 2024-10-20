@@ -39,19 +39,19 @@ namespace GAME
 		P_Collision		m_collision;
 		P_Decision		m_decision;
 
+#if 0
 		//-------------------------------------------------
 		//ファイティング：1p2p共通スクリプト処理
 		UINT	m_scpStop {0};		//スクリプトからのストップ
 
 		//特殊演出
 		UINT	m_blackOut {0};		//暗転
-#if 0
 		bool	m_whiteOut { F };	//白転
 		UINT	m_slow { 0 };		//スロー
 #endif // 0
 
 		//共通グラフィック
-		P_FtgGrp	m_pFtgGrp;
+//		P_FtgGrp	m_pFtgGrp;
 
 		//-------------------------------------------------
 		//勝者
@@ -71,7 +71,7 @@ namespace GAME
 
 		//スクリプトの毎フレーム処理
 		void Conduct ();
-		void Grp ();			//グラフィック共通
+		void Conduct_InDemo ();	//デモ中コンダクト
 		void Conduct_InStop ();	//一時停止コンダクト
 
 
@@ -94,68 +94,14 @@ namespace GAME
 		bool IsDown_Calm ();		//敗北ダウン安定状態
 		void StartWinner ();		//勝者表示
 
-		//----------------------------------------------------
-#if 0
-		//戦闘時間
-		void StartTime ();			//時間計測開始
-		void TimeSet ();			//時間計測初期化
-		void StartTimeUp ();		//タイムアップ
-		void StartEndWait ();		//タイムアップ終了待機
-		void StartEnd ();			//終了ステップ開始
-
-		//----------------
-		//終了判定
-		bool FinishCheck_ZeroLife ();	//格闘終了判定
-		bool FinishCheck_TimeUp ();		//時間終了
-
-		//時間終了時、残ライフで勝者決定
-		void DecideWinner_FromLife ();
-
-
-		//試合(マッチ)終了判定
-		bool IsEndMutch () { return m_round->IsEndMutch (); }
-
-#endif // 0
 		//----------------
 		//演出
 
 		//共通グラフィック
-		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
+//		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
 
 		bool IsWait ();	//両者待機状態
 
-#if 0
-		UINT GetBlackOut () const { return m_blackOut; };	//暗転
-		void SetBlackOut ( UINT i )
-		{
-			m_blackOut = i;
-			m_exeChara1->SetBlackOut ( i );
-			m_exeChara2->SetBlackOut ( i );
-		};
-
-		UINT GetScpStop () const { return m_scpStop; };	//停止
-		void SetScpStop ( UINT i ) { m_scpStop = i; };
-
-		void RevertSlow ();	//スロウ解除
-#endif // 0
-
-#if 0
-		bool CheckZeroLife ();	//格闘終了判定
-
-		//特殊演出
-		bool CheckWhiteOut () const { return m_whiteOut; }
-		void SetWhiteOut ( bool b ) { m_whiteOut = b; }
-
-		//初期操作 プレイヤ/CPU 設定
-		void Set_1P_vs_2P ();
-		void Set_1P_vs_CPU ();
-		void Set_CPU_vs_CPU ();
-
-		//勝者
-		WINNER GetWinner () const { return m_winner; }
-		CHARA_NAME GetWinnerName () const;
-
-#endif // 0
 
 		//トレーニングモード初期化
 		void TrainingInit ();
@@ -169,6 +115,8 @@ namespace GAME
 		//関数群
 		MutualChara_Utility			m_utl;
 
+		//サブルーチン
+		void SystemChange ();		//システム変更
 		void SaveParam();			//パラメータ記録
 
 	};

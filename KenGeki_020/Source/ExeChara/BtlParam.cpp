@@ -530,6 +530,7 @@ namespace GAME
 		if ( m_pAction->IsName ( U"前歩き")		) { return T; }
 		if ( m_pAction->IsName ( U"後歩き")		) { return T; }
 		if ( m_pAction->IsName ( U"着地")		) {	return T; }
+		if ( m_pAction->IsName ( U"空中やられ")	) {	return T; }
 
 		return F;
 	}
@@ -543,11 +544,11 @@ namespace GAME
 		if ( LIFE_MAX < m_life ) { m_life = LIFE_MAX; }
 	}
 
+	//加算後、最大最小値でチェック
 	void BtlParam::AddBalance ( int n )
 	{
 		m_balance += n;
 		if ( m_balance < 0 ) { m_balance = 0; }
-//		if ( BALANCE_MAX < m_balance ) { m_balance = BALANCE_MAX; }
 		if ( m_balance_max < m_balance ) { m_balance = m_balance_max; }
 	}
 

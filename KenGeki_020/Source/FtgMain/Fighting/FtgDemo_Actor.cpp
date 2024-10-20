@@ -23,7 +23,6 @@ namespace GAME
 		//ステート
 		m_Greeting = std::make_shared < FTG_DM_Greeting > ();
 		m_GetReady = std::make_shared < FTG_DM_GetReady > ();
-		m_Attack = std::make_shared < FTG_DM_Attack > ();
 		m_Main = std::make_shared < FTG_DM_Main > ();
 		m_WallBreak = std::make_shared < FTG_DM_WallBreak > ();
 		m_Down = std::make_shared < FTG_DM_Down > ();
@@ -33,7 +32,6 @@ namespace GAME
 
 		mvp_FtgDemo.push_back ( m_Greeting );
 		mvp_FtgDemo.push_back ( m_GetReady );
-		mvp_FtgDemo.push_back ( m_Attack );
 		mvp_FtgDemo.push_back ( m_Main );
 		mvp_FtgDemo.push_back ( m_WallBreak );
 		mvp_FtgDemo.push_back ( m_Down );
@@ -95,11 +93,9 @@ namespace GAME
 		//SOUND->If_Play_Loop_BGM ( BGM_Main );
 	}
 
-	void FtgDemoActor::Change_GetReady_To_Attack ()
+	void FtgDemoActor::Change_GetReady_To_Main ()
 	{
 		m_GetReady->Final ();
-		m_Attack->Start ();
-
 		mp_FtgDemo = m_Main;
 		m_Main->Start ();
 	}

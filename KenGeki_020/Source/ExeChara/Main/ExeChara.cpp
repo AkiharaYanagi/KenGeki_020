@@ -78,6 +78,7 @@ namespace GAME
 	//	void Input ();			//入力処理
 	//	void TransitAction ();	//アクション移項
 	//	void CalcPos ();		// 位置計算		//ぶつかり後、位置の修正
+	//	voidGenerate_Effect ()
 	//	void PreMove_Effect ();		//スクリプト処理 前 エフェクト動作
 
 	//PostScriptMove
@@ -112,6 +113,23 @@ namespace GAME
 	}
 
 	//================================================
+	//エフェクト スクリプト生成
+	void ExeChara::Generate_Effect ()
+	{
+		m_oprtEf->Generate ( m_pScript, m_btlPrm );
+
+		//通常時はGenerate()後に生成フラグを解除する
+		m_oprtEf->SetbGnrt ( F );
+	}
+
+	//エフェクト スクリプト生成１回のみ
+	void ExeChara::Generate_Effect_once ()
+	{
+		m_oprtEf->Generate ( m_pScript, m_btlPrm );
+		//通常時はGenerate()後に生成フラグを解除するが、
+		//一時停止中など１回のみは解除しない
+	}
+
 	//エフェクト スクリプト処理 前
 	void ExeChara::PreMove_Effect ()
 	{
@@ -149,6 +167,7 @@ namespace GAME
 			m_btlPrm.SetLife ( 10000 );
 #endif // 0
 		}
+#endif // 0
 
 		//-----------------------------------------
 		//ライフによるバランスゲージ増分
@@ -158,7 +177,6 @@ namespace GAME
 		int life = m_btlPrm.GetLife ();
 		int b_max = BALANCE_START + ( LIFE_MAX - life ) / 2;
 		m_btlPrm.SetBalanceMax ( b_max );
-#endif // 0
 	}
 
 
@@ -175,23 +193,16 @@ namespace GAME
 	//サウンドエフェクトの再生
 	void ExeChara::SE_Play ()
 	{
+		//一時停止中は１回のみ
+		if ( m_btlPrm.GetFirstSE () ) { return; }
+		
 		//ヒットストップ中は除く
 		if ( m_btlPrm.GetTmr_HitStop()->IsActive () )
 		{
 			return;
 		}
 
-#if 0
-		//スクリプトからSEのIDを取得
-		UINT id_se = m_pScript->m_prmStaging.SE;
-		//0は対象無しの値
-		if ( 0 != id_se )
-		{
-			//SOUND->Play_SE ( (SE_ID)id_se );
-			SND_PLAY_ONESHOT_SE ( (uint32)id_se );
-		}
-#endif // 0
-
+		//スクリプトから名前で指定
 		//SE
 		const s3d::String se_name =  m_pScript->m_prmStaging.SE_Name;
 		if ( se_name.compare ( U"" ) != 0 )
@@ -200,14 +211,35 @@ namespace GAME
 		}
 
 		//VC
-		const s3d::String vc_name =  m_pScript->m_prmStaging.VC_Name;
-		if ( vc_name.compare ( U"" ) != 0 )
-		{
-			SND_PLAY_ONESHOT_VC ( vc_name );		//名前から再生
-		}
+		PlayVoice ( m_pScript->m_prmStaging.VC_Name );
 
+		//再生フラグをOn (CharaStateでOff)
+		m_btlPrm.SetFirstSE ( T );
 	}
 
+	//ボイスの再生指定
+	void ExeChara::PlayVoice ( const s3d::String & vc_name )
+	{
+		//空欄は何もしない
+		if ( vc_name.compare ( U"" ) == 0 ) { return; }
+
+		//被ダメ時はランダムに飛ばす
+		if ( IsDamaged () )
+		{
+			//初撃は確定、連続ヒット中はランダム
+			UINT hitnum = m_pOther.lock()->GetBtlPrm().GetChainHitNum ();
+
+			if ( 1 < hitnum )
+			{
+				//ランダム 0-2 (30%)で再生
+				//ランダム 3-9 (70%)で非再生
+				int rnd = s3d::Random < int > ( 0, 9 );
+				if ( 2 < rnd ) { return; }
+			}
+		}
+
+		SND_PLAY_ONESHOT_VC ( vc_name );		//名前から再生
+	}
 
 
 	//====================================================================================
@@ -275,13 +307,13 @@ namespace GAME
 		SetParamFromScript ();
 	}
 
-	//スクリプトからパラメータを反映する
+
+	//スクリプトからパラメータに反映する
 	void ExeChara::SetParamFromScript ()
 	{
 		//------------------------------------------------
-		//アクションとスクリプトをパラメータに渡す
+		//アクションとスクリプトをバトルパラメータに渡す
 		m_btlPrm.Update ( m_pAction, m_pScript );
-
 
 		//------------------------------------------------
 		//	全体演出
@@ -290,34 +322,34 @@ namespace GAME
 		UINT blackOut = m_pScript->m_prmStaging.BlackOut;
 		if ( blackOut > 0 )
 		{
+			//全体グラフィックに値を指定する
 			m_pFtgGrp->StartBlackOut ( blackOut );
 		}
 
 		//------------------------------------------------
 		//スクリプトからの停止
 		//	タイマの状態を確認しないと同じスクリプトを調べ続けてしまう
-		//if ( ! m_btlPrm.GetTmr_ScpStop ()->IsActive () )
 		if ( ! m_pFtgGrp->IsActive_ScpStop () )
 		{
 			UINT scpStop = m_pScript->m_prmStaging.Stop;
 			m_btlPrm.SetScpStop ( scpStop );
 			if ( scpStop > 0 )
 			{
-				//共通に通知
+				//全体グラフィックに値を指定する
 				m_pFtgGrp->StartScpStop ( scpStop );
 
-				//互いにシフト
-				//ShiftScpStop ();
-				//m_pOther.lock ()->ShiftScpStop ();
+				//互いに時間停止ステートにシフト
+				ShiftScpStop ();
+				m_pOther.lock ()->ShiftScpStop ();
 			}
 		}
 	}
 
-#if 0
 	//====================================================================================
 
 	//-------------------------------------------------------------------------------------------------
 	//EfPart重なり
+#if 0
 	void ExeChara::OverEfPart ()
 	{
 #if 0
@@ -370,20 +402,18 @@ namespace GAME
 	}
 
 
-#if 0
 	//CPU操作切替
 	void ExeChara::ControlCPU ()
 	{
 		m_pCharaInput = m_pCPUInput;
-		m_dispChara->SetControl_CPU ();
+		//m_dispChara->SetControl_CPU ();
 	}
 
 	void ExeChara::ControlPlayer ()
 	{
 		m_pCharaInput = m_pPlayerInput;
-		m_dispChara->SetControl_PLAYER ();
+		//m_dispChara->SetControl_PLAYER ();
 	}
-#endif // 0
 
 
 

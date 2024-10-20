@@ -49,7 +49,7 @@ namespace GAME
 		AddpTask ( m_demoActor );
 
 		//Debug用　開始デモをスキップ切替
-#define DEMO_ON		0
+#define DEMO_ON		1
 #if DEMO_ON
 		m_demoSkip = F;
 #else
@@ -102,7 +102,7 @@ namespace GAME
 	{
 		m_demoActor->SetwpFighting ( shared_from_this () );
 		m_demoActor->SetpFtgGrp ( m_pFtgGrp );
-		m_mutualChara->SetpFtgGrp ( m_pFtgGrp );
+//		m_mutualChara->SetpFtgGrp ( m_pFtgGrp );
 		m_exeChara1->SetpFtgGrp ( m_pFtgGrp );
 		m_exeChara2->SetpFtgGrp ( m_pFtgGrp );
 
@@ -141,39 +141,8 @@ namespace GAME
 	{
 		//--------------------------
 		//デモ分岐
-		m_demoActor->Do ();
-
-		//--------------------------
-		//両者処理
-
-#if 0
-		//一時停止
-		if ( bStop )
-		{
-			//キャラ共通一連動作	//入力のみ
-//			m_mutualChara->Conduct_InStop ();
-		}
-		else
-		{
-			//キャラ共通一連動作
-//			m_mutualChara->Conduct ();
-		}
-#endif // 0
-
 		//@info 一時停止をConduct_InStop()ではなくキャラステートで分類する
-		bool bStop =  m_pFtgGrp->IsActive_ScpStop ();
-		if ( bStop )
-		{
-			m_mutualChara->ShiftScpStop ();
-		}
-		else
-		{
-			m_mutualChara->ShiftFighting ();
-		}
-
-		//キャラ共通一連動作
-		m_mutualChara->Conduct ();
-
+		m_demoActor->Do ();
 
 		//--------------------------
 		//共通グラフィック処理
@@ -185,7 +154,12 @@ namespace GAME
 
 	void Fighting::DemoRestart ()
 	{
-		TrainingRestart ();
+		G_Ftg::inst()->Init ();
+		m_btlTime->Init ();
+		m_pFtgGrp->Init ();
+		m_bg->Init ();
+		m_mutualChara->TrainingInit ();
+
 		m_demoActor->StartGreeting ();
 	}
 
@@ -195,8 +169,9 @@ namespace GAME
 		m_btlTime->Init ();
 		m_pFtgGrp->Init ();
 		m_bg->Init ();
-		m_demoActor->StartFighting ();
 		m_mutualChara->TrainingInit ();
+
+		m_demoActor->StartFighting ();
 	}
 
 
@@ -238,6 +213,13 @@ namespace GAME
 	void Fighting::StartEnd ()
 	{
 	}
+
+	//タイマ停止
+	void Fighting::StopTimer ()
+	{
+		m_btlTime->Stop ();
+	}
+
 
 	//タイムアップによる終了
 	bool Fighting::FinishCheck_TimeUp ()
@@ -333,6 +315,14 @@ namespace GAME
 		//----------------------------------------------------
 		//@info 共通のフラグポインタを MutalChara -> ExeChara まで渡す
 	 
+		//---------------------------------------------------
+		//キャラ位置から画面表示の基準位置(カメラ)を決定
+		VEC2 pos1p = m_exeChara1->GetPos ();
+		VEC2 pos2p = m_exeChara2->GetPos ();
+
+		//共通変数に保存
+		G_FTG()->CulcPosMutualBase ( pos1p, pos2p );
+
 		//----------------------------------------------------
 		//暗転
 		bool bBlackOut = m_pFtgGrp->IsActive_BlackOut ();

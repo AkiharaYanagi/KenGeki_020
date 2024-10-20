@@ -11,12 +11,6 @@
 #include "../GameMain/G_Ftg.h"
 #include "../GameMain/SoundConst.h"
 
-#if 0
-#include "../Title/Title.h"
-#include "../Result/Result.h"
-#endif // 0
-
-
 
 //-------------------------------------------------------------------------------------------------
 // 定義
@@ -100,9 +94,6 @@ namespace GAME
 	void FtgMain::ParamInit ()
 	{
 		m_fighting->ParamInit ( Scene::GetpParam () );
-
-		//BGM
-//		SOUND->Play_Loop_BGM ( BGM_Main );
 	}
 
 
@@ -149,8 +140,6 @@ namespace GAME
 		if ( m_fighting->IsEnd () )
 		{
 			//BGM終了
-			//SOUND->Stop_BGM ( BGM_Main );
-			//SOUND->Stop_BGM ( BGM_GABA );
 			SND_STOP_ALL_BGM ();
 
 			//シーン遷移

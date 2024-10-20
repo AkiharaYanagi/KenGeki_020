@@ -44,6 +44,7 @@ namespace GAME
 			//連続ヒット数のリセット
 			m_pOther.lock()->m_btlPrm.SetChainHitNum ( 0 );
 
+#if 0
 			//Test　バランス修正
 			int b = m_btlPrm.GetBalance ();
 			{
@@ -52,6 +53,7 @@ namespace GAME
 					m_btlPrm.SetBalance ( BALANCE_START );
 				}
 			}
+#endif // 0
 		}
 
 		//-----------------------------------------------------
@@ -127,7 +129,7 @@ namespace GAME
 		{
 			if ( m_pScript->GetFrame () == 0 )
 			{
-				SND_PLAY_ONESHOT_SE ( SE_Btl_Light );
+//				SND_PLAY_ONESHOT_SE ( SE_Btl_Light );
 			}
 		}
 

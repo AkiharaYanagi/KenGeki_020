@@ -27,6 +27,10 @@ namespace GAME
 		VP_Branch		m_vpBranch;			//エフェクトの分岐
 		VP_Route		m_vpRoute;			//ルート
 
+		//生成フラグ 時間停止などで生成を１回のみ実行する
+		bool			m_bStop { F };
+		bool			m_bGenerate { F };
+
 	public:
 		OperateEffect ();
 		OperateEffect ( const OperateEffect & rhs ) = delete;
@@ -44,12 +48,13 @@ namespace GAME
 		PLP_ExEf GetplpExEf () { return m_plpExeEffect; }
 
 		//エフェクト全体のオペレート
-		void PreMove ( P_Script pScp, BtlParam & btlprm );
-		void PostMove ( BtlParam & btlprm );
+		void Generate ( P_Script pScp, BtlParam & btlPrm );
+		void PreMove ( P_Script pScp, BtlParam & btlPrm );
+		void PostMove ( BtlParam & btlPrm );
 
 		//-----------------------------
 		// エフェクト生成
-		void GenerateEffect ( P_Script pScp, const BtlParam & btlprm );
+		void GenerateEffect ( P_Script pScp, const BtlParam & btlPrm );
 		
 		//エフェクトリストに追加
 		void AddListEffect ( P_Effect pEffect, P_EfGnrt pEfGnrt, VEC2 ptChara, bool dirRight );
@@ -65,6 +70,13 @@ namespace GAME
 
 		//オブジェクトによる稼働停止
 		void StopEffect ( P_Effect p ) { GetpExEf ( p )->Stop (); }
+
+
+		//一時停止中
+		void SetbStop ( bool b ) { m_bStop = b; }
+
+		//生成済みフラグ
+		void SetbGnrt ( bool b ) { m_bGenerate = b; }
 
 		//---------------------------------------------------------------
 	private:

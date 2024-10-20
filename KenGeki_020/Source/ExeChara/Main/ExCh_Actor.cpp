@@ -119,7 +119,7 @@ namespace GAME
 
 
 	//==========================================================
-	//メイン中一時遷移		(Start()を実行しない)
+	//メイン中一時遷移
 	//==========================================================
 	void ExeChara_Actor::ShiftFighting ()
 	{
@@ -128,6 +128,7 @@ namespace GAME
 
 	void ExeChara_Actor::ShiftScpStop ()
 	{
+		m_ScpStop->Start ();
 		mp_state = m_ScpStop;
 	}
 

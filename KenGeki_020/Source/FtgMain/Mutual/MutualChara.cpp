@@ -65,18 +65,15 @@ namespace GAME
 	//■	スクリプトの毎フレーム処理
 	//■
 	//■#########################################################
+
+	//通常
 	void MutualChara::Conduct ()
 	{
-		//---------------------------------------------------
-		//システム変更
-		m_utl.SwitchDispInput ();
-		m_utl.SwitchRect ();
-		m_utl.SwitchFrontEnd ();
-//		m_utl.SwitchCPU ();
+		SystemChange ();		//システム変更
 
 		//---------------------------------------------------
 
-		//◆スクリプト前処理(入力、移動など)
+		//◆スクリプト前処理(入力、遷移など)
 		m_exeChara1->PreScriptMove ();
 		m_exeChara2->PreScriptMove ();
 
@@ -94,30 +91,47 @@ namespace GAME
 		m_exeChara1->PostScriptMove ();
 		m_exeChara2->PostScriptMove ();
 
-		//グラフィック共通
-		Grp ();
-
-		//シーン共通パラメータ記録
-		SaveParam();
-
+		//---------------------------------------------------
+		SaveParam();		//シーン共通パラメータ記録
 	}
 
 
+	//■#########################################################
+
+	//コンダクト (デモ)
+	void MutualChara::Conduct_InDemo ()
+	{
+		SystemChange ();		//システム変更
+
+		//---------------------------------------------------
+		//◆スクリプト前処理(入力、遷移など)
+		m_exeChara1->PreScriptMove ();
+		m_exeChara2->PreScriptMove ();
+
+		//◆画像の更新
+		m_exeChara1->UpdateGraphic ();
+		m_exeChara2->UpdateGraphic ();
+
+		//◆判定なし
+
+		//◆スクリプト後処理(グラフィック位置など)
+		m_exeChara1->PostScriptMove ();
+		m_exeChara2->PostScriptMove ();
+
+		//---------------------------------------------------
+		SaveParam();		//シーン共通パラメータ記録
+	}
+
 
 	//■#########################################################
-	
-	//一時停止中コンダクト
+
+	//一時停止中コンダクト (アクション遷移なし)
 	void MutualChara::Conduct_InStop ()
 	{
-		//---------------------------------------------------
-		//システム変更
-		m_utl.SwitchDispInput ();
-		m_utl.SwitchRect ();
-		m_utl.SwitchFrontEnd ();
-		//		m_utl.SwitchCPU ();
-		//---------------------------------------------------
+		SystemChange ();		//システム変更
 
-		//◆スクリプト前処理(入力、移動など)
+		//---------------------------------------------------
+		//◆スクリプト前処理(入力)
 		m_exeChara1->Input ();
 		m_exeChara2->Input ();
 
@@ -125,200 +139,17 @@ namespace GAME
 		m_exeChara1->UpdateGraphic ();
 		m_exeChara2->UpdateGraphic ();
 
+		//◆判定なし
+
+		//◆スクリプト後処理(グラフィック位置など)
+		m_exeChara1->PostScriptMove ();
+		m_exeChara2->PostScriptMove ();
+
 		//---------------------------------------------------
-		//グラフィック共通
-		Grp ();
-
-		//シーン共通パラメータ記録
-		SaveParam();
-
+		SaveParam();		//シーン共通パラメータ記録
 	}
 
 	//■#########################################################
-
-
-	//◆================================
-	//◆		共通グラフィック
-	//◆================================
-	void MutualChara::Grp ()
-	{
-#if 0
-		//---------------------------------------------------
-		//暗転
-		UINT bo1 = m_exeChara1->GetBlackOut ();
-		UINT bo2 = m_exeChara2->GetBlackOut ();
-
-		//どちらかが発生したとき
-		if ( 0 < bo1 || 0 < bo2 )
-		{
-			//大きい方で上書
-			m_blackOut = ( bo2 < bo1 ) ? bo1 : bo2;
-			m_exeChara1->SetBlackOut ( 0 );
-			m_exeChara2->SetBlackOut ( 0 );
-		}
-
-		//---------------------------------------------------
-		//スクリプトからの停止
-		UINT scpStop1P = m_exeChara1->GetScpStop ();
-		UINT scpStop2P = m_exeChara2->GetScpStop ();
-		if ( 0 < scpStop1P )
-		{
-			m_scpStop = scpStop1P;
-			m_exeChara1->SetScpStop ( 0 );
-
-			m_exeChara1->SetStopTimer ( m_scpStop );
-			m_exeChara2->SetStopTimer ( m_scpStop );
-		}
-
-		//---------------------------------------------------
-		//白転
-		bool whiteOut1 = m_exeChara1->GetWhiteOut ();
-		bool whiteOut2 = m_exeChara2->GetWhiteOut ();
-
-		if ( whiteOut1 || whiteOut2 )
-		{
-			m_whiteOut = T;
-			m_exeChara1->SetWhiteOut ( F );
-			m_exeChara2->SetWhiteOut ( F );
-		}
-
-#endif // 0
-
-		//---------------------------------------------------
-		//キャラ位置から画面表示の基準位置(カメラ)を決定
-		VEC2 pos1p = m_exeChara1->GetPos ();
-		VEC2 pos2p = m_exeChara2->GetPos ();
-
-		//共通変数に保存
-		G_FTG()->CulcPosMutualBase ( pos1p, pos2p );
-
-	}
-
-
-
-
-#if 0
-	//------------------------------------------------------
-	//	終了判定
-	//------------------------------------------------------
-	bool MutualChara::CheckZeroLife ()
-	{
-		//終了判定
-		bool finish1p = m_exeChara1->IsZeroLife ();
-		bool finish2p = m_exeChara2->IsZeroLife ();
-
-		//どちらか、または両方ライフ０なら終了
-		if ( finish1p || finish2p )
-		{
-			PLAYER_ID plr = _PLAYER_NUM;
-			if ( finish1p && finish2p )
-			{
-				plr = _PLAYER_NUM;
-			}
-			else if ( ! finish1p && finish2p )
-			{
-				plr = PLAYER_ID_1;
-			}
-			else if ( finish1p && ! finish2p )
-			{
-				plr = PLAYER_ID_2;
-			}
-			//シーン共通パラメータ記録
-			m_pParam->SetWinner ( plr );
-			return T;
-		}
-
-		return F;
-	}
-
-#if 0
-	bool MutualChara::CheckDown ()
-	{
-		//ダウン判定
-		bool down1p = m_exeChara1->IsDown ();
-		bool down2p = m_exeChara2->IsDown ();
-		return (down1p || down2p);
-	}
-
-	bool MutualChara::CheckDownEnd ()
-	{
-		//ダウン判定
-		bool downEnd1p = m_exeChara1->IsDownEnd ();
-		bool downEnd2p = m_exeChara2->IsDownEnd ();
-		return (downEnd1p || downEnd2p);
-	}
-
-	bool MutualChara::CheckWin ()
-	{
-		//勝利状態判定
-		bool win1p = m_exeChara1->IsWin ();
-		bool win2p = m_exeChara2->IsWin ();
-		return (win1p || win2p);
-	}
-
-	bool MutualChara::CheckWinEnd ()
-	{
-		//勝利状態判定
-		bool winEnd1p = m_exeChara1->IsWinEnd ();
-		bool winEnd2p = m_exeChara2->IsWinEnd ();
-		return (winEnd1p || winEnd2p);
-	}
-
-	bool MutualChara::CheckWinner ()
-	{
-		bool bRet = false;
-
-		//ライフで勝利者を決定する
-		int life1p = m_exeChara1->GetLife ();
-		int life2p = m_exeChara2->GetLife ();
-
-		//Double K.O.
-		if ( life1p <= 0 && life2p <= 0 ) { m_winner = WINNER_DP; }
-		//2P Win
-		else if ( life1p <= 0 ) { m_winner = WINNER_2P; }
-		//1P Win
-		else if ( life2p <= 0 ) { m_winner = WINNER_1P; }
-		//Draw
-		else if ( life1p == life2p ) { m_winner = WINNER_DRAW; }
-
-		switch ( m_winner )
-		{
-		case WINNER_1P: 
-			m_exeChara1->SetCharaState ( CHST_WIN_END );
-			m_exeChara2->SetCharaState ( CHST_DOWN_END );
-			break;
-		case WINNER_2P: 
-			m_exeChara1->SetCharaState ( CHST_DOWN_END );
-			m_exeChara2->SetCharaState ( CHST_WIN_END );
-			break;
-		case WINNER_DP: break;
-		default: break;
-		}
-
-		return bRet;
-	}
-
-	void MutualChara::ForcedEnd ()
-	{
-		m_exeChara1->ForcedEnd ();
-		m_exeChara2->ForcedEnd ();
-	}
-#endif // 0
-
-
-	CHARA_NAME MutualChara::GetWinnerName () const
-	{
-		switch ( m_winner )
-		{
-		case WINNER_1P: return m_exeChara1->GetCharaName (); break;
-		case WINNER_2P: return m_exeChara2->GetCharaName (); break;
-		case WINNER_DP: break;
-		default: break;
-		}
-		return CHARA_NAME ();
-	}
-
-#endif // 0
 
 	//------------------------------------------------------
 	//	内部関数
@@ -330,9 +161,19 @@ namespace GAME
 		m_exeChara1->TrainingInit ();
 		m_exeChara2->TrainingInit ();
 
-		Init ();
+//		Init ();
 //		m_utl.SwitchDispInput ();
 //		m_pFtgGrp->InitSlow ();
+	}
+
+
+	//システム変更
+	void MutualChara::SystemChange ()
+	{
+		m_utl.SwitchDispInput ();
+		m_utl.SwitchRect ();
+		m_utl.SwitchFrontEnd ();
+		m_utl.SwitchCPU ();
 	}
 
 
@@ -341,8 +182,8 @@ namespace GAME
 	{
 		m_pParam->SetN_Life1p ( m_exeChara1->GetLife () );
 		m_pParam->SetN_Life2p ( m_exeChara2->GetLife () );
-		m_pParam->SetN_Act1p ( m_exeChara1->GetBtlParam ().GetNActTrs () );
-		m_pParam->SetN_Act2p ( m_exeChara2->GetBtlParam ().GetNActTrs () );
+		m_pParam->SetN_Act1p ( m_exeChara1->GetBtlPrm ().GetNActTrs () );
+		m_pParam->SetN_Act2p ( m_exeChara2->GetBtlPrm ().GetNActTrs () );
 	}
 
 
@@ -398,6 +239,16 @@ namespace GAME
 		m_exeChara1->ShiftFighting ();
 		m_exeChara2->ShiftFighting ();
 	}
+
+#if 0
+	void MutualChara::RevertSlow ()
+	{
+		m_exeChara1->RevertSlow ();
+		m_exeChara2->RevertSlow ();
+	}
+#endif // 0
+
+
 
 	//両者待機状態
 	bool MutualChara::IsWait ()
@@ -463,23 +314,6 @@ namespace GAME
 	}
 
 	//----------------------------------------------------
-
-
-	//------------------------------------------------------
-	//	終了判定
-	//------------------------------------------------------
-
-
-
-
-#if 0
-	void MutualChara::RevertSlow ()
-	{
-		m_exeChara1->RevertSlow ();
-		m_exeChara2->RevertSlow ();
-	}
-#endif // 0
-
 
 }	//namespace GAME
 

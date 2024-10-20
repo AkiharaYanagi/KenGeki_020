@@ -139,11 +139,10 @@ namespace GAME
 		pre_bFrontEnd = is_bFrontEnd;
 	}
 
-#if 0
 
 	//------------------------------------------------------
 	//CPU操作切替
-	void MutualChara_Utility::SwithcCPU ()
+	void MutualChara_Utility::SwitchCPU ()
 	{
 		static bool cpu1 = F;
 		if ( WND_UTL::AscKey ( '6' ) )
@@ -173,8 +172,6 @@ namespace GAME
 			}
 		}
 	}
-
-#endif // 
 
 
 }	//namespace GAME

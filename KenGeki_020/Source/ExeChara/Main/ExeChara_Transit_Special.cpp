@@ -38,22 +38,24 @@ namespace GAME
 
 		//------------------------------------------
 		//対象IDがバランス消費で移項不可能なら次へ
-		int balance = pNextAct->GetBalance ();
+		int Nextbalance = pNextAct->GetBalance ();
+		if ( Nextbalance != 0 )
+		{
+			//現在値と比較
+			if ( m_btlPrm.GetBalance() >= Nextbalance )
+			{
+				//必要量があれば消費して遷移する
+				m_btlPrm.AddBalance ( -1 * Nextbalance );
+			}
+			else
+			{
+				return F; //足りないとき遷移しない
+			}
+		}
 
-		//バランス消費
-		if ( m_btlPrm.GetBalance() >= balance )
-		{
-			//必要量があれば消費して遷移する
-			m_btlPrm.AddBalance ( balance );
-		}
-		else
-		{
-			return F; //足りないとき遷移しない
-		}
 
 		//------------------------------------------
 		//対象IDがマナ消費で移項不可能なら次へ
-
 
 		//マナ使用アクション　遷移チェック
 		int mana = pNextAct->GetMana ();
