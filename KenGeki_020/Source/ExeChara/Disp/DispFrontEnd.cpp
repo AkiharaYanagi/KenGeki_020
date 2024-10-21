@@ -17,8 +17,14 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	VEC2 DispFrontEnd::POS_PL_CP_1P ( 5, LIFE_GAUGE_Y - 18 );
-	VEC2 DispFrontEnd::POS_PL_CP_2P ( 1280 - 64 - 5, LIFE_GAUGE_Y - 18 );
+	VEC2 const DispFrontEnd::POS_PL_CP_1P ( 5, LIFE_GAUGE_Y - 18 );
+	VEC2 const DispFrontEnd::POS_PL_CP_2P ( 1280 - 64 - 5, LIFE_GAUGE_Y - 18 );
+	const float DispFrontEnd::FACE_X = 80;
+	const float DispFrontEnd::FACE_Y = 840;
+	const float DispFrontEnd::FACE_W = 100;
+	const float DispFrontEnd::CHOU_X = 300;
+	const float DispFrontEnd::CHOU_Y = 870;
+	const float DispFrontEnd::CHOU_W = 128;
 
 
 	DispFrontEnd::DispFrontEnd ()
@@ -145,6 +151,20 @@ namespace GAME
 		m_strState->SetColorF ( s3d::ColorF { 0.0f, 0.0f, 0.5f, 1.f } );
 		GRPLST_INSERT ( m_strState );
 		AddpTask ( m_strState );
+
+		//顔
+		m_face = std::make_shared < GameGraphic > ();
+		m_face->AddTexture_FromArchive ( U"Face_Sae.png" );
+		m_face->SetZ ( Z_SHADOW );
+		GRPLST_INSERT ( m_face );
+		AddpTask ( m_face );
+
+		//超必殺
+		m_ChouHissatsu = std::make_shared < GameGraphic > ();
+		m_ChouHissatsu->AddTexture_FromArchive ( U"ChouHissatsu.png" );
+		m_ChouHissatsu->SetZ ( Z_SHADOW );
+		GRPLST_INSERT ( m_ChouHissatsu );
+		AddpTask ( m_ChouHissatsu );
 	}
 
 	//オブジェクト生成用
@@ -179,10 +199,10 @@ namespace GAME
 		m_gaugeBalance->LoadPlayer ( playerID );
 		m_gaugeMana->LoadPlayer ( playerID );
 		m_gaugeAccel->LoadPlayer ( playerID );
-#if 0
 
 
 		//プレイヤー別初期化位置
+#if 0
 		if ( PLAYER_ID_1 == playerID )
 		{
 			m_grp_Cst_Player1P2P->SetPos ( POS_PL_CP_1P );
@@ -218,13 +238,19 @@ namespace GAME
 			m_grpStrHit->SetPos ( VEC2 ( 100 + 128, 200 ) );
 			
 			pOb->SetPos ( VEC2 ( 0, 200 ) );
+
+			m_face->SetPos ( VEC2 ( FACE_X, FACE_Y ) );
+			m_ChouHissatsu->SetPos ( VEC2 ( CHOU_X, CHOU_Y ) );
 		}
 		else if ( PLAYER_ID_2 == playerID )
 		{
-			m_grpHitNum->SetPos ( VEC2 ( 1280 - 384 -100, 200 ) );
-			m_grpStrHit->SetPos ( VEC2 ( 1280 - 256 -100, 200 ) );
+			m_grpHitNum->SetPos ( VEC2 ( WINDOW_WIDTH - 384 -100, 200 ) );
+			m_grpStrHit->SetPos ( VEC2 ( WINDOW_WIDTH - 256 -100, 200 ) );
 
 			pOb->SetPos ( VEC2 (  1280 - 384 - 0, 200 ) );
+
+			m_face->SetPos ( VEC2 ( WINDOW_WIDTH - FACE_W - FACE_X, FACE_Y ) );
+			m_ChouHissatsu->SetPos ( VEC2 ( WINDOW_WIDTH - CHOU_W - CHOU_X, CHOU_Y ) );
 		}
 
 

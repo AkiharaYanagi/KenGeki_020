@@ -16,10 +16,13 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	constexpr int32 CX_GAUGE_W = 500;
-	constexpr int32 CX_GAUGE_MAX = 10000;
 
-	const float DispGauge::UNIT_LGS = 1.f * CX_GAUGE_W / CX_GAUGE_MAX;//1単位あたりの表示長さ
+#pragma region CONST
+
+//	constexpr int32 CX_GAUGE_W = 500;		//表示幅
+//	constexpr int32 CX_GAUGE_MAX = 10000;	//最大量
+
+//	const float DispGauge::UNIT_LGS = 1.f * CX_GAUGE_W / CX_GAUGE_MAX;//1単位あたりの表示長さ
 	const float DispGauge::LIFE_Y_REV = -20;
 //	const float DispGauge::LIFE_Y_REV = -0;
 //	const float DispGauge::LIFE_H_REV = +50;
@@ -30,6 +33,8 @@ namespace GAME
 	const float DispGauge::Z_GAUGE_DECREASE	= 0.04f;
 	const float DispGauge::Z_GAUGE_WHITE	= 0.02f;
 	const float DispGauge::Z_GAUGE_VALUE	= 0.01f;
+
+#pragma endregion
 
 
 
@@ -72,25 +77,21 @@ namespace GAME
 
 		//枠
 		m_grp_Frame = std::make_shared < GameGraphic > ();
-//		m_grp_Frame->SetScalingCenter ( VEC2 ( 0, 64.f ) );
 		AddpTask ( m_grp_Frame );
 		GRPLST_INSERT ( m_grp_Frame );
 
 		//減少分(赤)
 		m_grp_Decrease = std::make_shared < GameGraphic > ();
-//		m_grp_Decrease->SetScalingCenter ( VEC2 ( 0, 64.f ) );
 		AddpTask ( m_grp_Decrease );
 		GRPLST_INSERT ( m_grp_Decrease );
 
 		//回復分(白)
 		m_grp_White = std::make_shared < GameGraphic > ();
-//		m_grp_White->SetScalingCenter ( VEC2 ( 0, 64.f ) );
 		AddpTask ( m_grp_White );
 		GRPLST_INSERT ( m_grp_White );
 
 		//値
 		m_grp_Value = std::make_shared < GameGraphic > ();
-//		m_grp_Value->SetScalingCenter ( VEC2 ( 0, 64.f ) );
 		AddpTask ( m_grp_Value );
 		GRPLST_INSERT ( m_grp_Value );
 	}
@@ -178,38 +179,41 @@ namespace GAME
 
 	void DispGauge::Init ()
 	{
-		m_value = LIFE_MAX;
-		m_dcr = LIFE_MAX;
+		//値
+		m_value = m_start;
+		m_dcr = (float)m_base_max;
 
-		//計算要 初期位置
-		float x = m_base_x;
-		float y = m_base_y + LIFE_Y_REV;
-//		float w = m_base_w;
-//		float h = m_base_h;
 
+		//位置
 		//　テクスチャは位置計算の基点が中心方向なので、２ｐ側のテクスチャを正とし１ｐ側は反転させる
+		// [1P] ========= 99 ========= [2P]
+		//		x	 w	　↑	↑	 w	  x
+
+		const float Y = m_base_y + LIFE_Y_REV;
 
 		if ( PLAYER_ID_1 == m_playerID )
 		{
-			const float X = x + 512;
-			m_grp_Frame->SetPos ( X, y );
+			const float X = m_base_x + m_base_w;
+
+			m_grp_Frame->SetPos ( X + m_padding, Y - m_padding );
+			m_grp_Value->SetPos ( X, Y );
+			m_grp_Decrease->SetPos ( X, Y );
+			m_grp_White->SetPos ( X, Y );
+
+			//反転
 			m_grp_Frame->SetScaling ( VEC2 ( -1.f, 1.f ) );
-			m_grp_Value->SetPos ( X, y );
 			m_grp_Value->SetScaling ( VEC2 ( -1.f, 1.f ) );
-			m_grp_Decrease->SetPos ( X, y );
 			m_grp_Decrease->SetScaling ( VEC2 ( -1.f, 1.f ) );
-			m_grp_White->SetPos ( X, y );
 			m_grp_White->SetScaling ( VEC2 ( -1.f, 1.f ) );
 		}
 		else if ( PLAYER_ID_2 == m_playerID )
 		{
-//			float p2_bx_l = GAME_WINDOW_WIDTH - x - w;
-			const float W = 512;
-			float p2_bx = GAME_WINDOW_WIDTH - x - W;	//W = テクスチャサイズ
-			m_grp_Frame->SetPos ( p2_bx, y );
-			m_grp_Value->SetPos ( p2_bx, y );
-			m_grp_Decrease->SetPos ( p2_bx, y );
-			m_grp_White->SetPos ( p2_bx, y );
+			float X = GAME_WINDOW_WIDTH - m_base_x - m_base_w;
+
+			m_grp_Frame->SetPos ( X - m_padding, Y - m_padding );
+			m_grp_Value->SetPos ( X, Y );
+			m_grp_Decrease->SetPos ( X, Y );
+			m_grp_White->SetPos ( X, Y );
 		}
 	}
 
@@ -218,15 +222,14 @@ namespace GAME
 	//◆毎フレーム 実行
 	void DispGauge::Update ( UINT value )
 	{
-		float x = m_base_x;
-		float y = m_base_y;
-		float w = m_base_w;
-		float h = m_base_h;
-		LONG P = (LONG)m_padding;
+//		float x = m_base_x;
+//		float y = m_base_y;
+//		float w = m_base_w;
+//		float h = m_base_h;
+//		LONG P = (LONG)m_padding;
 
-		const float W = 512;
-		const float Y = y + LIFE_Y_REV;
-		const LONG H = (LONG)( h + LIFE_H_REV );
+		const float Y = m_base_y + LIFE_Y_REV;
+		const LONG H = (LONG)( m_base_h + LIFE_H_REV );
 
 
 		//毎フレーム ダメージ表示を減少させる
@@ -236,34 +239,44 @@ namespace GAME
 		}
 		 
 		m_value = value;
+		UNIT_LGS = m_base_w / m_base_max;
 		float ln = UNIT_LGS * m_value;	//表示長さ
 		float ln_d = UNIT_LGS * m_dcr;	//ダメージ表示長さ
 
-		//０のときは非表示
+		//0以外は表示、０のときは非表示
 		m_grp_Value->SetValid ( m_value != 0 );
 
 		//表示
+		//@info テクスチャレクトを変更するとき、テクスチャサイズは変更しない
 		if ( PLAYER_ID_1 == m_playerID )
 		{
-			//@info テクスチャレクトを変更するとき、テクスチャサイズは変更しない
-			m_grp_Value->SetPos ( x + P + w, Y );
-			m_grp_Value->SetRectF ( s3d::RectF { P, 0, (LONG)(ln + P), H } );
+			//1p側基準位置
+			const float X = m_base_x + m_base_w;
+
+			m_grp_Value->SetPos ( X, Y );
+
+			//表示枠で減少分を設定
+			m_grp_Value->SetRectF ( s3d::RectF { 0, 0, (LONG)ln, H } );
+//			m_grp_Value->SetRectF ( s3d::RectF { P, 0, (LONG)(ln + P), H } );
 //			m_grp_Value->SetRectF ( s3d::RectF { P, 0, (LONG)(ln), H } );
 
-			m_grp_Decrease->SetPos ( x + P + w, Y );
-			m_grp_Decrease->SetRectF ( s3d::RectF { P, 0, (LONG)(ln_d + P), H } );
+			m_grp_Decrease->SetPos ( X, Y );
+			m_grp_Decrease->SetRectF ( s3d::RectF { 0, 0, (LONG)ln_d, H } );
+//			m_grp_Decrease->SetRectF ( s3d::RectF { P, 0, (LONG)(ln_d + P), H } );
 		}
 		else if ( PLAYER_ID_2 == m_playerID )
 		{
 			//2p側基準位置
-			float p2_bx = P + GAME_WINDOW_WIDTH - x - W;	//W = テクスチャサイズ
+			float X = GAME_WINDOW_WIDTH - m_base_x - m_base_w;
 
-			m_grp_Value->SetPos ( p2_bx, Y );
-			m_grp_Value->SetRectF ( s3d::RectF { P, 0, (LONG)(ln + P), H } );
+			m_grp_Value->SetPos ( X, Y );
+			m_grp_Value->SetRectF ( s3d::RectF { 0, 0, (LONG)ln, H } );
+//			m_grp_Value->SetRectF ( s3d::RectF { P, 0, (LONG)(ln + P), H } );
 //			m_grp_Value->SetRectF ( s3d::RectF { P, 0, (LONG)(ln), H } );
 
-			m_grp_Decrease->SetPos ( p2_bx, Y );
-			m_grp_Decrease->SetRectF ( s3d::RectF { P, 0, (LONG)(ln_d + P), H } );
+			m_grp_Decrease->SetPos ( X, Y );
+			m_grp_Decrease->SetRectF ( s3d::RectF { 0, 0, (LONG)ln_d, H } );
+//			m_grp_Decrease->SetRectF ( s3d::RectF { P, 0, (LONG)(ln_d + P), H } );
 		}
 
 	}

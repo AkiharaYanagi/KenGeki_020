@@ -30,11 +30,14 @@ namespace GAME
 
 		float		m_base_x { 0 };		//基準位置x
 		float		m_base_y { 0 };		//基準位置y
-		float		m_base_w { 0 };		//基準位置w
-		float		m_base_h { 0 };		//基準位置h
+		float		m_base_w { 0 };		//基準表示w
+		float		m_base_h { 0 };		//基準表示h
 		float		m_padding { 0 };	//パディング(端からの幅)
 
+		int32		m_start { 10000 };	//初期値(基準)
+		int32		m_base_max { 10000 };	//最大値(基準)
 		UINT		m_value { 0 };		//値
+		float		UNIT_LGS;			//1単位あたりの長さ
 		float		m_dcr { 0 };		//減少分値
 
 		//画像
@@ -46,7 +49,7 @@ namespace GAME
 		//減少分
 		float		m_acc { 0.1f };	//加速度
 		float		m_vel { 1.f };	//速度
-		int			m_wait { 0 };		//待機時間
+		int			m_wait { 0 };	//待機時間
 		bool		bStart { F };	//減少開始
 		bool		bWait { F };	//待機開始
 
@@ -62,6 +65,7 @@ namespace GAME
 		void SetPosition ( VEC2 xy, VEC2 wh ) { SetPosition ( xy.x, xy.y, wh.x, wh.y ); }
 		void SetPosition ( float x, float y, float w, float h );
 		void SetPadding ( float p ) { m_padding = p; }
+		void SetBaseMax ( int32 base_max ) { m_base_max = base_max; }
 
 		void SetZ ( float z );
 
@@ -104,7 +108,8 @@ namespace GAME
 //		void GrpOff ();
 
 	private:
-		static const float UNIT_LGS;	//1単位あたりの長さ
+#pragma region CONST
+
 		static const float LIFE_Y_REV;	//ライフゲージ補正
 		static const float LIFE_H_REV;	//ライフゲージ補正
 
@@ -112,6 +117,7 @@ namespace GAME
 		static const float Z_GAUGE_DECREASE;	//ライフゲージ表示前後・減少分
 		static const float Z_GAUGE_WHITE;		//ライフゲージ表示前後・白
 		static const float Z_GAUGE_VALUE;		//ライフゲージ表示前後・値
+#pragma endregion
 
 		void UpdateDecrease ();
 	};

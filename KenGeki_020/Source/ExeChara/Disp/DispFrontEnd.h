@@ -40,6 +40,9 @@ namespace GAME
 		PrmRect		m_gaugeLurch;			//のけぞり時間表示
 #endif	//0
 
+		P_Grp		m_face;				//顔
+		P_Grp		m_ChouHissatsu;		//超必殺
+
 		//-----------------------------------------------------
 
 		enum DISP_FE_CONST
@@ -59,8 +62,6 @@ namespace GAME
 		P_GrpAcv	m_grp_CH_InputCOMPLayer;	//キャラ近傍 入力者表示"CPU""Player"
 #endif // 0
 
-		static VEC2 POS_PL_CP_1P;
-		static VEC2 POS_PL_CP_2P;
 
 
 		//-----------------------------------------------------
@@ -120,6 +121,15 @@ namespace GAME
 
 	private:
 		P_Grp MakepGrpPlyr ( s3d::String str );
+
+		static const VEC2 POS_PL_CP_1P;
+		static const VEC2 POS_PL_CP_2P;
+		static const float FACE_X;
+		static const float FACE_Y;
+		static const float FACE_W;
+		static const float CHOU_X;
+		static const float CHOU_Y;
+		static const float CHOU_W;
 
 	};
 

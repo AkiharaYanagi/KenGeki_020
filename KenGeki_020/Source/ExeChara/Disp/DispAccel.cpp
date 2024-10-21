@@ -26,7 +26,7 @@ namespace GAME
 	const float DispAccel::HND_ROT_X = 8.f;
 	const float DispAccel::HND_ROT_Y = 64.f;
 
-	const float DispAccel::Z_GAUGE_ACCEL = Z_SYS + 0.08f;
+	const float DispAccel::Z_GAUGE_ACCEL = Z_SHADOW + 0.08f;
 
 
 
