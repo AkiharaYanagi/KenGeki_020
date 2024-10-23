@@ -62,6 +62,9 @@ namespace GAME
 		//ラウンド
 		P_Round			m_round;
 
+		//トレーニングモード
+		bool			m_bTraining { F };
+
 	public:
 		Fighting ();
 		Fighting ( const Fighting & rhs ) = delete;
@@ -80,6 +83,9 @@ namespace GAME
 		void SetDemoOn () { m_demoSkip = F; }
 		void SetDemoSkip () { m_demoSkip = T; }
 
+		//トレーニングモード
+		void SetbTraining ( bool b ) { m_bTraining = b; }
+
 		//トレーニング用リスタート
 		void TrainingRestart ();
 
@@ -88,7 +94,6 @@ namespace GAME
 		void TimeSet ();			//時間計測初期化
 		void StartTimeUp ();		//タイムアップ
 		void StartEndWait ();		//タイムアップ終了待機
-		void StartEnd ();			//終了ステップ開始
 
 		void StopTimer ();			//タイマ停止
 

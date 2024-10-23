@@ -181,29 +181,48 @@ namespace GAME
 	}
 
 
+	//キャラ名から選択する
+	void CharaSele_Player::AssignName ( CHARA_NAME name )
+	{
+		switch ( name )
+		{
+		case CHARA_OUKA:		 m_chsl_id = CHSLID_00; break;
+		case CHARA_SAE:			 m_chsl_id = CHSLID_02; break;
+		case CHARA_RETSUDOU:	 m_chsl_id = CHSLID_03; break;
+		}
+
+		//カーソル位置も更新
+		m_cursor->SetPos ( VEC2 ( m_pos [ m_chsl_id ].x, m_pos [ m_chsl_id ].y ) );
+	}
+
+
 
 	void CharaSele_Player::SetCursorUp ( P_GrpBlink pCrs, CHARA_SELE_ID & id )
 	{
-		id = m_pos [ id ].UP;
-		pCrs->SetPos ( VEC2 ( m_pos [ id ].x, m_pos [ id ].y ) );
+		CHARA_SELE_ID next_id = m_pos [ id ].UP;
+		pCrs->SetPos ( VEC2 ( m_pos [ next_id ].x, m_pos [ next_id ].y ) );
+		id = next_id;
 		Select ();
 	}
 	void CharaSele_Player::SetCursorDown ( P_GrpBlink pCrs, CHARA_SELE_ID & id )
 	{
-		id = m_pos [ id ].DOWN;
-		pCrs->SetPos ( VEC2 ( m_pos [ id ].x, m_pos [ id ].y ) );
+		CHARA_SELE_ID next_id  = m_pos [ id ].DOWN;
+		pCrs->SetPos ( VEC2 ( m_pos [ next_id ].x, m_pos [ next_id ].y ) );
+		id = next_id;
 		Select ();
 	}
 	void CharaSele_Player::SetCursorLeft ( P_GrpBlink pCrs, CHARA_SELE_ID & id )
 	{
-		id = m_pos [ id ].LEFT;
-		pCrs->SetPos ( VEC2 ( m_pos [ id ].x, m_pos [ id ].y ) );
+		CHARA_SELE_ID next_id  = m_pos [ id ].LEFT;
+		pCrs->SetPos ( VEC2 ( m_pos [ next_id ].x, m_pos [ next_id ].y ) );
+		id = next_id;
 		Select ();
 	}
 	void CharaSele_Player::SetCursorRight ( P_GrpBlink pCrs, CHARA_SELE_ID & id )
 	{
-		id = m_pos [ id ].RIGHT;
-		pCrs->SetPos ( VEC2 ( m_pos [ id ].x, m_pos [ id ].y ) );
+		CHARA_SELE_ID next_id  = m_pos [ id ].RIGHT;
+		pCrs->SetPos ( VEC2 ( m_pos [ next_id ].x, m_pos [ next_id ].y ) );
+		id = next_id;
 		Select ();
 	}
 

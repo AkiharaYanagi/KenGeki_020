@@ -43,6 +43,7 @@ namespace GAME
 		//勝利メッセージ
 		P_GrpStr		m_win_msg;
 		s3d::String		m_msg;
+		UINT			m_time_count { 0 };
 
 		s3d::HashTable < CHARA_NAME, s3d::String >  m_ch_msg;
 

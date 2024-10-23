@@ -383,10 +383,16 @@ namespace GAME
 		//------------------------------------------------
 		//◆移項限定処理
 		//ダッシュから次アクションに移項するとき、慣性を残す
-		if ( m_pChara->GetActionID ( U"FrontDashStart" ) == m_actionID )
+		if ( ! ExitActionName ( U"前ダッシュ開始" ) )
+		{
+			assert ( 0 );
+		}
+		if ( IsNameAction ( U"前ダッシュ開始" ) )
 		{
 			m_btlPrm.SetDashInertial ( VEC2 ( 10.f, 0 ) );
 		}
+#if 0
+
 		if ( m_pChara->GetActionID ( U"FrontDash" ) == m_actionID )
 		{
 			m_btlPrm.SetDashInertial ( VEC2 ( 10.f, 0 ) );
@@ -395,6 +401,8 @@ namespace GAME
 		{
 			m_btlPrm.SetDashInertial ( VEC2 ( -8.f, 0 ) );
 		}
+
+#endif // 0
 		//------------------------------------------------
 
 		//各種状態の終了

@@ -40,6 +40,8 @@ namespace GAME
 		DispChara ( const DispChara & rhs ) = delete;
 		~DispChara ();
 
+		void Move ();
+
 		void ParamInit ( P_Param pParam );
 
 		//プレイヤ側によりゲージ類の表示部のみ初期化

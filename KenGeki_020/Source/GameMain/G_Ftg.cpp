@@ -125,11 +125,11 @@ namespace GAME
 			m_posMutualBase = VEC2 ( posMutualBase_x, 0 );
 		}
 
-		DBGOUT_WND_F ( 0, U"m_posMutualBase.x = {}"_fmt( m_posMutualBase.x ) );
-		DBGOUT_WND_F ( 1, U"m_bWallMove.x = {}"_fmt( m_bWallMove ? 1 : 0 ) );
-		DBGOUT_WND_F ( 2, U"lx = {}, cx = {}, rx = {}"_fmt( lx, cx, rx ) );
-		DBGOUT_WND_F ( 3, U"Wall_L = {}, Wall_R = {}"_fmt( m_wall_L, m_wall_R ) );
 #if 0
+//		DBGOUT_WND_F ( DBGOUT_0, U"m_posMutualBase.x = {}"_fmt( m_posMutualBase.x ) );
+//		DBGOUT_WND_F ( DBGOUT_1, U"m_bWallMove.x = {}"_fmt( m_bWallMove ? 1 : 0 ) );
+//		DBGOUT_WND_F ( DBGOUT_2, U"lx = {}, cx = {}, rx = {}"_fmt( lx, cx, rx ) );
+//		DBGOUT_WND_F ( DBGOUT_3, U"Wall_L = {}, Wall_R = {}"_fmt( m_wall_L, m_wall_R ) );
 #endif // 0
 
 		

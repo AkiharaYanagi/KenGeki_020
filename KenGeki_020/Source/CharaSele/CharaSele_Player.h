@@ -49,6 +49,9 @@ namespace GAME
 		CHARA_SELE_ID GetID () const { return m_chsl_id; }
 		CHARA_NAME GetName () const;
 
+		//キャラ名から選択する
+		void AssignName ( CHARA_NAME name );
+
 		bool IsDecided () const { return m_decided; }
 
 	private:
@@ -67,6 +70,7 @@ namespace GAME
 		void SetCharaStand ( CHARA_SELE_ID id );
 		void HiddenCharaStand ();
 
+#pragma region CONST
 
 		//位置定数
 		static const float	FACE_X_0;
@@ -106,6 +110,8 @@ namespace GAME
 		static const float	CHARA_NAME_2P_Y;
 
 		static const float	POS0_X;
+
+#pragma endregion
 	};
 
 

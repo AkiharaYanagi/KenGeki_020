@@ -257,8 +257,6 @@ namespace GAME
 	//最前面表示切替
 	void ExeChara::OnFrontEnd ()
 	{
-		//@todo OnFrontEnd()で配列エラー
-
 		m_dispChara->OnFrontEnd ();
 	}
 	void ExeChara::OffFrontEnd ()

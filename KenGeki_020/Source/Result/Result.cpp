@@ -124,16 +124,15 @@ namespace GAME
 		m_msg.assign ( U"勝利メッセージのテスト。\nリザルト画面を待つ状態でどこまで表示できるか" );
 
 
-		m_ch_msg.emplace ( CHARA_OUKA,		U"桜花：勝利メッセージのテスト。\nリザルト画面");
-		m_ch_msg.emplace ( CHARA_SAE,		U"紗絵：勝利メッセージのテスト。\nリザルト画面");
-		m_ch_msg.emplace ( CHARA_RETSUDOU,	U"烈堂：勝利メッセージのテスト。\nリザルト画面");
+		m_ch_msg.emplace ( CHARA_OUKA,		U"鵯 桜花：\n・・・。");
+		m_ch_msg.emplace ( CHARA_SAE,		U"巴 紗絵：\nそれでおしまい？　\nもっと本気だしてよ♪");
+		m_ch_msg.emplace ( CHARA_RETSUDOU,	U"烈火 烈堂：\n本当に良い刀ってのは鞘に入ってるもんだぜ･･･");
 
 
 		//数値
 		m_n_offset = MakeStr ( NUM_X, NUM_Y + NUM_P * 0 );
 		m_n_max_chn = MakeStr ( NUM_X, NUM_Y + NUM_P * 1 );
 		m_n_max_dmg = MakeStr ( NUM_X, NUM_Y + NUM_P * 2 );
-
 	}
 
 	P_GrpStr Result::MakeStr ( float x, float y )
@@ -208,7 +207,15 @@ namespace GAME
 			m_n_max_dmg->SetStr ( U"{}"_fmt ( n_max_dmg ) );
 		}
 
+		//フェード
+		m_fade_in->StartBlackIn ( 16 );
+
+		//キャラ表示
 		m_chara_x = CHARA_SX;
+
+		//文字カウント
+		m_time_count = 0;
+
 		Scene::Init ();
 	}
 
@@ -245,8 +252,20 @@ namespace GAME
 			m_fade_out->StartBlackOut ( 16 );
 		}
 
+
+
+		//test
+		// 
+		//キー6でリセット
+		if ( CFG_PUSH_KEY ( P1_BTN6 ) || CFG_PUSH_KEY ( P2_BTN6 ) )
+		{
+			SND_STOP_ALL_BGM ();
+			Init ();
+		}
+
+
 		//メッセージ
-		const size_t length = static_cast < size_t > ( s3d::Scene::Time () / 0.05 );
+		const size_t length = static_cast < size_t > ( m_time_count ++ / 5 );
 		//m_win_msg->SetStr ( m_msg.substr ( 0, length ) );
 		m_win_msg->SetStr ( m_ch_msg [ name ].substr ( 0, length ) );
 

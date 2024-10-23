@@ -182,6 +182,9 @@ namespace GAME
 	//タイム計測開始
 	void Fighting::StartTime ()
 	{
+		//トレーニングモードは時間計測しない
+		if ( m_bTraining ) { return; }
+
 		m_btlTime->Start ();
 	}
 
@@ -206,12 +209,6 @@ namespace GAME
 	{
 		m_exeChara1->StartEndWait ();
 		m_exeChara2->StartEndWait ();
-	}
-
-
-	//終了ステップ開始
-	void Fighting::StartEnd ()
-	{
 	}
 
 	//タイマ停止

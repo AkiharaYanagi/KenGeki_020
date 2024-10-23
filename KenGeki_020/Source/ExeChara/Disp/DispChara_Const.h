@@ -19,11 +19,11 @@ namespace GAME
 	//ゲージ類 個別位置と色
 	enum GAUGE
 	{
-		LIFE_GAUGE_X = 80,
-		LIFE_GAUGE_Y = 30,
+		LIFE_GAUGE_X = 74,
+		LIFE_GAUGE_Y = 38,
 		LIFE_GAUGE_W = 500,		//値
 		LIFE_GAUGE_H = 60,
-		LIFE_GAUGE_P = 6,		//パディング
+		LIFE_GAUGE_P = 7,		//パディング
 
 		LIFE_GAUGE_VALUE_CLR0 = 0xffd0f040,
 		LIFE_GAUGE_VALUE_CLR1 = 0xffa0f0d0,
@@ -48,7 +48,7 @@ namespace GAME
 
 
 		MANA_GAUGE_X = 170,
-		MANA_GAUGE_Y = 930,
+		MANA_GAUGE_Y = 900,
 		MANA_GAUGE_W = 250,
 		MANA_GAUGE_H = 24,
 		MANA_GAUGE_P = 4,

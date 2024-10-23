@@ -244,7 +244,8 @@ namespace GAME
 		float ln_d = UNIT_LGS * m_dcr;	//ダメージ表示長さ
 
 		//0以外は表示、０のときは非表示
-		m_grp_Value->SetValid ( m_value != 0 );
+//		m_grp_Value->SetValid ( m_value != 0 );
+//		m_grp_Value->SetValid ( F );
 
 		//表示
 		//@info テクスチャレクトを変更するとき、テクスチャサイズは変更しない
@@ -286,13 +287,15 @@ namespace GAME
 		float ln = UNIT_LGS * m_value;	//表示長さ
 		float wht = UNIT_LGS * white;	//表示長さ
 
-		float x = m_base_x;
-		float y = m_base_y + LIFE_Y_REV;
-		float w = m_base_w;
-		float h = m_base_h + LIFE_H_REV;
-		LONG P = (LONG)m_padding;
+//		float x = m_base_x;
+//		float y = m_base_y + LIFE_Y_REV;
+//		float w = m_base_w;
+//		float h = m_base_h + LIFE_H_REV;
+//		LONG P = (LONG)m_padding;
 
-		const float W = 512;
+		const float Y = m_base_y + LIFE_Y_REV;
+//		const float W = 512;
+		const LONG H = (LONG)( m_base_h + LIFE_H_REV );
 
 		//メイン値のサイズを取得
 //		float vx = m_grp_Value->GetPos().x;
@@ -306,16 +309,24 @@ namespace GAME
 
 		if ( PLAYER_ID_1 == m_playerID )
 		{
-			m_grp_White->SetPos ( x + P + w, y );
-			m_grp_White->SetRectF ( s3d::RectF { P, 0, (LONG)(ln + P + wht), (LONG)h } );
+			//1p側基準位置
+			const float X = m_base_x + m_base_w;
+
+//			m_grp_White->SetPos ( x + P + w, y );
+//			m_grp_White->SetRectF ( s3d::RectF { P, 0, (LONG)(ln + P + wht), (LONG)h } );
+			m_grp_White->SetPos ( X, Y );
+			m_grp_White->SetRectF ( s3d::RectF { 0, 0, (LONG)(ln + wht), H } );
 		}
 		else if ( PLAYER_ID_2 == m_playerID )
 		{
 			//2p側基準位置
-			float p2_bx = P + GAME_WINDOW_WIDTH - x - W;	//W = テクスチャサイズ
+//			float p2_bx = P + GAME_WINDOW_WIDTH - x - W;	//W = テクスチャサイズ
+			float X = GAME_WINDOW_WIDTH - m_base_x - m_base_w;
 
-			m_grp_White->SetPos ( p2_bx, y );
-			m_grp_White->SetRectF ( s3d::RectF { P, 0, (LONG)(ln + P + wht), (LONG)h } );
+//			m_grp_White->SetPos ( p2_bx, y );
+//			m_grp_White->SetRectF ( s3d::RectF { P, 0, (LONG)(ln + P + wht), (LONG)h } );
+			m_grp_White->SetPos ( X, Y );
+			m_grp_White->SetRectF ( s3d::RectF { 0, 0, (LONG)(ln + wht), H } );
 		}
 	}
 

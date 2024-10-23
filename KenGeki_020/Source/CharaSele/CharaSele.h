@@ -55,19 +55,21 @@ namespace GAME
 		//モード保存
 		MUTCH_MODE		m_mode { MODE_PLAYER_PLAYER };
 
+		//文字表示
+		P_GrpBlink		m_txt_CharacterSelect;
 
 		//ステージセレクト
+		P_GrpBlink		m_txt_StageSelect;
 		P_Grp			m_stageSelect;
 		bool			m_stageDecide { F };
 		P_GrpBlink		m_stageSelectTri;
 
+		//BGMセレクト
+		P_GrpBlink		m_txt_BGMSelect;
+		P_Grp			m_bgmSelect;
+		
 		//操作説明
 		P_Grp			m_inst;
-
-		//文字表示
-		P_GrpBlink		m_txt_CharacterSelect;
-		P_GrpBlink		m_txt_StageSelect;
-		P_GrpBlink		m_txt_BGMSelect;
 
 
 	public:
@@ -81,9 +83,12 @@ namespace GAME
 
 		P_GameScene Transit ();
 
+		void Save ();
+
 	private:
 		void Input ();
 		STAGE_NAME GetStageName ();
+		void AssignStage ( STAGE_NAME name );
 
 #pragma region CONST
 
@@ -106,8 +111,15 @@ namespace GAME
 
 		static const float STG_X;
 		static const float STG_Y;
+		static const float STG_BG_X;
+		static const float STG_BG_Y;
 		static const float STG_TRI_X;
 		static const float STG_TRI_Y;
+
+		static const float BGM_X;
+		static const float BGM_Y;
+		static const float BGM_TRI_X;
+		static const float BGM_TRI_Y;
 
 		static const float INST_X;
 		static const float INST_Y;

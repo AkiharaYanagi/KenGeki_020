@@ -40,8 +40,11 @@ namespace GAME
 		PrmRect		m_gaugeLurch;			//のけぞり時間表示
 #endif	//0
 
+		P_Grp		m_name_bg;			//名前背景
+		P_Grp		m_name;				//名前
 		P_Grp		m_face;				//顔
 		P_Grp		m_ChouHissatsu;		//超必殺
+		CHARA_NAME	m_chara_name { CHARA_OUKA };	//キャラ名保存
 
 		//-----------------------------------------------------
 
@@ -70,6 +73,8 @@ namespace GAME
 		P_Grp		m_grpStrHit;		//"Hit"
 
 		//-----------------------------------------------------
+		//デバッグ用
+		
 		//アクション名
 		P_GrpStr	m_strAction;	
 		//ステート名
@@ -116,8 +121,12 @@ namespace GAME
 		void UpdateStateName ( s3d::String stateName );
 
 		//表示切替
-		void On ();
-		void Off ();
+		void On ();		//すべて
+		void Off ();	
+
+		void On_Debug ();
+		void Off_Debug ();	//デバッグ用
+		
 
 	private:
 		P_Grp MakepGrpPlyr ( s3d::String str );
@@ -131,6 +140,17 @@ namespace GAME
 		static const float CHOU_Y;
 		static const float CHOU_W;
 
+		static const float NAME_BG_X;
+		static const float NAME_BG_Y;
+		static const float NAME_BG_W;
+
+		static const float NAME_X;
+		static const float NAME_Y;
+		static const float NAME_OUKA_W;
+		static const float NAME_SAE_W;
+		static const float NAME_RETSUDOU_W;
+
+		static const float NAME_W [ 3 ];
 	};
 
 	using P_DispFrontEnd = std::shared_ptr < DispFrontEnd >;

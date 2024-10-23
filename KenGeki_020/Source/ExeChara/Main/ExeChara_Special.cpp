@@ -81,7 +81,7 @@ namespace GAME
 		//@info DBGOUT_WND_F は　ExeChara中で用いると２P側で上書きされる
 		if ( IsPlayerID( PLAYER_ID_1 ) )
 		{
-			DBGOUT_WND_F( 8, U"AirDash = {}"_fmt( m_btlPrm.GetNAirDash() ) );
+//			DBGOUT_WND_F( DBGOUT_8, U"AirDash = {}"_fmt( m_btlPrm.GetNAirDash() ) );
 		}
 
 

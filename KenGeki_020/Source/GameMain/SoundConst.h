@@ -31,5 +31,14 @@ namespace GAME
 	constexpr char32_t BGM_Result []	= U"12_BGM_Result.wav";
 	constexpr char32_t BGM_TitleCall []	= U"13_TitleCall.wav";
 
+
+	//ID
+	enum BGM_ID
+	{
+		BGM_ID_GABA,
+		BGM_ID_OUKA,
+		BGM_ID_SAE,
+		BGM_ID_RETSUDOU,
+	};
 }
 

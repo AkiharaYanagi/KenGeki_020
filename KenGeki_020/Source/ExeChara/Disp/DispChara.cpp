@@ -42,6 +42,11 @@ namespace GAME
 	{
 	}
 
+	void DispChara::Move ()
+	{
+		TASK_VEC::Move ();
+	}
+
 	//プレイヤIDを設定
 	void DispChara::LoadPlayer ( PLAYER_ID playerID )
 	{
@@ -54,9 +59,7 @@ namespace GAME
 	//シーンパラメータ関連初期化
 	void DispChara::ParamInit ( P_Param pParam )
 	{
-#if 0
 		m_frontEnd->ParamInit ( pParam );
-#endif // 0
 
 #if 0
 

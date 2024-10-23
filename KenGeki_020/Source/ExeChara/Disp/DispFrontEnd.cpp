@@ -22,9 +22,19 @@ namespace GAME
 	const float DispFrontEnd::FACE_X = 80;
 	const float DispFrontEnd::FACE_Y = 840;
 	const float DispFrontEnd::FACE_W = 100;
-	const float DispFrontEnd::CHOU_X = 300;
-	const float DispFrontEnd::CHOU_Y = 870;
-	const float DispFrontEnd::CHOU_W = 128;
+	const float DispFrontEnd::CHOU_X = 326;
+	const float DispFrontEnd::CHOU_Y = 850;
+	const float DispFrontEnd::CHOU_W = 100;
+
+	const float DispFrontEnd::NAME_BG_X = 155;
+	const float DispFrontEnd::NAME_BG_Y = 900;
+	const float DispFrontEnd::NAME_BG_W = 256;
+
+	const float DispFrontEnd::NAME_X = 175;
+	const float DispFrontEnd::NAME_Y = 913;
+
+	//各ファイルサイズから幅を指定
+	const float DispFrontEnd::NAME_W[3] = { 167.f, 118.f, 179.f };
 
 
 	DispFrontEnd::DispFrontEnd ()
@@ -36,10 +46,10 @@ namespace GAME
 		m_gaugeLife->SetPosition ( LIFE_GAUGE_X, LIFE_GAUGE_Y, LIFE_GAUGE_W, LIFE_GAUGE_H );
 		m_gaugeLife->SetPadding ( LIFE_GAUGE_P );
 		m_gaugeLife->SetZ ( Z_SHADOW );
-		m_gaugeLife->SetTextureName_Frame ( U"gauge_life_frame_2p.png" );
-		m_gaugeLife->SetTextureName_Value ( U"gauge_life_value_2p.png" );
-		m_gaugeLife->SetTextureName_Decrease ( U"gauge_life_decrease_2p.png" );
-		m_gaugeLife->SetTextureName_White ( U"gauge_life_white_2p.png" );
+		m_gaugeLife->SetTextureName_Frame ( U"Battle\\gauge_life_frame_2p.png" );
+		m_gaugeLife->SetTextureName_Value ( U"Battle\\gauge_life_value_2p.png" );
+		m_gaugeLife->SetTextureName_Decrease ( U"Battle\\gauge_life_decrease_2p.png" );
+		m_gaugeLife->SetTextureName_White ( U"Battle\\gauge_life_white_2p.png" );
 //	m_gaugeLife->SetColor_Decrease ( LIFE_GAUGE_DECREASE_CLR );
 		m_gaugeLife->OnWhite ();
 		AddpTask ( m_gaugeLife );
@@ -49,8 +59,8 @@ namespace GAME
 		m_gaugeBalance->SetPosition ( BALANCE_GAUGE_X, BALANCE_GAUGE_Y, BALANCE_GAUGE_W, BALANCE_GAUGE_H );
 		m_gaugeBalance->SetPadding ( BALANCE_GAUGE_P );
 		m_gaugeBalance->SetZ ( Z_SHADOW );
-		m_gaugeBalance->SetTextureName_Frame ( U"gauge_balance_frame.png" );
-		m_gaugeBalance->SetTextureName_Value ( U"gauge_balance_value.png" );
+		m_gaugeBalance->SetTextureName_Frame ( U"Battle\\gauge_balance_frame.png" );
+		m_gaugeBalance->SetTextureName_Value ( U"Battle\\gauge_balance_value.png" );
 		m_gaugeBalance->OffDecrease ();
 		m_gaugeBalance->OffWhite ();
 		AddpTask ( m_gaugeBalance );
@@ -60,8 +70,8 @@ namespace GAME
 		m_gaugeMana->SetPosition ( MANA_GAUGE_X, MANA_GAUGE_Y, MANA_GAUGE_W, MANA_GAUGE_H );
 		m_gaugeMana->SetPadding ( MANA_GAUGE_P );
 		m_gaugeMana->SetZ ( Z_SYS );
-		m_gaugeMana->SetTextureName_Frame ( U"gauge_mana_frame.png" );
-		m_gaugeMana->SetTextureName_Value ( U"gauge_mana_value.png" );
+		m_gaugeMana->SetTextureName_Frame ( U"Battle\\gauge_mana_frame.png" );
+		m_gaugeMana->SetTextureName_Value ( U"Battle\\gauge_mana_value.png" );
 		m_gaugeMana->SetPadding ( MANA_GAUGE_P );
 		m_gaugeMana->OffDecrease ();
 		m_gaugeMana->OffWhite ();
@@ -152,19 +162,39 @@ namespace GAME
 		GRPLST_INSERT ( m_strState );
 		AddpTask ( m_strState );
 
+		//名前背景
+		m_name_bg = std::make_shared < GameGraphic > ();
+		m_name_bg->AddTexture_FromArchive ( U"Battle\\Name_BG.png" );
+		m_name_bg->SetZ ( Z_SHADOW );
+		m_name_bg->SetScalingCenter ( VEC2 ( NAME_BG_W / 2, 18 ) );
+		GRPLST_INSERT ( m_name_bg );
+		AddpTask ( m_name_bg );
+
 		//顔
 		m_face = std::make_shared < GameGraphic > ();
-		m_face->AddTexture_FromArchive ( U"Face_Sae.png" );
+		m_face->AddTexture_FromArchive ( U"Battle\\Face_Ouka.png" );
+		m_face->AddTexture_FromArchive ( U"Battle\\Face_Sae.png" );
+		m_face->AddTexture_FromArchive ( U"Battle\\Face_Retsudou.png" );
+		m_face->SetIndexTexture ( 0 );
 		m_face->SetZ ( Z_SHADOW );
 		GRPLST_INSERT ( m_face );
 		AddpTask ( m_face );
 
 		//超必殺
 		m_ChouHissatsu = std::make_shared < GameGraphic > ();
-		m_ChouHissatsu->AddTexture_FromArchive ( U"ChouHissatsu.png" );
+		m_ChouHissatsu->AddTexture_FromArchive ( U"Battle\\ChouHissatsu.png" );
 		m_ChouHissatsu->SetZ ( Z_SHADOW );
 		GRPLST_INSERT ( m_ChouHissatsu );
 		AddpTask ( m_ChouHissatsu );
+
+		//名前
+		m_name = std::make_shared < GameGraphic > ();
+		m_name->AddTexture_FromArchive ( U"Battle\\Name_HIYODORI_OUKA.png" );
+		m_name->AddTexture_FromArchive ( U"Battle\\Name_TOMOE_SAE.png" );
+		m_name->AddTexture_FromArchive ( U"Battle\\Name_REKKA_RETSUDOU.png" );
+		m_name->SetZ ( Z_SHADOW - 0.01f );
+		GRPLST_INSERT ( m_name );
+		AddpTask ( m_name );
 	}
 
 	//オブジェクト生成用
@@ -239,8 +269,11 @@ namespace GAME
 			
 			pOb->SetPos ( VEC2 ( 0, 200 ) );
 
+			m_name_bg->SetPos ( VEC2 ( NAME_BG_X, NAME_BG_Y ) );
+			m_name_bg->SetScaling ( VEC2 ( -1.f, 1.f ) );
 			m_face->SetPos ( VEC2 ( FACE_X, FACE_Y ) );
 			m_ChouHissatsu->SetPos ( VEC2 ( CHOU_X, CHOU_Y ) );
+			m_name->SetPos ( VEC2 ( NAME_X, NAME_Y ) );
 		}
 		else if ( PLAYER_ID_2 == playerID )
 		{
@@ -249,8 +282,13 @@ namespace GAME
 
 			pOb->SetPos ( VEC2 (  1280 - 384 - 0, 200 ) );
 
+			m_name_bg->SetPos ( VEC2 ( WINDOW_WIDTH - NAME_BG_W - NAME_BG_X, NAME_BG_Y ) );
 			m_face->SetPos ( VEC2 ( WINDOW_WIDTH - FACE_W - FACE_X, FACE_Y ) );
 			m_ChouHissatsu->SetPos ( VEC2 ( WINDOW_WIDTH - CHOU_W - CHOU_X, CHOU_Y ) );
+
+			//キャラ名によって幅が異なる
+			float w = NAME_W [ - 1 + (int)m_chara_name ];
+			m_name->SetPos ( VEC2 (  WINDOW_WIDTH - w - NAME_X, NAME_Y ) );
 		}
 
 
@@ -276,10 +314,26 @@ namespace GAME
 		//ゲーム設定
 		GameSettingFile stg = pParam->GetGameSetting ();
 
-		//選択キャラ名前・モードを取得
-		PLAYER_MODE playerMode = stg.GetPlayerMode ( m_playerID );
+		//選択キャラ名前
+		CHARA_NAME charaName = stg.GetName ( m_playerID );
+		m_chara_name = charaName;
+
+		//キャラ名による初期化
+		switch ( charaName )
+		{
+		case CHARA_OUKA: break;
+		case CHARA_SAE: break;
+		case CHARA_RETSUDOU: break;
+		default: charaName = CHARA_OUKA; break;
+		}
+		m_face->SetIndexTexture ( (uint32)charaName - 1 );
+		m_name->SetIndexTexture ( (uint32)charaName - 1 );
+
 
 		//プレイヤモード(入力種類)による初期化
+		// 
+		//モードを取得
+		PLAYER_MODE playerMode = stg.GetPlayerMode ( m_playerID );
 		switch ( playerMode )
 		{
 #if 0
@@ -292,8 +346,8 @@ namespace GAME
 	}
 
 
-#if 0
 
+#if 0
 	void DispFrontEnd::SetPlayer ()
 	{
 		m_grp_Cst_InputPlayerCOM->SetIndexTexture ( INPUT_PLAYER );
@@ -503,10 +557,12 @@ namespace GAME
 		m_gaugeLife->On ();
 		m_gaugeBalance->On ();
 		m_gaugeMana->On ();
-
-		m_strAction->SetValid ( T );
-		m_strState->SetValid ( T );
 		m_gaugeAccel->On ();
+
+		m_name_bg->SetValid ( T );
+		m_name->SetValid ( T );
+		m_face->SetValid ( T );
+		m_ChouHissatsu->SetValid ( T );
 #if 0
 		m_grp_Cst_Player1P2P->SetValid ( T );
 		m_grp_Cst_InputPlayerCOM->SetValid ( T );
@@ -522,11 +578,12 @@ namespace GAME
 		m_gaugeLife->Off ();
 		m_gaugeBalance->Off ();
 		m_gaugeMana->Off ();
-
-		m_strAction->SetValid ( F );
-		m_strState->SetValid ( F );
-
 		m_gaugeAccel->Off ();
+
+		m_name_bg->SetValid ( F );
+		m_name->SetValid ( F );
+		m_face->SetValid ( F );
+		m_ChouHissatsu->SetValid ( F );
 #if 0
 		m_grp_Cst_Player1P2P->SetValid ( F );
 		m_grp_Cst_InputPlayerCOM->SetValid ( F );
@@ -535,6 +592,18 @@ namespace GAME
 		m_grp_CH_InputCOMPLayer->SetValid ( F );
 #endif // 0
 
+	}
+
+	void DispFrontEnd::On_Debug ()
+	{
+		m_strAction->SetValid ( T );
+		m_strState->SetValid ( T );
+	}
+
+	void DispFrontEnd::Off_Debug ()
+	{
+		m_strAction->SetValid ( F );
+		m_strState->SetValid ( F );
 	}
 
 

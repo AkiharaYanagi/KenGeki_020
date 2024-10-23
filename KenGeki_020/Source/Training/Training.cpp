@@ -109,6 +109,9 @@ namespace GAME
 		SND_PLAY_LOOP_BGM ( BGM_GABA );
 		//SND_PLAY_LOOP_BGM ( BGM_SAE );
 
+		//Fighting
+		m_fighting->SetbTraining ( T );	//トレーニングモード設定(タイマ無効など)
+
 		Scene::Load ();
 	}
 

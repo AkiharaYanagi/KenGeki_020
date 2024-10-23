@@ -14,6 +14,7 @@
 #include "GameSettingFile.h"
 //#include "SceneCommon.h"
 #include "Chara.h"
+#include "SoundConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -32,6 +33,7 @@ namespace GAME
 		CHARA_NAME		m_chara_name_1p { CHARA_TEST };
 		CHARA_NAME		m_chara_name_2p { CHARA_TEST };
 		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };
+		BGM_ID			m_bgme_id { BGM_ID_GABA };
 
 		//キャラ事前読込
 		P_Chara			m_pChara_Ouka { nullptr };
@@ -93,8 +95,8 @@ namespace GAME
 		}
 		void SetRandomChara ();
 
-		void SetStageName ( STAGE_NAME stage_name ) { m_stage_name = stage_name; } 
-		STAGE_NAME GetStageName () const { return m_stage_name; }
+		GET_SET ( STAGE_NAME, GetStageName, SetStageName, m_stage_name	)		//bgm
+		GET_SET ( BGM_ID, Get_BGM_ID, Set_BGM_ID, m_bgme_id	)		//bgm
 
 
 		//データ事前読込1

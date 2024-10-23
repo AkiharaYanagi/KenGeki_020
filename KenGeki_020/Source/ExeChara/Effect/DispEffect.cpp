@@ -71,8 +71,18 @@ namespace GAME
 //		VEC2 imgPos = VEC2( tempImgPos.x, tempImgPos.y );
 		VEC2 vecEfImg = ptEf + imgPos + G_BASE_POS ();
 
-		//test
-		vecEfImg = VEC2 ( 0, 0 );
+		//2pのみ
+		DBGOUT_WND_F ( DBGOUT_9,
+			U"({},{}) = ({},{})+({},{})+({}, {})"_fmt(
+				vecEfImg.x,
+				vecEfImg.y,
+				ptEf.x,
+				ptEf.y,
+				imgPos.x,
+				imgPos.y,
+				G_BASE_POS().x,
+				G_BASE_POS().y )
+			);
 
 		//回転
 		float rad = D3DX_PI * 0.01f * pScript->m_prmStaging.Rotate;
@@ -96,9 +106,8 @@ namespace GAME
 		m_grp->SetScalingCenter ( center );
 #endif // 0
 
-		//テクスチャの取得
+		//テクスチャの指定
 		UINT index = pScript->GetImageIndex ();
-//		P_Tx pEfTx = mpap_EfTx->at ( pScript->GetImageIndex() );
 
 		//表示に反映
 
@@ -106,10 +115,7 @@ namespace GAME
 		m_grp->SetBase ( vecEfImg );	//Grp "Ef" Shdは基本位置指定をBaseで行う
 
 		m_grp->SetScaling ( m_w * fDir, 1.f );
-//		m_grp->SetpTexture ( pEfTx );
 		m_grp->SetIndexTexture ( index );
-
-//		m_grp->Draw ();
 	}
 
 	void DispEffect::SetpCharaRect ( P_CharaRect pCharaRect )

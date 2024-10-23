@@ -111,7 +111,7 @@ namespace GAME
 		}
 #endif // 0
 
-		DBGOUT_WND_F ( 6, U"OperateEffect::m_bGenerate{}"_fmt( m_bGenerate ) );
+//		DBGOUT_WND_F ( DBGOUT_6, U"OperateEffect::m_bGenerate{}"_fmt( m_bGenerate ) );
 
 		//生成済みのとき何もしないで返す
 		//ExeCharaの通常状態で解除
