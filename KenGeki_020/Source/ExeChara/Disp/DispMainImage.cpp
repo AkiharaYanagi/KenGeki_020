@@ -62,7 +62,8 @@ namespace GAME
 		//位置
 		VEC2 posScript = pScript->GetPos ();
 		float bx = G_BASE_POS ().x;	//基準位置
-		float x = bx + ptChara.x + fDir * posScript.x;	//反転位置補正
+		float vib = btlprm.GetVib ();	//振動量
+		float x = bx + ptChara.x + fDir * posScript.x + vib;	//反転位置補正
 //		float x = bx + ptChara.x + posScript.x;	//->ScalingCenterの指定により位置補正は無し
 		float y =  0 + ptChara.y + posScript.y;
 		VEC2 vecImg = VEC2 ( x, y );

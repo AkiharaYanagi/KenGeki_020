@@ -87,6 +87,7 @@ namespace GAME
 		P_Timer		m_tmrDown;			//ダウンタイマ
 		P_Timer		m_tmrEnd;			//終了状態タイマ
 		P_Timer		m_tmrLurch;			//のけぞりタイマ
+		P_Timer		m_tmrVib;			//個別振動タイマ
 
 		UINT	m_blackOut { 0 };		//暗転
 		UINT	m_scpStop { 0 };		//スクリプトからの停止
@@ -102,6 +103,8 @@ namespace GAME
 		float	m_acc_recoil { 0 };		//反動(ノックバック)加速度
 		float	m_vel_recoil { 0 };		//反動(ノックバック)速度
 		float	m_pos_x_recoil { 0 };	//反動(ノックバック)位置
+
+		float	m_vib { 0.f };			//振動量
 
 		_CLR	m_color { 0xffffffff };	//色
 
@@ -185,6 +188,8 @@ namespace GAME
 		GET_SET ( float, GetAccRecoil, SetAccRecoil, m_acc_recoil )
 		GET_SET ( float, GetVelRecoil, SetVelRecoil, m_vel_recoil )
 		GET_SET ( float, GetPosXRecoil, SetPosXRecoil, m_pos_x_recoil )
+
+		GET_SET ( float, GetVib, SetVib, m_vib )
 
 		GET_SET ( _CLR, GetColor, SetColor, m_color )
 

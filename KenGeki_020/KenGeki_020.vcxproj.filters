@@ -984,6 +984,18 @@
     <ClInclude Include="Source\ExeChara\Input\NewCPUInput_Act.h">
       <Filter>03_FtgMain\ExeChara\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Menu\PauseMenu.h">
+      <Filter>80_Common\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Menu\PauseMenu_Const.h">
+      <Filter>80_Common\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Menu\PauseMenuItem.h">
+      <Filter>80_Common\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Menu\YesNo_Menu.h">
+      <Filter>80_Common\Menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1150,6 +1162,18 @@
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Input\NewCPUInput_Act.cpp">
       <Filter>03_FtgMain\ExeChara\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Menu\PauseMenu_Const.cpp">
+      <Filter>80_Common\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Menu\PauseMenuItem.cpp">
+      <Filter>80_Common\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Menu\YesNo_Menu.cpp">
+      <Filter>80_Common\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Menu\PauseMenu.cpp">
+      <Filter>80_Common\Menu</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

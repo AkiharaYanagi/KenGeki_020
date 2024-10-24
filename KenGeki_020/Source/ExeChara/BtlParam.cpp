@@ -113,6 +113,7 @@ namespace GAME
 		m_tmrScpStop		= std::make_shared < Timer > ();		//ストップタイマ
 		m_tmrHitPitch	= std::make_shared < Timer > ();		//ヒット間隔タイマ
 		m_tmrLurch		= std::make_shared < Timer > ();		//のけぞりタイマ
+		m_tmrVib		 = std::make_shared < Timer > ();	//個別振動
 		m_tmrWhiteDamage = std::make_shared < Timer > ();	//白ダメージ
 
 		m_timers.push_back ( m_tmrHitstop );
@@ -121,6 +122,7 @@ namespace GAME
 		m_timers.push_back ( m_tmrScpStop );
 		m_timers.push_back ( m_tmrHitPitch );
 		m_timers.push_back ( m_tmrLurch );
+		m_timers.push_back ( m_tmrVib );
 		m_timers.push_back ( m_tmrWhiteDamage );
 	}
 
@@ -357,6 +359,36 @@ namespace GAME
 #endif // 0
 		m_acc_recoil = 0;		//accは初速のみ
 
+
+		//------------------------------------------------
+		//演出・個別振動
+		if ( ! m_tmrVib->IsActive () )
+		{
+			//スクリプトからの指定があるとき
+			int32 vib = m_pScript->m_prmStaging.Vibration_S;
+			if ( vib > 0 )
+			{
+				//開始
+				m_tmrVib->Start ( vib );
+				m_vib = 10.f;
+			}
+			else
+			{
+				//通常時
+				m_vib = 0;
+			}
+		}
+		else
+		{
+			//反転する
+			m_vib *= -1;
+
+			//終了時
+			if ( m_tmrVib->IsLast () )
+			{
+				m_vib = 0;
+			}
+		}
 
 		//-------------------------------------------------
 		//ライフ関連

@@ -20,7 +20,9 @@ namespace GAME
 
 
 	//---------------------------------------------------------
+	//カーソル
 	//表示位置定数
+#if 0
 	const float	CharaSele_Player::FACE_X_0 = 362;
 	const float	CharaSele_Player::FACE_X_1 = 512;
 	const float	CharaSele_Player::FACE_X_2 = 662;
@@ -28,6 +30,14 @@ namespace GAME
 	const float	CharaSele_Player::FACE_Y_1 = 167;
 	const float	CharaSele_Player::FACE_Y_2 = 577;
 	const float	CharaSele_Player::FACE_Y_3 = 727;
+#endif // 0
+	const float	CharaSele_Player::FACE_X_0 = 410 - 2;
+	const float	CharaSele_Player::FACE_X_1 = FACE_X_0 + 150;
+	const float	CharaSele_Player::FACE_X_2 = FACE_X_1 + 150;
+	const float	CharaSele_Player::FACE_Y_0 =  70 - 2;
+	const float	CharaSele_Player::FACE_Y_1 = FACE_Y_0 + 150;
+	const float	CharaSele_Player::FACE_Y_2 = FACE_Y_0 + 560;
+	const float	CharaSele_Player::FACE_Y_3 = FACE_Y_2 + 150;
 
 	const float	CharaSele_Player::LOGO_NUM = 12;
 	const float	CharaSele_Player::LOGO_W = 128;
@@ -37,10 +47,12 @@ namespace GAME
 	const float	CharaSele_Player::LOGO_R_VEL_X = 4;
 
 	//カーソル
+#if 0
 	const float	CharaSele_Player::SELECT_1P_POS_X = 415 + 75 - 128;	//基準点 + 枠中心 + 画像半分
 	const float	CharaSele_Player::SELECT_1P_POS_Y = 70 + 75 - 128;
 	const float	CharaSele_Player::SELECT_2P_POS_X = 715 + 75 - 128;	//基準点 + 枠中心 + 画像半分
 	const float	CharaSele_Player::SELECT_2P_POS_Y = 70 + 75 - 128;
+#endif // 0
 
 	//キャラ立ち絵
 	const float	CharaSele_Player::CHARA_1P_POS_X = -300;

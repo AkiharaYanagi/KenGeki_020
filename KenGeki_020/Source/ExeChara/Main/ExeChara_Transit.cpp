@@ -231,10 +231,21 @@ namespace GAME
 		P_Action pAct = m_pOther.lock()->m_pChara->GetpAction ( nameAction );
 
 		//やられ状態のとき空中チェック
+		//@info 特殊状態　（特定技やられなど）は除く
 		bool bDai = U"ダメージ大" == nameAction ;
 		bool bSyou = U"ダメージ小" == nameAction ;
-
 		if ( bDai || bSyou )
+#if 0
+
+
+		//相手がダメージかつ空中なら
+		//bool bDmg = IsDamaged ();
+		//bool bJump = Is_AP_Jump ();
+//		if ( bDmg && bAir )
+		bool bAir = m_pOther.lock()->m_btlPrm.GetPos().y < (float)GROUND_Y;
+
+		if ( bAir )
+#endif // 0
 		{
 			ACTION_POSTURE ap = m_pOther.lock()->GetPosture ();
 			if ( ap == ACTION_POSTURE::AP_JUMP )

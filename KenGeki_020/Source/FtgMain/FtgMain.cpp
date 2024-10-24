@@ -23,10 +23,11 @@ namespace GAME
 		m_fighting = std::make_shared < Fighting > ();
 		AddpTask ( m_fighting );
 
-#if 0
 		//ポーズメニュ
-		m_pauseMenu = make_shared < PauseMenu > ();
+		m_pauseMenu = std::make_shared < PauseMenu > ();
 		AddpTask ( m_pauseMenu );
+
+#if 0
 
 		//ロード中
 		m_rectLoad = make_shared < PrmRect > ();
@@ -54,11 +55,11 @@ namespace GAME
 		m_NowLoading->SetZ ( Z_FADE - 0.01f );
 		AddpTask ( m_NowLoading );
 		GRPLST_INSERT_MAIN ( m_NowLoading );
+#endif // 0
 
 
 		//----------------------------------------------------
 		//@info コンストラクタでshared_from_this()を用いない
-#endif // 0
 	}
 
 	FtgMain::~FtgMain ()
@@ -72,10 +73,9 @@ namespace GAME
 
 		//遷移先指定にthisを保存
 		Scene::SetwpThis ( shared_from_this () );
-#if 0
+
 		//Menu用にthisを保存
 		m_pauseMenu->SetwpParentScene ( shared_from_this () );
-#endif // 0
 
 
 		//test
@@ -106,13 +106,13 @@ namespace GAME
 		{
 			m_NowLoading->SetValid ( F );
 		}
+#endif // 0
 
 		//メニュポーズ中
 		if ( m_pauseMenu->MenuCheck () )
 		{
 			return;
 		}
-#endif // 0
 
 		//デモ リスタート
 		if ( WND_UTL::AscKey ( '0' ) )

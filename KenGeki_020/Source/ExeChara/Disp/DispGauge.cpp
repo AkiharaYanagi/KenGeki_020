@@ -243,9 +243,11 @@ namespace GAME
 		float ln = UNIT_LGS * m_value;	//表示長さ
 		float ln_d = UNIT_LGS * m_dcr;	//ダメージ表示長さ
 
+
 		//0以外は表示、０のときは非表示
-//		m_grp_Value->SetValid ( m_value != 0 );
-//		m_grp_Value->SetValid ( F );
+		//RECTが０のときに全体表示になってしまうので、透明で代用
+		m_grp_Value->SetColor ( m_value == 0 ? 0x00ffffff : 0xffffffff );
+
 
 		//表示
 		//@info テクスチャレクトを変更するとき、テクスチャサイズは変更しない

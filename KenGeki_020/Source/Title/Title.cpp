@@ -164,11 +164,9 @@ namespace GAME
 
 		//カーソル回転
 		m_cursor_scaling_y += m_cursor_scaling_vy;
-		if ( m_cursor_scaling_y >= 1.f ) { m_cursor_scaling_vy = - 0.1f; }
-		if (m_cursor_scaling_y <= -1.f) { m_cursor_scaling_vy = 0.1f; }
-
+		if ( m_cursor_scaling_y >=  1.f ) { m_cursor_scaling_vy = - 0.1f; }
+		if ( m_cursor_scaling_y <= -1.f ) { m_cursor_scaling_vy =   0.1f; }
 		m_cursor->SetScaling ( 1.f, m_cursor_scaling_y );
-
 
 		//フェード中は入力を受付しない
 		if ( m_fade_in->IsActive () ) { Scene::Move (); return; }

@@ -101,7 +101,7 @@ namespace GAME
 			m_chara_stand_light->SetPos ( m_x, CHARA_1P_POS_Y );
 			m_chara_stand_light->SetIndexTexture ( CHSLID_00 );
 			m_chara_name->SetPos ( CHARA_NAME_1P_X, CHARA_NAME_1P_Y );
-			m_cursor->SetPos ( SELECT_1P_POS_X, SELECT_1P_POS_Y );
+			m_cursor->SetPos ( VEC2 ( m_pos [ CHSLID_00 ].x, m_pos [ CHSLID_00 ].y ) );
 			m_cursor->SetIndexTexture ( 0 );
 		}
 		else if ( PLAYER_ID_2 == id )
@@ -113,13 +113,23 @@ namespace GAME
 			m_chara_stand_light->SetPos ( m_x, CHARA_2P_POS_Y );
 			m_chara_stand_light->SetIndexTexture ( CHSLID_02 );
 			m_chara_name->SetPos ( CHARA_NAME_2P_X, CHARA_NAME_2P_Y );
-			m_cursor->SetPos ( SELECT_2P_POS_X, SELECT_2P_POS_Y );
+			m_cursor->SetPos ( VEC2 ( m_pos [ CHSLID_02 ].x, m_pos [ CHSLID_02 ].y ) );
 			m_cursor->SetIndexTexture ( 1 );
 		}
 	}
 
 	void CharaSele_Player::Move ()
 	{
+		//状態による分岐
+		switch ( m_state )
+		{
+		case STT_CHARA: Move_Chara	(); break;
+		case STT_STAGE: Move_Stage	(); break;
+		case STT_BGM:	Move_bgm	(); break;
+		case STT_OK:	Move_OK		(); break;
+		default: break;
+		};
+		
 		//入力
 		if ( m_decided )	//決定済みならば
 		{
@@ -175,6 +185,28 @@ namespace GAME
 		TASK_VEC::Move ();
 	}
 
+	void CharaSele_Player::Move_Chara ()
+	{
+		TASK_VEC::Move ();
+	}
+
+	void CharaSele_Player::Move_Stage ()
+	{
+		TASK_VEC::Move ();
+	}
+
+	void CharaSele_Player::Move_bgm ()
+	{
+		TASK_VEC::Move ();
+	}
+
+	void CharaSele_Player::Move_OK ()
+	{
+		Input_Decided ();	//キャンセルのみ
+		TASK_VEC::Move ();
+	}
+
+
 	CHARA_NAME CharaSele_Player::GetName () const
 	{
 		return m_pos[m_chsl_id].Name;
@@ -228,7 +260,6 @@ namespace GAME
 
 
 	//-------------------------------------------------------------------
-	// 
 	//入力
 	void CharaSele_Player::Input ()
 	{
@@ -258,6 +289,7 @@ namespace GAME
 
 	void CharaSele_Player::Input_Decided ()
 	{
+#if 0
 		if ( PLAYER_ID_1 == m_player_id )
 		{
 			if ( CFG_PUSH_KEY ( P1_BTN1 ) )
@@ -271,6 +303,12 @@ namespace GAME
 			{
 				Cancel ();	//否定
 			}
+		}
+#endif // 0
+		//ボタン１でキャンセル
+		if ( CFG_PL_KEY ( m_player_id, PLY_BTN1 ) )
+		{
+			Cancel ();
 		}
 	}
 

@@ -19,8 +19,14 @@ namespace GAME
 {
 #pragma region CONST
 
-	const float CharaSele::TXT_CHSL_X = 640 - 286 / 2;
+	//キャラセレ
+	const float CharaSele::TXT_CHSL_X = -2 + 640 - 286 / 2;
 	const float CharaSele::TXT_CHSL_Y = 5;
+
+	//キャラ別
+	const float CharaSele::CH_INDEX_X_1P = 0    + 100;
+	const float CharaSele::CH_INDEX_X_2P = 1280 - 100 - 194;
+	const float CharaSele::CH_INDEX_Y = 5;
 
 	const float CharaSele::CH_STT_X_1P = 410;
 	const float CharaSele::CH_STT_X_2P = 800;
@@ -31,23 +37,26 @@ namespace GAME
 	const float CharaSele::CH_BAR_Y = 0;
 
 	//ステージセレクト
-	const float CharaSele::TXT_STSL_X = 640 - 272 / 2;
-	const float CharaSele::TXT_STSL_Y = 406;
-	const float CharaSele::STG_X = 640 - 128;
-	const float CharaSele::STG_Y = 436;
 	const float CharaSele::STG_BG_X = 0;
-	const float CharaSele::STG_BG_Y = 405;
+	const float CharaSele::STG_BG_Y = 385;
+	const float CharaSele::TXT_STSL_X = 640 - 260 / 2;
+	const float CharaSele::TXT_STSL_Y = 390;
+	const float CharaSele::STG_X = 640 - 256 / 2;
+	const float CharaSele::STG_Y = 420;
 	const float CharaSele::STG_TRI_X = (1280 - 335) * 0.5f;
 	const float CharaSele::STG_TRI_Y = STG_Y + 50;
 
 	//BGMセレクト
+	const float CharaSele::BGM_SCROLL_X = 1280;
+	const float CharaSele::BGM_SCROLL_Y = 570;
 	const float CharaSele::TXT_BGM_X  = 640 - 184 / 2;
-	const float CharaSele::TXT_BGM_Y  = 582;
+	const float CharaSele::TXT_BGM_Y  = 572;
 	const float CharaSele::BGM_X = 640 - 225;
-	const float CharaSele::BGM_Y = 608;
+	const float CharaSele::BGM_Y = 602;
 	const float CharaSele::BGM_TRI_X = (1280 - 335) * 0.5f;
 	const float CharaSele::BGM_TRI_Y = BGM_Y + 50;
 
+	//操作説明
 	const float CharaSele::INST_X = 0;
 	const float CharaSele::INST_Y = 960 - 27;
 
@@ -56,7 +65,7 @@ namespace GAME
 
 	CharaSele::CharaSele ()
 	{
-		//BG
+		//BG(全体)
 		m_bg = std::make_shared < GameGraphic > ();
 		m_bg->AddTexture_FromArchive ( U"CharaSele\\CharaSele_BG.png" );
 		m_bg->SetPos ( 0, 0 );
@@ -64,7 +73,7 @@ namespace GAME
 		AddpTask ( m_bg );
 		GRPLST_INSERT ( m_bg );
 
-		//Scroll
+		//Scroll(全体)
 		m_scroll = std::make_shared < GameGraphic > ();
 		m_scroll->SetShader ( T );
 		m_scroll->AddTexture_FromArchive ( U"CharaSele\\CharaSele_Scroll.png" );
@@ -96,6 +105,19 @@ namespace GAME
 
 
 		//現在状態
+		m_index_1p = std::make_shared < GameGraphic > ();
+		m_index_1p->AddTexture_FromArchive ( U"CharaSele\\1P_Index.png" );
+		m_index_1p->SetPos ( CH_INDEX_X_1P, CH_INDEX_Y );
+		AddpTask ( m_index_1p );
+		GRPLST_INSERT ( m_index_1p );
+		m_index_2p = std::make_shared < GameGraphic > ();
+		m_index_2p->AddTexture_FromArchive ( U"CharaSele\\2P_Index.png" );
+		m_index_2p->SetPos ( CH_INDEX_X_2P, CH_INDEX_Y );
+		AddpTask ( m_index_2p );
+		GRPLST_INSERT ( m_index_2p );
+
+
+
 		m_state_1p = std::make_shared < GrpBlink > ();
 		m_state_1p->AddTexture_FromArchive ( U"CharaSele\\1P.png" );
 		m_state_1p->SetPos ( CH_STT_X_1P, TXT_CHSL_Y );
@@ -156,6 +178,8 @@ namespace GAME
 		m_scroll_Stage->SetShader ( T );
 		m_scroll_Stage->AddTexture_FromArchive ( U"CharaSele\\CharaSele_Scroll_Stage.png" );
 		m_scroll_Stage->SetPos ( STG_BG_X, STG_BG_Y );
+		m_scroll_Stage->SetScaling ( VEC2 ( 1.f, 0.875f ) );
+//		m_scroll_Stage->SetScaling ( VEC2 ( 1.f, 1.f ) );
 		m_scroll_Stage->SetZ ( Z_BG );
 		AddpTask ( m_scroll_Stage );
 		GRPLST_INSERT ( m_scroll_Stage );
@@ -190,6 +214,17 @@ namespace GAME
 		//-----------------------------------------------------------------------
 		//BGM
 
+		//Scroll bgm
+		m_scroll_bgm = std::make_shared < GameGraphic > ();
+		m_scroll_bgm->SetShader ( T );
+		m_scroll_bgm->AddTexture_FromArchive ( U"CharaSele\\CharaSele_Scroll_Stage.png" );
+		m_scroll_bgm->SetPos ( BGM_SCROLL_X, BGM_SCROLL_Y );
+		m_scroll_bgm->SetScaling ( VEC2 ( -1.f, 0.3f ) );
+//		m_scroll_bgm->SetScaling ( VEC2 ( -1.f, 1.f ) );
+		m_scroll_bgm->SetZ ( Z_BG );
+		AddpTask ( m_scroll_bgm );
+		GRPLST_INSERT ( m_scroll_bgm );
+
 		m_txt_BGMSelect = std::make_shared < GrpBlink > ();
 		m_txt_BGMSelect->AddTexture_FromArchive ( U"CharaSele\\Text_BGM_SELECT.png" );
 		m_txt_BGMSelect->SetPos ( VEC2 ( TXT_BGM_X, TXT_BGM_Y ) );
@@ -209,6 +244,7 @@ namespace GAME
 		AddpTask ( m_bgmSelect );
 		GRPLST_INSERT ( m_bgmSelect );
 
+		m_scrlbgm_x = BGM_SCROLL_X;
 
 		//-----------------------------------------------------------------------
 		//操作説明
@@ -337,6 +373,10 @@ namespace GAME
 		m_scrlStg_x -= 20;
 		if ( m_scrlStg_x < - 1280 ) { m_scrlStg_x = 0; }
 		m_scroll_Stage->SetPos ( m_scrlStg_x, STG_BG_Y );
+
+		m_scrlbgm_x += 20;
+		if ( 1280 + 1280 < m_scrlbgm_x ) { m_scrlbgm_x = 1280; }
+		m_scroll_bgm->SetPos ( m_scrlbgm_x, BGM_SCROLL_Y );
 
 		//----------------------------------------------------------
 		//フェードアウト中の待機と遷移

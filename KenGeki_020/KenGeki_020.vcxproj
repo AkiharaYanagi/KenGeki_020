@@ -449,6 +449,10 @@
     <ClInclude Include="Source\GameMain\SoundConst.h" />
     <ClInclude Include="Source\GameMain\stdafx.h" />
     <ClInclude Include="Source\GameMain\VoiceConst.h" />
+    <ClInclude Include="Source\Menu\PauseMenu.h" />
+    <ClInclude Include="Source\Menu\PauseMenuItem.h" />
+    <ClInclude Include="Source\Menu\PauseMenu_Const.h" />
+    <ClInclude Include="Source\Menu\YesNo_Menu.h" />
     <ClInclude Include="Source\Result\Result.h" />
     <ClInclude Include="Source\Result\ResultMenu.h" />
     <ClInclude Include="Source\Title\Title.h" />
@@ -511,6 +515,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\Menu\PauseMenu.cpp" />
+    <ClCompile Include="Source\Menu\PauseMenuItem.cpp" />
+    <ClCompile Include="Source\Menu\PauseMenu_Const.cpp" />
+    <ClCompile Include="Source\Menu\YesNo_Menu.cpp" />
     <ClCompile Include="Source\Result\Result.cpp" />
     <ClCompile Include="Source\Result\ResultMenu.cpp" />
     <ClCompile Include="Source\Title\Title.cpp" />

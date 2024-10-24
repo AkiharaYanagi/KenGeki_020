@@ -11,10 +11,7 @@
 #include "Game.h"
 #include "../GameMain/Scene.h"
 #include "Fighting/Fighting.h"
-
-#if 0
 #include "../Menu/PauseMenu.h"
-#endif // 0
 
 
 //-------------------------------------------------------------------------------------------------
@@ -26,11 +23,11 @@ namespace GAME
 	{
 		//戦闘
 		P_FTG			m_fighting;
-#if 0
 
 		//ポーズメニュ
 		P_PauseMenu		m_pauseMenu;
 
+#if 0
 		//ロード中
 		P_PrmRect		m_rectLoad;
 		UINT			m_wait;

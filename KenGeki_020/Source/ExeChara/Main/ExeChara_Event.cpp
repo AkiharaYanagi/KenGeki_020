@@ -77,6 +77,8 @@ namespace GAME
 	//相殺発生	//自分：Offset, 相手：Attack
 	void ExeChara::OnOffset_Common ()
 	{
+		//@todo 相殺２撃目にアサート（名前指定？）
+
 		//キャラの持つルート,ブランチの参照
 		const VP_Route vpRoute = m_pChara->GetvpRoute ();
 		const VP_Branch vpBranch = m_pChara->GetvpBranch ();

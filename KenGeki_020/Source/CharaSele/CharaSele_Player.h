@@ -18,8 +18,21 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+
+
 	class CharaSele_Player : public TASK_VEC
 	{
+	public:
+		//キャラセレ状態
+		enum CHST_PL_State
+		{
+			STT_CHARA,
+			STT_STAGE,
+			STT_BGM,
+			STT_OK,
+		};
+
+	private:
 		P_Param			m_pParam;
 		PLAYER_ID		m_player_id { PLAYER_ID_1 };	//プレイヤ識別
 		CHARA_SELE_ID	m_chsl_id { CHSLID_00 };		//キャラ選択ID
@@ -31,6 +44,8 @@ namespace GAME
 		P_GrpBlink		m_cursor;						//カーソル
 		float			m_x { 0 };		//カットイン位置
 		UINT			m_wait { 0 };	//決定ウェイト
+
+		CHST_PL_State	m_state { STT_CHARA };	//状態
 
 		//定数
 		static const uint32		CHARA_SELE_NUM = 12;		//個数
@@ -55,6 +70,12 @@ namespace GAME
 		bool IsDecided () const { return m_decided; }
 
 	private:
+		//状態による分岐
+		void Move_Chara ();
+		void Move_Stage ();
+		void Move_bgm ();
+		void Move_OK ();
+
 		void SetCursorUp ( P_GrpBlink pCrs, CHARA_SELE_ID & id );
 		void SetCursorDown ( P_GrpBlink pCrs, CHARA_SELE_ID & id );
 		void SetCursorLeft ( P_GrpBlink pCrs, CHARA_SELE_ID & id );
@@ -72,6 +93,7 @@ namespace GAME
 
 #pragma region CONST
 
+		//カーソル
 		//位置定数
 		static const float	FACE_X_0;
 		static const float	FACE_X_1;
@@ -88,11 +110,13 @@ namespace GAME
 		static const float	LOGO_R_START_Y;
 		static const float	LOGO_R_VEL_X;
 
-		//カーソル
+#if 0
+				//カーソル
 		static const float	SELECT_1P_POS_X;	//基準点 + 枠中心 + 画像半分
 		static const float	SELECT_1P_POS_Y;
 		static const float	SELECT_2P_POS_X;	//基準点 + 枠中心 + 画像半分
 		static const float	SELECT_2P_POS_Y;
+#endif // 0
 
 		//キャラ立ち絵
 		static const float	CHARA_1P_POS_X;

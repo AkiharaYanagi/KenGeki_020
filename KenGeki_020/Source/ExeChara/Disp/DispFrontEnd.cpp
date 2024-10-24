@@ -69,7 +69,7 @@ namespace GAME
 		m_gaugeMana = std::make_shared < DispGauge > ();
 		m_gaugeMana->SetPosition ( MANA_GAUGE_X, MANA_GAUGE_Y, MANA_GAUGE_W, MANA_GAUGE_H );
 		m_gaugeMana->SetPadding ( MANA_GAUGE_P );
-		m_gaugeMana->SetZ ( Z_SYS );
+		m_gaugeMana->SetZ ( Z_SHADOW );
 		m_gaugeMana->SetTextureName_Frame ( U"Battle\\gauge_mana_frame.png" );
 		m_gaugeMana->SetTextureName_Value ( U"Battle\\gauge_mana_value.png" );
 		m_gaugeMana->SetPadding ( MANA_GAUGE_P );
@@ -150,8 +150,8 @@ namespace GAME
 		m_strAction->SetZ ( Z_MENU );
 		m_strAction->SetSize ( G_Font::SIZE_40 );
 		m_strAction->SetColorF ( s3d::ColorF { 0.8f, 0.8f, 1.f, 1.f } );
-		GRPLST_INSERT ( m_strAction );
 		AddpTask ( m_strAction );
+		GRPLST_INSERT ( m_strAction );
 
 		//ステート名
 		m_strState = std::make_shared < GrpStr > ();
@@ -159,8 +159,8 @@ namespace GAME
 		m_strState->SetZ ( Z_MENU );
 		m_strState->SetSize ( G_Font::SIZE_40 );
 		m_strState->SetColorF ( s3d::ColorF { 0.0f, 0.0f, 0.5f, 1.f } );
-		GRPLST_INSERT ( m_strState );
 		AddpTask ( m_strState );
+		GRPLST_INSERT ( m_strState );
 
 		//名前背景
 		m_name_bg = std::make_shared < GameGraphic > ();
@@ -177,15 +177,15 @@ namespace GAME
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Retsudou.png" );
 		m_face->SetIndexTexture ( 0 );
 		m_face->SetZ ( Z_SHADOW );
-		GRPLST_INSERT ( m_face );
 		AddpTask ( m_face );
+		GRPLST_INSERT ( m_face );
 
 		//超必殺
 		m_ChouHissatsu = std::make_shared < GameGraphic > ();
 		m_ChouHissatsu->AddTexture_FromArchive ( U"Battle\\ChouHissatsu.png" );
 		m_ChouHissatsu->SetZ ( Z_SHADOW );
-		GRPLST_INSERT ( m_ChouHissatsu );
 		AddpTask ( m_ChouHissatsu );
+		GRPLST_INSERT ( m_ChouHissatsu );
 
 		//名前
 		m_name = std::make_shared < GameGraphic > ();
@@ -193,8 +193,8 @@ namespace GAME
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_TOMOE_SAE.png" );
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_REKKA_RETSUDOU.png" );
 		m_name->SetZ ( Z_SHADOW - 0.01f );
-		GRPLST_INSERT ( m_name );
 		AddpTask ( m_name );
+		GRPLST_INSERT ( m_name );
 	}
 
 	//オブジェクト生成用

@@ -116,6 +116,8 @@ namespace GAME
 		}
 
 		//-----------------------------------------------------
+#if 0
+
 		if ( IsNameAction ( U"超必殺A" ) )
 		{
 			if ( m_pScript->GetFrame () == 1 )
@@ -123,6 +125,8 @@ namespace GAME
 				m_btlPrm.SetPos ( VEC2 ( 0, 0 ) );
 			}
 		}
+
+#endif // 0
 
 		//-----------------------------------------------------
 		if ( IsNameAction ( U"乱舞超必殺技発生" ) )
