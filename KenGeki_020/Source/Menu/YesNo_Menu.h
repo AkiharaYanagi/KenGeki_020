@@ -49,9 +49,12 @@ namespace GAME
 	// Y_N_メニュ
 	class YesNo_Menu : public Menu
 	{
-//		P_PrmRect		m_bg;
 		P_MenuString	m_grpStr_yesno;
+
+		//カーソル
 		P_Grp			m_cursor;
+		float		m_cursor_scaling_vy{ 0.05f };
+		float		m_cursor_scaling_y{ 1.f };
 
 		P_MenuString	m_grpStr_yes;
 		P_MenuString	m_grpStr_no;
@@ -76,6 +79,21 @@ namespace GAME
 		void Off ();
 
 		void SetwpParentScene ( WP_Scene wp );
+
+	private:
+		static const float BG_X;
+		static const float BG_Y;
+		static const float BG_W;
+		static const float BG_H;
+		static const float CAPTION_X;
+		static const float CAPTION_Y;
+		static const float YES_X;
+		static const float YES_Y;
+		static const float NO_X;
+		static const float NO_Y;
+		static const float CURSOR_X;
+		static const float CURSOR_Y;
+		static const float CURSOR_P;
 	};
 
 	using P_YesNo_Menu = std::shared_ptr < YesNo_Menu >;

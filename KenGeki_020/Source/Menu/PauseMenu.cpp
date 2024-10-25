@@ -9,6 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "PauseMenu.h"
 #include "PauseMenu_Const.h"
+#include "../GameMain/SeConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -17,7 +18,7 @@
 namespace GAME
 {
 	const float PauseMenu::CURSOR_X = 100;
-	const float PauseMenu::CURSOR_Y = 350;
+	const float PauseMenu::CURSOR_Y = 330;
 
 
 	PauseMenu::PauseMenu ()
@@ -58,12 +59,11 @@ namespace GAME
 		m_mi_resume = std::make_shared < PMI_ResumeGame > ();
 		AddpTask ( m_mi_resume );
 
-#if 0
+
 		//--------------------------------------------
 		//Y/Nメニュ
 		m_yesnoMenu = std::make_shared < YesNo_Menu > ();
 		AddpTask ( m_yesnoMenu );
-#endif // 0
 
 
 		//--------------------------------------------
@@ -94,11 +94,8 @@ namespace GAME
 
 	void PauseMenu::Move ()
 	{
-
-#if 0
 		//Y/Nメニュ稼働時は何もしない
 		if ( m_yesnoMenu->GetActive () ) { Menu::Move (); return; }
-#endif // 0
 
 		//非アクティブ時は何もしない
 		if ( ! GetActive () )
@@ -110,12 +107,11 @@ namespace GAME
 			Menu::Move (); return; 
 		}
 
-#if 0
 		//@info 解除を同一ボタンにすると同[F]で解除されてしまう
 		//-> MenuCheck()内部で分岐する
 		
 		Input ();
-#endif // 0
+
 
 		//Do()は選択されたメニュ項目について常に行う
 		Menu::Do ();
@@ -145,6 +141,7 @@ namespace GAME
 			bool bMenuBtn = ( CFG_PUSH_KEY ( P1_BTN5 ) || CFG_PUSH_KEY ( P2_BTN5 ) );
 			if ( bEsc || bMenuBtn )
 			{
+				SND_PLAY_ONESHOT_SE(SE_select_Cancel);
 				Off ();
 				return F;
 			}
@@ -160,6 +157,7 @@ namespace GAME
 		bool bMenuBtn = ( CFG_PUSH_KEY ( P1_BTN5 ) || CFG_PUSH_KEY ( P2_BTN5 ) );
 		if ( bEsc || bMenuBtn )
 		{
+			SND_PLAY_ONESHOT_SE (SE_select_move);
 			On ();
 		}
 
@@ -174,10 +172,12 @@ namespace GAME
 		//選択
 		if ( CFG_PUSH_KEY ( P1_DOWN ) || CFG_PUSH_KEY ( P2_DOWN ) )
 		{
+			SND_PLAY_ONESHOT_SE ( SE_select_move );
 			Menu::Next ();
 		}
 		if ( CFG_PUSH_KEY ( P1_UP ) || CFG_PUSH_KEY ( P2_UP ) )
 		{
+			SND_PLAY_ONESHOT_SE (SE_select_move);
 			Menu::Prev ();
 		}
 
@@ -198,9 +198,7 @@ namespace GAME
 
 		m_mi_title->Off ();
 		m_mi_resume->Off ();
-#if 0
 		m_yesnoMenu->Off ();
-#endif // 0
 
 		m_bMenu = F;
 		SetActive ( F );
@@ -215,9 +213,9 @@ namespace GAME
 
 		m_mi_title->On ();
 		m_mi_resume->On ();
-#if 0
-		m_yesnoMenu->On ();
-#endif // 0
+
+		//yes_noは別で起動する
+//		m_yesnoMenu->On ();
 
 		m_bMenu = T;
 		SetActive ( T );
@@ -234,11 +232,7 @@ namespace GAME
 
 		m_mi_title->Off ();
 		m_mi_resume->Off ();
-
-#if 0
-		m_bg->SetValid ( F );
 		m_yesnoMenu->Off ();
-#endif // 0
 
 		//全体稼働フラグは残す
 		//m_bMenu = F;
@@ -260,10 +254,7 @@ namespace GAME
 	{
 		m_mi_title->SetwpParent ( shared_from_this () );
 		m_mi_resume->SetwpParent ( shared_from_this () );
-
-#if 0
 		m_yesnoMenu->SetwpParentScene ( wp );
-#endif // 0
 	}
 
 }	//namespace GAME

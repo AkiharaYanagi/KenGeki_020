@@ -10,6 +10,7 @@
 #include "PauseMenuItem.h"
 #include "PauseMenu.h"
 #include "PauseMenu_Const.h"
+#include "../GameMain/SeConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -41,10 +42,9 @@ namespace GAME
 
 	void PMI_To_Title::Decide ()
 	{
-#if 0
+		SND_PLAY_ONESHOT_SE(SE_select_move);
 		P_PauseMenu p = dynamic_pointer_cast < PauseMenu > ( mwp_Parent.lock () );
 		p->OpenYNMenu ();
-#endif // 0
 	}
 
 	void PMI_To_Title::Off ()
@@ -80,6 +80,7 @@ namespace GAME
 
 	void PMI_ResumeGame::Decide ()
 	{
+		SND_PLAY_ONESHOT_SE(SE_select_Cancel);
 		P_PauseMenu p = dynamic_pointer_cast <PauseMenu> ( mwp_Parent.lock () );
 		p->Off ();
 	}

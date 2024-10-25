@@ -9,8 +9,8 @@
 //-------------------------------------------------------------------------------------------------
 #include "YesNo_Menu.h"
 #include "../GameMain/Scene.h"
-#include "../GameMain/SoundConst.h"
 #include "PauseMenu_Const.h"
+#include "../GameMain/SeConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -18,11 +18,29 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+	const float YesNo_Menu::BG_X = (GAME_WINDOW_WIDTH * 0.5f) - (BG_W * 0.5f);
+	const float YesNo_Menu::BG_Y = 400;
+	const float YesNo_Menu::BG_W = 500;
+	const float YesNo_Menu::BG_H = 200;
+
+	const float YesNo_Menu::CAPTION_X = GAME_WINDOW_WIDTH * 0.5f - 190;
+	const float YesNo_Menu::CAPTION_Y = BG_Y;
+
+	const float YesNo_Menu::YES_X = BG_X + 100;
+	const float YesNo_Menu::YES_Y = 400;
+	const float YesNo_Menu::NO_X = YES_X + CURSOR_P;
+	const float YesNo_Menu::NO_Y = 200;
+
+	const float YesNo_Menu::CURSOR_X = BG_X + 20;
+	const float YesNo_Menu::CURSOR_Y = 530;
+	const float YesNo_Menu::CURSOR_P = 210;
+
 	//===================================================
 	//決定　タイトルに戻る
 	void YNM_Item_Yes::Decide ()
 	{
 		//BGM
+		SND_PLAY_ONESHOT_SE(SE_select_decide);
 		SND_STOP_ALL_BGM ();
 		mwp_Scene.lock()->Transit_Title ();
 	}
@@ -30,6 +48,7 @@ namespace GAME
 	//キャンセル 自メニュを閉じる
 	void YNM_Item_No::Decide ()
 	{
+		SND_PLAY_ONESHOT_SE(SE_select_Cancel);
 		P_YesNo_Menu p = std::dynamic_pointer_cast <YesNo_Menu> ( mwp_Parent.lock () );
 		p->Off ();
 	}
@@ -41,21 +60,11 @@ namespace GAME
 	{
 		//--------------------------------------------
 		//基本背景
-#if 0
-		m_bg = std::make_shared < PrmRect > ();
-		m_bg->SetSize ( 500, 200 );
-		m_bg->SetColor ( 0x80000000 );
-		float center = GAME_WINDOW_WIDTH * 0.5f;
-		m_bg->SetPos ( (int32)(center - (m_bg->GetSize().x * 0.5f)), 400 );
-		m_bg->SetZ ( Z_MENU_YN_BG );
-		AddpTask ( m_bg );
-//		GRPLST_INSERT ( m_bg );
-#endif // 0
 		Menu::SetBG_use ( T );
-		Menu::SetBG_Size ( 500, 200 );
-		float center = GAME_WINDOW_WIDTH * 0.5f;
-		Menu::SetBG_Pos ( center - (500 * 0.5f), 400 );
+		Menu::SetBG_Size ( BG_W, BG_H );
+		Menu::SetBG_Pos ( BG_X, BG_Y );
 		Menu::SetBG_Color ( _CLR ( 0xd0000000 ) );
+		Menu::SetBG_Z ( Z_MENU_YN_BG );
 
 		//見出
 		m_grpStr_yesno = std::make_shared < MenuString > ();
@@ -81,8 +90,8 @@ namespace GAME
 
 		//--------------------------------------------
 		m_cursor = std::make_shared < GameGraphic > ();
-		m_cursor->AddTexture_FromArchive ( U"title_cursor.png" );
-		m_cursor->SetPos ( 380, 500 );
+		m_cursor->AddTexture_FromArchive(U"Title\\title_cursor.png");
+		m_cursor->SetPos ( CURSOR_X, CURSOR_Y );
 		m_cursor->SetZ ( Z_MENU_YN_STR );
 		m_cursor->SetScalingCenter ( 0, 12.5f );
 		AddpTask ( m_cursor );
@@ -111,11 +120,9 @@ namespace GAME
 
 	void YesNo_Menu::Init ()
 	{
-		const float center = GAME_WINDOW_WIDTH * 0.5f;
-		const float by = 400;
-		m_grpStr_yesno->SetPos ( center - 140, by );
-		m_grpStr_yes->SetPos ( 510, by + 100 );
-		m_grpStr_no->SetPos ( 720, by + 100 );
+		m_grpStr_yesno->SetPos (CAPTION_X, CAPTION_Y);
+		m_grpStr_yes->SetPos ( YES_X, BG_Y + 100 );
+		m_grpStr_no->SetPos ( NO_X, BG_Y + 100 );
 
 		Menu::Init ();
 	}
@@ -128,10 +135,12 @@ namespace GAME
 		//選択
 		if ( CFG_PUSH_KEY ( P1_RIGHT ) || CFG_PUSH_KEY ( P2_RIGHT ) )
 		{
+			SND_PLAY_ONESHOT_SE(SE_select_move);
 			Menu::Next ();
 		}
 		if ( CFG_PUSH_KEY ( P1_LEFT ) || CFG_PUSH_KEY ( P2_LEFT ) )
 		{
+			SND_PLAY_ONESHOT_SE(SE_select_move);
 			Menu::Prev ();
 		}
 
@@ -146,8 +155,15 @@ namespace GAME
 		}
 		m_wait = T;
 
+		//カーソル回転
+		m_cursor_scaling_y += m_cursor_scaling_vy;
+		if (m_cursor_scaling_y >= 1.f) { m_cursor_scaling_vy = -0.1f; }
+		if (m_cursor_scaling_y <= -1.f) { m_cursor_scaling_vy = 0.1f; }
+		m_cursor->SetScaling(1.f, m_cursor_scaling_y);
+
 		//カーソル位置
-		m_cursor->SetPos ( 380.f + 210 * Menu::GetIdItem (), 500.f );
+		m_cursor->SetPos ( CURSOR_X + CURSOR_P * Menu::GetIdItem (), CURSOR_Y );
+
 
 		Menu::Move ();
 	}
@@ -161,6 +177,7 @@ namespace GAME
 		SetActive ( T );
 
 		m_wait = F;
+		Menu::On();
 	}
 
 	void YesNo_Menu::Off ()
@@ -170,6 +187,8 @@ namespace GAME
 		m_grpStr_no->SetValid ( F );
 		m_cursor->SetValid ( F );
 		SetActive ( F );
+		m_wait = F;
+		Menu::Off ();
 	}
 
 #if 0

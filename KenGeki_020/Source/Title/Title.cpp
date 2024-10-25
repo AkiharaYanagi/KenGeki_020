@@ -150,7 +150,7 @@ namespace GAME
 		if ( WND_UTL::AscKey ( VK_F1 ) )
 		{
 			//反転
-			m_bDemo != m_bDemo;
+			m_bDemo = ! m_bDemo;
 
 			//保存
 			P_Param pPrm = GetpParam();

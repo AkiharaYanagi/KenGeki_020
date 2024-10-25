@@ -64,12 +64,11 @@ namespace GAME
 //		void SetwpParent ( WP_FtgMain p );
 		void SetwpParentScene ( WP_Scene wp );
 
-//		void OpenYNMenu () { m_yesnoMenu->On (); }
+		void OpenYNMenu () { m_yesnoMenu->On (); }
 
 	private:
 		static const float CURSOR_X;
 		static const float CURSOR_Y;
-		static const float CURSOR_SCL_VY;
 	};
 
 
