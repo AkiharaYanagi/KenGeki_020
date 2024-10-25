@@ -317,6 +317,15 @@
     <Text Include="App\[共通デモアクション].txt">
       <Filter>00_Document</Filter>
     </Text>
+    <Text Include="App\SE_Name.txt">
+      <Filter>00_Document</Filter>
+    </Text>
+    <Text Include="App\BGM_Name.txt">
+      <Filter>00_Document</Filter>
+    </Text>
+    <Text Include="App\VC_Name.txt">
+      <Filter>00_Document</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="App\dll\soundtouch\SoundTouch_x64.dll">
