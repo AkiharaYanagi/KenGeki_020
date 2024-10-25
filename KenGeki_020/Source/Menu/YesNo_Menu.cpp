@@ -23,7 +23,7 @@ namespace GAME
 	void YNM_Item_Yes::Decide ()
 	{
 		//BGM
-		//SOUND->Stop_BGM ( BGM_Main );
+		SND_STOP_ALL_BGM ();
 		mwp_Scene.lock()->Transit_Title ();
 	}
 
@@ -40,6 +40,8 @@ namespace GAME
 	YesNo_Menu::YesNo_Menu ()
 	{
 		//--------------------------------------------
+		//基本背景
+#if 0
 		m_bg = std::make_shared < PrmRect > ();
 		m_bg->SetSize ( 500, 200 );
 		m_bg->SetColor ( 0x80000000 );
@@ -48,36 +50,43 @@ namespace GAME
 		m_bg->SetZ ( Z_MENU_YN_BG );
 		AddpTask ( m_bg );
 //		GRPLST_INSERT ( m_bg );
+#endif // 0
+		Menu::SetBG_use ( T );
+		Menu::SetBG_Size ( 500, 200 );
+		float center = GAME_WINDOW_WIDTH * 0.5f;
+		Menu::SetBG_Pos ( center - (500 * 0.5f), 400 );
+		Menu::SetBG_Color ( _CLR ( 0xd0000000 ) );
 
-		//const int FONTSIZE = 60;
+		//見出
 		m_grpStr_yesno = std::make_shared < MenuString > ();
 		m_grpStr_yesno->SetbMenu ( T );
 		m_grpStr_yesno->SetStr ( U"- 終了します -" );
 		m_grpStr_yesno->SetZ ( Z_MENU_YN_STR );
 		AddpTask ( m_grpStr_yesno );
-//		GRPLST_INSERT ( m_grpStr_yesno );
+		GRPLST_INSERT ( m_grpStr_yesno );
 
 		m_grpStr_yes = std::make_shared < MenuString > ();
 		m_grpStr_yes->SetbMenu ( T );
 		m_grpStr_yes->SetStr ( U"はい" );
 		m_grpStr_yes->SetZ ( Z_MENU_YN_STR );
 		AddpTask ( m_grpStr_yes );
-//		GRPLST_INSERT ( m_grpStr_yes );
+		GRPLST_INSERT ( m_grpStr_yes );
 
 		m_grpStr_no = std::make_shared < MenuString > ();
 		m_grpStr_no->SetbMenu ( T );
 		m_grpStr_no->SetStr ( U"いいえ" );
 		m_grpStr_no->SetZ ( Z_MENU_YN_STR );
 		AddpTask ( m_grpStr_no );
-//		GRPLST_INSERT ( m_grpStr_no );
+		GRPLST_INSERT ( m_grpStr_no );
 
 		//--------------------------------------------
 		m_cursor = std::make_shared < GameGraphic > ();
 		m_cursor->AddTexture_FromArchive ( U"title_cursor.png" );
 		m_cursor->SetPos ( 380, 500 );
 		m_cursor->SetZ ( Z_MENU_YN_STR );
+		m_cursor->SetScalingCenter ( 0, 12.5f );
 		AddpTask ( m_cursor );
-//		GRPLST_INSERT ( m_cursor );
+		GRPLST_INSERT ( m_cursor );
 
 		//--------------------------------------------
 		//メニュー項目
@@ -145,7 +154,6 @@ namespace GAME
 
 	void YesNo_Menu::On ()
 	{
-		m_bg->SetValid ( T );
 		m_grpStr_yesno->SetValid ( T );
 		m_grpStr_yes->SetValid ( T );
 		m_grpStr_no->SetValid ( T );
@@ -157,7 +165,6 @@ namespace GAME
 
 	void YesNo_Menu::Off ()
 	{
-		m_bg->SetValid ( F );
 		m_grpStr_yesno->SetValid ( F );
 		m_grpStr_yes->SetValid ( F );
 		m_grpStr_no->SetValid ( F );

@@ -47,6 +47,9 @@ namespace GAME
 
 		TITLE_TO	m_to { TITLE_TO_BATTLE };
 
+		//デモモード
+		bool		m_bDemo { F };
+
 	public:
 		Title ();
 		Title ( const Title & rhs ) = delete;

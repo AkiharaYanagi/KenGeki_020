@@ -134,10 +134,32 @@ namespace GAME
 
 	void Title::ParamInit ()
 	{
+		P_Param pPrm = GetpParam();
+		GameSettingFile stg = pPrm->GetGameSetting ();
+		m_bDemo = stg.GetDemo();
 	}
 
 	void Title::Move ()
 	{
+		//デモモード
+		if ( m_bDemo )
+		{
+		}
+		
+		//F1でデモ切替
+		if ( WND_UTL::AscKey ( VK_F1 ) )
+		{
+			//反転
+			m_bDemo != m_bDemo;
+
+			//保存
+			P_Param pPrm = GetpParam();
+			GameSettingFile stg = pPrm->GetGameSetting ();
+			stg.SetDemo ( m_bDemo );
+			stg.Save ();
+		}
+
+		//---------------------------------------------------------
 		//常時演出
 		
 		//タイマ

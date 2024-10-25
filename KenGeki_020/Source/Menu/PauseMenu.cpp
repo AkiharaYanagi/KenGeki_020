@@ -22,47 +22,6 @@ namespace GAME
 
 	PauseMenu::PauseMenu ()
 	{
-#if 0
-
-		//--------------------------------------------
-		m_bg = std::make_shared < PrmRect > ();
-		m_bg->SetSize ( WINDOW_WIDTH - 200, WINDOW_HEIGHT - 200 );
-		m_bg->SetColor ( _CLR(0xa0000000) );
-		m_bg->SetPos ( 100, 100 );
-		m_bg->SetZ ( Z_MENU_BG );
-		AddpTask ( m_bg );
-//		GRPLST_INSERT ( m_bg );
-
-		//--------------------------------------------
-		m_grpStr_pause = std::make_shared < MenuString > ();
-		m_grpStr_pause->SetStr ( U"- PAUSE -" );
-		m_grpStr_pause->SetPos ( 500, 120 );
-		m_grpStr_pause->SetZ ( Z_MENU_STR );
-
-		//@todo Z値が小さい(手前の)とき文字列が描画されないことの調査
-
-		AddpTask ( m_grpStr_pause );
-//		GRPLST_INSERT ( m_grpStr_pause );
-
-		//--------------------------------------------
-		//カーソル
-		m_cursor = std::make_shared < GameGraphic > ();
-		m_cursor->AddTexture_FromArchive ( U"title_cursor.png" );
-		m_cursor->SetPos ( 100, 300 );
-		m_cursor->SetZ ( Z_MENU_STR );
-		AddpTask ( m_cursor );
-//		GRPLST_INSERT ( m_cursor );
-#endif // 0
-
-
-#if 0
-		//--------------------------------------------
-		//Y/Nメニュ
-		m_yesnoMenu = std::make_shared < YesNo_Menu > ();
-		AddpTask ( m_yesnoMenu );
-#endif // 0
-
-
 		//--------------------------------------------
 		//基本背景
 		Menu::SetBG_use ( T );
@@ -91,11 +50,21 @@ namespace GAME
 
 		//--------------------------------------------
 		//メニュー項目
+
+		//タイトル
 		m_mi_title = std::make_shared < PMI_To_Title > ();
 		AddpTask ( m_mi_title );
-
+		//ゲームに戻る
 		m_mi_resume = std::make_shared < PMI_ResumeGame > ();
 		AddpTask ( m_mi_resume );
+
+#if 0
+		//--------------------------------------------
+		//Y/Nメニュ
+		m_yesnoMenu = std::make_shared < YesNo_Menu > ();
+		AddpTask ( m_yesnoMenu );
+#endif // 0
+
 
 		//--------------------------------------------
 		//初期状態はOff
@@ -132,7 +101,10 @@ namespace GAME
 #endif // 0
 
 		//非アクティブ時は何もしない
-		if ( ! GetActive () ) { Menu::Move (); return; }
+		if ( ! GetActive () )
+		{
+			Menu::Move (); return;
+		}
 		if ( ! m_bMenu )
 		{
 			Menu::Move (); return; 
@@ -227,7 +199,6 @@ namespace GAME
 		m_mi_title->Off ();
 		m_mi_resume->Off ();
 #if 0
-		m_bg->SetValid ( F );
 		m_yesnoMenu->Off ();
 #endif // 0
 
@@ -245,7 +216,6 @@ namespace GAME
 		m_mi_title->On ();
 		m_mi_resume->On ();
 #if 0
-		m_bg->SetValid ( T );
 		m_yesnoMenu->On ();
 #endif // 0
 

@@ -37,7 +37,7 @@ namespace GAME
 		P_Scene		mp_Transit;		//遷移可能な次のシーン
 
 		//===========================================================
-		bool	m_bTransit;
+//		bool	m_bTransit;
 
 	public:
 		Scene ();
@@ -80,8 +80,8 @@ namespace GAME
 		}
 
 		//遷移
-		bool GetTransit () const { return m_bTransit; }
-		void SetTransit ( bool b ) { m_bTransit = b; }
+//		bool GetTransit () const { return m_bTransit; }
+//		void SetTransit ( bool b ) { m_bTransit = b; }
 
 		WP_Scene GetwpThis () { return mwp_This; }
 		void SetwpParentScene ( WP_Scene wp ) { mwp_This = wp; }
@@ -89,7 +89,7 @@ namespace GAME
 
 		//メニュ用シーン移項
 		void Transit_Title ();		//タイトルに戻る
-		void Transit_Intro ();		//イントロに移行
+//		void Transit_Intro ();		//イントロに移行
 		void Transit_Fighting ();	//ファイティングに移行
 		void Transit_Fighting ( MUTCH_MODE mode );		//ファイティングに移行(VSモード指定)
 		void Transit_Training ();	//トレーニングに移行

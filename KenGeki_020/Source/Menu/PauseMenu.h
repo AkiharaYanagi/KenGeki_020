@@ -38,10 +38,8 @@ namespace GAME
 		float		m_cursor_scaling_y { 1.f };
 
 
-#if 0
 		//YNメニュ
 		P_YesNo_Menu	m_yesnoMenu;
-#endif // 0
 
 	public:
 		PauseMenu ();
