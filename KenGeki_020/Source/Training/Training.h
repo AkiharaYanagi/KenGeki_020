@@ -11,7 +11,7 @@
 #include "Game.h"
 #include "../GameMain/Scene.h"
 #include "../FtgMain/Fighting/Fighting.h"
-//#include "../Menu/PauseMenu.h"
+#include "../Menu/PauseMenu.h"
 //#include "Training_Menu.h"
 
 
@@ -28,8 +28,8 @@ namespace GAME
 		//戦闘
 		P_FTG			m_fighting;
 
-#if 0
 
+#if 0
 		//キー説明
 		P_GrpAcv		m_keyIntro;
 
@@ -38,10 +38,10 @@ namespace GAME
 		UINT			m_wait;
 		P_GrpStr		m_NowLoading;
 
-		//ポーズメニュ
-//		P_PauseMenu		m_pauseMenu;
-		P_Training_Menu		m_pauseMenu;
 #endif // 0
+		//ポーズメニュ
+		P_PauseMenu		m_pauseMenu;
+//		P_Training_Menu		m_pauseMenu;
 
 		static const float	BX;
 		static const float	BY;

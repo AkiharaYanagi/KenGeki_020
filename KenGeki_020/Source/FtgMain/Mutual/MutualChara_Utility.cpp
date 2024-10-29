@@ -33,12 +33,13 @@ namespace GAME
 		//デバッグ用枠表示初期切替
 #define DISP_RECT	1
 #if DISP_RECT
-//		bDispRect = T;
-		m_exeChara1->OnDispRect ();
-		m_exeChara2->OnDispRect ();
+		OnDispRect ();
+		OnDispInput ();
+		OnDispFrontEnd ();
 #else
-		m_exeChara1->OffDispRect ();
-		m_exeChara2->OffDispRect ();
+		OffDispRect ();
+		OffDispInput ();
+		OffDispFrontEnd ();
 #endif // DISP_RECT
 	}
 
@@ -47,10 +48,6 @@ namespace GAME
 	//@info ExeCharaで呼ぶと1P2Pで２回呼ばれてしまう
 	void MutualChara_Utility::SwitchRect ()
 	{
-		static bool bDispRect = T;		//状態
-		static bool pre_bDispRect = F;	//前回押しているか
-		static bool is_bDispRect = F;	//今回押しているか
-
 		is_bDispRect = ( WND_UTL::AscKey ( '2' ) );
 
 		//@info キーボード入力は押しっぱなしで一定時間後連打状態になる
@@ -61,28 +58,35 @@ namespace GAME
 		{
 			if ( ! bDispRect )
 			{
-				m_exeChara1->OnDispRect ();
-				m_exeChara2->OnDispRect ();
-				bDispRect = T;
+				OnDispRect ();
 			}
 			else
 			{
-				m_exeChara1->OffDispRect ();
-				m_exeChara2->OffDispRect ();
-				bDispRect = F;
+				OffDispRect ();
 			}
 		}
 		pre_bDispRect = is_bDispRect;
 	}
 
+	void MutualChara_Utility::OnDispRect ()
+	{
+		m_exeChara1->OnDispRect ();
+		m_exeChara2->OnDispRect ();
+		bDispRect = T;
+	}
+
+	void MutualChara_Utility::OffDispRect ()
+	{
+		m_exeChara1->OffDispRect ();
+		m_exeChara2->OffDispRect ();
+		bDispRect = F;
+	}
+
+
 	//------------------------------------------------------
 	//入力表示切替
 	void MutualChara_Utility::SwitchDispInput ()
 	{
-		static bool bDispInput = T;		//状態
-		static bool pre_bDispInput = F;	//前回押しているか
-		static bool is_bDispInput = F;	//今回押しているか
-
 		is_bDispInput = ( WND_UTL::AscKey ( '3' ) );
 
 		//今回押した瞬間ならば、1回のみ切替
@@ -90,30 +94,35 @@ namespace GAME
 		{
 			if ( ! bDispInput )
 			{
-				m_exeChara1->OnDispInput ();
-				m_exeChara2->OnDispInput ();
-				bDispInput = true;
+				OnDispInput ();
 			}
 			else
 			{
-				m_exeChara1->OffDispInput ();
-				m_exeChara2->OffDispInput ();
-				bDispInput = false;
+				OffDispInput ();
 			}
 		}
 
 		pre_bDispInput = is_bDispInput;
 	}
 
+	void MutualChara_Utility::OnDispInput ()
+	{
+		m_exeChara1->OnDispInput ();
+		m_exeChara2->OnDispInput ();
+		bDispInput = T;
+	}
+
+	void MutualChara_Utility::OffDispInput ()
+	{
+		m_exeChara1->OffDispInput ();
+		m_exeChara2->OffDispInput ();
+		bDispInput = F;
+	}
+
 	//------------------------------------------------------
 	//ゲージ類表示切替
 	void MutualChara_Utility::SwitchFrontEnd ()
 	{
-		static bool bFrontEnd = T;		//状態
-		static bool pre_bFrontEnd = F;	//前回押しているか
-		static bool is_bFrontEnd = F;	//今回押しているか
-
-
 		is_bFrontEnd = ( WND_UTL::AscKey ( '4' ) );
 		//Asyncの最初の１回
 		G_FTG()->SetSysDisp ( is_bFrontEnd );
@@ -124,19 +133,29 @@ namespace GAME
 		{
 			if ( ! bFrontEnd )
 			{
-				m_exeChara1->OnFrontEnd ();
-				m_exeChara2->OnFrontEnd ();
-				bFrontEnd = true;
+				OnDispFrontEnd ();
 			}
 			else
 			{
-				m_exeChara1->OffFrontEnd ();
-				m_exeChara2->OffFrontEnd ();
-				bFrontEnd = false;
+				OffDispFrontEnd ();
 			}
 		}
 
 		pre_bFrontEnd = is_bFrontEnd;
+	}
+
+	void MutualChara_Utility::OnDispFrontEnd ()
+	{
+		m_exeChara1->OnFrontEnd ();
+		m_exeChara2->OnFrontEnd ();
+		bFrontEnd = T;
+	}
+
+	void MutualChara_Utility::OffDispFrontEnd ()
+	{
+		m_exeChara1->OffFrontEnd ();
+		m_exeChara2->OffFrontEnd ();
+		bFrontEnd = F;
 	}
 
 

@@ -196,9 +196,15 @@ namespace GAME
 		//一時停止中は１回のみ
 		if ( m_btlPrm.GetFirstSE () ) { return; }
 		
-		//ヒットストップ中は除く
-		if ( m_btlPrm.GetTmr_HitStop()->IsActive () )
+		//ヒットストップ中(同一スクリプト)は１回のみ
+		P_Timer pTmr = m_btlPrm.GetTmr_HitStop();
+		if ( m_btlPrm.GetTmr_HitStop()->IsStart () )
 		{
+			//初回は鳴らす
+		}
+		else if ( m_btlPrm.GetTmr_HitStop()->IsActive () )
+		{
+			//途中は何もしない
 			return;
 		}
 
@@ -223,8 +229,10 @@ namespace GAME
 		//空欄は何もしない
 		if ( vc_name.compare ( U"" ) == 0 ) { return; }
 
-		//被ダメ時はランダムに飛ばす
-		if ( IsDamaged () )
+		//被ダメ時と小攻撃はランダムに飛ばす
+		bool bDamaged = IsDamaged ();
+		bool bLAttack_L = IsAttack_L ();
+		if ( bDamaged || bLAttack_L )
 		{
 			//初撃は確定、連続ヒット中はランダム
 			UINT hitnum = m_pOther.lock()->GetBtlPrm().GetChainHitNum ();

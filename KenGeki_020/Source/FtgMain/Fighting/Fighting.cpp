@@ -110,6 +110,9 @@ namespace GAME
 		m_strState->SetSize ( G_Font::SIZE_40 );
 		m_strState->SetPos ( VEC2 ( 640 - 110, 145 ) );
 
+		//初期値は非表示
+		m_strState->SetValid ( F );
+
 		TASK_LST::Load ();
 	}
 
@@ -231,6 +234,15 @@ namespace GAME
 		bool finish1p = m_exeChara1->IsZeroLife ();
 		bool finish2p = m_exeChara2->IsZeroLife ();
 
+		//トレーニングモードは終了しない
+		if ( m_bTraining )
+		{
+			if ( finish1p ) { m_exeChara1->Init (); }
+			if ( finish2p ) { m_exeChara2->Init (); }
+			return F;
+		}
+
+
 		//どちらか、または両方ライフ０なら終了
 		if ( finish1p || finish2p )
 		{
@@ -260,6 +272,10 @@ namespace GAME
 	//残ライフで勝者決定
 	void Fighting::DecideWinner_FromLife ()
 	{
+		//トレーニングモードは時間計測しない
+		if ( m_bTraining ) { return; }
+
+
 		//タイムアップ時、残り体力で勝者を決める
 		int life_1 = m_exeChara1->GetBtlPrm ().GetLife ();
 		int life_2 = m_exeChara2->GetBtlPrm ().GetLife ();
@@ -364,7 +380,7 @@ namespace GAME
 
 		//----------------------------------------------------
 		//表示切替
-		SwitchDisp ();
+//		SwitchDisp ();
 
 		//----------------------------------------------------
 		//背景通常処理

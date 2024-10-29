@@ -256,6 +256,28 @@ namespace GAME
 	}
 
 
+	bool CharaInput::IsSomething () const
+	{
+		if ( m_vGameKey [ 0 ].GetLvr ( GameKey::LVR_1 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetLvr ( GameKey::LVR_2 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetLvr ( GameKey::LVR_3 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetLvr ( GameKey::LVR_6 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetLvr ( GameKey::LVR_9 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetLvr ( GameKey::LVR_8 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetLvr ( GameKey::LVR_7 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetLvr ( GameKey::LVR_4 ) ) { return T; }
+
+		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_0 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_1 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_2 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_3 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_4 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_5 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_6 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_7 ) ) { return T; }
+
+		return F;
+	}
 
 }	//namespace GAME
 

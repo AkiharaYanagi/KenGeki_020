@@ -33,7 +33,6 @@ namespace GAME
 		CHARA_NAME		m_chara_name_1p { CHARA_TEST };
 		CHARA_NAME		m_chara_name_2p { CHARA_TEST };
 		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };
-		BGM_ID			m_bgme_id { BGM_ID_GABA };
 
 		//キャラ事前読込
 		P_Chara			m_pChara_Ouka { nullptr };
@@ -62,8 +61,8 @@ namespace GAME
 		~Param ();
 
 		//ゲーム設定 ( 外部ファイル読込 )
-		GameSettingFile GetGameSetting () const { return m_setting; }
-		void SetSettingFile ( GameSettingFile stg ) { m_setting = stg; }
+		const GameSettingFile & GetGameSetting () const { return m_setting; }
+		void SetSettingFile ( const GameSettingFile & stg ) { m_setting = stg; }
 
 		//内部設定
 		void SetGameMode ( GAME_MODE mode ) { m_gameMode = mode; }
@@ -96,7 +95,9 @@ namespace GAME
 		void SetRandomChara ();
 
 		GET_SET ( STAGE_NAME, GetStageName, SetStageName, m_stage_name	)		//bgm
-		GET_SET ( BGM_ID, Get_BGM_ID, Set_BGM_ID, m_bgme_id	)		//bgm
+
+		BGM_ID Get_BGM_ID () { return m_setting.GetBGM_ID (); }
+		void Set_BGM_ID ( BGM_ID id ) { m_setting.SetBGM_ID ( id ); }
 
 
 		//データ事前読込1

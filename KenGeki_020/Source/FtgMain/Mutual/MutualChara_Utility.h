@@ -24,6 +24,19 @@ namespace GAME
 		P_ExeChara		m_exeChara1;
 		P_ExeChara		m_exeChara2;
 
+		bool bDispRect { T };		//状態
+		bool pre_bDispRect { F };	//前回押しているか
+		bool is_bDispRect { F };	//今回押しているか
+
+		bool bDispInput { T };		//状態
+		bool pre_bDispInput { F };	//前回押しているか
+		bool is_bDispInput { F };	//今回押しているか
+
+		bool bFrontEnd { T };		//状態
+		bool pre_bFrontEnd { F };	//前回押しているか
+		bool is_bFrontEnd { F };	//今回押しているか
+
+
 	public:
 		MutualChara_Utility ();
 		MutualChara_Utility ( const MutualChara_Utility & rhs ) = delete;
@@ -32,8 +45,17 @@ namespace GAME
 		void SetpChara ( P_ExeChara p1, P_ExeChara p2 );
 
 		void SwitchRect ();			//枠表示切替
+		void OnDispRect ();
+		void OffDispRect ();
+
 		void SwitchDispInput ();	//入力表示切替
+		void OnDispInput ();
+		void OffDispInput ();
+
 		void SwitchFrontEnd ();		//ゲージ類表示切替
+		void OnDispFrontEnd ();
+		void OffDispFrontEnd ();
+
 		void SwitchCPU ();			//2PをCPU操作切替
 	};
 

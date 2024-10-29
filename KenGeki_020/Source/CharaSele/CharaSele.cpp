@@ -20,17 +20,13 @@ namespace GAME
 #pragma region CONST
 
 	//キャラセレ
-	const float CharaSele::TXT_CHSL_X = -2 + 640 - 286 / 2;
-	const float CharaSele::TXT_CHSL_Y = 5;
+	const float CharaSele::TXT_CHSL_X = 640 - 270 / 2;
+	const float CharaSele::TXT_CHSL_Y = 24;
 
 	//キャラ別
 	const float CharaSele::CH_INDEX_X_1P = 0    + 100;
 	const float CharaSele::CH_INDEX_X_2P = 1280 - 100 - 194;
 	const float CharaSele::CH_INDEX_Y = 5;
-
-	const float CharaSele::CH_STT_X_1P = 410;
-	const float CharaSele::CH_STT_X_2P = 800;
-	const float CharaSele::CH_STT_Y = 5;
 
 	const float CharaSele::CH_BAR_X_1P = 405;
 	const float CharaSele::CH_BAR_X_2P = 405;
@@ -52,9 +48,9 @@ namespace GAME
 	const float CharaSele::TXT_BGM_X  = 640 - 184 / 2;
 	const float CharaSele::TXT_BGM_Y  = 572;
 	const float CharaSele::BGM_X = 640 - 225;
-	const float CharaSele::BGM_Y = 602;
-	const float CharaSele::BGM_TRI_X = (1280 - 335) * 0.5f;
-	const float CharaSele::BGM_TRI_Y = BGM_Y + 50;
+	const float CharaSele::BGM_Y = 605;
+	const float CharaSele::BGM_TRI_X = (1280 - 450) * 0.5f;
+	const float CharaSele::BGM_TRI_Y = BGM_Y + 4;
 
 	//操作説明
 	const float CharaSele::INST_X = 0;
@@ -110,6 +106,7 @@ namespace GAME
 		m_index_1p->SetPos ( CH_INDEX_X_1P, CH_INDEX_Y );
 		AddpTask ( m_index_1p );
 		GRPLST_INSERT ( m_index_1p );
+
 		m_index_2p = std::make_shared < GameGraphic > ();
 		m_index_2p->AddTexture_FromArchive ( U"CharaSele\\2P_Index.png" );
 		m_index_2p->SetPos ( CH_INDEX_X_2P, CH_INDEX_Y );
@@ -117,34 +114,25 @@ namespace GAME
 		GRPLST_INSERT ( m_index_2p );
 
 
+#if 0
 
 		m_state_1p = std::make_shared < GrpBlink > ();
-		m_state_1p->AddTexture_FromArchive ( U"CharaSele\\1P.png" );
+		m_state_1p->AddTexture_FromArchive ( U"CharaSele\\1P_State.png" );
 		m_state_1p->SetPos ( CH_STT_X_1P, TXT_CHSL_Y );
 		m_state_1p->SetBlinkTime ( 20 );
 		m_state_1p->SetHalf ( T );
 		AddpTask ( m_state_1p );
 		GRPLST_INSERT ( m_state_1p );
 
-		m_state_bar_1p = std::make_shared < GameGraphic > ();
-		m_state_bar_1p->AddTexture_FromArchive ( U"CharaSele\\CharaSelePlayerCursor1P.png" );
-		m_state_bar_1p->SetPos ( CH_STT_X_1P, TXT_CHSL_Y );
-		AddpTask ( m_state_bar_1p );
-		GRPLST_INSERT ( m_state_bar_1p );
-
 		m_state_2p = std::make_shared < GrpBlink > ();
-		m_state_2p->AddTexture_FromArchive ( U"CharaSele\\2P.png" );
+		m_state_2p->AddTexture_FromArchive ( U"CharaSele\\2P_State.png" );
 		m_state_2p->SetPos ( CH_STT_X_2P, TXT_CHSL_Y );
 		m_state_2p->SetBlinkTime ( 20 );
 		m_state_2p->SetHalf ( T );
 		AddpTask ( m_state_2p );
 		GRPLST_INSERT ( m_state_2p );
 
-		m_state_bar_2p = std::make_shared < GameGraphic > ();
-		m_state_bar_2p->AddTexture_FromArchive ( U"CharaSele\\CharaSelePlayerCursor2P.png" );
-		m_state_bar_2p->SetPos ( CH_STT_X_2P, TXT_CHSL_Y );
-		AddpTask ( m_state_bar_2p );
-		GRPLST_INSERT ( m_state_bar_2p );
+#endif // 0
 
 
 
@@ -159,12 +147,14 @@ namespace GAME
 		AddpTask ( m_fade_toFighting );
 		GRPLST_INSERT ( m_fade_toFighting );
 
+
+		//-----------------------------------------------------------------------
 		//文字表示
 		m_txt_CharacterSelect = std::make_shared < GrpBlink > ();
 		m_txt_CharacterSelect->AddTexture_FromArchive ( U"CharaSele\\Text_CHARACTER_SELECT.png" );
 		m_txt_CharacterSelect->SetPos ( VEC2 ( TXT_CHSL_X, TXT_CHSL_Y ) );
 		m_txt_CharacterSelect->SetZ ( Z_SYS );
-		m_txt_CharacterSelect->Start ();
+//		m_txt_CharacterSelect->Start ();
 		m_txt_CharacterSelect->SetHalf ( T );
 		AddpTask ( m_txt_CharacterSelect );
 		GRPLST_INSERT ( m_txt_CharacterSelect );
@@ -203,7 +193,7 @@ namespace GAME
 		GRPLST_INSERT ( m_stageSelect );
 
 		m_stageSelectTri = std::make_shared < GrpBlink > ();
-		m_stageSelectTri->AddTexture_FromArchive ( U"CharaSele\\SelectTriangle.png" );
+		m_stageSelectTri->AddTexture_FromArchive ( U"CharaSele\\SelectTriangleStage.png" );
 		m_stageSelectTri->SetPos ( VEC2 ( STG_TRI_X, STG_TRI_Y ) );
 		m_stageSelectTri->SetZ ( Z_EFF );
 		m_stageSelectTri->SetHalf ( T );
@@ -244,7 +234,22 @@ namespace GAME
 		AddpTask ( m_bgmSelect );
 		GRPLST_INSERT ( m_bgmSelect );
 
+		m_bgmSelectTri = std::make_shared < GrpBlink > ();
+		m_bgmSelectTri->AddTexture_FromArchive ( U"CharaSele\\SelectTriangleBGM.png" );
+		m_bgmSelectTri->SetPos ( VEC2 ( BGM_TRI_X, BGM_TRI_Y ) );
+		m_bgmSelectTri->SetZ ( Z_EFF );
+		m_bgmSelectTri->SetHalf ( T );
+		AddpTask ( m_bgmSelectTri );
+		GRPLST_INSERT ( m_bgmSelectTri );
+
 		m_scrlbgm_x = BGM_SCROLL_X;
+
+
+		ma_bgm.push_back ( BGM_GABA );
+		ma_bgm.push_back ( BGM_OUKA );
+		ma_bgm.push_back ( BGM_SAE );
+		ma_bgm.push_back ( BGM_RETSU );
+
 
 		//-----------------------------------------------------------------------
 		//操作説明
@@ -276,6 +281,12 @@ namespace GAME
 		//ステージ
 		STAGE_NAME stageName = p->GetStageName ();
 		AssignStage ( stageName );
+
+		//BGM
+		m_bgm_id = p->Get_BGM_ID ();
+
+		//読み込んだBGM_IDの表示だけ変更する
+		m_bgmSelect->SetIndexTexture ( m_bgm_id );
 	}
 
 
@@ -291,7 +302,7 @@ namespace GAME
 
 		//SOUND
 		SND_STOP_ALL_BGM();
-		SND_PLAY_LOOP_BGM ( BGM_CharaSele );
+		SND_PLAY_LOOP_BGM ( BGM_CharaSele );	//初期BGMはキャラセレBGM
 
 		Scene::Load ();
 	}
@@ -357,14 +368,18 @@ namespace GAME
 		pPrm->SetCharaName1p ( m_chsl_pl_1p->GetName() );
 		pPrm->SetCharaName2p ( m_chsl_pl_2p->GetName() );
 		pPrm->SetStageName ( GetStageName () );
+		pPrm->Set_BGM_ID ( m_bgm_id );
 
-		//設定ファイルにも記録
+		//設定ファイルに書出
 		pPrm->GetGameSetting().Save ();
 	}
 
 
 	void CharaSele::Move ()
 	{
+		//----------------------------------------------------------
+		// 表示類
+		
 		//背景スクロール
 		m_scrl_y -= 20;
 		if ( m_scrl_y < - 960 ) { m_scrl_y = 0; }
@@ -377,6 +392,59 @@ namespace GAME
 		m_scrlbgm_x += 20;
 		if ( 1280 + 1280 < m_scrlbgm_x ) { m_scrlbgm_x = 1280; }
 		m_scroll_bgm->SetPos ( m_scrlbgm_x, BGM_SCROLL_Y );
+
+
+		//選択状態
+		CharaSele_Player::CHST_PL_State stt1p = m_chsl_pl_1p->GetState ();
+		CharaSele_Player::CHST_PL_State stt2p = m_chsl_pl_2p->GetState ();
+
+		bool b1Ch = stt1p == CharaSele_Player::STT_CHARA;
+		bool b2Ch = stt2p == CharaSele_Player::STT_CHARA;
+
+		//キャラセレクト
+		if ( b1Ch || b2Ch )
+		{
+			//点滅
+			m_txt_CharacterSelect->Start ();
+		}
+		else
+		{
+			m_txt_CharacterSelect->Stop ();
+		}
+
+		bool b1Stg = stt1p == CharaSele_Player::STT_STAGE;
+		bool b2Stg = stt2p == CharaSele_Player::STT_STAGE;
+
+		//ステージセレクト
+		if ( b1Stg || b2Stg )
+		{
+			//点滅
+			m_txt_StageSelect->Start ();
+			m_stageSelectTri->Start ();
+		}
+		else
+		{
+			m_txt_StageSelect->Stop ();
+			m_stageSelectTri->Stop ();
+		}
+
+
+		bool b1BGM = stt1p == CharaSele_Player::STT_BGM;
+		bool b2BGM = stt2p == CharaSele_Player::STT_BGM;
+
+		//BGMセレクト
+		if ( b1BGM || b2BGM )
+		{
+			//点滅
+			m_txt_BGMSelect->Start ();
+			m_bgmSelectTri->Start ();
+		}
+		else
+		{
+			m_txt_BGMSelect->Stop ();
+			m_bgmSelectTri->Stop ();
+		}
+
 
 		//----------------------------------------------------------
 		//フェードアウト中の待機と遷移
@@ -397,6 +465,20 @@ namespace GAME
 		//入力
 		Input ();
 
+
+		//両者すべてを決定したらFtgMainに移行
+		bool bOK1 = stt1p == CharaSele_Player::STT_OK;
+		bool bOK2 = stt2p == CharaSele_Player::STT_OK;
+
+		if ( bOK1 && bOK2 )
+		{
+			if ( ! m_fade_toFighting->IsActive () )
+			{
+				//フェード開始
+				m_fade_toFighting->StartBlackOut ( 16 );
+			}
+		}
+
 		Scene::Move (); 
 	}
 
@@ -416,99 +498,68 @@ namespace GAME
 		}
 
 
-		//決定
-		bool b1 = m_chsl_pl_1p->IsDecided ();
-		bool b2 = m_chsl_pl_2p->IsDecided ();
+		//選択状態
+		CharaSele_Player::CHST_PL_State stt1p = m_chsl_pl_1p->GetState ();
+		CharaSele_Player::CHST_PL_State stt2p = m_chsl_pl_2p->GetState ();
 
-		//両方未決定時はステージセレクトではない
-		if ( ! b1 && ! b2 )
+		//ステージセレクト
+		if ( stt1p == CharaSele_Player::STT_STAGE )
 		{
-			//点滅を止める
-			m_txt_StageSelect->Stop ();
-			m_stageSelectTri->Stop ();
+			if ( CFG_PUSH_KEY ( P1_LEFT ) ) { StagePrev (); }
+			if ( CFG_PUSH_KEY ( P1_RIGHT ) ) { StageNext (); }
+			if ( CFG_PUSH_KEY ( P1_BTN0 ) ) { StageDecide (); }
+		}
+		if ( stt2p == CharaSele_Player::STT_STAGE )
+		{
+			if ( CFG_PUSH_KEY ( P2_LEFT ) ) { StagePrev (); }
+			if ( CFG_PUSH_KEY ( P2_RIGHT ) ) { StageNext (); }
+			if ( CFG_PUSH_KEY ( P2_BTN0 ) ) { StageDecide (); }
 		}
 
-		//片方が決定したらステージセレクト
-		if ( b1 )
+		//BGMセレクト
+		if ( stt1p == CharaSele_Player::STT_BGM )
 		{
-			//点滅開始
-			m_txt_StageSelect->Start ();
-			m_stageSelectTri->Start ();
-
-			//状態
-			m_state_1p->SetPos ( CH_STT_X_1P, TXT_STSL_Y );
-			m_state_bar_1p->SetPos ( CH_BAR_X_1P, TXT_STSL_Y );
-
-			if ( CFG_PUSH_KEY ( P1_LEFT ) )
-			{
-				m_stageSelect->PrevIndexTexture ();
-				SND_PLAY_ONESHOT_SE ( SE_select_move );
-			}
-			if ( CFG_PUSH_KEY ( P1_RIGHT ) )
-			{
-				m_stageSelect->NextIndexTexture ();
-				SND_PLAY_ONESHOT_SE ( SE_select_move );
-			}
-
-			if ( CFG_PUSH_KEY ( P1_BTN0 ) )
-			{
-				SND_PLAY_ONESHOT_SE ( SE_select_decide );
-				m_stageDecide = T;
-			}
+			if ( CFG_PUSH_KEY ( P1_LEFT ) ) { BGM_Prev (); }
+			if ( CFG_PUSH_KEY ( P1_RIGHT ) ) { BGM_Next (); }
+			if ( CFG_PUSH_KEY ( P1_BTN0 ) ) { BGM_Decide (); }
 		}
-		else
+		if ( stt2p == CharaSele_Player::STT_BGM )
 		{
-			//状態
-			m_state_1p->SetPos ( CH_STT_X_1P, TXT_CHSL_Y );
-			m_state_bar_1p->SetPos ( CH_BAR_X_1P, CH_BAR_Y );
+			if ( CFG_PUSH_KEY ( P2_LEFT ) ) { BGM_Prev (); }
+			if ( CFG_PUSH_KEY ( P2_RIGHT ) ) { BGM_Next (); }
+			if ( CFG_PUSH_KEY ( P2_BTN0 ) ) { BGM_Decide (); }
 		}
 
-		if ( b2 )
-		{
-			//点滅開始
-			m_txt_StageSelect->Start ();
-			m_stageSelectTri->Start ();
-
-			m_state_2p->SetPos ( CH_STT_X_2P, TXT_STSL_Y );
-			m_state_bar_2p->SetPos ( CH_BAR_X_2P, TXT_STSL_Y );
-
-			if ( CFG_PUSH_KEY ( P2_LEFT ) )
-			{
-				m_stageSelect->PrevIndexTexture ();
-				SND_PLAY_ONESHOT_SE ( SE_select_move );
-			}
-			if ( CFG_PUSH_KEY ( P2_RIGHT ) )
-			{
-				m_stageSelect->NextIndexTexture ();
-				SND_PLAY_ONESHOT_SE ( SE_select_move );
-			}
-
-			if ( CFG_PUSH_KEY ( P2_BTN0 ) )
-			{
-				SND_PLAY_ONESHOT_SE ( SE_select_decide );
-				m_stageDecide = T;
-			}
-		}
-		else
-		{
-			//状態
-			m_state_2p->SetPos ( CH_STT_X_2P, TXT_CHSL_Y );
-			m_state_bar_2p->SetPos ( CH_BAR_X_2P, CH_BAR_Y );
-		}
-
-		//両者とステージを決定したらFtgMainに移行
-		if ( b1 && b2 && m_stageDecide )
-		{
-			if ( ! m_fade_toFighting->IsActive () )
-			{
-				//フェード開始
-				m_fade_toFighting->StartBlackOut ( 16 );
-			}
-		}
 
 	}
 
 
+	//-------------------------------------------------
+	void CharaSele::StagePrev ()
+	{
+		SND_PLAY_ONESHOT_SE ( SE_select_move );
+		m_stageSelect->PrevIndexTexture ();
+	}
+
+	void CharaSele::StageNext ()
+	{
+		SND_PLAY_ONESHOT_SE ( SE_select_move );
+		m_stageSelect->NextIndexTexture ();
+	}
+
+	void CharaSele::StageDecide ()
+	{
+		SND_PLAY_ONESHOT_SE ( SE_select_decide );
+		m_stageDecide = T;
+
+		//BGM選択に以降するときに初期値で変更する
+		SND_STOP_ALL_BGM();
+		SND_PLAY_LOOP_BGM ( m_bgm_id );
+
+	}
+
+
+	//-------------------------------------------------
 	STAGE_NAME CharaSele::GetStageName ()
 	{
 		STAGE_NAME ret = STAGE_YUUHINO_HARA;
@@ -527,6 +578,48 @@ namespace GAME
 	{
 		m_stageSelect->SetIndexTexture ( (uint32) name );
 	}
+
+	//-------------------------------------------------
+	void CharaSele::BGM_Prev ()
+	{
+		switch ( m_bgm_id )
+		{
+		case BGM_ID_GABA:	m_bgm_id = BGM_ID_OUKA;		 break;
+		case BGM_ID_OUKA:	m_bgm_id = BGM_ID_SAE;		 break;
+		case BGM_ID_SAE:	m_bgm_id = BGM_ID_RETSU;	 break;
+		case BGM_ID_RETSU:	m_bgm_id = BGM_ID_GABA;		 break;
+		}
+
+		Set_BGM_ID ( m_bgm_id );
+	}
+
+	void CharaSele::BGM_Next ()
+	{
+		switch ( m_bgm_id )
+		{
+		case BGM_ID_GABA:	m_bgm_id = BGM_ID_RETSU;	 break;
+		case BGM_ID_OUKA:	m_bgm_id = BGM_ID_GABA;		 break;
+		case BGM_ID_SAE:	m_bgm_id = BGM_ID_OUKA;		 break;
+		case BGM_ID_RETSU:	m_bgm_id = BGM_ID_SAE;		 break;
+		}
+
+		Set_BGM_ID ( m_bgm_id );
+	}
+
+	void CharaSele::Set_BGM_ID ( BGM_ID id )
+	{
+		m_bgm_id = id;
+		m_bgmSelect->SetIndexTexture ( m_bgm_id );
+		SND_STOP_ALL_BGM();
+		SND_PLAY_LOOP_BGM ( ma_bgm [ id ] );
+	}
+
+	void CharaSele::BGM_Decide ()
+	{
+		GetpParam()->Set_BGM_ID ( m_bgm_id );
+		SND_PLAY_ONESHOT_SE ( SE_select_decide );
+	}
+
 
 
 }	//namespace GAME

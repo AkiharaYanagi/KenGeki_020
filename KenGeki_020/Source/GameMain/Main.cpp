@@ -31,6 +31,9 @@ GameSystem gameSystem;
 //メインループ
 void Main()
 {
+	//タイトル
+	Window::SetTitle ( U"剣撃クロスゾーン" );
+
 	//読込
 	Load ();
 

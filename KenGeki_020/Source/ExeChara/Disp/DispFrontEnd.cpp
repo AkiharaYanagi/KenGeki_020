@@ -217,6 +217,10 @@ namespace GAME
 	{
 		m_strAction->SetSize ( G_Font::SIZE_40 );
 		m_strState->SetSize ( G_Font::SIZE_40 );
+
+		//初期値はOff
+		Off ();
+
 		TASK_VEC::Load ();
 	}
 
@@ -452,7 +456,6 @@ namespace GAME
 	void DispFrontEnd::UpdateActionName ( s3d::String actionName )
 	{
 		m_strAction->SetStr ( actionName );
-//		m_strAction->Draw ();
 	}
 
 	void DispFrontEnd::UpdateStateName ( s3d::String stateName )
@@ -554,6 +557,8 @@ namespace GAME
 
 	void DispFrontEnd::On ()
 	{
+#if 0
+
 		m_gaugeLife->On ();
 		m_gaugeBalance->On ();
 		m_gaugeMana->On ();
@@ -563,6 +568,11 @@ namespace GAME
 		m_name->SetValid ( T );
 		m_face->SetValid ( T );
 		m_ChouHissatsu->SetValid ( T );
+#endif // 0
+
+		m_strAction->SetValid ( T );
+		m_strState->SetValid ( T );
+
 #if 0
 		m_grp_Cst_Player1P2P->SetValid ( T );
 		m_grp_Cst_InputPlayerCOM->SetValid ( T );
@@ -575,6 +585,8 @@ namespace GAME
 
 	void DispFrontEnd::Off ()
 	{
+#if 0
+
 		m_gaugeLife->Off ();
 		m_gaugeBalance->Off ();
 		m_gaugeMana->Off ();
@@ -584,6 +596,11 @@ namespace GAME
 		m_name->SetValid ( F );
 		m_face->SetValid ( F );
 		m_ChouHissatsu->SetValid ( F );
+#endif // 0
+
+		m_strAction->SetValid ( F );
+		m_strState->SetValid ( F );
+
 #if 0
 		m_grp_Cst_Player1P2P->SetValid ( F );
 		m_grp_Cst_InputPlayerCOM->SetValid ( F );

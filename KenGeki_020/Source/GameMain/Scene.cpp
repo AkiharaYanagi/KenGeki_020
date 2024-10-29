@@ -28,7 +28,6 @@ namespace GAME
 	//------------------------------------------------------------------
 
 	Scene::Scene ()
-//		: m_bTransit ( F )
 	{
 	}
 
@@ -126,12 +125,12 @@ namespace GAME
 		{
 			//全キャラデータを事前読込
 			// ここで読込しないとき、バトルメインでキャラの個別読込
-//			m_pParam->LoadCharaData_All ();
+			m_pParam->LoadCharaData_All ();
 		}
 
 
 		//デバッグ表示オン/オフ 初期状態
-		//ExwChara 1p/2p のとき、1pの値を2pで上書きに注意
+		//ExeChara 1p/2p のとき、1pの値を2pで上書きに注意
 		DBGOUT_WND_ON (); 
 //		DBGOUT_WND_OFF ();
 

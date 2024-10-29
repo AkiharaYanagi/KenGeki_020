@@ -29,7 +29,6 @@ namespace GAME
 	constexpr char32_t BGM_Title []		= U"10_BGM_Title.wav";
 	constexpr char32_t BGM_CharaSele []	= U"11_BGM_CharaSele.wav";
 	constexpr char32_t BGM_Result []	= U"12_BGM_Result.wav";
-	constexpr char32_t BGM_TitleCall []	= U"13_TitleCall.wav";
 
 
 	//ID
@@ -38,7 +37,16 @@ namespace GAME
 		BGM_ID_GABA,
 		BGM_ID_OUKA,
 		BGM_ID_SAE,
-		BGM_ID_RETSUDOU,
+		BGM_ID_RETSU,
+	};
+
+	//BGM_ID_TO_NAME
+	static const char32_t * BGM_ID_TO_NAME[] =
+	{
+		BGM_GABA,
+		BGM_OUKA,
+		BGM_SAE,
+		BGM_RETSU,
 	};
 }
 

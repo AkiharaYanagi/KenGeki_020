@@ -25,11 +25,12 @@ namespace GAME
 	GameSettingFile::GameSettingFile ( const GameSettingFile & rhs )
 	{
 		m_startMode		= rhs.m_startMode;
+		m_demo			= rhs.m_demo;
 		m_playerMode1p	= rhs.m_playerMode1p;
 		m_playerMode2p	= rhs.m_playerMode2p;
 		m_name1p		= rhs.m_name1p;
 		m_name2p		= rhs.m_name2p;
-		m_demo			= rhs.m_demo;
+		m_bgm_id		= rhs.m_bgm_id;
 	}
 
 	void GameSettingFile::Load ()
@@ -64,6 +65,10 @@ namespace GAME
 			m_name1p = (CHARA_NAME)tempName1p;
 			m_name2p = (CHARA_NAME)tempName2p;
 
+			byte bgm = 0;
+			ifstrm.read( (char*)&bgm, sizeof( byte ) );
+			m_bgm_id = (BGM_ID)bgm;
+
 			//終了
 			ifstrm.close();
 
@@ -78,7 +83,7 @@ namespace GAME
 	{
 	}
 
-	void GameSettingFile::Save()
+	void GameSettingFile::Save() const
 	{
 		try
 		{
@@ -91,6 +96,7 @@ namespace GAME
 			ofstrm.write ( (char*)&m_playerMode2p, sizeof ( byte ) );
 			ofstrm.write ( (char*)&m_name1p, sizeof ( byte ) );
 			ofstrm.write ( (char*)&m_name2p, sizeof ( byte ) );
+			ofstrm.write ( (char*)&m_bgm_id, sizeof ( byte ) );
 
 			//終了
 			ofstrm.close ();
@@ -104,11 +110,12 @@ namespace GAME
 	void GameSettingFile::SetDefault ()
 	{
 		m_startMode = START_BATTLE;
+		m_demo = F;
 		m_playerMode1p = MODE_PLAYER;
 		m_playerMode2p = MODE_PLAYER;
 		m_name1p = CHARA_OUKA;
 		m_name2p = CHARA_OUKA;
-		m_demo = F;
+		m_bgm_id = BGM_ID_GABA;
 	}
 
 

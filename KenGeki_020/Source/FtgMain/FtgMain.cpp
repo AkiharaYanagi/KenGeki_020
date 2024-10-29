@@ -66,6 +66,10 @@ namespace GAME
 	{
 	}
 
+	void FtgMain::ParamInit ()
+	{
+	}
+
 	void FtgMain::Load ()
 	{
 		//戦闘共通
@@ -77,24 +81,13 @@ namespace GAME
 		//Menu用にthisを保存
 		m_pauseMenu->SetwpParentScene ( shared_from_this () );
 
-
-		//test
-//		DBGOUT_WND()->On ();
-		DBGOUT_WND()->Off ();
-
 		//BGM
+		P_Param pParam = Scene::GetpParam ();
+		BGM_ID bgm_id = pParam->Get_BGM_ID ();
 		SND_STOP_ALL_BGM ();
-		//SND_PLAY_LOOP_BGM ( BGM_GABA );
-		//SND_PLAY_LOOP_BGM ( BGM_SAE );
-		SND_PLAY_LOOP_BGM ( BGM_RETSU );
-
+		SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ bgm_id ] );
 
 		Scene::Load ();
-	}
-
-	void FtgMain::ParamInit ()
-	{
-		m_fighting->ParamInit ( Scene::GetpParam () );
 	}
 
 
@@ -121,8 +114,8 @@ namespace GAME
 		}
 
 		//トレーニングリセット
-		bool p1Reset = CFG_PUSH_KEY ( P1_BTN6 );
-		bool p2Reset = CFG_PUSH_KEY ( P2_BTN6 );
+		bool p1Reset = CFG_PUSH_KEY ( P1_BTN7 );
+		bool p2Reset = CFG_PUSH_KEY ( P2_BTN7 );
 		bool sysReset = WND_UTL::AscKey ( VK_BACK );
 		if ( p1Reset || p2Reset || sysReset )
 		{

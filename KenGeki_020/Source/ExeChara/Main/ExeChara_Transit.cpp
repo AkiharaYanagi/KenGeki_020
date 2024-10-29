@@ -172,7 +172,7 @@ namespace GAME
 		if ( NO_ACTION == idAction )
 		{
 			TRACE_F ( _T("▼▼▼ アクション名呼び出しエラー.%s"), action_name.c_str() );
-			assert ( T );
+			assert ( action_name );
 		}
 		SetAction ( idAction );
 	}
@@ -274,8 +274,11 @@ namespace GAME
 
 	void ExeChara::ChangeOhter ()
 	{
-		//対象なしのときアサート
-		assert ( m_pOther.lock ()->ExitActionName ( m_nameChangeOther ) );
+		if ( ! m_pOther.lock ()->ExistActionName ( m_nameChangeOther ) )
+		{
+			//対象なしのときアサート
+			assert ( m_nameChangeOther );
+		}
 
 		//ノーリアクション
 		if ( 0 == m_nameChangeOther.compare ( U"ノーリアクション" ) )
@@ -394,11 +397,18 @@ namespace GAME
 		//------------------------------------------------
 		//◆移項限定処理
 		//ダッシュから次アクションに移項するとき、慣性を残す
-		if ( ! ExitActionName ( U"前ダッシュ開始" ) )
+		if ( ! ExistActionName ( U"前ダッシュ開始" ) )
 		{
 			assert ( 0 );
 		}
-		if ( IsNameAction ( U"前ダッシュ開始" ) )
+		if ( ! ExistActionName ( U"ボタンダッシュ開始" ) )
+		{
+			assert ( 0 );
+		}
+
+		bool bDash = IsNameAction ( U"前ダッシュ開始" );
+		bool bBtnDash = IsNameAction ( U"ボタンダッシュ開始" );
+		if ( bDash || bBtnDash )
 		{
 			m_btlPrm.SetDashInertial ( VEC2 ( 10.f, 0 ) );
 		}

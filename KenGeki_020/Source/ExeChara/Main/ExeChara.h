@@ -256,7 +256,7 @@ namespace GAME
 		bool IsNameAction ( s3d::String name ) const { return m_pAction->IsName ( name ); }
 
 		//アクションが存在するかどうか
-		bool ExitActionName ( s3d::String name ) const { return m_pChara->ExistAction ( name ); }
+		bool ExistActionName ( s3d::String name ) const { return m_pChara->ExistAction ( name ); }
 
 		//ヒットストップ
 		bool IsHitStop () { return m_btlPrm.IsHitStop (); }
@@ -438,16 +438,17 @@ namespace GAME
 			||	m_pAction->GetCategory ()  == AC_ATTACK_M
 			||	m_pAction->GetCategory ()  == AC_ATTACK_H; 
 		}
-		bool IsStand ()		 const { return m_pAction->GetCategory ()  == AC_NEUTRAL; }
-		bool IsMove ()		 const { return m_pAction->GetCategory ()  == AC_MOVE; }
-		bool IsDash ()		 const { return m_pAction->GetCategory ()  == AC_DASH; }
-		bool IsSpecial ()	 const { return m_pAction->GetCategory ()  == AC_SPECIAL; }
-		bool IsOverdrive ()	 const { return m_pAction->GetCategory ()  == AC_OVERDRIVE; }
-		bool IsPoised ()	 const { return m_pAction->GetCategory ()  == AC_POISED; }
-		bool IsClang ()		 const { return m_pAction->GetCategory ()  == AC_CLANG; }
-		bool IsAvoid ()		 const { return m_pAction->GetCategory ()  == AC_AVOID; }
-		bool IsDotty ()		 const { return m_pAction->GetCategory ()  == AC_DOTTY; }
-		bool IsDamaged ()	 const { return m_pAction->GetCategory ()  == AC_DAMAGED; }
+		bool IsAttack_L ()	 const { return m_pAction->GetCategory () == AC_ATTACK_L; }
+		bool IsStand ()		 const { return m_pAction->GetCategory () == AC_NEUTRAL; }
+		bool IsMove ()		 const { return m_pAction->GetCategory () == AC_MOVE; }
+		bool IsDash ()		 const { return m_pAction->GetCategory () == AC_DASH; }
+		bool IsSpecial ()	 const { return m_pAction->GetCategory () == AC_SPECIAL; }
+		bool IsOverdrive ()	 const { return m_pAction->GetCategory () == AC_OVERDRIVE; }
+		bool IsPoised ()	 const { return m_pAction->GetCategory () == AC_POISED; }
+		bool IsClang ()		 const { return m_pAction->GetCategory () == AC_CLANG; }
+		bool IsAvoid ()		 const { return m_pAction->GetCategory () == AC_AVOID; }
+		bool IsDotty ()		 const { return m_pAction->GetCategory () == AC_DOTTY; }
+		bool IsDamaged ()	 const { return m_pAction->GetCategory () == AC_DAMAGED; }
 
 #if 0
 	public:

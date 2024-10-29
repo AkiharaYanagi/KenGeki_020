@@ -37,6 +37,13 @@ namespace GAME
 	//	const CHARA_SELE_ID		 CHARA_SELE_NUM = 12;
 	//	const CHARA_SELE_ID	CharaSele_Player::CHARA_SELE_NUM = 12;
 
+	const float CharaSele_Player::CH_STT_X_1P = 402;
+	const float CharaSele_Player::CH_STT_X_2P = 405;
+	const float CharaSele_Player::CH_STT_CHARA_Y = 8;
+	const float CharaSele_Player::CH_STT_STAGE_Y = 370;
+	const float CharaSele_Player::CH_STT_BGM_Y = 552;
+	const float CharaSele_Player::CH_STT_OK_Y = 2000;	//画面外
+
 
 
 
@@ -78,6 +85,17 @@ namespace GAME
 		m_cursor->SetZ ( Z_SYS );
 		AddpTask ( m_cursor );
 		GRPLST_INSERT ( m_cursor );
+
+		//状態表示
+		m_state_Disp = std::make_shared < GrpBlink > ();
+		m_state_Disp->AddTexture_FromArchive ( U"CharaSele\\1P_State.png" );
+		m_state_Disp->AddTexture_FromArchive ( U"CharaSele\\2P_State.png" );
+		m_state_Disp->SetBlinkTime ( 20 );
+		m_state_Disp->SetHalf ( T );
+		m_state_Disp->SetZ ( Z_MENU );
+		AddpTask ( m_state_Disp );
+		GRPLST_INSERT ( m_state_Disp );
+
 	}
 
 	CharaSele_Player::~CharaSele_Player ()
@@ -86,6 +104,7 @@ namespace GAME
 
 	void CharaSele_Player::ParamInit ( P_Param p )
 	{
+		p->GetCharaName ( m_player_id );
 	}
 
 	void CharaSele_Player::PlayerInit ( PLAYER_ID id )
@@ -103,6 +122,8 @@ namespace GAME
 			m_chara_name->SetPos ( CHARA_NAME_1P_X, CHARA_NAME_1P_Y );
 			m_cursor->SetPos ( VEC2 ( m_pos [ CHSLID_00 ].x, m_pos [ CHSLID_00 ].y ) );
 			m_cursor->SetIndexTexture ( 0 );
+			m_state_Disp->SetIndexTexture ( 0 );
+			m_state_Disp->SetPos ( CH_STT_X_1P, CH_STT_CHARA_Y );
 		}
 		else if ( PLAYER_ID_2 == id )
 		{
@@ -115,6 +136,8 @@ namespace GAME
 			m_chara_name->SetPos ( CHARA_NAME_2P_X, CHARA_NAME_2P_Y );
 			m_cursor->SetPos ( VEC2 ( m_pos [ CHSLID_02 ].x, m_pos [ CHSLID_02 ].y ) );
 			m_cursor->SetIndexTexture ( 1 );
+			m_state_Disp->SetIndexTexture ( 1 );
+			m_state_Disp->SetPos ( CH_STT_X_2P, CH_STT_CHARA_Y );
 		}
 	}
 
@@ -124,12 +147,15 @@ namespace GAME
 		switch ( m_state )
 		{
 		case STT_CHARA: Move_Chara	(); break;
+		case STT_COLOR: Move_Color	(); break;
 		case STT_STAGE: Move_Stage	(); break;
 		case STT_BGM:	Move_bgm	(); break;
 		case STT_OK:	Move_OK		(); break;
 		default: break;
 		};
-		
+
+#if 0
+
 		//入力
 		if ( m_decided )	//決定済みならば
 		{
@@ -140,21 +166,15 @@ namespace GAME
 			Input ();	//移動と決定
 		}
 
-		//選択キャラ表示
-		switch ( m_chsl_id )
-		{
-		case CHSLID_00: SetCharaStand ( CHSLID_00 ); break;
-		case CHSLID_01: HiddenCharaStand ();break;
-		case CHSLID_02: SetCharaStand ( CHSLID_02 ); break;
-		case CHSLID_03: SetCharaStand ( CHSLID_03 ); break;
-		case CHSLID_04: HiddenCharaStand ();break;
-		case CHSLID_05: HiddenCharaStand ();break;
-		case CHSLID_06: HiddenCharaStand ();break;
-		case CHSLID_07: HiddenCharaStand ();break;
-		case CHSLID_08: HiddenCharaStand ();break;
-		case CHSLID_09: HiddenCharaStand ();break;
-		default: break;
-		}
+#endif // 0
+
+		TASK_VEC::Move ();
+	}
+
+	//-------------------------------------------
+	void CharaSele_Player::Move_Chara ()
+	{
+		Input_Chara ();	//移動と決定
 
 		//選択カットイン
 		if ( PLAYER_ID_1 == m_player_id )
@@ -174,39 +194,44 @@ namespace GAME
 			}
 		}
 
-		//決定待機
-		if ( ++ m_wait > 10 )
-		{
-			//明度を戻す
-			m_chara_stand_light->SetValid ( F );
-			m_wait = 0;
-		}
-
 		TASK_VEC::Move ();
 	}
 
-	void CharaSele_Player::Move_Chara ()
+	void CharaSele_Player::Move_Color ()
 	{
 		TASK_VEC::Move ();
 	}
 
 	void CharaSele_Player::Move_Stage ()
 	{
+		//キャラ決定後
+		if ( ++ m_wait > 10 )
+		{
+			//明度を戻す
+			m_chara_stand->SetValid ( T );
+			m_chara_stand_light->SetValid ( F );
+			m_wait = 0;
+		}
+
+		Input_Stage ();
+
 		TASK_VEC::Move ();
 	}
 
 	void CharaSele_Player::Move_bgm ()
 	{
+		Input_BGM ();
 		TASK_VEC::Move ();
 	}
 
 	void CharaSele_Player::Move_OK ()
 	{
-		Input_Decided ();	//キャンセルのみ
+		Input_OK ();	//キャンセルのみ
 		TASK_VEC::Move ();
 	}
 
 
+	//-------------------------------------------
 	CHARA_NAME CharaSele_Player::GetName () const
 	{
 		return m_pos[m_chsl_id].Name;
@@ -221,6 +246,22 @@ namespace GAME
 		case CHARA_OUKA:		 m_chsl_id = CHSLID_00; break;
 		case CHARA_SAE:			 m_chsl_id = CHSLID_02; break;
 		case CHARA_RETSUDOU:	 m_chsl_id = CHSLID_03; break;
+		}
+
+		//選択キャラ表示
+		switch ( m_chsl_id )
+		{
+		case CHSLID_00: SetCharaStand ( CHSLID_00 ); break;
+		case CHSLID_01: HiddenCharaStand ();break;
+		case CHSLID_02: SetCharaStand ( CHSLID_02 ); break;
+		case CHSLID_03: SetCharaStand ( CHSLID_03 ); break;
+		case CHSLID_04: HiddenCharaStand ();break;
+		case CHSLID_05: HiddenCharaStand ();break;
+		case CHSLID_06: HiddenCharaStand ();break;
+		case CHSLID_07: HiddenCharaStand ();break;
+		case CHSLID_08: HiddenCharaStand ();break;
+		case CHSLID_09: HiddenCharaStand ();break;
+		default: break;
 		}
 
 		//カーソル位置も更新
@@ -261,56 +302,93 @@ namespace GAME
 
 	//-------------------------------------------------------------------
 	//入力
-	void CharaSele_Player::Input ()
+	void CharaSele_Player::Input_Chara ()
 	{
-		if ( PLAYER_ID_1 == m_player_id )
-		{
-			//移動
-			if ( CFG_PUSH_KEY ( P1_UP ) ) { SetCursorUp ( m_cursor, m_chsl_id ); }
-			if ( CFG_PUSH_KEY ( P1_DOWN ) ) { SetCursorDown ( m_cursor, m_chsl_id ); }
-			if ( CFG_PUSH_KEY ( P1_LEFT ) ) { SetCursorLeft ( m_cursor, m_chsl_id ); }
-			if ( CFG_PUSH_KEY ( P1_RIGHT ) ) { SetCursorRight ( m_cursor, m_chsl_id ); }
+		//移動
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_UP) ) { SetCursorUp ( m_cursor, m_chsl_id ); }
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_DOWN ) ) { SetCursorDown ( m_cursor, m_chsl_id ); }
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_LEFT ) ) { SetCursorLeft ( m_cursor, m_chsl_id ); }
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_RIGHT ) ) { SetCursorRight ( m_cursor, m_chsl_id ); }
 
-			//決定
-			if ( CFG_PUSH_KEY ( P1_BTN0 ) ) { Decide (); }
-		}
-		else if ( PLAYER_ID_2 == m_player_id )
-		{
-			if ( CFG_PUSH_KEY ( P2_UP ) ) { SetCursorUp ( m_cursor, m_chsl_id ); }
-			if ( CFG_PUSH_KEY ( P2_DOWN ) ) { SetCursorDown ( m_cursor, m_chsl_id ); }
-			if ( CFG_PUSH_KEY ( P2_LEFT ) ) { SetCursorLeft ( m_cursor, m_chsl_id ); }
-			if ( CFG_PUSH_KEY ( P2_RIGHT ) ) { SetCursorRight ( m_cursor, m_chsl_id ); }
-
-			//決定
-			if ( CFG_PUSH_KEY ( P2_BTN0 ) ) { Decide (); }
-		}
+		//ボタン0で決定
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN0 ) ) { Decide (); }
 	}
 
-
-	void CharaSele_Player::Input_Decided ()
+	void CharaSele_Player::Input_Color ()
 	{
-#if 0
-		if ( PLAYER_ID_1 == m_player_id )
+		//ボタン0で決定
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN0 ) )
 		{
-			if ( CFG_PUSH_KEY ( P1_BTN1 ) )
-			{
-				Cancel ();	//否定
-			}
+			//ステートを変更
+			m_state = STT_STAGE;
+			m_state_Disp->SetPosY ( CH_STT_STAGE_Y );
 		}
-		else if ( PLAYER_ID_2 == m_player_id )
-		{
-			if ( CFG_PUSH_KEY ( P2_BTN1 ) )
-			{
-				Cancel ();	//否定
-			}
-		}
-#endif // 0
+
 		//ボタン１でキャンセル
-		if ( CFG_PL_KEY ( m_player_id, PLY_BTN1 ) )
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN1 ) )
 		{
 			Cancel ();
 		}
 	}
+
+
+	void CharaSele_Player::Input_Stage ()
+	{
+		//ボタン0で決定
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN0 ) )
+		{
+			//ステートを変更
+			m_state = STT_BGM;
+			m_state_Disp->SetPosY ( CH_STT_BGM_Y );
+		}
+
+		//ボタン１でキャンセル
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN1 ) )
+		{
+			//ステートを変更
+			m_state = STT_CHARA;
+			m_state_Disp->SetPosY ( CH_STT_CHARA_Y );
+			SND_PLAY_ONESHOT_SE ( SE_select_Cancel );
+		}
+	}
+
+	void CharaSele_Player::Input_BGM ()
+	{
+		//ボタン0で決定
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN0 ) )
+		{
+			//ステートを変更
+			m_state = STT_OK;
+			m_state_Disp->SetPosY ( CH_STT_OK_Y );
+		}
+
+		//ボタン１でキャンセル
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN1 ) )
+		{
+			//ステートを変更
+			m_state = STT_STAGE;
+			m_state_Disp->SetPosY ( CH_STT_STAGE_Y );
+			SND_PLAY_ONESHOT_SE ( SE_select_Cancel );
+
+			SND_STOP_ALL_BGM();
+			SND_PLAY_LOOP_BGM ( BGM_CharaSele );	//初期BGMはキャラセレBGM
+		}
+	}
+
+
+	void CharaSele_Player::Input_OK ()
+	{
+		//ボタン１でキャンセル
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN1 ) )
+		{
+			//ステートを変更
+			m_state = STT_BGM;
+			m_state_Disp->SetPosY ( CH_STT_BGM_Y );
+			SND_PLAY_ONESHOT_SE ( SE_select_Cancel );
+		}
+	}
+
+
 
 
 	//キャンセル
@@ -320,6 +398,10 @@ namespace GAME
 		m_chara_stand->SetValid ( T );
 		m_chara_stand_light->SetValid ( F );
 		m_cursor->Start ();
+
+		//ステートを変更
+		m_state = STT_CHARA;
+		m_state_Disp->SetPosY ( CH_STT_CHARA_Y );
 
 		SND_PLAY_ONESHOT_SE ( SE_select_Cancel );
 
@@ -342,6 +424,22 @@ namespace GAME
 			m_chara_stand->SetPos ( m_x, CHARA_2P_POS_Y );
 		}
 
+		//選択キャラ表示
+		switch ( m_chsl_id )
+		{
+		case CHSLID_00: SetCharaStand ( CHSLID_00 ); break;
+		case CHSLID_01: HiddenCharaStand ();break;
+		case CHSLID_02: SetCharaStand ( CHSLID_02 ); break;
+		case CHSLID_03: SetCharaStand ( CHSLID_03 ); break;
+		case CHSLID_04: HiddenCharaStand ();break;
+		case CHSLID_05: HiddenCharaStand ();break;
+		case CHSLID_06: HiddenCharaStand ();break;
+		case CHSLID_07: HiddenCharaStand ();break;
+		case CHSLID_08: HiddenCharaStand ();break;
+		case CHSLID_09: HiddenCharaStand ();break;
+		default: break;
+		}
+
 		SND_PLAY_ONESHOT_SE ( SE_select_move );
 	}
 
@@ -356,9 +454,13 @@ namespace GAME
 		}
 
 		m_decided = T; 
+		m_cursor->Stop ();
 		m_chara_stand->SetValid ( F );
 		m_chara_stand_light->SetValid ( T );
-		m_cursor->Stop ();
+
+		//ステートを変更
+		m_state = STT_STAGE;
+		m_state_Disp->SetPosY ( CH_STT_STAGE_Y );
 
 		SND_PLAY_ONESHOT_SE ( SE_select_decide );
 
@@ -390,6 +492,7 @@ namespace GAME
 	{
 		m_chara_stand->SetValid ( T );
 		m_chara_stand->SetIndexTexture ( id ); 
+		m_chara_stand_light->SetValid ( F );
 		m_chara_stand_light->SetIndexTexture ( id ); 
 		m_chara_name->SetValid ( T );
 		m_chara_name->SetIndexTexture ( id );

@@ -138,7 +138,7 @@ namespace GAME
 		{
 			//メニュポーズ解除
 			bool bEsc = ( WND_UTL::AscKey ( VK_ESCAPE ) );
-			bool bMenuBtn = ( CFG_PUSH_KEY ( P1_BTN5 ) || CFG_PUSH_KEY ( P2_BTN5 ) );
+			bool bMenuBtn = ( CFG_PUSH_KEY ( P1_BTN6 ) || CFG_PUSH_KEY ( P2_BTN6 ) );
 			if ( bEsc || bMenuBtn )
 			{
 				SND_PLAY_ONESHOT_SE(SE_select_Cancel);
@@ -154,7 +154,7 @@ namespace GAME
 
 		//メニュポーズ開始
 		bool bEsc = ( WND_UTL::AscKey ( VK_ESCAPE ) );
-		bool bMenuBtn = ( CFG_PUSH_KEY ( P1_BTN5 ) || CFG_PUSH_KEY ( P2_BTN5 ) );
+		bool bMenuBtn = ( CFG_PUSH_KEY ( P1_BTN6 ) || CFG_PUSH_KEY ( P2_BTN6 ) );
 		if ( bEsc || bMenuBtn )
 		{
 			SND_PLAY_ONESHOT_SE (SE_select_move);

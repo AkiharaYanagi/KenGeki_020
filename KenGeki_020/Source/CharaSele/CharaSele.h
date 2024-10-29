@@ -36,15 +36,13 @@ namespace GAME
 		//プレイヤー毎位置
 		P_ChSele_Pl		m_chsl_pl_1p;
 		P_ChSele_Pl		m_chsl_pl_2p;
+		P_Grp			m_index_1p;
+		P_Grp			m_index_2p;
 
 
 		//現在の選択状態を表示
-		P_Grp			m_index_1p;
-		P_GrpBlink		m_state_1p;
-		P_Grp			m_state_bar_1p;
-		P_Grp			m_index_2p;
-		P_GrpBlink		m_state_2p;
-		P_Grp			m_state_bar_2p;
+//		P_GrpBlink		m_state_1p;
+//		P_GrpBlink		m_state_2p;
 
 		//フェード
 		P_FadeRect		m_fade_toTitle;
@@ -71,7 +69,12 @@ namespace GAME
 		float			m_scrlbgm_x { 0 };
 		P_GrpBlink		m_txt_BGMSelect;
 		P_Grp			m_bgmSelect;
-		
+		P_GrpBlink		m_bgmSelectTri;
+	
+		//BGM
+		s3d::Array < s3d::String >		ma_bgm;		//BGM指定文字列
+		BGM_ID			m_bgm_id { BGM_ID_GABA };
+	
 		//操作説明
 		P_Grp			m_inst;
 
@@ -91,6 +94,16 @@ namespace GAME
 
 	private:
 		void Input ();
+
+		void StagePrev ();
+		void StageNext ();
+		void StageDecide ();
+
+		void BGM_Prev ();
+		void BGM_Next ();
+		void BGM_Decide ();
+		void Set_BGM_ID ( BGM_ID id );
+
 		STAGE_NAME GetStageName ();
 		void AssignStage ( STAGE_NAME name );
 
@@ -103,10 +116,6 @@ namespace GAME
 		static const float CH_INDEX_X_1P;
 		static const float CH_INDEX_X_2P;
 		static const float CH_INDEX_Y;
-
-		static const float CH_STT_X_1P;
-		static const float CH_STT_X_2P;
-		static const float CH_STT_Y;
 
 		static const float CH_BAR_X_1P;
 		static const float CH_BAR_X_2P;

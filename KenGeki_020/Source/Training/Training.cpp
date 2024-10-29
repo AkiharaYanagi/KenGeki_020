@@ -40,6 +40,10 @@ namespace GAME
 		AddpTask ( m_fighting );
 		m_fighting->SetActiveTimer ( F );
 
+		//ポーズメニュ
+		m_pauseMenu = std::make_shared < PauseMenu > ();
+		AddpTask ( m_pauseMenu );
+
 
 #if 0
 		//キー説明
@@ -49,10 +53,6 @@ namespace GAME
 		m_keyIntro->SetZ ( Z_BG - 0.01f );
 		AddpTask ( m_keyIntro );
 		GRPLST_INSERT_MAIN ( m_keyIntro );
-
-		//ポーズメニュ
-		m_pauseMenu = make_shared < Training_Menu > ();
-		AddpTask ( m_pauseMenu );
 
 		//ロード中
 		m_rectLoad = make_shared < PrmRect > ();
@@ -93,21 +93,23 @@ namespace GAME
 		//遷移先指定にthisを保存
 		Scene::SetwpThis ( shared_from_this () );
 
+		//Menu用にthisを保存
+		m_pauseMenu->SetwpParentScene ( shared_from_this () );
+
 		//戦闘共通
 		G_Ftg::inst()->Init ();
 
 #if 0
-		//Menu用にthisを保存
-		m_pauseMenu->SetwpParentScene ( shared_from_this () );
-
 		//CPU / PLAYER
 		m_fighting->Set_1P_vs_2P ();
 #endif // 0
 
 		//BGM
+		P_Param pParam = Scene::GetpParam ();
+		BGM_ID bgm_id = pParam->Get_BGM_ID ();
 		SND_STOP_ALL_BGM ();
-		SND_PLAY_LOOP_BGM ( BGM_GABA );
-		//SND_PLAY_LOOP_BGM ( BGM_SAE );
+		SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ bgm_id ] );
+
 
 		//Fighting
 		m_fighting->SetbTraining ( T );	//トレーニングモード設定(タイマ無効など)
@@ -143,8 +145,8 @@ namespace GAME
 #endif // 0
 
 		//トレーニングリセット
-		bool p1Reset = CFG_PUSH_KEY ( P1_BTN6 );
-		bool p2Reset = CFG_PUSH_KEY ( P2_BTN6 );
+		bool p1Reset = CFG_PUSH_KEY ( P1_BTN7 );
+		bool p2Reset = CFG_PUSH_KEY ( P2_BTN7 );
 		bool sysReset = WND_UTL::AscKey( '0' );
 		if ( p1Reset || p2Reset || sysReset )
 		{

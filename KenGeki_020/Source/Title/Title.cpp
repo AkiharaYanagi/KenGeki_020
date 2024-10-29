@@ -176,7 +176,15 @@ namespace GAME
 		m_tmr_title_call->Move ();
 		if ( m_tmr_title_call->IsLast () )
 		{
-			SND_PLAY_ONESHOT_VC ( VC_00_TITLE_CALL );
+			int rnd = s3d::Random ( 0, 1 );
+			if ( rnd == 0 )
+			{
+				SND_PLAY_ONESHOT_VC ( VC_00_TITLE_CALL );
+			}
+			else
+			{
+				SND_PLAY_ONESHOT_VC ( VC_01_TITLE_CALL );
+			}
 		}
 
 		//背景スクロール
@@ -293,6 +301,13 @@ namespace GAME
 
 			//フェード開始
 			m_fade_out->StartBlackOut ( FADE_OUT_T );
+		}
+
+		if ( CFG_PUSH_KEY ( P1_BTN3 ) )
+		{
+			//BGM
+			SND_STOP_ALL_BGM ();
+			SND_PLAY_LOOP_BGM ( BGM_Title );
 		}
 
 	}

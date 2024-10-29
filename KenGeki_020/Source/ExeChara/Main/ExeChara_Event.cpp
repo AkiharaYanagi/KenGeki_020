@@ -149,7 +149,16 @@ namespace GAME
 
 		//-------------------------------------------------
 		//ノックバック処理		// 値は (float) = (int)1/10
+
 		float recoil_i = 0.1f * m_pScript->m_prmBattle.Recoil_I;
+
+		//打撃時にいずれかの入力で距離離し
+		if ( m_pOther.lock()->m_pCharaInput->IsSomething () )
+		{
+			recoil_i *= 10;
+			recoil_i += 10;
+		}
+
 		m_btlPrm.SetAccRecoil ( recoil_i );
 
 		//-----------------------------------------------------

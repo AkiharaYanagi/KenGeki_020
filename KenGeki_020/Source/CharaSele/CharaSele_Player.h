@@ -27,6 +27,7 @@ namespace GAME
 		enum CHST_PL_State
 		{
 			STT_CHARA,
+			STT_COLOR,
 			STT_STAGE,
 			STT_BGM,
 			STT_OK,
@@ -36,16 +37,17 @@ namespace GAME
 		P_Param			m_pParam;
 		PLAYER_ID		m_player_id { PLAYER_ID_1 };	//プレイヤ識別
 		CHARA_SELE_ID	m_chsl_id { CHSLID_00 };		//キャラ選択ID
-		P_Grp			m_chara_stand;					//キャラ立絵
-		bool			m_decided { F };				//決定
-		P_Grp			m_chara_stand_light;			//キャラ立絵(明度)
-		P_Grp			m_chara_stand_shade;			//キャラ立絵(影)
-		P_Grp			m_chara_name;					//キャラ名前
-		P_GrpBlink		m_cursor;						//カーソル
-		float			m_x { 0 };		//カットイン位置
-		UINT			m_wait { 0 };	//決定ウェイト
+		P_Grp			m_chara_stand;			//キャラ立絵
+		bool			m_decided { F };		//決定
+		P_Grp			m_chara_stand_light;	//キャラ立絵(明度)
+		P_Grp			m_chara_stand_shade;	//キャラ立絵(影)
+		P_Grp			m_chara_name;			//キャラ名前
+		P_GrpBlink		m_cursor;				//カーソル
+		float			m_x { 0 };				//カットイン位置
+		UINT			m_wait { 0 };			//決定ウェイト
 
 		CHST_PL_State	m_state { STT_CHARA };	//状態
+		P_GrpBlink		m_state_Disp;			//状態表示
 
 		//定数
 		static const uint32		CHARA_SELE_NUM = 12;		//個数
@@ -67,11 +69,15 @@ namespace GAME
 		//キャラ名から選択する
 		void AssignName ( CHARA_NAME name );
 
+		//状態の取得
 		bool IsDecided () const { return m_decided; }
+		CHST_PL_State GetState () const { return m_state; }
+
 
 	private:
 		//状態による分岐
 		void Move_Chara ();
+		void Move_Color ();
 		void Move_Stage ();
 		void Move_bgm ();
 		void Move_OK ();
@@ -81,8 +87,12 @@ namespace GAME
 		void SetCursorLeft ( P_GrpBlink pCrs, CHARA_SELE_ID & id );
 		void SetCursorRight ( P_GrpBlink pCrs, CHARA_SELE_ID & id );
 
-		void Input ();	//入力
-		void Input_Decided ();		//決定後の入力
+		void Input_Chara ();	//キャラ選択時の入力
+		void Input_Color ();	//カラー選択時の入力
+		void Input_Stage ();	//ステージ選択時の入力
+		void Input_BGM ();		//BGM選択時の入力
+		void Input_OK ();		//決定後の入力
+
 		void Cancel ();	//キャンセル
 		void Select ();	//カーソル移動で選択時
 		void Decide ();	//決定時
@@ -134,6 +144,13 @@ namespace GAME
 		static const float	CHARA_NAME_2P_Y;
 
 		static const float	POS0_X;
+
+		static const float CH_STT_X_1P;
+		static const float CH_STT_X_2P;
+		static const float CH_STT_CHARA_Y;
+		static const float CH_STT_STAGE_Y;
+		static const float CH_STT_BGM_Y;
+		static const float CH_STT_OK_Y;
 
 #pragma endregion
 	};

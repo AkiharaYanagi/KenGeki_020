@@ -68,6 +68,9 @@ namespace GAME
 
 		//直接キー取得
 		bool IsLvr4 () const { return m_vGameKey[0].GetLvr ( GameKey::LVR_4 ); }
+
+		//何れかのキーが入力されているかどうか
+		bool IsSomething () const;
 	};
 
 	using P_CharaInput = std::shared_ptr < CharaInput >;

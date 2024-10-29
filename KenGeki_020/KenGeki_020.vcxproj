@@ -170,6 +170,7 @@
     <Text Include="App\SE_Name.txt" />
     <Text Include="App\VC_Name.txt" />
     <Text Include="App\[共通デモアクション].txt" />
+    <Text Include="App\◆公開用　修正点・変更点.txt" />
     <Text Include="App\◆開発用　修正点・変更点.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +301,7 @@
     <None Include="App\example\toml\config.toml" />
     <None Include="App\example\toml\test.toml" />
     <None Include="App\example\zip\zip_test.zip" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="App\example\shot.mp3" />

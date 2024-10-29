@@ -326,6 +326,9 @@
     <Text Include="App\VC_Name.txt">
       <Filter>00_Document</Filter>
     </Text>
+    <Text Include="App\◆公開用　修正点・変更点.txt">
+      <Filter>00_Document</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="App\dll\soundtouch\SoundTouch_x64.dll">
@@ -787,6 +790,7 @@
     <None Include=".editorconfig">
       <Filter>99_Resource Files</Filter>
     </None>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="App\example\test.mp3">

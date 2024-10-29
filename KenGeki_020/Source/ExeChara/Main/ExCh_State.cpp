@@ -40,11 +40,11 @@ namespace GAME
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
 		pExe->PostMove_Effect ();		//エフェクト生成と動作
-		pExe->MoveTimer ();		//タイマ稼働
 		//■		pExe->CheckLife ();		//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 		pExe->SE_Play ();			//SEの再生
 
+		pExe->MoveTimer ();		//タイマ稼働
 		pExe->SetFirstSE ( F );		//SE再生フラグ
 	}
 
@@ -136,11 +136,11 @@ namespace GAME
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();
 		pExe->PostMove_Effect ();	//エフェクト動作
-		pExe->MoveTimer ();			//タイマ稼働
 		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 		pExe->SE_Play ();			//SEの再生
 
+		pExe->MoveTimer ();			//タイマ稼働
 		pExe->SetFirstSE ( F );		//SE再生フラグ
 	}
 
@@ -181,7 +181,6 @@ namespace GAME
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();
 		pExe->PostMove_Effect ();	//エフェクト動作
-		//■		pExe->MoveTimer ();			//タイマ稼働
 		//■		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 
@@ -189,6 +188,7 @@ namespace GAME
 		pExe->SE_Play ();			//SEの再生
 		pExe->GetBtlPrm().SetFirstSE ( T );		//SE再生フラグ
 
+		//■		pExe->MoveTimer ();			//タイマ稼働
 	}
 
 	//------------------------------------------------
@@ -210,10 +210,11 @@ namespace GAME
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();
 		pExe->PostMove_Effect ();	//エフェクト動作
-		//■		pExe->MoveTimer ();			//タイマ稼働
 		//■		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 		pExe->SE_Play ();			//SEの再生
+
+		//■		pExe->MoveTimer ();			//タイマ稼働
 	}
 
 	//------------------------------------------------

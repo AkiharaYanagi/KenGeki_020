@@ -330,16 +330,9 @@ namespace GAME
 		float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
 		float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
 
-
-
-
 		//壁より先には移動しない
 		if ( m_posChara.x < wall_L ) { m_posChara.x = wall_L; }
 		if ( m_posChara.x > wall_R ) { m_posChara.x = wall_R; }
-#if 0
-#endif // 0
-
-
 
 
 		//---------------
@@ -419,9 +412,12 @@ namespace GAME
 		}
 #endif // 0
 
-//		//アクセルディジーズ
+
+		//----------------------------------------------------------
+		// ゲージ関連
+		
+		//アクセルディジーズ	//ネガティブポイズン
 		//アクセル値が低いとき、ライフの減少をもたらす
-		//ネガティブポイズン
 		if ( m_accel < 0 )
 		{
 			//ライフ残１０％補正
@@ -430,6 +426,15 @@ namespace GAME
 				m_life += m_accel / 100;
 			}
 		}
+
+		//アクセル値が他ゲージに影響
+		int balance_recovery = 1 * m_accel / 100;
+
+
+		//通常スタミナ値回復
+		m_balance += balance_recovery;
+		if ( m_balance > m_balance_max ) { m_balance = m_balance_max; }
+
 	}
 
 
