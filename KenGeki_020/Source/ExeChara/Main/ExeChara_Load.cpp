@@ -31,6 +31,9 @@ namespace GAME
 		//入力 (プレイヤモードによる分岐)
 		LoadInput ();
 
+		//バトルパラメータ
+		m_btlPrm.ParamInit ( pParam );
+
 
 		//ゲーム設定ファイル
 		GameSettingFile stg = pParam->GetGameSetting ();

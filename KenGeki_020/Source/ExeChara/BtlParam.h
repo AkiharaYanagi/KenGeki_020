@@ -11,6 +11,7 @@
 #include "Game.h"
 #include "Script.h"
 #include "../GameMain/GameConst.h"
+#include "../GameMain/Param.h"
 #include "../FtgMain/FtgConst.h"
 #include "Timer.h"
 #include "TimerSlow.h"
@@ -43,6 +44,7 @@ namespace GAME
 		WP_ExeChara		m_pOther;		//相手エグゼキャラ(循環参照なのでweak_ptr)
 		P_Action		m_pAction;		//現在アクション
 		P_Script		m_pScript;		//現在スクリプト
+		P_Param			m_pParam;		//全体パラメータ
 
 		//------------------------------------------------
 		//パラメータ
@@ -117,6 +119,7 @@ namespace GAME
 		~BtlParam ();
 
 		//--------------------------------------------------------------------
+		void ParamInit ( P_Param p );
 		void SetpChara ( P_Chara p );
 		void SetwpExeChara ( WP_ExeChara pExeChara, WP_ExeChara pOther );
 

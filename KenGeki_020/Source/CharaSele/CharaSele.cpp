@@ -244,11 +244,12 @@ namespace GAME
 
 		m_scrlbgm_x = BGM_SCROLL_X;
 
-
+#if 0
 		ma_bgm.push_back ( BGM_GABA );
 		ma_bgm.push_back ( BGM_OUKA );
 		ma_bgm.push_back ( BGM_SAE );
 		ma_bgm.push_back ( BGM_RETSU );
+#endif // 0
 
 
 		//-----------------------------------------------------------------------
@@ -554,7 +555,7 @@ namespace GAME
 
 		//BGM選択に以降するときに初期値で変更する
 		SND_STOP_ALL_BGM();
-		SND_PLAY_LOOP_BGM ( m_bgm_id );
+		SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ m_bgm_id ] );
 
 	}
 
@@ -611,7 +612,8 @@ namespace GAME
 		m_bgm_id = id;
 		m_bgmSelect->SetIndexTexture ( m_bgm_id );
 		SND_STOP_ALL_BGM();
-		SND_PLAY_LOOP_BGM ( ma_bgm [ id ] );
+//		SND_PLAY_LOOP_BGM ( ma_bgm [ id ] );
+		SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ id ] );
 	}
 
 	void CharaSele::BGM_Decide ()

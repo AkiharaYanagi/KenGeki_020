@@ -125,7 +125,7 @@ namespace GAME
 		{
 			//全キャラデータを事前読込
 			// ここで読込しないとき、バトルメインでキャラの個別読込
-			m_pParam->LoadCharaData_All ();
+//			m_pParam->LoadCharaData_All ();
 		}
 
 

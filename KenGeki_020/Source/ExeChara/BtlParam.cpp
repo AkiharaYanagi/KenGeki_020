@@ -85,6 +85,11 @@ namespace GAME
 	}
 
 
+	void BtlParam::ParamInit ( P_Param p )
+	{
+		m_pParam = p;
+	}
+
 	void BtlParam::SetpChara ( P_Chara p )
 	{
 		m_pChara = p;
@@ -716,9 +721,12 @@ namespace GAME
 		//※ヒットストップ分を待機してからスタート
 		HitPitchWaitStart ( HITSTOP_TIME );
 
+		//同一アクション内ヒット数
 		++ m_hitNum;
 
+		//連続ヒット数
 		++ m_chainHitNum;
+		m_pParam->UpdateIfMax_Chain ( m_playerID, m_chainHitNum );
 	}
 
 	void BtlParam::HitPitchWaitStart ( UINT time )

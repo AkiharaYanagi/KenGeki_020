@@ -1188,5 +1188,8 @@
     <ClCompile Include="Source\Menu\PauseMenu.cpp">
       <Filter>80_Common\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameMain\SoundConst.cpp">
+      <Filter>90_GameMain</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

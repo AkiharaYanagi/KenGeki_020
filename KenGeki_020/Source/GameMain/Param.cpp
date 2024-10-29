@@ -175,6 +175,24 @@ namespace GAME
 		m_n_max_damege_2p = 0;		//
 	}
 
+	void Param::UpdateIfMax_Chain ( PLAYER_ID id, int n )
+	{
+		if ( id == PLAYER_ID_1 )
+		{
+			if ( m_n_max_chain_1p > n )
+			{
+				m_n_max_chain_1p = n;
+			}
+		}
+		else if ( id == PLAYER_ID_2 )
+		{
+			if ( m_n_max_chain_2p > n )
+			{
+				m_n_max_chain_2p = n;
+			}
+		}
+	}
+
 
 }	//namespace GAME
 

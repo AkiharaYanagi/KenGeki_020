@@ -72,7 +72,7 @@ namespace GAME
 		P_GrpBlink		m_bgmSelectTri;
 	
 		//BGM
-		s3d::Array < s3d::String >		ma_bgm;		//BGM指定文字列
+//		s3d::Array < s3d::String >		ma_bgm;		//BGM指定文字列
 		BGM_ID			m_bgm_id { BGM_ID_GABA };
 	
 		//操作説明
