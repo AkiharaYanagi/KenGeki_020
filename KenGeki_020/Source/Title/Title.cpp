@@ -144,7 +144,7 @@ namespace GAME
 
 		m_strDemoSwitch = std::make_shared < GrpStr > ();
 		m_strDemoSwitch->SetSize ( G_Font::SIZE_20 );
-		m_strDemoSwitch->SetPos ( 505, 758 );
+		m_strDemoSwitch->SetPos ( 522, 758 );
 		m_strDemoSwitch->SetZ ( Z_MENU );
 		m_strDemoSwitch->SetStr(U"( デモモード：F9で切換 )");
 		AddpTask ( m_strDemoSwitch );

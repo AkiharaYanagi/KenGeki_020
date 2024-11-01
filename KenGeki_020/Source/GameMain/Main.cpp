@@ -95,8 +95,13 @@ void Init ()
 	s3d::Window::Resize ( wnd_w, wnd_h );	//16:9 で(1280,960)が入るサイズ
 	s3d::Window::SetStyle ( s3d::WindowStyle::Sizable );
 
+	//OS解像度と拡大率のためウィンドウサイズを再取得
+//	int32 w = s3d::Window::Get;
+//	int32 h = s3d::Window::Get;
+
+
 	//位置
-#define CURSOR_POS_START 0
+#define CURSOR_POS_START 1
 #if CURSOR_POS_START
 	s3d::Window::Centering ();	//モニタ中央
 #else

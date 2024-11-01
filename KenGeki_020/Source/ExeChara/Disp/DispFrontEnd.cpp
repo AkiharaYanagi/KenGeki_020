@@ -34,7 +34,7 @@ namespace GAME
 	const float DispFrontEnd::NAME_Y = 913;
 
 	const float DispFrontEnd::DMG_X = 10;
-	const float DispFrontEnd::DMG_Y = 200;
+	const float DispFrontEnd::DMG_Y = 180;
 
 	//各ファイルサイズから幅を指定
 	const float DispFrontEnd::NAME_W[3] = { 167.f, 118.f, 179.f };

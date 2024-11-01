@@ -75,6 +75,18 @@ namespace GAME
 
 	NewCPUInput::NewCPUInput ()
 	{
+
+#if 0
+		std::vector < double > weights = { 0.1, 0.3, 0.2, 0.4 };
+		m_dist = std::discrete_distribution <> ( weights.begin(), weights.end() );
+#endif // 0
+
+		//初期値を現在時刻で１ｐと２ｐで変える
+		std::chrono::steady_clock::time_point now = std::chrono::high_resolution_clock::now ();
+		std::chrono::duration ms = std::chrono::duration_cast < std::chrono::milliseconds > ( now.time_since_epoch () );
+		int32_t t = static_cast < int32_t > ( ms.count() );
+
+		m_gen = std::mt19937 ( (unsigned int)t + m_rnd_dev () );	//メルセンヌ・ツイスタ
 	}
 
 
@@ -85,12 +97,6 @@ namespace GAME
 
 	void NewCPUInput::Load ()
 	{
-
-#if 0
-		std::vector < double > weights = { 0.1, 0.3, 0.2, 0.4 };
-		m_dist = std::discrete_distribution <> ( weights.begin(), weights.end() );
-#endif // 0
-		m_gen = std::mt19937 ( m_rnd_dev () );		//メルセンヌ・ツイスタ
 	}
 
 	void NewCPUInput::Update ( bool dirRight )
