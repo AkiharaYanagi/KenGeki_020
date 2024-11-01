@@ -39,6 +39,19 @@ namespace GAME
 		GameSettingFile stg = pParam->GetGameSetting ();
 
 		//キャラ名
+
+		if ( stg.GetDemo () )
+		{
+			//デモ時はランダム
+			int rnd = s3d::Random ( 1 );
+			switch ( rnd )
+			{
+			case 0: m_name = CHARA_NAME::CHARA_SAE;			break;
+			case 1: m_name = CHARA_NAME::CHARA_RETSUDOU;	break;
+			};
+			stg.Save ();
+		}
+
 //		m_name = stg.GetName ( m_playerID );
 		m_name = pParam->GetCharaName ( m_btlPrm.GetPlayerID () );
 //		m_name = CHARA_SAE;

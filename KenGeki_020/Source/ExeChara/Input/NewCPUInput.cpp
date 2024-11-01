@@ -50,7 +50,7 @@ namespace GAME
 		10,		//LVR_3		下前
 		0,		//LVR_4		後
 		1000,	//LVR_5		N
-		600,	//LVR_6		前
+		90,		//LVR_6		前
 		10,		//LVR_7		上後
 		10,		//LVR_8		上
 		20,		//LVR_9		上前
@@ -59,15 +59,19 @@ namespace GAME
 	//重み定数
 	const std::vector < double > NewCPUInput::weights_key =
 	{
-		1000,		//N	
-		60,		//BTN_0
-		50,		//BTN_1
-		40,		//BTN_2
-		30,		//BTN_3
-		20,		//BTN_4
-		60,		//BTN_5
-		20,		//BTN_4 + BTN_2
-		20,		//BTN_4 + BTN_3
+		1000,		//N						0
+		60,		//BTN_0		(小)				1
+		50,		//BTN_1		(中)				2
+		40,		//BTN_2		(大)				3
+		30,		//BTN_3		(特大)			4
+		20,		//BTN_4		(必殺)			5
+		20,		//BTN_5		(ダッシュ)		6
+
+		50,		//BTN_3 + LVR_6 (剣撃走破)	7
+		50,		//BTN_4 + LVR_4 (竜巻必殺)	8
+		50,		//BTN_4 + LVR_2 (昇竜拳)		9
+		20,		//BTN_4 + BTN_2 (超必殺A)	10
+		20,		//BTN_4 + BTN_3 (超必殺B)	11
 	};
 
 
@@ -183,8 +187,8 @@ namespace GAME
 		default: break;
 		}
 
-#if 0
 		//左右チェック
+#if 0
 		if ( ! dirRight )
 		{
 			//1<->3, 4<->6, 7<->9
@@ -225,6 +229,21 @@ namespace GAME
 
 		//============================================================
 		//ボタン
+#if 0
+		1000,		//N						0
+		60,		//BTN_0		(小)				1
+		50,		//BTN_1		(中)				2
+		40,		//BTN_2		(大)				3
+		30,		//BTN_3		(特大)			4
+		20,		//BTN_4		(必殺)			5
+		20,		//BTN_5		(ダッシュ)		6
+
+		50,		//BTN_3 + LVR_6 (剣撃走破)	7
+		50,		//BTN_4 + LVR_4 (竜巻必殺)	8
+		50,		//BTN_4 + LVR_2 (昇竜拳)		9
+		20,		//BTN_4 + BTN_2 (超必殺A)	10
+		20,		//BTN_4 + BTN_3 (超必殺B)	11
+#endif // 0
 
 
 		m_dist_key = std::discrete_distribution <> ( weights_key.begin(), weights_key.end() );
@@ -241,13 +260,30 @@ namespace GAME
 		case 4: gameKey.SetBtn ( GameKey::BTN_3, T ); break;
 		case 5: gameKey.SetBtn ( GameKey::BTN_4, T ); break;
 		case 6: gameKey.SetBtn ( GameKey::BTN_5, T ); break;
+
 		case 7:
-			gameKey.SetBtn ( GameKey::BTN_2, T );
-			gameKey.SetBtn ( GameKey::BTN_4, T );
-		break;
-		case 8:
 			gameKey.SetBtn ( GameKey::BTN_3, T );
+			gameKey.SetLvr ( GameKey::LVR_6, T );
+		break;
+
+		case 8:
 			gameKey.SetBtn ( GameKey::BTN_4, T );
+			gameKey.SetLvr ( GameKey::LVR_4, T );
+		break;
+
+		case 9:
+			gameKey.SetBtn ( GameKey::BTN_4, T );
+			gameKey.SetLvr ( GameKey::LVR_2, T );
+		break;
+
+		case 10:
+			gameKey.SetBtn ( GameKey::BTN_4, T );
+			gameKey.SetBtn ( GameKey::BTN_2, T );
+		break;
+
+		case 11:
+			gameKey.SetBtn ( GameKey::BTN_4, T );
+			gameKey.SetLvr ( GameKey::BTN_3, T );
 		break;
 
 		default: break;

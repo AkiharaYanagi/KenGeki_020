@@ -22,7 +22,7 @@ namespace GAME
 	//------------------------------------------
 
 	//BGM_ID_TO_NAME
-	const char32_t * BGM_ID_TO_NAME[] =
+	BGM_NAME	 BGM_ID_TO_NAME [] =
 	{
 		BGM_GABA,
 		BGM_OUKA,

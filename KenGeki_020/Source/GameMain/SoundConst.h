@@ -40,7 +40,11 @@ namespace GAME
 		BGM_ID_RETSU,
 	};
 
+
+	//エイリアス
+	using BGM_NAME = const char32_t *;
+
 	//BGM_ID_TO_NAME
-	extern const char32_t * BGM_ID_TO_NAME[];
+	extern BGM_NAME		BGM_ID_TO_NAME[];
 }
 
