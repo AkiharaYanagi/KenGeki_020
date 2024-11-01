@@ -121,7 +121,7 @@ namespace GAME
 		m_strVer = std::make_shared < GrpStr > ();
 		m_strVer->SetPos ( 1185, 905 );
 		m_strVer->SetZ ( Z_MENU );
-		m_strVer->SetStr ( U"Ver 0.091" );
+		m_strVer->SetStr ( U"Ver 0.10" );
 		AddpTask ( m_strVer );
 		GRPLST_INSERT ( m_strVer );
 
