@@ -85,6 +85,7 @@ namespace GAME
 
 		//トレーニングモード
 		void SetbTraining ( bool b ) { m_bTraining = b; }
+		bool GetbTraining () const { return m_bTraining; }
 
 		//トレーニング用リスタート
 		void TrainingRestart ();
@@ -102,8 +103,11 @@ namespace GAME
 		bool FinishCheck_ZeroLife ();	//格闘終了判定
 		bool FinishCheck_TimeUp ();		//時間終了
 
-		//時間終了時、残ライフで勝者決定
+		//時間終了時、残ライフで勝者決定(ラウンド反映)
 		void DecideWinner_FromLife ();
+
+		//勝利デモ移行
+		void WinnerDemo ();
 
 		//ラウンド取得
 		void AddRound_1p () { m_round->AddRound_1p (); }
@@ -114,6 +118,10 @@ namespace GAME
 
 		//終了
 		bool IsEnd () const { return m_demoActor->IsEnd (); }
+		bool IsDrawEnd () const { return m_demoActor->IsDrawEnd (); }
+
+		//引分判定
+		bool IsDraw () const;
 
 #if 0
 		//初期操作 プレイヤ/CPU 設定
@@ -137,6 +145,9 @@ namespace GAME
 
 		//タイマ切替
 		void SetActiveTimer ( bool b ) { m_btlTime->SetActive ( b ); }
+
+		//トレーニングモード設定
+		void SetTraining () { m_btlTime->SetTraining (); }
 
 
 	private:

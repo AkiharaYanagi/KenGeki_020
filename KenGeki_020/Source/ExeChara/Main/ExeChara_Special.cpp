@@ -39,22 +39,30 @@ namespace GAME
 	void ExeChara::SpecialAction ()
 	{
 		//-----------------------------------------------------
+		//立ち状態でリセット
 		if ( IsNameAction ( U"立ち" ) )
 		{
-			//連続ヒット数のリセット
+			//相手の連続ヒット数のリセット
 			m_pOther.lock()->m_btlPrm.SetChainHitNum ( 0 );
-
-#if 0
-			//Test　バランス修正
-			int b = m_btlPrm.GetBalance ();
-			{
-				if ( b < 1000 ) 
-				{
-					m_btlPrm.SetBalance ( BALANCE_START );
-				}
-			}
-#endif // 0
 		}
+
+		//ダメージでないときもリセット
+		if ( ! IsDamaged () )
+		{
+			m_pOther.lock()->m_btlPrm.SetChainHitNum ( 0 );
+		}
+
+		//次が立ちに戻る
+		if ( 0 == m_pAction->GetNextName ().compare ( U"立ち" ) )
+		{
+			//最終スクリプト
+			if ( m_pAction->IsEndScript ( m_frame ) )
+			{
+				//相手の連続ヒット数のリセット
+				m_pOther.lock()->m_btlPrm.SetChainHitNum ( 0 );
+			}
+		}
+
 
 		//-----------------------------------------------------
 		if ( IsNameAction ( U"ダウン" ) )

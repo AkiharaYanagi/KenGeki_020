@@ -102,6 +102,7 @@ namespace GAME
 
 	void FtgDemoActor::Change_Main_To_Down ()
 	{
+		m_Main->Final ();
 		m_Down->Start ();
 		mp_FtgDemo = m_Down;
 	}
@@ -162,9 +163,16 @@ namespace GAME
 		mp_FtgDemo = m_Main;
 	}
 
+
+	//シーン移行フラグ
 	void FtgDemoActor::End_Down_To_Result ()
 	{
 		m_bEnd = T;
+	}
+
+	void FtgDemoActor::Draw_To_CharaSele ()
+	{
+		m_bDraw = T;
 	}
 
 }	//namespace GAME

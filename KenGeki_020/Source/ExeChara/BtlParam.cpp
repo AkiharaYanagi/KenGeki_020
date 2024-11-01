@@ -54,6 +54,7 @@ namespace GAME
 		m_hitEst = rhs.m_hitEst;		//攻撃成立フラグ
 		m_FirstEf = rhs.m_FirstEf;		//初回Efフラグ
 		m_FirstSE = rhs.m_FirstSE;		//初回SEフラグ
+		m_FirstVC = rhs.m_FirstVC;		//初回VCフラグ
 		m_ForcedChange = rhs.m_ForcedChange;	//強制変更
 		m_clang = rhs.m_clang;			//打合発生フラグ
 		m_transit = rhs.m_transit;		//スクリプト遷移したフレーム
@@ -71,6 +72,7 @@ namespace GAME
 
 		m_hitNum = rhs.m_hitNum;				//同一アクション内ヒット数
 		m_chainHitNum = rhs.m_chainHitNum;		//連続ヒット数　(別アクション)
+		m_chainDamage = rhs.m_chainDamage;		//連続ヒットダメージ
 		mn_AirDash = rhs.mn_AirDash;			//空中ダッシュ回数
 
 		m_acc_recoil = rhs.m_acc_recoil;		//反動(ノックバック)加速度
@@ -180,6 +182,7 @@ namespace GAME
 
 		m_hitNum = 0;
 		m_chainHitNum = 0;
+		m_chainDamage = 0;
 
 		//反動(ノックバック)
 		m_acc_recoil = 0;
@@ -211,11 +214,14 @@ namespace GAME
 		m_clang = false;
 		m_hitEst = false;
 		m_FirstEf = false;
+		m_FirstSE = false;
+		m_FirstVC = false;
 		m_ForcedChange = false;
 		m_lurch = 0;
 		AllTmr_Clear ();
 		m_hitNum = 0;
 		m_hitDrop = 0;
+		m_vib = 0;
 	}
 
 	//------------------------------------------------

@@ -171,7 +171,14 @@ namespace GAME
 		UINT idAction = m_pChara->GetActionID ( action_name );
 		if ( NO_ACTION == idAction )
 		{
-			TRACE_F ( _T("▼▼▼ アクション名呼び出しエラー.%s"), action_name.c_str() );
+			TRACE_F ( _T("▼▼▼ アクション名呼び出しエラー:%s\n"), action_name.toWstr().c_str() );
+
+
+
+			//@todo 呼び出しエラーのassertを仮値で続行させる
+
+
+
 			assert ( action_name );
 		}
 		SetAction ( idAction );
@@ -222,9 +229,12 @@ namespace GAME
 //		tstring nameAction = Check_TransitAction_Condition_str ( CONDITION );
 		s3d::String nameAction = Check_TransitAction_Condition_str ( CONDITION );
 
-		//該当無しは何もしない
+		//該当無しは"ダメージ大"にして処理
 		UINT index = m_pOther.lock()->m_pChara->GetActionID ( nameAction );
-		if ( NO_ACTION == index ) { return; }
+		if ( NO_ACTION == index )
+		{
+			nameAction = U"ダメージ大";
+		}
 
 		//=================================================================
 		//遷移先チェック
@@ -254,7 +264,7 @@ namespace GAME
 			}
 		}
 
-		//@todo のけぞり時間を指定してある場合、相手に適用
+		//@info のけぞり時間を指定してある場合、相手に適用
 
 		//スクリプト
 		if ( m_pScript->m_prmBattle.Warp != 0 )
@@ -276,8 +286,9 @@ namespace GAME
 	{
 		if ( ! m_pOther.lock ()->ExistActionName ( m_nameChangeOther ) )
 		{
+			TRACE_F ( _T("ChangeOther(): Error : name = %s\n"), m_nameChangeOther.toWstr().c_str () );
 			//対象なしのときアサート
-			assert ( m_nameChangeOther );
+			//assert ( m_nameChangeOther );
 		}
 
 		//ノーリアクション
@@ -288,8 +299,8 @@ namespace GAME
 		}
 
 		//相手を変更
-		m_pOther.lock ()->SetAction ( m_nameChangeOther );	//遷移
 		m_pOther.lock ()->m_btlPrm.SetForcedChange ( T );	//強制
+		m_pOther.lock ()->SetAction ( m_nameChangeOther );	//遷移
 	}
 
 

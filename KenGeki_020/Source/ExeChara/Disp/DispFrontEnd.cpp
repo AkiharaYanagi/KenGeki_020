@@ -218,8 +218,8 @@ namespace GAME
 		m_strAction->SetSize ( G_Font::SIZE_40 );
 		m_strState->SetSize ( G_Font::SIZE_40 );
 
-		//初期値はOff
-		Off ();
+		//初期値はOff -> MutualUtilityで指定
+		//Off ();
 
 		TASK_VEC::Load ();
 	}
@@ -621,6 +621,12 @@ namespace GAME
 	{
 		m_strAction->SetValid ( F );
 		m_strState->SetValid ( F );
+	}
+
+
+	void DispFrontEnd::EndBattle ()
+	{
+		m_grpHitNum->SetValid ( F );
 	}
 
 

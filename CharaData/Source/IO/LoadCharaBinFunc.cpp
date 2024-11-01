@@ -371,10 +371,12 @@ namespace GAME
 		scp.m_prmStaging.SE_Name		 = m_utl.LoadS3dString ( buf, pos );
 		scp.m_prmStaging.VC_Name		 = m_utl.LoadS3dString ( buf, pos );
 
+#if 0
 		if ( 0 != scp.m_prmStaging.SE_Name.compare ( U"" ) )
 		{
 			TRACE_F ( _T("%s\n"), scp.m_prmStaging.SE_Name.toWstr().c_str() );
 		}
+#endif // 0
 	}
 
 

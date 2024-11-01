@@ -129,17 +129,8 @@ namespace GAME
 		gameKey.SetBtn ( 6, bBtn6 );
 		gameKey.SetBtn ( 7, bBtn7 );
 
-
-		//現状を前回のキーに保存する
-		gameKey.ReservePrevious ( m_vGameKey[0] );
-
-
-		//ゲーム入力を更新しながら現在フレーム分を保存
-		for ( int i = m_vGameKeyNum - 1; i >= 1; -- i )
-		{
-			m_vGameKey[i] = m_vGameKey[i - 1];
-		}
-		m_vGameKey[0] = gameKey;	//最後に先頭に記録
+		//状態を１つ進める
+		IncrementInput ( gameKey );
 	}
 
 
@@ -153,6 +144,21 @@ namespace GAME
 			m_vGameKey [ i ].ClearKey ();
 		}
 	}
+
+	void CharaInput::IncrementInput ( GameKey & gameKey )
+	{
+		//前回のキーを保存する
+		gameKey.ReservePrevious ( m_vGameKey[0] );
+
+
+		//ゲーム入力を更新しながら現在フレーム分を保存
+		for ( int i = m_vGameKeyNum - 1; i >= 1; -- i )
+		{
+			m_vGameKey[i] = m_vGameKey[i - 1];
+		}
+		m_vGameKey[0] = gameKey;	//最後に先頭に記録
+	}
+
 
 
 	//------------------------------------------------------------------------------------

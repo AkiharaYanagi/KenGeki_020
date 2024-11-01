@@ -44,6 +44,10 @@ namespace GAME
 
 	const uint32 Title::TITLE_CALL_WAIT = 2;
 
+	const int32 Title::WAIT_DEMO = 300;
+//	const int32 Title::WAIT_DEMO = 180;
+	const int32 Title::BAR_DEMO_Y = 752;
+
 #pragma endregion
 
 
@@ -111,6 +115,97 @@ namespace GAME
 		m_tmr_title_bgm->Start ();
 		m_tmr_title_call = std::make_shared < Timer > ( TITLE_CALL_WAIT );
 		m_tmr_title_call->Start ();
+
+
+		//Ver.
+		m_strVer = std::make_shared < GrpStr > ();
+		m_strVer->SetPos ( 1185, 905 );
+		m_strVer->SetZ ( Z_MENU );
+		m_strVer->SetStr ( U"Ver 0.091" );
+		AddpTask ( m_strVer );
+		GRPLST_INSERT ( m_strVer );
+
+
+		//デモ
+		m_strDemo = std::make_shared < GrpStr > ();
+		m_strDemo->SetSize ( G_Font::SIZE_40 );
+		m_strDemo->SetPos ( 500, 700 );
+		m_strDemo->SetZ ( Z_MENU );
+		m_strDemo->SetStr ( U"- Demo Mode -" );
+		AddpTask ( m_strDemo );
+		GRPLST_INSERT ( m_strDemo );
+
+		m_barDemo = std::make_shared < PrmRect > ();
+		m_barDemo->SetSize ( 300, 2 );
+		m_barDemo->SetColor ( _CLR ( 0xffff8080 ) );
+		m_barDemo->SetPos ( 640 - 150, BAR_DEMO_Y );
+		AddpTask ( m_barDemo );
+		GRPLST_INSERT ( m_barDemo );
+
+		m_strDemoSwitch = std::make_shared < GrpStr > ();
+		m_strDemoSwitch->SetSize ( G_Font::SIZE_20 );
+		m_strDemoSwitch->SetPos ( 495, 758 );
+		m_strDemoSwitch->SetZ ( Z_MENU );
+		m_strDemoSwitch->SetStr(U"( デモモード：F9で切換 )");
+		AddpTask ( m_strDemoSwitch );
+		GRPLST_INSERT ( m_strDemoSwitch );
+
+		m_tmrDemo.SetTargetTime ( WAIT_DEMO );
+		m_tmrDemo.Start ();
+
+		m_fade_demo = std::make_shared < FadeRect > ();
+		m_fade_demo->SetAfterClear ( F );
+		AddpTask ( m_fade_demo );
+		GRPLST_INSERT ( m_fade_demo );
+
+		//初期値はOff
+		OffDemo ();
+
+
+
+
+#if 0
+
+		//test
+		std::mt19937 m_gen;
+		std::discrete_distribution<> m_dist;
+		std::random_device m_rnd_dev;
+
+		std::vector < double > weights = { 0.1, 0.3, 0.2, 0.4 };
+		m_gen = std::mt19937 ( m_rnd_dev () );		//メルセンヌ・ツイスタ
+		m_dist = std::discrete_distribution <> ( weights.begin(), weights.end() );
+
+		int result = 0;
+
+		int num0 = 0;
+		int num1 = 0;
+		int num2 = 0;
+		int num3 = 0;
+
+
+		for ( int i = 0; i < 10000; ++ i )
+		{
+			result = m_dist ( m_gen );
+
+			switch ( result )
+			{
+			case 0: ++ num0; break;
+			case 1: ++ num1; break;
+			case 2: ++ num2; break;
+			case 3: ++ num3; break;
+			}
+		}
+
+		TRACE_F ( _T("%d, %d, %d, %d\n"), num0, num1, num2, num3  );
+		TRACE_F ( _T("%lf, %lf, %lf, %lf\n"),
+			0.1 * num0 / num0 ,
+			0.1 * num1 / num0 ,
+			0.1 * num2 / num0 ,
+			0.1 * num3 / num0 );
+
+
+#endif // 0
+
 	}
 
 	Title::~Title ()
@@ -136,7 +231,10 @@ namespace GAME
 	{
 		P_Param pPrm = GetpParam();
 		GameSettingFile stg = pPrm->GetGameSetting ();
+
+		//デモ切換
 		m_bDemo = stg.GetDemo();
+		ValidDemo ( m_bDemo );
 	}
 
 	void Title::Move ()
@@ -144,13 +242,35 @@ namespace GAME
 		//デモモード
 		if ( m_bDemo )
 		{
+			//タイトルでカウントして自動で開始
+			m_tmrDemo.Move ();
+
+			uint32 t = m_tmrDemo.GetTime ();
+			int32 w = (int32) ( (WAIT_DEMO - t) * 300.0 / WAIT_DEMO );
+			m_barDemo->SetSize ( w, 2 );
+			m_barDemo->SetPos ( 640 + 150 - w, BAR_DEMO_Y );
+
+			//カウント終了後、シーン移行
+			if ( m_tmrDemo.IsLast () )
+			{
+				SND_PLAY_ONESHOT_SE ( SE_select_decide );
+				m_fade_demo->StartBlackOut ( FADE_OUT_T );
+				m_barDemo->SetValid ( F );
+			}
 		}
 		
-		//F1でデモ切替
-		if ( WND_UTL::AscKey ( VK_F1 ) )
+		//F9でデモ切替
+		if ( WND_UTL::AscKey ( VK_F9 ) )
 		{
 			//反転
 			m_bDemo = ! m_bDemo;
+			ValidDemo ( m_bDemo );
+
+			//開始時
+			if ( m_bDemo )
+			{
+				m_tmrDemo.Start ();
+			}
 
 			//保存
 			P_Param pPrm = GetpParam();
@@ -203,14 +323,30 @@ namespace GAME
 		if ( m_fade_out->IsActive () ) { Scene::Move (); return; }
 
 
-		//入力
-		Input ();
+		//デモモードは切換のみしか入力を受け付けない
+		if ( ! m_bDemo )
+		{
+			//入力
+			Input ();
+		}
 
 		Scene::Move ();
 	}
 
 	P_GameScene Title::Transit ()
 	{
+		//-----------------------------------
+		//デモ フェード待機開始
+		if ( m_fade_demo->IsLast () )
+		{
+			//ゲーム共通パラメータ
+			P_Param pParam = Scene::GetpParam ();
+
+			SND_STOP_ALL_BGM ();
+			Scene::Transit_Fighting ( MUTCH_MODE::MODE_CPU_CPU );
+		}
+
+		//-----------------------------------
 		//フェード待機開始
 		if ( m_fade_out->IsLast () )
 		{
@@ -310,6 +446,37 @@ namespace GAME
 			SND_PLAY_LOOP_BGM ( BGM_Title );
 		}
 
+	}
+
+
+	//----------------------------------------------------
+	//デモ
+	void Title::ValidDemo ( bool b )
+	{
+		if ( b ) { OnDemo (); }
+		else { OffDemo (); }
+	}
+
+	void Title::OnDemo ()
+	{
+		m_strDemo->SetValid ( T );
+		m_barDemo->SetValid ( T );
+		m_strDemoSwitch->SetValid ( T );
+
+		//通常選択肢はOff
+		m_menu->SetValid ( F );
+		m_cursor->SetValid ( F );
+	}
+
+	void Title::OffDemo ()
+	{
+		m_strDemo->SetValid ( F );
+		m_barDemo->SetValid ( F );
+		m_strDemoSwitch->SetValid ( F );
+
+		//通常選択肢はOn
+		m_menu->SetValid ( T );
+		m_cursor->SetValid ( T );
 	}
 
 

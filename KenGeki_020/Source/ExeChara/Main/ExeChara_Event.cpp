@@ -140,24 +140,47 @@ namespace GAME
 		//-----------------------------------------------------
 		//条件分岐 (相手→自分でないとスクリプトが変わってしまう)
 
-		//投げのとき、相手の状態によっては移項しない　（投げ不能状態）
-		TransitAction_Condition_E ( BRC_THR_E, T );	//投げ・相手
-		TransitAction_Condition_I ( BRC_THR_I, F );	//投げ・自分
-
-		TransitAction_Condition_E ( BRC_HIT_E, T );	//ヒット・相手
-		TransitAction_Condition_I ( BRC_HIT_I, F );	//ヒット・自分
-
+		if ( IsThrow () )
+		{
+			//投げのとき、相手の状態によっては移項しない　（投げ不能状態）
+			TransitAction_Condition_E ( BRC_THR_E, T );	//投げ・相手
+			TransitAction_Condition_I ( BRC_THR_I, F );	//投げ・自分
+		}
+		else
+		{
+			TransitAction_Condition_E ( BRC_HIT_E, T );	//ヒット・相手
+			TransitAction_Condition_I ( BRC_HIT_I, F );	//ヒット・自分
+		}
 		//-------------------------------------------------
-		//ノックバック処理		// 値は (float) = (int)1/10
+		//自分ノックバック処理		// 値は (float) = (int)1/10
 
 		float recoil_i = 0.1f * m_pScript->m_prmBattle.Recoil_I;
 
-		//打撃時にいずれかの入力で距離離し
+		float pre_rcl = recoil_i;
+
+
+		//★★★ 打撃時にいずれかの入力で距離離し
 		if ( m_pOther.lock()->m_pCharaInput->IsSomething () )
 		{
 			recoil_i *= 10;
 			recoil_i += 10;
 		}
+
+
+		//ヒット数補正
+		UINT chain = m_btlPrm.GetChainHitNum ();
+//		float d_revise = 1.f + (float)chain * (float)chain * 0.1f;
+		float d_revise = 1.f + (float)chain * 0.1f;
+		recoil_i = d_revise * recoil_i;
+
+		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
+		{
+			DBGOUT_WND_F ( DBGOUT_0, U"pre_rcl = {}"_fmt ( pre_rcl ) );
+			DBGOUT_WND_F ( DBGOUT_1, U"rev = {}"_fmt ( d_revise ) );
+			DBGOUT_WND_F ( DBGOUT_2, U"recoil_i = {}"_fmt ( recoil_i ) );
+		}
+#if 0
+#endif // 0
 
 		m_btlPrm.SetAccRecoil ( recoil_i );
 
@@ -256,6 +279,7 @@ namespace GAME
 		//相手
 		P_Script pScpOther = m_pOther.lock ()->m_pScript;
 
+#if 0
 		//-------------------------------------------------
 		//当て身成立
 		if ( IsNameAction ( U"竜巻必殺" ) )
@@ -274,6 +298,80 @@ namespace GAME
 			}
 			return;
 		}
+#endif // 0
+
+		//空中ガード不可
+		if ( ! IsAir () )
+		{
+			//-------------------------------------------------
+			//ガード
+			OnGuard ();
+		}
+
+		bool bGuard = IsGuard ();
+
+		//-------------------------------------------------
+		//ダメージ処理
+		int damage = pScpOther->m_prmBattle.Power;
+//		m_btlPrm.AddLife ( - damage );
+
+		//int pre_dmg = damage;
+
+		//ヒット数補正
+		UINT chain = m_pOther.lock()->m_btlPrm.GetChainHitNum ();
+		float d_revise = ( 100.f - (float)chain ) * 0.01f;
+
+		//ガード
+		float g = bGuard ? 0.1f : 1.f;
+
+		damage = (int) ( d_revise * damage * g );
+#if 0
+		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_2 )
+		{
+			DBGOUT_WND_F ( DBGOUT_0, U"pre_dmg = {}"_fmt ( pre_dmg ) );
+			DBGOUT_WND_F ( DBGOUT_1, U"rev = {}"_fmt ( d_revise ) );
+			DBGOUT_WND_F ( DBGOUT_2, U"damage = {}"_fmt ( damage ) );
+		}
+#endif // 0
+
+
+		m_btlPrm.OnDamage ( - damage );	//power は＋の値、ダメージ計算はマイナスにして加算
+
+		//-------------------------------------------------
+		//バランス処理
+		int b_e = pScpOther->m_prmBattle.Balance_E;
+		int bl = m_btlPrm.GetBalance ();
+		m_btlPrm.SetBalance ( bl - b_e );
+
+		//-------------------------------------------------
+		//ヒットストップ
+
+		//相手スクリプトによる追加止め時間
+		P_Action pAct = m_pOther.lock()->GetpAction();
+		P_Script pScp = m_pOther.lock()->GetpScript();
+		int warp = pScp->m_prmBattle.Warp;
+
+		UINT stopTime = HITSTOP_TIME;
+		if( warp != 0 )
+		{
+			stopTime += warp;
+		}
+
+		m_btlPrm.GetTmr_HitStop ()->Start ( stopTime );	//ヒットストップの設定
+
+
+		//-------------------------------------------------
+		//その他　効果
+		// スクリプトが進まないヒットストップ中も見るのでフラグでチェックする
+//		m_btlPrm.SetFirstEf ( true );			//初回のみエフェクト発生
+//		m_btlPrm.SetFirstSE ( true );			//初回のみSE発生
+		//->それぞれ発生箇所でフラグ管理
+	}
+
+	void ExeChara::OnGuard ()
+	{
+		//相手
+		P_Script pScpOther = m_pOther.lock ()->m_pScript;
 
 		//-------------------------------------------------
 		//ガード判定
@@ -307,51 +405,18 @@ namespace GAME
 			m_pOther.lock ()->m_nameChangeOther = gaurd_Name;
 
 
+			//-------------------------------------------------
+			//ガード時相手からのノックバック処理
+			float recoil_e = 0.1f * pScpOther->m_prmBattle.Recoil_E;	// 値は (float) = (int)1/10
+			if ( recoil_e != 0 )
+			{
+				m_btlPrm.SetAccRecoil ( recoil_e );
+			}
 			return;
 		}
-#if 0
-#endif // 0
 
-		//-------------------------------------------------
-		//ダメージ処理
-		int damage = pScpOther->m_prmBattle.Power;
-//		m_btlPrm.AddLife ( - damage );
-		m_btlPrm.OnDamage ( - damage );
-
-		//-------------------------------------------------
-		//ノックバック処理
-//		float recoil_i = 0.1f * pScpOther->m_prmBattle.Recoil_I;		// 値は (float) = (int)1/10
-//		m_btlPrm.SetAccRecoil ( recoil_i );
-
-		//-------------------------------------------------
-		//バランス処理
-		int b_e = pScpOther->m_prmBattle.Balance_E;
-		int bl = m_btlPrm.GetBalance ();
-		m_btlPrm.SetBalance ( bl - b_e );
-
-		//-------------------------------------------------
-		//ヒットストップ
-
-		//相手スクリプトによる追加止め時間
-		P_Action pAct = m_pOther.lock()->GetpAction();
-		P_Script pScp = m_pOther.lock()->GetpScript();
-		int warp = pScp->m_prmBattle.Warp;
-
-		UINT stopTime = HITSTOP_TIME;
-		if( warp != 0 )
-		{
-			stopTime += warp;
-		}
-
-		m_btlPrm.GetTmr_HitStop ()->Start ( stopTime );	//ヒットストップの設定
-
-
-		//-------------------------------------------------
-		//その他　効果
-		// スクリプトが進まないヒットストップ中も見るのでフラグでチェックする
-//		m_btlPrm.SetFirstEf ( true );			//初回のみエフェクト発生
-		m_btlPrm.SetFirstSE ( true );			//初回のみSE発生
 	}
+
 
 	//相手ダメージ処理の後
 	void ExeChara::OnDamaged_After ()

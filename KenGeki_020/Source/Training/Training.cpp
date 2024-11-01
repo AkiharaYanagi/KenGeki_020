@@ -38,7 +38,9 @@ namespace GAME
 		//戦闘
 		m_fighting = std::make_shared < Fighting > ();
 		AddpTask ( m_fighting );
-		m_fighting->SetActiveTimer ( F );
+		//m_fighting->SetActiveTimer ( F );
+		m_fighting->SetTraining ();
+
 
 		//ポーズメニュ
 		m_pauseMenu = std::make_shared < PauseMenu > ();
@@ -136,13 +138,13 @@ namespace GAME
 		{
 			m_NowLoading->SetValid ( F );
 		}
+#endif // 0
 
 		//メニュポーズ中
 		if ( m_pauseMenu->MenuCheck () )
 		{
 			return;
 		}
-#endif // 0
 
 		//トレーニングリセット
 		bool p1Reset = CFG_PUSH_KEY ( P1_BTN7 );
@@ -159,6 +161,8 @@ namespace GAME
 
 	P_GameScene Training::Transit ()
 	{
+#if 0
+
 		//BackSpaceで戻る
 		if ( WND_UTL::AscKey ( VK_BACK ) )
 		{
@@ -166,6 +170,7 @@ namespace GAME
 			GetwpThis().lock ()->Transit_Title ();
 		}
 
+#endif // 0
 		return Scene::Transit ();
 	}
 

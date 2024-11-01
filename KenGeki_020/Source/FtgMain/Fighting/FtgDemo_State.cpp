@@ -77,12 +77,26 @@ namespace GAME
 		m_grpGetReady = MakeGrpValue ( U"Demo_GetReady.png" );
 		m_grpGetReady->SetEnd ( COUNT );
 
+
 		m_timer = std::make_shared < Timer > ();
 	}
 
 	void FTG_DM_GetReady::Start ()
 	{
 		GetpMutualChara ()->StartGetReady ();
+
+		//BGM
+//		P_Param pParam = Scene::GetpParam ();
+		P_Param pParam =  m_prmFtgDemo->GetpSceneParam();
+		BGM_ID bgm_id = pParam->Get_BGM_ID ();	//保存IDとゲーム管理IDは異なるので名前で検索
+
+		//すでに再生中でなければ
+		if ( ! SND()->IsPlayBGM( BGM_ID_TO_NAME [ bgm_id ] ) )
+		{
+			SND_STOP_ALL_BGM ();
+			SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ bgm_id ] );
+		}
+
 
 		m_grpGetReady->Start ();
 		m_timer->Start ();
@@ -150,21 +164,41 @@ namespace GAME
 			GetwpFtgDemoActor().lock()->Shift_Main_To_WallBreak ();
 		}
 
+		//終了判定
+		P_FTG pFtg = GetwpFighting().lock();
+
 		// 格闘終了判定
-		if ( GetwpFighting().lock()->FinishCheck_ZeroLife () )
+		if ( pFtg->FinishCheck_ZeroLife () )
 		{
-			GetwpFtgDemoActor ().lock ()->Change_Main_To_Down ();
+			//トレーニングモードは終了しない
+			if ( pFtg->GetbTraining () )
+			{
+				pFtg->TrainingRestart ();	//リスタート
+			}
+			else
+			{
+				//ダウン状態に移行
+				GetwpFtgDemoActor ().lock ()->Change_Main_To_Down ();
+			}
 		}
 
 		// タイムアップ判定
-		if ( GetwpFighting().lock()->FinishCheck_TimeUp () )
+		if ( pFtg->FinishCheck_TimeUp () )
 		{
 			GetwpFtgDemoActor ().lock ()->Change_Main_To_TimeUpWait ();
 		}
 
-
 		//キャラ共通一連動作
 		pMutual->Conduct ();
+	}
+
+	void FTG_DM_Main::Final ()
+	{
+		//枠リセット
+//		GetpMutualChara()->ResetRect ();
+
+		//戦闘終了
+		GetpMutualChara()->EndBattle ();
 	}
 
 	//------------------------------------------------
@@ -388,7 +422,11 @@ namespace GAME
 	void FTG_DM_Winner::Start ()
 	{
 		m_dispTimer->Start ();
+
+		//キャラ
 		GetpMutualChara ()->StartWinner ( );
+//		GetwpFighting().lock()->WinnerDemo ();
+
 
 		//勝者表示
 		P_Param p = m_prmFtgDemo->GetpSceneParam ();

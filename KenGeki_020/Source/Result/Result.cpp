@@ -41,6 +41,11 @@ namespace GAME
 
 	const float Result::INST_X = 0;
 	const float Result::INST_Y = 960 - 27;
+
+	const int32 Result::WAIT_END = 600;
+	const int32 Result::BAR_END_W = 300;
+	const int32 Result::BAR_END_X = 1100;
+	const int32 Result::BAR_END_Y = 910;
 #pragma endregion
 
 
@@ -127,6 +132,19 @@ namespace GAME
 		m_ch_msg.emplace ( CHARA_OUKA,		U"鵯 桜花：\n・・・。");
 		m_ch_msg.emplace ( CHARA_SAE,		U"巴 紗絵：\nそれでおしまい？　\nもっと本気だしてよ♪");
 		m_ch_msg.emplace ( CHARA_RETSUDOU,	U"烈火 烈堂：\n本当に良い刀ってのは鞘に入ってるもんだぜ･･･");
+
+
+
+		//終了タイマ
+		m_tmrEnd.SetTargetTime ( 300 );
+
+		//時間表示バー
+		m_barEnd = std::make_shared < PrmRect > ();
+		m_barEnd->SetSize ( BAR_END_W, 2 );
+		m_barEnd->SetColor ( _CLR ( 0xffffc0c0 ) );
+		m_barEnd->SetPos ( BAR_END_X, BAR_END_Y );
+		AddpTask ( m_barEnd );
+		GRPLST_INSERT ( m_barEnd );
 
 
 		//数値
@@ -216,6 +234,11 @@ namespace GAME
 		//文字カウント
 		m_time_count = 0;
 
+		//終了タイマ
+		m_tmrEnd.Start ();
+
+		m_barEnd->SetValid ( T );
+
 		Scene::Init ();
 	}
 
@@ -229,6 +252,13 @@ namespace GAME
 		m_chara_x += CHARA_VX;
 		if ( m_chara_x > CHARA_PX ) { m_chara_x = CHARA_PX; }
 		m_chara->SetPos ( m_chara_x, CHARA_PY );
+
+
+		//終了
+		uint32 t = m_tmrEnd.GetTime ();
+		int32 w = (int32) ( 1.0 * (WAIT_END - t) * BAR_END_W / WAIT_END );
+		m_barEnd->SetSize ( w, 2 );
+		m_barEnd->SetPos ( BAR_END_X - w, BAR_END_Y );
 
 
 		//フェードのラストでBGM開始
@@ -256,8 +286,8 @@ namespace GAME
 
 		//test
 		// 
-		//キー6でリセット
-		if ( CFG_PUSH_KEY ( P1_BTN6 ) || CFG_PUSH_KEY ( P2_BTN6 ) )
+		//キー7でリセット
+		if ( CFG_PUSH_KEY ( P1_BTN7 ) || CFG_PUSH_KEY ( P2_BTN7 ) )
 		{
 			SND_STOP_ALL_BGM ();
 			Init ();
@@ -268,6 +298,26 @@ namespace GAME
 		const size_t length = static_cast < size_t > ( m_time_count ++ / 5 );
 		//m_win_msg->SetStr ( m_msg.substr ( 0, length ) );
 		m_win_msg->SetStr ( m_ch_msg [ name ].substr ( 0, length ) );
+
+
+		//カウントで終了
+		m_tmrEnd.Move ();
+		if ( m_tmrEnd.IsLast () )
+		{
+			//デモモードのとき、タイトルにもどる
+			if ( GetpParam()->GetGameSetting().GetDemo () )
+			{
+				Scene::Transit_Title ();
+			}
+			else
+			{
+				SND_PLAY_ONESHOT_SE ( SE_select_decide );
+
+				//フェード開始
+				m_fade_out->StartBlackOut ( 16 );
+			}
+		}
+
 
 		Scene::Move ();
 	}

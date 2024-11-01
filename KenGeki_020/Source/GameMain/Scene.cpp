@@ -70,20 +70,18 @@ namespace GAME
 		mp_Transit = std::make_shared < FtgMain > ();
 	}
 
+	void Scene::Transit_Fighting ( MUTCH_MODE mode )
+	{
+		GetpParam ()->SetMutchMode ( mode );
+		Transit_Fighting ();
+	}
+
 	//[シーン遷移] トレーニングに移行
 	void Scene::Transit_Training ()
 	{
 		GRPLST_CLEAR ();
 		mp_Transit = std::make_shared < Training > ();
 	}
-#if 0
-	void Scene::Transit_Fighting ( MUTCH_MODE mode )
-	{
-		Transit_Fighting ();
-		GetpParam ()->SetMutchMode ( mode );
-	}
-#endif // 0
-
 	
 	//[シーン遷移] キャラセレに移行
 	void Scene::Transit_CharaSele ()
@@ -124,15 +122,15 @@ namespace GAME
 		if ( startMode == START_TITLE )
 		{
 			//全キャラデータを事前読込
-			// ここで読込しないとき、バトルメインでキャラの個別読込
-//			m_pParam->LoadCharaData_All ();
+//			// ここで読込しないとき、バトルメインでキャラの個別読込
+			m_pParam->LoadCharaData_All ();
 		}
 
 
 		//デバッグ表示オン/オフ 初期状態
 		//ExeChara 1p/2p のとき、1pの値を2pで上書きに注意
-		DBGOUT_WND_ON (); 
-//		DBGOUT_WND_OFF ();
+//		DBGOUT_WND_ON (); 
+		DBGOUT_WND_OFF ();
 
 
 

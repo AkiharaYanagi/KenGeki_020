@@ -51,18 +51,18 @@ namespace GAME
 //		bool bHit = m_btlPrm.GetHitEst ();
 
 		//デバッグ表示あり
-#if 0
-		if ( m_playerID == PLAYER_ID_1 )
+#if 1
+		if ( m_btlPrm.GetPlayerID() == PLAYER_ID_1 )
 		{
-			DBGOUT_WND_F ( 4, _T ( "bHit = %d" ), bHit ? 1 : 0 );
+			DBGOUT_WND_F ( DBGOUT_4, U"bHit = {}"_fmt( bHit ? 1 : 0) );
 			P_Timer ptHitStop = m_btlPrm.GetTmr_HitStop ();
-			DBGOUT_WND_F ( 5, _T ( "hitStop = %d" ), ptHitStop->GetTime () );
+			DBGOUT_WND_F ( DBGOUT_5, U"hitStop = {}"_fmt( ptHitStop->GetTime () ) );
 			UINT hitpitch = m_pAction->GetHitPitch ();
 			P_Timer ptHitPitch = m_btlPrm.GetTmr_HitPitch ();
-			DBGOUT_WND_F ( 6, _T ( "hitPitch = %d / %d" ), ptHitPitch->GetTime (), hitpitch );
+			DBGOUT_WND_F ( DBGOUT_6, U"hitPitch = {} / {}"_fmt( ptHitPitch->GetTime (), hitpitch ) );
 			UINT hitmax = m_pAction->GetHitNum ();
 			UINT hitnum = m_btlPrm.GetHitNum ();
-			DBGOUT_WND_F ( 7, _T ( "hitnum = %d / %d" ), hitnum, hitmax );
+			DBGOUT_WND_F ( DBGOUT_7, U"hitnum = {} / {}"_fmt( hitnum, hitmax ) );
 		}
 #endif // 0
 

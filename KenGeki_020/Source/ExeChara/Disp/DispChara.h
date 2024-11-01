@@ -58,6 +58,9 @@ namespace GAME
 
 		void UpdateStateName ( s3d::String stateName );
 
+		//終了時
+		void EndBattle ();
+		
 		//------------------------------------------------
 		//@info 表示切替
 		//  ExeChara以下で行うと1P2Pで2回呼ばれるのでMutualCharaなどで呼び出す

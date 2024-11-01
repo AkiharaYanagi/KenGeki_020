@@ -131,6 +131,7 @@ namespace GAME
 		FTG_DM_Main ();
 		void Start ();
 		void Do ();
+		void Final ();
 		s3d::String GetName () const { return s3d::String { U"FTG_DM_Main"}; }
 	};
 	using P_FTG_DM_Main = std::shared_ptr < FTG_DM_Main >;

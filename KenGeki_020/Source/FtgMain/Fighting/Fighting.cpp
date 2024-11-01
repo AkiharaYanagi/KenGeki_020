@@ -164,6 +164,16 @@ namespace GAME
 		m_mutualChara->TrainingInit ();
 
 		m_demoActor->StartGreeting ();
+
+
+		//BGM
+//		P_Param pParam = Scene::GetpParam ();
+//		P_Param pParam =  m_prmFtgDemo->GetpSceneParam();
+		BGM_ID bgm_id = m_pParam->Get_BGM_ID ();
+		SND_STOP_ALL_BGM ();
+		SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ bgm_id ] );
+
+
 	}
 
 	void Fighting::TrainingRestart ()
@@ -234,6 +244,7 @@ namespace GAME
 		bool finish1p = m_exeChara1->IsZeroLife ();
 		bool finish2p = m_exeChara2->IsZeroLife ();
 
+#if 0
 		//トレーニングモードは終了しない
 		if ( m_bTraining )
 		{
@@ -241,6 +252,7 @@ namespace GAME
 			if ( finish2p ) { m_exeChara2->Init (); }
 			return F;
 		}
+#endif // 0
 
 
 		//どちらか、または両方ライフ０なら終了
@@ -275,20 +287,15 @@ namespace GAME
 		//トレーニングモードは時間計測しない
 		if ( m_bTraining ) { return; }
 
-
 		//タイムアップ時、残り体力で勝者を決める
 		int life_1 = m_exeChara1->GetBtlPrm ().GetLife ();
 		int life_2 = m_exeChara2->GetBtlPrm ().GetLife ();
 
-
 		//1P勝利
 		if ( life_1 > life_2 )
 		{
-			m_exeChara1->SetAction ( U"勝利" );
-			m_exeChara2->SetAction ( U"時間切れ敗北" );
-
 			//ラウンド加算
-			m_round->AddRound_1p ();
+//			m_round->AddRound_1p ();
 
 			//シーンパラメータに保存
 			m_pParam->SetWinner ( PLAYER_ID_1 );
@@ -296,11 +303,8 @@ namespace GAME
 		//2P勝利
 		else if ( life_1 < life_2 )
 		{
-			m_exeChara1->SetAction ( U"時間切れ敗北" );
-			m_exeChara2->SetAction ( U"勝利" );
-
 			//ラウンド加算
-			m_round->AddRound_2p ();
+//			m_round->AddRound_2p ();
 
 			//シーンパラメータに保存
 			m_pParam->SetWinner ( PLAYER_ID_2 );
@@ -308,15 +312,54 @@ namespace GAME
 		//引き分け
 		else
 		{
-			m_exeChara1->SetAction ( U"引分" );
-			m_exeChara2->SetAction ( U"引分" );
-
 			//どちらもラウンド取得なし
 
 			//シーンパラメータに保存
 			m_pParam->SetWinner ( _PLAYER_NUM );	//Dra
 		}
 	}
+
+		//勝利デモ移行
+	void Fighting::WinnerDemo ()
+	{
+		//トレーニングモードは時間計測しない
+		if ( m_bTraining ) { return; }
+
+		//タイムアップ時、残り体力で勝者を決める
+		int life_1 = m_exeChara1->GetBtlPrm ().GetLife ();
+		int life_2 = m_exeChara2->GetBtlPrm ().GetLife ();
+
+		//1P勝利
+		if ( life_1 > life_2 )
+		{
+			m_exeChara1->SetAction ( U"勝利" );
+			m_exeChara2->SetAction ( U"時間切れ敗北" );
+		}
+		//2P勝利
+		else if ( life_1 < life_2 )
+		{
+			m_exeChara1->SetAction ( U"時間切れ敗北" );
+			m_exeChara2->SetAction ( U"勝利" );
+		}
+		//引き分け
+		else
+		{
+			m_exeChara1->SetAction ( U"引分" );
+			m_exeChara2->SetAction ( U"引分" );
+		}
+	}
+
+	bool Fighting::IsDraw () const
+	{
+		int life_1 = m_exeChara1->GetBtlPrm ().GetLife ();
+		int life_2 = m_exeChara2->GetBtlPrm ().GetLife ();
+
+		//ダウン時もダウンしないときもライフが同じなら引分状態
+		if ( life_1 == life_2 ) { return T; }
+
+		return F;
+	}
+
 
 	//=============================================================
 	//	内部関数

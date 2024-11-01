@@ -45,7 +45,10 @@ namespace GAME
 		P_PRM_FTG_DEMO		mp_Param;
 
 		//終了フラグ
-		bool				m_bEnd;
+		bool				m_bEnd { F };
+
+		//引分終了フラグ
+		bool				m_bDraw { F };
 
 	public:
 		FtgDemoActor ();
@@ -79,6 +82,9 @@ namespace GAME
 		
 		void End_Down_To_Result ();		//戦闘終了によりリザルトへシーン移行
 		bool IsEnd () const { return m_bEnd; }
+
+		void Draw_To_CharaSele ();	//引分によりキャラセレへ移行
+		bool IsDrawEnd () const { return m_bDraw; }
 
 		s3d::String GetName () const { return mp_FtgDemo->GetName (); }
 

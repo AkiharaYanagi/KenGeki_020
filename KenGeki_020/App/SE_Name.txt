@@ -16,3 +16,4 @@ SE_14_キラーン.wav
 SE_15_打ち合い.wav
 SE_16_抜刀.wav
 SE_17_ドカーン.wav
+SE_18_ガード.wav

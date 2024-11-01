@@ -43,9 +43,11 @@ namespace GAME
 		//■		pExe->CheckLife ();		//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 		pExe->SE_Play ();			//SEの再生
+		pExe->VC_Play ();			//VCの再生
 
 		pExe->MoveTimer ();		//タイマ稼働
 		pExe->SetFirstSE ( F );		//SE再生フラグ
+		pExe->SetFirstVC ( F );		//VC再生フラグ
 	}
 
 	//=====================================================
@@ -139,9 +141,11 @@ namespace GAME
 		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 		pExe->SE_Play ();			//SEの再生
+		pExe->VC_Play ();			//VCの再生
 
 		pExe->MoveTimer ();			//タイマ稼働
 		pExe->SetFirstSE ( F );		//SE再生フラグ
+		pExe->SetFirstVC ( F );		//VC再生フラグ
 	}
 
 
@@ -186,7 +190,9 @@ namespace GAME
 
 		//SEは再生してフラグを続投（通常時にOFF）
 		pExe->SE_Play ();			//SEの再生
+		pExe->VC_Play ();			//VCの再生
 		pExe->GetBtlPrm().SetFirstSE ( T );		//SE再生フラグ
+		pExe->GetBtlPrm().SetFirstVC ( T );		//VC再生フラグ
 
 		//■		pExe->MoveTimer ();			//タイマ稼働
 	}
@@ -213,8 +219,11 @@ namespace GAME
 		//■		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
 		pExe->SE_Play ();			//SEの再生
+		pExe->VC_Play ();			//VCの再生
 
 		//■		pExe->MoveTimer ();			//タイマ稼働
+		pExe->SetFirstSE ( F );		//SE再生フラグ
+		pExe->SetFirstVC ( F );		//VC再生フラグ
 	}
 
 	//------------------------------------------------

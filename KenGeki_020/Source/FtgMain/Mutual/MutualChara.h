@@ -16,8 +16,6 @@
 #include "Decision.h"
 #include "../Fighting/FtgGrp.h"
 #include "MutualChara_Utility.h"
-//#include "BattleTime.h"
-//#include "Round.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -38,20 +36,6 @@ namespace GAME
 		//判定クラス
 		P_Collision		m_collision;
 		P_Decision		m_decision;
-
-#if 0
-		//-------------------------------------------------
-		//ファイティング：1p2p共通スクリプト処理
-		UINT	m_scpStop {0};		//スクリプトからのストップ
-
-		//特殊演出
-		UINT	m_blackOut {0};		//暗転
-		bool	m_whiteOut { F };	//白転
-		UINT	m_slow { 0 };		//スロー
-#endif // 0
-
-		//共通グラフィック
-//		P_FtgGrp	m_pFtgGrp;
 
 		//-------------------------------------------------
 		//勝者
@@ -90,6 +74,8 @@ namespace GAME
 		void ShiftFighting ();		//戦闘通常状態に戻る
 		void ShiftScpStop ();		//一時停止
 
+		void EndBattle ();			//戦闘終了
+		void ResetRect ();			//枠リセット
 		void StartEndWait ();		//終了待機
 		bool IsDown_Calm ();		//敗北ダウン安定状態
 		void StartWinner ();		//勝者表示

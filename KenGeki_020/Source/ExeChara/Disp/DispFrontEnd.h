@@ -71,6 +71,7 @@ namespace GAME
 		//ヒット数
 		P_Grp		m_grpHitNum;		//"0"~"9"
 		P_Grp		m_grpStrHit;		//"Hit"
+		P_GrpStr	m_strDmg;			//ダメージ
 
 		//-----------------------------------------------------
 		//デバッグ用
@@ -126,7 +127,9 @@ namespace GAME
 
 		void On_Debug ();
 		void Off_Debug ();	//デバッグ用
-		
+
+		//終了時
+		void EndBattle ();
 
 	private:
 		P_Grp MakepGrpPlyr ( s3d::String str );

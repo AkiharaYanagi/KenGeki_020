@@ -47,6 +47,10 @@ namespace GAME
 
 		s3d::HashTable < CHARA_NAME, s3d::String >  m_ch_msg;
 
+		//終了タイマ
+		Timer			m_tmrEnd;
+		P_PrmRect		m_barEnd;	//時間表示バー
+
 
 		//数値
 		P_GrpStr		m_n_offset;
@@ -97,6 +101,11 @@ namespace GAME
 
 		static const float INST_X;	//操作説明
 		static const float INST_Y;
+
+		static const int32 WAIT_END;
+		static const int32 BAR_END_W;
+		static const int32 BAR_END_X;
+		static const int32 BAR_END_Y;
 #pragma endregion
 	};
 

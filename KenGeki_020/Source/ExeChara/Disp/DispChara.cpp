@@ -149,6 +149,12 @@ namespace GAME
 		m_frontEnd->UpdateHitNum ( n );
 	}
 
+	//終了時
+	void DispChara::EndBattle ()
+	{
+		m_frontEnd->EndBattle ();
+	}
+
 
 }	//namespace GAME
 

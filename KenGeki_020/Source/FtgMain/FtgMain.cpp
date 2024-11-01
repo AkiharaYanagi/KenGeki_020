@@ -68,6 +68,7 @@ namespace GAME
 
 	void FtgMain::ParamInit ()
 	{
+		m_fighting->ParamInit ( GetpParam () );
 	}
 
 	void FtgMain::Load ()
@@ -81,11 +82,15 @@ namespace GAME
 		//Menu用にthisを保存
 		m_pauseMenu->SetwpParentScene ( shared_from_this () );
 
+#if 0
+
 		//BGM
 		P_Param pParam = Scene::GetpParam ();
 		BGM_ID bgm_id = pParam->Get_BGM_ID ();
 		SND_STOP_ALL_BGM ();
 		SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ bgm_id ] );
+#endif // 0
+
 
 		Scene::Load ();
 	}
@@ -138,6 +143,16 @@ namespace GAME
 
 			//シーン遷移
 			Scene::Transit_Result ();
+		}
+
+		//引分終了
+		if ( m_fighting->IsDrawEnd () )
+		{
+			//BGM終了
+			SND_STOP_ALL_BGM ();
+
+			//シーン遷移
+			Scene::Transit_CharaSele ();
 		}
 
 		return Scene::Transit ();

@@ -17,9 +17,11 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+//	const int BattleTime::START_TIME = 5940 - 1;	//99秒
 	const int BattleTime::START_TIME = 3600;	//60秒
 //	const int BattleTime::START_TIME = 1800;	//30秒
-//	const int BattleTime::START_TIME = 359;		//テスト用５秒
+//	const int BattleTime::START_TIME = 359;		//テスト用5秒
+//	const int BattleTime::START_TIME = 179;		//テスト用3秒
 
 	BattleTime::BattleTime ()
 	{
@@ -60,8 +62,12 @@ namespace GAME
 		m_battle_time_01->SetPos ( VEC2 ( bx + 34,	by ) );
 		m_battle_time_02->SetPos ( VEC2 ( bx,		by ) );
 
+
+		m_startTime = START_TIME;
+
 		//開始状態
-		Start ();
+//		Start ();
+		m_active = F;
 	}
 
 	BattleTime::~BattleTime ()
@@ -70,7 +76,8 @@ namespace GAME
 
 	void BattleTime::Init ()
 	{
-		m_time = START_TIME;
+		m_time = m_startTime;
+		DispTime ();
 
 		TASK_VEC::Init ();
 	}
@@ -78,17 +85,20 @@ namespace GAME
 	void BattleTime::Move ()
 	{
 		//非稼働時は何もしない
-		if ( ! m_active ) { TASK_VEC::Move (); return; }
+		if ( ! m_active )
+		{
+			m_battle_time_01->SetColor ( 0xfffff0f0 );
+			m_battle_time_02->SetColor ( 0xfffff0f0 );
+			TASK_VEC::Move (); return;
+		}
+		else
+		{
+			m_battle_time_01->SetColor ( 0xffffffff );
+			m_battle_time_02->SetColor ( 0xffffffff );
+		}
 
-		//--------------------------
-		// バトルタイム
-		int second = m_time / 60;			//[F] to [Sec]
-		int index_01 = second % 10;			//１桁目
-		int index_02 = second / 10 % 10;	//2桁目
-
-		m_battle_time_01->SetIndexTexture ( index_01 );
-		m_battle_time_02->SetIndexTexture ( index_02 );
-
+		//時間表示
+		DispTime ();
 
 		//範囲
 //		if ( m_time <= 0 ) { m_time = 3660; }
@@ -139,6 +149,27 @@ namespace GAME
 		m_battle_time_01->SetValid ( F );
 		m_battle_time_02->SetValid ( F );
 		m_battle_time->SetValid ( F );
+	}
+
+	//時間表示
+	void BattleTime::DispTime ()
+	{
+		int second = m_time / 60;			//[F] to [Sec]
+		int index_01 = second % 10;			//１桁目
+		int index_02 = second / 10 % 10;	//2桁目
+
+		m_battle_time_01->SetIndexTexture ( index_01 );
+		m_battle_time_02->SetIndexTexture ( index_02 );
+
+	}
+
+
+	//トレーニングモード設定
+	void BattleTime::SetTraining ()
+	{
+		m_startTime = 5940;
+		m_time = 5940;
+		m_active = F;
 	}
 
 

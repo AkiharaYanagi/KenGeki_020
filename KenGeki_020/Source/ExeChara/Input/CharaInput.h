@@ -45,8 +45,13 @@ namespace GAME
 		//入力をクリア
 		void ClearInput ();
 
+		//入力を一つ進める(過去に記録)
+		void IncrementInput ( GameKey & gameKey );
+
+
 		//キー入力配列の参照
 		const V_GAME_KEY & GetvGameKey () const { return m_vGameKey; }
+		V_GAME_KEY & GetvGameKey () { return m_vGameKey; }
 
 		//ルートリストをチェックして各種ブランチのコマンドが達成されていたら
 		//遷移先のアクションIDを返す

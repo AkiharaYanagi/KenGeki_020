@@ -25,6 +25,7 @@
 
 #include "../Input/PlayerInput.h"
 #include "../Input/CPUInput.h"
+#include "../Input/NewCPUInput.h"
 
 #include "../Effect/OperateEffect.h"
 #include "../../FtgMain/Ef/EfSouha.h"
@@ -100,6 +101,7 @@ namespace GAME
 		P_CharaInput	m_pCharaInput;	//入力
 		P_PlayerInput	m_pPlayerInput;	//プレイヤ
 		P_CPUInput		m_pCPUInput;	//CPU
+		P_NewCPUInput	m_pNewCPUInput;	//New_CPU
 
 		//------------------------------------------------
 		//エフェクト監理
@@ -166,6 +168,7 @@ namespace GAME
 		void CheckLife ();			//ライフ判定
 		void UpdateGraphic ();		//グラフィック更新
 		void SE_Play ();			//SE再生
+		void VC_Play ();			//VC再生
 		//===========================================================
 
 
@@ -242,6 +245,11 @@ namespace GAME
 
 		//SEの初回チェック
 		void SetFirstSE ( bool b ) { m_btlPrm.SetFirstSE ( b ); }
+		//SEの再生指定
+		void PlaySE ( const s3d::String & se_name );
+
+		//ボイスの初回チェック
+		void SetFirstVC ( bool b ) { m_btlPrm.SetFirstVC ( b ); }
 		//ボイスの再生指定
 		void PlayVoice ( const s3d::String & vc_name );
 
@@ -283,6 +291,8 @@ namespace GAME
 		void ClearInput () { m_pCharaInput->ClearInput (); }
 		void SetLose () { m_btlPrm.SetLose (); }
 
+		void EndBattle ();	//戦闘終了
+
 #if 0
 		//一時停止
 		void SetWait ( bool b ) { m_btlPrm.SetWait ( b ); }	//入力を停止
@@ -317,6 +327,8 @@ namespace GAME
 //		void OnDamaged ( int damage );
 		void OnDamaged ();
 		void OnDamaged_After ();	//相手ダメージ処理の後
+
+		void OnGuard ();
 
 		//判定後、相手の強制変更
 		void ChangeOhter ();
@@ -449,7 +461,11 @@ namespace GAME
 		bool IsAvoid ()		 const { return m_pAction->GetCategory () == AC_AVOID; }
 		bool IsDotty ()		 const { return m_pAction->GetCategory () == AC_DOTTY; }
 		bool IsDamaged ()	 const { return m_pAction->GetCategory () == AC_DAMAGED; }
+		bool IsGuard ()		 const { return m_pAction->GetCategory () == AC_GUARD; }
 
+		bool IsAir ()		 const { return m_pAction->GetPosture () == AP_JUMP; }
+		bool IsThrow () const;
+		bool Have_TransitAction_Condition ( BRANCH_CONDITION BRC_CND ) const;
 #if 0
 	public:
 		//FightingオブジェクトのWPを設置

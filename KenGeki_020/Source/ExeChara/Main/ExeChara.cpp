@@ -190,6 +190,7 @@ namespace GAME
 		m_dispChara->UpdateStateName ( m_actor.GetStateName() );
 	}
 
+	//-------------------------------------------------------------------
 	//サウンドエフェクトの再生
 	void ExeChara::SE_Play ()
 	{
@@ -198,30 +199,62 @@ namespace GAME
 		
 		//ヒットストップ中(同一スクリプト)は１回のみ
 		P_Timer pTmr = m_btlPrm.GetTmr_HitStop();
-		if ( m_btlPrm.GetTmr_HitStop()->IsStart () )
+		if ( pTmr->IsStart () )
 		{
 			//初回は鳴らす
 		}
-		else if ( m_btlPrm.GetTmr_HitStop()->IsActive () )
+		else if ( pTmr->IsActive () )
 		{
 			//途中は何もしない
 			return;
 		}
 
 		//スクリプトから名前で指定
-		//SE
-		const s3d::String se_name =  m_pScript->m_prmStaging.SE_Name;
-		if ( se_name.compare ( U"" ) != 0 )
-		{
-			SND_PLAY_ONESHOT_SE ( se_name );		//名前から再生
-		}
-
-		//VC
-		PlayVoice ( m_pScript->m_prmStaging.VC_Name );
+		PlaySE ( m_pScript->m_prmStaging.SE_Name );
 
 		//再生フラグをOn (CharaStateでOff)
 		m_btlPrm.SetFirstSE ( T );
 	}
+
+	//SEの再生指定
+	void ExeChara::PlaySE ( const s3d::String & se_name )
+	{
+		//空欄は何もしない
+		if ( se_name.compare ( U"" ) == 0 ) { return; }
+
+		SND_PLAY_ONESHOT_SE ( se_name );		//名前から再生
+	}
+
+
+	//-------------------------------------------------------------------
+	//ボイスの再生
+	void ExeChara::VC_Play ()
+	{
+		//一時停止中は１回のみ
+		if ( m_btlPrm.GetFirstVC () )
+		{
+			return;
+		}
+		
+		//ヒットストップ中(同一スクリプト)は１回のみ
+		P_Timer pTmr = m_btlPrm.GetTmr_HitStop();
+		if ( pTmr->IsStart () )
+		{
+			//初回は鳴らす
+		}
+		else if ( pTmr->IsActive () )
+		{
+			//途中は何もしない
+			return;
+		}
+
+		//VC再生
+		PlayVoice ( m_pScript->m_prmStaging.VC_Name );
+
+		//再生フラグをOn (CharaStateでOff)
+		m_btlPrm.SetFirstVC ( T );
+	}
+
 
 	//ボイスの再生指定
 	void ExeChara::PlayVoice ( const s3d::String & vc_name )
@@ -229,10 +262,12 @@ namespace GAME
 		//空欄は何もしない
 		if ( vc_name.compare ( U"" ) == 0 ) { return; }
 
-		//被ダメ時と小攻撃はランダムに飛ばす
+		//被ダメ時とガード時、小攻撃はランダムに飛ばす
 		bool bDamaged = IsDamaged ();
+		bool bGuard = IsGuard ();
 		bool bLAttack_L = IsAttack_L ();
-		if ( bDamaged || bLAttack_L )
+
+		if ( bDamaged ||  bGuard || bLAttack_L )
 		{
 			//初撃は確定、連続ヒット中はランダム
 			UINT hitnum = m_pOther.lock()->GetBtlPrm().GetChainHitNum ();
@@ -320,6 +355,13 @@ namespace GAME
 		//------------------------------------------------
 		//アクションとスクリプトをバトルパラメータに渡す
 		m_btlPrm.Update ( m_pAction, m_pScript );
+
+		//直接ダメージ処理
+		int drctDmg = m_pScript->m_prmBattle.DirectDamage;
+		if ( drctDmg != 0 )
+		{
+			m_pOther.lock()->m_btlPrm.OnDamage ( - drctDmg );
+		}
 
 		//------------------------------------------------
 		//	全体演出
@@ -412,7 +454,11 @@ namespace GAME
 	//CPU操作切替
 	void ExeChara::ControlCPU ()
 	{
-		m_pCharaInput = m_pCPUInput;
+		//m_pCharaInput = m_pCPUInput;
+
+		m_pCharaInput = m_pNewCPUInput;
+
+		
 		//m_dispChara->SetControl_CPU ();
 	}
 
@@ -423,6 +469,41 @@ namespace GAME
 	}
 
 
+	bool ExeChara::IsThrow () const
+	{
+		//攻撃状態かつブランチ条件にTHRを持つ
+		bool bThrI = Have_TransitAction_Condition ( BRC_THR_I );
+		bool bThrE = Have_TransitAction_Condition ( BRC_THR_E );
+		return bThrI || bThrE;
+	}
+
+	//アクション移行(条件チェック) 存在したらT
+	bool ExeChara::Have_TransitAction_Condition ( BRANCH_CONDITION brc_cnd ) const
+	{
+		//キャラの持つルート,ブランチ,コマンドの参照
+		const VP_Route& vpRoute = m_pChara->GetvpRoute ();
+		const VP_Branch& vpBranch = m_pChara->GetvpBranch ();
+
+		//スクリプトの持つルートリスト
+		for ( UINT indexRut : m_pScript->GetcvRouteID () )
+		{
+			const V_UINT& vBrcID = vpRoute [ indexRut ]->GetcvIDBranch ();
+
+			//対象のブランチリスト
+			for ( UINT id : vBrcID )
+			{
+				//存在したらT
+				if ( brc_cnd == vpBranch [ id ]->GetCondition () ) { return T; }
+			}
+		}
+		return F;
+	}
+
+	void ExeChara::EndBattle ()
+	{
+		ResetRect ();
+		m_dispChara->EndBattle ();
+	}
 
 
 }	//namespace GAME

@@ -259,6 +259,21 @@ namespace GAME
 	}
 
 
+	//枠リセット
+	void MutualChara::EndBattle ()
+	{
+		m_exeChara1->EndBattle ();
+		m_exeChara2->EndBattle ();
+	}
+
+	//枠リセット
+	void MutualChara::ResetRect ()
+	{
+		m_exeChara1->ResetRect ();
+		m_exeChara2->ResetRect ();
+	}
+
+
 	//終了待機
 	void MutualChara::StartEndWait ()
 	{

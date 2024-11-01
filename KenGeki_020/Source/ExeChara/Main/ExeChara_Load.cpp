@@ -38,11 +38,7 @@ namespace GAME
 		//ゲーム設定ファイル
 		GameSettingFile stg = pParam->GetGameSetting ();
 
-
-		//選択キャラ名前・モードを取得
-//		m_playerMode = stg.GetPlayerMode ( m_playerID );
-
-
+		//キャラ名
 //		m_name = stg.GetName ( m_playerID );
 		m_name = pParam->GetCharaName ( m_btlPrm.GetPlayerID () );
 //		m_name = CHARA_SAE;
@@ -242,6 +238,7 @@ namespace GAME
 	void ExeChara::LoadInput ()
 	{
 		//キャラ入力(プレイヤー, CPU, Network)
+		//初期化
 		m_pPlayerInput = std::make_shared < PlayerInput > ();
 		m_pPlayerInput->SetPlayer ( m_btlPrm.GetPlayerID () );
 
@@ -249,17 +246,25 @@ namespace GAME
 		m_pCPUInput->SetPlayer ( m_btlPrm.GetPlayerID () );
 		m_pCPUInput->Load ();
 
-#if 0
+		m_pNewCPUInput = std::make_shared < NewCPUInput > ();
+		m_pNewCPUInput->SetPlayer ( m_btlPrm.GetPlayerID () );
+
+
+		//設定ファイルからモードを取得
+		GameSettingFile stg = m_pParam->GetGameSetting ();
+		m_playerMode = stg.GetPlayerMode ( m_btlPrm.GetPlayerID () );
+
 		//プレイヤモード(入力種類)による初期化
 		switch ( m_playerMode )
 		{
 		case MODE_PLAYER: m_pCharaInput = m_pPlayerInput; break;
-		case MODE_CPU: m_pCharaInput = m_pCPUInput; break;
-		case MODE_NETWORK: m_pCharaInput = m_pPlayerInput; break;	//(仮)
+//		case MODE_CPU: m_pCharaInput = m_pCPUInput; break;
+		case MODE_CPU: m_pCharaInput = m_pNewCPUInput; break;
+//		case MODE_NETWORK: m_pCharaInput = m_pPlayerInput; break;	//(仮)
 		default: break;
 		}
-#endif // 0
-		m_pCharaInput = m_pPlayerInput;
+
+//		m_pCharaInput = m_pPlayerInput;
 	}
 
 }	//namespace GAME

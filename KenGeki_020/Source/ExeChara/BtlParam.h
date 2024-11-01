@@ -75,6 +75,7 @@ namespace GAME
 		bool	m_hitEst { F };			//攻撃成立フラグ
 		bool	m_FirstEf { F };		//初回Efフラグ
 		bool	m_FirstSE { F };		//初回SEフラグ
+		bool	m_FirstVC { F };		//初回VCフラグ
 		bool	m_ForcedChange { F };	//強制変更
 		bool	m_clang { F };			//打合発生フラグ
 		bool	m_transit { F };		//スクリプト遷移したフレーム
@@ -100,6 +101,7 @@ namespace GAME
 		P_Timer	m_tmrHitPitch { 0 };	//ヒット間隔タイマ
 		UINT	m_hitNum { 0 };			//同一アクション内ヒット数
 		UINT	m_chainHitNum { 0 };	//連続ヒット数　(別アクション)
+		int32	m_chainDamage { 0 };	//連続ヒットダメージ
 		UINT	mn_AirDash { 0 };		//空中ダッシュ回数
 
 		float	m_acc_recoil { 0 };		//反動(ノックバック)加速度
@@ -173,6 +175,7 @@ namespace GAME
 		GET_SET ( bool, GetTrangit, SetTrangit, m_transit )		//スクリプト遷移
 		GET_SET ( bool, GetFirstEf, SetFirstEf, m_FirstEf )		//エフェクト発生初回
 		GET_SET ( bool, GetFirstSE, SetFirstSE, m_FirstSE )		//SE発生初回
+		GET_SET ( bool, GetFirstVC, SetFirstVC, m_FirstVC )		//VC発生初回
 		GET_SET ( bool, GetWait, SetWait, m_wait )				//待機(入力を停止)
 		GET_SET ( bool, GetStop, SetStop, m_stop )				//停止(入力、スクリプト処理を停止)
 
@@ -224,6 +227,7 @@ namespace GAME
 		void AddAccel ( int n );
 		void DirZeroAccel ( int n );	//０方向に向かう
 		void AddNActTrs ( int n ) { m_nActTransit += n; }
+		void AddChainDamage ( int32 n ) { m_chainDamage += n; }
 
 		//----
 		//処理まとめ

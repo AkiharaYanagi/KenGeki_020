@@ -49,6 +49,15 @@ namespace GAME
 
 		//デモモード
 		bool		m_bDemo { F };
+		P_GrpStr	m_strDemo;	//デモ表示 "- Demo Mode -"文字列
+		P_GrpStr	m_strDemoSwitch;	//デモ操作切換 "F9で切換" 文字列
+		P_PrmRect	m_barDemo;	//時間表示バー
+		Timer		m_tmrDemo;	//タイマ
+		P_FadeRect	m_fade_demo;		
+
+		//Ver.
+		P_GrpStr	m_strVer;
+
 
 	public:
 		Title ();
@@ -64,6 +73,10 @@ namespace GAME
 
 	private:
 		void Input ();
+
+		void ValidDemo ( bool b );
+		void OnDemo ();
+		void OffDemo ();
 
 #pragma region CONST
 
@@ -90,6 +103,8 @@ namespace GAME
 
 		static const uint32 TITLE_CALL_WAIT;	//タイトルコールウェイト
 
+		static const int32 WAIT_DEMO;	//待機時間
+		static const int32 BAR_DEMO_Y;	//バー表示Y
 #pragma endregion
 
 	};

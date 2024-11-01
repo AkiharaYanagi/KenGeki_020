@@ -40,8 +40,8 @@ namespace GAME
 		FtgMain ( const FtgMain & rhs ) = delete;
 		~FtgMain ();
 
-		void Load ();
 		void ParamInit ();
+		void Load ();
 		void Move ();
 
 		//--------------------------
