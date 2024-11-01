@@ -603,6 +603,7 @@ namespace GAME
 		if ( m_pAction->IsName ( U"後歩き")		) { return T; }
 		if ( m_pAction->IsName ( U"着地")		) {	return T; }
 		if ( m_pAction->IsName ( U"空中やられ")	) {	return T; }
+		if ( m_pAction->IsName ( U"起き上がり")	) {	return T; }
 
 		return F;
 	}

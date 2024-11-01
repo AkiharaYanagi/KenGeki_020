@@ -78,6 +78,7 @@ namespace GAME
 		void OnDemo ();
 		void OffDemo ();
 
+		CHARA_NAME GetCharaName_Rnd ();
 		STAGE_NAME GetStageName_Rnd ();
 		BGM_ID GetBGM_ID_Rnd ();
 

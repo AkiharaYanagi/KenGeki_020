@@ -273,11 +273,11 @@ namespace GAME
 			{
 				m_tmrDemo.Start ();
 
-				//ステージランダム
-				pPrm->SetStageName ( GetStageName_Rnd () );
-
-				//BGMランダム
-				pPrm->Set_BGM_ID ( GetBGM_ID_Rnd () );
+				//ランダムで各種値を決める
+				pPrm->SetCharaName1p ( GetCharaName_Rnd () );	//キャラランダム
+				pPrm->SetCharaName2p ( GetCharaName_Rnd () );	//キャラランダム
+				pPrm->SetStageName ( GetStageName_Rnd () );	//ステージランダム
+				pPrm->Set_BGM_ID ( GetBGM_ID_Rnd () );		//BGMランダム
 			}
 
 			//保存
@@ -484,6 +484,23 @@ namespace GAME
 		//通常選択肢はOn
 		m_menu->SetValid ( T );
 		m_cursor->SetValid ( T );
+	}
+
+
+	//各種ランダム選択
+
+	CHARA_NAME Title::GetCharaName_Rnd ()
+	{
+		CHARA_NAME ret = CHARA_NAME::CHARA_SAE;
+
+		int rnd = s3d::Random ( 1 );
+		switch ( rnd )
+		{
+		case 0: ret = CHARA_NAME::CHARA_SAE;		break;
+		case 1: ret = CHARA_NAME::CHARA_RETSUDOU;	break;
+		};
+
+		return ret;
 	}
 
 	STAGE_NAME Title::GetStageName_Rnd ()

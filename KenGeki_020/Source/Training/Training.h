@@ -24,6 +24,8 @@ namespace GAME
 	{
 		//トレーニング表示
 		P_Grp			m_training;
+		P_Grp			m_training_Intro0;
+		P_Grp			m_training_Intro1;
 
 		//戦闘
 		P_FTG			m_fighting;

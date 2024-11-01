@@ -76,13 +76,13 @@ namespace GAME
 
 		void SetCharaName1p ( CHARA_NAME name )
 		{
-			m_setting.SetCharaName1p ( name );
+			m_setting.SetCharaName1p ( name );	//ファイルにも記録
 			m_chara_name_1p = name;
 		}
 		CHARA_NAME GetCharaName1p () const { return m_chara_name_1p; }
 		void SetCharaName2p ( CHARA_NAME name )
 		{
-			m_setting.SetCharaName2p ( name );
+			m_setting.SetCharaName2p ( name );	//ファイルにも記録
 			m_chara_name_2p = name;
 		}
 		CHARA_NAME GetCharaName2p () const { return m_chara_name_2p; }

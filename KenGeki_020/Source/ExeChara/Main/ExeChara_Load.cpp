@@ -25,6 +25,9 @@ namespace GAME
 		//保存
 		m_pParam = pParam;
 
+		//キャラ選択
+		m_name = pParam->GetCharaName ( m_btlPrm.GetPlayerID () );
+
 		//キャラ表示
 		m_dispChara->ParamInit ( pParam );
 
@@ -34,6 +37,7 @@ namespace GAME
 		//バトルパラメータ
 		m_btlPrm.ParamInit ( pParam );
 
+#if 0
 
 		//ゲーム設定ファイル
 		GameSettingFile stg = pParam->GetGameSetting ();
@@ -68,6 +72,8 @@ namespace GAME
 	//		m_name = CHARA_SAE;
 	//		m_name = CHARA_RETSUDOU;
 		}
+
+#endif // 0
 
 	}
 

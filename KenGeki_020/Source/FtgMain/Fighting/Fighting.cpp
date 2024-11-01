@@ -18,7 +18,7 @@
 namespace GAME
 {
 	const float Fighting::BGM_X = 640 - (303 / 2);
-	const float Fighting::BGM_Y = 930;
+	const float Fighting::BGM_Y = 935;
 
 
 	Fighting::Fighting ()
@@ -89,7 +89,7 @@ namespace GAME
 		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Gaba.png" );
 		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Ouka.png" );
 		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Sae.png" );
-		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Retsu.png" );
+		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Retsudou.png" );
 		m_bgmName->SetPos ( VEC2 ( BGM_X, BGM_Y ) );
 		m_bgmName->SetZ ( Z_EFF );
 		AddpTask ( m_bgmName );
@@ -121,6 +121,7 @@ namespace GAME
 		m_exeChara1->SetpFtgGrp ( m_pFtgGrp );
 		m_exeChara2->SetpFtgGrp ( m_pFtgGrp );
 
+		m_bgmName->SetIndexTexture ( m_pParam->Get_BGM_ID () );
 
 		m_strState->SetSize ( G_Font::SIZE_40 );
 		m_strState->SetPos ( VEC2 ( 640 - 110, 145 ) );

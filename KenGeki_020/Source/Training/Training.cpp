@@ -35,6 +35,20 @@ namespace GAME
 		AddpTask ( m_training );
 		GRPLST_INSERT ( m_training );
 
+		m_training_Intro0 = std::make_shared < GameGraphic > ();
+		m_training_Intro0->AddTexture_FromArchive ( U"Training\\Intro_Training0.png" );
+		m_training_Intro0->SetPos ( 0, 960 - 29 );
+		m_training_Intro0->SetZ ( Z_MENU );
+		AddpTask ( m_training_Intro0 );
+		GRPLST_INSERT ( m_training_Intro0 );
+
+		m_training_Intro1 = std::make_shared < GameGraphic > ();
+		m_training_Intro1->AddTexture_FromArchive ( U"Training\\Intro_Training1.png" );
+		m_training_Intro1->SetPos ( 0, 0 );
+		m_training_Intro1->SetZ ( Z_MENU );
+		AddpTask ( m_training_Intro1 );
+		GRPLST_INSERT ( m_training_Intro1 );
+
 		//戦闘
 		m_fighting = std::make_shared < Fighting > ();
 		AddpTask ( m_fighting );

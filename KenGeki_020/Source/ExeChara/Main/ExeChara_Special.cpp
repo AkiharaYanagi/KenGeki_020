@@ -62,8 +62,8 @@ namespace GAME
 			}
 		}
 
-
 		//-----------------------------------------------------
+		//足払い追撃ヒット
 		if ( IsNameAction ( U"ダウン" ) )
 		{
 			if ( m_pOther.lock()->IsNameAction ( U"足払い追撃ヒット" ) )
