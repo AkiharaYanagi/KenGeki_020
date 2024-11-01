@@ -64,14 +64,15 @@ namespace GAME
 		50,		//BTN_1		(中)				2
 		40,		//BTN_2		(大)				3
 		30,		//BTN_3		(特大)			4
-		20,		//BTN_4		(必殺)			5
+		10,		//BTN_4		(必殺)			5
 		20,		//BTN_5		(ダッシュ)		6
 
 		50,		//BTN_3 + LVR_6 (剣撃走破)	7
-		50,		//BTN_4 + LVR_4 (竜巻必殺)	8
-		50,		//BTN_4 + LVR_2 (昇竜拳)		9
-		20,		//BTN_4 + BTN_2 (超必殺A)	10
-		20,		//BTN_4 + BTN_3 (超必殺B)	11
+		20,		//BTN_4 + LVR_6 (波動必殺)	8
+		20,		//BTN_4 + LVR_4 (竜巻必殺)	9
+		20,		//BTN_4 + LVR_2 (昇竜拳)		10
+		20,		//BTN_4 + BTN_2 (超必殺A)	11
+		20,		//BTN_4 + BTN_3 (超必殺B)	12
 	};
 
 
@@ -235,14 +236,15 @@ namespace GAME
 		50,		//BTN_1		(中)				2
 		40,		//BTN_2		(大)				3
 		30,		//BTN_3		(特大)			4
-		20,		//BTN_4		(必殺)			5
+		10,		//BTN_4		(必殺)			5
 		20,		//BTN_5		(ダッシュ)		6
 
 		50,		//BTN_3 + LVR_6 (剣撃走破)	7
-		50,		//BTN_4 + LVR_4 (竜巻必殺)	8
-		50,		//BTN_4 + LVR_2 (昇竜拳)		9
-		20,		//BTN_4 + BTN_2 (超必殺A)	10
-		20,		//BTN_4 + BTN_3 (超必殺B)	11
+		20,		//BTN_4 + LVR_6 (波動必殺)	8
+		20,		//BTN_4 + LVR_4 (竜巻必殺)	9
+		20,		//BTN_4 + LVR_2 (昇竜拳)		10
+		20,		//BTN_4 + BTN_2 (超必殺A)	11
+		20,		//BTN_4 + BTN_3 (超必殺B)	12
 #endif // 0
 
 
@@ -268,20 +270,25 @@ namespace GAME
 
 		case 8:
 			gameKey.SetBtn ( GameKey::BTN_4, T );
-			gameKey.SetLvr ( GameKey::LVR_4, T );
+			gameKey.SetLvr ( GameKey::LVR_6, T );
 		break;
 
 		case 9:
 			gameKey.SetBtn ( GameKey::BTN_4, T );
-			gameKey.SetLvr ( GameKey::LVR_2, T );
+			gameKey.SetLvr ( GameKey::LVR_4, T );
 		break;
 
 		case 10:
 			gameKey.SetBtn ( GameKey::BTN_4, T );
-			gameKey.SetBtn ( GameKey::BTN_2, T );
+			gameKey.SetLvr ( GameKey::LVR_2, T );
 		break;
 
 		case 11:
+			gameKey.SetBtn ( GameKey::BTN_4, T );
+			gameKey.SetBtn ( GameKey::BTN_2, T );
+		break;
+
+		case 12:
 			gameKey.SetBtn ( GameKey::BTN_4, T );
 			gameKey.SetLvr ( GameKey::BTN_3, T );
 		break;

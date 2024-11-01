@@ -116,10 +116,10 @@ namespace GAME
 		{
 			//パラメータから取得
 			bgm_id = pParam->Get_BGM_ID ();
-
-			//保存IDとゲーム管理IDは異なるので名前で検索
-			bgm_name = BGM_ID_TO_NAME [ bgm_id ];
 		}
+
+		//保存IDとゲーム管理IDは異なるので名前で検索
+		bgm_name = BGM_ID_TO_NAME [ bgm_id ];
 
 
 		//すでに再生中でなければ再生

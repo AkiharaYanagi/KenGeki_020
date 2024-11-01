@@ -51,13 +51,16 @@ namespace GAME
 			};
 			stg.Save ();
 		}
-
-//		m_name = stg.GetName ( m_playerID );
-		m_name = pParam->GetCharaName ( m_btlPrm.GetPlayerID () );
-//		m_name = CHARA_SAE;
-//		m_name = CHARA_RETSUDOU;
+		else
+		{
+	//		m_name = stg.GetName ( m_playerID );
+			m_name = pParam->GetCharaName ( m_btlPrm.GetPlayerID () );
+	//		m_name = CHARA_SAE;
+	//		m_name = CHARA_RETSUDOU;
+		}
 
 	}
+
 
 	//------------------------
 	//読込
