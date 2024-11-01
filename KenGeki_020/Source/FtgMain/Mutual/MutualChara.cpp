@@ -46,6 +46,24 @@ namespace GAME
 	{
 		m_pParam = pParam;
 		m_decision->SetpParam ( pParam );
+
+		if ( PLAYER_MODE::MODE_CPU == m_pParam->GetPlayerMode ( PLAYER_ID_1 ) )
+		{
+			m_utl.SetCPU_1P ( T );
+		}
+		else if ( PLAYER_MODE::MODE_PLAYER == m_pParam->GetPlayerMode ( PLAYER_ID_1 ))
+		{
+			m_utl.SetCPU_1P ( F );
+		}
+
+		if ( PLAYER_MODE::MODE_CPU == m_pParam->GetPlayerMode ( PLAYER_ID_2 ) )
+		{
+			m_utl.SetCPU_2P ( T );
+		}
+		else if ( PLAYER_MODE::MODE_PLAYER == m_pParam->GetPlayerMode ( PLAYER_ID_2 ))
+		{
+			m_utl.SetCPU_2P ( F );
+		}
 	}
 
 	void MutualChara::Load ()

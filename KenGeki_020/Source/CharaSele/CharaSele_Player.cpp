@@ -311,7 +311,10 @@ namespace GAME
 		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_RIGHT ) ) { SetCursorRight ( m_cursor, m_chsl_id ); }
 
 		//ボタン0で決定
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN0 ) ) { Decide (); }
+		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN0 ) )
+		{
+			Decide ();
+		}
 	}
 
 	void CharaSele_Player::Input_Color ()
@@ -473,7 +476,7 @@ namespace GAME
 	{
 		switch ( m_chsl_id )
 		{
-		case CHSLID_00: return T;
+		case CHSLID_00: return F;
 		case CHSLID_01: break;
 		case CHSLID_02: return T;
 		case CHSLID_03: return T;

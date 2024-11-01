@@ -262,6 +262,7 @@ namespace GAME
 		//F9でデモ切替
 		if ( WND_UTL::AscKey ( VK_F9 ) )
 		{
+			//値の取得
 			P_Param pPrm = GetpParam();
 
 			//反転
@@ -271,6 +272,7 @@ namespace GAME
 			//開始時
 			if ( m_bDemo )
 			{
+				//デモモードタイマのスタート
 				m_tmrDemo.Start ();
 
 				//ランダムで各種値を決める
@@ -278,12 +280,21 @@ namespace GAME
 				pPrm->SetCharaName2p ( GetCharaName_Rnd () );	//キャラランダム
 				pPrm->SetStageName ( GetStageName_Rnd () );	//ステージランダム
 				pPrm->Set_BGM_ID ( GetBGM_ID_Rnd () );		//BGMランダム
+
+				//CPU操作
+				pPrm->SetMutchMode ( MUTCH_MODE::MODE_CPU_CPU );
+			}
+			else
+			{
+				//プレイヤ操作
+				pPrm->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_PLAYER );
 			}
 
 			//保存
-			GameSettingFile stg = pPrm->GetGameSetting ();
-			stg.SetDemo ( m_bDemo );
-			stg.Save ();
+			pPrm->SetDemo ( m_bDemo );
+			pPrm->GetGameSetting ().Save ();
+
+			bool b = GetpParam()->GetGameSetting().GetDemo ();
 		}
 
 		//---------------------------------------------------------

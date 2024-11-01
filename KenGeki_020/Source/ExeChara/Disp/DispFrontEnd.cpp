@@ -150,6 +150,7 @@ namespace GAME
 		m_strDmg = std::make_shared < GrpStr > ();
 		m_strDmg->SetSize ( G_Font::SIZE_30 );
 		m_strDmg->SetZ ( Z_SYS - 0.01f );
+		m_strDmg->SetValid ( F );
 		AddpTask ( m_strDmg );
 		GRPLST_INSERT ( m_strDmg );
 
@@ -194,7 +195,7 @@ namespace GAME
 		//超必殺
 		m_ChouHissatsu = std::make_shared < GameGraphic > ();
 		m_ChouHissatsu->AddTexture_FromArchive ( U"Battle\\ChouHissatsu.png" );
-		m_ChouHissatsu->SetZ ( Z_SHADOW );
+		m_ChouHissatsu->SetZ ( Z_SYS );
 		AddpTask ( m_ChouHissatsu );
 		GRPLST_INSERT ( m_ChouHissatsu );
 
@@ -465,15 +466,18 @@ namespace GAME
 
 		m_grpHitNum->SetIndexTexture ( n1 );
 
+		//2hit以上で表示
 		if ( n < 2 )
 		{
 			m_grpHitNum->SetValid ( F );
 			m_grpStrHit->SetValid ( F );
+			m_strDmg->SetValid ( F );
 		}
 		else
 		{
 			m_grpHitNum->SetValid ( T );
 			m_grpStrHit->SetValid ( T );
+			//桁数
 			if ( n < 10 )
 			{
 				pOb->SetValid ( F );
@@ -483,6 +487,7 @@ namespace GAME
 				pOb->SetIndexTexture ( n2 );
 				pOb->SetValid ( T );
 			}
+			m_strDmg->SetValid ( T );
 		}
 	}
 

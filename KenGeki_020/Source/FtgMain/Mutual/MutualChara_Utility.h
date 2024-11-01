@@ -36,6 +36,8 @@ namespace GAME
 		bool pre_bFrontEnd { F };	//前回押しているか
 		bool is_bFrontEnd { F };	//今回押しているか
 
+		bool cpu1 { F };	//CPU状態
+		bool cpu2 { F };	//CPU状態
 
 	public:
 		MutualChara_Utility ();
@@ -56,6 +58,8 @@ namespace GAME
 		void OnDispFrontEnd ();
 		void OffDispFrontEnd ();
 
+		void SetCPU_1P ( bool bCPU );	//T:CPU, F:PLAYER
+		void SetCPU_2P ( bool bCPU );	//T:CPU, F:PLAYER
 		void SwitchCPU ();			//2PをCPU操作切替
 	};
 

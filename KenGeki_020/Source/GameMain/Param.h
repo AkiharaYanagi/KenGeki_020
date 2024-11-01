@@ -96,8 +96,12 @@ namespace GAME
 
 		GET_SET ( STAGE_NAME, GetStageName, SetStageName, m_stage_name	)		//bgm
 
-		BGM_ID Get_BGM_ID () { return m_setting.GetBGM_ID (); }
+		//設定ファイルにも記録
+		BGM_ID Get_BGM_ID () const { return m_setting.GetBGM_ID (); }
 		void Set_BGM_ID ( BGM_ID id ) { m_setting.SetBGM_ID ( id ); }
+
+		bool GetDemo () const { return m_setting.GetDemo (); }
+		void SetDemo ( bool b ) { m_setting.SetDemo ( b ); }
 
 
 		//データ事前読込1
@@ -138,6 +142,7 @@ namespace GAME
 		GET_SET ( int, Get_MAX_CHN_1P, Set_MAX_CHN_1P, m_n_max_chain_1p	)		//連撃数
 		GET_SET ( int, Get_MAX_CHN_2P, Set_MAX_CHN_2P, m_n_max_chain_2p	)		//連撃数
 
+		void UpdateIfMAX_DMG ( PLAYER_ID id, int n );
 		void UpdateIfMax_Chain ( PLAYER_ID id, int n );
 
 	};

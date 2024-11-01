@@ -42,7 +42,7 @@ namespace GAME
 	const float Result::INST_X = 0;
 	const float Result::INST_Y = 960 - 27;
 
-	const int32 Result::WAIT_END = 600;
+	const int32 Result::WAIT_END = 500;
 	const int32 Result::BAR_END_W = 300;
 	const int32 Result::BAR_END_X = 1100;
 	const int32 Result::BAR_END_Y = 910;

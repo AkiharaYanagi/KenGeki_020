@@ -79,7 +79,7 @@ namespace GAME
 		void SetCharaName1p ( CHARA_NAME name ) { m_name1p = name; }
 		void SetCharaName2p ( CHARA_NAME name ) { m_name2p = name; }
 
-		//デモ
+		//デモ (設定ファイルにも記録)
 		GET_SET ( bool, GetDemo, SetDemo, m_demo )
 		 
 		//BGM

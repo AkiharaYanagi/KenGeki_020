@@ -176,6 +176,24 @@ namespace GAME
 	}
 
 	//最大だったら更新する
+	void Param::UpdateIfMAX_DMG ( PLAYER_ID id, int n )
+	{
+		if ( id == PLAYER_ID_1 )
+		{
+			if (m_n_max_damege_1p < n)
+			{
+				m_n_max_damege_1p = n;
+			}
+		}
+		else if ( id == PLAYER_ID_2 )
+		{
+			if ( m_n_max_damege_2p < n )
+			{
+				m_n_max_damege_2p = n;
+			}
+		}
+	}
+
 	void Param::UpdateIfMax_Chain ( PLAYER_ID id, int n )
 	{
 		if ( id == PLAYER_ID_1 )

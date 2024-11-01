@@ -399,11 +399,11 @@ namespace GAME
 		//リザルト用に保存 (相手の値)
 		if ( Is1P () )
 		{
-			m_pParam->Set_MAX_DMG_2P ( chnDmg );
+			m_pParam->UpdateIfMAX_DMG ( PLAYER_ID_2, chnDmg );
 		}
 		else if ( Is2P () )
 		{
-			m_pParam->Set_MAX_DMG_1P ( chnDmg );
+			m_pParam->UpdateIfMAX_DMG ( PLAYER_ID_1, chnDmg );
 		}
 
 		//-------------------------------------------------

@@ -160,10 +160,20 @@ namespace GAME
 
 
 	//------------------------------------------------------
+	void MutualChara_Utility::SetCPU_1P ( bool bCPU )
+	{
+		cpu1 = bCPU;
+	}
+	
+	void MutualChara_Utility::SetCPU_2P ( bool bCPU )
+	{
+		cpu2 = bCPU;
+	}
+	
+	 
 	//CPU操作切替
 	void MutualChara_Utility::SwitchCPU ()
 	{
-		static bool cpu1 = F;
 		if ( WND_UTL::AscKey ( '6' ) )
 		{
 			cpu1 ^= T;
@@ -177,7 +187,6 @@ namespace GAME
 			}
 		}
 
-		static bool cpu2 = F;
 		if ( WND_UTL::AscKey ( '7' ) )
 		{
 			cpu2 ^= T;
