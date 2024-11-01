@@ -93,12 +93,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A6DD14736EA34863B2E8C6D7192E0A49"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_ACEAC665A79E44288AC224C871105141"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -628,26 +622,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A6DD14736EA34863B2E8C6D7192E0A49"
-            {
-            "SourcePath" = "8:..\\KenGeki_020\\App\\◆開発用　修正点・変更点.txt"
-            "TargetName" = "8:◆開発用　修正点・変更点.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ACEAC665A79E44288AC224C871105141"
             {
             "SourcePath" = "8:..\\KenGeki_020\\App\\入力設定.ico"
@@ -980,7 +954,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:剣撃クロスゾーン"
         "ProductCode" = "8:{2AD345BC-E6F9-41BF-8FA7-1CD8FD4D7433}"
-        "PackageCode" = "8:{6D77C9DF-660E-40C8-A1B7-1DCA3304E3C7}"
+        "PackageCode" = "8:{19CCFD9F-ACFF-4EC8-96F2-71260EC42304}"
         "UpgradeCode" = "8:{121A6B38-462B-4ED0-A1D5-5BEBB20D452B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

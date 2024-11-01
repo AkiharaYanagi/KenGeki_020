@@ -73,6 +73,20 @@ namespace GAME
 		}
 
 		//-----------------------------------------------------
+		//ダッシュ時
+		if ( IsNameAction ( U"前ダッシュ" ) )
+		{
+			//ゲージ
+			int balance = m_btlPrm.GetBalance ();
+
+			if ( 40 < balance )
+			{
+				m_btlPrm.AddBalance ( -30 );	//スタミナマイナス
+				m_btlPrm.AddMana ( 30 );	//超必殺プラス
+			}
+		}
+
+		//-----------------------------------------------------
 		//空中ダッシュ, 低空ダッシュ
 		bool AirDash = IsNameAction ( U"空中ダッシュ" );
 		bool LowAirDash = IsNameAction ( U"低空ダッシュ" );

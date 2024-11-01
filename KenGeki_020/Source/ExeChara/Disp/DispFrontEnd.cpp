@@ -306,7 +306,7 @@ namespace GAME
 			m_strDmg->SetPos ( VEC2 ( WINDOW_WIDTH - 180, DMG_Y ) );
 			m_strDmg->SetStr ( U"P2_Dmg" );
 
-			pOb->SetPos ( VEC2 (  1280 - 384 - 0, 200 ) );
+			pOb->SetPos ( VEC2 (  WINDOW_WIDTH - 384 - 200, 200 ) );
 
 			m_name_bg->SetPos ( VEC2 ( WINDOW_WIDTH - NAME_BG_W - NAME_BG_X, NAME_BG_Y ) );
 			m_face->SetPos ( VEC2 ( WINDOW_WIDTH - FACE_W - FACE_X, FACE_Y ) );
@@ -397,16 +397,16 @@ namespace GAME
 	{
 		//ライフ
 //		int white = btlPrm.GetWhiteDamage ();
-		m_gaugeLife->Update ( btlPrm.GetLife () );
+		m_gaugeLife->Update ( (UINT) btlPrm.GetLife () );
 		m_gaugeLife->UpdateWhite ( btlPrm.GetWhiteDamage () );
 
 		//バランス上限値変更
 		float w = btlPrm.GetBalanceMax() / (1.f * (int32)BALANCE_MAX) * 100.f;
 		m_gaugeBalance->ChangeMax ( w );
-		m_gaugeBalance->Update ( btlPrm.GetBalance () );
+		m_gaugeBalance->Update ( (UINT) btlPrm.GetBalance () );
 
 		//マナ
-		m_gaugeMana->Update ( btlPrm.GetMana () );
+		m_gaugeMana->Update ( (UINT) btlPrm.GetMana () );
 
 		//アクセル
 		m_gaugeAccel->Update ( btlPrm.GetAccel () );

@@ -247,7 +247,10 @@ namespace GAME
 		//0以外は表示、０のときは非表示
 		//RECTが０のときに全体表示になってしまうので、透明で代用
 		m_grp_Value->SetColor ( m_value == 0 ? 0x00ffffff : 0xffffffff );
-
+		if ( value == 0 )
+		{
+			ln = 1;
+		}
 
 		//表示
 		//@info テクスチャレクトを変更するとき、テクスチャサイズは変更しない

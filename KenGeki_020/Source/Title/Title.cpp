@@ -294,7 +294,7 @@ namespace GAME
 			pPrm->SetDemo ( m_bDemo );
 			pPrm->GetGameSetting ().Save ();
 
-			bool b = GetpParam()->GetGameSetting().GetDemo ();
+//			bool b = GetpParam()->GetGameSetting().GetDemo ();
 		}
 
 		//---------------------------------------------------------

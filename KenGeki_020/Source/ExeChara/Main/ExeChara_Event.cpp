@@ -227,6 +227,12 @@ namespace GAME
 		UINT chain = m_btlPrm.GetChainHitNum ();
 //		float d_revise = 1.f + (float)chain * (float)chain * 0.1f;
 		float d_revise = 1.f + (float)chain * 0.1f;
+
+		//超必殺のみ補正外
+		if ( IsOverdrive () )
+		{
+			d_revise = 1.f;
+		}
 		recoil_i = d_revise * recoil_i;
 
 #if 0

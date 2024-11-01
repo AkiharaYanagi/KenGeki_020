@@ -621,14 +621,14 @@ namespace GAME
 	void BtlParam::AddBalance ( int n )
 	{
 		m_balance += n;
-		if ( m_balance < 0 ) { m_balance = 0; }
+		if ( m_balance < 0 ) { m_balance = 1; }
 		if ( m_balance_max < m_balance ) { m_balance = m_balance_max; }
 	}
 
 	void BtlParam::AddMana ( int n )
 	{
 		m_mana += n;
-		if ( m_mana < 0 ) { m_mana = 0; }
+		if ( m_mana < 0 ) { m_mana = 1; }
 		if ( MANA_MAX < m_mana ) { m_mana = MANA_MAX; }
 	}
 
