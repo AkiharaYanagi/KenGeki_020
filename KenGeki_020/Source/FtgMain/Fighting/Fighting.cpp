@@ -17,6 +17,9 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+	const float Fighting::BGM_X = 640 - (303 / 2);
+	const float Fighting::BGM_Y = 930;
+
 
 	Fighting::Fighting ()
 	{
@@ -79,6 +82,18 @@ namespace GAME
 		//ラウンド
 		m_round = std::make_shared < Round > ();
 		AddpTask ( m_round );
+
+		//------------------------------------------------
+		//BGM名
+		m_bgmName = std::make_shared < GameGraphic > ();
+		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Gaba.png" );
+		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Ouka.png" );
+		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Sae.png" );
+		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Retsu.png" );
+		m_bgmName->SetPos ( VEC2 ( BGM_X, BGM_Y ) );
+		m_bgmName->SetZ ( Z_EFF );
+		AddpTask ( m_bgmName );
+		GRPLST_INSERT ( m_bgmName );
 
 	}
 

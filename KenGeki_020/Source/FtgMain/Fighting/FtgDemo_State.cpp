@@ -92,39 +92,17 @@ namespace GAME
 
 
 		//BGM開始
-		BGM_NAME bgm_name = BGM_GABA;
-		BGM_ID bgm_id = BGM_ID_GABA;
 
-
-		//デモ時はランダム
-		if ( stg.GetDemo () )
-		{
-			//Saveし直すのでIDで選択
-			int rnd = s3d::Random ( 3 );
-			switch ( rnd )
-			{
-			case 0: bgm_id = BGM_ID_GABA;	break;
-			case 1: bgm_id = BGM_ID_OUKA;	break;
-			case 2: bgm_id = BGM_ID_SAE;	break;
-			case 3: bgm_id = BGM_ID_RETSU;	break;
-			};
-
-			stg.SetBGM_ID ( bgm_id );
-			stg.Save ();
-		}
-		else
-		{
-			//パラメータから取得
-			bgm_id = pParam->Get_BGM_ID ();
-		}
+		//パラメータから取得
+		BGM_ID bgm_id = pParam->Get_BGM_ID ();
 
 		//保存IDとゲーム管理IDは異なるので名前で検索
-		bgm_name = BGM_ID_TO_NAME [ bgm_id ];
-
+		BGM_NAME bgm_name = BGM_ID_TO_NAME [ bgm_id ];
 
 		//すでに再生中でなければ再生
 		if ( ! SND()->IsPlayBGM( bgm_name ) )
 		{
+			//全停止から再生
 			SND_STOP_ALL_BGM ();
 			SND_PLAY_LOOP_BGM ( bgm_name );
 		}

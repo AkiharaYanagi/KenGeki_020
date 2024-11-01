@@ -262,6 +262,8 @@ namespace GAME
 		//F9でデモ切替
 		if ( WND_UTL::AscKey ( VK_F9 ) )
 		{
+			P_Param pPrm = GetpParam();
+
 			//反転
 			m_bDemo = ! m_bDemo;
 			ValidDemo ( m_bDemo );
@@ -270,10 +272,15 @@ namespace GAME
 			if ( m_bDemo )
 			{
 				m_tmrDemo.Start ();
+
+				//ステージランダム
+				pPrm->SetStageName ( GetStageName_Rnd () );
+
+				//BGMランダム
+				pPrm->Set_BGM_ID ( GetBGM_ID_Rnd () );
 			}
 
 			//保存
-			P_Param pPrm = GetpParam();
 			GameSettingFile stg = pPrm->GetGameSetting ();
 			stg.SetDemo ( m_bDemo );
 			stg.Save ();
@@ -477,6 +484,37 @@ namespace GAME
 		//通常選択肢はOn
 		m_menu->SetValid ( T );
 		m_cursor->SetValid ( T );
+	}
+
+	STAGE_NAME Title::GetStageName_Rnd ()
+	{
+		STAGE_NAME ret = STAGE_YUUHINO_HARA;
+
+		int rnd = s3d::Random ( 2 );
+		switch ( rnd )
+		{
+		case 0: ret = STAGE_ASAHINO_HARA; break;
+		case 1: ret = STAGE_YUUHINO_HARA; break;
+		case 2: ret = STAGE_YORUNO_HARA; break;
+		}
+
+		return ret;
+	}
+
+	BGM_ID Title::GetBGM_ID_Rnd ()
+	{
+		BGM_ID ret = BGM_ID_GABA;
+
+		int rnd = s3d::Random ( 3 );
+		switch ( rnd )
+		{
+		case 0: ret = BGM_ID_GABA;	break;
+		case 1: ret = BGM_ID_OUKA;	break;
+		case 2: ret = BGM_ID_SAE;	break;
+		case 3: ret = BGM_ID_RETSU;	break;
+		};
+
+		return ret;
 	}
 
 

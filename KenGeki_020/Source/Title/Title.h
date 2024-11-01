@@ -78,6 +78,9 @@ namespace GAME
 		void OnDemo ();
 		void OffDemo ();
 
+		STAGE_NAME GetStageName_Rnd ();
+		BGM_ID GetBGM_ID_Rnd ();
+
 #pragma region CONST
 
 		static const float BG_X;	//BG

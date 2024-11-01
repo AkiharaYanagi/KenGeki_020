@@ -62,6 +62,11 @@ namespace GAME
 		//ラウンド
 		P_Round			m_round;
 
+		//-------------------------------------------------
+		//BGM名
+		P_Grp			m_bgmName;
+
+		//-------------------------------------------------
 		//トレーニングモード
 		bool			m_bTraining { F };
 
@@ -153,6 +158,9 @@ namespace GAME
 	private:
 		//共通グラフィック処理
 		void Grp ();
+
+		static const float BGM_X;
+		static const float BGM_Y;
 	};
 
 	using P_FTG = std::shared_ptr < Fighting >;

@@ -49,6 +49,16 @@ namespace GAME
 			case 0: m_name = CHARA_NAME::CHARA_SAE;			break;
 			case 1: m_name = CHARA_NAME::CHARA_RETSUDOU;	break;
 			};
+
+			//キャラを記録
+			if ( Is1P () )
+			{
+				pParam->SetCharaName1p ( m_name );
+			}
+			else if ( Is2P () )
+			{
+				pParam->SetCharaName2p ( m_name );
+			}
 			stg.Save ();
 		}
 		else

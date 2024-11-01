@@ -136,7 +136,7 @@ namespace GAME
 
 
 		//終了タイマ
-		m_tmrEnd.SetTargetTime ( 300 );
+		m_tmrEnd.SetTargetTime ( WAIT_END );
 
 		//時間表示バー
 		m_barEnd = std::make_shared < PrmRect > ();
