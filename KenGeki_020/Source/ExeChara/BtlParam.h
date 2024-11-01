@@ -115,6 +115,8 @@ namespace GAME
 		//Result用
 		int		m_nActTransit { 0 };	//アクション移行回数
 
+		bool	m_kouatsu { F };		//剣撃抗圧
+
 	public:
 		BtlParam ();
 		BtlParam ( const BtlParam & rhs );	// ※ コピー可能
@@ -139,6 +141,9 @@ namespace GAME
 		//--------------------------------------------------------------------
 		//アクション終了時
 		void EndAction ();
+
+		//フレーム処理開始時
+		void FrameInit ();
 
 		//位置計算
 		void CalcPos ( P_Script pScp );
@@ -184,6 +189,7 @@ namespace GAME
 		GET_SET ( UINT, GetScpStop, SetScpStop, m_scpStop )	//スクリプトからの停止
 		GET_SET ( UINT, GetHitNum, SetHitNum, m_hitNum )		//同一アクション内ヒット数
 		GET_SET ( UINT, GetChainHitNum, SetChainHitNum, m_chainHitNum )		//同一アクション内ヒット数
+		GET_SET ( int32, GetChainDamage, SetChainDamage, m_chainDamage )	//連続ヒットダメージ
 		GET_SET ( bool, GetWhiteOut, SetWhiteOut, m_whiteOut )		//白転
 		GET_SET ( bool, GetWallBreak, SetWallBreak, m_wall_break )	//壁割り
 
@@ -198,6 +204,8 @@ namespace GAME
 		GET_SET ( float, GetVib, SetVib, m_vib )
 
 		GET_SET ( _CLR, GetColor, SetColor, m_color )
+
+		GET_SET ( int, GetKouAtsu, SetKouAtsu, m_kouatsu )	//剣撃抗圧
 
 		//--------------------------------------------------------------------
 		//タイマ
@@ -250,6 +258,7 @@ namespace GAME
 		bool IsLookOther ();
 
 		void DecisionWhiteDamage ();	//白ダメージ確定
+		void ChainReset ();	//連続ヒット関連リセット
 
 		void SetLose ();	//敗北処理
 

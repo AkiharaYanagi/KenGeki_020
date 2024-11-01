@@ -110,8 +110,10 @@ namespace GAME
 	//----------------------------------------------
 
 
-	//自分・攻撃 -> 相手・くらい
+	//==========================================
+	//◆ 自分・攻撃 -> 相手・くらい
 	//ヒット発生(攻撃成立側)
+	//==========================================
 	void ExeChara::OnHit ()
 	{
 
@@ -152,38 +154,13 @@ namespace GAME
 			TransitAction_Condition_I ( BRC_HIT_I, F );	//ヒット・自分
 		}
 		//-------------------------------------------------
-		//自分ノックバック処理		// 値は (float) = (int)1/10
-
-		float recoil_i = 0.1f * m_pScript->m_prmBattle.Recoil_I;
-
-		float pre_rcl = recoil_i;
 
 
-		//★★★ 打撃時にいずれかの入力で距離離し
-		if ( m_pOther.lock()->m_pCharaInput->IsSomething () )
-		{
-			recoil_i *= 10;
-			recoil_i += 10;
-		}
+		//分岐後 ヒット時処理
 
-
-		//ヒット数補正
-		UINT chain = m_btlPrm.GetChainHitNum ();
-//		float d_revise = 1.f + (float)chain * (float)chain * 0.1f;
-		float d_revise = 1.f + (float)chain * 0.1f;
-		recoil_i = d_revise * recoil_i;
-
-		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
-		{
-			DBGOUT_WND_F ( DBGOUT_0, U"pre_rcl = {}"_fmt ( pre_rcl ) );
-			DBGOUT_WND_F ( DBGOUT_1, U"rev = {}"_fmt ( d_revise ) );
-			DBGOUT_WND_F ( DBGOUT_2, U"recoil_i = {}"_fmt ( recoil_i ) );
-		}
-#if 0
-#endif // 0
-
-		m_btlPrm.SetAccRecoil ( recoil_i );
-
+		//ノックバック
+		OnKnockBack ();
+		
 		//-----------------------------------------------------
 		//ゲージ増減 (超必殺以外)
 		if ( ! IsActCtg ( AC_OVERDRIVE ) )
@@ -201,6 +178,71 @@ namespace GAME
 		//-----------------------------------------------------
 		//パラメータ
 		m_btlPrm.OnHit ();
+	}
+
+
+	//自分ノックバック処理
+	void ExeChara::OnKnockBack ()
+	{
+		// スクリプトで指定した値は (int)1/10;
+		// 実効値 (float) = (float)1/10
+
+		float recoil_i = 0.1f * m_pScript->m_prmBattle.Recoil_I;
+
+//		float pre_rcl = recoil_i;
+
+
+		//★★★ 剣撃抗圧 (打撃時にいずれかの入力で距離離し)
+		P_ExeChara pOther =  m_pOther.lock();
+		if ( pOther->m_pCharaInput->IsSomething () )
+		{
+			//@info スタミナゲージ消費
+			//バランス消費で移項可能かチェック
+
+			//現在値と比較
+			int balance = pOther->m_btlPrm.GetBalance ();
+			const int cost = 1000;
+			if ( balance < cost )
+			{
+				//足りないとき遷移しない
+			}
+			else
+			{
+				//必要量があれば消費して遷移する
+				pOther->m_btlPrm.AddBalance ( -1 * cost );
+
+				//成立時
+				recoil_i *= 10;
+				recoil_i += -10;
+
+				//成立フラグ
+				pOther->m_btlPrm.SetKouAtsu ( T );
+				//フレーム最初にFalse、以降同一フレーム処理で判定に用いる
+				//主にエフェクト発生
+			}
+		}
+			
+
+		//ヒット数補正
+		UINT chain = m_btlPrm.GetChainHitNum ();
+//		float d_revise = 1.f + (float)chain * (float)chain * 0.1f;
+		float d_revise = 1.f + (float)chain * 0.1f;
+		recoil_i = d_revise * recoil_i;
+
+#if 0
+
+		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
+		{
+			DBGOUT_WND_F ( DBGOUT_0, U"pre_rcl = {}"_fmt ( pre_rcl ) );
+			DBGOUT_WND_F ( DBGOUT_1, U"rev = {}"_fmt ( d_revise ) );
+			DBGOUT_WND_F ( DBGOUT_2, U"recoil_i = {}"_fmt ( recoil_i ) );
+		}
+
+#endif // 0
+
+		//パラメータに反映
+		m_btlPrm.SetAccRecoil ( recoil_i );
+
 	}
 
 
@@ -271,13 +313,15 @@ namespace GAME
 		m_btlPrm.GetTmr_HitPitch ()->Start ();
 	}
 
-
-	//相手・攻撃 → 自分・くらい
+	//==========================================
+	//◆ 相手・攻撃 → 自分・くらい
 	//くらい状態・ダメージ処理
+	//==========================================
 	void ExeChara::OnDamaged ()
 	{
 		//相手
-		P_Script pScpOther = m_pOther.lock ()->m_pScript;
+		P_ExeChara pOther = m_pOther.lock ();
+		P_Script pScpOther = pOther->m_pScript;
 
 #if 0
 		//-------------------------------------------------
@@ -317,8 +361,11 @@ namespace GAME
 
 		//int pre_dmg = damage;
 
+
+
+
 		//ヒット数補正
-		UINT chain = m_pOther.lock()->m_btlPrm.GetChainHitNum ();
+		UINT chain = pOther->m_btlPrm.GetChainHitNum ();
 		float d_revise = ( 100.f - (float)chain ) * 0.01f;
 
 		//ガード
@@ -336,6 +383,28 @@ namespace GAME
 
 
 		m_btlPrm.OnDamage ( - damage );	//power は＋の値、ダメージ計算はマイナスにして加算
+
+
+		//◆ 相手・攻撃 → 自分・くらい
+		//@info 連続ヒットダメージ数は常に加算し、相手のニュートラル状態で０に戻す
+		//相手の連続ヒットダメージ数
+		pOther->m_btlPrm.AddChainDamage ( damage );
+		int32 chnDmg = pOther->m_btlPrm.GetChainDamage ();
+		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_2 )	//相手
+		{
+			DBGOUT_WND_F ( DBGOUT_0, U"ダメージ = {}"_fmt( damage ) );
+			DBGOUT_WND_F ( DBGOUT_1, U"連続ヒットダメージ = {}"_fmt( chnDmg ) );
+		}
+
+		//リザルト用に保存 (相手の値)
+		if ( Is1P () )
+		{
+			m_pParam->Set_MAX_DMG_2P ( chnDmg );
+		}
+		else if ( Is2P () )
+		{
+			m_pParam->Set_MAX_DMG_1P ( chnDmg );
+		}
 
 		//-------------------------------------------------
 		//バランス処理

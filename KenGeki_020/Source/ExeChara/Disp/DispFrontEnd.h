@@ -13,6 +13,7 @@
 #include "DispGauge.h"
 #include "DispAccel.h"
 #include "../BtlParam.h"
+#include "../../FtgMain/Ef/EfKouAtsu.h"
 
 //#include "Chara.h"
 //#include "../../FtgMain/G_Ftg.h"
@@ -45,6 +46,9 @@ namespace GAME
 		P_Grp		m_face;				//顔
 		P_Grp		m_ChouHissatsu;		//超必殺
 		CHARA_NAME	m_chara_name { CHARA_OUKA };	//キャラ名保存
+
+		//剣撃抗圧
+		P_EfKouAtsu	m_kouatsu;
 
 		//-----------------------------------------------------
 
@@ -97,7 +101,10 @@ namespace GAME
 		void UpdateMainImage ( VEC2 posChara );
 
 		//ゲージ類更新
-		void UpdateGauge ( BtlParam btlPrm );
+		void UpdateGauge ( const BtlParam & btlPrm );
+
+		//ダメージ更新
+		void UpdateDamage ( const BtlParam & btlPrm );
 
 #if 0
 		//ヒットストップ時間表示の更新
@@ -154,6 +161,9 @@ namespace GAME
 		static const float NAME_RETSUDOU_W;
 
 		static const float NAME_W [ 3 ];
+
+		static const float DMG_X;
+		static const float DMG_Y;
 	};
 
 	using P_DispFrontEnd = std::shared_ptr < DispFrontEnd >;

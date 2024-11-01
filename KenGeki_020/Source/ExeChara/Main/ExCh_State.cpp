@@ -118,7 +118,10 @@ namespace GAME
 		pExe->Input ();				//入力		
 
 		//ヒットストップ時は以降を飛ばす
-		if ( pExe->IsHitStop () ) { return; }
+		if ( pExe->IsHitStop () )
+		{
+			return;
+		}
 
 		pExe->TransitAction ();		//アクション遷移
 		pExe->CalcPos ();			//位置計算

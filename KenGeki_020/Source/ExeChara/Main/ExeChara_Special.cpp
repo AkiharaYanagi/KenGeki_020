@@ -38,18 +38,18 @@ namespace GAME
 	//================================================
 	void ExeChara::SpecialAction ()
 	{
+		//「相手」の、連続ヒット関連リセット
 		//-----------------------------------------------------
 		//立ち状態でリセット
 		if ( IsNameAction ( U"立ち" ) )
 		{
-			//相手の連続ヒット数のリセット
-			m_pOther.lock()->m_btlPrm.SetChainHitNum ( 0 );
+			m_pOther.lock()->m_btlPrm.ChainReset ();
 		}
 
 		//ダメージでないときもリセット
 		if ( ! IsDamaged () )
 		{
-			m_pOther.lock()->m_btlPrm.SetChainHitNum ( 0 );
+			m_pOther.lock()->m_btlPrm.ChainReset ();
 		}
 
 		//次が立ちに戻る
@@ -58,8 +58,7 @@ namespace GAME
 			//最終スクリプト
 			if ( m_pAction->IsEndScript ( m_frame ) )
 			{
-				//相手の連続ヒット数のリセット
-				m_pOther.lock()->m_btlPrm.SetChainHitNum ( 0 );
+				m_pOther.lock()->m_btlPrm.ChainReset ();
 			}
 		}
 

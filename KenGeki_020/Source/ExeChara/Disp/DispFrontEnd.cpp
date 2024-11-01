@@ -33,6 +33,9 @@ namespace GAME
 	const float DispFrontEnd::NAME_X = 175;
 	const float DispFrontEnd::NAME_Y = 913;
 
+	const float DispFrontEnd::DMG_X = 10;
+	const float DispFrontEnd::DMG_Y = 200;
+
 	//各ファイルサイズから幅を指定
 	const float DispFrontEnd::NAME_W[3] = { 167.f, 118.f, 179.f };
 
@@ -69,7 +72,7 @@ namespace GAME
 		m_gaugeMana = std::make_shared < DispGauge > ();
 		m_gaugeMana->SetPosition ( MANA_GAUGE_X, MANA_GAUGE_Y, MANA_GAUGE_W, MANA_GAUGE_H );
 		m_gaugeMana->SetPadding ( MANA_GAUGE_P );
-		m_gaugeMana->SetZ ( Z_SHADOW );
+		m_gaugeMana->SetZ ( Z_SYS );
 		m_gaugeMana->SetTextureName_Frame ( U"Battle\\gauge_mana_frame.png" );
 		m_gaugeMana->SetTextureName_Value ( U"Battle\\gauge_mana_value.png" );
 		m_gaugeMana->SetPadding ( MANA_GAUGE_P );
@@ -142,12 +145,20 @@ namespace GAME
 		AddpTask ( m_grpStrHit );
 		GRPLST_INSERT ( m_grpStrHit );
 
+		//-----------------------------------------
+		//ダメージ
+		m_strDmg = std::make_shared < GrpStr > ();
+		m_strDmg->SetSize ( G_Font::SIZE_30 );
+		m_strDmg->SetZ ( Z_SYS - 0.01f );
+		AddpTask ( m_strDmg );
+		GRPLST_INSERT ( m_strDmg );
+
 
 		//------------------------------------------------------
 		//アクション名
 		m_strAction = std::make_shared < GrpStr > ();
 		m_strAction->SetStr ( U"Action" );
-		m_strAction->SetZ ( Z_MENU );
+		m_strAction->SetZ ( Z_SYS );
 		m_strAction->SetSize ( G_Font::SIZE_40 );
 		m_strAction->SetColorF ( s3d::ColorF { 0.8f, 0.8f, 1.f, 1.f } );
 		AddpTask ( m_strAction );
@@ -156,7 +167,7 @@ namespace GAME
 		//ステート名
 		m_strState = std::make_shared < GrpStr > ();
 		m_strState->SetStr ( U"State" );
-		m_strState->SetZ ( Z_MENU );
+		m_strState->SetZ ( Z_SYS );
 		m_strState->SetSize ( G_Font::SIZE_40 );
 		m_strState->SetColorF ( s3d::ColorF { 0.0f, 0.0f, 0.5f, 1.f } );
 		AddpTask ( m_strState );
@@ -165,7 +176,7 @@ namespace GAME
 		//名前背景
 		m_name_bg = std::make_shared < GameGraphic > ();
 		m_name_bg->AddTexture_FromArchive ( U"Battle\\Name_BG.png" );
-		m_name_bg->SetZ ( Z_SHADOW );
+		m_name_bg->SetZ ( Z_SYS );
 		m_name_bg->SetScalingCenter ( VEC2 ( NAME_BG_W / 2, 18 ) );
 		GRPLST_INSERT ( m_name_bg );
 		AddpTask ( m_name_bg );
@@ -176,7 +187,7 @@ namespace GAME
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Sae.png" );
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Retsudou.png" );
 		m_face->SetIndexTexture ( 0 );
-		m_face->SetZ ( Z_SHADOW );
+		m_face->SetZ ( Z_SYS );
 		AddpTask ( m_face );
 		GRPLST_INSERT ( m_face );
 
@@ -192,9 +203,15 @@ namespace GAME
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_HIYODORI_OUKA.png" );
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_TOMOE_SAE.png" );
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_REKKA_RETSUDOU.png" );
-		m_name->SetZ ( Z_SHADOW - 0.01f );
+		m_name->SetZ ( Z_SYS - 0.01f );
 		AddpTask ( m_name );
 		GRPLST_INSERT ( m_name );
+
+		//-----------------------------------------
+		//剣撃抗圧
+		m_kouatsu = std::make_shared < EfKouAtsu > ();
+		AddpTask ( m_kouatsu );
+		GRPLST_INSERT ( m_kouatsu );
 	}
 
 	//オブジェクト生成用
@@ -270,6 +287,8 @@ namespace GAME
 		{
 			m_grpHitNum->SetPos ( VEC2 ( 100, 200 ) );
 			m_grpStrHit->SetPos ( VEC2 ( 100 + 128, 200 ) );
+			m_strDmg->SetPos ( VEC2 ( DMG_X, DMG_Y ) );
+			m_strDmg->SetStr ( U"P1_Dmg" );
 			
 			pOb->SetPos ( VEC2 ( 0, 200 ) );
 
@@ -283,6 +302,8 @@ namespace GAME
 		{
 			m_grpHitNum->SetPos ( VEC2 ( WINDOW_WIDTH - 384 -100, 200 ) );
 			m_grpStrHit->SetPos ( VEC2 ( WINDOW_WIDTH - 256 -100, 200 ) );
+			m_strDmg->SetPos ( VEC2 ( WINDOW_WIDTH - 180, DMG_Y ) );
+			m_strDmg->SetStr ( U"P2_Dmg" );
 
 			pOb->SetPos ( VEC2 (  1280 - 384 - 0, 200 ) );
 
@@ -371,7 +392,7 @@ namespace GAME
 	//更新
 
 	//ゲージ
-	void DispFrontEnd::UpdateGauge ( BtlParam btlPrm )
+	void DispFrontEnd::UpdateGauge ( const BtlParam & btlPrm )
 	{
 		//ライフ
 //		int white = btlPrm.GetWhiteDamage ();
@@ -388,6 +409,20 @@ namespace GAME
 
 		//アクセル
 		m_gaugeAccel->Update ( btlPrm.GetAccel () );
+
+
+		//抗圧
+		if ( btlPrm.GetKouAtsu () )
+		{
+			m_kouatsu->On ( btlPrm );
+		}
+	}
+
+	//ダメージ更新
+	void DispFrontEnd::UpdateDamage ( const BtlParam & btlPrm )
+	{
+		int32 chnDmg = btlPrm.GetChainDamage ();
+		m_strDmg->SetStr ( U"{} Damage"_fmt( chnDmg ) );
 	}
 
 	void DispFrontEnd::UpdateMainImage ( VEC2 posChara )

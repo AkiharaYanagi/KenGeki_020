@@ -1,6 +1,6 @@
 ﻿//=================================================================================================
 //
-//	EfSouha ヘッダファイル
+//	EfKouAtsu ヘッダファイル
 //
 //=================================================================================================
 #pragma once
@@ -11,6 +11,7 @@
 #include "Game.h"
 #include "../../GameMain/GameConst.h"
 #include "../../FtgMain/FtgConst.h"
+#include "../../ExeChara/BtlParam.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -18,10 +19,10 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	//剣撃走破 エフェクト
-	class EfSouha : public GrpEf
+	//剣撃抗圧 エフェクト
+	class EfKouAtsu : public GrpEf
 	{
-//		P_GrpEf		m_souha;
+#if 0
 
 		VEC2		m_scalingStart { 0.1f, 0.1f };
 		VEC2		m_scaling { 1.f, 1.f };
@@ -29,20 +30,22 @@ namespace GAME
 		VEC2		m_v { 0.f, 0.f };
 		VEC2		m_a { 0.f, 0.f };
 
-		Timer		m_timer;
+#endif // 0
+
+		Timer		m_pchTimer;	//ピッチタイマ
 
 	public:
-		EfSouha ();
-		EfSouha ( const EfSouha & rhs ) = delete;
-		~EfSouha ();
+		EfKouAtsu ();
+		EfKouAtsu ( const EfKouAtsu & rhs ) = delete;
+		~EfKouAtsu ();
 
 		void Init ();
 		void Move ();
 
-		void On ( VEC2 center );
+		void On ( const BtlParam & btlPrm );
 	};
 
-	using P_EfSouha = std::shared_ptr < EfSouha >;
+	using P_EfKouAtsu = std::shared_ptr < EfKouAtsu >;
 
 
 }	//namespace GAME

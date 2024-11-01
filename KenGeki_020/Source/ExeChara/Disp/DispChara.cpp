@@ -89,10 +89,10 @@ namespace GAME
 	//---------------------------------------------------------------------
 
 	//全体更新
-	void DispChara::Update ( P_Action pAct, P_Script pScp, const BtlParam & btlprm, P_CharaInput pChIpt )
+	void DispChara::Update ( P_Action pAct, P_Script pScp, const BtlParam & btlPrm, P_CharaInput pChIpt )
 	{
 		//メインイメージの更新
-		UpdateMainImage ( pScp, btlprm );
+		UpdateMainImage ( pScp, btlPrm );
 
 		//枠
 		m_dispRect->Update ();
@@ -101,10 +101,13 @@ namespace GAME
 		UpdateInput ( pChIpt );
 
 		//ゲージ類更新
-		UpdateGauge ( btlprm );
+		UpdateGauge ( btlPrm );
 
 		//ヒット数更新
-		UpdateChainHitNum ( btlprm.GetChainHitNum () );
+		UpdateChainHitNum ( btlPrm.GetChainHitNum () );
+
+		//ダメージ更新
+		m_frontEnd->UpdateDamage ( btlPrm );
 
 		//アクション名更新
 		m_frontEnd->UpdateActionName ( pAct->GetName ().c_str () );

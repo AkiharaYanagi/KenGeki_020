@@ -80,6 +80,7 @@ namespace GAME
 		m_pos_x_recoil = rhs.m_pos_x_recoil;	//反動(ノックバック)位置
 
 		m_nActTransit = rhs.m_nActTransit;		//アクション移行回数
+		m_kouatsu = rhs.m_kouatsu;			//剣撃抗圧
 	}
 
 	BtlParam::~BtlParam ()
@@ -188,6 +189,11 @@ namespace GAME
 		m_acc_recoil = 0;
 		m_vel_recoil = 0;
 		m_pos_x_recoil = 0;
+
+		//@info Result用などシーン通して使うものはInitで初期化しない
+		//m_nActTransit
+
+		m_kouatsu = F;
 	}
 
 	void BtlParam::TimerMove ()
@@ -223,6 +229,24 @@ namespace GAME
 		m_hitDrop = 0;
 		m_vib = 0;
 	}
+
+
+	//フレーム処理開始時
+	void BtlParam::FrameInit ()
+	{
+		m_kouatsu = F;
+	}
+
+	//連続ヒット関連リセット
+	void BtlParam::ChainReset ()
+	{
+		//連続ヒット数のリセット
+		m_chainHitNum = 0;
+
+		//連続ヒットダメージのリセット
+		m_chainDamage = 0;
+	}
+
 
 	//------------------------------------------------
 	//位置計算
@@ -633,6 +657,10 @@ namespace GAME
 	//-------------------------------------------------------------------
 	// イベント
 
+	//==========================================
+	//◆ 相手・攻撃 → 自分・くらい
+	//くらい状態・ダメージ処理
+	//==========================================
 	void BtlParam::OnDamage ( int damage )
 	{
 		//通常ダメージ：マイナスの値
@@ -670,6 +698,7 @@ namespace GAME
 		m_life += damage;
 		m_white_damage = 0;
 #endif // 0
+
 	}
 
 
@@ -717,7 +746,10 @@ namespace GAME
 	//============================================================
 
 
-	//ヒット時
+	//==========================================
+	//◆ 自分・攻撃 -> 相手・くらい
+	//ヒット発生(攻撃成立側)
+	//==========================================
 	void BtlParam::OnHit ()
 	{
 		m_hitEst = T;		//攻撃成立フラグ
@@ -727,8 +759,12 @@ namespace GAME
 		//※ヒットストップ分を待機してからスタート
 		HitPitchWaitStart ( HITSTOP_TIME );
 
+
 		//同一アクション内ヒット数
 		++ m_hitNum;
+
+
+		//@info 連続ヒット数は常に加算し、ニュートラル状態で「相手(m_pOther)」の値を０に戻す
 
 		//連続ヒット数
 		++ m_chainHitNum;

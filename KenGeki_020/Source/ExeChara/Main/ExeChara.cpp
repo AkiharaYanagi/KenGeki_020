@@ -107,6 +107,9 @@ namespace GAME
 	// 位置計算
 	void ExeChara::CalcPos ()
 	{
+		//フレーム開始処理
+		m_btlPrm.FrameInit ();
+
 		m_btlPrm.CalcBalance ( m_pScript );	//バランス処理
 		m_btlPrm.CalcPos ( m_pScript );		//位置計算
 		m_btlPrm.Landing ();	//着地
