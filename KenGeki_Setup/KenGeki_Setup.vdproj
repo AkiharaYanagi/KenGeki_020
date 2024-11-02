@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_251CDA0B4F8A460ABD93B19F4141BE06"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_25EEE5B2436847428A25B6F42E77F8CD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -322,6 +328,26 @@
             {
             "SourcePath" = "8:..\\KenGeki_020\\App\\◆公開用　修正点・変更点.txt"
             "TargetName" = "8:◆公開用　修正点・変更点.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_251CDA0B4F8A460ABD93B19F4141BE06"
+            {
+            "SourcePath" = "8:..\\KenGeki_020\\App\\剣撃ゲーム指南書.pdf"
+            "TargetName" = "8:剣撃ゲーム指南書.pdf"
             "Tag" = "8:"
             "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
             "Condition" = "8:"
@@ -954,7 +980,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:剣撃クロスゾーン"
         "ProductCode" = "8:{2AD345BC-E6F9-41BF-8FA7-1CD8FD4D7433}"
-        "PackageCode" = "8:{19CCFD9F-ACFF-4EC8-96F2-71260EC42304}"
+        "PackageCode" = "8:{11D09CCE-8A33-4EB9-AC56-1181EB42ABA8}"
         "UpgradeCode" = "8:{121A6B38-462B-4ED0-A1D5-5BEBB20D452B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

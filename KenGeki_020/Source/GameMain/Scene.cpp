@@ -122,8 +122,8 @@ namespace GAME
 		if ( startMode == START_TITLE )
 		{
 			//全キャラデータを事前読込
-			// ここで読込しないとき、バトルメインでキャラの個別読込
-//			m_pParam->LoadCharaData_All ();
+//			// ここで読込しないとき、バトルメインでキャラの個別読込
+			m_pParam->LoadCharaData_All ();
 		}
 
 
