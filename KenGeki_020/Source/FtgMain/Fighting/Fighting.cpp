@@ -456,7 +456,7 @@ namespace GAME
 		//ステート名
 		m_strState->SetStr ( m_demoActor->GetName () );
 
-		static bool bDisp = T;		//状態
+		static bool bDisp = F;		//状態
 		static bool pre_bDisp = F;	//前回押しているか
 		static bool is_bDisp = F;	//今回押しているか
 
@@ -485,7 +485,7 @@ namespace GAME
 
 	void Fighting::SwitchDisp ()
 	{
-		static bool bDisp = T;		//状態
+		static bool bDisp = F;		//状態
 		static bool pre_bDisp = F;	//前回押しているか
 		static bool is_bDisp = F;	//今回押しているか
 
@@ -498,12 +498,12 @@ namespace GAME
 		{
 			if ( bDisp )
 			{
-				OffDisp ();
+				OnDisp ();
 				bDisp = false;
 			}
 			else
 			{
-				OnDisp ();
+				OffDisp ();
 				bDisp = true;
 			}
 		}
