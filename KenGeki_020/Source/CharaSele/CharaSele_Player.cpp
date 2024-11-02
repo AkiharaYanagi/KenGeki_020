@@ -44,6 +44,8 @@ namespace GAME
 	const float CharaSele_Player::CH_STT_BGM_Y = 552;
 	const float CharaSele_Player::CH_STT_OK_Y = 2000;	//画面外
 
+	const uint32 CharaSele_Player::PLAYER = 0;
+	const uint32 CharaSele_Player::CPU = 1;
 
 
 
@@ -96,15 +98,19 @@ namespace GAME
 		AddpTask ( m_state_Disp );
 		GRPLST_INSERT ( m_state_Disp );
 
+		//-----------------------------------------------------------------------
+		//入力者 
+		m_grp_Cst_InputPlayerCOM = std::make_shared < GameGraphic > ();
+		m_grp_Cst_InputPlayerCOM->AddTexture_FromArchive ( U"INPUT_PLAYER.png" );
+		m_grp_Cst_InputPlayerCOM->AddTexture_FromArchive ( U"INPUT_CPU.png" );
+		m_grp_Cst_InputPlayerCOM->SetZ ( Z_SYS );
+		AddpTask ( m_grp_Cst_InputPlayerCOM );
+		GRPLST_INSERT ( m_grp_Cst_InputPlayerCOM );
+
 	}
 
 	CharaSele_Player::~CharaSele_Player ()
 	{
-	}
-
-	void CharaSele_Player::ParamInit ( P_Param p )
-	{
-		p->GetCharaName ( m_player_id );
 	}
 
 	void CharaSele_Player::PlayerInit ( PLAYER_ID id )
@@ -124,6 +130,7 @@ namespace GAME
 			m_cursor->SetIndexTexture ( 0 );
 			m_state_Disp->SetIndexTexture ( 0 );
 			m_state_Disp->SetPos ( CH_STT_X_1P, CH_STT_CHARA_Y );
+			m_grp_Cst_InputPlayerCOM->SetPos ( 300, 5 );
 		}
 		else if ( PLAYER_ID_2 == id )
 		{
@@ -138,6 +145,52 @@ namespace GAME
 			m_cursor->SetIndexTexture ( 1 );
 			m_state_Disp->SetIndexTexture ( 1 );
 			m_state_Disp->SetPos ( CH_STT_X_2P, CH_STT_CHARA_Y );
+			m_grp_Cst_InputPlayerCOM->SetPos ( 1280 - 64 - 300, 5 );
+		}
+
+	}
+
+	void CharaSele_Player::ParamInit ( P_Param p )
+	{
+		m_pParam = p;
+//		p->GetCharaName ( m_player_id );
+		MUTCH_MODE mutch = m_pParam->GetMutchMode ();
+
+		if ( PLAYER_ID_1 == m_player_id )
+		{
+			switch ( mutch )
+			{
+			case MUTCH_MODE::MODE_PLAYER_CPU :
+				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( PLAYER );
+				m_Input_1P_Only = T;
+				break;
+			case MUTCH_MODE::MODE_PLAYER_PLAYER :
+				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( PLAYER );
+				m_Input_1P_Only = F;
+				break;
+			case MUTCH_MODE::MODE_CPU_CPU :
+				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( CPU );
+				m_Input_1P_Only = T;
+				break;
+			}
+		}
+		else if ( PLAYER_ID_2 == m_player_id )
+		{
+			switch ( mutch )
+			{
+			case MUTCH_MODE::MODE_PLAYER_CPU :
+				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( CPU );
+				m_Input_1P_Only = T;
+				break;
+			case MUTCH_MODE::MODE_PLAYER_PLAYER :
+				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( PLAYER );
+				m_Input_1P_Only = F;
+				break;
+			case MUTCH_MODE::MODE_CPU_CPU :
+				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( CPU );
+				m_Input_1P_Only = T;	//CPUvsCPUも１Pが両者を選択
+				break;
+			}
 		}
 	}
 
@@ -304,14 +357,33 @@ namespace GAME
 	//入力
 	void CharaSele_Player::Input_Chara ()
 	{
+		//条件チェック
+		if ( IsNotSelect () ) { return; }
+
+		//操作側ID
+		PLAYER_ID id = m_player_id; //初期値
+
+		//1Pのみ操作で1P決定済みのとき1P側入力で操作
+		if ( m_Input_1P_Only && m_decide_1P )
+		{
+			id = PLAYER_ID_1;
+
+			//ボタン１でキャンセル
+			if ( CFG_PUSH_KEY_PL ( id, PLY_BTN1 ) )
+			{
+				m_back_to_1p = T;
+			}
+		}
+
+
 		//移動
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_UP) ) { SetCursorUp ( m_cursor, m_chsl_id ); }
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_DOWN ) ) { SetCursorDown ( m_cursor, m_chsl_id ); }
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_LEFT ) ) { SetCursorLeft ( m_cursor, m_chsl_id ); }
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_RIGHT ) ) { SetCursorRight ( m_cursor, m_chsl_id ); }
+		if ( CFG_PUSH_KEY_PL ( id, PLY_UP) ) { SetCursorUp ( m_cursor, m_chsl_id ); }
+		if ( CFG_PUSH_KEY_PL ( id, PLY_DOWN ) ) { SetCursorDown ( m_cursor, m_chsl_id ); }
+		if ( CFG_PUSH_KEY_PL ( id, PLY_LEFT ) ) { SetCursorLeft ( m_cursor, m_chsl_id ); }
+		if ( CFG_PUSH_KEY_PL ( id, PLY_RIGHT ) ) { SetCursorRight ( m_cursor, m_chsl_id ); }
 
 		//ボタン0で決定
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN0 ) )
+		if ( CFG_PUSH_KEY_PL ( id, PLY_BTN0 ) )
 		{
 			Decide ();
 		}
@@ -319,6 +391,19 @@ namespace GAME
 
 	void CharaSele_Player::Input_Color ()
 	{
+		//条件チェック
+		if ( IsNotSelect () ) { return; }
+
+		//操作側ID
+		PLAYER_ID id = m_player_id; //初期値
+
+		//1Pのみ操作で1P決定済みのとき1P側入力で操作
+		if ( m_Input_1P_Only && m_decide_1P )
+		{
+			id = PLAYER_ID_1;
+		}
+
+
 		//ボタン0で決定
 		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN0 ) )
 		{
@@ -337,8 +422,21 @@ namespace GAME
 
 	void CharaSele_Player::Input_Stage ()
 	{
+		//条件チェック
+		if ( IsNotSelect () ) { return; }
+
+		//操作側ID
+		PLAYER_ID id = m_player_id; //初期値
+
+		//1Pのみ操作で1P決定済みのとき1P側入力で操作
+		if ( m_Input_1P_Only && m_decide_1P )
+		{
+			id = PLAYER_ID_1;
+		}
+
+
 		//ボタン0で決定
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN0 ) )
+		if ( CFG_PUSH_KEY_PL ( id, PLY_BTN0 ) )
 		{
 			//ステートを変更
 			m_state = STT_BGM;
@@ -346,7 +444,7 @@ namespace GAME
 		}
 
 		//ボタン１でキャンセル
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN1 ) )
+		if ( CFG_PUSH_KEY_PL ( id, PLY_BTN1 ) )
 		{
 			//ステートを変更
 			m_state = STT_CHARA;
@@ -357,16 +455,34 @@ namespace GAME
 
 	void CharaSele_Player::Input_BGM ()
 	{
+		//条件チェック
+		if ( IsNotSelect () ) { return; }
+
+		//操作側ID
+		PLAYER_ID id = m_player_id; //初期値
+
+		//1Pのみ操作で1P決定済みのとき1P側入力で操作
+		if ( m_Input_1P_Only && m_decide_1P )
+		{
+			id = PLAYER_ID_1;
+		}
+
+
 		//ボタン0で決定
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN0 ) )
+		if ( CFG_PUSH_KEY_PL ( id, PLY_BTN0 ) )
 		{
 			//ステートを変更
 			m_state = STT_OK;
 			m_state_Disp->SetPosY ( CH_STT_OK_Y );
+
+			if ( m_Input_1P_Only && Is1P() )
+			{
+				m_decide_1P = T;	//1P側選択終了、2P側へ移行
+			}
 		}
 
 		//ボタン１でキャンセル
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN1 ) )
+		if ( CFG_PUSH_KEY_PL ( id, PLY_BTN1 ) )
 		{
 			//ステートを変更
 			m_state = STT_STAGE;
@@ -381,8 +497,23 @@ namespace GAME
 
 	void CharaSele_Player::Input_OK ()
 	{
+		//条件チェック
+		if ( IsNotSelect () ) { return; }
+
+		//操作側ID
+		PLAYER_ID id = m_player_id; //初期値
+
+		//1Pのみ操作で1P決定済みのとき1P側入力で操作
+		if ( m_Input_1P_Only && m_decide_1P )
+		{
+			id = PLAYER_ID_1;
+		}
+
+		//1Pが2P側を操作しているとき何もしない
+		if ( m_Input_1P_Only && m_decide_1P ) { return; }
+
 		//ボタン１でキャンセル
-		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_BTN1 ) )
+		if ( CFG_PUSH_KEY_PL ( id, PLY_BTN1 ) )
 		{
 			//ステートを変更
 			m_state = STT_BGM;
@@ -391,6 +522,15 @@ namespace GAME
 		}
 	}
 
+
+	//2Pからキャンセルして1PのBGMに戻る
+	void CharaSele_Player::BackTo1pBGM ()
+	{
+		//ステートを変更
+		m_state = STT_BGM;
+		m_state_Disp->SetPosY ( CH_STT_BGM_Y );
+		SND_PLAY_ONESHOT_SE ( SE_select_Cancel );
+	}
 
 
 
@@ -506,6 +646,77 @@ namespace GAME
 	{
 		m_chara_stand->SetValid ( F ); 
 		m_chara_name->SetValid ( F );
+	}
+
+
+
+	//1Pが両者選択のとき2Pなら操作しない
+	//ただし、1Pが操作終了後は1Pが操作する
+	bool CharaSele_Player::IsNotSelect () const
+	{
+		//ただし、1Pが操作終了後は1Pが操作する
+		if ( m_Input_1P_Only && m_decide_1P ) { return F; }
+
+		//1Pが両者選択のとき2Pなら操作しない
+		return Is2P () && m_Input_1P_Only;
+	}
+
+
+
+
+	//外部から見るキー操作
+	bool CharaSele_Player::PUSH_KEY_LEFT () const
+	{
+		//条件チェック
+		if ( IsNotSelect () ) { return F; }
+
+		//操作側ID
+		PLAYER_ID id = m_player_id; //初期値
+
+		//1Pのみ操作で1P決定済みのとき2P側を操作
+		if ( m_Input_1P_Only && m_decide_1P )
+		{
+			id = PLAYER_ID_1;
+		}
+
+		//該当IDが左を入力
+		return	 CFG_PUSH_KEY_PL ( id, PLY_LEFT );
+	}
+
+	bool CharaSele_Player::PUSH_KEY_RIHGT () const
+	{
+		//条件チェック
+		if ( IsNotSelect () ) { return F; }
+
+		//操作側ID
+		PLAYER_ID id = m_player_id; //初期値
+
+		//1Pのみ操作で1P決定済みのとき2P側を操作
+		if ( m_Input_1P_Only && m_decide_1P )
+		{
+			id = PLAYER_ID_1;
+		}
+
+		//該当IDが右を入力
+		return	 CFG_PUSH_KEY_PL ( id, PLY_RIGHT );
+	}
+
+	bool CharaSele_Player::PUSH_KEY_DECIDE () const
+	{
+		//条件チェック
+		if ( IsNotSelect () ) { return F; }
+
+		//操作側ID
+		PLAYER_ID id = m_player_id; //初期値
+
+		//1Pのみ操作で1P決定済みのとき2P側を操作
+		if ( m_Input_1P_Only && m_decide_1P )
+		{
+			id = PLAYER_ID_1;
+		}
+
+		//該当IDがボタン０を入力
+		return	 CFG_PUSH_KEY_PL ( id, PLY_BTN0 );
 	}
 
 

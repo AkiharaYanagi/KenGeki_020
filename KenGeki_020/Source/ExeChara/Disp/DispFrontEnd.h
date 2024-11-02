@@ -62,12 +62,12 @@ namespace GAME
 		};
 
 #if 0
-		P_GrpAcv	m_grp_Cst_Player1P2P;	//プレイヤ側 固定表示"1P""2P"
-		P_GrpAcv	m_grp_Cst_InputPlayerCOM;	//入力者 固定表示"CPU""Player"
-
-		P_GrpAcv	m_grp_CH_Player1P2P;	//キャラ近傍 プレイヤ表示"1P""2P"
-		P_GrpAcv	m_grp_CH_InputCOMPLayer;	//キャラ近傍 入力者表示"CPU""Player"
 #endif // 0
+		P_Grp	m_grp_Cst_Player1P2P;	//プレイヤ側 固定表示"1P""2P"
+		P_Grp	m_grp_Cst_InputPlayerCOM;	//入力者 固定表示"CPU""Player"
+
+		P_Grp	m_grp_CH_Player1P2P;	//キャラ近傍 プレイヤ表示"1P""2P"
+		P_Grp	m_grp_CH_InputCOMPLayer;	//キャラ近傍 入力者表示"CPU""Player"
 
 
 
@@ -114,9 +114,9 @@ namespace GAME
 		void UpdateLurch ( VEC2 ptChara, bool dirRight, UINT lurch, UINT lurchTimer );
 #endif // 0
 
-#if 0
 		void SetPlayer ();
 		void SetCPU ();
+#if 0
 #endif // 0
 
 		//ヒット数
@@ -134,6 +134,9 @@ namespace GAME
 
 		void On_Debug ();
 		void Off_Debug ();	//デバッグ用
+
+		void On_DispPlayerInput ();
+		void Off_DispPlayerInput ();
 
 		//終了時
 		void EndBattle ();

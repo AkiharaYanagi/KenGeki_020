@@ -24,7 +24,10 @@ namespace GAME
 		float		m_bg_x { 0 };
 
 		P_Grp		m_logo;
-		P_Grp		m_menu;
+		P_Grp		m_menu_1PvsCPU;
+		P_Grp		m_menu_1Pvs2P;
+		P_Grp		m_menu_CPUvsCPU;
+		P_Grp		m_menu_Training;
 		P_Grp		m_cursor;
 		P_Grp		m_inst;		//操作説明
 
@@ -41,11 +44,14 @@ namespace GAME
 		//シーン選択
 		enum TITLE_TO
 		{
-			TITLE_TO_BATTLE,
+			TITLE_TO_BATTLE_1PvsCPU,
+			TITLE_TO_BATTLE_1Pvs2P,
+			TITLE_TO_BATTLE_CPUvsCPU,
+//			TITLE_TO_BATTLE,
 			TITLE_TO_TRAINING,
 		};
 
-		TITLE_TO	m_to { TITLE_TO_BATTLE };
+		TITLE_TO	m_to { TITLE_TO_BATTLE_1PvsCPU };
 
 		//デモモード
 		bool		m_bDemo { F };
@@ -94,6 +100,10 @@ namespace GAME
 
 		static const float MENU_X;	//メニュ
 		static const float MENU_Y;
+		static const float MENU_Y0;
+		static const float MENU_Y1;
+		static const float MENU_Y2;
+		static const float MENU_Y3;
 
 		static const float CURSOR_X;	//カーソル
 		static const float CURSOR_Y;

@@ -1,4 +1,5 @@
-﻿//=================================================================================================
+﻿#include "../../GameMain/Param.h"
+//=================================================================================================
 //
 //	両者キャラ　利用関数群
 //
@@ -10,6 +11,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
 #include "../../ExeChara/Main/ExeChara.h"
+#include "../../GameMain/Param.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -36,6 +38,10 @@ namespace GAME
 		bool pre_bFrontEnd { F };	//前回押しているか
 		bool is_bFrontEnd { F };	//今回押しているか
 
+		bool bDispPlayerInput { T };		//状態
+		bool pre_bDispPlayerInput { F };	//前回押しているか
+		bool is_bDispPlayerInput { F };		//今回押しているか
+
 		bool cpu1 { F };	//CPU状態
 		bool cpu2 { F };	//CPU状態
 
@@ -44,6 +50,7 @@ namespace GAME
 		MutualChara_Utility ( const MutualChara_Utility & rhs ) = delete;
 		~MutualChara_Utility ();
 
+		void ParamInit ( P_Param p );
 		void SetpChara ( P_ExeChara p1, P_ExeChara p2 );
 
 		void SwitchRect ();			//枠表示切替
@@ -57,6 +64,10 @@ namespace GAME
 		void SwitchFrontEnd ();		//ゲージ類表示切替
 		void OnDispFrontEnd ();
 		void OffDispFrontEnd ();
+
+		void SwitchPlayerInput ();		//プレイヤインプット表示切替
+		void OnDispPlayerInput ();
+		void OffDispPlayerInput ();
 
 		void SetCPU_1P ( bool bCPU );	//T:CPU, F:PLAYER
 		void SetCPU_2P ( bool bCPU );	//T:CPU, F:PLAYER

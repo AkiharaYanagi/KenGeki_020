@@ -260,6 +260,8 @@ namespace GAME
 		m_inst->SetZ ( Z_SYS );
 		AddpTask ( m_inst );
 		GRPLST_INSERT ( m_inst );
+
+
 	}
 
 	CharaSele::~CharaSele ()
@@ -506,32 +508,48 @@ namespace GAME
 		//ステージセレクト
 		if ( stt1p == CharaSele_Player::STT_STAGE )
 		{
-			if ( CFG_PUSH_KEY ( P1_LEFT ) ) { StagePrev (); }
-			if ( CFG_PUSH_KEY ( P1_RIGHT ) ) { StageNext (); }
-			if ( CFG_PUSH_KEY ( P1_BTN0 ) ) { StageDecide (); }
+			if ( m_chsl_pl_1p->PUSH_KEY_LEFT ()   ) { StagePrev (); }
+			if ( m_chsl_pl_1p->PUSH_KEY_RIHGT ()  ) { StageNext (); }
+			if ( m_chsl_pl_1p->PUSH_KEY_DECIDE () ) { StageDecide (); }
 		}
 		if ( stt2p == CharaSele_Player::STT_STAGE )
 		{
-			if ( CFG_PUSH_KEY ( P2_LEFT ) ) { StagePrev (); }
-			if ( CFG_PUSH_KEY ( P2_RIGHT ) ) { StageNext (); }
-			if ( CFG_PUSH_KEY ( P2_BTN0 ) ) { StageDecide (); }
+			if ( m_chsl_pl_2p->PUSH_KEY_LEFT ()   ) { StagePrev (); }
+			if ( m_chsl_pl_2p->PUSH_KEY_RIHGT ()  ) { StageNext (); }
+			if ( m_chsl_pl_2p->PUSH_KEY_DECIDE () ) { StageDecide (); }
 		}
 
 		//BGMセレクト
 		if ( stt1p == CharaSele_Player::STT_BGM )
 		{
-			if ( CFG_PUSH_KEY ( P1_LEFT ) ) { BGM_Prev (); }
-			if ( CFG_PUSH_KEY ( P1_RIGHT ) ) { BGM_Next (); }
-			if ( CFG_PUSH_KEY ( P1_BTN0 ) ) { BGM_Decide (); }
+			if ( m_chsl_pl_1p->PUSH_KEY_LEFT ()   ) { BGM_Prev (); }
+			if ( m_chsl_pl_1p->PUSH_KEY_RIHGT ()  ) { BGM_Next (); }
+			if ( m_chsl_pl_1p->PUSH_KEY_DECIDE () ) { BGM_Decide (); }
 		}
 		if ( stt2p == CharaSele_Player::STT_BGM )
 		{
-			if ( CFG_PUSH_KEY ( P2_LEFT ) ) { BGM_Prev (); }
-			if ( CFG_PUSH_KEY ( P2_RIGHT ) ) { BGM_Next (); }
-			if ( CFG_PUSH_KEY ( P2_BTN0 ) ) { BGM_Decide (); }
+			if ( m_chsl_pl_2p->PUSH_KEY_LEFT ()   ) { BGM_Prev (); }
+			if ( m_chsl_pl_2p->PUSH_KEY_RIHGT ()  ) { BGM_Next (); }
+			if ( m_chsl_pl_2p->PUSH_KEY_DECIDE () ) { BGM_Decide (); }
 		}
 
 
+		//----------------------
+		//1Pのみ操作時
+		 
+		//1Pの終了チェックを2P側に知らせる
+		m_chsl_pl_2p->SetDecide1P ( m_chsl_pl_1p->GetDecide1P () );
+
+		//2P側をキャンセルして1P側に戻る
+		if ( m_chsl_pl_2p->GetBackTo1P () )
+		{
+			m_chsl_pl_1p-> BackTo1pBGM ();
+			m_chsl_pl_2p->SetBackTo1P ( F );
+
+			//決定済みを解除
+			m_chsl_pl_1p->SetDecide1P ( F );
+			m_chsl_pl_2p->SetDecide1P ( F );
+		}
 	}
 
 

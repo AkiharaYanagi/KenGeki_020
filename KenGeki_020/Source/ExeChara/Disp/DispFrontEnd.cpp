@@ -17,8 +17,8 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	VEC2 const DispFrontEnd::POS_PL_CP_1P ( 5, LIFE_GAUGE_Y - 18 );
-	VEC2 const DispFrontEnd::POS_PL_CP_2P ( 1280 - 64 - 5, LIFE_GAUGE_Y - 18 );
+	VEC2 const DispFrontEnd::POS_PL_CP_1P ( 5, LIFE_GAUGE_Y );
+	VEC2 const DispFrontEnd::POS_PL_CP_2P ( 1280 - 64 - 5, LIFE_GAUGE_Y );
 	const float DispFrontEnd::FACE_X = 80;
 	const float DispFrontEnd::FACE_Y = 840;
 	const float DispFrontEnd::FACE_W = 100;
@@ -88,18 +88,18 @@ namespace GAME
 		//-----------------------------------------------------
 		//プレイヤー表示
 		//-----------------------------------------------------
+		m_grp_Cst_Player1P2P = MakepGrpPlyr ( U"Player_1P.png" );
+		m_grp_Cst_Player1P2P->AddTexture_FromArchive ( U"Player_2P.png" );
+
+		m_grp_Cst_InputPlayerCOM = MakepGrpPlyr ( U"INPUT_PLAYER.png" );
+		m_grp_Cst_InputPlayerCOM->AddTexture_FromArchive ( U"INPUT_CPU.png" );
+
+		m_grp_CH_Player1P2P = MakepGrpPlyr ( U"Player_1P.png" );
+		m_grp_CH_Player1P2P->AddTexture_FromArchive ( U"Player_2P.png" );
+
+		m_grp_CH_InputCOMPLayer = MakepGrpPlyr ( U"INPUT_PLAYER.png" );
+		m_grp_CH_InputCOMPLayer->AddTexture_FromArchive ( U"INPUT_CPU.png" );
 #if 0
-		m_grp_Cst_Player1P2P = MakepGrpPlyr ( _T ( "Player_1P.png" ) );
-		m_grp_Cst_Player1P2P->AddTexture ( _T ( "Player_2P.png" ) );
-
-		m_grp_Cst_InputPlayerCOM = MakepGrpPlyr ( _T ( "INPUT_PLAYER.png" ) );
-		m_grp_Cst_InputPlayerCOM->AddTexture ( _T ( "INPUT_CPU.png" ) );
-
-		m_grp_CH_Player1P2P = MakepGrpPlyr ( _T ( "Player_1P.png" ) );
-		m_grp_CH_Player1P2P->AddTexture ( _T ( "Player_2P.png" ) );
-
-		m_grp_CH_InputCOMPLayer = MakepGrpPlyr ( _T ( "INPUT_PLAYER.png" ) );
-		m_grp_CH_InputCOMPLayer->AddTexture ( _T ( "INPUT_CPU.png" ) );
 
 //		m_grp_Cst_Player1P2P->SetValid ( F );
 //		m_grp_Cst_InputPlayerCOM->SetValid ( F );
@@ -220,8 +220,8 @@ namespace GAME
 	{
 		P_Grp p = std::make_shared < GameGraphic > ();
 		p->SetValid ( T );
-		p->AddTexture ( str );
-		p->SetZ ( Z_SYS + 0.06f );
+		p->AddTexture_FromArchive ( str );
+		p->SetZ ( Z_SYS - 0.06f );
 		AddpTask ( p );
 		GRPLST_INSERT ( p );
 		return p;
@@ -254,24 +254,20 @@ namespace GAME
 
 
 		//プレイヤー別初期化位置
-#if 0
 		if ( PLAYER_ID_1 == playerID )
 		{
 			m_grp_Cst_Player1P2P->SetPos ( POS_PL_CP_1P );
 			m_grp_Cst_Player1P2P->SetIndexTexture ( SIDE_1P );
-
-			m_grp_Cst_InputPlayerCOM->SetPos ( POS_PL_CP_1P + VEC2 ( 0, 33 ) );
+			m_grp_Cst_InputPlayerCOM->SetPos ( POS_PL_CP_1P + VEC2 ( 0, 18 ) );
 			m_grp_CH_Player1P2P->SetIndexTexture ( SIDE_1P );
 		}
 		else if ( PLAYER_ID_2 == playerID )
 		{
 			m_grp_Cst_Player1P2P->SetPos ( POS_PL_CP_2P );
 			m_grp_Cst_Player1P2P->SetIndexTexture ( SIDE_2P );
-
-			m_grp_Cst_InputPlayerCOM->SetPos ( POS_PL_CP_2P + VEC2 ( 0, 33 ) );
+			m_grp_Cst_InputPlayerCOM->SetPos ( POS_PL_CP_2P + VEC2 ( 0, 18 ) );
 			m_grp_CH_Player1P2P->SetIndexTexture ( SIDE_2P );
 		}
-#endif // 0
 
 #if 0
 		//ヒットストップ時間表示
@@ -362,9 +358,9 @@ namespace GAME
 		PLAYER_MODE playerMode = stg.GetPlayerMode ( m_playerID );
 		switch ( playerMode )
 		{
-#if 0
 		case MODE_PLAYER: SetPlayer (); break;
 		case MODE_CPU: SetCPU (); break;
+#if 0
 #endif // 0
 		case MODE_NETWORK: break;
 		default: break;
@@ -373,7 +369,6 @@ namespace GAME
 
 
 
-#if 0
 	void DispFrontEnd::SetPlayer ()
 	{
 		m_grp_Cst_InputPlayerCOM->SetIndexTexture ( INPUT_PLAYER );
@@ -386,6 +381,7 @@ namespace GAME
 		m_grp_CH_InputCOMPLayer->SetIndexTexture ( INPUT_CPU );
 	}
 
+#if 0
 #endif // 0
 
 
@@ -431,11 +427,11 @@ namespace GAME
 		//プレイヤー表示
 		float bx = G_Ftg::inst ()->GetPosMutualBase ().x;	//基準位置
 		VEC2 vecImgPlayer = VEC2 ( bx, 0 ) + posChara + VEC2 ( -32.f, 0 );
-		vecImgPlayer.y = 32.f + 1.f * (int32)PLAYER_BASE_Y;	//y方向のみ指定
+		vecImgPlayer.y = 1.f * (int32)PLAYER_BASE_Y;	//y方向のみ指定
 
-#if 0
 		m_grp_CH_Player1P2P->SetPos(vecImgPlayer);
-		m_grp_CH_InputCOMPLayer->SetPos ( vecImgPlayer + VEC2 ( 0, 33 ) );
+		m_grp_CH_InputCOMPLayer->SetPos ( vecImgPlayer + VEC2 ( 0, 18 ) );
+#if 0
 #endif // 0
 
 		//硬直時間表示
@@ -661,6 +657,23 @@ namespace GAME
 	{
 		m_strAction->SetValid ( F );
 		m_strState->SetValid ( F );
+	}
+
+
+	void DispFrontEnd::On_DispPlayerInput ()
+	{
+		m_grp_Cst_Player1P2P->SetValid ( T );
+		m_grp_Cst_InputPlayerCOM->SetValid ( T );
+		m_grp_CH_Player1P2P->SetValid ( T );
+		m_grp_CH_InputCOMPLayer->SetValid ( T );
+	}
+
+	void DispFrontEnd::Off_DispPlayerInput ()
+	{
+		m_grp_Cst_Player1P2P->SetValid ( F );
+		m_grp_Cst_InputPlayerCOM->SetValid ( F );
+		m_grp_CH_Player1P2P->SetValid ( F );
+		m_grp_CH_InputCOMPLayer->SetValid ( F );
 	}
 
 

@@ -73,7 +73,9 @@ namespace GAME
 
 		void OnFrontEnd () { m_frontEnd->On (); }
 		void OffFrontEnd () { m_frontEnd->Off (); }
-#if 0
+
+		void On_DispPlayerInput () { m_frontEnd->On_DispPlayerInput (); }
+		void Off_DispPlayerInput () { m_frontEnd->Off_DispPlayerInput (); }
 
 		//------------------------------------------------
 
@@ -81,6 +83,7 @@ namespace GAME
 		void SetControl_PLAYER () { m_frontEnd->SetPlayer (); }
 		void SetControl_CPU () { m_frontEnd->SetCPU (); }
 
+#if 0
 
 		//色変更
 		void SetColor ( _CLR clr ) { m_mainImage->SetColor ( clr ); }

@@ -24,6 +24,23 @@ namespace GAME
 	{
 	}
 
+	void MutualChara_Utility::ParamInit ( P_Param p )
+	{
+		MUTCH_MODE mode = p->GetMutchMode ();
+		switch ( mode )
+		{
+		case MUTCH_MODE::MODE_PLAYER_CPU:
+			cpu1 = F; cpu2 = T;
+			break;
+		case MUTCH_MODE::MODE_PLAYER_PLAYER:
+			cpu1 = F; cpu2 = F;
+			break;
+		case MUTCH_MODE::MODE_CPU_CPU:
+			cpu1 = T; cpu2 = T;
+			break;
+		}
+	}
+
 	void MutualChara_Utility::SetpChara ( P_ExeChara p1, P_ExeChara p2 )
 	{
 		m_exeChara1 = p1;
@@ -36,10 +53,12 @@ namespace GAME
 		OnDispRect ();
 		OnDispInput ();
 		OnDispFrontEnd ();
+		OnDispPlayerInput ();
 #else
 		OffDispRect ();
 		OffDispInput ();
 		OffDispFrontEnd ();
+		OffDispPlayerInput ();
 #endif // DISP_RECT
 	}
 
@@ -156,6 +175,46 @@ namespace GAME
 		m_exeChara1->OffFrontEnd ();
 		m_exeChara2->OffFrontEnd ();
 		bFrontEnd = F;
+	}
+
+
+	//------------------------------------------------------
+	//プレイヤCPU表示切替
+	void MutualChara_Utility::SwitchPlayerInput ()
+	{
+		is_bDispPlayerInput = ( WND_UTL::AscKey ( '5' ) );
+		//Asyncの最初の１回
+		//G_FTG()->SetSysDisp ( is_bDispPlayerInput );
+
+
+		//今回押した瞬間ならば、1回のみ切替
+		if ( ! pre_bDispPlayerInput && is_bDispPlayerInput )	// false -> true
+		{
+			if ( ! bDispPlayerInput )
+			{
+				OnDispPlayerInput ();
+			}
+			else
+			{
+				OffDispPlayerInput ();
+			}
+		}
+
+		pre_bDispPlayerInput = is_bDispPlayerInput;
+	}
+
+	void MutualChara_Utility::OnDispPlayerInput ()
+	{
+		m_exeChara1->On_DispPlayerInput ();
+		m_exeChara2->On_DispPlayerInput ();
+		bDispPlayerInput = T;
+	}
+
+	void MutualChara_Utility::OffDispPlayerInput ()
+	{
+		m_exeChara1->Off_DispPlayerInput ();
+		m_exeChara2->Off_DispPlayerInput ();
+		bDispPlayerInput = F;
 	}
 
 

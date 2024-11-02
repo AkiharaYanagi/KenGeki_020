@@ -397,6 +397,10 @@ namespace GAME
 		void OnFrontEnd ();
 		void OffFrontEnd ();
 
+		//プレイヤインプット面表示切替
+		void On_DispPlayerInput ();
+		void Off_DispPlayerInput ();
+
 		//CPU操作切替
 		void ControlCPU ();
 		void ControlPlayer ();

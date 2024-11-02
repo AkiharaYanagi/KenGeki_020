@@ -53,6 +53,13 @@ namespace GAME
 		static const uint32		CHARA_SELE_NUM = 12;		//個数
 		static const ChSlct		m_pos [ CHARA_SELE_NUM ];	//枠位置
 
+		//CPU
+		bool			m_cpu { F };				//CPUかどうか
+		bool			m_decide_1P { F };			//1P決定後
+		P_Grp			m_grp_Cst_InputPlayerCOM;	//入力者 固定表示"CPU""Player"
+		bool			m_Input_1P_Only { F };		//選択操作は１Pのみ
+		bool			m_back_to_1p { F };			//2P側から1P側へ戻る
+
 	public:
 		CharaSele_Player ();
 		CharaSele_Player ( const CharaSele_Player & rhs ) = delete;
@@ -73,6 +80,25 @@ namespace GAME
 		bool IsDecided () const { return m_decided; }
 		CHST_PL_State GetState () const { return m_state; }
 
+		bool Is1P() const { return m_player_id == PLAYER_ID_1; }
+		bool Is2P() const { return m_player_id == PLAYER_ID_2; }
+
+		//1Pの終了
+		bool GetDecide1P () const { return m_decide_1P; }
+		void SetDecide1P ( bool b ) { m_decide_1P = b; }
+
+		//2Pから1Pに戻る
+		bool GetBackTo1P () const { return m_back_to_1p; }
+		void SetBackTo1P ( bool b ) { m_back_to_1p = b; }
+
+		//2Pからキャンセルして1PのBGMに戻る
+		void BackTo1pBGM ();
+
+
+		//外部から見るキー操作
+		bool PUSH_KEY_LEFT () const;
+		bool PUSH_KEY_RIHGT () const;
+		bool PUSH_KEY_DECIDE () const;
 
 	private:
 		//状態による分岐
@@ -100,6 +126,10 @@ namespace GAME
 		bool CanSelect ();	//選択可能かどうか
 		void SetCharaStand ( CHARA_SELE_ID id );
 		void HiddenCharaStand ();
+
+
+		//1Pが両者選択のとき2Pなら操作しない
+		bool IsNotSelect () const;
 
 #pragma region CONST
 
@@ -152,6 +182,8 @@ namespace GAME
 		static const float CH_STT_BGM_Y;
 		static const float CH_STT_OK_Y;
 
+		static const uint32		PLAYER;
+		static const uint32		CPU;
 #pragma endregion
 	};
 

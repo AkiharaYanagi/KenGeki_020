@@ -29,12 +29,16 @@ namespace GAME
 	const float Title::LOGO_X = ( WINDOW_WIDTH - 648 ) * 0.5f;
 	const float Title::LOGO_Y = 0;
 
-	const float Title::MENU_X = 580;
-	const float Title::MENU_Y = 800 - 7;
+	const float Title::CURSOR_X = 400;
+	const float Title::CURSOR_Y = 720;
+	const float Title::CURSOR_P = 50;
 
-	const float Title::CURSOR_X = 480;
-	const float Title::CURSOR_Y = 800;
-	const float Title::CURSOR_P = 70;
+	const float Title::MENU_X = CURSOR_X + 100;
+	const float Title::MENU_Y = CURSOR_Y - 7;
+	const float Title::MENU_Y0 = MENU_Y  + 0;
+	const float Title::MENU_Y1 = MENU_Y0 + CURSOR_P;
+	const float Title::MENU_Y2 = MENU_Y1 + CURSOR_P;
+	const float Title::MENU_Y3 = MENU_Y2 + CURSOR_P;
 
 	const float Title::INST_X = 0;
 	const float Title::INST_Y = 960 - 27;
@@ -70,12 +74,33 @@ namespace GAME
 		AddpTask ( m_logo );
 		GRPLST_INSERT ( m_logo );
 
-		m_menu = std::make_shared < GameGraphic > ();
-		m_menu->AddTexture_FromArchive ( U"Title\\title_menu.png" );
-		m_menu->SetPos ( MENU_X, MENU_Y );
-		m_menu->SetZ ( Z_CH );
-		AddpTask ( m_menu );
-		GRPLST_INSERT ( m_menu );
+		m_menu_1PvsCPU = std::make_shared < GameGraphic > ();
+		m_menu_1PvsCPU->AddTexture_FromArchive ( U"Title\\Title_Menu_1PvsCPU.png" );
+		m_menu_1PvsCPU->SetPos ( MENU_X, MENU_Y0 );
+		m_menu_1PvsCPU->SetZ ( Z_CH );
+		AddpTask ( m_menu_1PvsCPU );
+		GRPLST_INSERT ( m_menu_1PvsCPU );
+
+		m_menu_1Pvs2P = std::make_shared < GameGraphic > ();
+		m_menu_1Pvs2P->AddTexture_FromArchive ( U"Title\\Title_Menu_1Pvs2P.png" );
+		m_menu_1Pvs2P->SetPos ( MENU_X, MENU_Y1 );
+		m_menu_1Pvs2P->SetZ ( Z_CH );
+		AddpTask ( m_menu_1Pvs2P );
+		GRPLST_INSERT ( m_menu_1Pvs2P );
+
+		m_menu_CPUvsCPU = std::make_shared < GameGraphic > ();
+		m_menu_CPUvsCPU->AddTexture_FromArchive ( U"Title\\Title_Menu_CPUvsCPU.png" );
+		m_menu_CPUvsCPU->SetPos ( MENU_X, MENU_Y2 );
+		m_menu_CPUvsCPU->SetZ ( Z_CH );
+		AddpTask ( m_menu_CPUvsCPU );
+		GRPLST_INSERT ( m_menu_CPUvsCPU );
+
+		m_menu_Training = std::make_shared < GameGraphic > ();
+		m_menu_Training->AddTexture_FromArchive ( U"Title\\Title_Menu_Training.png" );
+		m_menu_Training->SetPos ( MENU_X, MENU_Y3 );
+		m_menu_Training->SetZ ( Z_CH );
+		AddpTask ( m_menu_Training );
+		GRPLST_INSERT ( m_menu_Training );
 
 		m_cursor = std::make_shared < GameGraphic > ();
 		m_cursor->AddTexture_FromArchive ( U"Title\\title_cursor.png" );
@@ -259,8 +284,8 @@ namespace GAME
 			}
 		}
 		
-		//F9でデモ切替
-		if ( WND_UTL::AscKey ( VK_F9 ) )
+		//F9でデモ切替 (ボタン：リセットでも切換)
+		if ( WND_UTL::AscKey ( VK_F9 ) || CFG_PUSH_KEY_12 ( PLY_BTN7 ) )
 		{
 			//値の取得
 			P_Param pPrm = GetpParam();
@@ -381,14 +406,35 @@ namespace GAME
 
 				switch ( m_to )
 				{
-				case TITLE_TO_BATTLE:
+				case TITLE_TO_BATTLE_1PvsCPU:
 					SND_STOP_ALL_BGM ();
+					pParam->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_CPU );
 					pParam->SetGameMode ( GAME_MODE::MODE_MAIN );
 					Scene::Transit_CharaSele ();
-//					Scene::Transit_Fighting ();
 					break;
+				case TITLE_TO_BATTLE_1Pvs2P:
+					SND_STOP_ALL_BGM ();
+					pParam->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_PLAYER );
+					pParam->SetGameMode ( GAME_MODE::MODE_MAIN );
+					Scene::Transit_CharaSele ();
+					break;
+				case TITLE_TO_BATTLE_CPUvsCPU:
+					SND_STOP_ALL_BGM ();
+					pParam->SetMutchMode ( MUTCH_MODE::MODE_CPU_CPU );
+					pParam->SetGameMode ( GAME_MODE::MODE_MAIN );
+					Scene::Transit_CharaSele ();
+					break;
+#if 0
+				case TITLE_TO_BATTLE:
+					SND_STOP_ALL_BGM ();
+					pParam->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_CPU );
+					pParam->SetGameMode ( GAME_MODE::MODE_MAIN );
+					Scene::Transit_CharaSele ();
+					break;
+#endif // 0
 				case TITLE_TO_TRAINING:
 					SND_STOP_ALL_BGM ();
+					pParam->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_CPU );
 					pParam->SetGameMode ( GAME_MODE::MODE_TRAINING );
 					Scene::Transit_CharaSele ();
 //					Scene::Transit_Training ();
@@ -417,11 +463,17 @@ namespace GAME
 		{
 			switch ( m_to )
 			{
-			case TITLE_TO_BATTLE:
+			case TITLE_TO_BATTLE_1PvsCPU:
 				m_to = TITLE_TO_TRAINING;
 				break;
+			case TITLE_TO_BATTLE_1Pvs2P:
+				m_to = TITLE_TO_BATTLE_1PvsCPU;
+				break;
+			case TITLE_TO_BATTLE_CPUvsCPU:
+				m_to = TITLE_TO_BATTLE_1Pvs2P;
+				break;
 			case TITLE_TO_TRAINING:
-				m_to = TITLE_TO_BATTLE;
+				m_to = TITLE_TO_BATTLE_CPUvsCPU;
 				break;
 			}
 
@@ -433,11 +485,17 @@ namespace GAME
 		{
 			switch ( m_to )
 			{
-			case TITLE_TO_BATTLE:
+			case TITLE_TO_BATTLE_1PvsCPU:
+				m_to = TITLE_TO_BATTLE_1Pvs2P;
+				break;
+			case TITLE_TO_BATTLE_1Pvs2P:
+				m_to = TITLE_TO_BATTLE_CPUvsCPU;
+				break;
+			case TITLE_TO_BATTLE_CPUvsCPU:
 				m_to = TITLE_TO_TRAINING;
 				break;
 			case TITLE_TO_TRAINING:
-				m_to = TITLE_TO_BATTLE;
+				m_to = TITLE_TO_BATTLE_1PvsCPU;
 				break;
 			}
 
@@ -456,13 +514,14 @@ namespace GAME
 			//フェード開始
 			m_fade_out->StartBlackOut ( FADE_OUT_T );
 		}
-
+#if 0
 		if ( CFG_PUSH_KEY ( P1_BTN3 ) )
 		{
 			//BGM
 			SND_STOP_ALL_BGM ();
 			SND_PLAY_LOOP_BGM ( BGM_Title );
 		}
+#endif // 0
 
 	}
 
@@ -482,7 +541,10 @@ namespace GAME
 		m_strDemoSwitch->SetValid ( T );
 
 		//通常選択肢はOff
-		m_menu->SetValid ( F );
+		m_menu_1PvsCPU->SetValid ( F );
+		m_menu_1Pvs2P->SetValid ( F );
+		m_menu_CPUvsCPU->SetValid ( F );
+		m_menu_Training->SetValid ( F );
 		m_cursor->SetValid ( F );
 	}
 
@@ -493,7 +555,10 @@ namespace GAME
 		m_strDemoSwitch->SetValid ( F );
 
 		//通常選択肢はOn
-		m_menu->SetValid ( T );
+		m_menu_1PvsCPU->SetValid ( T );
+		m_menu_1Pvs2P->SetValid ( T );
+		m_menu_CPUvsCPU->SetValid ( T );
+		m_menu_Training->SetValid ( T );
 		m_cursor->SetValid ( T );
 	}
 

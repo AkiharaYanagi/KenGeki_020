@@ -45,6 +45,7 @@ namespace GAME
 	void MutualChara::ParamInit ( P_Param pParam )
 	{
 		m_pParam = pParam;
+		m_utl.ParamInit ( pParam );
 		m_decision->SetpParam ( pParam );
 
 		if ( PLAYER_MODE::MODE_CPU == m_pParam->GetPlayerMode ( PLAYER_ID_1 ) )
@@ -191,6 +192,7 @@ namespace GAME
 		m_utl.SwitchDispInput ();
 		m_utl.SwitchRect ();
 		m_utl.SwitchFrontEnd ();
+		m_utl.SwitchPlayerInput ();
 		m_utl.SwitchCPU ();
 	}
 

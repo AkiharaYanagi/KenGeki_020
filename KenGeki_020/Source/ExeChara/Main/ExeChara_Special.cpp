@@ -79,9 +79,9 @@ namespace GAME
 			//ゲージ
 			int balance = m_btlPrm.GetBalance ();
 
-			if ( 40 < balance )
+			if ( 20 < balance )
 			{
-				m_btlPrm.AddBalance ( -30 );	//スタミナマイナス
+				m_btlPrm.AddBalance ( -10 );	//スタミナマイナス
 				m_btlPrm.AddMana ( 30 );	//超必殺プラス
 			}
 		}

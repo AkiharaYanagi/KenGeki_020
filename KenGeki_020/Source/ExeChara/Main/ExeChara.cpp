@@ -310,6 +310,18 @@ namespace GAME
 		m_dispChara->OffFrontEnd ();
 	}
 
+	//プレイヤインプット面表示切替
+	void ExeChara::On_DispPlayerInput ()
+	{
+		m_dispChara->On_DispPlayerInput ();
+	}
+	void ExeChara::Off_DispPlayerInput ()
+	{
+		m_dispChara->Off_DispPlayerInput ();
+	}
+
+
+
 #if 0
 	//================================================
 	//	外部からの状態(State)変更
@@ -457,18 +469,19 @@ namespace GAME
 	//CPU操作切替
 	void ExeChara::ControlCPU ()
 	{
+		//操作切換
 		//m_pCharaInput = m_pCPUInput;
-
 		m_pCharaInput = m_pNewCPUInput;
-
-		
-		//m_dispChara->SetControl_CPU ();
+		//表示切換
+		m_dispChara->SetControl_CPU ();
 	}
 
 	void ExeChara::ControlPlayer ()
 	{
+		//操作切換
 		m_pCharaInput = m_pPlayerInput;
-		//m_dispChara->SetControl_PLAYER ();
+		//表示切換
+		m_dispChara->SetControl_PLAYER ();
 	}
 
 
