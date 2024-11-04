@@ -146,7 +146,14 @@ namespace GAME
 		m_strVer = std::make_shared < GrpStr > ();
 		m_strVer->SetPos ( 1185, 905 );
 		m_strVer->SetZ ( Z_MENU );
-		m_strVer->SetStr ( U"Ver 0.10" );
+
+#if 0
+		//2024/11/03 デジゲー博
+//		m_strVer->SetStr ( U"Ver 0.10" );
+#endif // 0
+		//2024/11/03 修正パッチ
+		m_strVer->SetStr ( U"Ver 0.11" );
+
 		AddpTask ( m_strVer );
 		GRPLST_INSERT ( m_strVer );
 
@@ -434,7 +441,7 @@ namespace GAME
 #endif // 0
 				case TITLE_TO_TRAINING:
 					SND_STOP_ALL_BGM ();
-					pParam->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_CPU );
+					pParam->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_PLAYER );
 					pParam->SetGameMode ( GAME_MODE::MODE_TRAINING );
 					Scene::Transit_CharaSele ();
 //					Scene::Transit_Training ();

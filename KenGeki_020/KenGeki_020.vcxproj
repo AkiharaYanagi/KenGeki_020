@@ -167,6 +167,7 @@
     <Text Include="App\example\txt\kr.txt" />
     <Text Include="App\example\txt\sc.txt" />
     <Text Include="App\example\video\river.txt" />
+    <Text Include="App\Readme_剣撃クロスゾーン.txt" />
     <Text Include="App\SE_Name.txt" />
     <Text Include="App\VC_Name.txt" />
     <Text Include="App\[共通デモアクション].txt" />

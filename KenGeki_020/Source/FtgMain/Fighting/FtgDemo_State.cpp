@@ -183,7 +183,8 @@ namespace GAME
 			//トレーニングモードは終了しない
 			if ( pFtg->GetbTraining () )
 			{
-				pFtg->TrainingRestart ();	//リスタート
+				//リスタートもしないので戻るときは手動でリセット
+				//pFtg->TrainingRestart ();	//リスタート
 			}
 			else
 			{

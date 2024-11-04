@@ -127,6 +127,9 @@ namespace GAME
 		SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ bgm_id ] );
 
 
+		//両者の操作をCPUではなくプレイヤに初期設定
+		pParam->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_PLAYER );
+
 		//Fighting
 		m_fighting->SetbTraining ( T );	//トレーニングモード設定(タイマ無効など)
 

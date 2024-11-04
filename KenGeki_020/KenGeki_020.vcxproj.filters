@@ -329,6 +329,9 @@
     <Text Include="App\◆公開用　修正点・変更点.txt">
       <Filter>00_Document</Filter>
     </Text>
+    <Text Include="App\Readme_剣撃クロスゾーン.txt">
+      <Filter>00_Document</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="App\dll\soundtouch\SoundTouch_x64.dll">

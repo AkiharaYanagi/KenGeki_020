@@ -53,13 +53,16 @@ namespace GAME
 		OnDispRect ();
 		OnDispInput ();
 		OnDispFrontEnd ();
-		OnDispPlayerInput ();
 #else
 		OffDispRect ();
 		OffDispInput ();
 		OffDispFrontEnd ();
-		OffDispPlayerInput ();
 #endif // DISP_RECT
+
+
+		//CPU操作表示は初期値でON
+		OnDispPlayerInput ();
+//		OffDispPlayerInput ();
 	}
 
 	//------------------------------------------------------

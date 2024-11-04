@@ -174,6 +174,12 @@ namespace GAME
 	//	内部関数
 	//------------------------------------------------------
 
+	//トレーニングモード設定
+	void MutualChara::SetTraining ()
+	{
+		m_utl.OnDispPlayerInput ();
+	}
+
 	//トレーニングモード初期化
 	void MutualChara::TrainingInit ()
 	{

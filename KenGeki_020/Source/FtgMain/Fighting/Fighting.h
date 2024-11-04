@@ -152,7 +152,11 @@ namespace GAME
 		void SetActiveTimer ( bool b ) { m_btlTime->SetActive ( b ); }
 
 		//トレーニングモード設定
-		void SetTraining () { m_btlTime->SetTraining (); }
+		void SetTraining ()
+		{
+			m_mutualChara->SetTraining ();
+			m_btlTime->SetTraining ();
+		}
 
 
 	private:
