@@ -166,7 +166,7 @@ namespace GAME
 				break;
 			case MUTCH_MODE::MODE_PLAYER_PLAYER :
 				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( PLAYER );
-				m_Input_1P_Only = F;
+				m_Input_1P_Only = T;
 				break;
 			case MUTCH_MODE::MODE_CPU_CPU :
 				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( CPU );
@@ -183,8 +183,9 @@ namespace GAME
 				m_Input_1P_Only = T;
 				break;
 			case MUTCH_MODE::MODE_PLAYER_PLAYER :
-				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( PLAYER );
-				m_Input_1P_Only = F;
+//				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( PLAYER );
+				m_grp_Cst_InputPlayerCOM->SetValid ( F );
+				m_Input_1P_Only = T;
 				break;
 			case MUTCH_MODE::MODE_CPU_CPU :
 				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( CPU );
@@ -616,7 +617,7 @@ namespace GAME
 	{
 		switch ( m_chsl_id )
 		{
-		case CHSLID_00: return F;
+		case CHSLID_00: return T;
 		case CHSLID_01: break;
 		case CHSLID_02: return T;
 		case CHSLID_03: return T;

@@ -40,6 +40,9 @@ namespace GAME
 	const float DispFrontEnd::NAME_W[3] = { 167.f, 118.f, 179.f };
 
 
+	//@todo Z値のまとめ
+
+
 	DispFrontEnd::DispFrontEnd ()
 	{
 		//ゲージ類
@@ -177,7 +180,7 @@ namespace GAME
 		//名前背景
 		m_name_bg = std::make_shared < GameGraphic > ();
 		m_name_bg->AddTexture_FromArchive ( U"Battle\\Name_BG.png" );
-		m_name_bg->SetZ ( Z_SYS );
+		m_name_bg->SetZ ( Z_SHADOW );
 		m_name_bg->SetScalingCenter ( VEC2 ( NAME_BG_W / 2, 18 ) );
 		GRPLST_INSERT ( m_name_bg );
 		AddpTask ( m_name_bg );
@@ -188,7 +191,7 @@ namespace GAME
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Sae.png" );
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Retsudou.png" );
 		m_face->SetIndexTexture ( 0 );
-		m_face->SetZ ( Z_SYS );
+		m_face->SetZ ( Z_SHADOW + 0.01f );
 		AddpTask ( m_face );
 		GRPLST_INSERT ( m_face );
 
@@ -393,16 +396,16 @@ namespace GAME
 	{
 		//ライフ
 //		int white = btlPrm.GetWhiteDamage ();
-		m_gaugeLife->Update ( (UINT) btlPrm.GetLife () );
+		m_gaugeLife->Update ( btlPrm.GetLife () );
 		m_gaugeLife->UpdateWhite ( btlPrm.GetWhiteDamage () );
 
 		//バランス上限値変更
 		float w = btlPrm.GetBalanceMax() / (1.f * (int32)BALANCE_MAX) * 100.f;
 		m_gaugeBalance->ChangeMax ( w );
-		m_gaugeBalance->Update ( (UINT) btlPrm.GetBalance () );
+		m_gaugeBalance->Update ( btlPrm.GetBalance () );
 
 		//マナ
-		m_gaugeMana->Update ( (UINT) btlPrm.GetMana () );
+		m_gaugeMana->Update ( btlPrm.GetMana () );
 
 		//アクセル
 		m_gaugeAccel->Update ( btlPrm.GetAccel () );

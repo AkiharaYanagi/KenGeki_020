@@ -45,7 +45,7 @@ namespace GAME
 		m_training_Intro1 = std::make_shared < GameGraphic > ();
 		m_training_Intro1->AddTexture_FromArchive ( U"Training\\Intro_Training1.png" );
 		m_training_Intro1->SetPos ( 0, 0 );
-		m_training_Intro1->SetZ ( Z_MENU );
+		m_training_Intro1->SetZ ( Z_BG - 0.01f );
 		AddpTask ( m_training_Intro1 );
 		GRPLST_INSERT ( m_training_Intro1 );
 

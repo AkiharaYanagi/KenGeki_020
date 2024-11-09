@@ -148,6 +148,8 @@ namespace GAME
 		m_grp_White->AddTexture_FromArchive ( textureName );
 	}
 
+#if 0
+
 	void DispGauge::SetColor_Frame ( _CLR c )
 	{
 //		m_Frame->SetAllColor ( c );
@@ -170,6 +172,8 @@ namespace GAME
 
 //		m_grp_Value->SetColor ( 0xffff0000 );
 	}
+
+#endif // 0
 
 	void DispGauge::LoadPlayer ( PLAYER_ID id )
 	{
@@ -220,7 +224,7 @@ namespace GAME
 
 	//値の更新
 	//◆毎フレーム 実行
-	void DispGauge::Update ( UINT value )
+	void DispGauge::Update ( int32 value )
 	{
 //		float x = m_base_x;
 //		float y = m_base_y;
@@ -245,12 +249,16 @@ namespace GAME
 
 
 		//0以外は表示、０のときは非表示
+#if	0
 		//RECTが０のときに全体表示になってしまうので、透明で代用
 		m_grp_Value->SetColor ( m_value == 0 ? 0x00ffffff : 0xffffffff );
 		if ( value == 0 )
 		{
 			ln = 1;
 		}
+#endif	//0
+		m_grp_Value->SetValid ( value > 0 );
+
 
 		//表示
 		//@info テクスチャレクトを変更するとき、テクスチャサイズは変更しない

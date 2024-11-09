@@ -21,6 +21,8 @@ namespace GAME
 
 #pragma region CONST
 
+	const char32_t Title::Ver[] = U"ver 0.12";
+
 	const float Title::BG_X = 0;
 	const float Title::BG_Y = 0;
 	const float Title::BG_VX = -64.f;
@@ -150,9 +152,11 @@ namespace GAME
 #if 0
 		//2024/11/03 デジゲー博
 //		m_strVer->SetStr ( U"Ver 0.10" );
+		//2024/11/03 修正パッチ
 #endif // 0
 		//2024/11/03 修正パッチ
-		m_strVer->SetStr ( U"Ver 0.11" );
+		//m_strVer->SetStr ( U"Ver 0.12" );
+		m_strVer->SetStr ( Ver );
 
 		AddpTask ( m_strVer );
 		GRPLST_INSERT ( m_strVer );

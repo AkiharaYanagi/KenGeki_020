@@ -360,6 +360,13 @@ namespace GAME
 		default: break;
 		}
 
+		if ( Is1P () )
+		{
+			DBGOUT_WND_F ( DBGOUT_0, U"vy = {}"_fmt( m_vel.y ) );
+		}
+
+
+
 		//---------------
 		//画面端 (キャラ移動補正)
 		float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
@@ -467,7 +474,8 @@ namespace GAME
 
 
 		//通常スタミナ値回復
-		m_balance += balance_recovery;
+//		m_balance += balance_recovery;
+		AddBalance ( balance_recovery );
 		if ( m_balance > m_balance_max ) { m_balance = m_balance_max; }
 
 	}

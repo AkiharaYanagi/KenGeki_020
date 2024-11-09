@@ -26,7 +26,8 @@ namespace GAME
 	const float DispAccel::HND_ROT_X = 8.f;
 	const float DispAccel::HND_ROT_Y = 64.f;
 
-	const float DispAccel::Z_GAUGE_ACCEL = Z_EFF + 0.08f;	//他ゲージより後ろ
+//	const float DispAccel::Z_GAUGE_ACCEL = Z_EFF + 0.08f;	//他ゲージより後ろ
+	const float DispAccel::Z_GAUGE_ACCEL = Z_EFF;
 
 
 

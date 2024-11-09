@@ -220,8 +220,8 @@ namespace GAME
 		//各値取得
 		PLAYER_ID GetPlayerID () const { return m_btlPrm.GetPlayerID (); }
 		bool IsPlayerID ( PLAYER_ID id ) { return m_btlPrm.GetPlayerID () == id; }
-		bool Is1P () const { return PLAYER_ID_1 == m_btlPrm.GetPlayerID(); }
-		bool Is2P () const { return PLAYER_ID_2 == m_btlPrm.GetPlayerID(); }
+		bool Is1P () const { return m_btlPrm.Is1P(); }
+		bool Is2P () const { return m_btlPrm.Is2P(); }
 		CHARA_NAME GetCharaName () const { return m_name; }
 
 		P_Action GetpAction () const { return m_pAction; }
@@ -330,7 +330,7 @@ namespace GAME
 		void OnDamaged ();
 		void OnDamaged_After ();	//相手ダメージ処理の後
 
-		void OnGuard ();
+		bool OnGuard ();
 		void OnKnockBack ();
 
 		//判定後、相手の強制変更

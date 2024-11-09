@@ -262,6 +262,8 @@ namespace GAME
 
 		void SetLose ();	//敗北処理
 
+		bool Is1P () const { return PLAYER_ID_1 == GetPlayerID(); }
+		bool Is2P () const { return PLAYER_ID_2 == GetPlayerID(); }
 	private:
 		// 慣性の減少
 		void DecreaseInertial ( float d, VEC2 & inertial );

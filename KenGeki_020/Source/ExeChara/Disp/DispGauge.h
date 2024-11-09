@@ -76,16 +76,16 @@ namespace GAME
 		void SetTextureName_White ( s3d::String textureName );
 
 		//カラーの設定
-		void SetColor_Frame ( _CLR c );
-		void SetColor_Decrease ( _CLR c );
-		void SetColor_Value ( _CLR c0, _CLR c1, _CLR c2, _CLR c3 );
+//		void SetColor_Frame ( _CLR c );
+//		void SetColor_Decrease ( _CLR c );
+//		void SetColor_Value ( _CLR c0, _CLR c1, _CLR c2, _CLR c3 );
 
 		//初期化
 		void Init ();
 
 		//値の更新
-		void Update ( UINT value );
-		void UpdateWhite ( int white );
+		void Update ( int32 value );
+		void UpdateWhite ( int32 white );
 
 		//最大値変更(値のみ、内部数値はBrlParamで制限)
 		// 初期値 GAUGE_WIDTH ("FtgConst.h") のパーセントで変更 (0%~100%)

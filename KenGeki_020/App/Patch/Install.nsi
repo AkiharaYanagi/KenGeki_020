@@ -34,5 +34,6 @@ Section
 	File "F:\Projects\KenGeki_020\KenGeki_020\App\KenGeki_CrossZone.exe"
 	File "F:\Projects\KenGeki_020\KenGeki_020\App\chara_Sae_Bin.dat"
 	File "F:\Projects\KenGeki_020\KenGeki_020\App\chara_Retsudou_Bin.dat"
+	File "F:\Projects\KenGeki_020\KenGeki_020\App\archive.dat"
 
 SectionEnd

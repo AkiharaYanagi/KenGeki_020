@@ -487,6 +487,9 @@ namespace GAME
 
 	bool ExeChara::IsThrow () const
 	{
+		//カテゴリ
+		if ( m_pAction->GetCategory () == AC_THROW ) { return T; }
+		
 		//攻撃状態かつブランチ条件にTHRを持つ
 		bool bThrI = Have_TransitAction_Condition ( BRC_THR_I );
 		bool bThrE = Have_TransitAction_Condition ( BRC_THR_E );

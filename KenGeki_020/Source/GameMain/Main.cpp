@@ -101,12 +101,12 @@ void Init ()
 
 
 	//位置
-#define CURSOR_POS_START 1
+#define CURSOR_POS_START 0
 #if CURSOR_POS_START
 	s3d::Window::Centering ();	//モニタ中央
 #else
 	//カーソル位置のモニタの中心
-	WND_UTL::MoveWindow_toCenter_onCursor ();
+	WND_UTL::MoveWindow_toCenter_onCursor ( wnd_w, wnd_h );
 #endif // 0
 
 }

@@ -89,6 +89,7 @@ namespace GAME
 		BGM_ID GetBGM_ID_Rnd ();
 
 #pragma region CONST
+		static const char32_t Ver[];	//Version
 
 		static const float BG_X;	//BG
 		static const float BG_Y;

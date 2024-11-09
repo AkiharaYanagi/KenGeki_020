@@ -350,15 +350,16 @@ namespace GAME
 		}
 #endif // 0
 
+		bool bGuard = F;
+
 		//空中ガード不可
 		if ( ! IsAir () )
 		{
 			//-------------------------------------------------
 			//ガード
-			OnGuard ();
+			bGuard = OnGuard ();
 		}
 
-		bool bGuard = IsGuard ();
 
 		//-------------------------------------------------
 		//ダメージ処理
@@ -443,7 +444,9 @@ namespace GAME
 		//->それぞれ発生箇所でフラグ管理
 	}
 
-	void ExeChara::OnGuard ()
+
+	//ガード成立かどうか
+	bool ExeChara::OnGuard ()
 	{
 		//相手
 		P_Script pScpOther = m_pOther.lock ()->m_pScript;
@@ -451,6 +454,7 @@ namespace GAME
 		//-------------------------------------------------
 		//ガード判定
 		//後方向が入力されているとき
+		//後下方向
 		if ( m_pCharaInput->IsLvr4 () )
 		{
 			//----------------------------
@@ -487,9 +491,12 @@ namespace GAME
 			{
 				m_btlPrm.SetAccRecoil ( recoil_e );
 			}
-			return;
+
+
+			return T;
 		}
 
+		return F;
 	}
 
 
@@ -498,9 +505,10 @@ namespace GAME
 	{
 		//-----------------------------------------------------
 		//特殊アクションカテゴリ指定
-		if ( IsSpecial () || IsOverdrive () )
+		if ( IsSpecial () || IsOverdrive () || IsThrow () )
 		{
 			//必殺・超必殺時に相手の白ダメージ確定
+			//ver 0.13 投げを追加
 			m_pOther.lock()->m_btlPrm.DecisionWhiteDamage ();
 		}
 
