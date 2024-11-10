@@ -32,6 +32,7 @@
 [入力]: １～２プレイヤー / ゲームパッドまたはキーボード (キー設定可能)
 [出力]: ゲーム画面解像度 [1280*960] (ウィンドウモードで拡大縮小可能)
 [ネットワーク]: 未対応 (将来対応検討)
+[言語]: 日本語のみ(将来対応検討)
 
 ・インストール		:「剣撃クロスゾーン_セットアップ.msi」を実行する。
 ・アンインストール	:Windowsの「コントロールパネル - プログラムと機能」からアンインストールする。
@@ -120,9 +121,9 @@ Esc			：	強制終了
 
 ・ゲームプログラミングライブラリ	：Siv3D (https://siv3d.github.io/)
 
-・BGM			：高良郁斗@IKUTO	(https://lit.link/ikutotakara)
+・BGM				：高良郁斗@IKUTO	(https://lit.link/ikutotakara)
 ・ボイス	：
-	巴 紗絵		：雲雀ゆい	(https://iikoe.org/actor_page/3833)
+	巴 紗絵			：雲雀ゆい		(https://iikoe.org/actor_page/3833)
 	烈火 烈堂		：髭武者		(https://x.com/OLT826gnB319137)
 
 ・その他BGM, 効果音:	Audiostock	(https://audiostock.jp/)

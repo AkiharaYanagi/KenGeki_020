@@ -101,7 +101,7 @@ void Init ()
 
 
 	//位置
-#define CURSOR_POS_START 0
+#define CURSOR_POS_START 1
 #if CURSOR_POS_START
 	s3d::Window::Centering ();	//モニタ中央
 #else

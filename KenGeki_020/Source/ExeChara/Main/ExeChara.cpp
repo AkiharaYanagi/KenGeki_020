@@ -376,6 +376,8 @@ namespace GAME
 		if ( drctDmg != 0 )
 		{
 			m_pOther.lock()->m_btlPrm.OnDamage ( - drctDmg );
+
+			OnDamaged_After ();	//白ダメージ判定
 		}
 
 		//------------------------------------------------
