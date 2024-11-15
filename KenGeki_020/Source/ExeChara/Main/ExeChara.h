@@ -491,6 +491,7 @@ namespace GAME
 		void RevertSlow ();
 #endif // 0
 
+	public:
 
 	public:
 		//終了のための待機状態かどうか
