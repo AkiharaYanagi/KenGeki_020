@@ -112,18 +112,6 @@ namespace GAME
 		GRPLST_INSERT_MAIN ( m_bg_front );
 #endif // 0
 
-		//------------------------------------------------
-		//暗転
-		m_bg_black = std::make_shared < PrmRect > ();
-//		m_bg_black->SetPos ( 0, 0 );
-//		m_bg_black->SetSize ( 1280, 960 );
-		m_bg_black->SetRect ( 0, 0, 1280, 960 );
-		m_bg_black->SetColor ( s3d::Color ( 0, 0, 0, 128 ) );
-		m_bg_black->SetZ ( Z_BG );
-		AddpTask ( m_bg_black );
-		GRPLST_INSERT ( m_bg_black );
-		m_bg_black->SetValid ( F );
-
 #if 0
 		//------------------------------------------------
 		//BGタイマ
@@ -411,6 +399,7 @@ namespace GAME
 	}
 
 
+#if 0
 
 	void BG::SetBlackOut ( bool b )
 	{
@@ -427,7 +416,6 @@ namespace GAME
 		m_bg_black->SetValid ( F );
 	}
 
-#if 0
 	void BG::SetWhiteOut ( UINT n )
 	{
 		m_tmrWhiteOut->Start ( n );

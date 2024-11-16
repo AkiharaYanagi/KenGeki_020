@@ -472,12 +472,8 @@ namespace GAME
 		//アクセル値が他ゲージに影響
 		int balance_recovery = 1 * m_accel / 100;
 
-
 		//通常スタミナ値回復
-//		m_balance += balance_recovery;
 		AddBalance ( balance_recovery );
-		if ( m_balance > m_balance_max ) { m_balance = m_balance_max; }
-
 	}
 
 

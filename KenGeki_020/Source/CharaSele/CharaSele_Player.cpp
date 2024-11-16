@@ -166,7 +166,7 @@ namespace GAME
 				break;
 			case MUTCH_MODE::MODE_PLAYER_PLAYER :
 				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( PLAYER );
-				m_Input_1P_Only = T;
+				m_Input_1P_Only = F;
 				break;
 			case MUTCH_MODE::MODE_CPU_CPU :
 				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( CPU );
@@ -183,9 +183,8 @@ namespace GAME
 				m_Input_1P_Only = T;
 				break;
 			case MUTCH_MODE::MODE_PLAYER_PLAYER :
-//				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( PLAYER );
-				m_grp_Cst_InputPlayerCOM->SetValid ( F );
-				m_Input_1P_Only = T;
+				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( PLAYER );
+				m_Input_1P_Only = F;
 				break;
 			case MUTCH_MODE::MODE_CPU_CPU :
 				m_grp_Cst_InputPlayerCOM->SetIndexTexture ( CPU );

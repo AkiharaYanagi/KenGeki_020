@@ -395,6 +395,7 @@ namespace GAME
 		//共通変数に保存
 		G_FTG()->CulcPosMutualBase ( pos1p, pos2p );
 
+#if 0
 		//----------------------------------------------------
 		//暗転
 		bool bBlackOut = m_pFtgGrp->IsActive_BlackOut ();
@@ -410,7 +411,6 @@ namespace GAME
 			m_bg->OffBlackOut ();
 		}
 
-#if 0
 
 		//----------------------------------------------------
 		//白転
@@ -435,7 +435,6 @@ namespace GAME
 			m_mutualChara->RevertSlow ();
 		}
 #endif // 0
-
 
 		//----------------------------------------------------
 		//表示切替

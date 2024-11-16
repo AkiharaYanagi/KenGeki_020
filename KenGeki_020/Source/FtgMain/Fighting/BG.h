@@ -57,11 +57,6 @@ namespace GAME
 		UINT			m_indexTexture { 0 };
 #endif // 0
 
-		//タイマ
-//		P_Timer			m_tmrBlackOut;		//暗転
-		P_PrmRect		m_bg_black;			//暗転用
-
-
 	public:
 		BG ();
 		BG ( const BG & rhs ) = delete;
@@ -82,12 +77,12 @@ namespace GAME
 		//共通グラフィック処理
 		void Grp ();
 
+#if 0
 		//暗転
 		void SetBlackOut ( bool b );
 		void OnBlackOut ();
 		void OffBlackOut ();
 
-#if 0
 		//条件確認
 		bool IsBlackOut () const { return m_tmrBlackOut->IsActive (); }
 

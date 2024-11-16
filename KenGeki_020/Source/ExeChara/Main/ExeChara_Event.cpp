@@ -77,6 +77,12 @@ namespace GAME
 	//相殺発生	//自分：Offset, 相手：Attack
 	void ExeChara::OnOffset_Common ()
 	{
+
+		//全体振動
+		m_pFtgGrp->StartVibration ( 10 );
+
+
+
 		//@todo 相殺２撃目にアサート（名前指定？）
 
 		//キャラの持つルート,ブランチの参照
@@ -157,6 +163,14 @@ namespace GAME
 
 
 		//分岐後 ヒット時処理
+
+
+		//特定アクション
+		if ( IsNameAction ( U"特大攻撃" ) )
+		{
+			m_pFtgGrp->StartVibration ( 10 );
+		}
+
 
 		//ノックバック
 		OnKnockBack ();

@@ -137,24 +137,27 @@ namespace GAME
 		}
 
 		//-----------------------------------------------------
-#if 0
-
-		if ( IsNameAction ( U"超必殺A" ) )
-		{
-			if ( m_pScript->GetFrame () == 1 )
-			{
-				m_btlPrm.SetPos ( VEC2 ( 0, 0 ) );
-			}
-		}
-
-#endif // 0
-
-		//-----------------------------------------------------
-		if ( IsNameAction ( U"乱舞超必殺技発生" ) )
+		if ( IsNameAction ( U"超必殺技B成立" ) )
 		{
 			if ( m_pScript->GetFrame () == 0 )
 			{
-//				SND_PLAY_ONESHOT_SE ( SE_Btl_Light );
+				m_pFtgGrp->StartWhiteOut ( 60 );
+				m_dispChara->TurnShadow ( T );
+				m_pOther.lock()->m_dispChara->TurnShadow ( T );
+			}
+
+			if ( ! m_pFtgGrp->IsActive_WhiteOut () )
+			{
+				m_dispChara->TurnShadow ( F );
+				m_pOther.lock()->m_dispChara->TurnShadow ( F );
+			}
+		}
+
+		//-----------------------------------------------------
+		if ( IsNameAction ( U"特大攻撃" ) )
+		{
+			if ( m_pScript->GetFrame () == 0 )
+			{
 			}
 		}
 

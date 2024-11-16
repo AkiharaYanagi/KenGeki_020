@@ -129,7 +129,7 @@ namespace GAME
 		m_msg.assign ( U"勝利メッセージのテスト。\nリザルト画面を待つ状態でどこまで表示できるか" );
 
 
-		m_ch_msg.emplace ( CHARA_OUKA,		U"鵯 桜花：\n・・・。");
+		m_ch_msg.emplace ( CHARA_OUKA,		U"鵯 桜花：\n花ひらいて風雨多し\n人、生きては別離たる");
 		m_ch_msg.emplace ( CHARA_SAE,		U"巴 紗絵：\nそれでおしまい？　\nもっと本気だしてよ♪");
 		m_ch_msg.emplace ( CHARA_RETSUDOU,	U"烈火 烈堂：\n本当に良い刀ってのは鞘に入ってるもんだぜ･･･");
 

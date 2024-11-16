@@ -92,6 +92,9 @@ namespace GAME
 		void TurnShadow ( bool b ) { m_mainImage->TurnShadow ( b ); }
 #endif // 0
 
+		//影化
+		void TurnShadow ( bool b ) { m_mainImage->TurnShadow ( b ); }
+
 
 	private:
 		//メインイメージの更新

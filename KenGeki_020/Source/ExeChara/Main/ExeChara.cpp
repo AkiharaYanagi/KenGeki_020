@@ -391,6 +391,13 @@ namespace GAME
 			m_pFtgGrp->StartBlackOut ( blackOut );
 		}
 
+		//振動
+		UINT vibration = m_pScript->m_prmStaging.Vibration;
+		if ( vibration > 0 )
+		{
+			m_pFtgGrp->StartVibration ( vibration );
+		}
+
 		//------------------------------------------------
 		//スクリプトからの停止
 		//	タイマの状態を確認しないと同じスクリプトを調べ続けてしまう
