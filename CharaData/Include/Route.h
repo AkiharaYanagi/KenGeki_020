@@ -18,9 +18,8 @@ namespace GAME
 	
 	class Route
 	{
-//		tstring		m_name;				//名前
-		s3d::String		m_name;				//名前
-		std::vector < UINT >		m_vIdBranch;
+		s3d::String		m_name;			//名前
+		V_UINT			m_vIdBranch;	//ブランチIDリスト
 
 	public:
 		Route ();
@@ -28,8 +27,6 @@ namespace GAME
 		~Route ();
 
 		//名前
-//		tstring GetName () const { return m_name; }
-//		void SetName ( tstring name ) { m_name.assign ( name ); }
 		s3d::String GetName () const { return m_name; }
 		void SetName ( s3d::String name ) { m_name.assign ( name ); }
 

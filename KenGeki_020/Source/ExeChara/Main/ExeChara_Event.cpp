@@ -110,6 +110,9 @@ namespace GAME
 				SetAction ( id );
 			}
 		}
+
+		//相殺キャンセル開始
+		m_btlPrm.GetTmr_OfstCncl()->Start ( OFST_CNCL );
 	}
 
 
@@ -481,11 +484,11 @@ namespace GAME
 //			SetAction ( U"ガード小" );
 			s3d::String gaurd_Name = U"ガード小";
 
-			int32 gaurd_id = s3d::Random ( 2 );
 #if 0
-			static int32 gaurd_id = 0;
-			if ( ++ gaurd_id >= 3 ) { gaurd_id = 0; }
+			int32 gaurd_id = s3d::Random ( 2 );
 #endif // 0
+			static int32 gaurd_id = 0;
+//			if ( ++ gaurd_id >= 3 ) { gaurd_id = 0; }
 
 			switch ( gaurd_id )
 			{

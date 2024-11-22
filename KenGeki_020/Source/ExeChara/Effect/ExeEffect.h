@@ -97,7 +97,10 @@ namespace GAME
 		void PostScriptMove ( BtlParam & btlprm );
 		void SynchroScript ( VEC2 ptChara );
 
+		//値の設定
 //		void SetZ ( float z ) { m_dispEffect.SetZ ( z ); }
+		void SetShader ( bool b ) { m_dispEffect->SetShader ( b ); }
+
 
 		//相殺
 		void SetOffset ( bool b ) { m_offset = b; }
@@ -119,6 +122,8 @@ namespace GAME
 			if ( m_dirRight ) { return v; }
 			return VEC2 ( -v.x, v.y );
 		}
+
+		void CalcPos ();
 	};
 
 	//型別定義 エイリアス

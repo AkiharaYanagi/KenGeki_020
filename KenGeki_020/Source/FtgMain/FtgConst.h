@@ -145,6 +145,8 @@ namespace GAME
 		OFFSET_TIME = 14,
 		DOWN_TIME = 120 + 60,
 		END_TIME = 60,
+
+		OFST_CNCL = 15,		//相殺キャンセル可能時間
 	};
 }
 

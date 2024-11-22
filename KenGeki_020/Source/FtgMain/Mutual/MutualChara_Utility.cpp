@@ -10,6 +10,8 @@
 #include "MutualChara_Utility.h"
 #include "../../GameMain/G_Ftg.h"
 
+#include "../../GameMain/DebugDisp.h"
+
 
 //-------------------------------------------------------------------------------------------------
 // 定義
@@ -48,8 +50,7 @@ namespace GAME
 
 		//------------------------------------------------
 		//デバッグ用枠表示初期切替
-#define DISP_RECT	0
-#if DISP_RECT
+#if DEBUG_DISP
 		OnDispRect ();
 		OnDispInput ();
 		OnDispFrontEnd ();
@@ -146,7 +147,7 @@ namespace GAME
 	void MutualChara_Utility::SwitchFrontEnd ()
 	{
 		is_bFrontEnd = ( WND_UTL::AscKey ( '4' ) );
-		//Asyncの最初の１回
+		//Asyncの最初の１回を記録（２回目はリセットされる）
 		G_FTG()->SetSysDisp ( is_bFrontEnd );
 
 
@@ -171,6 +172,8 @@ namespace GAME
 		m_exeChara1->OnFrontEnd ();
 		m_exeChara2->OnFrontEnd ();
 		bFrontEnd = T;
+		is_bFrontEnd = T;
+		G_FTG()->SetSysDisp ( is_bFrontEnd );
 	}
 
 	void MutualChara_Utility::OffDispFrontEnd ()
@@ -178,6 +181,8 @@ namespace GAME
 		m_exeChara1->OffFrontEnd ();
 		m_exeChara2->OffFrontEnd ();
 		bFrontEnd = F;
+		is_bFrontEnd = F;
+		G_FTG()->SetSysDisp ( is_bFrontEnd );
 	}
 
 

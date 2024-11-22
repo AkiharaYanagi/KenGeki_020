@@ -54,6 +54,8 @@ namespace GAME
 		//P_GrpEfShd GetpGrp () { return m_grp; }
 
 		void SetW ( float w ) { m_w = w; }
+
+		void SetShader ( bool b ) { m_grp->SetShader ( b ); }
 	};
 
 	using P_DispEffect = std::shared_ptr < DispEffect >;

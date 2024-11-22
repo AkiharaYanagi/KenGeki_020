@@ -165,7 +165,7 @@ namespace GAME
 	//ルートリストをチェックして各種ブランチのコマンドが達成されていたら
 	//遷移先のアクションIDを返す
 	//戻値：enum { NO_COMPLETE (0xFFFFFFFF) } 不成立
-	UINT CharaInput::GetTransitID ( Chara & ch, P_Script pScp, bool dirRight )
+	UINT CharaInput::GetTransitID ( const Chara & ch, P_Script pScp, bool dirRight )
 	{
 		//キャラの持つルート,ブランチ,コマンドの参照
 		const VP_Route vpRoute = ch.GetvpRoute ();
@@ -201,7 +201,7 @@ namespace GAME
 
 	
 	//成立リストを生成する
-	void CharaInput::MakeTransitIDList ( Chara & ch, P_Script pScp, bool dirRight )
+	void CharaInput::MakeTransitIDList ( const Chara & ch, P_Script pScp, bool dirRight )
 	{
 		//成立した１つのIDではなく、成立したIDを優先順位で保存したリストを返す
 		m_vCompID.clear ();
@@ -239,8 +239,50 @@ namespace GAME
 					m_vCompID.push_back ( id );
 				}
 			}
+#if 0
+			MakeTransitIDList ( ch, vBranchID, dirRight );
+#endif // 0
 		}
 	}
+	
+	
+	//成立リストを生成する
+	//引数：キャラ参照, 特定条件のブランチIDリスト, 向き
+	void CharaInput::MakeTransitIDList ( const Chara & ch, V_UINT vBrc, bool dirRight )
+	{
+		//成立した１つのIDではなく、成立したIDを優先順位で保存したリストを返す
+		m_vCompID.clear ();
+
+		//キャラの持つルート,ブランチ,コマンドの参照
+		const VP_Route vpRoute = ch.GetvpRoute ();
+		const VP_Branch vpBranch = ch.GetvpBranch ();
+		const VP_Command vpCommand = ch.GetvpCommand ();
+
+
+		//対象のブランチリスト
+		//特定条件のブランチIDリスト
+		for ( UINT indexBranch : vBrc )
+		{
+			//ブランチの取得
+			P_Branch pBrc = vpBranch [ indexBranch ];
+
+			//コマンド分岐以外は飛ばす
+			if ( BRC_CMD != pBrc->GetCondition () ) { continue; }
+
+			//コマンドの取得
+			UINT indexCommand = vpBranch [ indexBranch ]->GetIndexCommand ();
+			P_Command pCmd = vpCommand [ indexCommand ];
+
+			//対象コマンドが成立していたら
+			if ( pCmd->Compare ( m_vGameKey, dirRight ) )
+			{
+				//遷移先アクションIDを登録する
+				UINT id = vpBranch [ indexBranch ]->GetIndexSequence ();
+				m_vCompID.push_back ( id );
+			}
+		}
+	}
+
 
 	//優先リストの先頭を取得する
 	UINT CharaInput::GetCompID ()

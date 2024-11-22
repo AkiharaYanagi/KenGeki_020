@@ -26,7 +26,7 @@ namespace GAME
 		bool				m_cpu;			//CPUフラグ
 
 		//コマンドが完成したIDを優先順に保存したリスト
-		std::vector < UINT >		m_vCompID;		
+		V_UINT				m_vCompID;		
 
 	public:
 		CharaInput ();
@@ -56,11 +56,12 @@ namespace GAME
 		//ルートリストをチェックして各種ブランチのコマンドが達成されていたら
 		//遷移先のアクションIDを返す
 		//戻値：enum { NO_COMPLETE (0xFFFFFFFF) } 不成立
-		virtual UINT GetTransitID ( Chara & ch, P_Script pScp, bool dirRight );
+		virtual UINT GetTransitID ( const Chara & ch, P_Script pScp, bool dirRight );
 
 		//成立リストを生成する
-		virtual void MakeTransitIDList ( Chara & ch, P_Script pScp, bool dirRight );
-
+		virtual void MakeTransitIDList ( const Chara & ch, P_Script pScp, bool dirRight );
+		virtual void MakeTransitIDList ( const Chara & ch, V_UINT vBrc, bool dirRight );
+ 
 		//キーの保存
 		void SetGameKey ( V_GAME_KEY & vKey );
 

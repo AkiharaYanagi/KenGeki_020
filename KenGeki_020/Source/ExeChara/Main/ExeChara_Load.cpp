@@ -112,6 +112,9 @@ namespace GAME
 		m_btlPrm.SetpChara ( m_pChara );
 		m_btlPrm.SetwpExeChara ( shared_from_this (), m_pOther );
 
+		//相殺キャンセルリストを先に作成しておく
+		MakeOfstCnclList ();
+
 		//--------------------------------------------
 		//エフェクト生成ベクタの生成
 		m_oprtEf->MakeEfList ( m_pChara );
@@ -298,6 +301,59 @@ namespace GAME
 
 //		m_pCharaInput = m_pPlayerInput;
 	}
+
+
+
+	//相殺キャンセルリスト生成
+	void ExeChara::MakeOfstCnclList ()
+	{
+		//移動、通常、必殺、超必殺でキャンセル可能
+		
+		//@info コマンドかつ移動だと前離しによる移動停止でニュートラルなどが含まれるので外す
+		//優先順位
+		//地上・空中分岐
+
+		//キャラからルートリストを取得
+		const VP_Route vpRoute = m_pChara->GetvpRoute ();
+		const VP_Branch vpBrc = m_pChara->GetvpBranch ();
+
+
+		//地上
+		m_vOfstCncl.clear ();
+		UINT32 i = 0;
+		for ( P_Route pRut : vpRoute )
+		{
+			if ( 0 == pRut->GetName ().compare ( U"地上超必殺技" ) )
+			{
+				const V_UINT vBrc = pRut->GetcvIDBranch ();
+
+				//手動でリストに追加
+				for ( UINT32 iBrc : vBrc )
+				{
+					m_vOfstCncl.push_back ( iBrc );
+				}
+			}
+
+			++ i;
+		}
+
+		//空中
+		m_vOfstCncl_Air.clear ();
+		UINT32 i_air = 0;
+		for ( P_Branch pBrc : vpBrc )
+		{
+			//条件：コマンド入力のみ
+			if ( BRC_CMD == pBrc->GetCondition () )
+			{
+				//リストに追加
+				m_vOfstCncl_Air.push_back ( i_air );
+			}
+
+			++ i_air;
+		}
+	}
+
+
 
 }	//namespace GAME
 

@@ -122,7 +122,9 @@ namespace GAME
 		m_tmrHitPitch	= std::make_shared < Timer > ();		//ヒット間隔タイマ
 		m_tmrLurch		= std::make_shared < Timer > ();		//のけぞりタイマ
 		m_tmrVib		 = std::make_shared < Timer > ();	//個別振動
+		m_tmrOfstCncl =	std::make_shared < Timer > ();		//相殺キャンセルタイマ
 		m_tmrWhiteDamage = std::make_shared < Timer > ();	//白ダメージ
+
 
 		m_timers.push_back ( m_tmrHitstop );
 		m_timers.push_back ( m_tmrDown );
@@ -131,6 +133,7 @@ namespace GAME
 		m_timers.push_back ( m_tmrHitPitch );
 		m_timers.push_back ( m_tmrLurch );
 		m_timers.push_back ( m_tmrVib );
+		m_timers.push_back ( m_tmrOfstCncl );
 		m_timers.push_back ( m_tmrWhiteDamage );
 	}
 
@@ -360,12 +363,6 @@ namespace GAME
 		default: break;
 		}
 
-		if ( Is1P () )
-		{
-			DBGOUT_WND_F ( DBGOUT_0, U"vy = {}"_fmt( m_vel.y ) );
-		}
-
-
 
 		//---------------
 		//画面端 (キャラ移動補正)
@@ -515,7 +512,9 @@ namespace GAME
 			UINT indexAction = m_pExeChara.lock()->Check_TransitAction_Condition ( BRANCH_CONDITION::BRC_GRD );
 			if ( NO_COMPLETE != indexAction )
 			{
-				Ground_Y ();
+				Ground_Y ();	//位置関連
+
+				EndAction ();	//パラメータ関連
 
 				//自身を変更
 				m_pExeChara.lock()->SetAction ( indexAction );	//遷移
@@ -524,7 +523,7 @@ namespace GAME
 			//位置が基準より下で立ち状態だったら
 			if ( m_pAction->IsName ( U"立ち" ) )
 			{
-				Ground_Y ();
+				Ground_Y ();	//位置関連
 			}
 		}
 

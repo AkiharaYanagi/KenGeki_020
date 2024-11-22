@@ -167,10 +167,11 @@ namespace GAME
 		void MoveTimer ();			//タイマ稼働
 		void CheckLife ();			//ライフ判定
 		void UpdateGraphic ();		//グラフィック更新
-		void SE_Play ();			//SE再生
-		void VC_Play ();			//VC再生
+		void SoundPlay ();			//音の再生(SE, VC)
 		//===========================================================
 
+		void SE_Play ();			//SE再生
+		void VC_Play ();			//VC再生
 
 		//------------------------------------------------------------
 		//相手を設定
@@ -409,6 +410,9 @@ namespace GAME
 	//	内部関数
 	//================================================
 	private:
+		V_UINT	m_vOfstCncl;		//相殺キャンセルリスト(地上)
+		V_UINT	m_vOfstCncl_Air;	//相殺キャンセルリスト(空中)
+		void MakeOfstCnclList ();	//相殺キャンセルリスト生成
 
 	public:
 		//アクション指定(Stateから指定)

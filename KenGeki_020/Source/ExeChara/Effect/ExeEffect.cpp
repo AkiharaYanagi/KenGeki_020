@@ -194,7 +194,29 @@ namespace GAME
 		}
 
 		//速度計算
-		m_ptEffect += Dir ( m_pScript->m_prmBattle.Vel );
+		//m_ptEffect += Dir ( m_pScript->m_prmBattle.Vel );
+		CalcPos ();
+
+
+
+
+		//----------------------------------
+		//	Ef個別指定
+		//----------------------------------
+		if ( m_pEffect->GetName () == U"空中竜巻_鞘" )
+		{
+			if ( m_ptEffect.y >= (float)GROUND_Y )
+			{
+				m_ptEffect.y = GROUND_Y;
+				m_vel.x = 0;
+				m_vel.y = 0;
+				m_acc.x = 0;
+				m_acc.y = 0;
+			}
+		}
+
+
+			 
 
 		//枠設定
 		m_charaRect->SetARect ( m_pScript->GetpvARect (), m_dirRight, m_ptEffect );
@@ -206,6 +228,67 @@ namespace GAME
 	void ExeEffect::SynchroScript ( VEC2 ptChara )
 	{
 		m_ptEffect = ptChara;
+	}
+
+
+	void ExeEffect::CalcPos ()
+	{
+		//スクリプトを取得
+		P_Script pScp = m_pScript;
+		VEC2 vel = pScp->m_prmBattle.Vel;
+		VEC2 acc = pScp->m_prmBattle.Acc;
+		float dir = m_dirRight ? 1.f : -1.f;		//向き
+
+		//------------------------
+		//計算種類で分岐
+		CLC_ST clcSt = pScp->m_prmBattle.CalcState;
+		switch ( clcSt )
+		{
+		case CLC_MAINTAIN: 	//持続
+			m_acc = acc;
+
+			m_vel.x += m_acc.x;		//加速度
+			m_ptEffect.x += dir * m_vel.x;		//速度
+			//m_ptEffect.x += dir * m_inertial.x;		//慣性
+
+			m_vel.y += m_acc.y;		//加速度
+			m_ptEffect.y += m_vel.y;		//速度
+			//m_ptEffect.y += m_inertial.y;		//慣性
+
+			break;
+
+		case CLC_SUBSTITUDE:	//代入
+
+			m_vel.x = vel.x;
+			m_acc.x = acc.x;
+			m_ptEffect.x += dir * m_vel.x;		//速度
+			//m_ptEffect.x += dir * m_inertial.x;		//慣性
+
+			//m_vg += m_g;
+			//m_vel.y = vel.y + m_vg;
+			m_acc.y = acc.y;
+			m_ptEffect.y += m_vel.y;		//速度
+			//m_ptEffect.y += m_inertial.y;		//慣性
+
+			break;
+
+		case CLC_ADD:	//加算
+
+			m_vel.x += vel.x;
+			m_acc.x += acc.x;
+			m_ptEffect.x += dir * m_vel.x;		//速度
+			//m_ptEffect.x += dir * m_inertial.x;		//慣性
+
+			m_vel.y += vel.y;
+			m_acc.y += acc.y;
+			m_ptEffect.y += m_vel.y;		//速度
+			//m_ptEffect.y += m_inertial.y;		//慣性
+
+			break;
+
+		default: break;
+		}
+
 	}
 
 

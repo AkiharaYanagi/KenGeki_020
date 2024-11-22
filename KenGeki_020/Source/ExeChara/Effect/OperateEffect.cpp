@@ -181,13 +181,6 @@ namespace GAME
 			P_Effect pEf = m_pChara->GetpEffect ( index );
 
 			//----------------------------------
-			//	Ef特殊指定
-			//----------------------------------
-			if ( pEf->GetName () == U"Inazuma" )
-			{
-			}
-			 
-			//----------------------------------
 			//生成用なら
 			if ( pEfGnrt->GetGnrt () )
 			{
@@ -218,6 +211,16 @@ namespace GAME
 		P_ExEf pExeEffect = std::make_shared < ExeEffect > ( pEffect, m_pChara, pEfGnrt, ptChara, dirRight );
 		m_plpExeEffect->push_back ( pExeEffect );
 		AddpTask ( pExeEffect );	//タスクリスト
+
+
+		//----------------------------------
+		//	Ef個別指定
+		//----------------------------------
+		if ( pEffect->GetName () == U"空中竜巻_鞘" )
+		{
+			pExeEffect->SetShader ( F );
+		}
+			 
 	}
 
 	//オブジェクトからExeEfを取得

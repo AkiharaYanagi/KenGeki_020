@@ -52,7 +52,9 @@ namespace GAME
 
 		//=====================================================
 		//ステート名
-		P_GrpStr		m_strState;	
+		P_GrpStr		m_strState;
+		bool			m_bDispStrState { F };
+		bool			m_pre_bDispStrState { F };
 
 		//-------------------------------------------------
 		//戦闘時間
@@ -61,6 +63,10 @@ namespace GAME
 		//-------------------------------------------------
 		//ラウンド
 		P_Round			m_round;
+
+		//システム表示
+		bool			m_bDispSys { F };
+		bool			m_pre_bDispSys { F };
 
 		//-------------------------------------------------
 		//BGM名
@@ -147,6 +153,9 @@ namespace GAME
 		void SwitchDisp ();
 		void OnDisp ();
 		void OffDisp ();
+
+		void SwitchDispStrState ();
+
 
 		//タイマ切替
 		void SetActiveTimer ( bool b ) { m_btlTime->SetActive ( b ); }

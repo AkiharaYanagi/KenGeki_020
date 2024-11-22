@@ -100,9 +100,10 @@ namespace GAME
 	{
 		//-----------------------------------------------------
 		// コマンドによる分岐
+		
 		//コマンドが完成したIDを優先順に保存したリスト
 		m_pCharaInput->MakeTransitIDList ( *m_pChara, m_pScript, m_btlPrm.GetDirRight () );
-		const std::vector < UINT > & vCompID = m_pCharaInput->GetvCompID ();
+		const V_UINT & vCompID = m_pCharaInput->GetvCompID ();
 
 		uint32 transitID = (uint32)NO_COMPLETE;
 		for ( UINT id : vCompID )
@@ -116,12 +117,37 @@ namespace GAME
 				continue;
 			}
 
-			//------------------------------------------
-
 			//可能なら遷移先に指定して終了
 			transitID = id;
 			break;
 		}
+		
+
+		//相殺キャンセルチェック
+		if ( m_btlPrm.GetTmr_OfstCncl()->IsActive () )
+		{
+			//コマンドが完成したIDを優先順に保存したリスト
+
+			m_pCharaInput->MakeTransitIDList ( *m_pChara, m_vOfstCncl, m_btlPrm.GetDirRight () );
+			const V_UINT & vCompID = m_pCharaInput->GetvCompID ();
+
+			for ( UINT id : vCompID )
+			{
+				//遷移先チェック
+				P_Action pAct = m_pChara->GetpAction ( id );
+
+				//特殊アクション 除外 指定　：　不可能なら次をチェック
+				if ( ! TranditAction_Exclusion ( pAct ) )
+				{
+					continue;
+				}
+
+				//可能なら遷移先に指定して終了
+				transitID = id;
+				break;
+			}
+		}
+
 
 		//コマンドが完成かつ移行条件がOKなら
 		if ( NO_COMPLETE != transitID )

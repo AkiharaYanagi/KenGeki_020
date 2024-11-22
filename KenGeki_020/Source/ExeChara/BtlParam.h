@@ -91,6 +91,7 @@ namespace GAME
 		P_Timer		m_tmrEnd;			//終了状態タイマ
 		P_Timer		m_tmrLurch;			//のけぞりタイマ
 		P_Timer		m_tmrVib;			//個別振動タイマ
+		P_Timer		m_tmrOfstCncl;		//相殺キャンセルタイマ
 
 		UINT	m_blackOut { 0 };		//暗転
 		UINT	m_scpStop { 0 };		//スクリプトからの停止
@@ -215,6 +216,7 @@ namespace GAME
 		P_Timer GetTmr_Down () { return m_tmrDown; }
 		P_Timer GetTmr_End () { return m_tmrEnd; }
 		P_Timer GetTmr_Lurch () { return m_tmrLurch; }
+		P_Timer GetTmr_OfstCncl () { return m_tmrOfstCncl; }
 
 		void AllTmr_Clear () { for ( P_Timer ptmr : m_timers ) { ptmr->Clear (); } }
 

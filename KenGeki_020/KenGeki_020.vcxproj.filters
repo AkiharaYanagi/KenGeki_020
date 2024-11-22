@@ -1015,6 +1015,9 @@
     <ClInclude Include="Source\FtgMain\Ef\EfKouAtsu.h">
       <Filter>03_FtgMain\Ef</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameMain\DebugDisp.h">
+      <Filter>90_GameMain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1199,6 +1202,9 @@
     </ClCompile>
     <ClCompile Include="Source\FtgMain\Ef\EfKouAtsu.cpp">
       <Filter>03_FtgMain\Ef</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Sound.cpp">
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

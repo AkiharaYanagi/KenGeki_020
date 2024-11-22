@@ -452,62 +452,36 @@ namespace GAME
 			m_demoActor->Shift_Main_To_WallBreak ();
 		}
 
+		//----------------------------------------------------
 		//ステート名
 		m_strState->SetStr ( m_demoActor->GetName () );
 
-		static bool bDisp = F;		//状態
-		static bool pre_bDisp = F;	//前回押しているか
-		static bool is_bDisp = F;	//今回押しているか
-
-//		is_bDisp = ( WND_UTL::AscKey ( '4' ) );
-		//Asyncの判定２回目以降
-		is_bDisp = G_FTG()->GetSysDisp ();
-
-
-		//今回押した瞬間ならば、1回のみ切替
-		if ( ! pre_bDisp && is_bDisp )	// false -> true
-		{
-			if ( bDisp )
-			{
-				m_strState->SetValid ( F );
-				bDisp = false;
-			}
-			else
-			{
-				m_strState->SetValid ( T );
-				bDisp = true;
-			}
-		}
-
-		pre_bDisp = is_bDisp;
 	}
 
 	void Fighting::SwitchDisp ()
 	{
-		static bool bDisp = F;		//状態
-		static bool pre_bDisp = F;	//前回押しているか
-		static bool is_bDisp = F;	//今回押しているか
+//		static bool bDisp = F;		//状態
+//		static bool pre_bDisp = F;	//前回押しているか
+//		static bool is_bDisp = F;	//今回押しているか
 
 		//		is_bDisp0 = ( WND_UTL::AscKey ( '4' ) );
 		//Asyncの判定２回目以降
-		is_bDisp = G_FTG()->GetSysDisp ();
+		bool is_bDisp = G_FTG()->GetSysDisp ();
 
 		//今回押した瞬間ならば、1回のみ切替
-		if ( ! pre_bDisp && is_bDisp )	// false -> true
+		if ( ! m_pre_bDispSys && is_bDisp )	// false -> true
 		{
-			if ( bDisp )
+			if ( m_bDispSys )
 			{
 				OnDisp ();
-				bDisp = false;
 			}
 			else
 			{
 				OffDisp ();
-				bDisp = true;
 			}
 		}
 
-		pre_bDisp = is_bDisp;
+		m_pre_bDispSys = is_bDisp;
 	}
 
 
@@ -515,12 +489,45 @@ namespace GAME
 	{
 		m_btlTime->On ();
 		m_round->On ();
+		m_bDispSys = T;
 	}
 
 	void Fighting::OffDisp ()
 	{
 		m_btlTime->Off ();
 		m_round->Off ();
+		m_bDispSys = F;
+	}
+
+
+	void Fighting::SwitchDispStrState ()
+	{
+//		static bool bDisp = F;		//状態
+//		static bool pre_bDisp = F;	//前回押しているか
+//		static bool is_bDisp = F;	//今回押しているか
+
+
+//		is_bDisp = ( WND_UTL::AscKey ( '4' ) );
+		//Asyncの判定２回目以降
+		bool is_bDisp = G_FTG()->GetSysDisp ();
+
+
+		//今回押した瞬間ならば、1回のみ切替
+		if ( ! m_pre_bDispStrState && is_bDisp )	// false -> true
+		{
+			if ( m_bDispStrState )
+			{
+				m_strState->SetValid ( F );
+				m_bDispStrState = F;
+			}
+			else
+			{
+				m_strState->SetValid ( T );
+				m_bDispStrState = T;
+			}
+		}
+
+		m_pre_bDispStrState = is_bDisp;
 	}
 
 

@@ -446,6 +446,7 @@
     <ClInclude Include="Source\FtgMain\Mutual\Decision.h" />
     <ClInclude Include="Source\FtgMain\Mutual\MutualChara.h" />
     <ClInclude Include="Source\FtgMain\Mutual\MutualChara_Utility.h" />
+    <ClInclude Include="Source\GameMain\DebugDisp.h" />
     <ClInclude Include="Source\GameMain\GameConst.h" />
     <ClInclude Include="Source\GameMain\GameMain.h" />
     <ClInclude Include="Source\GameMain\GameSettingFile.h" />
@@ -491,6 +492,7 @@
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Event.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Rect.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Sound.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Special.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Transit_Special.cpp" />
