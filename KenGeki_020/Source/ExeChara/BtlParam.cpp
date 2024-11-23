@@ -608,6 +608,9 @@ namespace GAME
 		if ( m_pAction->IsName ( U"空中やられ")	) {	return T; }
 		if ( m_pAction->IsName ( U"起き上がり")	) {	return T; }
 
+		//特殊
+		if ( m_pAction->IsName ( U"桜花_超必殺技Aやられ")	) {	return T; }
+
 		return F;
 	}
 
