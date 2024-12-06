@@ -19,3 +19,5 @@ SE_17_ドカーン.wav
 SE_18_ガード.wav
 SE_19_斬撃0.wav
 SE_20_キャッチ.wav
+SE_21_ダウン.wav
+SE_22_ブオン.wav

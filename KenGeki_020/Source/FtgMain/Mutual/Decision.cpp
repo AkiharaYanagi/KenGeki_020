@@ -306,10 +306,8 @@ namespace GAME
 			m_pExeChara2p->OnDamaged ();		//くらい状態・ダメージ処理
 			m_pExeChara1p->OnDamaged_After ();	//相手ダメージ後
 
-			hit_center_2p.x += (+50 + s3d::RandomInt32() % 100);
-			hit_center_2p.y += (-50 + s3d::RandomInt32() % 100);
 			m_efHit->On ();		//ヒットエフェクト
-			m_efHit->Start ( hit_center_2p, 16 );		//ヒットエフェクト
+			m_efHit->Start_Rnd ( hit_center_2p, 16, 50 );		//ヒットエフェクト
 		}
 
 		if ( hit1P )
@@ -318,10 +316,8 @@ namespace GAME
 			m_pExeChara1p->OnDamaged ();		//くらい状態・ダメージ処理
 			m_pExeChara2p->OnDamaged_After ();	//相手ダメージ後
 
-			hit_center_1p.x += (+50 + s3d::RandomInt32() % 100);
-			hit_center_1p.y += (-50 + s3d::RandomInt32() % 100);
 			m_efHit->On ();		//ヒットエフェクト
-			m_efHit->Start ( hit_center_1p, 16 );		//ヒットエフェクト
+			m_efHit->Start_Rnd ( hit_center_1p, 16, 50 );		//ヒットエフェクト
 		}
 
 		m_efHit->SetDispBase ( G_BASE_POS() );

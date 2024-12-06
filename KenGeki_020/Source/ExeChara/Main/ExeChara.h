@@ -259,9 +259,9 @@ namespace GAME
 
 		//------------------------------------------------------------
 		bool CanBeThrown () const;		//投げられ判定
-		bool IsThrowAction () const;		//投げ判定
+		bool IsThrowAction () const;	//投げ判定
 		bool IsNotOffset () const;		//相殺しない判定
-		bool CanGaurd () const;		//ガードできる状態かどうか
+		bool CanGuard () const;			//ガードできる状態かどうか
 
 		//特殊アクション（名前指定）
 		bool IsNameAction ( s3d::String name ) const { return m_pAction->IsName ( name ); }
@@ -331,7 +331,8 @@ namespace GAME
 		void OnDamaged ();
 		void OnDamaged_After ();	//相手ダメージ処理の後
 
-		bool OnGuard ();
+		bool CheckGuard ();		//ガード成立判定
+		void OnGuard ();		//ガード成立後の処理
 		void OnKnockBack ();
 
 		//判定後、相手の強制変更

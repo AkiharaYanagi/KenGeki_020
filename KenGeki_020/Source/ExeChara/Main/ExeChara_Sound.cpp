@@ -20,8 +20,6 @@ namespace GAME
 	void ExeChara::SoundPlay ()
 	{
 		SE_Play ();
-
-		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_2 ) { return; }
 		VC_Play ();
 	}
 

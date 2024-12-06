@@ -192,6 +192,13 @@ namespace GAME
 				break;
 			}
 		}
+
+		//トレーニングモードはPvPだがキャラセレは1Pのみ
+		GAME_MODE game_mode = p->GetGameMode ();
+		if ( MODE_TRAINING == game_mode )
+		{
+			m_Input_1P_Only = T;
+		}
 	}
 
 	void CharaSele_Player::Move ()

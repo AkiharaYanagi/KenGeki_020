@@ -76,6 +76,7 @@ namespace GAME
 		P_Grp		m_grpHitNum;		//"0"~"9"
 		P_Grp		m_grpStrHit;		//"Hit"
 		P_GrpStr	m_strDmg;			//ダメージ
+		P_GrpStr	m_strRevise;		//補正
 
 		//-----------------------------------------------------
 		//デバッグ用

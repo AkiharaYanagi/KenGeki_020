@@ -95,6 +95,11 @@ namespace GAME
 		AddpTask ( m_bgmName );
 		GRPLST_INSERT ( m_bgmName );
 
+
+
+		//@todo
+		// 毎フレームにアサート前にキャラ状態をテキストファイルに書出
+
 	}
 
 	Fighting::~Fighting ()

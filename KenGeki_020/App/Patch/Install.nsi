@@ -2,7 +2,7 @@
 LoadLanguageFile "${NSISDIR}\Contrib\Language files\Japanese.nlf"
 
 # アプリケーション名
-Name "剣撃クロスゾーン 修正パッチ ver0.11"
+Name "剣撃クロスゾーン 修正パッチ ver0.20"
 
 #作成されるインストーラ
 OutFile "Installer.exe"
@@ -34,6 +34,8 @@ Section
 	File "F:\Projects\KenGeki_020\KenGeki_020\App\KenGeki_CrossZone.exe"
 	File "F:\Projects\KenGeki_020\KenGeki_020\App\chara_Sae_Bin.dat"
 	File "F:\Projects\KenGeki_020\KenGeki_020\App\chara_Retsudou_Bin.dat"
+	File "F:\Projects\KenGeki_020\KenGeki_020\App\chara_Ouka_Bin.dat"
 	File "F:\Projects\KenGeki_020\KenGeki_020\App\archive.dat"
+	File "F:\Projects\KenGeki_020\KenGeki_020\App\Se.dat"
 
 SectionEnd

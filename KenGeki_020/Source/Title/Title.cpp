@@ -21,7 +21,7 @@ namespace GAME
 
 #pragma region CONST
 
-	const char32_t Title::Ver[] = U"ver 0.12";
+	const char32_t Title::Ver[] = U"ver 0.20";
 
 	const float Title::BG_X = 0;
 	const float Title::BG_Y = 0;

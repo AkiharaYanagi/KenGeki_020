@@ -182,7 +182,7 @@ namespace GAME
 		//ゲージ増減 (超必殺以外)
 		if ( ! IsActCtg ( AC_OVERDRIVE ) )
 		{
-			//攻撃値をマナ増加に加算
+			//攻撃値を超必殺技ゲージに加算
 			int p = m_pScript->m_prmBattle.Power;
 
 			//アクセルゲージ補正 ( -1.000倍 ~ +2.000倍 )
@@ -190,6 +190,9 @@ namespace GAME
 			double dp = p * 0.002f * m_btlPrm.GetAccel();
 
 			m_btlPrm.AddMana ( (int)dp );
+
+			//バランス固定回復
+			m_btlPrm.AddBalance ( 100 );
 		}
 
 		//-----------------------------------------------------
@@ -209,24 +212,24 @@ namespace GAME
 //		float pre_rcl = recoil_i;
 
 
-		//★★★ 剣撃抗圧 (打撃時にいずれかの入力で距離離し)
+		//★★★ 剣撃抵抗 (打撃時にいずれかの入力で距離離し)
 		P_ExeChara pOther =  m_pOther.lock();
-		if ( pOther->m_pCharaInput->IsSomething () )
+		if ( pOther->m_pCharaInput->PushSomething () )
 		{
 			//@info スタミナゲージ消費
 			//バランス消費で移項可能かチェック
 
 			//現在値と比較
 			int balance = pOther->m_btlPrm.GetBalance ();
-			const int cost = 1000;
-			if ( balance < cost )
+			const int COST = 500;
+			if ( balance < COST )
 			{
 				//足りないとき遷移しない
 			}
 			else
 			{
 				//必要量があれば消費して遷移する
-				pOther->m_btlPrm.AddBalance ( -1 * cost );
+				pOther->m_btlPrm.AddBalance ( -1 * COST );
 
 				//成立時
 				recoil_i *= 10;
@@ -240,10 +243,12 @@ namespace GAME
 		}
 			
 
-		//ヒット数補正
+		//距離ヒット数補正
 		UINT chain = m_btlPrm.GetChainHitNum ();
+
 //		float d_revise = 1.f + (float)chain * (float)chain * 0.1f;
 		float d_revise = 1.f + (float)chain * 0.1f;
+//		if ( 10 <= chain ) { d_revise *= d_revise; }	//10hit以降補正
 
 		//超必殺のみ補正外
 		if ( IsOverdrive () )
@@ -320,14 +325,6 @@ namespace GAME
 	}
 
 
-	//ガードできる状態かどうか
-	bool ExeChara::CanGaurd () const
-	{
-		if ( IsStand () ) { return T; }
-		return F;
-	}
-
-
 	//エフェクトヒット発生(攻撃成立側)
 	void ExeChara::OnEfHit ()
 	{
@@ -344,6 +341,8 @@ namespace GAME
 	{
 		//相手
 		P_ExeChara pOther = m_pOther.lock ();
+
+		//自スクリプト
 		P_Script pScpOther = pOther->m_pScript;
 
 #if 0
@@ -367,32 +366,40 @@ namespace GAME
 		}
 #endif // 0
 
+		//-------------------------------------------------
+		//ガード判定
+#if 0
 		bool bGuard = F;
+		bool bThrow = pOther->IsThrow ();
 
-		//空中ガード不可
-		if ( ! IsAir () )
+		//自身がガード可能時、かつ相手の技が投げではないとき　ガード判定開始
+		if ( CanGuard () && ! bThrow )
 		{
 			//-------------------------------------------------
 			//ガード
 			bGuard = OnGuard ();
 		}
+#endif // 0
+		bool bGuard = CheckGuard ();
 
 
 		//-------------------------------------------------
 		//ダメージ処理
 		int damage = pScpOther->m_prmBattle.Power;
 //		m_btlPrm.AddLife ( - damage );
-
 		//int pre_dmg = damage;
 
-
-
-
+		//-------------------------------------------------
 		//ヒット数補正
 		UINT chain = pOther->m_btlPrm.GetChainHitNum ();
-		float d_revise = ( 100.f - (float)chain ) * 0.01f;
+		if ( chain == 1 ) { chain = 0; }		//1hit目は補正なし
+		if ( chain > 100 ) { chain = 100; }		//上限100
 
-		//ガード
+		float d_revise = ( 100.f - (float)chain ) * 0.01f;	//%に換算
+		if ( 10 <= chain ) { d_revise *= d_revise; }	//10hit以降補正
+		if ( d_revise < 0 ) { d_revise = 0.01f; }	//０にはしない
+
+		//ガード成立時のダメージ補正
 		float g = bGuard ? 0.1f : 1.f;
 
 		damage = (int) ( d_revise * damage * g );
@@ -413,6 +420,7 @@ namespace GAME
 		//@info 連続ヒットダメージ数は常に加算し、相手のニュートラル状態で０に戻す
 		//相手の連続ヒットダメージ数
 		pOther->m_btlPrm.AddChainDamage ( damage );
+
 		int32 chnDmg = pOther->m_btlPrm.GetChainDamage ();
 		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_2 )	//相手
 		{
@@ -462,11 +470,69 @@ namespace GAME
 	}
 
 
-	//ガード成立かどうか
-	bool ExeChara::OnGuard ()
+
+	//ガードできる状態かどうか
+	bool ExeChara::CanGuard () const
 	{
 		//相手
-		P_Script pScpOther = m_pOther.lock ()->m_pScript;
+		P_ExeChara pOther = m_pOther.lock ();
+
+		//空中は不可
+		bool bAir = IsAir ();
+		if ( bAir ) { return F; }
+
+		//ダメージ状態は不可
+		bool bDamaged = IsDamaged ();
+		if ( bDamaged ) { return F; }
+
+		//相手が投げ判定は不可
+		bool bThrow = pOther->IsThrow ();
+		if ( bThrow ) { return F; }
+
+#if 0
+		//立ち状態は可能
+		if ( IsStand () ) { return T; }
+#endif // 0
+
+		//後方向が入力されているとき
+		if ( m_pCharaInput->IsLvr4 () ) { return T; }
+
+		//後下方向が入力されているとき
+		if ( m_pCharaInput->IsLvr3 () ) { return T; }
+
+
+		return F;
+	}
+
+
+	//ガード成立かどうか
+	bool ExeChara::CheckGuard ()
+	{
+		//相手
+		P_ExeChara pOther = m_pOther.lock ();
+		P_Script pScpOther = pOther->m_pScript;
+
+		//条件判定
+		if ( CanGuard () )
+		{
+			//ガード実行
+			OnGuard ();
+			return T;
+		}
+
+		//ガード不成立
+		return F;
+	}
+
+
+	//ガード成立後の処理
+	void ExeChara::OnGuard ()
+	{
+		//相手
+		P_ExeChara pOther = m_pOther.lock ();
+		P_Script pScpOther = pOther->m_pScript;
+
+#if 0
 
 		//-------------------------------------------------
 		//ガード判定
@@ -512,8 +578,35 @@ namespace GAME
 
 			return T;
 		}
+#endif // 0
 
-		return F;
+		//-------------------------------------------------
+		//アクション変更
+		s3d::String gaurd_Name = U"ガード小";
+
+		int32 gaurd_id = 0;
+
+		//相手の強度によって変化
+
+
+		switch ( gaurd_id )
+		{
+		case 0: gaurd_Name = U"ガード小"; break;
+		case 1: gaurd_Name = U"ガード中"; break;
+		case 2: gaurd_Name = U"ガード大"; break;
+		}
+
+		//相手の「相手の変更先アクション」を指定 (1周して自分のアクション)
+		m_pOther.lock ()->m_nameChangeOther = gaurd_Name;
+
+
+		//-------------------------------------------------
+		//ガード時相手からのノックバック処理
+		float recoil_e = 0.1f * pScpOther->m_prmBattle.Recoil_E;	// 値は (float) = (int)1/10
+		if ( recoil_e != 0 )
+		{
+			m_btlPrm.SetAccRecoil ( recoil_e );
+		}
 	}
 
 

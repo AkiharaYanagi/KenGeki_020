@@ -170,6 +170,9 @@ namespace GAME
 		m_actor.Init ();
 
 		//表示
+		// 特殊演出初期化
+		m_dispChara->TurnShadow ( F );
+		
 		//@info Move()中のTransit()の後に遷移し、
 		//	再度Move()は呼ばれず(Init()は呼ばれる)、
 		//	Draw()が呼ばれるため、ここで手動の初期化が必要

@@ -257,7 +257,16 @@ namespace GAME
 			ln = 1;
 		}
 #endif	//0
+
+#if 0
+		//Validも切り換えでチェックしてOnになるので、他で代用する
 		m_grp_Value->SetValid ( value > 0 );
+#endif // 0
+
+		if ( value < 100)
+		{
+			ln = 1;
+		}
 
 
 		//表示

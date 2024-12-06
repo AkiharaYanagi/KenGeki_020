@@ -304,6 +304,7 @@ namespace GAME
 	}
 
 
+	//何れかのキーが入力されているかどうか
 	bool CharaInput::IsSomething () const
 	{
 		if ( m_vGameKey [ 0 ].GetLvr ( GameKey::LVR_1 ) ) { return T; }
@@ -323,6 +324,30 @@ namespace GAME
 		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_5 ) ) { return T; }
 		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_6 ) ) { return T; }
 		if ( m_vGameKey [ 0 ].GetBtn ( GameKey::BTN_7 ) ) { return T; }
+
+		return F;
+	}
+
+	//何れかのキーが押された瞬間かどうか
+	bool CharaInput::PushSomething () const
+	{
+		if ( m_vGameKey [ 0 ].PushLvr ( GameKey::LVR_1 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushLvr ( GameKey::LVR_2 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushLvr ( GameKey::LVR_3 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushLvr ( GameKey::LVR_6 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushLvr ( GameKey::LVR_9 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushLvr ( GameKey::LVR_8 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushLvr ( GameKey::LVR_7 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushLvr ( GameKey::LVR_4 ) ) { return T; }
+
+		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_0 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_1 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_2 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_3 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_4 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_5 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_6 ) ) { return T; }
+		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_7 ) ) { return T; }
 
 		return F;
 	}

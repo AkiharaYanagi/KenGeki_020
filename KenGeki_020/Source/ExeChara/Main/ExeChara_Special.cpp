@@ -137,11 +137,12 @@ namespace GAME
 		}
 
 		//-----------------------------------------------------
+		//桜花
 		if ( IsNameAction ( U"超必殺技B成立" ) )
 		{
-			if ( m_pScript->GetFrame () == 0 )
+			if ( m_pScript->GetFrame () == 2 )
 			{
-				m_pFtgGrp->StartWhiteOut ( 60 );
+				m_pFtgGrp->StartWhiteOut ( 60 + 4 );
 				m_dispChara->TurnShadow ( T );
 				m_pOther.lock()->m_dispChara->TurnShadow ( T );
 			}

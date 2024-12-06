@@ -282,11 +282,16 @@ namespace GAME
 		//アクションとスクリプトをバトルパラメータに渡す
 		m_btlPrm.Update ( m_pAction, m_pScript );
 
+		//------------------------------------------------
 		//直接ダメージ処理
 		int drctDmg = m_pScript->m_prmBattle.DirectDamage;
 		if ( drctDmg != 0 )
 		{
 			m_pOther.lock()->m_btlPrm.OnDamage ( - drctDmg );
+
+			//自分の連続ヒットダメージ数
+			m_btlPrm.AddChainDamage ( drctDmg );
+
 
 			OnDamaged_After ();	//白ダメージ判定
 		}
@@ -410,7 +415,7 @@ namespace GAME
 		//カテゴリ
 		if ( m_pAction->GetCategory () == AC_THROW ) { return T; }
 		
-		//攻撃状態かつブランチ条件にTHRを持つ
+		//または攻撃状態かつブランチ条件にTHRを持つ
 		bool bThrI = Have_TransitAction_Condition ( BRC_THR_I );
 		bool bThrE = Have_TransitAction_Condition ( BRC_THR_E );
 		return bThrI || bThrE;

@@ -33,7 +33,7 @@ namespace GAME
 	const float DispFrontEnd::NAME_X = 175;
 	const float DispFrontEnd::NAME_Y = 913;
 
-	const float DispFrontEnd::DMG_X = 10;
+	const float DispFrontEnd::DMG_X = 50;
 	const float DispFrontEnd::DMG_Y = 180;
 
 	//各ファイルサイズから幅を指定
@@ -156,6 +156,15 @@ namespace GAME
 		m_strDmg->SetValid ( F );
 		AddpTask ( m_strDmg );
 		GRPLST_INSERT ( m_strDmg );
+
+		//-----------------------------------------
+		//補正
+		m_strRevise = std::make_shared < GrpStr > ();
+		m_strRevise->SetSize ( G_Font::SIZE_30 );
+		m_strRevise->SetZ ( Z_SYS - 0.01f );
+		m_strRevise->SetValid ( F );
+		AddpTask ( m_strRevise );
+		GRPLST_INSERT ( m_strRevise );
 
 
 		//------------------------------------------------------
@@ -289,6 +298,8 @@ namespace GAME
 			m_grpStrHit->SetPos ( VEC2 ( 100 + 128, 200 ) );
 			m_strDmg->SetPos ( VEC2 ( DMG_X, DMG_Y ) );
 			m_strDmg->SetStr ( U"P1_Dmg" );
+			m_strRevise->SetPos ( VEC2 ( DMG_X, DMG_Y - 30 ) );
+			m_strRevise->SetStr ( U"P1_Revise" );
 			
 			pOb->SetPos ( VEC2 ( 0, 200 ) );
 
@@ -302,8 +313,10 @@ namespace GAME
 		{
 			m_grpHitNum->SetPos ( VEC2 ( WINDOW_WIDTH - 384 -100, 200 ) );
 			m_grpStrHit->SetPos ( VEC2 ( WINDOW_WIDTH - 256 -100, 200 ) );
-			m_strDmg->SetPos ( VEC2 ( WINDOW_WIDTH - 180, DMG_Y ) );
+			m_strDmg->SetPos ( VEC2 ( WINDOW_WIDTH - 250, DMG_Y ) );
 			m_strDmg->SetStr ( U"P2_Dmg" );
+			m_strRevise->SetPos ( VEC2 (  WINDOW_WIDTH - 250, DMG_Y - 30 ) );
+			m_strRevise->SetStr ( U"P2_Revise" );
 
 			pOb->SetPos ( VEC2 (  WINDOW_WIDTH - 384 - 200, 200 ) );
 
@@ -421,8 +434,24 @@ namespace GAME
 	//ダメージ更新
 	void DispFrontEnd::UpdateDamage ( const BtlParam & btlPrm )
 	{
+		//ダメージ
 		int32 chnDmg = btlPrm.GetChainDamage ();
 		m_strDmg->SetStr ( U"{} Damage"_fmt( chnDmg ) );
+
+		//ヒット数による補正表示
+		UINT chain = btlPrm.GetChainHitNum ();
+		if ( chain == 1 ) { chain = 0; }		//1hit目は補正なし
+		if ( chain > 100 ) { chain = 100; }		//上限100
+
+		float d_revise = ( 100.f - (float)chain ) * 0.01f;	//%に換算
+		if ( 10 <= chain ) { d_revise *= d_revise; }	//10hit以降補正
+		if ( d_revise < 0 ) { d_revise = 0.01f; }	//０にはしない
+
+
+		std::ostringstream oss;
+		oss << std::fixed << std::setprecision ( 3 ) << d_revise * 100;
+
+		m_strRevise->SetStr ( U"{}%"_fmt( s3d::Unicode::Widen ( oss.str() ) ) );
 	}
 
 	void DispFrontEnd::UpdateMainImage ( VEC2 posChara )
@@ -465,12 +494,19 @@ namespace GAME
 
 		m_grpHitNum->SetIndexTexture ( n1 );
 
+
+		//test
+		// 
+		//1hit以上で表示
+		if ( n < 1 )
+
 		//2hit以上で表示
-		if ( n < 2 )
+//		if ( n < 2 )
 		{
 			m_grpHitNum->SetValid ( F );
 			m_grpStrHit->SetValid ( F );
 			m_strDmg->SetValid ( F );
+			m_strRevise->SetValid ( F );
 		}
 		else
 		{
@@ -487,6 +523,7 @@ namespace GAME
 				pOb->SetValid ( T );
 			}
 			m_strDmg->SetValid ( T );
+			m_strRevise->SetValid ( T );
 		}
 	}
 

@@ -27,7 +27,7 @@ namespace GAME
 #endif // 0
 
 
-	//重み定数
+	//重み定数：レバー
 #if 0
 	const std::vector < double > NewCPUInput::weights =
 	{
@@ -49,30 +49,30 @@ namespace GAME
 		15,		//LVR_2		下
 		10,		//LVR_3		下前
 		0,		//LVR_4		後
-		1000,	//LVR_5		N
+		800,	//LVR_5		N
 		90,		//LVR_6		前
 		10,		//LVR_7		上後
 		10,		//LVR_8		上
-		20,		//LVR_9		上前
+		30,		//LVR_9		上前
 	};
 
-	//重み定数
+	//重み定数：ボタン
 	const std::vector < double > NewCPUInput::weights_key =
 	{
-		1000,		//N						0
-		60,		//BTN_0		(小)				1
-		50,		//BTN_1		(中)				2
-		40,		//BTN_2		(大)				3
-		30,		//BTN_3		(特大)			4
-		10,		//BTN_4		(必殺)			5
-		20,		//BTN_5		(ダッシュ)		6
+		2000,	//N							0
+		120,	//BTN_0		(小)				1
+		100,	//BTN_1		(中)				2
+		 80,	//BTN_2		(大)				3
+		 50,	//BTN_3		(特大)			4
+		 10,	//BTN_4		(必殺)			5
+		 50,	//BTN_5		(ダッシュ)		6
 
-		50,		//BTN_3 + LVR_6 (剣撃走破)	7
-		20,		//BTN_4 + LVR_6 (波動必殺)	8
-		20,		//BTN_4 + LVR_4 (竜巻必殺)	9
-		20,		//BTN_4 + LVR_2 (昇竜拳)		10
-		20,		//BTN_4 + BTN_2 (超必殺A)	11
-		20,		//BTN_4 + BTN_3 (超必殺B)	12
+		20,		//BTN_3 + LVR_6 (剣撃走破)	7
+		10,		//BTN_4 + LVR_6 (波動必殺)	8
+		10,		//BTN_4 + LVR_4 (竜巻必殺)	9
+		10,		//BTN_4 + LVR_2 (昇竜拳)		10
+		10,		//BTN_4 + BTN_2 (超必殺A)	11
+		10,		//BTN_4 + BTN_3 (超必殺B)	12
 	};
 
 
@@ -290,7 +290,7 @@ namespace GAME
 
 		case 12:
 			gameKey.SetBtn ( GameKey::BTN_4, T );
-			gameKey.SetLvr ( GameKey::BTN_3, T );
+			gameKey.SetBtn ( GameKey::BTN_3, T );
 		break;
 
 		default: break;
