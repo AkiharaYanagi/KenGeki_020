@@ -263,10 +263,13 @@ namespace GAME
 		m_grp_Value->SetValid ( value > 0 );
 #endif // 0
 
-		if ( value < 100)
+#if 0
+		if ( value < 100 )
 		{
 			ln = 1;
 		}
+#endif // 0
+		m_grp_Value->SetColor ( value < 100 ? 0x00ffffff : 0xffffffff );
 
 
 		//表示

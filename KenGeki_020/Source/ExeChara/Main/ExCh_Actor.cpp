@@ -121,7 +121,7 @@ namespace GAME
 	//==========================================================
 	//メイン中一時遷移
 	//==========================================================
-	void ExeChara_Actor::ShiftFighting ()
+	void ExeChara_Actor::ShiftFightingMain ()
 	{
 		mp_state = m_Main;
 	}
@@ -130,6 +130,13 @@ namespace GAME
 	{
 		m_ScpStop->Start ();
 		mp_state = m_ScpStop;
+	}
+
+	void ExeChara_Actor::RestoreScpStop ()
+	{
+		//スクリプトを１つ進めて通常状態に戻す
+		m_Main->NextScript ();
+		mp_state = m_Main;
 	}
 
 	void ExeChara_Actor::ShiftSlowSkip ()

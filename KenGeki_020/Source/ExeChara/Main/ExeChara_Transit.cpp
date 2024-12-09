@@ -47,22 +47,11 @@ namespace GAME
 
 
 		//-----------------------------------------------------
-		//現在スクリプトが現在アクションにおける最終フレーム ならば
-		if ( m_pAction->IsOverScript ( m_frame ) )
-		{
-			EndAction ();	//アクション終了処理
-			//次アクション m_frame = 0に遷移
-		}
-
-		//-----------------------------------------------------
 		// スクリプト通常処理
 		ExeScript ();
 
 
-		//通常処理：スクリプトを１つ進める
-		++ m_frame;
-
-
+		//-----------------------------------------------------
 		//スロウのとき
 #if 0
 
@@ -91,9 +80,25 @@ namespace GAME
 		}
 
 #endif // 0
-
-
 	}
+
+
+	void ExeChara::EndScript ()
+	{
+		//-----------------------------------------------------
+		//通常処理：スクリプトを１つ進める
+		++ m_frame;
+
+		//-----------------------------------------------------
+		//次スクリプトがオーバー
+		// -> 現在アクションにおける最終フレーム ならば
+		if ( m_pAction->IsOverScript ( m_frame ) )
+		{
+			EndAction ();	//アクション終了処理
+			//次アクション m_frame = 0に遷移
+		}
+	}
+
 
 	//アクション移項（コマンドに関する処理）
 	bool ExeChara::TranditAction_Command ()
@@ -129,9 +134,9 @@ namespace GAME
 			//コマンドが完成したIDを優先順に保存したリスト
 
 			m_pCharaInput->MakeTransitIDList ( *m_pChara, m_vOfstCncl, m_btlPrm.GetDirRight () );
-			const V_UINT & vCompID = m_pCharaInput->GetvCompID ();
+			const V_UINT & vCompID_Offset = m_pCharaInput->GetvCompID ();
 
-			for ( UINT id : vCompID )
+			for ( UINT id : vCompID_Offset )
 			{
 				//遷移先チェック
 				P_Action pAct = m_pChara->GetpAction ( id );
@@ -214,7 +219,9 @@ namespace GAME
 	//アクション移行(自身)
 	void  ExeChara::TransitAction_Condition_I ( BRANCH_CONDITION CONDITION, bool forced )
 	{
-		//ヒット・相手
+		(void)forced;
+#if 0
+		//条件を満たしたときに自身を変更する
 		UINT indexAction = Check_TransitAction_Condition ( CONDITION );
 		if ( NO_COMPLETE != indexAction )
 		{
@@ -226,7 +233,26 @@ namespace GAME
 			SetAction ( indexAction );	//遷移
 			m_btlPrm.SetForcedChange ( forced );	//強制
 		}
+#endif // 0
+
+		//アクション名を取得
+		s3d::String nameAction = Check_TransitAction_Condition_str ( CONDITION );
+
+		//=================================================================
+		//遷移先チェック
+
+		//該当無しは"ノーリアクション"にして変更なし
+		UINT index = m_pChara->GetActionID ( nameAction );
+		if ( NO_ACTION == index )
+		{
+			nameAction = U"ノーリアクション";
+		}
+
+		//=================================================================
+		//自身の変更先アクション名を保存
+		m_nameChangeMine = nameAction;
 	}
+
 
 	//アクション移行 ( 自分攻撃、相手ヒット )
 	void  ExeChara::TransitAction_Condition_E ( BRANCH_CONDITION CONDITION, bool forced )
@@ -308,6 +334,31 @@ namespace GAME
 #endif // 0
 	}
 
+	//----------------------------------------------
+	//判定後、自身の強制変更
+	void ExeChara::ChangeMine ()
+	{
+		if ( ! ExistActionName ( m_nameChangeMine ) )
+		{
+			TRACE_F ( _T("ChangeOther(): Error : name = %s\n"), m_nameChangeMine.toWstr().c_str () );
+			//対象なしのときアサート
+			//assert ( m_nameChangeOther );
+		}
+
+		//ノーリアクション
+		if ( 0 == m_nameChangeMine.compare ( U"ノーリアクション" ) )
+		{
+			//変更せず続行
+			return;
+		}
+
+		//相手を変更
+		m_btlPrm.SetForcedChange ( T );	//強制
+		SetAction ( m_nameChangeMine );	//遷移
+	}
+
+
+	//判定後、相手の強制変更
 	void ExeChara::ChangeOhter ()
 	{
 		if ( ! m_pOther.lock ()->ExistActionName ( m_nameChangeOther ) )
@@ -328,6 +379,7 @@ namespace GAME
 		m_pOther.lock ()->m_btlPrm.SetForcedChange ( T );	//強制
 		m_pOther.lock ()->SetAction ( m_nameChangeOther );	//遷移
 	}
+	//----------------------------------------------
 
 
 	//アクション移行(条件チェック)

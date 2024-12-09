@@ -126,6 +126,9 @@ namespace GAME
 		void PreScriptMove ();
 		void RectMove ();
 		void PostScriptMove ();
+
+		//復旧状態のときにスクリプトを１つ進める
+		void NextScript ();
 	};
 	using P_CHST_Main = std::shared_ptr < CHST_Main >;
 
@@ -133,7 +136,7 @@ namespace GAME
 	//バトル　一時停止
 	class CHST_ScpStop : public ExeChara_State
 	{
-		Timer		m_timer;
+//		Timer		m_timer;
 	public:
 		s3d::String GetName () const { return U"Stop"; }
 		void Start ();

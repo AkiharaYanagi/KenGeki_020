@@ -70,8 +70,9 @@ namespace GAME
 		void StartWinner ();
 
 		//メイン中一時遷移	
-		void ShiftFighting ();
+		void ShiftFightingMain ();	//状態を通常状態に戻す
 		void ShiftScpStop ();
+		void RestoreScpStop ();		//一時停止からの復旧
 		void ShiftSlowSkip ();
 		void ShiftWallBreak ();
 

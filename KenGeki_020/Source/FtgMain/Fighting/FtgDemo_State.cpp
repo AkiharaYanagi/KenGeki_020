@@ -156,16 +156,20 @@ namespace GAME
 
 		P_MutualChara pMutual = GetpMutualChara ();
 
-		//一時停止
-		bool bStop =  GetpFtgGrp()->IsActive_ScpStop ();
-		if ( bStop )
+
+		//一時停止解除
+		bool bStop_last =  GetpFtgGrp()->IsLast_ScpSopt ();
+		if ( bStop_last )
 		{
-			pMutual->ShiftScpStop ();
+			//pMutual->ShiftScpStop ();
+			//@info 開始はExeCharaで行う
 		}
 		else
 		{
-			pMutual->ShiftFighting ();
+			//pMutual->ShiftFightingMain ();
+			pMutual->RestoreScpStop ();
 		}
+
 
 		//[一時] 壁割
 		bool bOnWallBreak = GetpFtgGrp()->GetWallBreak ();
@@ -262,7 +266,7 @@ namespace GAME
 			//通常状態へ移行
 			PLAYER_ID WB_Player = m_prmFtgDemo->GetpFtgGrp()->GetWB_Player ();
 			GetpMutualChara()->WallBreak_Action ( WB_Player );
-			GetpMutualChara()->ShiftFighting ();
+			GetpMutualChara()->ShiftFightingMain ();
 			GetwpFtgDemoActor().lock()->Shift_WallBreak_To_Main();
 		}
 
@@ -436,7 +440,9 @@ namespace GAME
 
 		//キャラ
 		GetpMutualChara ()->StartWinner ( );
-//		GetwpFighting().lock()->WinnerDemo ();
+#if 0
+		GetwpFighting().lock()->WinnerDemo ();
+#endif // 0
 
 
 		//勝者表示

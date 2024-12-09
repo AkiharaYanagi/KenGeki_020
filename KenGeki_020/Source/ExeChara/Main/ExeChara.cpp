@@ -75,18 +75,19 @@ namespace GAME
 	//	Stateから呼ばれる状態別処理
 	//***********************************************************
 	//PreScriptMove
-	//	void Input ();			//入力処理
-	//	void TransitAction ();	//アクション移項
-	//	void CalcPos ();		// 位置計算		//ぶつかり後、位置の修正
-	//	voidGenerate_Effect ()
+	//	void Input ();				//入力処理
+	//	void TransitAction ();		//アクション移項
+	//	void CalcPos ();			//位置計算	//ぶつかり後、位置の修正
+	//	void Generate_Effect ();	//スクリプト処理 前 エフェクト生成
 	//	void PreMove_Effect ();		//スクリプト処理 前 エフェクト動作
 
 	//PostScriptMove
 	//	void PostMove_Effect ();	//スクリプト処理 後 エフェクト動作
-	//	void MoveTimer () { m_btlPrm.TimerMove (); }		//タイマ稼働
-	//	void CheckLife ();		//ライフ判定
-	//	void UpdateGraphic ();	//グラフィック更新
-	//	void Sound_Play ();		//音の再生(SE, VC)
+	//	void MoveTimer ();			//タイマ稼働
+	//	void CheckLife ();			//ライフ判定
+	//	void UpdateGraphic ();		//グラフィック更新
+	//	void Sound_Play ();			//音の再生(SE, VC)
+	//	void EndScript ();			//スクリプト終了、次へ移行
 	//===========================================================
 
 
@@ -199,6 +200,12 @@ namespace GAME
 	//	-> "ExeChara_Sound.cpp"
 
 
+	//================================================
+	//スクリプト終了、次へ移行
+	//	void EndScript ();
+	//	-> "ExeChara_Transit.cpp"
+
+
 	//====================================================================================
 
 	//入力表示切替
@@ -265,6 +272,11 @@ namespace GAME
 		m_pAction = m_pChara->GetpAction ( m_actionID );
 		m_pScript = m_pAction->GetpScript ( m_frame );
 
+		if ( Is1P () )
+		{
+			DBGOUT_WND_F ( DBGOUT_0, U" m_frame = {}"_fmt( m_frame ) );
+		}
+
 		//------------------------------------------------
 		//	特殊アクション指定
 		SpecialAction ();
@@ -317,10 +329,22 @@ namespace GAME
 		//------------------------------------------------
 		//スクリプトからの停止
 		//	タイマの状態を確認しないと同じスクリプトを調べ続けてしまう
-		if ( ! m_pFtgGrp->IsActive_ScpStop () )
+		if ( m_pFtgGrp->IsActive_ScpStop () )
 		{
+			//自身の一時停止を解除
+			//ShiftFightingMain ();
+
+			//@info 解除はFTG_DM_Main::Do()で行う
+		}
+		else
+		{
+			//一時停止状態でないとき
+
+			//スクリプトから値を取得
 			UINT scpStop = m_pScript->m_prmStaging.Stop;
 			m_btlPrm.SetScpStop ( scpStop );
+
+			//0でないとき
 			if ( scpStop > 0 )
 			{
 				//全体グラフィックに値を指定する
@@ -333,6 +357,12 @@ namespace GAME
 		}
 
 	}
+
+	void ExeChara::RestoreScpStop ()
+	{
+		m_actor.RestoreScpStop ();
+	}
+
 
 	//====================================================================================
 
@@ -442,6 +472,7 @@ namespace GAME
 		}
 		return F;
 	}
+
 
 	void ExeChara::EndBattle ()
 	{

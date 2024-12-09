@@ -340,7 +340,9 @@ namespace GAME
 		}
 	}
 
-		//勝利デモ移行
+	//勝利デモ移行
+	//	->個別でExeCharaStateで行う
+#if 0
 	void Fighting::WinnerDemo ()
 	{
 		//トレーニングモードは時間計測しない
@@ -369,6 +371,7 @@ namespace GAME
 			m_exeChara2->SetAction ( U"引分" );
 		}
 	}
+#endif // 0
 
 	bool Fighting::IsDraw () const
 	{

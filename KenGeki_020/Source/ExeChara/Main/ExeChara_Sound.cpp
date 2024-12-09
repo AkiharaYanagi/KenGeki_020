@@ -28,8 +28,17 @@ namespace GAME
 	//サウンドエフェクトの再生
 	void ExeChara::SE_Play ()
 	{
+		//空欄は何もしない
+		if ( m_pScript->m_prmStaging.SE_Name.compare ( U"" ) == 0 ) { return; }
+
+//		DBGOUT_WND_F ( DBGOUT_0, U" FirstSE = {}"_fmt(  m_btlPrm.GetFirstSE () ? 1 : 0 ) );
+//		DBGOUT_WND_F ( DBGOUT_1, U" FirstSE = {}"_fmt(  m_btlPrm.GetFirstSE () ? 1 : 0 ) );
+
 		//一時停止中は１回のみ
-		if ( m_btlPrm.GetFirstSE () ) { return; }
+		if ( m_btlPrm.GetFirstSE () )
+		{
+			return;
+		}
 		
 		//ヒットストップ中(同一スクリプト)は１回のみ
 		P_Timer pTmr = m_btlPrm.GetTmr_HitStop();
@@ -53,9 +62,6 @@ namespace GAME
 	//SEの再生指定
 	void ExeChara::PlaySE ( const s3d::String & se_name )
 	{
-		//空欄は何もしない
-		if ( se_name.compare ( U"" ) == 0 ) { return; }
-
 		SND_PLAY_ONESHOT_SE ( se_name );		//名前から再生
 	}
 

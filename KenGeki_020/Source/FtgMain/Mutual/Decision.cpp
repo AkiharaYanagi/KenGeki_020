@@ -326,9 +326,11 @@ namespace GAME
 		if ( hit2P )
 		{
 			m_pExeChara1p->ChangeOhter ();
+			m_pExeChara1p->ChangeMine ();
 		}
 		if ( hit1P )
 		{
+			m_pExeChara2p->ChangeMine ();
 			m_pExeChara2p->ChangeOhter ();
 		}
 

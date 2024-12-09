@@ -165,6 +165,9 @@ namespace GAME
 		//入力
 		m_pCharaInput->ClearInput ();
 
+		//遷移
+		m_nameChangeMine = U"ノーリアクション";
+		m_nameChangeOther = U"ノーリアクション";
 
 		//アクタ
 		m_actor.Init ();

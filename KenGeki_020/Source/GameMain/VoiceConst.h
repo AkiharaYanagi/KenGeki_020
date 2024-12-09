@@ -22,8 +22,9 @@ namespace GAME
 	//　"VC\\"フォルダ内のファイル名で指定する
 
 	//VOICE
-	constexpr char32_t VC_00_TITLE_CALL []		= U"VC00_99_紗絵_タイトルコール.wav";
-	constexpr char32_t VC_01_TITLE_CALL []		= U"VC01_99_烈堂_タイトルコール.wav";
+	constexpr char32_t VC_00_SAE_TITLE_CALL []		= U"VC00_99_紗絵_タイトルコール.wav";
+	constexpr char32_t VC_01_RETSUDOU_TITLE_CALL []	= U"VC01_99_烈堂_タイトルコール.wav";
+	constexpr char32_t VC_02_OUKA_TITLE_CALL []		= U"VC02_33_4_桜花_タイトルコール：剣撃クロスゾーン.wav";
 
 }
 

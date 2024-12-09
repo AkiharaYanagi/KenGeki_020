@@ -20,8 +20,8 @@ namespace GAME
 	// ※凡例
 	//■	：他ステートと比較して外してある項目
  	//------------------------------------------------
-	//
-	// 
+
+
 	//=====================================================
 	//共通：入力なしPreScriptMove
 	void ExeChara_State::PreScriptMove_NoInput ()
@@ -42,13 +42,13 @@ namespace GAME
 		pExe->PostMove_Effect ();		//エフェクト生成と動作
 		//■		pExe->CheckLife ();		//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
-		pExe->SoundPlay ();		//音の再生
-//		pExe->SE_Play ();			//SEの再生
-//		pExe->VC_Play ();			//VCの再生
+		pExe->SoundPlay ();			//音(SE, VC)の再生
 
 		pExe->MoveTimer ();		//タイマ稼働
 		pExe->SetFirstSE ( F );		//SE再生フラグ
 		pExe->SetFirstVC ( F );		//VC再生フラグ
+
+		pExe->EndScript ();			//スクリプト終了、次へ移行
 	}
 
 	//=====================================================
@@ -95,6 +95,7 @@ namespace GAME
 //■		pExe->SetCollisionRect ();	//接触枠設定
 		pExe->Generate_Effect ();	//エフェクト生成
 		pExe->PreMove_Effect ();	//エフェクト動作
+		pExe->EndScript ();			//スクリプト終了、次へ移行
 	}
 
 	void CHST_GetReady::PostScriptMove ()
@@ -144,15 +145,20 @@ namespace GAME
 		pExe->PostMove_Effect ();	//エフェクト動作
 		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
-		pExe->SoundPlay ();			//音の再生
-//		pExe->SE_Play ();			//SEの再生
-//		pExe->VC_Play ();			//VCの再生
-
+		pExe->SoundPlay ();			//音(SE, VC)の再生
 		pExe->MoveTimer ();			//タイマ稼働
-		pExe->SetFirstSE ( F );		//SE再生フラグ
+
+		pExe->SetFirstSE ( F );		//SE再生フラグ (一時停止ステートではOffにしない)
 		pExe->SetFirstVC ( F );		//VC再生フラグ
+
+		pExe->EndScript ();			//スクリプト終了、次へ移行
 	}
 
+
+	void CHST_Main::NextScript ()
+	{
+		GetwpExeChara ().lock()->EndScript ();
+	}
 
 	//------------------------------------------------
 	//バトル　一時停止
@@ -160,20 +166,12 @@ namespace GAME
 	void CHST_ScpStop::Start ()
 	{
 		WP_ExeChara wpExeCh = GetwpExeChara ();
-		UINT stop = wpExeCh.lock()->GetBtlPrm ().GetScpStop ();
-		m_timer.Start ( stop );
+//		UINT stop = wpExeCh.lock()->GetBtlPrm ().GetScpStop ();
+//		m_timer.Start ( stop );
 	}
 
 	void CHST_ScpStop::PreScriptMove ()
 	{
-		//タイマ
-		m_timer.Move ();
-		if ( m_timer.IsLast () )
-		{
-			//終了時に通常バトルにシフト
-			GetwpActor ().lock()->ShiftFighting ();
-		}
-
 		//一連処理
 		P_ExeChara pExe = GetwpExeChara ().lock ();
 		pExe->Input ();				//入力		
@@ -194,13 +192,29 @@ namespace GAME
 		pExe->UpdateGraphic ();		//グラフィックの更新
 
 		//SEは再生してフラグを続投（通常時にOFF）
-		pExe->SoundPlay ();			//音の再生
-//		pExe->SE_Play ();			//SEの再生
-//		pExe->VC_Play ();			//VCの再生
+		pExe->SoundPlay ();			//音(SE, VC)の再生
 		pExe->GetBtlPrm().SetFirstSE ( T );		//SE再生フラグ
 		pExe->GetBtlPrm().SetFirstVC ( T );		//VC再生フラグ
 
 		//■		pExe->MoveTimer ();			//タイマ稼働
+		//■		pExe->EndScript ();			//スクリプト終了、次へ移行
+
+
+		//---------------------------------
+		//タイマと終了処理
+		//終了はFtgGrpのタイマでExeChara::SetParamFromScript()で行う
+#if 0
+//		m_timer.Move ();
+//		if ( m_timer.IsLast () )
+
+		UINT stop = GetwpExeChara ().lock()->GetBtlPrm ().GetScpStop ();
+
+		if ( T )
+		{
+			//終了時に通常バトルにシフト
+			GetwpActor ().lock()->ShiftFightingMain ();
+		}
+#endif // 0
 	}
 
 	//------------------------------------------------
@@ -231,6 +245,7 @@ namespace GAME
 		//■		pExe->MoveTimer ();			//タイマ稼働
 		pExe->SetFirstSE ( F );		//SE再生フラグ
 		pExe->SetFirstVC ( F );		//VC再生フラグ
+		pExe->EndScript ();			//スクリプト終了、次へ移行
 	}
 
 	//------------------------------------------------
@@ -286,6 +301,9 @@ namespace GAME
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
 		pExe->ClearInput ();
+
+		//アクション・スクリプト初期化
+		pExe->SetAction ( U"時間切れ敗北" );
 	}
 
 	void CHST_EndWait::PreScriptMove ()

@@ -260,10 +260,16 @@ namespace GAME
 	}
 
 	//戦闘通常状態に戻る
-	void MutualChara::ShiftFighting ()
+	void MutualChara::ShiftFightingMain ()
 	{
-		m_exeChara1->ShiftFighting ();
-		m_exeChara2->ShiftFighting ();
+		m_exeChara1->ShiftFightingMain ();
+		m_exeChara2->ShiftFightingMain ();
+	}
+
+	void MutualChara::RestoreScpStop ()
+	{
+		m_exeChara1->RestoreScpStop ();
+		m_exeChara2->RestoreScpStop ();
 	}
 
 #if 0
@@ -346,10 +352,12 @@ namespace GAME
 		if ( PLAYER_ID_1 == winner )
 		{
 			m_exeChara1->StartWinner ();
+			m_exeChara2->StartTimeUp ();
 		}
 		else if ( PLAYER_ID_2 == winner )
 		{
 			m_exeChara2->StartWinner ();
+			m_exeChara1->StartTimeUp ();
 		}
 
 	}

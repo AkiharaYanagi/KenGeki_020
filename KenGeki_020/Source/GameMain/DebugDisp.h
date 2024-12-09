@@ -20,7 +20,7 @@ namespace GAME
 //	0 : OFF
 //  1 : ON
 
-#define DEBUG_DISP	0
+#define DEBUG_DISP	1
 
 
 }
