@@ -71,8 +71,9 @@ namespace GAME
 		void StartFighting ();		//戦闘開始
 
 		void WallBreak_Action ( PLAYER_ID id );	//壁割後のアクション指定
-		void ShiftFighting ();		//戦闘通常状態に戻る
+		void ShiftFightingMain ();		//戦闘通常状態に戻る
 		void ShiftScpStop ();		//一時停止
+		void RestoreScpStop ();		//一時停止からの復旧
 
 		void EndBattle ();			//戦闘終了
 		void ResetRect ();			//枠リセット

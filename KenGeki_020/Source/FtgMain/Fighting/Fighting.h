@@ -117,8 +117,10 @@ namespace GAME
 		//時間終了時、残ライフで勝者決定(ラウンド反映)
 		void DecideWinner_FromLife ();
 
+#if 0
 		//勝利デモ移行
 		void WinnerDemo ();
+#endif // 0
 
 		//ラウンド取得
 		void AddRound_1p () { m_round->AddRound_1p (); }

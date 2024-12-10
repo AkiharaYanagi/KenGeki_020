@@ -153,9 +153,9 @@ namespace GAME
 		//2024/11/03 デジゲー博
 //		m_strVer->SetStr ( U"Ver 0.10" );
 		//2024/11/03 修正パッチ
-#endif // 0
 		//2024/11/03 修正パッチ
 		//m_strVer->SetStr ( U"Ver 0.12" );
+#endif // 0
 		m_strVer->SetStr ( Ver );
 
 		AddpTask ( m_strVer );
@@ -350,14 +350,12 @@ namespace GAME
 		m_tmr_title_call->Move ();
 		if ( m_tmr_title_call->IsLast () )
 		{
-			int rnd = s3d::Random ( 0, 1 );
-			if ( rnd == 0 )
+			int rnd = s3d::Random ( 0, 2 );
+			switch ( rnd )
 			{
-				SND_PLAY_ONESHOT_VC ( VC_00_TITLE_CALL );
-			}
-			else
-			{
-				SND_PLAY_ONESHOT_VC ( VC_01_TITLE_CALL );
+			case 0: SND_PLAY_ONESHOT_VC ( VC_00_SAE_TITLE_CALL ); break;
+			case 1: SND_PLAY_ONESHOT_VC ( VC_01_RETSUDOU_TITLE_CALL ); break;
+			case 2: SND_PLAY_ONESHOT_VC ( VC_02_OUKA_TITLE_CALL ); break;
 			}
 		}
 
