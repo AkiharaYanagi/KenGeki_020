@@ -108,6 +108,10 @@ namespace GAME
 		P_OprEf			m_oprtEf;
 
 		//------------------------------------------------
+		//自身変更指定の一時保存
+		//ヒット時など相手を変更するときに判定後、1P2P同時に適用する
+		s3d::String		m_nameChangeMine;	//変更する自身のアクション名 
+
 		//相手変更指定の一時保存
 		//ヒット時など相手を変更するときに判定後、1P2P同時に適用する
 		s3d::String		m_nameChangeOther;	//変更する相手のアクション名 
@@ -287,8 +291,9 @@ namespace GAME
 		bool IsDown_Calm () { return IsNameAction ( U"敗北ダウン" ); }
 		void StartWinner	() { m_actor.StartWinner (); }
 
-		void ShiftFighting () { m_actor.ShiftFighting (); }
+		void ShiftFightingMain () { m_actor.ShiftFighting (); }
 		void ShiftScpStop () { m_actor.ShiftScpStop (); }
+		void RestoreScpStop () { m_actor.ShiftScpStop (); }
 
 		bool SkipDecision () const { return m_actor.SkipDecision (); }
 		void ClearInput () { m_pCharaInput->ClearInput (); }
@@ -335,8 +340,13 @@ namespace GAME
 		void OnGuard ();		//ガード成立後の処理
 		void OnKnockBack ();
 
+		//-------------------------
+		//判定後、自身の強制変更
+		void ChangeMine ();
+
 		//判定後、相手の強制変更
 		void ChangeOhter ();
+		//-------------------------
 
 #if 0
 		//相殺

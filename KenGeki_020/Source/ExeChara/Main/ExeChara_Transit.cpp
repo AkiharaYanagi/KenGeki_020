@@ -129,9 +129,9 @@ namespace GAME
 			//コマンドが完成したIDを優先順に保存したリスト
 
 			m_pCharaInput->MakeTransitIDList ( *m_pChara, m_vOfstCncl, m_btlPrm.GetDirRight () );
-			const V_UINT & vCompID = m_pCharaInput->GetvCompID ();
+			const V_UINT & vCompID_Offset = m_pCharaInput->GetvCompID ();
 
-			for ( UINT id : vCompID )
+			for ( UINT id : vCompID_Offset )
 			{
 				//遷移先チェック
 				P_Action pAct = m_pChara->GetpAction ( id );
