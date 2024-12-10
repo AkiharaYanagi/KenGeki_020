@@ -793,7 +793,9 @@
     <None Include=".editorconfig">
       <Filter>99_Resource Files</Filter>
     </None>
-    <None Include="cpp.hint" />
+    <None Include="cpp.hint">
+      <Filter>99_Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Media Include="App\example\test.mp3">

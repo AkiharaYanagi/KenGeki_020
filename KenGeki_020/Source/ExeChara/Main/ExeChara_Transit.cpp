@@ -45,10 +45,11 @@ namespace GAME
 		// 特殊条件による分岐
 		TranditAction_Special ();
 
-
 		//-----------------------------------------------------
 		// スクリプト通常処理
 		ExeScript ();
+
+
 
 
 		//-----------------------------------------------------
@@ -85,6 +86,11 @@ namespace GAME
 
 	void ExeChara::EndScript ()
 	{
+		if ( Is1P () )
+		{
+			DBGOUT_WND_F ( DBGOUT_8, U"PreScriptMove: m_frame = {}"_fmt( m_frame ) );
+		}
+
 		//-----------------------------------------------------
 		//通常処理：スクリプトを１つ進める
 		++ m_frame;
@@ -97,6 +103,12 @@ namespace GAME
 			EndAction ();	//アクション終了処理
 			//次アクション m_frame = 0に遷移
 		}
+
+		if ( Is1P () )
+		{
+			DBGOUT_WND_F ( DBGOUT_9, U"PreScriptMove: m_frame = {}"_fmt( m_frame ) );
+		}
+
 	}
 
 
@@ -175,7 +187,7 @@ namespace GAME
 
 			//次フレームのスクリプトを１つ進める
 			//今回フレームは取得済みのm_pScriptを用いる
-			++ m_frame;
+//			++ m_frame;
 
 			//終了
 			return T;

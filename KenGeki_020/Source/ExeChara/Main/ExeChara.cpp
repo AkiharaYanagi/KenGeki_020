@@ -274,16 +274,33 @@ namespace GAME
 
 		if ( Is1P () )
 		{
-			DBGOUT_WND_F ( DBGOUT_0, U" m_frame = {}"_fmt( m_frame ) );
+			UINT frame = GetpScript()->GetFrame ();
+			DBGOUT_WND_F ( DBGOUT_1, U"TransitAction: m_frame = {}"_fmt( m_frame ) );
 		}
+
 
 		//------------------------------------------------
 		//	特殊アクション指定
 		SpecialAction ();
 
+		if ( Is1P () )
+		{
+			UINT frame = GetpScript()->GetFrame ();
+			DBGOUT_WND_F ( DBGOUT_2, U"TransitAction: m_frame = {}"_fmt( m_frame ) );
+		}
+
 		//------------------------------------------------
 		//スクリプトからのパラメータ反映
 		SetParamFromScript ();
+
+
+
+		if ( Is1P () )
+		{
+			UINT frame = GetpScript()->GetFrame ();
+			DBGOUT_WND_F ( DBGOUT_3, U"TransitAction: m_frame = {}"_fmt( m_frame ) );
+		}
+
 	}
 
 

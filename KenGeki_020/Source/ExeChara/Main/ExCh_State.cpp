@@ -117,6 +117,9 @@ namespace GAME
 	void CHST_Main::PreScriptMove ()
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();
+
+
+
 		pExe->Input ();				//入力		
 
 		//ヒットストップ時は以降を飛ばす
@@ -142,6 +145,16 @@ namespace GAME
 	void CHST_Main::PostScriptMove ()
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();
+
+
+		if ( pExe->Is1P () )
+		{
+			UINT m_frame = pExe->GetpScript()->GetFrame ();
+			DBGOUT_WND_F ( DBGOUT_2, U"PostScriptMove: m_frame = {}"_fmt( m_frame ) );
+		}
+
+
+
 		pExe->PostMove_Effect ();	//エフェクト動作
 		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新
