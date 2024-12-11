@@ -266,6 +266,12 @@ namespace GAME
 		m_exeChara2->ShiftFightingMain ();
 	}
 
+	void MutualChara::ShiftFightingMain_PreScriptMove ()
+	{
+		m_exeChara1->ShiftFightingMain_PreScriptMove ();
+		m_exeChara2->ShiftFightingMain_PreScriptMove ();
+	}
+
 	void MutualChara::RestoreScpStop ()
 	{
 		m_exeChara1->RestoreScpStop ();

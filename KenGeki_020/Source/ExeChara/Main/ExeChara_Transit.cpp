@@ -308,6 +308,28 @@ namespace GAME
 #endif // 0
 	}
 
+	void ExeChara::ChangeMine ()
+	{
+		if ( ! m_pOther.lock ()->ExistActionName ( m_nameChangeMine ) )
+		{
+			TRACE_F ( _T("ChangeOther(): Error : name = %s\n"), m_nameChangeMine.toWstr().c_str () );
+			//対象なしのときアサート
+			//assert ( m_nameChangeMine );
+		}
+
+		//ノーリアクション
+		if ( 0 == m_nameChangeMine.compare ( U"ノーリアクション" ) )
+		{
+			//変更せず続行
+			return;
+		}
+
+		//相手を変更
+		m_pOther.lock ()->m_btlPrm.SetForcedChange ( T );	//強制
+		m_pOther.lock ()->SetAction ( m_nameChangeMine );	//遷移
+	}
+
+
 	void ExeChara::ChangeOhter ()
 	{
 		if ( ! m_pOther.lock ()->ExistActionName ( m_nameChangeOther ) )
@@ -409,8 +431,8 @@ namespace GAME
 					m_pOther.lock()->SetAction ( U"ホーミング" );
 
 					//ステートの変更
-					m_actor.ShiftWallBreak ();
-					m_pOther.lock()->m_actor.ShiftWallBreak ();
+					m_pActor->ShiftWallBreak ();
+					m_pOther.lock()->m_pActor->ShiftWallBreak ();
 
 					//グラフィックからFTG全体に反映
 					m_pFtgGrp->SetWallBreak ( T );

@@ -17,7 +17,7 @@
 namespace GAME
 {
 
-	class ExeChara_Actor
+	class ExeChara_Actor : public std::enable_shared_from_this < ExeChara_Actor >
 	{
 		//ステート
 		P_CHST_Start		m_Start;
@@ -53,6 +53,7 @@ namespace GAME
 		~ExeChara_Actor () {}
 
 		void Init ();
+		void Load ();
 
 		void SetwpExeChara ( WP_ExeChara p ) { mp_param->SetwpExeChara ( p ); }
 
@@ -70,7 +71,8 @@ namespace GAME
 		void StartWinner ();
 
 		//メイン中一時遷移	
-		void ShiftFighting ();
+		void ShiftFightingMain ();
+		void ShiftFightingMain_PreScriptMove ();
 		void ShiftScpStop ();
 		void ShiftSlowSkip ();
 		void ShiftWallBreak ();
@@ -92,6 +94,9 @@ namespace GAME
 		//Decision()の最初に呼ばれ、処理をスキップするかどうか
 		bool SkipDecision () const { return mp_state->SkipDecision (); }
 	};
+
+
+	using P_ExeChara_Actor = std::shared_ptr < ExeChara_Actor >;
 
 
 }	//namespace GAME

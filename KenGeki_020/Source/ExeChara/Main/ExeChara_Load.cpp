@@ -100,7 +100,8 @@ namespace GAME
 
 		//--------------------------------------------
 		//アクタ・ステートに用いる状態パラメータに登録
-		m_actor.SetwpExeChara ( shared_from_this () );
+		m_pActor->SetwpExeChara ( shared_from_this () );
+		m_pActor->Load ();
 
 		//--------------------------------------------
 		//キャラ表示初期化
@@ -170,7 +171,7 @@ namespace GAME
 		m_nameChangeOther = U"ノーリアクション";
 
 		//アクタ
-		m_actor.Init ();
+		m_pActor->Init ();
 
 		//表示
 		// 特殊演出初期化

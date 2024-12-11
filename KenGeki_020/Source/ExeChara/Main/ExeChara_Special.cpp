@@ -147,11 +147,11 @@ namespace GAME
 				m_pOther.lock()->m_dispChara->TurnShadow ( T );
 			}
 
-			if ( ! m_pFtgGrp->IsActive_WhiteOut () )
-			{
-				m_dispChara->TurnShadow ( F );
-				m_pOther.lock()->m_dispChara->TurnShadow ( F );
-			}
+		}
+		if ( ! m_pFtgGrp->IsActive_WhiteOut () )
+		{
+			m_dispChara->TurnShadow ( F );
+			m_pOther.lock()->m_dispChara->TurnShadow ( F );
 		}
 
 		//-----------------------------------------------------

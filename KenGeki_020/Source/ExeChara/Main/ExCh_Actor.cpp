@@ -8,6 +8,8 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "ExCh_Actor.h"
+#include "ExeChara.h"
+
 
 //-------------------------------------------------------------------------------------------------
 // 定義
@@ -71,6 +73,12 @@ namespace GAME
 		mp_state = m_Main;
 	}
 
+	void ExeChara_Actor::Load ()
+	{
+		std::shared_ptr < ExeChara_Actor > sp_actor =  shared_from_this ();
+		mp_param->SetwpExeChara_Actor ( sp_actor );
+	}
+
 
 	//==========================================================
 	//状態変更	(Start()を実行する)
@@ -121,8 +129,14 @@ namespace GAME
 	//==========================================================
 	//メイン中一時遷移
 	//==========================================================
-	void ExeChara_Actor::ShiftFighting ()
+	void ExeChara_Actor::ShiftFightingMain ()
 	{
+		mp_state = m_Main;
+	}
+
+	void ExeChara_Actor::ShiftFightingMain_PreScriptMove ()
+	{
+		m_Main->PreScriptMove ();
 		mp_state = m_Main;
 	}
 

@@ -45,7 +45,7 @@ namespace GAME
 	FTG_DM_Greeting::FTG_DM_Greeting ()
 	{
 		m_timer = std::make_shared < Timer > ();
-		m_timer->SetTargetTime ( 120 );
+		m_timer->SetTargetTime ( 180 );
 	}
 
 	void FTG_DM_Greeting::Start ()
@@ -156,16 +156,19 @@ namespace GAME
 
 		P_MutualChara pMutual = GetpMutualChara ();
 
+
 		//一時停止
-		bool bStop =  GetpFtgGrp()->IsActive_ScpStop ();
-		if ( bStop )
+		if ( GetpFtgGrp()->IsStart_ScpStop () )
 		{
 			pMutual->ShiftScpStop ();
 		}
-		else
+		//最終時に通常状態に戻す
+		if ( GetpFtgGrp()->IsLast_ScpStop () )
 		{
-			pMutual->ShiftFighting ();
+			GetpFtgGrp()->ClearTmr_ScpStop ();
+			pMutual->ShiftFightingMain ();
 		}
+
 
 		//[一時] 壁割
 		bool bOnWallBreak = GetpFtgGrp()->GetWallBreak ();
@@ -262,7 +265,7 @@ namespace GAME
 			//通常状態へ移行
 			PLAYER_ID WB_Player = m_prmFtgDemo->GetpFtgGrp()->GetWB_Player ();
 			GetpMutualChara()->WallBreak_Action ( WB_Player );
-			GetpMutualChara()->ShiftFighting ();
+			GetpMutualChara()->ShiftFightingMain ();
 			GetwpFtgDemoActor().lock()->Shift_WallBreak_To_Main();
 		}
 

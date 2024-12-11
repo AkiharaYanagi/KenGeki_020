@@ -170,8 +170,11 @@ namespace GAME
 		m_timer.Move ();
 		if ( m_timer.IsLast () )
 		{
+			m_timer.Clear ();
+
 			//終了時に通常バトルにシフト
-			GetwpActor ().lock()->ShiftFighting ();
+			GetwpActor ().lock()->ShiftFightingMain_PreScriptMove ();
+			return;
 		}
 
 		//一連処理
