@@ -153,8 +153,9 @@ namespace GAME
 		//2024/11/03 デジゲー博
 //		m_strVer->SetStr ( U"Ver 0.10" );
 		//2024/11/03 修正パッチ
-		//2024/11/03 修正パッチ
 		//m_strVer->SetStr ( U"Ver 0.12" );
+		//2024/12/15 変な格ゲー会
+		//0.15
 #endif // 0
 		m_strVer->SetStr ( Ver );
 
@@ -289,6 +290,18 @@ namespace GAME
 			//カウント終了後、シーン移行
 			if ( m_tmrDemo.IsLast () )
 			{
+				//値の取得
+				P_Param pPrm = GetpParam();
+
+				//ランダムで各種値を決める
+				pPrm->SetCharaName1p ( GetCharaName_Rnd () );	//キャラランダム
+				pPrm->SetCharaName2p ( GetCharaName_Rnd () );	//キャラランダム
+				pPrm->SetStageName ( GetStageName_Rnd () );	//ステージランダム
+				pPrm->Set_BGM_ID ( GetBGM_ID_Rnd () );		//BGMランダム
+
+				//CPU操作
+				pPrm->SetMutchMode ( MUTCH_MODE::MODE_CPU_CPU );
+
 				SND_PLAY_ONESHOT_SE ( SE_select_decide );
 				m_fade_demo->StartBlackOut ( FADE_OUT_T );
 				m_barDemo->SetValid ( F );
@@ -310,15 +323,6 @@ namespace GAME
 			{
 				//デモモードタイマのスタート
 				m_tmrDemo.Start ();
-
-				//ランダムで各種値を決める
-				pPrm->SetCharaName1p ( GetCharaName_Rnd () );	//キャラランダム
-				pPrm->SetCharaName2p ( GetCharaName_Rnd () );	//キャラランダム
-				pPrm->SetStageName ( GetStageName_Rnd () );	//ステージランダム
-				pPrm->Set_BGM_ID ( GetBGM_ID_Rnd () );		//BGMランダム
-
-				//CPU操作
-				pPrm->SetMutchMode ( MUTCH_MODE::MODE_CPU_CPU );
 			}
 			else
 			{
@@ -578,11 +582,12 @@ namespace GAME
 	{
 		CHARA_NAME ret = CHARA_NAME::CHARA_SAE;
 
-		int rnd = s3d::Random ( 1 );
+		int rnd = s3d::Random ( 2 );
 		switch ( rnd )
 		{
 		case 0: ret = CHARA_NAME::CHARA_SAE;		break;
 		case 1: ret = CHARA_NAME::CHARA_RETSUDOU;	break;
+		case 2: ret = CHARA_NAME::CHARA_OUKA;		break;
 		};
 
 		return ret;

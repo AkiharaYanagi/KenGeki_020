@@ -81,6 +81,9 @@ namespace GAME
 
 		m_nActTransit = rhs.m_nActTransit;		//アクション移行回数
 		m_kouatsu = rhs.m_kouatsu;			//剣撃抗圧
+
+		m_reviseThrow = rhs.m_reviseThrow;		//投げ後の連続技中補正
+		m_confirmed_revise = rhs.m_confirmed_revise;		//最終確定補正値
 	}
 
 	BtlParam::~BtlParam ()
@@ -197,6 +200,9 @@ namespace GAME
 		//m_nActTransit
 
 		m_kouatsu = F;
+
+		m_reviseThrow = 1.f;
+		m_confirmed_revise = 1.f;
 	}
 
 	void BtlParam::TimerMove ()
@@ -248,6 +254,10 @@ namespace GAME
 
 		//連続ヒットダメージのリセット
 		m_chainDamage = 0;
+
+		//補正
+		m_reviseThrow = 1.f;
+		m_confirmed_revise = 1.f;
 	}
 
 
@@ -772,7 +782,17 @@ namespace GAME
 
 
 		//@info 連続ヒット数は常に加算し、ニュートラル状態で「相手(m_pOther)」の値を０に戻す
+		//ガード時は加算しない
 
+#if 0
+		//連続ヒット数
+		++ m_chainHitNum;
+		m_pParam->UpdateIfMax_Chain ( m_playerID, m_chainHitNum );
+#endif // 0
+	}
+
+	void BtlParam::IncChainHitNum ()
+	{
 		//連続ヒット数
 		++ m_chainHitNum;
 		m_pParam->UpdateIfMax_Chain ( m_playerID, m_chainHitNum );

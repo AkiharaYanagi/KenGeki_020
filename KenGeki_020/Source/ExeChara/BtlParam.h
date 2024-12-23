@@ -118,6 +118,9 @@ namespace GAME
 
 		bool	m_kouatsu { F };		//剣撃抗圧
 
+		float	m_reviseThrow { 1.f };		//投げ後の連続技中補正
+		float	m_confirmed_revise { 1.f };	//最終確定補正値
+
 	public:
 		BtlParam ();
 		BtlParam ( const BtlParam & rhs );	// ※ コピー可能
@@ -207,6 +210,8 @@ namespace GAME
 		GET_SET ( _CLR, GetColor, SetColor, m_color )
 
 		GET_SET ( int, GetKouAtsu, SetKouAtsu, m_kouatsu )	//剣撃抗圧
+		GET_SET ( float, GetReviseThrow, SetReviseThrow, m_reviseThrow )
+		GET_SET ( float, GetCnfmRvs, SetCnfmRvs, m_confirmed_revise )
 
 		//--------------------------------------------------------------------
 		//タイマ
@@ -238,6 +243,7 @@ namespace GAME
 		void DirZeroAccel ( int n );	//０方向に向かう
 		void AddNActTrs ( int n ) { m_nActTransit += n; }
 		void AddChainDamage ( int32 n ) { m_chainDamage += n; }
+		void IncChainHitNum ();
 
 		//----
 		//処理まとめ

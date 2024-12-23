@@ -290,6 +290,16 @@ namespace GAME
 		int drctDmg = m_pScript->m_prmBattle.DirectDamage;
 		if ( drctDmg != 0 )
 		{
+
+			if ( IsNameAction ( U"超必殺Bヒット" ) )
+			{
+				bool b = m_pOther.lock()->IsNameAction ( U"烈堂_超必Bやられ" );
+				if ( ! b )
+				{
+					drctDmg /= 10;
+				}
+			}
+
 			m_pOther.lock()->m_btlPrm.OnDamage ( - drctDmg );
 
 			//自分の連続ヒットダメージ数

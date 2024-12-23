@@ -489,9 +489,12 @@ namespace GAME
 	void CharaSele::Input ()
 	{
 		//BackSpaceでタイトルに戻る (ESCは直接終了)
+		//コントローラ(7:リセットボタン)でも戻る
 		if ( ! m_fade_toTitle->IsActive () )
 		{
-			if ( WND_UTL::AscKey ( VK_BACK ) )
+			bool bBackSpace = WND_UTL::AscKey ( VK_BACK );
+			bool bCtrlReset = CFG_PUSH_KEY_12 ( PLAYER_INPUT::PLY_BTN7 );
+			if ( bBackSpace || bCtrlReset )
 			{
 				SND_PLAY_ONESHOT_SE ( SE_select_Cancel );
 

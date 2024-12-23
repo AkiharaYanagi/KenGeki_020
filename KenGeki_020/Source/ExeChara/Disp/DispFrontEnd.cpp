@@ -434,9 +434,12 @@ namespace GAME
 	//ダメージ更新
 	void DispFrontEnd::UpdateDamage ( const BtlParam & btlPrm )
 	{
-		//ダメージ
+		//ダメージ(相手)
 		int32 chnDmg = btlPrm.GetChainDamage ();
 		m_strDmg->SetStr ( U"{} Damage"_fmt( chnDmg ) );
+
+		//補正
+#if 0
 
 		//ヒット数による補正表示
 		UINT chain = btlPrm.GetChainHitNum ();
@@ -452,6 +455,10 @@ namespace GAME
 		oss << std::fixed << std::setprecision ( 3 ) << d_revise * 100;
 
 		m_strRevise->SetStr ( U"{}%"_fmt( s3d::Unicode::Widen ( oss.str() ) ) );
+
+#endif // 0
+
+		m_strRevise->SetStr ( U"{0:.2f}%"_fmt( btlPrm.GetCnfmRvs () * 100 ) );
 	}
 
 	void DispFrontEnd::UpdateMainImage ( VEC2 posChara )
@@ -484,8 +491,10 @@ namespace GAME
 
 
 	//ヒット数
-	void DispFrontEnd::UpdateHitNum ( UINT n )
+	void DispFrontEnd::UpdateHitNum ( const BtlParam & btlPrm )
 	{
+		int n = btlPrm.GetChainHitNum ();
+
 		if ( n < 0 || 100 <= n ) { return; }
 
 		int n1 = n % 10;	//1桁目

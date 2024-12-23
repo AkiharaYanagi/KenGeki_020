@@ -104,10 +104,10 @@ namespace GAME
 		void UpdateInput ( P_CharaInput p );
 
 		//ゲージ類更新
-		void UpdateGauge ( BtlParam btlPrm );
+		void UpdateGauge ( const BtlParam & btlPrm );
 
 		//ヒット数更新
-		void UpdateChainHitNum ( UINT n );
+		void UpdateChainHitNum ( const BtlParam & btlPrm );
 	};
 
 

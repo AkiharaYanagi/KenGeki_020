@@ -121,7 +121,7 @@ namespace GAME
 #endif // 0
 
 		//ヒット数
-		void UpdateHitNum ( UINT n );
+		void UpdateHitNum ( const BtlParam & btlPrm );
 
 		//アクション名表示
 		void UpdateActionName ( s3d::String actionName );
