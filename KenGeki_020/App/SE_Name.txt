@@ -21,3 +21,10 @@ SE_19_斬撃0.wav
 SE_20_キャッチ.wav
 SE_21_ダウン.wav
 SE_22_ブオン.wav
+SE_23_烈堂足音.wav
+SE_24_桜花足音.wav
+SE_25_紗絵足音.wav
+SE_26_ガード2.wav
+SE_27_空中ダッシュ1.wav
+SE_28_空中ダッシュ2.wav
+SE_29_烈堂_超必B.wav
