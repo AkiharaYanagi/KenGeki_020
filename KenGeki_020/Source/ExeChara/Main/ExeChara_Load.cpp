@@ -349,12 +349,18 @@ namespace GAME
 		UINT32 i_air = 0;
 		for ( P_Branch pBrc : vpBrc )
 		{
+			//条件：空中行動可能アクションのみ
+			//現在は不可
+#if 0
 			//条件：コマンド入力のみ
 			if ( BRC_CMD == pBrc->GetCondition () )
 			{
 				//リストに追加
 				m_vOfstCncl_Air.push_back ( i_air );
 			}
+
+#endif // 0
+
 
 			++ i_air;
 		}

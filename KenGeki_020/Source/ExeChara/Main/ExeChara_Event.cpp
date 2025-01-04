@@ -422,6 +422,19 @@ namespace GAME
 			pOther->m_btlPrm.SetReviseThrow ( throwRvs );
 		}
 
+		//-------------------------------------------------
+		//特殊補正
+		//49.9% -> 45%補正
+		int32 chainDamage = pOther->m_btlPrm.GetChainDamage ();
+		float d_45 = 1.f;
+		if ( chainDamage > 4500 )
+		{
+			d_45 = 0.1f;
+		}
+		//-------------------------------------------------
+
+
+
 		//最終確定補正値
 		pOther->m_btlPrm.SetCnfmRvs ( d_revise * throwRvs );
 
@@ -429,11 +442,7 @@ namespace GAME
 
 		//最終確定値
 		float confirmed_revise = pOther->m_btlPrm.GetCnfmRvs ();
-		int confirmed_damage = (int) ( confirmed_revise * damage * g );
-
-		//49.9%補正
-		if ( confirmed_damage > LIFE_HALF ) { confirmed_damage = LIFE_HALF; }
-
+		int confirmed_damage = (int) ( confirmed_revise * damage * g * d_45 );
 
 		m_btlPrm.OnDamage ( - confirmed_damage );	//power は＋の値、ダメージ計算はマイナスにして加算
 
