@@ -50,7 +50,7 @@ namespace GAME
 		m_pChara_Ouka = GetpChara_Ouka ();
 		m_pChara_Sae = GetpChara_Sae ();
 		m_pChara_Retsudou = GetpChara_Retsudou ();
-//		m_pChara_Retsudou_2 = GetpChara_Retsudou2 ();
+		m_pChara_Gabadaruga = GetpChara_Gabadaruga ();
 
 		m_read_chara = T;
 	}
@@ -124,7 +124,7 @@ namespace GAME
 		if ( m_pChara_Ouka == nullptr )
 		{
 			m_pChara_Ouka = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb_0 ( CHARA_DAT_OUKA, * m_pChara_Ouka );
+			LoadCharaBin_s3d lcb ( CHARA_DAT_OUKA, * m_pChara_Ouka );
 		}
 		return m_pChara_Ouka;
 	}
@@ -134,7 +134,7 @@ namespace GAME
 		if ( m_pChara_Sae == nullptr )
 		{
 			m_pChara_Sae = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb_1 ( CHARA_DAT_SAE, * m_pChara_Sae );
+			LoadCharaBin_s3d lcb ( CHARA_DAT_SAE, * m_pChara_Sae );
 		}
 		return m_pChara_Sae;
 	}
@@ -144,16 +144,19 @@ namespace GAME
 		if ( m_pChara_Retsudou == nullptr )
 		{
 			m_pChara_Retsudou = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb_1 ( CHARA_DAT_RETSUDOU, * m_pChara_Retsudou );
+			LoadCharaBin_s3d lcb ( CHARA_DAT_RETSUDOU, * m_pChara_Retsudou );
 		}
 		return m_pChara_Retsudou;
 	}
 
-	P_Chara Param::GetpChara_Retsudou2 ()
+	P_Chara Param::GetpChara_Gabadaruga ()
 	{
-		m_pChara_Retsudou_2 = std::make_shared < Chara > ();	//キャラデータ実体
-		//		LoadCharaBin_s3d lcb_3 ( U"chara_Retsudou_Bin.dat", * m_pChara_Retsudou_2 );
-		return m_pChara_Retsudou_2;
+		if ( m_pChara_Gabadaruga == nullptr )
+		{
+			m_pChara_Gabadaruga = std::make_shared < Chara > ();	//キャラデータ実体
+			LoadCharaBin_s3d lcb ( U"chara_Gabadaruga_Bin.dat", * m_pChara_Gabadaruga );
+		}
+		return m_pChara_Gabadaruga;
 	}
 
 
