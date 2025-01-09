@@ -119,11 +119,13 @@ Esc			：	強制終了
 ・サークルスタッフ
 企画・原案・キャラデザイン：	髭武者	(https://x.com/OLT826gnB319137)
 3Dグラフィック・エフェクト：	龍村某	(https://x.com/nani_gassy)
-プログラム・スクリプト：	秋原やなぎ	(https://x.com/akiharasoft)
+プログラム・スクリプト：		秋原やなぎ	(https://x.com/akiharasoft)
+
 
 ・指南書・ミニキャライラスト：　あねほし (https://x.com/ane_hoshimaru)
 ・メインBGM:　高良郁斗@IKUTO	(https://lit.link/ikutotakara)
 ・その他BGM, 効果音: Audiostock	(https://audiostock.jp/)
+
 ・VOICE:
 巴 紗絵：	雲雀ゆい (https://iikoe.org/actor_page/3833)
 烈火 烈堂：	髭武者	 (https://x.com/kankoreoeaki1)
