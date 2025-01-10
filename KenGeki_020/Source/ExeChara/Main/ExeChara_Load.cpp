@@ -270,7 +270,7 @@ namespace GAME
 		case CHARA_OUKA:		m_pChara = m_pParam->GetpChara_Ouka ();			break;
 		case CHARA_SAE:			m_pChara = m_pParam->GetpChara_Sae ();			 break;
 		case CHARA_RETSUDOU:	m_pChara = m_pParam->GetpChara_Retsudou ();		 break;
-		case CHARA_GABADARUGA:	m_pChara = m_pParam->GetpChara_Retsudou2 ();		 break;
+		case CHARA_GABADARUGA:	m_pChara = m_pParam->GetpChara_Gabadaruga ();		 break;
 		default: break;
 		}
 

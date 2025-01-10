@@ -38,7 +38,7 @@ namespace GAME
 		P_Chara			m_pChara_Ouka { nullptr };
 		P_Chara			m_pChara_Sae { nullptr };
 		P_Chara			m_pChara_Retsudou { nullptr };
-		P_Chara			m_pChara_Retsudou_2 { nullptr };
+		P_Chara			m_pChara_Gabadaruga { nullptr };
 		bool			m_read_chara { F };
 
 		//リザルト用
@@ -109,7 +109,7 @@ namespace GAME
 		P_Chara GetpChara_Ouka ();
 		P_Chara GetpChara_Sae ();
 		P_Chara GetpChara_Retsudou ();
-		P_Chara GetpChara_Retsudou2 ();
+		P_Chara GetpChara_Gabadaruga ();
 		bool IsReadChara () const { return m_read_chara; }
 
 
