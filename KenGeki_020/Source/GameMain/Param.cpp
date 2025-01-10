@@ -22,6 +22,7 @@ namespace GAME
 	constexpr char32_t CHARA_DAT_OUKA []		= U"chara_Ouka_Bin.dat";
 	constexpr char32_t CHARA_DAT_SAE []			= U"chara_Sae_Bin.dat";
 	constexpr char32_t CHARA_DAT_RETSUDOU []	= U"chara_Retsudou_Bin.dat";
+	constexpr char32_t CHARA_DAT_GABADARUGA []	= U"chara_Gabadaruga_Bin.dat";
 
 
 	Param::Param ()
@@ -154,7 +155,7 @@ namespace GAME
 		if ( m_pChara_Gabadaruga == nullptr )
 		{
 			m_pChara_Gabadaruga = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb ( U"chara_Gabadaruga_Bin.dat", * m_pChara_Gabadaruga );
+			LoadCharaBin_s3d lcb ( CHARA_DAT_GABADARUGA, * m_pChara_Gabadaruga );
 		}
 		return m_pChara_Gabadaruga;
 	}

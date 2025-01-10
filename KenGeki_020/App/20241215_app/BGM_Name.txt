@@ -1,9 +1,0 @@
-00_BGM_GABA.wav
-01_BGM_SAE.wav
-02_BGM_OUKA.wav
-03_BGM_RETSU.wav
-04_BGM_ENEMY0.wav
-05_BGM_FERA.wav
-10_BGM_Title.wav
-11_BGM_CharaSele.wav
-12_BGM_Result.wav
