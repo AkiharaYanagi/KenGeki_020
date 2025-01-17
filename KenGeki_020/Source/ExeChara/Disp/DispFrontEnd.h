@@ -48,7 +48,7 @@ namespace GAME
 		CHARA_NAME	m_chara_name { CHARA_OUKA };	//キャラ名保存
 
 		//剣撃抗圧
-		P_EfKouAtsu	m_kouatsu;
+		P_EfKouAtsu	m_taikou;
 
 		//-----------------------------------------------------
 

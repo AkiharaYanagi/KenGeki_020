@@ -222,9 +222,9 @@ namespace GAME
 
 		//-----------------------------------------
 		//剣撃抗圧
-		m_kouatsu = std::make_shared < EfKouAtsu > ();
-		AddpTask ( m_kouatsu );
-		GRPLST_INSERT ( m_kouatsu );
+		m_taikou = std::make_shared < EfKouAtsu > ();
+		AddpTask ( m_taikou );
+		GRPLST_INSERT ( m_taikou );
 	}
 
 	//オブジェクト生成用
@@ -424,10 +424,10 @@ namespace GAME
 		m_gaugeAccel->Update ( btlPrm.GetAccel () );
 
 
-		//抗圧
-		if ( btlPrm.GetKouAtsu () )
+		//対抗
+		if ( btlPrm.GetTaikou () )
 		{
-			m_kouatsu->On ( btlPrm );
+			m_taikou->On ( btlPrm );
 		}
 	}
 

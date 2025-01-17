@@ -168,6 +168,7 @@ namespace GAME
 		void PreMove_Effect ();		//スクリプト処理 前 エフェクト動作
 
 		//PostScriptMove
+		void BtlPrm_Move_Input ();	//バトルパラメータ入力処理
 		void PostMove_Effect ();	//スクリプト処理 後 エフェクト動作
 		void MoveTimer ();			//タイマ稼働
 		void CheckLife ();			//ライフ判定

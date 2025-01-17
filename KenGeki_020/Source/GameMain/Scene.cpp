@@ -132,8 +132,8 @@ namespace GAME
 		//デバッグ表示オン/オフ 初期状態
 		//ExeChara 1p/2p のとき、1pの値を2pで上書きに注意
 #if DEBUG_DISP		
-//		DBGOUT_WND_ON ();
-		DBGOUT_WND_OFF ();
+		DBGOUT_WND_ON ();
+//		DBGOUT_WND_OFF ();
 #else
 		DBGOUT_WND_OFF ();
 #endif	//DEBUG_DISP

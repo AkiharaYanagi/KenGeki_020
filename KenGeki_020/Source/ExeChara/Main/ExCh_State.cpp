@@ -141,6 +141,10 @@ namespace GAME
 	void CHST_Main::PostScriptMove ()
 	{
 		P_ExeChara pExe = GetwpExeChara ().lock ();
+
+		//追加
+		pExe->BtlPrm_Move_Input();					//バトルパラメータの入力処理
+
 		pExe->PostMove_Effect ();	//エフェクト動作
 		pExe->CheckLife ();			//ライフ判定
 		pExe->UpdateGraphic ();		//グラフィックの更新

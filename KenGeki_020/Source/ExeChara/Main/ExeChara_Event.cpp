@@ -209,40 +209,49 @@ namespace GAME
 		// 実効値 (float) = (float)1/10
 
 		float recoil_i = 0.1f * m_pScript->m_prmBattle.Recoil_I;
-
 //		float pre_rcl = recoil_i;
 
+#if 0
 
+		//----------------------------------------------------------
 		//★★★ 剣撃抵抗 (打撃時にいずれかの入力で距離離し)
 		P_ExeChara pOther =  m_pOther.lock();
-		if ( pOther->m_pCharaInput->PushSomething () )
+
+		bool bTaikou = pOther->m_btlPrm.GetTmr_Taikou()->IsActive ();
+		if ( bTaikou )
 		{
-			//@info スタミナゲージ消費
-			//バランス消費で移項可能かチェック
-
-			//現在値と比較
-			int balance = pOther->m_btlPrm.GetBalance ();
-			const int COST = 500;
-			if ( balance < COST )
+			if ( pOther->m_pCharaInput->PushSomething () )
 			{
-				//足りないとき遷移しない
-			}
-			else
-			{
-				//必要量があれば消費して遷移する
-				pOther->m_btlPrm.AddBalance ( -1 * COST );
+				//@info スタミナゲージ消費
+				//バランス消費で移項可能かチェック
 
-				//成立時
-				recoil_i *= 10;
-				recoil_i += -10;
+				//現在値と比較
+				int balance = pOther->m_btlPrm.GetBalance ();
+				const int COST = 500;
+				if ( balance < COST )
+				{
+					//足りないとき遷移しない
+				}
+				else
+				{
+					//必要量があれば消費して遷移する
+					pOther->m_btlPrm.AddBalance ( -1 * COST );
 
-				//成立フラグ
-				pOther->m_btlPrm.SetKouAtsu ( T );
-				//フレーム最初にFalse、以降同一フレーム処理で判定に用いる
-				//主にエフェクト発生
+					//成立時
+					recoil_i *= 10;
+					recoil_i += -10;
+
+					//成立フラグ
+					pOther->m_btlPrm.SetTaikou ( T );
+					//フレーム最初にFalse、以降同一フレーム処理で判定に用いる
+					//主にエフェクト発生
+				}
 			}
 		}
-			
+
+
+#endif // 0
+
 
 		//距離ヒット数補正
 		UINT chain = m_btlPrm.GetChainHitNum ();
@@ -382,6 +391,12 @@ namespace GAME
 		}
 #endif // 0
 		bool bGuard = CheckGuard ();
+
+
+		//-------------------------------------------------
+		//★★★ 剣撃抵抗 (打撃時にいずれかの入力で距離離し)
+		//受付タイマをON
+		m_btlPrm.GetTmr_Taikou()->Start ( TAIKOU_TIME );
 
 
 		//-------------------------------------------------

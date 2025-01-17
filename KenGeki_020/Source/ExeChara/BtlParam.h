@@ -92,6 +92,7 @@ namespace GAME
 		P_Timer		m_tmrLurch;			//のけぞりタイマ
 		P_Timer		m_tmrVib;			//個別振動タイマ
 		P_Timer		m_tmrOfstCncl;		//相殺キャンセルタイマ
+		P_Timer		m_tmrTaikou;		//剣撃対抗受付タイマ
 
 		UINT	m_blackOut { 0 };		//暗転
 		UINT	m_scpStop { 0 };		//スクリプトからの停止
@@ -116,7 +117,7 @@ namespace GAME
 		//Result用
 		int		m_nActTransit { 0 };	//アクション移行回数
 
-		bool	m_kouatsu { F };		//剣撃抗圧
+		bool	m_taikou { F };		//剣撃対抗
 
 		float	m_reviseThrow { 1.f };		//投げ後の連続技中補正
 		float	m_confirmed_revise { 1.f };	//最終確定補正値
@@ -153,6 +154,10 @@ namespace GAME
 		void CalcPos ( P_Script pScp );
 
 		void PosInit ();
+
+		//バトルパラメータにおける毎フレームの入力による動作
+		void Move_Input ();
+
 
 		//--------------------------------------------------------------------
 		//各パラメータ
@@ -209,7 +214,7 @@ namespace GAME
 
 		GET_SET ( _CLR, GetColor, SetColor, m_color )
 
-		GET_SET ( int, GetKouAtsu, SetKouAtsu, m_kouatsu )	//剣撃抗圧
+		GET_SET ( int, GetTaikou, SetTaikou, m_taikou )	//剣撃対抗
 		GET_SET ( float, GetReviseThrow, SetReviseThrow, m_reviseThrow )
 		GET_SET ( float, GetCnfmRvs, SetCnfmRvs, m_confirmed_revise )
 
@@ -222,6 +227,7 @@ namespace GAME
 		P_Timer GetTmr_End () { return m_tmrEnd; }
 		P_Timer GetTmr_Lurch () { return m_tmrLurch; }
 		P_Timer GetTmr_OfstCncl () { return m_tmrOfstCncl; }
+		P_Timer GetTmr_Taikou () { return m_tmrTaikou; }
 
 		void AllTmr_Clear () { for ( P_Timer ptmr : m_timers ) { ptmr->Clear (); } }
 

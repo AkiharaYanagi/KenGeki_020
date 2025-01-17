@@ -149,6 +149,8 @@ namespace GAME
 		END_TIME = 60,
 
 		OFST_CNCL = 15,		//相殺キャンセル可能時間
+
+		TAIKOU_TIME = 6,	//剣撃対抗受付時間( start==1フレからなので、値が6で[5フレーム間])
 	};
 }
 

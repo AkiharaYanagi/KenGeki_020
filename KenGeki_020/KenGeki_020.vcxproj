@@ -490,6 +490,7 @@
     <ClCompile Include="Source\ExeChara\Main\ExCh_State.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Event.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Func.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Rect.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Sound.cpp" />

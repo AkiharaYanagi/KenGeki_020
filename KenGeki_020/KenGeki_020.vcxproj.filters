@@ -1206,5 +1206,8 @@
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Sound.cpp">
       <Filter>03_FtgMain\ExeChara\Main</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Func.cpp">
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

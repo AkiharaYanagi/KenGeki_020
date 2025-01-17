@@ -80,7 +80,7 @@ namespace GAME
 		m_pos_x_recoil = rhs.m_pos_x_recoil;	//反動(ノックバック)位置
 
 		m_nActTransit = rhs.m_nActTransit;		//アクション移行回数
-		m_kouatsu = rhs.m_kouatsu;			//剣撃抗圧
+		m_taikou = rhs.m_taikou;			//剣撃抗圧
 
 		m_reviseThrow = rhs.m_reviseThrow;		//投げ後の連続技中補正
 		m_confirmed_revise = rhs.m_confirmed_revise;		//最終確定補正値
@@ -127,7 +127,7 @@ namespace GAME
 		m_tmrVib		 = std::make_shared < Timer > ();	//個別振動
 		m_tmrOfstCncl =	std::make_shared < Timer > ();		//相殺キャンセルタイマ
 		m_tmrWhiteDamage = std::make_shared < Timer > ();	//白ダメージ
-
+		m_tmrTaikou		= std::make_shared < Timer > ();	//剣撃対抗受付タイマ
 
 		m_timers.push_back ( m_tmrHitstop );
 		m_timers.push_back ( m_tmrDown );
@@ -138,6 +138,7 @@ namespace GAME
 		m_timers.push_back ( m_tmrVib );
 		m_timers.push_back ( m_tmrOfstCncl );
 		m_timers.push_back ( m_tmrWhiteDamage );
+		m_timers.push_back ( m_tmrTaikou );
 	}
 
 	void BtlParam::PosInit ()
@@ -199,7 +200,7 @@ namespace GAME
 		//@info Result用などシーン通して使うものはInitで初期化しない
 		//m_nActTransit
 
-		m_kouatsu = F;
+		m_taikou = F;
 
 		m_reviseThrow = 1.f;
 		m_confirmed_revise = 1.f;
@@ -243,7 +244,7 @@ namespace GAME
 	//フレーム処理開始時
 	void BtlParam::FrameInit ()
 	{
-		m_kouatsu = F;
+		m_taikou = F;
 	}
 
 	//連続ヒット関連リセット
@@ -482,6 +483,14 @@ namespace GAME
 		//通常スタミナ値回復
 		AddBalance ( balance_recovery );
 	}
+
+
+	//◆フレーム毎１回処理
+	//バトルパラメータにおける毎フレームの入力による動作
+	void BtlParam::Move_Input ()
+	{
+	}
+
 
 
 	// 慣性の減少

@@ -143,6 +143,11 @@ namespace GAME
 	}
 
 	//================================================
+	//バトルパラメータ入力処理
+//	void ExeChara::BtlPrm_Move_Input ()
+	//-> "ExeChara_Func.cpp"
+
+	//================================================
 	//エフェクト スクリプト処理 後
 	void ExeChara::PostMove_Effect ()
 	{
