@@ -39,7 +39,7 @@ namespace GAME
 		P_ExeChara pOther =  m_pOther.lock();
 
 		//相手（くらい側のフラグチェック）
-		bool bTaikou = pOther->m_btlPrm.GetTmr_Taikou()->IsActive ();
+		bool bTimerTaikou = pOther->m_btlPrm.GetTmr_Taikou()->IsActive ();
 
 		//ノックバック量を計算済みの値
 		//バトルパラメータに保存し、CalcPos()で位置を計算し、０にリセットされる
@@ -48,12 +48,12 @@ namespace GAME
 
 		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
 		{
-			DBGOUT_WND_F ( DBGOUT_0, U"剣撃抵抗 = {}"_fmt( bTaikou ? 1 : 0 ) );
+			DBGOUT_WND_F ( DBGOUT_0, U"剣撃抵抗 = {}"_fmt( bTimerTaikou ? 1 : 0 ) );
 			DBGOUT_WND_F ( DBGOUT_1, U"accRecoil = {:.3f}"_fmt( accRecoil ) );
 		}
 
 		//受付時間内の場合
-		if ( bTaikou )
+		if ( bTimerTaikou )
 		{
 			//入力が合った場合
 			if ( pOther->m_pCharaInput->PushSomething () )
@@ -83,6 +83,9 @@ namespace GAME
 					pOther->m_btlPrm.SetTaikou ( T );
 					//フレーム最初にFalse、以降同一フレーム処理で判定に用いる
 					//主にエフェクト発生
+
+					//自身の受付時間を解除
+					pOther->m_btlPrm.GetTmr_Taikou()->Clear ();;
 				}
 
 				//値を再保存

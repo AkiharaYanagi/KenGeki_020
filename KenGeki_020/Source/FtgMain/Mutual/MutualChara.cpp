@@ -336,15 +336,20 @@ namespace GAME
 	{
 		PLAYER_ID winner = m_pParam->GetWinner ();
 
+		//勝者側の立ち状態
 		//敗者側のダウンが落ち着いたらTを返す
 
 		if ( PLAYER_ID_1 == winner )
 		{
-			return m_exeChara2->IsDown_Calm ();
+			bool b1 = m_exeChara1->IsWait ();
+			bool b2 = m_exeChara2->IsDown_Calm ();
+			return b1 && b2;
 		}
 		else if ( PLAYER_ID_2 == winner )
 		{
-			return m_exeChara1->IsDown_Calm ();
+			bool b1 = m_exeChara1->IsDown_Calm ();
+			bool b2 = m_exeChara2->IsWait ();
+			return b1 && b2;
 		}
 		return F;
 	}
