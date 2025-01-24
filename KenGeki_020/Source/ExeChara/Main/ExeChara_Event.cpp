@@ -447,11 +447,12 @@ namespace GAME
 			d_45 = 0.1f;
 		}
 		//-------------------------------------------------
-
-
+		//超必殺補正
+		float rev_od = m_btlPrm.GetReviseOverDrive ();
+		//-------------------------------------------------
 
 		//最終確定補正値
-		pOther->m_btlPrm.SetCnfmRvs ( d_revise * throwRvs );
+		pOther->m_btlPrm.SetCnfmRvs ( d_revise * throwRvs * rev_od );
 
 		//-------------------------------------------------
 

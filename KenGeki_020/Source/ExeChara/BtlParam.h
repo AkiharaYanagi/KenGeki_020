@@ -117,9 +117,10 @@ namespace GAME
 		//Result用
 		int		m_nActTransit { 0 };	//アクション移行回数
 
-		bool	m_taikou { F };		//剣撃対抗
+		bool	m_taikou { F };			//剣撃対抗
 
 		float	m_reviseThrow { 1.f };		//投げ後の連続技中補正
+		float	m_reviseOverDrive { 1.f };	//超必後の連続技中補正
 		float	m_confirmed_revise { 1.f };	//最終確定補正値
 
 	public:
@@ -216,6 +217,7 @@ namespace GAME
 
 		GET_SET ( int, GetTaikou, SetTaikou, m_taikou )	//剣撃対抗
 		GET_SET ( float, GetReviseThrow, SetReviseThrow, m_reviseThrow )
+		GET_SET ( float, GetReviseOverDrive, SetReviseOverDrive, m_reviseOverDrive )
 		GET_SET ( float, GetCnfmRvs, SetCnfmRvs, m_confirmed_revise )
 
 		//--------------------------------------------------------------------

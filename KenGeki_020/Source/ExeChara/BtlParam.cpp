@@ -80,9 +80,10 @@ namespace GAME
 		m_pos_x_recoil = rhs.m_pos_x_recoil;	//反動(ノックバック)位置
 
 		m_nActTransit = rhs.m_nActTransit;		//アクション移行回数
-		m_taikou = rhs.m_taikou;			//剣撃抗圧
+		m_taikou = rhs.m_taikou;				//剣撃対抗
 
 		m_reviseThrow = rhs.m_reviseThrow;		//投げ後の連続技中補正
+		m_reviseOverDrive = rhs.m_reviseOverDrive;		//超必後の連続技中補正
 		m_confirmed_revise = rhs.m_confirmed_revise;		//最終確定補正値
 	}
 
@@ -203,6 +204,7 @@ namespace GAME
 		m_taikou = F;
 
 		m_reviseThrow = 1.f;
+		m_reviseOverDrive = 1.f;
 		m_confirmed_revise = 1.f;
 	}
 
@@ -258,6 +260,7 @@ namespace GAME
 
 		//補正
 		m_reviseThrow = 1.f;
+		m_reviseOverDrive = 1.f;
 		m_confirmed_revise = 1.f;
 	}
 

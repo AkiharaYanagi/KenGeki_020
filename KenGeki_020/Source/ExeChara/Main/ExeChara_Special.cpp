@@ -126,8 +126,19 @@ namespace GAME
 				SetAction ( U"剣撃走破ヒット" );
 			}
 		}
+		//-----------------------------------------------------
+		//超必殺全般
+		if ( IsOverdrive () )
+		{
+			//最終スクリプト
+			if ( m_pAction->IsEndScript ( m_frame ) )
+			{
+				m_btlPrm.SetReviseOverDrive ( 0.5f );
+			}
+		}
 
 		//-----------------------------------------------------
+		//紗絵
 		if ( IsNameAction ( U"超雷電蹴_発生" ) )
 		{
 			if ( m_pScript->GetFrame () == 1 )
