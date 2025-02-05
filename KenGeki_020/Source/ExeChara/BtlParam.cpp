@@ -54,6 +54,7 @@ namespace GAME
 		m_hitEst = rhs.m_hitEst;		//攻撃成立フラグ
 		m_FirstEf = rhs.m_FirstEf;		//初回Efフラグ
 		m_FirstSE = rhs.m_FirstSE;		//初回SEフラグ
+		m_FirstSE_HS = rhs.m_FirstSE_HS;		//初回SEフラグ(ヒットストップ)
 		m_FirstVC = rhs.m_FirstVC;		//初回VCフラグ
 		m_ForcedChange = rhs.m_ForcedChange;	//強制変更
 		m_clang = rhs.m_clang;			//打合発生フラグ
@@ -172,6 +173,8 @@ namespace GAME
 		m_hitEst = false;
 		m_FirstEf = false;
 		m_FirstSE = false;
+		m_FirstSE_HS = false;
+		m_FirstVC = false;
 
 		m_inertial = VEC2 ( 0, 0 );
 		m_dashInertial = VEC2 ( 0, 0 );
@@ -233,6 +236,7 @@ namespace GAME
 		m_hitEst = false;
 		m_FirstEf = false;
 		m_FirstSE = false;
+		m_FirstSE_HS = false;
 		m_FirstVC = false;
 		m_ForcedChange = false;
 		m_lurch = 0;

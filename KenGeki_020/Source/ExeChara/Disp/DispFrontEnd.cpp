@@ -37,7 +37,7 @@ namespace GAME
 	const float DispFrontEnd::DMG_Y = 180;
 
 	//各ファイルサイズから幅を指定
-	const float DispFrontEnd::NAME_W[3] = { 167.f, 118.f, 179.f };
+	const float DispFrontEnd::NAME_W[4] = { 167.f, 118.f, 179.f, 130.f };
 
 
 	//@todo Z値のまとめ
@@ -142,7 +142,7 @@ namespace GAME
 		m_grpHitNum->AddObject ();
 
 		m_grpStrHit = std::make_shared < GameGraphic > ();
-		m_grpStrHit->AddTexture_FromArchive ( U"Hit.png" );
+		m_grpStrHit->AddTexture_FromArchive ( U"Geki.png" );
 		m_grpStrHit->SetZ ( Z_EFB + 0.01f );
 		m_grpStrHit->SetValid ( F );
 		AddpTask ( m_grpStrHit );
@@ -199,6 +199,7 @@ namespace GAME
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Ouka.png" );
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Sae.png" );
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Retsudou.png" );
+		m_face->AddTexture_FromArchive ( U"Battle\\Face_Gabadaruga.png" );
 		m_face->SetIndexTexture ( 0 );
 		m_face->SetZ ( Z_SHADOW + 0.01f );
 		AddpTask ( m_face );
@@ -216,6 +217,7 @@ namespace GAME
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_HIYODORI_OUKA.png" );
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_TOMOE_SAE.png" );
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_REKKA_RETSUDOU.png" );
+		m_name->AddTexture_FromArchive ( U"Battle\\Name_GABADARUGA.png" );
 		m_name->SetZ ( Z_SYS - 0.01f );
 		AddpTask ( m_name );
 		GRPLST_INSERT ( m_name );
@@ -295,7 +297,7 @@ namespace GAME
 		if ( PLAYER_ID_1 == playerID )
 		{
 			m_grpHitNum->SetPos ( VEC2 ( 100, 200 ) );
-			m_grpStrHit->SetPos ( VEC2 ( 100 + 128, 200 ) );
+			m_grpStrHit->SetPos ( VEC2 ( 100 + 128, 180 ) );
 			m_strDmg->SetPos ( VEC2 ( DMG_X, DMG_Y ) );
 			m_strDmg->SetStr ( U"P1_Dmg" );
 			m_strRevise->SetPos ( VEC2 ( DMG_X, DMG_Y - 30 ) );
@@ -312,7 +314,7 @@ namespace GAME
 		else if ( PLAYER_ID_2 == playerID )
 		{
 			m_grpHitNum->SetPos ( VEC2 ( WINDOW_WIDTH - 384 -100, 200 ) );
-			m_grpStrHit->SetPos ( VEC2 ( WINDOW_WIDTH - 256 -100, 200 ) );
+			m_grpStrHit->SetPos ( VEC2 ( WINDOW_WIDTH - 256 -100, 180 ) );
 			m_strDmg->SetPos ( VEC2 ( WINDOW_WIDTH - 250, DMG_Y ) );
 			m_strDmg->SetStr ( U"P2_Dmg" );
 			m_strRevise->SetPos ( VEC2 (  WINDOW_WIDTH - 250, DMG_Y - 30 ) );
@@ -362,6 +364,7 @@ namespace GAME
 		case CHARA_OUKA: break;
 		case CHARA_SAE: break;
 		case CHARA_RETSUDOU: break;
+		case CHARA_GABADARUGA: break;
 		default: charaName = CHARA_OUKA; break;
 		}
 		m_face->SetIndexTexture ( (uint32)charaName - 1 );
@@ -538,9 +541,9 @@ namespace GAME
 
 	//-------------------------------------------------------------------
 	//状態表示
-	void DispFrontEnd::UpdateActionName ( s3d::String actionName )
+	void DispFrontEnd::UpdateActionName ( s3d::String actionName, UINT frame )
 	{
-		m_strAction->SetStr ( actionName );
+		m_strAction->SetStr ( actionName + U"[{}]"_fmt( frame ) );
 	}
 
 	void DispFrontEnd::UpdateStateName ( s3d::String stateName )

@@ -74,7 +74,8 @@ namespace GAME
 		bool	m_damaged { F };		//くらいフラグ
 		bool	m_hitEst { F };			//攻撃成立フラグ
 		bool	m_FirstEf { F };		//初回Efフラグ
-		bool	m_FirstSE { F };		//初回SEフラグ
+		bool	m_FirstSE { F };		//初回SEフラグ (一時停止 : state)
+		bool	m_FirstSE_HS { F };		//初回SEフラグ (ヒットストップ)
 		bool	m_FirstVC { F };		//初回VCフラグ
 		bool	m_ForcedChange { F };	//強制変更
 		bool	m_clang { F };			//打合発生フラグ
@@ -190,6 +191,7 @@ namespace GAME
 		GET_SET ( bool, GetTrangit, SetTrangit, m_transit )		//スクリプト遷移
 		GET_SET ( bool, GetFirstEf, SetFirstEf, m_FirstEf )		//エフェクト発生初回
 		GET_SET ( bool, GetFirstSE, SetFirstSE, m_FirstSE )		//SE発生初回
+		GET_SET ( bool, GetFirstSE_HS, SetFirstSE_HS, m_FirstSE_HS )	//SE発生初回(ヒットストップ)
 		GET_SET ( bool, GetFirstVC, SetFirstVC, m_FirstVC )		//VC発生初回
 		GET_SET ( bool, GetWait, SetWait, m_wait )				//待機(入力を停止)
 		GET_SET ( bool, GetStop, SetStop, m_stop )				//停止(入力、スクリプト処理を停止)

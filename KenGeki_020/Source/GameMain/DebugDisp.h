@@ -20,8 +20,12 @@ namespace GAME
 //	0 : OFF
 //  1 : ON
 
-#define DEBUG_DISP	0
+#define DEBUG_DISP	1
 
+#if 0
+		//デバッグ表示あり
+//		DBGOUT_WND_F ( DBGOUT_6, U"OperateEffect::m_bGenerate{}"_fmt( m_bGenerate ) );
+#endif // 0
 
 }
 

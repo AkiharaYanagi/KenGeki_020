@@ -30,3 +30,6 @@ SE_28_空中ダッシュ2.wav
 SE_29_烈堂_超必B.wav
 SE_30_刀音1.wav
 SE_31_刀斬音.wav
+SE_32_弱殴り.wav
+SE_33_中殴り.wav
+SE_34_強殴り.wav

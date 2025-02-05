@@ -32,16 +32,32 @@ namespace GAME
 		if ( m_btlPrm.GetFirstSE () ) { return; }
 		
 		//ヒットストップ中(同一スクリプト)は１回のみ
-		P_Timer pTmr = m_btlPrm.GetTmr_HitStop();
-		if ( pTmr->IsStart () )
+		P_Timer pTmr_HitStop = m_btlPrm.GetTmr_HitStop();
+		if ( pTmr_HitStop->IsActive () )
 		{
 			//初回は鳴らす
+			if ( ! m_btlPrm.GetFirstSE_HS () )
+			{
+				//フラグをオン
+				m_btlPrm.SetFirstSE_HS ( T );
+			}
+			else
+			{	//途中は何もしない
+				return;
+			}
 		}
-		else if ( pTmr->IsActive () )
+		else
 		{
-			//途中は何もしない
-			return;
+			//終了時に解除
+			m_btlPrm.SetFirstSE_HS ( F );
 		}
+		if ( m_btlPrm.GetPlayerID() == PLAYER_ID_1 )
+		{
+			UINT n = m_pScript->GetFrame ();
+			bool b = m_btlPrm.GetFirstSE_HS ();
+			DBGOUT_WND_F ( DBGOUT_7, U"{}: FirstSE_HS = {}"_fmt( n, b ) );
+		}
+
 
 		//スクリプトから名前で指定
 		PlaySE ( m_pScript->m_prmStaging.SE_Name );

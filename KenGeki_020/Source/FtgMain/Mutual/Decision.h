@@ -44,6 +44,10 @@ namespace GAME
 		//共通エフェクト
 		P_EfClang		m_efClang;
 		P_GrpEf			m_efHit;
+		P_GrpEf			m_efHit_line0;		//ヒットエフェクト 集中線0
+		P_GrpEf			m_efHit_line1;		//ヒットエフェクト 集中線1
+		P_GrpEf			m_efHit_smoke;		//ヒットエフェクト煙
+
 
 #if 0
 		P_EfSpark		m_efSpark;

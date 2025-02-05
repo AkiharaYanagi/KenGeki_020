@@ -30,14 +30,77 @@ namespace GAME
 
 		//ヒットエフェクト
 		m_efHit = std::make_shared < GrpEf > ();
-		m_efHit->AddTexture_FromArchive ( U"Ef_Hit.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\00.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\01.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\02.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\03.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\04.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\05.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\06.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\07.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\08.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\09.png" );
+		m_efHit->AddTexture_FromArchive ( U"Ef_Hit\\10.png" );
 		m_efHit->SetBase ( VEC2 ( 0, 0 ) );
-		m_efHit->SetRevised ( VEC2 ( -200, -200 ) );
-		m_efHit->SetColor ( _CLR ( 0xc0ffffff ) );
+		m_efHit->SetRevised ( VEC2 ( -250, -250 ) );
+		m_efHit->SetColor ( _CLR ( 0xffffffff ) );
 		m_efHit->SetZ ( Z_EFF );
-		m_efHit->SetShader ( T );
+		m_efHit->SetShader ( F );
 		AddpTask ( m_efHit );
 		GRPLST_INSERT ( m_efHit );
+
+		//ヒットエフェクト 集中線
+		m_efHit_line0 = std::make_shared < GrpEf > ();
+		m_efHit_line0->AddTexture_FromArchive ( U"Ef_Hit_Line0\\00.png" );
+		m_efHit_line0->AddTexture_FromArchive ( U"Ef_Hit_Line0\\01.png" );
+		m_efHit_line0->AddTexture_FromArchive ( U"Ef_Hit_Line0\\02.png" );
+		m_efHit_line0->AddTexture_FromArchive ( U"Ef_Hit_Line0\\03.png" );
+		m_efHit_line0->AddTexture_FromArchive ( U"Ef_Hit_Line0\\04.png" );
+		m_efHit_line0->AddTexture_FromArchive ( U"Ef_Hit_Line0\\05.png" );
+		m_efHit_line0->AddTexture_FromArchive ( U"Ef_Hit_Line0\\06.png" );
+		m_efHit_line0->AddTexture_FromArchive ( U"Ef_Hit_Line0\\07.png" );
+		m_efHit_line0->AddTexture_FromArchive ( U"Ef_Hit_Line0\\08.png" );
+		m_efHit_line0->SetBase ( VEC2 ( 0, 0 ) );
+		m_efHit_line0->SetRevised ( VEC2 ( -750, -500 ) );
+		m_efHit_line0->SetColor ( _CLR ( 0xffffffff ) );
+		m_efHit_line0->SetZ ( Z_EFF );
+		m_efHit_line0->SetShader ( T );
+		AddpTask ( m_efHit_line0 );
+		GRPLST_INSERT ( m_efHit_line0 );
+
+		//ヒットエフェクト 集中線
+		m_efHit_line1 = std::make_shared < GrpEf > ();
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\00.png" );
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\01.png" );
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\02.png" );
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\03.png" );
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\04.png" );
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\05.png" );
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\06.png" );
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\07.png" );
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\08.png" );
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\09.png" );
+		m_efHit_line1->AddTexture_FromArchive ( U"Ef_Hit_Line1\\10.png" );
+		m_efHit_line1->SetBase ( VEC2 ( 0, 0 ) );
+		m_efHit_line1->SetRevised ( VEC2 ( -750, -500 ) );
+		m_efHit_line1->SetColor ( _CLR ( 0xffffffff ) );
+		m_efHit_line1->SetZ ( Z_EFF );
+		m_efHit_line1->SetShader ( T );
+		AddpTask ( m_efHit_line1 );
+		GRPLST_INSERT ( m_efHit_line1 );
+
+		//ヒットエフェクト 煙
+		m_efHit_smoke = std::make_shared < GrpEf > ();
+		m_efHit_smoke->AddTexture_FromArchive ( U"Ef_Hit_Smoke\\00.png" );
+		m_efHit_smoke->AddTexture_FromArchive ( U"Ef_Hit_Smoke\\01.png" );
+		m_efHit_smoke->AddTexture_FromArchive ( U"Ef_Hit_Smoke\\02.png" );
+		m_efHit_smoke->SetBase ( VEC2 ( 0, 0 ) );
+		m_efHit_smoke->SetRevised ( VEC2 ( -750, -500 ) );
+		m_efHit_smoke->SetColor ( _CLR ( 0xffffffff ) );
+		m_efHit_smoke->SetZ ( Z_EFF );
+		m_efHit_smoke->SetShader ( F );
+		AddpTask ( m_efHit_smoke );
+		GRPLST_INSERT ( m_efHit_smoke );
 
 #if 0
 		m_efSpark = make_shared < EfSpark > ();
@@ -308,6 +371,15 @@ namespace GAME
 
 			m_efHit->On ();		//ヒットエフェクト
 			m_efHit->Start_Rnd ( hit_center_2p, 16, 50 );		//ヒットエフェクト
+
+			m_efHit_line0->On ();		//ヒットエフェクト
+			m_efHit_line0->Start_Rnd ( hit_center_2p, 16, 50 );		//ヒットエフェクト
+
+			m_efHit_line1->On ();		//
+			m_efHit_line1->Start_Rnd ( hit_center_2p, 16, 50 );		//ヒットエフェクト
+
+			m_efHit_smoke->On ();		//ヒットエフェクト
+			m_efHit_smoke->Start_Rnd ( hit_center_2p, 16, 50 );		//ヒットエフェクト
 		}
 
 		if ( hit1P )
@@ -318,7 +390,20 @@ namespace GAME
 
 			m_efHit->On ();		//ヒットエフェクト
 			m_efHit->Start_Rnd ( hit_center_1p, 16, 50 );		//ヒットエフェクト
+
+			m_efHit_line0->On ();		//ヒットエフェクト
+			m_efHit_line0->Start_Rnd ( hit_center_1p, 16, 50 );		//ヒットエフェクト
+
+			m_efHit_line1->On ();		//
+			m_efHit_line1->Start_Rnd ( hit_center_1p, 16, 50 );		//ヒットエフェクト
+
+			m_efHit_smoke->On ();		//ヒットエフェクト
+			m_efHit_smoke->Start_Rnd ( hit_center_1p, 16, 50 );		//ヒットエフェクト
+
 		}
+		DBGOUT_WND_F ( DBGOUT_8, U"center({},{})"_fmt( hit_center_2p.x, hit_center_2p.y ) );
+
+
 
 		m_efHit->SetDispBase ( G_BASE_POS() );
 
@@ -335,6 +420,14 @@ namespace GAME
 		}
 
 		//================================================================
+
+
+		//ヒットエフェクト
+		if ( m_efHit->GetValid () ) { m_efHit->Advance (); }
+		if ( m_efHit_line0->GetValid () ) { m_efHit_line0->Advance (); }
+		if ( m_efHit_line1->GetValid () ) { m_efHit_line1->Advance (); }
+		if ( m_efHit_smoke->GetValid () ) { m_efHit_smoke->Advance (); }
+
 	}
 
 

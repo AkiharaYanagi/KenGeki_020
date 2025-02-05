@@ -110,7 +110,7 @@ namespace GAME
 		m_frontEnd->UpdateDamage ( btlPrm );
 
 		//アクション名更新
-		m_frontEnd->UpdateActionName ( pAct->GetName ().c_str () );
+		m_frontEnd->UpdateActionName ( pAct->GetName ().c_str (), pScp->GetFrame() );
 	}
 
 

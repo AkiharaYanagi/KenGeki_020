@@ -607,6 +607,19 @@ namespace GAME
 		m_cursor->Stop ();
 		m_chara_stand->SetValid ( F );
 		m_chara_stand_light->SetValid ( T );
+#if 0
+		if ( PLAYER_ID_1 == m_chsl_id )
+		{
+			m_x = CHARA_1P_POS_X;
+			m_chara_stand->SetPos ( m_x, CHARA_1P_POS_Y );
+		}
+		else if ( PLAYER_ID_2 == m_chsl_id )
+		{
+			m_x = CHARA_2P_POS_X;
+			m_chara_stand->SetPos ( m_x, CHARA_2P_POS_Y );
+		}
+#endif // 0
+
 
 		//ステートを変更
 		m_state = STT_STAGE;
