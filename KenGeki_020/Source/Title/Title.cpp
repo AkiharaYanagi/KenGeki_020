@@ -11,6 +11,7 @@
 #include "../GameMain/SoundConst.h"
 #include "../GameMain/VoiceConst.h"
 #include "../GameMain/SeConst.h"
+#include "../GameMain/DebugDisp.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -21,7 +22,7 @@ namespace GAME
 
 #pragma region CONST
 
-	const char32_t Title::Ver[] = U"ver 0.21";
+	const char32_t Title::Ver[] = U"ver 0.22";
 
 	const float Title::BG_X = 0;
 	const float Title::BG_Y = 0;
@@ -154,8 +155,9 @@ namespace GAME
 //		m_strVer->SetStr ( U"Ver 0.10" );
 		//2024/11/03 修正パッチ
 		//m_strVer->SetStr ( U"Ver 0.12" );
-		//2024/12/15 変な格ゲー会
-		//0.15
+		//2024/12/15 変な格ゲー会 ver0.15
+		//2024/12/30 冬コミ ver0.20
+		//2024/12/31 冬コミ修正 ver0.21
 #endif // 0
 		m_strVer->SetStr ( Ver );
 
@@ -200,48 +202,18 @@ namespace GAME
 
 
 
+		//体験版表示
+#if TRIAL
+		m_trial = std::make_shared < GameGraphic > ();
 
-#if 0
+		m_trial->SetPos ( 1280 - 200, 820 );
+		m_trial->AddTexture_FromArchive ( U"Title\\trial.png" );
+		AddpTask ( m_trial );
+		GRPLST_INSERT ( m_trial );
+#else // TRIAL
 
-		//test
-		std::mt19937 m_gen;
-		std::discrete_distribution<> m_dist;
-		std::random_device m_rnd_dev;
+#endif // TRIAL
 
-		std::vector < double > weights = { 0.1, 0.3, 0.2, 0.4 };
-		m_gen = std::mt19937 ( m_rnd_dev () );		//メルセンヌ・ツイスタ
-		m_dist = std::discrete_distribution <> ( weights.begin(), weights.end() );
-
-		int result = 0;
-
-		int num0 = 0;
-		int num1 = 0;
-		int num2 = 0;
-		int num3 = 0;
-
-
-		for ( int i = 0; i < 10000; ++ i )
-		{
-			result = m_dist ( m_gen );
-
-			switch ( result )
-			{
-			case 0: ++ num0; break;
-			case 1: ++ num1; break;
-			case 2: ++ num2; break;
-			case 3: ++ num3; break;
-			}
-		}
-
-		TRACE_F ( _T("%d, %d, %d, %d\n"), num0, num1, num2, num3  );
-		TRACE_F ( _T("%lf, %lf, %lf, %lf\n"),
-			0.1 * num0 / num0 ,
-			0.1 * num1 / num0 ,
-			0.1 * num2 / num0 ,
-			0.1 * num3 / num0 );
-
-
-#endif // 0
 
 	}
 

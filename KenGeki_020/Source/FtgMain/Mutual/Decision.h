@@ -12,12 +12,7 @@
 #include "../../ExeChara/Main/ExeChara.h"
 #include "../../GameMain/Param.h"
 #include "../Ef/EfClang.h"
-#if 0
-#include "Ef/EfSpark.h"
-#include "Ef/EfParticle.h"
-#include "Ef/EfPart.h"
-#include "Ef/EfHit.h"
-#endif // 0
+#include "../Ef/EfHitLine.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -48,12 +43,8 @@ namespace GAME
 		P_GrpEf			m_efHit_line1;		//ヒットエフェクト 集中線1
 		P_GrpEf			m_efHit_smoke;		//ヒットエフェクト煙
 
+		P_EfHitLine		m_efHitLine;
 
-#if 0
-		P_EfSpark		m_efSpark;
-//		P_EfParticle	m_efParticle;
-		P_EfPart		m_efPart;
-#endif // 0
 
 #if 0
 

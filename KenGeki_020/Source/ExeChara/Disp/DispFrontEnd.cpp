@@ -340,8 +340,8 @@ namespace GAME
 		}
 		else if ( PLAYER_ID_2 == playerID )
 		{
-			m_strAction->SetPos ( VEC2 ( 640 + 390, 120 ) );
-			m_strState->SetPos ( VEC2 ( 640 + 390, 160 ) );
+			m_strAction->SetPos ( VEC2 ( 640 + 300, 120 ) );
+			m_strState->SetPos ( VEC2 ( 640 + 300, 160 ) );
 		}
 
 	}

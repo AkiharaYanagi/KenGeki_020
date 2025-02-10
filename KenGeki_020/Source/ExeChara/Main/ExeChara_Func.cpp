@@ -35,7 +35,7 @@ namespace GAME
 		//==========================================
 		//自分ノックバック処理
 		
-		//★★★ 剣撃抵抗 (打撃時にいずれかの入力で距離離し)
+		//★★★ 剣撃対抗 (打撃時にいずれかの入力で距離離し)
 		P_ExeChara pOther =  m_pOther.lock();
 
 		//相手（くらい側のフラグチェック）
@@ -48,7 +48,7 @@ namespace GAME
 
 		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
 		{
-			DBGOUT_WND_F ( DBGOUT_0, U"剣撃抵抗 = {}"_fmt( bTimerTaikou ? 1 : 0 ) );
+			DBGOUT_WND_F ( DBGOUT_0, U"剣撃対抗 = {}"_fmt( bTimerTaikou ? 1 : 0 ) );
 			DBGOUT_WND_F ( DBGOUT_1, U"accRecoil = {:.3f}"_fmt( accRecoil ) );
 		}
 

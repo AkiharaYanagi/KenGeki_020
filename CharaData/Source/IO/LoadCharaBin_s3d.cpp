@@ -49,8 +49,10 @@ namespace GAME
 	//------------------------------------------
 	void LoadCharaBin_s3d::_Load ( const s3d::String & filename, Chara & chara )
 	{
+		std::filesystem::path current_path = std::filesystem::current_path();
+
 		//ファイル存在確認
-		if ( std::filesystem::exists  ( filename.str() ) ) { return; }
+		if ( ! std::filesystem::exists  ( filename.str() ) ) { return; }
 
 		//---------------------------------------------------------------------
 		//ファイル読込

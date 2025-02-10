@@ -123,6 +123,9 @@ namespace GAME
 		void AddpEffect ( std::unique_ptr < P_Effect [] > arypEffect, rsize_t size );
 		void AddpEffect ( const std::vector < P_Effect > & arypEffect, rsize_t size );
 
+		//指定エフェクト名が存在するかどうか
+		bool ExistEffect ( s3d::String name ) const;
+
 		//Efイメージ テクスチャポインタの取得
 		P_Tx GetpEfTexture ( UINT index ) { return mpap_txEf->at ( index ); }
 

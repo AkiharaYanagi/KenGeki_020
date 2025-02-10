@@ -160,6 +160,19 @@ namespace GAME
 		return F;
 	}
 
+	bool Chara::ExistEffect ( s3d::String name ) const
+	{
+		for ( auto p : * mpap_Ef )
+		{
+			s3d::String effectName = p->GetName ();
+			if ( 0 == name.compare ( effectName ) )
+			{
+				return T;
+			}
+		}
+		return F;
+	}
+
 
 }	//namespace GAME
 

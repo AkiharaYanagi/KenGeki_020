@@ -27,12 +27,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_25EEE5B2436847428A25B6F42E77F8CD"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2BB23F13470E4049BFD375257078ABF0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -46,18 +40,6 @@
         "Entry"
         {
         "MsmKey" = "8:_42135E6AF95F4345949030D32E85262A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4A7BBCDF802B420FAF5CA333C2C00463"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4CE6019BF7874BAF92A30EBC4C6F1F30"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -81,6 +63,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7547CF77AACF4DDF95070940680C6623"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_75D429E48A184814B84B1E1FE3FAEC28"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -88,6 +76,12 @@
         "Entry"
         {
         "MsmKey" = "8:_866BAB95BE5245BFB4F35B098DCECFC9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8AA41850DA6A473886A92DBCEA1D4E1A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -149,6 +143,12 @@
         {
         "MsmKey" = "8:_BFF426BE5C76AD8A91BFFE68BEC7820B"
         "OwnerKey" = "8:_40482E4562991D4DF0040E75D815A333"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CB7F08C73DC649BFA0CB82302AEA6981"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -370,26 +370,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_25EEE5B2436847428A25B6F42E77F8CD"
-            {
-            "SourcePath" = "8:..\\KenGeki_020\\App\\chara_Ouka_Bin.dat"
-            "TargetName" = "8:chara_Ouka_Bin.dat"
-            "Tag" = "8:"
-            "Folder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2BB23F13470E4049BFD375257078ABF0"
             {
             "SourcePath" = "8:..\\KenGeki_020\\App\\archive.dat"
@@ -445,46 +425,6 @@
             {
             "SourcePath" = "8:..\\KenGeki_020\\App\\Vc.dat"
             "TargetName" = "8:Vc.dat"
-            "Tag" = "8:"
-            "Folder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4A7BBCDF802B420FAF5CA333C2C00463"
-            {
-            "SourcePath" = "8:..\\KenGeki_020\\App\\chara_Sae_Bin.dat"
-            "TargetName" = "8:chara_Sae_Bin.dat"
-            "Tag" = "8:"
-            "Folder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4CE6019BF7874BAF92A30EBC4C6F1F30"
-            {
-            "SourcePath" = "8:..\\KenGeki_020\\App\\chara_Retsudou_Bin.dat"
-            "TargetName" = "8:chara_Retsudou_Bin.dat"
             "Tag" = "8:"
             "Folder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
             "Condition" = "8:"
@@ -583,6 +523,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7547CF77AACF4DDF95070940680C6623"
+            {
+            "SourcePath" = "8:..\\KenGeki_020\\App\\chara_Retsudou.dat"
+            "TargetName" = "8:chara_Retsudou.dat"
+            "Tag" = "8:"
+            "Folder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_75D429E48A184814B84B1E1FE3FAEC28"
             {
             "SourcePath" = "8:..\\KenGeki_020\\App\\icon.ico"
@@ -618,6 +578,26 @@
                 }
             "SourcePath" = "8:..\\KenGeki_020\\App\\ScriptEditor.exe"
             "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8AA41850DA6A473886A92DBCEA1D4E1A"
+            {
+            "SourcePath" = "8:..\\KenGeki_020\\App\\chara_Ouka.dat"
+            "TargetName" = "8:chara_Ouka.dat"
             "Tag" = "8:"
             "Folder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
             "Condition" = "8:"
@@ -783,6 +763,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB7F08C73DC649BFA0CB82302AEA6981"
+            {
+            "SourcePath" = "8:..\\KenGeki_020\\App\\chara_Sae.dat"
+            "TargetName" = "8:chara_Sae.dat"
+            "Tag" = "8:"
+            "Folder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC20B7F28BAB46CCA819C7F7B632AD22"

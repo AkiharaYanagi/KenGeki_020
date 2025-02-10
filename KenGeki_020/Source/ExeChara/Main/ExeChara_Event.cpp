@@ -214,7 +214,7 @@ namespace GAME
 #if 0
 
 		//----------------------------------------------------------
-		//★★★ 剣撃抵抗 (打撃時にいずれかの入力で距離離し)
+		//★★★ 剣撃対抗 (打撃時にいずれかの入力で距離離し)
 		P_ExeChara pOther =  m_pOther.lock();
 
 		bool bTaikou = pOther->m_btlPrm.GetTmr_Taikou()->IsActive ();
@@ -394,10 +394,13 @@ namespace GAME
 
 
 		//-------------------------------------------------
-		//★★★ 剣撃抵抗 (打撃時にいずれかの入力で距離離し)
-		//受付タイマをON
-		m_btlPrm.GetTmr_Taikou()->Start ( TAIKOU_TIME );
+		//★★★ 剣撃対抗 (打撃時にいずれかの入力で距離離し)
 
+		if ( ! pOther->IsOverdrive () )	//攻撃した相手が超必殺でないとき
+		{
+			//受付タイマをON
+			m_btlPrm.GetTmr_Taikou()->Start ( TAIKOU_TIME );
+		}
 
 		//-------------------------------------------------
 		//相手(攻撃側)のヒット数加算 ガード時を除く
@@ -502,6 +505,15 @@ namespace GAME
 		int warp = pScp->m_prmBattle.Warp;
 
 		UINT stopTime = HITSTOP_TIME;
+
+		//技指定
+		if ( pAct->IsName ( U"波動" ) )
+		{
+			stopTime += 10;
+		}
+
+
+
 		if( warp != 0 )
 		{
 			stopTime += warp;

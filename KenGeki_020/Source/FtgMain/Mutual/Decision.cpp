@@ -102,19 +102,10 @@ namespace GAME
 		AddpTask ( m_efHit_smoke );
 		GRPLST_INSERT ( m_efHit_smoke );
 
-#if 0
-		m_efSpark = make_shared < EfSpark > ();
-		AddpTask ( m_efSpark );
-		GRPLST_INSERT_MAIN ( m_efSpark );
 
-//		m_efParticle = make_shared < EfParticle > ();
-//		GRPLST_INSERT_MAIN ( m_efParticle );
-
-		m_efPart = make_shared < EfPart > ();
-		AddpTask ( m_efPart );
-		GRPLST_INSERT_MAIN ( m_efPart );
-
-#endif // 0
+//		m_efHitLine = std::make_shared < EfHitLine > ();
+//		AddpTask ( m_efHitLine );
+//		GRPLST_INSERT ( m_efHitLine );
 	}
 
 	Decision::~Decision ()
@@ -369,9 +360,16 @@ namespace GAME
 			m_pExeChara2p->OnDamaged ();		//くらい状態・ダメージ処理
 			m_pExeChara1p->OnDamaged_After ();	//相手ダメージ後
 
+
 			m_efHit->On ();		//ヒットエフェクト
 			m_efHit->Start_Rnd ( hit_center_2p, 16, 50 );		//ヒットエフェクト
 
+#if 0
+			if ( m_pExeChara1p->GetpAction()->IsName ( U"竜巻弱1" ) )
+			{
+				m_efHit->On ();		//ヒットエフェクト
+				m_efHit->Start_Rnd ( hit_center_2p, 16, 50 );		//ヒットエフェクト
+			}
 			m_efHit_line0->On ();		//ヒットエフェクト
 			m_efHit_line0->Start_Rnd ( hit_center_2p, 16, 50 );		//ヒットエフェクト
 
@@ -380,6 +378,8 @@ namespace GAME
 
 			m_efHit_smoke->On ();		//ヒットエフェクト
 			m_efHit_smoke->Start_Rnd ( hit_center_2p, 16, 50 );		//ヒットエフェクト
+
+#endif // 0
 		}
 
 		if ( hit1P )
@@ -391,6 +391,12 @@ namespace GAME
 			m_efHit->On ();		//ヒットエフェクト
 			m_efHit->Start_Rnd ( hit_center_1p, 16, 50 );		//ヒットエフェクト
 
+#if 0
+			if ( m_pExeChara2p->GetpAction()->IsName ( U"竜巻弱1" ) )
+			{
+				m_efHit->On ();		//ヒットエフェクト
+				m_efHit->Start_Rnd ( hit_center_1p, 16, 50 );		//ヒットエフェクト
+			}
 			m_efHit_line0->On ();		//ヒットエフェクト
 			m_efHit_line0->Start_Rnd ( hit_center_1p, 16, 50 );		//ヒットエフェクト
 
@@ -399,6 +405,8 @@ namespace GAME
 
 			m_efHit_smoke->On ();		//ヒットエフェクト
 			m_efHit_smoke->Start_Rnd ( hit_center_1p, 16, 50 );		//ヒットエフェクト
+
+#endif // 0
 
 		}
 		DBGOUT_WND_F ( DBGOUT_8, U"center({},{})"_fmt( hit_center_2p.x, hit_center_2p.y ) );
@@ -424,9 +432,12 @@ namespace GAME
 
 		//ヒットエフェクト
 		if ( m_efHit->GetValid () ) { m_efHit->Advance (); }
+#if 0
 		if ( m_efHit_line0->GetValid () ) { m_efHit_line0->Advance (); }
 		if ( m_efHit_line1->GetValid () ) { m_efHit_line1->Advance (); }
 		if ( m_efHit_smoke->GetValid () ) { m_efHit_smoke->Advance (); }
+
+#endif // 0
 
 	}
 

@@ -786,11 +786,21 @@ namespace GAME
 	void BtlParam::OnHit ()
 	{
 		m_hitEst = T;		//攻撃成立フラグ
-		m_tmrHitstop->Start ( HITSTOP_TIME );		//ヒットストップの設定
 
-//		m_tmrHitPitch->WaitStart ( HITSTOP_TIME );	//ヒット間隔のカウント
+		//ヒットストップ
+		UINT hitstop = HITSTOP_TIME;
+
+		//技指定
+		if ( m_pAction->IsName ( U"波動" ) )
+		{
+			hitstop += 10;
+		}
+
+		m_tmrHitstop->Start ( hitstop );		//ヒットストップの設定
+
+//		m_tmrHitPitch->WaitStart ( hitstop );	//ヒット間隔のカウント
 		//※ヒットストップ分を待機してからスタート
-		HitPitchWaitStart ( HITSTOP_TIME );
+		HitPitchWaitStart ( hitstop );
 
 
 		//同一アクション内ヒット数

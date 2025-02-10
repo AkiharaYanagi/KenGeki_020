@@ -109,6 +109,13 @@ void Init ()
 	s3d::Window::Centering ();	//モニタ中央
 #endif // CURSOR_POS_START
 
+
+	//----------------------------------------
+	//カーソル位置を画面外にする
+	WindowState winStt = s3d::Window::GetState();
+//	s3d::Cursor::SetPos ( winStt.virtualSize );	//右下
+	s3d::Cursor::SetPos ( winStt.virtualSize.x - 165 , -20 );	//右上
+
 }
 
 

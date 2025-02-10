@@ -1018,6 +1018,9 @@
     <ClInclude Include="Source\GameMain\DebugDisp.h">
       <Filter>90_GameMain</Filter>
     </ClInclude>
+    <ClInclude Include="Source\FtgMain\Ef\EfHitLine.h">
+      <Filter>03_FtgMain\Ef</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1208,6 +1211,9 @@
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Func.cpp">
       <Filter>03_FtgMain\ExeChara\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Ef\EfHitLine.cpp">
+      <Filter>03_FtgMain\Ef</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

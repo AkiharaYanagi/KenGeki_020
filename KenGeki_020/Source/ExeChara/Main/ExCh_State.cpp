@@ -118,6 +118,9 @@ namespace GAME
 		P_ExeChara pExe = GetwpExeChara ().lock ();
 		pExe->Input ();				//入力		
 
+
+		pExe->PreMove_Effect ();	//エフェクト動作
+
 		//ヒットストップ時は以降を飛ばす
 		if ( pExe->IsHitStop () )
 		{
@@ -129,7 +132,6 @@ namespace GAME
 		pExe->SetCollisionRect ();	//接触枠設定
 //		pExe->OverEfPart ();		//EfPart重なり
 		pExe->Generate_Effect ();	//エフェクト生成
-		pExe->PreMove_Effect ();	//エフェクト動作
 	}
 
 	void CHST_Main::RectMove ()

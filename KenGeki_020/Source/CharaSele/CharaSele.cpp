@@ -88,6 +88,17 @@ namespace GAME
 		AddpTask ( m_charaFace );
 		GRPLST_INSERT ( m_charaFace );
 
+#if TRIAL
+		//体験版用キャラ隠し
+		m_hidden = std::make_shared < PrmRect > ();
+		m_hidden->SetSize ( 150, 150 );
+		m_hidden->SetPos ( 415 + 300, 70 );
+		m_hidden->SetColor ( 0xa0000000 );
+		m_hidden->SetZ ( Z_EFF - 0.01f );
+		AddpTask ( m_hidden );
+		GRPLST_INSERT ( m_hidden );
+#endif // TRIAL
+
 
 
 		//プレイヤ別の位置など
