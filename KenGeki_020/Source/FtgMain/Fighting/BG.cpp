@@ -17,11 +17,14 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	const float BG::BG_SIZE_W = 2048;
-	const float BG::BG_SIZE_H = 1024;
-	const float BG::BG_POS_X = 0 - ( 2048 - 1280 ) / 2;
+//	const float BG::BG_SIZE_W = 2048;
+	const float BG::BG_SIZE_W = 1920;
+//	const float BG::BG_SIZE_H = 1024;
+	const float BG::BG_SIZE_H = 960;
+	const float BG::BG_POS_X = 0 - ( BG_SIZE_W - 1280 ) / 2;
 //	const float BG::BG_POS_Y = 0 - ( 1024 - 960 );
-	const float BG::BG_POS_Y = 0 - ( 1080 - 960 );
+//	const float BG::BG_POS_Y = 0 - ( 1080 - 960 );
+	const float BG::BG_POS_Y = 0 - ( 960 - BG_SIZE_H );
 
 	BG::BG ()
 	{
@@ -178,7 +181,8 @@ namespace GAME
 		break;
 
 		case STAGE_YUUHINO_HARA:
-			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_evening_C.png" );
+//			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_evening_C.png" );
+			m_bg_C->AddTexture_FromArchive ( U"BG\\bg_school.png" );
 			m_bg_L->AddTexture_FromArchive ( U"BG\\BG_evening_L.png" );
 			m_bg_R->AddTexture_FromArchive ( U"BG\\BG_evening_R.png" );
 		break;

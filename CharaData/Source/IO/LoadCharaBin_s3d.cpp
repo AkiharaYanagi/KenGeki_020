@@ -5,6 +5,9 @@
 //=================================================================================================
 #include "LoadCharaBin_s3d.h"
 #include <filesystem>
+#include "LoadImgFile.h"
+
+using namespace std::chrono;
 
 
 //-------------------------------------------------------------------------------------------------
@@ -12,6 +15,9 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+	using CLK = std::chrono::steady_clock;
+
+
 	//==================================================================================
 	//	LoadChara
 	//		スクリプトとイメージリストを保存したキャラデータ ".dat"ファイル から、Charaを読み込む
@@ -82,6 +88,35 @@ namespace GAME
 
 		//イメージ
 		m_func.LoadCharaImage ( std::move ( buffer ), pos, chara );
+
+#if 0
+
+		//時間計測
+		CLK::time_point start_time = CLK::now ();
+
+
+		//読込
+		LoadImgFile loadImgFile;
+
+		size_t len = filename.length();
+		s3d::String fn = filename.substr ( 0, len - 4 );
+
+		s3d::String filename_bhv = fn + U"_bhv.img";
+		chara.SetpapTx_Main ( loadImgFile.Do ( filename_bhv ) );
+
+		s3d::String filename_gns = fn + U"_bhv.img";
+		chara.SetpapTx_Ef ( loadImgFile.Do ( filename_gns ) );
+
+
+		//時間計測
+		CLK::time_point end_time = CLK::now ();
+		duration drtn = duration_cast < microseconds > ( end_time - start_time );
+		long long ms = drtn.count ();
+		s3d::Logger << ms;
+
+
+		loadImgFile.Conversion ( filename_bhv );
+#endif // 0
 	}
 
 

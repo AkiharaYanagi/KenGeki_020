@@ -29,7 +29,7 @@ namespace GAME
 		double	m_r { 0 };
 
 
-		P_GrpEf		m_test;
+//		P_GrpEf		m_test;
 
 
 	public:

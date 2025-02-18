@@ -300,7 +300,6 @@ namespace GAME
 		int drctDmg = m_pScript->m_prmBattle.DirectDamage;
 		if ( drctDmg != 0 )
 		{
-#if 0
 
 			if ( IsNameAction ( U"超必殺Bヒット" ) )
 			{
@@ -311,6 +310,7 @@ namespace GAME
 				}
 			}
 
+#if 0
 #endif // 0
 
 			m_pOther.lock()->m_btlPrm.OnDamage ( - drctDmg );

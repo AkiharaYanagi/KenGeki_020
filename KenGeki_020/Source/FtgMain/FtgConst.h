@@ -90,7 +90,8 @@ namespace GAME
 	//画面描画用 初期位置
 	enum PLAYER_BASE_PT
 	{
-		GAME_WIDTH = 2048,		//ゲーム上で扱う幅
+//		GAME_WIDTH = 2048,		//ゲーム上で扱う幅
+		GAME_WIDTH = 1920,		//ゲーム上で扱う幅
 		GAME_HEIGHT = 1024,
 
 		GAME_WIDTH_HALF = GAME_WIDTH / 2,		//ゲーム上で扱う幅

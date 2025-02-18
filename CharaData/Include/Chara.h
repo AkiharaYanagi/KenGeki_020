@@ -79,6 +79,10 @@ namespace GAME
 		//メインイメージ テクスチャポインタの取得
 		P_Tx GetpMainTexture ( UINT index ) { return mpap_txMain->at ( index ); }
 
+		//テクスチャ配列の設定
+		void SetpapTx_Main ( PAP_Tx paptx ) { mpap_txMain = paptx; }
+
+
 		//-----------------------------------------------------------------
 		//アクション配列ポインタを取得
 		PAP_Action GetpvpAction () { return mpap_Action; }
@@ -128,6 +132,9 @@ namespace GAME
 
 		//Efイメージ テクスチャポインタの取得
 		P_Tx GetpEfTexture ( UINT index ) { return mpap_txEf->at ( index ); }
+
+		//テクスチャ配列の設定
+		void SetpapTx_Ef ( PAP_Tx paptx ) { mpap_txEf = paptx; }
 
 		//-----------------------------------------------------------------
 		//エフェクト配列に追加

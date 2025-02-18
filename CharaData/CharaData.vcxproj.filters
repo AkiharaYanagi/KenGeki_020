@@ -187,6 +187,9 @@
     <ClCompile Include="Source\IO\LoadCharaBinFunc.cpp">
       <Filter>IO</Filter>
     </ClCompile>
+    <ClCompile Include="Source\IO\LoadImgFile.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -879,6 +882,9 @@
       <Filter>IO</Filter>
     </ClInclude>
     <ClInclude Include="include\LoadCharaBinFunc.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\LoadImgFile.h">
       <Filter>IO</Filter>
     </ClInclude>
   </ItemGroup>

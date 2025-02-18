@@ -134,6 +134,7 @@
     <ClCompile Include="Source\IO\LoadCharaBinFunc.cpp" />
     <ClCompile Include="Source\IO\LoadCharaBinUtl.cpp" />
     <ClCompile Include="Source\IO\LoadCharaBin_s3d.cpp" />
+    <ClCompile Include="Source\IO\LoadImgFile.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -348,6 +349,7 @@
     <ClInclude Include="include\LoadCharaBinFunc.h" />
     <ClInclude Include="include\LoadCharaBinUtl.h" />
     <ClInclude Include="include\LoadCharaBin_s3d.h" />
+    <ClInclude Include="Include\LoadImgFile.h" />
     <ClInclude Include="include\Route.h" />
     <ClInclude Include="include\Script.h" />
     <ClInclude Include="include\ScriptParam_Battle.h" />
