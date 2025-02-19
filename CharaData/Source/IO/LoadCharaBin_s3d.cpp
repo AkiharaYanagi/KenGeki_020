@@ -104,7 +104,7 @@ namespace GAME
 		s3d::String filename_bhv = fn + U"_bhv.img";
 		chara.SetpapTx_Main ( loadImgFile.Do ( filename_bhv ) );
 
-		s3d::String filename_gns = fn + U"_bhv.img";
+		s3d::String filename_gns = fn + U"_gns.img";
 		chara.SetpapTx_Ef ( loadImgFile.Do ( filename_gns ) );
 
 
