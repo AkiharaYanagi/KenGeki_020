@@ -198,6 +198,7 @@ namespace GAME
 		m_stageSelect->AddTexture_FromArchive ( U"CharaSele\\BG_Preview_Noon.png" );
 		m_stageSelect->AddTexture_FromArchive ( U"CharaSele\\BG_Preview_Evening.png" );
 		m_stageSelect->AddTexture_FromArchive ( U"CharaSele\\BG_Preview_Night.png" );
+		m_stageSelect->AddTexture_FromArchive ( U"CharaSele\\BG_Preview_School.png" );
 		m_stageSelect->SetPos ( VEC2 ( STG_X, STG_Y ) );
 		m_stageSelect->SetZ ( Z_EFF );
 		AddpTask ( m_stageSelect );
@@ -602,6 +603,7 @@ namespace GAME
 		case 0: ret = STAGE_ASAHINO_HARA; break;
 		case 1: ret = STAGE_YUUHINO_HARA; break;
 		case 2: ret = STAGE_YORUNO_HARA; break;
+		case 3: ret = STAGE_SCHOOL_NOON; break;
 		}
 
 		return ret;

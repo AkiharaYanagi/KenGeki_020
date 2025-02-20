@@ -181,8 +181,7 @@ namespace GAME
 		break;
 
 		case STAGE_YUUHINO_HARA:
-//			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_evening_C.png" );
-			m_bg_C->AddTexture_FromArchive ( U"BG\\bg_school.png" );
+			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_evening_C.png" );
 			m_bg_L->AddTexture_FromArchive ( U"BG\\BG_evening_L.png" );
 			m_bg_R->AddTexture_FromArchive ( U"BG\\BG_evening_R.png" );
 		break;
@@ -192,6 +191,13 @@ namespace GAME
 			m_bg_L->AddTexture_FromArchive ( U"BG\\BG_night_L.png" );
 			m_bg_R->AddTexture_FromArchive ( U"BG\\BG_night_R.png" );
 		break;
+
+		case STAGE_SCHOOL_NOON:
+			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_school.png" );
+			m_bg_L->AddTexture_FromArchive ( U"BG\\BG_evening_L.png" );
+			m_bg_R->AddTexture_FromArchive ( U"BG\\BG_evening_R.png" );
+		break;
+
 		}
 	}
 
