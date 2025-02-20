@@ -22,7 +22,16 @@ namespace GAME
 
 #pragma region CONST
 
-	const char32_t Title::Ver[] = U"ver 0.22";
+#if 0
+		//2024/11/03 デジゲー博 Ver 0.10
+		//2024/11/03 修正パッチ Ver 0.12;
+		//2024/12/15 変な格ゲー会 ver0.15
+		//2024/12/30 冬コミ ver0.20
+		//2024/12/31 冬コミ修正 ver0.21
+		//2024/02/10 Steam ver0.22
+		//2024/02/20 修正 ver0.23
+#endif // 0
+	const char32_t Title::Ver[] = U"ver 0.23";
 
 	const float Title::BG_X = 0;
 	const float Title::BG_Y = 0;
@@ -149,16 +158,6 @@ namespace GAME
 		m_strVer = std::make_shared < GrpStr > ();
 		m_strVer->SetPos ( 1185, 905 );
 		m_strVer->SetZ ( Z_MENU );
-
-#if 0
-		//2024/11/03 デジゲー博
-//		m_strVer->SetStr ( U"Ver 0.10" );
-		//2024/11/03 修正パッチ
-		//m_strVer->SetStr ( U"Ver 0.12" );
-		//2024/12/15 変な格ゲー会 ver0.15
-		//2024/12/30 冬コミ ver0.20
-		//2024/12/31 冬コミ修正 ver0.21
-#endif // 0
 		m_strVer->SetStr ( Ver );
 
 		AddpTask ( m_strVer );

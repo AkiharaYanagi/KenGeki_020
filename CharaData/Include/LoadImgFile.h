@@ -23,6 +23,8 @@ namespace GAME
 
 		void Conversion ( s3d::String filepath );
 		PAP_Tx LoadTx ();
+		PAP_Tx LoadImg ();
+		PAP_Tx LoadAtlas();
 	};
 
 

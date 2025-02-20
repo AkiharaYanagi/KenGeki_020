@@ -162,5 +162,24 @@ namespace GAME
 	}
 
 
+	//Img->P_Tx
+	PAP_Tx LoadImgFile::LoadImg ()
+	{
+		PAP_Tx paptx = std::make_shared < AP_Tx > ();
+		return paptx;
+	}
+
+	//Atlas->P_Tx
+	PAP_Tx LoadImgFile::LoadAtlas ()
+	{
+		PAP_Tx paptx = std::make_shared < AP_Tx > ();
+		Atlas atlas;
+
+
+
+		return paptx;
+	}
+
+
 }	//namespace GAME
 
