@@ -14,12 +14,6 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	using P_CH = std::shared_ptr < char [] >;
-	using P_BYTE = std::shared_ptr < byte [] >;
-	using UP_BYTE = std::unique_ptr < byte [] >;
-	using L_UINT = std::unique_ptr < UINT [] >;
-	using CUPR_BYTE = const UP_BYTE &;
-
 	//------------------------------------------------------------
 	//	LoadCharaBinで用いる関数群
 	//------------------------------------------------------------

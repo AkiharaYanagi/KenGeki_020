@@ -13,9 +13,6 @@ namespace FS = std::filesystem;
 namespace GAME
 {
 
-	using UP_BYTE = std::unique_ptr < byte [] >;
-
-
 	PAP_Tx LoadImgFile::Do ( s3d::String filepath )
 	{
 		//Unicode ロケールの設定
@@ -162,22 +159,28 @@ namespace GAME
 	}
 
 
-	//Img->P_Tx
+	//Img->PAP_Tx
 	PAP_Tx LoadImgFile::LoadImg ()
 	{
 		PAP_Tx paptx = std::make_shared < AP_Tx > ();
 		return paptx;
 	}
 
-	//Atlas->P_Tx
-	PAP_Tx LoadImgFile::LoadAtlas ()
+	//Atlas->PAP_Tx
+	PAP_Tx LoadImgFile::LoadAtlas ( s3d::String filepath )
 	{
-		PAP_Tx paptx = std::make_shared < AP_Tx > ();
+		//atlasをデシリアライズ
 		Atlas atlas;
+		s3d::Deserializer < s3d::BinaryReader > br { filepath };
 
+		if ( not br )
+		{
+			return std::make_shared < AP_Tx > ();
+		}
 
+		br ( atlas );
 
-		return paptx;
+		return atlas.GetpapTx ();
 	}
 
 

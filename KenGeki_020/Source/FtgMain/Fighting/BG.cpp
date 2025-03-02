@@ -39,7 +39,7 @@ namespace GAME
 		//------------------------------------------------
 		//背景 左
 		m_bg_L = std::make_shared < GameGraphic > ();
-		m_bg_L->SetPos ( -2048, BG_POS_Y );
+		m_bg_L->SetPos ( -BG_SIZE_W, BG_POS_Y );
 		m_bg_L->SetZ ( Z_BG );
 		AddpTask ( m_bg_L );
 		GRPLST_INSERT ( m_bg_L );
@@ -47,7 +47,7 @@ namespace GAME
 		//------------------------------------------------
 		//背景 右
 		m_bg_R = std::make_shared < GameGraphic > ();
-		m_bg_R->SetPos ( 2048, BG_POS_Y );
+		m_bg_R->SetPos ( BG_SIZE_W, BG_POS_Y );
 		m_bg_R->SetZ ( Z_BG );
 		AddpTask ( m_bg_R );
 		GRPLST_INSERT ( m_bg_R );
@@ -170,7 +170,7 @@ namespace GAME
 
 	void BG::ParamInit ( P_Param pParam )
 	{
-		m_stage_name = pParam->GetStageName ();
+		m_stage_name = pParam->GetStage_Name ();
 
 		switch ( m_stage_name )
 		{

@@ -220,6 +220,8 @@ namespace GAME
 	//アクション移行(自身)
 	void  ExeChara::TransitAction_Condition_I ( BRANCH_CONDITION CONDITION, bool forced )
 	{
+		(void)forced;
+
 		//ヒット・相手
 		UINT indexAction = Check_TransitAction_Condition ( CONDITION );
 		if ( NO_COMPLETE != indexAction )
@@ -228,18 +230,26 @@ namespace GAME
 			P_Action pAct = m_pChara->GetpAction ( indexAction );
 			P_Script pScr = pAct->GetpScript ( 0 );
 
+
+			s3d::String nameAction = Check_TransitAction_Condition_str ( CONDITION );
+
+			//=================================================================
+			//自身の変更先アクション名を保存
+			m_nameChangeMine = nameAction;
+
 			//自身を変更
-			SetAction ( indexAction );	//遷移
-			m_btlPrm.SetForcedChange ( forced );	//強制
+//			SetAction ( indexAction );	//遷移
+//			m_btlPrm.SetForcedChange ( forced );	//強制
 		}
 	}
 
 	//アクション移行 ( 自分攻撃、相手ヒット )
 	void  ExeChara::TransitAction_Condition_E ( BRANCH_CONDITION CONDITION, bool forced )
 	{
-		if ( forced ) { int i = 0; ++ i; }
+		(void)forced;
 
 #if 0
+		if ( forced ) { int i = 0; ++ i; }
 		UINT indexAction = Check_TransitAction_Condition ( CONDITION );
 
 		//該当無しは何もしない
@@ -314,27 +324,6 @@ namespace GAME
 #endif // 0
 	}
 
-	void ExeChara::ChangeMine ()
-	{
-		if ( ! m_pOther.lock ()->ExistActionName ( m_nameChangeMine ) )
-		{
-			TRACE_F ( _T("ChangeOther(): Error : name = %s\n"), m_nameChangeMine.toWstr().c_str () );
-			//対象なしのときアサート
-			//assert ( m_nameChangeMine );
-		}
-
-		//ノーリアクション
-		if ( 0 == m_nameChangeMine.compare ( U"ノーリアクション" ) )
-		{
-			//変更せず続行
-			return;
-		}
-
-		//相手を変更
-		m_pOther.lock ()->m_btlPrm.SetForcedChange ( T );	//強制
-		m_pOther.lock ()->SetAction ( m_nameChangeMine );	//遷移
-	}
-
 
 	void ExeChara::ChangeOhter ()
 	{
@@ -343,6 +332,7 @@ namespace GAME
 			TRACE_F ( _T("ChangeOther(): Error : name = %s\n"), m_nameChangeOther.toWstr().c_str () );
 			//対象なしのときアサート
 			//assert ( m_nameChangeOther );
+			return;
 		}
 
 		//ノーリアクション
@@ -355,6 +345,32 @@ namespace GAME
 		//相手を変更
 		m_pOther.lock ()->m_btlPrm.SetForcedChange ( T );	//強制
 		m_pOther.lock ()->SetAction ( m_nameChangeOther );	//遷移
+		m_nameChangeOther = U"ノーリアクション";
+
+		m_pOther.lock()->m_btlPrm.SetFirstSE_HS ( F );
+	}
+
+	void ExeChara::ChangeMine ()
+	{
+		if ( ! ExistActionName ( m_nameChangeMine ) )
+		{
+			TRACE_F ( _T("ChangeOther(): Error : name = %s\n"), m_nameChangeMine.toWstr().c_str () );
+			//対象なしのときアサート
+			//assert ( m_nameChangeMine );
+			return;
+		}
+
+		//ノーリアクション
+		if ( 0 == m_nameChangeMine.compare ( U"ノーリアクション" ) )
+		{
+			//変更せず続行
+			return;
+		}
+
+		//自身を変更
+		m_btlPrm.SetForcedChange ( T );	//強制
+		SetAction ( m_nameChangeMine );	//遷移
+		m_nameChangeMine = U"ノーリアクション";
 	}
 
 
@@ -412,6 +428,13 @@ namespace GAME
 	// 特殊条件による分岐
 	void ExeChara::TranditAction_Special ()
 	{
+		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_2 )
+		{
+			float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
+			float x = m_btlPrm.GetPos().x;
+			DBGOUT_WND_F ( DBGOUT_0, U"2p_x = {}, wall_R = {}"_fmt( x, wall_R ) );
+		}
+
 		//条件：壁到達のブランチをチェック
 		s3d::String ActionName = Check_TransitAction_Condition_str ( BRC_WALL );
 		if ( ActionName.compare ( U"" ) != 0 )

@@ -340,8 +340,8 @@ namespace GAME
 		}
 		else if ( PLAYER_ID_2 == playerID )
 		{
-			m_strAction->SetPos ( VEC2 ( 640 + 300, 120 ) );
-			m_strState->SetPos ( VEC2 ( 640 + 300, 160 ) );
+			m_strAction->SetPos ( VEC2 ( 640 + 200, 120 ) );
+			m_strState->SetPos ( VEC2 ( 640 + 200, 160 ) );
 		}
 
 	}
@@ -442,25 +442,6 @@ namespace GAME
 		m_strDmg->SetStr ( U"{} Damage"_fmt( chnDmg ) );
 
 		//補正
-#if 0
-
-		//ヒット数による補正表示
-		UINT chain = btlPrm.GetChainHitNum ();
-		if ( chain == 1 ) { chain = 0; }		//1hit目は補正なし
-		if ( chain > 100 ) { chain = 100; }		//上限100
-
-		float d_revise = ( 100.f - (float)chain ) * 0.01f;	//%に換算
-		if ( 10 <= chain ) { d_revise *= d_revise; }	//10hit以降補正
-		if ( d_revise < 0 ) { d_revise = 0.01f; }	//０にはしない
-
-
-		std::ostringstream oss;
-		oss << std::fixed << std::setprecision ( 3 ) << d_revise * 100;
-
-		m_strRevise->SetStr ( U"{}%"_fmt( s3d::Unicode::Widen ( oss.str() ) ) );
-
-#endif // 0
-
 		m_strRevise->SetStr ( U"{0:.2f}%"_fmt( btlPrm.GetCnfmRvs () * 100 ) );
 	}
 

@@ -294,7 +294,7 @@ namespace GAME
 		m_chsl_pl_2p->AssignName ( charaName2p );
 
 		//ステージ
-		STAGE_NAME stageName = p->GetStageName ();
+		STAGE_NAME stageName = p->GetStage_Name ();
 		AssignStage ( stageName );
 
 		//BGM
@@ -382,7 +382,7 @@ namespace GAME
 		P_Param pPrm = Scene::GetpParam ();
 		pPrm->SetCharaName1p ( m_chsl_pl_1p->GetName() );
 		pPrm->SetCharaName2p ( m_chsl_pl_2p->GetName() );
-		pPrm->SetStageName ( GetStageName () );
+		pPrm->SetStage_Name ( GetStageName () );
 		pPrm->Set_BGM_ID ( m_bgm_id );
 
 		//設定ファイルに書出

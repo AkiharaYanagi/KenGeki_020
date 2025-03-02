@@ -31,6 +31,7 @@ namespace GAME
 		CHARA_NAME		m_name2p { CHARA_TEST };
 
 		BGM_ID			m_bgm_id { BGM_ID_GABA };			//BGM_ID
+		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };	//STAGE_NAME
 
 
 	public:
@@ -84,6 +85,9 @@ namespace GAME
 		 
 		//BGM
 		GET_SET ( BGM_ID, GetBGM_ID, SetBGM_ID, m_bgm_id )
+		 
+		//Stage
+		GET_SET ( STAGE_NAME, GetStage_Name, SetStage_Name, m_stage_name )
 		 
 		//-----------------------------------------
 

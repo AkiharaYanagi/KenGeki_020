@@ -31,6 +31,7 @@ namespace GAME
 		m_name1p		= rhs.m_name1p;
 		m_name2p		= rhs.m_name2p;
 		m_bgm_id		= rhs.m_bgm_id;
+		m_stage_name	= rhs.m_stage_name;
 	}
 
 	void GameSettingFile::Load ()
@@ -69,6 +70,10 @@ namespace GAME
 			ifstrm.read( (char*)&bgm, sizeof( byte ) );
 			m_bgm_id = (BGM_ID)bgm;
 
+			byte stage = 0;
+			ifstrm.read( (char*)&stage, sizeof( byte ) );
+			m_stage_name = (STAGE_NAME)stage;
+
 			//終了
 			ifstrm.close();
 
@@ -97,6 +102,7 @@ namespace GAME
 			ofstrm.write ( (char*)&m_name1p, sizeof ( byte ) );
 			ofstrm.write ( (char*)&m_name2p, sizeof ( byte ) );
 			ofstrm.write ( (char*)&m_bgm_id, sizeof ( byte ) );
+			ofstrm.write ( (char*)&m_stage_name, sizeof ( byte ) );
 
 			//終了
 			ofstrm.close ();
@@ -116,6 +122,7 @@ namespace GAME
 		m_name1p = CHARA_OUKA;
 		m_name2p = CHARA_OUKA;
 		m_bgm_id = BGM_ID_GABA;
+		m_stage_name = STAGE_YUUHINO_HARA;
 	}
 
 

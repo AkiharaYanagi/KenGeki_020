@@ -94,11 +94,14 @@ namespace GAME
 		}
 		void SetRandomChara ();
 
-		GET_SET ( STAGE_NAME, GetStageName, SetStageName, m_stage_name	)		//bgm
+//		GET_SET ( STAGE_NAME, GetStageName, SetStageName, m_stage_name	)		//bgm
 
 		//設定ファイルにも記録
 		BGM_ID Get_BGM_ID () const { return m_setting.GetBGM_ID (); }
 		void Set_BGM_ID ( BGM_ID id ) { m_setting.SetBGM_ID ( id ); }
+
+		STAGE_NAME GetStage_Name () const { return m_setting.GetStage_Name (); }
+		void SetStage_Name ( STAGE_NAME stage ) { m_setting.SetStage_Name ( stage ); }
 
 		bool GetDemo () const { return m_setting.GetDemo (); }
 		void SetDemo ( bool b ) { m_setting.SetDemo ( b ); }

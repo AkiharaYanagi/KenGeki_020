@@ -46,11 +46,13 @@ namespace GAME
 		//剣撃対抗タイマ５フレ間、ヒットストップの間はたまたま保持されている
 		float accRecoil = m_btlPrm.GetAccRecoil ();
 
+#if 0
 		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
 		{
 			DBGOUT_WND_F ( DBGOUT_0, U"剣撃対抗 = {}"_fmt( bTimerTaikou ? 1 : 0 ) );
 			DBGOUT_WND_F ( DBGOUT_1, U"accRecoil = {:.3f}"_fmt( accRecoil ) );
 		}
+#endif // 0
 
 		//受付時間内の場合
 		if ( bTimerTaikou )

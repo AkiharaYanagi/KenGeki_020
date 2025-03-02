@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1774170EC8FA47E59A84E1130EE56F82"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_251CDA0B4F8A460ABD93B19F4141BE06"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -88,12 +94,6 @@
         "Entry"
         {
         "MsmKey" = "8:_9C6AB01AF58549C6B3268839500472D1"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A19278867E914DA9BAE061009DA333CD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -336,6 +336,26 @@
             "TargetName" = "8:◆公開用　修正点・変更点.txt"
             "Tag" = "8:"
             "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1774170EC8FA47E59A84E1130EE56F82"
+            {
+            "SourcePath" = "8:..\\KenGeki_020\\App\\KenGeki_KeyConfig.exe"
+            "TargetName" = "8:KenGeki_KeyConfig.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -620,26 +640,6 @@
             "TargetName" = "8:Readme_剣撃クロスゾーン.txt"
             "Tag" = "8:"
             "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A19278867E914DA9BAE061009DA333CD"
-            {
-            "SourcePath" = "8:..\\KenGeki_020\\App\\剣撃クロスゾーン 入力設定.exe"
-            "TargetName" = "8:剣撃クロスゾーン 入力設定.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1162,7 +1162,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_A19278867E914DA9BAE061009DA333CD"
+            "Target" = "8:_1774170EC8FA47E59A84E1130EE56F82"
             "Folder" = "8:_2E07B9A218B646BF91A11671E585B281"
             "WorkingFolder" = "8:_5194C9D731444E71A7D457D5EE0B6A83"
             "Icon" = "8:_ACEAC665A79E44288AC224C871105141"

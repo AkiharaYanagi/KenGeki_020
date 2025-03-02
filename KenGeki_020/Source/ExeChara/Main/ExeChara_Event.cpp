@@ -126,6 +126,26 @@ namespace GAME
 	//==========================================
 	void ExeChara::OnHit ()
 	{
+		//相手
+		P_ExeChara pOther = m_pOther.lock ();
+
+		//-----------------------------------------------------
+		//ゲージ増減 (超必殺以外)
+		if ( ! IsActCtg ( AC_OVERDRIVE ) )
+		{
+			//攻撃値を超必殺技ゲージに加算
+			int p = m_pScript->m_prmBattle.Power;
+
+			//アクセルゲージ補正 ( -1.000倍 ~ +2.000倍 )
+			//( -500 ~ +1000 )
+			double dp = p * 0.002f * m_btlPrm.GetAccel();
+
+			m_btlPrm.AddMana ( (int)dp );
+
+			//バランス固定回復
+			m_btlPrm.AddBalance ( 100 );
+		}
+
 
 		//-----------------------------------------------------
 		//避けを直前成立させるとスロウ
@@ -148,6 +168,9 @@ namespace GAME
 			}
 		}
 #endif // 0
+
+		//ガード成立時、分岐しない
+//		if ( pOther->CanGuard () ) { return; }
 
 		//-----------------------------------------------------
 		//条件分岐 (相手→自分でないとスクリプトが変わってしまう)
@@ -179,23 +202,6 @@ namespace GAME
 		//ノックバック
 		OnKnockBack ();
 		
-		//-----------------------------------------------------
-		//ゲージ増減 (超必殺以外)
-		if ( ! IsActCtg ( AC_OVERDRIVE ) )
-		{
-			//攻撃値を超必殺技ゲージに加算
-			int p = m_pScript->m_prmBattle.Power;
-
-			//アクセルゲージ補正 ( -1.000倍 ~ +2.000倍 )
-			//( -500 ~ +1000 )
-			double dp = p * 0.002f * m_btlPrm.GetAccel();
-
-			m_btlPrm.AddMana ( (int)dp );
-
-			//バランス固定回復
-			m_btlPrm.AddBalance ( 100 );
-		}
-
 		//-----------------------------------------------------
 		//パラメータ
 		m_btlPrm.OnHit ();
@@ -392,6 +398,11 @@ namespace GAME
 #endif // 0
 		bool bGuard = CheckGuard ();
 
+		if ( bGuard )
+		{
+			//ガード成立時、分岐しない
+			pOther->m_nameChangeMine = U"ノーリアクション";
+		}
 
 		//-------------------------------------------------
 		//★★★ 剣撃対抗 (打撃時にいずれかの入力で距離離し)
@@ -451,20 +462,22 @@ namespace GAME
 		}
 		//-------------------------------------------------
 		//超必殺補正
-		float rev_od = m_btlPrm.GetReviseOverDrive ();
+		float rev_od = pOther->m_btlPrm.GetReviseOverDrive ();
 		//-------------------------------------------------
 
 		//最終確定補正値
-		pOther->m_btlPrm.SetCnfmRvs ( d_revise * throwRvs * rev_od );
+		pOther->m_btlPrm.SetCnfmRvs ( d_revise * throwRvs * rev_od * g * d_45 );
 
 		//-------------------------------------------------
 
 		//最終確定値
 		float confirmed_revise = pOther->m_btlPrm.GetCnfmRvs ();
-		int confirmed_damage = (int) ( confirmed_revise * damage * g * d_45 );
+		int confirmed_damage = (int) ( confirmed_revise * damage );
 
 		m_btlPrm.OnDamage ( - confirmed_damage );	//power は＋の値、ダメージ計算はマイナスにして加算
 
+		//スタミナ反映
+		m_btlPrm.AddBalance ( (int)(confirmed_damage * 0.1f ) );
 
 
 
@@ -478,6 +491,7 @@ namespace GAME
 		{
 			DBGOUT_WND_F ( DBGOUT_0, U"ダメージ = {}"_fmt( damage ) );
 			DBGOUT_WND_F ( DBGOUT_1, U"連続ヒットダメージ = {}"_fmt( chnDmg ) );
+			DBGOUT_WND_F ( DBGOUT_2, U"rev_od = {}"_fmt( rev_od ) );
 		}
 
 		//リザルト用に保存 (相手の値)

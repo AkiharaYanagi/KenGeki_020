@@ -4,11 +4,11 @@
 //
 //=================================================================================================
 #pragma once
+//#include "Game.h"
 #include "Define.h"
-#include "Document.h"
-#include <filesystem>
+#include "Define_Siv3D.h"
+#include "04_GameFile.h"
 
-#include "IOCharaDefine.h"
 
 //-------------------------------------------------------------------------------------------------
 // 宣言
@@ -24,7 +24,9 @@ namespace GAME
 		void Conversion ( s3d::String filepath );
 		PAP_Tx LoadTx ();
 		PAP_Tx LoadImg ();
-		PAP_Tx LoadAtlas();
+
+		//Atlas -> PAP_Tx
+		PAP_Tx LoadAtlas( s3d::String filepath );
 	};
 
 

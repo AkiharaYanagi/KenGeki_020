@@ -735,6 +735,14 @@ namespace GAME
 	}
 
 
+	void BtlParam::OnGuard ()
+	{
+		//ガードストップ
+		UINT hitstop = HITSTOP_TIME;
+		m_tmrHitstop->Start ( hitstop );		//ヒットストップの設定
+	}
+
+
 	//============================================================
 	//相殺時 (自分：攻撃、相手：攻撃)
 	void BtlParam::OnOffset_AA ()
@@ -802,10 +810,8 @@ namespace GAME
 		//※ヒットストップ分を待機してからスタート
 		HitPitchWaitStart ( hitstop );
 
-
 		//同一アクション内ヒット数
 		++ m_hitNum;
-
 
 		//@info 連続ヒット数は常に加算し、ニュートラル状態で「相手(m_pOther)」の値を０に戻す
 		//ガード時は加算しない

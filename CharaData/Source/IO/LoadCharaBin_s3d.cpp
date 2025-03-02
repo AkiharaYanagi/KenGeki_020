@@ -53,6 +53,7 @@ namespace GAME
 	//------------------------------------------
 	//	try用実行関数
 	//------------------------------------------
+	//filename : "chara_***.dat"
 	void LoadCharaBin_s3d::_Load ( const s3d::String & filename, Chara & chara )
 	{
 		std::filesystem::path current_path = std::filesystem::current_path();
@@ -88,6 +89,15 @@ namespace GAME
 
 		//イメージ
 		m_func.LoadCharaImage ( std::move ( buffer ), pos, chara );
+
+#if 0
+		LoadImgFile lif;
+		s3d::String fn = filename.substr ( 0, filename.length() - 4 );
+		s3d::String filename_bhv = fn + U"_bhv.atls";
+		s3d::String filename_gns = fn + U"_gns.atls";
+		chara.SetpapTx_Main ( lif.LoadAtlas ( filename_bhv ) );
+		chara.SetpapTx_Ef ( lif.LoadAtlas ( filename_gns ) );
+#endif // 0
 
 #if 0
 

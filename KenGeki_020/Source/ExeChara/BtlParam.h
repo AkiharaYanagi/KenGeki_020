@@ -261,6 +261,7 @@ namespace GAME
 		void HitPitchWaitStart ( UINT time );	//ヒット間隔再スタート
 		void CalcBalance ( P_Script pScp );
 		void OnDamage ( int damage );	//ダメージ時
+		void OnGuard ();	//ガード時
 
 		void OnOffset_AA ();	//相殺時 (自分：攻撃、相手：攻撃)
 		void OnOffset_AO ();	//相殺時 (自分：攻撃、相手：相殺)

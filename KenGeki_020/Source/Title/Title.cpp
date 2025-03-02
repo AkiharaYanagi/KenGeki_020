@@ -267,8 +267,8 @@ namespace GAME
 				//ランダムで各種値を決める
 				pPrm->SetCharaName1p ( GetCharaName_Rnd () );	//キャラランダム
 				pPrm->SetCharaName2p ( GetCharaName_Rnd () );	//キャラランダム
-				pPrm->SetStageName ( GetStageName_Rnd () );	//ステージランダム
 				pPrm->Set_BGM_ID ( GetBGM_ID_Rnd () );		//BGMランダム
+				pPrm->SetStage_Name ( GetStageName_Rnd () );	//ステージランダム
 
 				//CPU操作
 				pPrm->SetMutchMode ( MUTCH_MODE::MODE_CPU_CPU );
@@ -568,12 +568,13 @@ namespace GAME
 	{
 		STAGE_NAME ret = STAGE_YUUHINO_HARA;
 
-		int rnd = s3d::Random ( 2 );
+		int rnd = s3d::Random ( 3 );
 		switch ( rnd )
 		{
 		case 0: ret = STAGE_ASAHINO_HARA; break;
 		case 1: ret = STAGE_YUUHINO_HARA; break;
 		case 2: ret = STAGE_YORUNO_HARA; break;
+		case 3: ret = STAGE_SCHOOL_NOON; break;
 		}
 
 		return ret;

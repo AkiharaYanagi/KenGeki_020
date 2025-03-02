@@ -133,7 +133,9 @@ namespace GAME
 			//最終スクリプト
 			if ( m_pAction->IsEndScript ( m_frame ) )
 			{
-				m_btlPrm.SetReviseOverDrive ( 0.5f );
+				//補正は自分に係り、相手のダメージ時に参照される
+				float rev = m_btlPrm.GetReviseOverDrive ();
+				m_btlPrm.SetReviseOverDrive ( rev * 0.5f );
 			}
 		}
 
