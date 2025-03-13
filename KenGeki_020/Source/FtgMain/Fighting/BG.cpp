@@ -219,8 +219,11 @@ namespace GAME
 
 	void BG::Move ()
 	{
+#if 0
 		m_front->SetDispBase ( G_BASE_POS () );
 		m_front->NextIndexTexture ();
+#endif // 0
+
 
 #if 0
 		//--------------------------
@@ -451,6 +454,8 @@ namespace GAME
 
 	void BG::LoadFrontOb ()
 	{
+#if 0
+
 		//------------------------------------------------
 		m_front = std::make_shared < GrpEf > ();
 		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_00.png" );
@@ -502,6 +507,8 @@ namespace GAME
 		m_front->On ();
 		AddpTask ( m_front );
 		GRPLST_INSERT ( m_front );
+
+#endif // 0
 	}
 
 

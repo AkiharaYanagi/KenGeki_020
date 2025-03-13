@@ -94,3 +94,7 @@ VC03_01_0_Gaba_激烈のヴァルカンレイブ.wav
 VC03_01_1_Gaba_畳み掛ける.wav
 VC03_02_0_Gaba_パンチだ.wav
 VC03_03_0_Gaba_中攻撃.wav
+VC03_04_0_Gaba_投げ.wav
+VC03_05_0_Gaba_激突のヘルアビス.wav
+VC03_06_0_Gaba_激動の.wav
+VC03_06_1_Gaba_グラビトンクラッチ.wav

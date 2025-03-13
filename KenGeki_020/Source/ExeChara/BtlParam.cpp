@@ -531,6 +531,14 @@ namespace GAME
 	{
 		VEC2 pos = GetPos ();
 
+
+		if ( GetPlayerID () == PLAYER_ID_1 )
+		{
+			DBGOUT_WND_F ( DBGOUT_0, U"1p_pos = {},{}"_fmt( pos.x, pos.y ) );
+		}
+
+
+
 		//位置が基準より下だったら
 		if ( (float)PLAYER_BASE_Y < pos.y )
 		{

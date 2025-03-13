@@ -514,26 +514,34 @@ namespace GAME
 		//ヒットストップ
 
 		//相手スクリプトによる追加止め時間
-		P_Action pAct = m_pOther.lock()->GetpAction();
-		P_Script pScp = m_pOther.lock()->GetpScript();
-		int warp = pScp->m_prmBattle.Warp;
-
+		P_Action pAct = pOther->GetpAction();
+		P_Script pScp = pOther->GetpScript();
 		UINT stopTime = HITSTOP_TIME;
 
-		//技指定
-		if ( pAct->IsName ( U"波動" ) )
-		{
-			stopTime += 10;
-		}
-
-
-
+		int warp = pScp->m_prmBattle.Warp;
 		if( warp != 0 )
 		{
 			stopTime += warp;
 		}
 
-		m_btlPrm.GetTmr_HitStop ()->Start ( stopTime );	//ヒットストップの設定
+
+		//ガード時
+		if ( bGuard )
+		{
+			//個別
+			bool bRai0 = pOther->IsNameAction ( U"雷電蹴_1" );
+			bool bKuuRai0 = pOther->IsNameAction ( U"空中雷電蹴_1" );
+			bool bKuuRai1 = pOther->IsNameAction ( U"空中雷電蹴_持続" );
+			if ( bRai0 || bKuuRai0 || bKuuRai1 )
+			{
+				m_btlPrm.GetTmr_HitStop ()->Start ( stopTime );	//ヒットストップの設定
+			}
+		}
+		//ガード時以外(ヒット時)
+		else
+		{
+			m_btlPrm.GetTmr_HitStop ()->Start ( stopTime );	//ヒットストップの設定
+		}
 
 
 		//-------------------------------------------------
@@ -682,6 +690,8 @@ namespace GAME
 		{
 			m_btlPrm.SetAccRecoil ( recoil_e );
 		}
+
+
 	}
 
 

@@ -37,7 +37,7 @@ namespace GAME
 		P_Grp			m_input;
 
 		//手前部分表示
-		P_GrpEf			m_front;
+//		P_GrpEf			m_front;
 
 #if 0
 		P_GrpAcv		m_bg_back;

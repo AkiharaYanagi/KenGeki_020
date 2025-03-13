@@ -327,18 +327,20 @@ namespace GAME
 
 	void ExeChara::ChangeOhter ()
 	{
+		//ノーリアクション
+		if ( 0 == m_nameChangeOther.compare ( U"ノーリアクション" ) )
+		{
+			//変更せず続行
+			return;
+		}
+
+
+		//移行先名前チェック
 		if ( ! m_pOther.lock ()->ExistActionName ( m_nameChangeOther ) )
 		{
 			TRACE_F ( _T("ChangeOther(): Error : name = %s\n"), m_nameChangeOther.toWstr().c_str () );
 			//対象なしのときアサート
 			//assert ( m_nameChangeOther );
-			return;
-		}
-
-		//ノーリアクション
-		if ( 0 == m_nameChangeOther.compare ( U"ノーリアクション" ) )
-		{
-			//変更せず続行
 			return;
 		}
 
@@ -428,25 +430,39 @@ namespace GAME
 	// 特殊条件による分岐
 	void ExeChara::TranditAction_Special ()
 	{
+#if 0
 		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_2 )
 		{
-			float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
+			float edge_L = G_FTG()->GetEdgeLeft () + (float)FIELD_EDGE + 50;
+			float edge_R = -50 - (float)FIELD_EDGE + G_FTG()->GetEdgeRight ();
 			float x = m_btlPrm.GetPos().x;
-			DBGOUT_WND_F ( DBGOUT_0, U"2p_x = {}, wall_R = {}"_fmt( x, wall_R ) );
+			DBGOUT_WND_F ( DBGOUT_0, U"edge_R = {}, 2p_x = {}, edge_R = {}"_fmt( edge_L, x, edge_R ) );
+			float base_x = G_FTG()->GetPosMutualBase().x;
+			DBGOUT_WND_F ( DBGOUT_1, U"base_x = {}"_fmt( base_x ) );
 		}
+#endif // 0
 
 		//条件：壁到達のブランチをチェック
 		s3d::String ActionName = Check_TransitAction_Condition_str ( BRC_WALL );
 		if ( ActionName.compare ( U"" ) != 0 )
 		{
+#if 0
 			//壁位置
 			float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
 			float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
 
-
 			//壁位置に達していたら
 			bool b_R = wall_R <= m_btlPrm.GetPos().x;
 			bool b_L = m_btlPrm.GetPos().x <= wall_L;
+#endif // 0
+			//画面端位置
+			float edge_L = G_FTG()->GetEdgeLeft () + (float)FIELD_EDGE + 50;
+			float edge_R = -50 - (float)FIELD_EDGE + G_FTG()->GetEdgeRight ();
+
+
+			//壁位置に達していたら
+			bool b_L = m_btlPrm.GetPos().x <= edge_L;
+			bool b_R = edge_R <= m_btlPrm.GetPos().x;
 
 			if ( b_L || b_R )
 			{

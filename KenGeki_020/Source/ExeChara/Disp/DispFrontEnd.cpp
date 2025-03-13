@@ -524,6 +524,11 @@ namespace GAME
 	//状態表示
 	void DispFrontEnd::UpdateActionName ( s3d::String actionName, UINT frame )
 	{
+		if ( PLAYER_ID_2 == m_playerID )
+		{
+			size_t ln = actionName.length ();
+			m_strAction->SetPos ( VEC2 ( 640 + 100 - 20 * ln, 120 ) );
+		}
 		m_strAction->SetStr ( actionName + U"[{}]"_fmt( frame ) );
 	}
 

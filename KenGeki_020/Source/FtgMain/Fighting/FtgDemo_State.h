@@ -177,7 +177,14 @@ namespace GAME
 	class FTG_DM_Down : public FtgDemoState
 	{
 		P_GrpDemo	m_grpDown;
+
+		P_GrpDemo	m_grp_Ketsu;
+		P_GrpDemo	m_grp_chaku;
+		P_GrpDemo	m_grpLight0;
+		P_GrpDemo	m_grpLight1;
+
 		P_Timer		m_timer;	//タイマ
+
 	public:
 		FTG_DM_Down ();
 		FTG_DM_Down ( const FTG_DM_Down & rhs ) = delete;

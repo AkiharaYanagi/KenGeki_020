@@ -435,6 +435,9 @@
     <ClInclude Include="Source\FtgMain\Ef\EfSouha.h" />
     <ClInclude Include="Source\FtgMain\Fighting\BattleTime.h" />
     <ClInclude Include="Source\FtgMain\Fighting\BG.h" />
+    <ClInclude Include="Source\FtgMain\Fighting\BG\BG_Base.h" />
+    <ClInclude Include="Source\FtgMain\Fighting\BG\BG_Yuuhi_no_hara.h" />
+    <ClInclude Include="Source\FtgMain\Fighting\BG\_BG.h" />
     <ClInclude Include="Source\FtgMain\Fighting\Fighting.h" />
     <ClInclude Include="Source\FtgMain\Fighting\FtgDemo_Actor.h" />
     <ClInclude Include="Source\FtgMain\Fighting\FtgDemo_State.h" />
@@ -506,6 +509,9 @@
     <ClCompile Include="Source\FtgMain\Ef\EfSouha.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\BattleTime.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\BG.cpp" />
+    <ClCompile Include="Source\FtgMain\Fighting\BG\BG_Base.cpp" />
+    <ClCompile Include="Source\FtgMain\Fighting\BG\BG_Yuuhi_no_hara.cpp" />
+    <ClCompile Include="Source\FtgMain\Fighting\BG\_BG.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\Fighting.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\FtgDemo_Actor.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\FtgDemo_State.cpp" />

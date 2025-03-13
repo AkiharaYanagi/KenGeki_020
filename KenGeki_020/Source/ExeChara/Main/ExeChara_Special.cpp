@@ -174,6 +174,56 @@ namespace GAME
 		}
 
 		//-----------------------------------------------------
+		//ギャバ
+		if ( m_name == CHARA_GABADARUGA )
+		{
+			if ( IsNameAction ( U"投げ成立0" ) )
+			{
+				if ( m_pScript->GetFrame () == 0 )
+				{
+					m_pOther.lock()->TopByZ ();
+				}
+			}
+
+			//位置調整用
+			float bDir = m_btlPrm.GetDirRight () ? 1.f : -1.f;
+			VEC2 my_pos = GetPos ();
+			VEC2 pos_rev = { my_pos.x + ( bDir * 250 ), my_pos.y + 0 };
+
+			if ( IsNameAction ( U"昇竜投げ成立" ) )
+			{
+				if ( m_pScript->GetFrame () == 0 )
+				{
+					m_pOther.lock()->TopByZ ();	//表示前後
+				}
+
+				m_pOther.lock()->SetPos ( pos_rev );	//位置同期
+			}
+
+			if ( IsNameAction ( U"昇竜投げ落下" ) )
+			{
+				m_pOther.lock()->SetPos ( pos_rev );	//位置同期
+			}
+
+			if ( IsNameAction ( U"昇竜投げ着地" ) )
+			{
+//				m_pOther.lock()->SetPos ( pos_rev );	//位置同期
+			}
+
+
+			if ( IsNameAction ( U"半回転投げ成立" ) )
+			{
+				if ( m_pScript->GetFrame () == 0 )
+				{
+					m_pOther.lock()->TopByZ ();
+
+					//位置指定
+					m_pOther.lock()->SetPos ( VEC2 ( my_pos.x + ( bDir * 250 ), GROUND_Y ) );
+				}
+			}
+		}
+
+		//-----------------------------------------------------
 		if ( IsNameAction ( U"特大攻撃" ) )
 		{
 			if ( m_pScript->GetFrame () == 0 )

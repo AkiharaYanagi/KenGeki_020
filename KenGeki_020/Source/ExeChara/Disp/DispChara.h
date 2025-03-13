@@ -95,6 +95,9 @@ namespace GAME
 		//影化
 		void TurnShadow ( bool b ) { m_mainImage->TurnShadow ( b ); }
 
+		//メインイメージを同一Z値で先頭にする
+		void TopByZ () { m_mainImage->TopByZ (); }
+
 
 	private:
 		//メインイメージの更新

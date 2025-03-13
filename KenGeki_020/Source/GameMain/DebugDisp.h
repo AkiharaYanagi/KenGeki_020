@@ -22,7 +22,7 @@ namespace GAME
 //	0 : OFF
 //  1 : ON
 
-#define DEBUG_DISP	1
+#define DEBUG_DISP	0
 
 #if 0
 		//デバッグ表示あり

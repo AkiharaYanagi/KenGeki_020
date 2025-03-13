@@ -515,6 +515,10 @@ namespace GAME
 		//終了のための待機状態かどうか
 		bool IsWait () { return IsStand (); }
 
+		
+		//メインイメージを同一Z値で先頭にする
+		void TopByZ () { m_dispChara->TopByZ (); }
+
 
 	};
 

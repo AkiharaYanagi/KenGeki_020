@@ -33,13 +33,19 @@ namespace GAME
 	//---------------------------------------------------------------------
 
 	private:
-		//壁位置
+		//キャラ中央位置(ゲーム位置)
+		float	m_chara_center_x { 0 };
+
+		//壁位置 (ゲーム範囲からの算出)(ゲーム位置)
 		float	m_wall_L { 0 };	//左
 		float	m_wall_R { 0 };	//右
 
-		//キャラ位置による画面補正量
+		//画面端位置 (キャラ中心からの算出)(ゲーム位置)
+		float	m_edge_L { 0 };
+		float	m_edge_R { 0 };
+
+		//キャラ位置による画面補正量(表示位置)
 		VEC2	m_posMutualBase { 0, 0 };
-		float	m_chara_center_x { 0 };
 
 		//立ち位置リセットフラグ
 		//条件：画面端で "足払い" がヒット時
@@ -59,11 +65,12 @@ namespace GAME
 		void Init ();
 
 
+		//キャラ中央位置(ゲーム位置)
+		float GetCharaCenterX () const { return m_chara_center_x; }
+
 		//画面端での表示基準位置
 		void CulcPosMutualBase ( VEC2 pos1p, VEC2 pos2p );
 		VEC2 GetPosMutualBase () const { return m_posMutualBase; }
-
-		float GetCharaCenterX () const { return m_chara_center_x; }
 
 		//新規壁位置設定フラグ
 		bool GetNewWall () const
@@ -78,6 +85,10 @@ namespace GAME
 		float GetWallRight () const { return m_wall_R; }
 
 		void SetWallMove ( bool b ) { m_bWallMove = b; }
+
+		//画面端位置
+		float GetEdgeLeft () const { return m_edge_L; }
+		float GetEdgeRight () const { return m_edge_R; }
 
 		//システム表示
 		GET_SET ( bool, GetSysDisp, SetSysDisp, m_sysDisp )

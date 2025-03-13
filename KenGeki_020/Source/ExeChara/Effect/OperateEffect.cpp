@@ -243,6 +243,10 @@ namespace GAME
 		{
 			pExeEffect->SetShader ( F );
 		}
+		if ( pEffect->GetName () == U"DustCloud" )
+		{
+			pExeEffect->SetShader ( F );
+		}
 			 
 	}
 

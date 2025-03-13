@@ -428,8 +428,25 @@ namespace GAME
 		}
 
 		//================================================================
+		//強制変更
+		s3d::String nameActionCRC_1p = m_pExeChara1p->Check_TransitAction_Condition_str ( BRC_COERACION );
+		bool cpc_1p = nameActionCRC_1p != U"";
+		s3d::String nameActionCRC_2p = m_pExeChara2p->Check_TransitAction_Condition_str ( BRC_COERACION );
+		bool cpc_2p = nameActionCRC_2p != U"";
+
+		//互いにチェックして反映
+		if ( cpc_1p )
+		{
+			m_pExeChara2p->SetAction ( nameActionCRC_1p );
+		}
+		if ( cpc_2p )
+		{
+			m_pExeChara1p->SetAction ( nameActionCRC_2p );
+		}
 
 
+		//================================================================
+		// 
 		//ヒットエフェクト
 		if ( m_efHit->GetValid () ) { m_efHit->Advance (); }
 #if 0
