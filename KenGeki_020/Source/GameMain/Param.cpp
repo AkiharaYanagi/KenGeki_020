@@ -19,9 +19,11 @@
 namespace GAME
 {
 
-	constexpr char32_t CHARA_DAT_OUKA []		= U"chara_Ouka.dat";
+//	constexpr char32_t CHARA_DAT_OUKA []		= U"chara_Ouka.dat";
+	constexpr char32_t CHARA_DAT_OUKA []		= U"chara_Retsudou2p.dat";
 	constexpr char32_t CHARA_DAT_SAE []			= U"chara_Sae.dat";
 	constexpr char32_t CHARA_DAT_RETSUDOU []	= U"chara_Retsudou.dat";
+//	constexpr char32_t CHARA_DAT_RETSUDOU []	= U"chara_Retsudou2p.dat";
 	constexpr char32_t CHARA_DAT_GABADARUGA []	= U"chara_Gabadaruga.dat";
 
 
