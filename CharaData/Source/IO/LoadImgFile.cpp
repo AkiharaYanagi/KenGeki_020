@@ -184,5 +184,67 @@ namespace GAME
 	}
 
 
+	//LZ4 -> PAP_Tx
+	PAP_Tx LoadImgFile::LoadLz4 ( s3d::String filepath )
+	{
+		//ファイル読込
+		s3d::BinaryReader br { filepath };
+
+		//圧縮サイズ
+		size_t cmprsdSz = br.size();
+
+		//元サイズを読取
+		size_t originSz = 0;
+		br.read ( originSz );
+
+		//圧縮データを読取
+		s3d::Blob cmprsBlob { cmprsdSz };
+		br.read ( cmprsBlob.data(), sizeof ( originSz ), cmprsdSz );
+
+		//解凍サイズ
+		int dcmprsSz = (int)originSz;
+		//std::vector < char > dcmprsBuf ( dcmprsSz );
+		s3d::Blob dcmprsBuf ( originSz );
+
+		//解凍
+		LZ4_decompress_safe ( (const char *)cmprsBlob.data(), (char*)dcmprsBuf.data(), (int)cmprsdSz, dcmprsSz );
+
+		size_t szDmprsBuf = dcmprsBuf.size ();
+		s3d::MemoryReader mr { dcmprsBuf };
+
+		Atlas atlas;
+		atlas.LoadMemoryStream ( mr );
+
+		return atlas.GetpapTx ();
+	}
+
+	
+	//LZ4 -> PAP_Tx
+	PAP_Tx LoadImgFile::LoadLz4_Bhv ( s3d::String filepath )
+	{
+		return LoadLz4 ( filepath );
+	}
+
+	PAP_Tx LoadImgFile::LoadLz4_Bhv_Name ( s3d::String filepath )
+	{
+		s3d::String fn = filepath.substr ( 0, filepath.length() - 4 );
+		s3d::String filename_bhv = fn + U"_bhv.lz4";
+		return LoadLz4 ( filename_bhv );
+	}
+
+	//LZ4 -> PAP_Tx
+	PAP_Tx LoadImgFile::LoadLz4_Gns ( s3d::String filepath )
+	{
+		return LoadLz4 ( filepath );
+	}
+
+	PAP_Tx LoadImgFile::LoadLz4_Gns_Name ( s3d::String filepath )
+	{
+		s3d::String fn = filepath.substr ( 0, filepath.length() - 4 );
+		s3d::String filename_gns = fn + U"_gns.lz4";
+		return LoadLz4 ( filename_gns );
+	}
+
+
 }	//namespace GAME
 

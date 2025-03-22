@@ -247,6 +247,10 @@ namespace GAME
 		{
 			pExeEffect->SetShader ( F );
 		}
+		if ( pEffect->GetName () == U"Guard" )
+		{
+			pExeEffect->SetShader ( F );
+		}
 			 
 	}
 

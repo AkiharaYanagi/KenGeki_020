@@ -32,6 +32,13 @@ namespace GAME
 		CHARA_NAME_NUM,
 	};
 
+	//カラー指定
+	enum CHARA_COLOR
+	{
+		CH_CLR_1,
+		CH_CLR_2,
+	};
+
 	//開始状態
 	enum START_MODE
 	{

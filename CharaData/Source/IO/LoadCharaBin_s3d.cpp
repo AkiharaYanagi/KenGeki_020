@@ -87,17 +87,28 @@ namespace GAME
 		//スクリプト
 		m_func.LoadCharaScript ( std::move ( buffer ), pos, chara );
 
-#if 0
+#if 1
 		//イメージ
 		m_func.LoadCharaImage ( std::move ( buffer ), pos, chara );
 #endif // 0
 
-		LoadImgFile lif;
+//		LoadImgFile lif;
+#if 0
 		s3d::String fn = filename.substr ( 0, filename.length() - 4 );
-		s3d::String filename_bhv = fn + U"_bhv.atls";
-		s3d::String filename_gns = fn + U"_gns.atls";
-		chara.SetpapTx_Main ( lif.LoadAtlas ( filename_bhv ) );
-		chara.SetpapTx_Ef ( lif.LoadAtlas ( filename_gns ) );
+
+//		s3d::String filename_bhv = fn + U"_bhv.atls";
+//		chara.SetpapTx_Main ( lif.LoadAtlas ( filename_bhv ) );
+		s3d::String filename_bhv = fn + U"_bhv.lz4";
+		chara.SetpapTx_Main ( lif.LoadLz4 ( filename_bhv ) );
+
+//		s3d::String filename_gns = fn + U"_gns.atls";
+//		chara.SetpapTx_Ef ( lif.LoadAtlas ( filename_gns ) );
+		s3d::String filename_gns = fn + U"_gns.lz4";
+		chara.SetpapTx_Ef ( lif.LoadLz4 ( filename_gns ) );
+#endif // 0
+//		chara.SetpapTx_Main ( lif.LoadLz4_Bhv ( filename ) );
+//		chara.SetpapTx_Ef ( lif.LoadLz4_Gns ( filename ) );
+
 
 #if 0
 

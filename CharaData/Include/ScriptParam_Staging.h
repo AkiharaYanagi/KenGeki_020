@@ -49,6 +49,7 @@ namespace GAME
 		~ScriptParam_Staging ();
 		//=======================================
 
+		//シェーダ利用(ID)
 		//SE・EF、ガード時・ヒット時分岐
 
 #if 0

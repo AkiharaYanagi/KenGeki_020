@@ -527,7 +527,7 @@ namespace GAME
 		if ( PLAYER_ID_2 == m_playerID )
 		{
 			size_t ln = actionName.length ();
-			m_strAction->SetPos ( VEC2 ( 640 + 100 - 20 * ln, 120 ) );
+			m_strAction->SetPos ( VEC2 ( 640 + 100 - 20.f * ln, 120 ) );
 		}
 		m_strAction->SetStr ( actionName + U"[{}]"_fmt( frame ) );
 	}

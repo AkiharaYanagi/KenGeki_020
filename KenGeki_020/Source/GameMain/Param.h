@@ -41,6 +41,14 @@ namespace GAME
 		P_Chara			m_pChara_Gabadaruga { nullptr };
 		bool			m_read_chara { F };
 
+		//キャラカラー
+		PAP_Tx			m_pCH_CLR_Ouka_1 { nullptr };
+		PAP_Tx			m_pCH_CLR_Ouka_2 { nullptr };
+		PAP_Tx			m_pCH_CLR_Sae_1 { nullptr };
+		PAP_Tx			m_pCH_CLR_Sae_2 { nullptr };
+		PAP_Tx			m_pCH_CLR_Retsu_1 { nullptr };
+		PAP_Tx			m_pCH_CLR_Retsu_2 { nullptr };
+
 		//リザルト用
 		PLAYER_ID		m_winner { PLAYER_ID_1 };		//勝者
 		int32		m_n_life_1p { 0 };		//残ライフ
@@ -115,6 +123,24 @@ namespace GAME
 		P_Chara GetpChara_Gabadaruga ();
 		bool IsReadChara () const { return m_read_chara; }
 
+		//プレイヤ指定
+		P_Chara GetpChara_Ouka ( PLAYER_ID player );
+		P_Chara GetpChara_Sae ( PLAYER_ID player );
+		P_Chara GetpChara_Retsudou ( PLAYER_ID player );
+		P_Chara GetpChara_Gabadaruga ( PLAYER_ID player );
+
+		//キャラカラー
+		void SetCharaColor1p ( CHARA_COLOR clr ) { m_setting.SetCharaColor1p ( clr ); }
+		void SetCharaColor2p ( CHARA_COLOR clr ) { m_setting.SetCharaColor2p ( clr ); }
+
+		//プレイヤ側でカラー番号を取得
+		CHARA_COLOR GetClr ( PLAYER_ID id ) const;
+		//キャラとプレイヤ側でカラー番号別テクスチャ配列の参照
+		PAP_Tx & GetPAP_Tx ( CHARA_NAME name, PLAYER_ID id );
+		//キャラ名とプレイヤ側とカラー番号で読込ファイル名を取得
+		LPCUSTR GetImgFileName ( CHARA_NAME name, PLAYER_ID id ) const;
+		//ファイル名とキャラポインタで、指定カラー番号のテクスチャ配列を設置
+		void SetImgClr ( P_Chara r_pch, CHARA_NAME name, PLAYER_ID id );
 
 		//リザルト用
 		void ResetBattleParam ();

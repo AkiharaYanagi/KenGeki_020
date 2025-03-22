@@ -23,10 +23,19 @@ namespace GAME
 
 		void Conversion ( s3d::String filepath );
 		PAP_Tx LoadTx ();
+
+		//Img->PAP_Tx
 		PAP_Tx LoadImg ();
 
 		//Atlas -> PAP_Tx
 		PAP_Tx LoadAtlas( s3d::String filepath );
+
+		//LZ4 -> PAP_Tx
+		PAP_Tx LoadLz4 ( s3d::String filepath );
+		PAP_Tx LoadLz4_Bhv ( s3d::String filepath );
+		PAP_Tx LoadLz4_Bhv_Name ( s3d::String filepath );
+		PAP_Tx LoadLz4_Gns ( s3d::String filepath );
+		PAP_Tx LoadLz4_Gns_Name ( s3d::String filepath );
 	};
 
 
