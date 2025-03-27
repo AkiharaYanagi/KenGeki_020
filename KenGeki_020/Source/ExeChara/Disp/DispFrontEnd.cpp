@@ -142,7 +142,7 @@ namespace GAME
 		m_grpHitNum->AddObject ();
 
 		m_grpStrHit = std::make_shared < GameGraphic > ();
-		m_grpStrHit->AddTexture_FromArchive ( U"Geki.png" );
+		m_grpStrHit->AddTexture_FromArchive ( U"hit\\Geki.png" );
 		m_grpStrHit->SetZ ( Z_EFB + 0.01f );
 		m_grpStrHit->SetValid ( F );
 		AddpTask ( m_grpStrHit );

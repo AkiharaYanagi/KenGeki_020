@@ -406,7 +406,10 @@
   <ItemGroup>
     <ClInclude Include="Source\CharaSele\CharaSele.h" />
     <ClInclude Include="Source\CharaSele\CharaSeleConst.h" />
+    <ClInclude Include="Source\CharaSele\CharaSele_Image.h" />
     <ClInclude Include="Source\CharaSele\CharaSele_Player.h" />
+    <ClInclude Include="Source\CharaSele\_CharaSele.h" />
+    <ClInclude Include="Source\CharaSele\_CharaSele_Player.h" />
     <ClInclude Include="Source\ExeChara\BtlParam.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispAccel.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h" />
@@ -473,7 +476,10 @@
   <ItemGroup>
     <ClCompile Include="Source\CharaSele\CharaSele.cpp" />
     <ClCompile Include="Source\CharaSele\CharaSeleConst.cpp" />
+    <ClCompile Include="Source\CharaSele\CharaSele_Image.cpp" />
     <ClCompile Include="Source\CharaSele\CharaSele_Player.cpp" />
+    <ClCompile Include="Source\CharaSele\_CharaSele.cpp" />
+    <ClCompile Include="Source\CharaSele\_CharaSele_Player.cpp" />
     <ClCompile Include="Source\ExeChara\BtlParam.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispAccel.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />

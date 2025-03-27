@@ -15,6 +15,7 @@
 #include "../Title/Title.h"
 #include "../Training/Training.h"
 #include "../CharaSele/CharaSele.h"
+#include "../CharaSele/_CharaSele.h"
 #include "../Result/Result.h"
 
 #include "../GameMain/SoundConst.h"
@@ -89,7 +90,15 @@ namespace GAME
 	void Scene::Transit_CharaSele ()
 	{
 		GRPLST_CLEAR ();
-		mp_Transit = std::make_shared < CharaSele > ();
+
+
+
+//		mp_Transit = std::make_shared < CharaSele > ();
+
+		mp_Transit = std::make_shared < _CharaSele > ();
+
+
+
 	}
 
 	//[シーン遷移] リザルトに移行
@@ -119,6 +128,11 @@ namespace GAME
 		//最初のシーンを設定ファイルから取得する
 		GameSettingFile stgs = m_pParam->GetGameSetting ();
 		startMode = stgs.GetStartMode ();
+
+
+		//test
+		startMode = START_CHARA_SELE;
+
 
 
 		if ( startMode == START_TITLE )
@@ -159,7 +173,13 @@ namespace GAME
 		//---------------------------------------------
 		//キャラセレから開始
 		case START_CHARA_SELE:
-			pScene = std::make_shared < CharaSele > ();
+
+
+//			pScene = std::make_shared < CharaSele > ();
+			pScene = std::make_shared < _CharaSele > ();
+
+
+
 		break;
 
 		//---------------------------------------------

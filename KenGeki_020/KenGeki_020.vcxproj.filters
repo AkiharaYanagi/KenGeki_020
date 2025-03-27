@@ -1033,6 +1033,15 @@
     <ClInclude Include="Source\FtgMain\Fighting\BG\_BG.h">
       <Filter>03_FtgMain\Fighting\BG</Filter>
     </ClInclude>
+    <ClInclude Include="Source\CharaSele\CharaSele_Image.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\_CharaSele.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\_CharaSele_Player.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1235,6 +1244,15 @@
     </ClCompile>
     <ClCompile Include="Source\FtgMain\Fighting\BG\_BG.cpp">
       <Filter>03_FtgMain\Fighting\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\CharaSele_Image.cpp">
+      <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\_CharaSele.cpp">
+      <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\_CharaSele_Player.cpp">
+      <Filter>02_CharaSele</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
