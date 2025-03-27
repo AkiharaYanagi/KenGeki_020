@@ -1,7 +1,6 @@
 *.atls
 *.img
 *.bin
-*.png
 *.exe
 *.lib
 *.idb
