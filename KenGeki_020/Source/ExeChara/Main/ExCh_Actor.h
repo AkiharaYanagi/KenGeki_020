@@ -74,6 +74,7 @@ namespace GAME
 		void ShiftFightingMain ();
 		void ShiftFightingMain_PreScriptMove ();
 		void ShiftScpStop ();
+		void RestoreScpStop ();		//一時停止からの復旧
 		void ShiftSlowSkip ();
 		void ShiftWallBreak ();
 

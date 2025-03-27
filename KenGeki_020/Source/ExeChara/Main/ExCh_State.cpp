@@ -159,6 +159,11 @@ namespace GAME
 		pExe->SetFirstVC ( F );		//VC再生フラグ
 	}
 
+	void CHST_Main::NextScript ()
+	{
+//		GetwpExeChara ().lock()->EndScript ();
+	}
+
 
 	//------------------------------------------------
 	//バトル　一時停止

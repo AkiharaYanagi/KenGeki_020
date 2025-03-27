@@ -282,7 +282,7 @@ namespace GAME
 
 		if ( Is1P () )
 		{
-			UINT frame = GetpScript()->GetFrame ();
+	//		UINT frame = GetpScript()->GetFrame ();
 			DBGOUT_WND_F ( DBGOUT_1, U"TransitAction: m_frame = {}"_fmt( m_frame ) );
 		}
 
@@ -293,7 +293,7 @@ namespace GAME
 
 		if ( Is1P () )
 		{
-			UINT frame = GetpScript()->GetFrame ();
+	//		UINT frame = GetpScript()->GetFrame ();
 			DBGOUT_WND_F ( DBGOUT_2, U"TransitAction: m_frame = {}"_fmt( m_frame ) );
 		}
 
@@ -305,7 +305,7 @@ namespace GAME
 
 		if ( Is1P () )
 		{
-			UINT frame = GetpScript()->GetFrame ();
+	//		UINT frame = GetpScript()->GetFrame ();
 			DBGOUT_WND_F ( DBGOUT_3, U"TransitAction: m_frame = {}"_fmt( m_frame ) );
 		}
 
@@ -403,11 +403,14 @@ namespace GAME
 		}
 
 	}
+#if 0
 
 	void ExeChara::RestoreScpStop ()
 	{
 		m_actor.RestoreScpStop ();
 	}
+
+#endif // 0
 
 
 	//====================================================================================

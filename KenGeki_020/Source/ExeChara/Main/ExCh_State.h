@@ -136,7 +136,7 @@ namespace GAME
 	//バトル　一時停止
 	class CHST_ScpStop : public ExeChara_State
 	{
-//		Timer		m_timer;
+		Timer		m_timer;
 	public:
 		s3d::String GetName () const { return U"Stop"; }
 		void Start ();
