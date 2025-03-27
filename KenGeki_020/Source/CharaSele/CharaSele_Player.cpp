@@ -9,6 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "CharaSele_Player.h"
 #include "../GameMain/SeConst.h"
+#include "../GameMain/DebugDisp.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -607,6 +608,19 @@ namespace GAME
 		m_cursor->Stop ();
 		m_chara_stand->SetValid ( F );
 		m_chara_stand_light->SetValid ( T );
+#if 0
+		if ( PLAYER_ID_1 == m_chsl_id )
+		{
+			m_x = CHARA_1P_POS_X;
+			m_chara_stand->SetPos ( m_x, CHARA_1P_POS_Y );
+		}
+		else if ( PLAYER_ID_2 == m_chsl_id )
+		{
+			m_x = CHARA_2P_POS_X;
+			m_chara_stand->SetPos ( m_x, CHARA_2P_POS_Y );
+		}
+#endif // 0
+
 
 		//ステートを変更
 		m_state = STT_STAGE;
@@ -619,6 +633,26 @@ namespace GAME
 
 
 	//選択可能かどうか
+#if TRIAL
+	bool CharaSele_Player::CanSelect ()
+	{
+		switch ( m_chsl_id )
+		{
+		case CHSLID_00: return T;
+		case CHSLID_01: break;
+		case CHSLID_02: return F;	//体験版
+		case CHSLID_03: return T;
+		case CHSLID_04: break;
+		case CHSLID_05: break;
+		case CHSLID_06: break;
+		case CHSLID_07: break;
+		case CHSLID_08: break;
+		case CHSLID_09: break;
+		default: break;
+		}
+		return F;
+	}
+#else //TRIAL
 	bool CharaSele_Player::CanSelect ()
 	{
 		switch ( m_chsl_id )
@@ -637,6 +671,8 @@ namespace GAME
 		}
 		return F;
 	}
+#endif // TRIAL
+
 
 	void CharaSele_Player::SetCharaStand ( CHARA_SELE_ID id )
 	{

@@ -95,6 +95,9 @@ namespace GAME
 		//影化
 		void TurnShadow ( bool b ) { m_mainImage->TurnShadow ( b ); }
 
+		//メインイメージを同一Z値で先頭にする
+		void TopByZ () { m_mainImage->TopByZ (); }
+
 
 	private:
 		//メインイメージの更新
@@ -104,10 +107,10 @@ namespace GAME
 		void UpdateInput ( P_CharaInput p );
 
 		//ゲージ類更新
-		void UpdateGauge ( BtlParam btlPrm );
+		void UpdateGauge ( const BtlParam & btlPrm );
 
 		//ヒット数更新
-		void UpdateChainHitNum ( UINT n );
+		void UpdateChainHitNum ( const BtlParam & btlPrm );
 	};
 
 

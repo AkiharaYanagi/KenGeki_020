@@ -32,6 +32,8 @@ namespace GAME
 
 		//CharaFace
 		P_Grp			m_charaFace;
+		P_PrmRect		m_hidden;		//体験版用キャラ隠し
+
 
 		//プレイヤー毎位置
 		P_ChSele_Pl		m_chsl_pl_1p;

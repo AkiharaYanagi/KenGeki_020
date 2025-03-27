@@ -11,6 +11,7 @@
 #include "../GameMain/SoundConst.h"
 #include "../GameMain/VoiceConst.h"
 #include "../GameMain/SeConst.h"
+#include "../GameMain/DebugDisp.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -21,7 +22,16 @@ namespace GAME
 
 #pragma region CONST
 
-	const char32_t Title::Ver[] = U"ver 0.20";
+#if 0
+		//2024/11/03 デジゲー博 Ver 0.10
+		//2024/11/03 修正パッチ Ver 0.12;
+		//2024/12/15 変な格ゲー会 ver0.15
+		//2024/12/30 冬コミ ver0.20
+		//2024/12/31 冬コミ修正 ver0.21
+		//2024/02/10 Steam ver0.22
+		//2024/02/20 修正 ver0.23
+#endif // 0
+	const char32_t Title::Ver[] = U"ver 0.23";
 
 	const float Title::BG_X = 0;
 	const float Title::BG_Y = 0;
@@ -148,14 +158,6 @@ namespace GAME
 		m_strVer = std::make_shared < GrpStr > ();
 		m_strVer->SetPos ( 1185, 905 );
 		m_strVer->SetZ ( Z_MENU );
-
-#if 0
-		//2024/11/03 デジゲー博
-//		m_strVer->SetStr ( U"Ver 0.10" );
-		//2024/11/03 修正パッチ
-		//2024/11/03 修正パッチ
-		//m_strVer->SetStr ( U"Ver 0.12" );
-#endif // 0
 		m_strVer->SetStr ( Ver );
 
 		AddpTask ( m_strVer );
@@ -199,48 +201,18 @@ namespace GAME
 
 
 
+		//体験版表示
+#if TRIAL
+		m_trial = std::make_shared < GameGraphic > ();
 
-#if 0
+		m_trial->SetPos ( 1280 - 200, 820 );
+		m_trial->AddTexture_FromArchive ( U"Title\\trial.png" );
+		AddpTask ( m_trial );
+		GRPLST_INSERT ( m_trial );
+#else // TRIAL
 
-		//test
-		std::mt19937 m_gen;
-		std::discrete_distribution<> m_dist;
-		std::random_device m_rnd_dev;
+#endif // TRIAL
 
-		std::vector < double > weights = { 0.1, 0.3, 0.2, 0.4 };
-		m_gen = std::mt19937 ( m_rnd_dev () );		//メルセンヌ・ツイスタ
-		m_dist = std::discrete_distribution <> ( weights.begin(), weights.end() );
-
-		int result = 0;
-
-		int num0 = 0;
-		int num1 = 0;
-		int num2 = 0;
-		int num3 = 0;
-
-
-		for ( int i = 0; i < 10000; ++ i )
-		{
-			result = m_dist ( m_gen );
-
-			switch ( result )
-			{
-			case 0: ++ num0; break;
-			case 1: ++ num1; break;
-			case 2: ++ num2; break;
-			case 3: ++ num3; break;
-			}
-		}
-
-		TRACE_F ( _T("%d, %d, %d, %d\n"), num0, num1, num2, num3  );
-		TRACE_F ( _T("%lf, %lf, %lf, %lf\n"),
-			0.1 * num0 / num0 ,
-			0.1 * num1 / num0 ,
-			0.1 * num2 / num0 ,
-			0.1 * num3 / num0 );
-
-
-#endif // 0
 
 	}
 
@@ -289,6 +261,18 @@ namespace GAME
 			//カウント終了後、シーン移行
 			if ( m_tmrDemo.IsLast () )
 			{
+				//値の取得
+				P_Param pPrm = GetpParam();
+
+				//ランダムで各種値を決める
+				pPrm->SetCharaName1p ( GetCharaName_Rnd () );	//キャラランダム
+				pPrm->SetCharaName2p ( GetCharaName_Rnd () );	//キャラランダム
+				pPrm->Set_BGM_ID ( GetBGM_ID_Rnd () );		//BGMランダム
+				pPrm->SetStage_Name ( GetStageName_Rnd () );	//ステージランダム
+
+				//CPU操作
+				pPrm->SetMutchMode ( MUTCH_MODE::MODE_CPU_CPU );
+
 				SND_PLAY_ONESHOT_SE ( SE_select_decide );
 				m_fade_demo->StartBlackOut ( FADE_OUT_T );
 				m_barDemo->SetValid ( F );
@@ -310,15 +294,6 @@ namespace GAME
 			{
 				//デモモードタイマのスタート
 				m_tmrDemo.Start ();
-
-				//ランダムで各種値を決める
-				pPrm->SetCharaName1p ( GetCharaName_Rnd () );	//キャラランダム
-				pPrm->SetCharaName2p ( GetCharaName_Rnd () );	//キャラランダム
-				pPrm->SetStageName ( GetStageName_Rnd () );	//ステージランダム
-				pPrm->Set_BGM_ID ( GetBGM_ID_Rnd () );		//BGMランダム
-
-				//CPU操作
-				pPrm->SetMutchMode ( MUTCH_MODE::MODE_CPU_CPU );
 			}
 			else
 			{
@@ -578,11 +553,12 @@ namespace GAME
 	{
 		CHARA_NAME ret = CHARA_NAME::CHARA_SAE;
 
-		int rnd = s3d::Random ( 1 );
+		int rnd = s3d::Random ( 2 );
 		switch ( rnd )
 		{
 		case 0: ret = CHARA_NAME::CHARA_SAE;		break;
 		case 1: ret = CHARA_NAME::CHARA_RETSUDOU;	break;
+		case 2: ret = CHARA_NAME::CHARA_OUKA;		break;
 		};
 
 		return ret;
@@ -592,12 +568,13 @@ namespace GAME
 	{
 		STAGE_NAME ret = STAGE_YUUHINO_HARA;
 
-		int rnd = s3d::Random ( 2 );
+		int rnd = s3d::Random ( 3 );
 		switch ( rnd )
 		{
 		case 0: ret = STAGE_ASAHINO_HARA; break;
 		case 1: ret = STAGE_YUUHINO_HARA; break;
 		case 2: ret = STAGE_YORUNO_HARA; break;
+		case 3: ret = STAGE_SCHOOL_NOON; break;
 		}
 
 		return ret;

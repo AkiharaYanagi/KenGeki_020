@@ -107,23 +107,39 @@ namespace GAME
 			//画面左端から表示半分左側のとき
 			if ( averagex < m_wall_L + window_half )
 			{
+				//キャラ位置による画面補正量(表示位置)
 				posMutualBase_x = lx;
+
+				//画面端位置
+				m_edge_L = 0;
+				m_edge_R = 0 + GAME_WINDOW_WIDTH;
 			}
 			//右寄
 			//画面右端から表示半分右側のとき
 			else if ( averagex > m_wall_R - window_half )
 			{
+				//キャラ位置による画面補正量(表示位置)
 				posMutualBase_x = rx;
+
+				//画面端位置
+				m_edge_L = GAME_WIDTH - GAME_WINDOW_WIDTH;
+				m_edge_R = GAME_WIDTH;
 			}
 			//中央
 			else
 			{
+				//キャラ位置による画面補正量(表示位置)
 				posMutualBase_x = cx;
+
+				//画面端位置
+				m_edge_L = m_chara_center_x - window_half;
+				m_edge_R = m_chara_center_x + window_half;
 			}
 
 			//計算した画面表示補正位置を保存
 			m_posMutualBase = VEC2 ( posMutualBase_x, 0 );
 		}
+
 
 #if 0
 //		DBGOUT_WND_F ( DBGOUT_0, U"m_posMutualBase.x = {}"_fmt( m_posMutualBase.x ) );

@@ -182,6 +182,9 @@
     <Filter Include="90_GameMain">
       <UniqueIdentifier>{7941956b-e8c1-47d6-9ef3-35ce0236b1c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03_FtgMain\Fighting\BG">
+      <UniqueIdentifier>{08607420-6e1f-4aee-a046-c426a948a105}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -1020,6 +1023,27 @@
     <ClInclude Include="Source\GameMain\DebugDisp.h">
       <Filter>90_GameMain</Filter>
     </ClInclude>
+    <ClInclude Include="Source\FtgMain\Ef\EfHitLine.h">
+      <Filter>03_FtgMain\Ef</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\BG\BG_Yuuhi_no_hara.h">
+      <Filter>03_FtgMain\Fighting\BG</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\BG\BG_Base.h">
+      <Filter>03_FtgMain\Fighting\BG</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\BG\_BG.h">
+      <Filter>03_FtgMain\Fighting\BG</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\CharaSele_Image.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\_CharaSele.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\_CharaSele_Player.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1207,6 +1231,30 @@
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Sound.cpp">
       <Filter>03_FtgMain\ExeChara\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Func.cpp">
+      <Filter>03_FtgMain\ExeChara\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Ef\EfHitLine.cpp">
+      <Filter>03_FtgMain\Ef</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\BG\BG_Yuuhi_no_hara.cpp">
+      <Filter>03_FtgMain\Fighting\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\BG\BG_Base.cpp">
+      <Filter>03_FtgMain\Fighting\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\BG\_BG.cpp">
+      <Filter>03_FtgMain\Fighting\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\CharaSele_Image.cpp">
+      <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\_CharaSele.cpp">
+      <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\_CharaSele_Player.cpp">
+      <Filter>02_CharaSele</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

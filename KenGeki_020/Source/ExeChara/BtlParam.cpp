@@ -54,6 +54,7 @@ namespace GAME
 		m_hitEst = rhs.m_hitEst;		//攻撃成立フラグ
 		m_FirstEf = rhs.m_FirstEf;		//初回Efフラグ
 		m_FirstSE = rhs.m_FirstSE;		//初回SEフラグ
+		m_FirstSE_HS = rhs.m_FirstSE_HS;		//初回SEフラグ(ヒットストップ)
 		m_FirstVC = rhs.m_FirstVC;		//初回VCフラグ
 		m_ForcedChange = rhs.m_ForcedChange;	//強制変更
 		m_clang = rhs.m_clang;			//打合発生フラグ
@@ -80,7 +81,11 @@ namespace GAME
 		m_pos_x_recoil = rhs.m_pos_x_recoil;	//反動(ノックバック)位置
 
 		m_nActTransit = rhs.m_nActTransit;		//アクション移行回数
-		m_kouatsu = rhs.m_kouatsu;			//剣撃抗圧
+		m_taikou = rhs.m_taikou;				//剣撃対抗
+
+		m_reviseThrow = rhs.m_reviseThrow;		//投げ後の連続技中補正
+		m_reviseOverDrive = rhs.m_reviseOverDrive;		//超必後の連続技中補正
+		m_confirmed_revise = rhs.m_confirmed_revise;		//最終確定補正値
 	}
 
 	BtlParam::~BtlParam ()
@@ -124,7 +129,7 @@ namespace GAME
 		m_tmrVib		 = std::make_shared < Timer > ();	//個別振動
 		m_tmrOfstCncl =	std::make_shared < Timer > ();		//相殺キャンセルタイマ
 		m_tmrWhiteDamage = std::make_shared < Timer > ();	//白ダメージ
-
+		m_tmrTaikou		= std::make_shared < Timer > ();	//剣撃対抗受付タイマ
 
 		m_timers.push_back ( m_tmrHitstop );
 		m_timers.push_back ( m_tmrDown );
@@ -135,6 +140,7 @@ namespace GAME
 		m_timers.push_back ( m_tmrVib );
 		m_timers.push_back ( m_tmrOfstCncl );
 		m_timers.push_back ( m_tmrWhiteDamage );
+		m_timers.push_back ( m_tmrTaikou );
 	}
 
 	void BtlParam::PosInit ()
@@ -167,6 +173,8 @@ namespace GAME
 		m_hitEst = false;
 		m_FirstEf = false;
 		m_FirstSE = false;
+		m_FirstSE_HS = false;
+		m_FirstVC = false;
 
 		m_inertial = VEC2 ( 0, 0 );
 		m_dashInertial = VEC2 ( 0, 0 );
@@ -196,7 +204,11 @@ namespace GAME
 		//@info Result用などシーン通して使うものはInitで初期化しない
 		//m_nActTransit
 
-		m_kouatsu = F;
+		m_taikou = F;
+
+		m_reviseThrow = 1.f;
+		m_reviseOverDrive = 1.f;
+		m_confirmed_revise = 1.f;
 	}
 
 	void BtlParam::TimerMove ()
@@ -224,6 +236,7 @@ namespace GAME
 		m_hitEst = false;
 		m_FirstEf = false;
 		m_FirstSE = false;
+		m_FirstSE_HS = false;
 		m_FirstVC = false;
 		m_ForcedChange = false;
 		m_lurch = 0;
@@ -237,7 +250,7 @@ namespace GAME
 	//フレーム処理開始時
 	void BtlParam::FrameInit ()
 	{
-		m_kouatsu = F;
+		m_taikou = F;
 	}
 
 	//連続ヒット関連リセット
@@ -248,6 +261,11 @@ namespace GAME
 
 		//連続ヒットダメージのリセット
 		m_chainDamage = 0;
+
+		//補正
+		m_reviseThrow = 1.f;
+		m_reviseOverDrive = 1.f;
+		m_confirmed_revise = 1.f;
 	}
 
 
@@ -474,6 +492,14 @@ namespace GAME
 	}
 
 
+	//◆フレーム毎１回処理
+	//バトルパラメータにおける毎フレームの入力による動作
+	void BtlParam::Move_Input ()
+	{
+	}
+
+
+
 	// 慣性の減少
 	void BtlParam::DecreaseInertial ( float d, VEC2& inertial )
 	{
@@ -504,6 +530,14 @@ namespace GAME
 	void BtlParam::Landing ()
 	{
 		VEC2 pos = GetPos ();
+
+
+		if ( GetPlayerID () == PLAYER_ID_1 )
+		{
+			DBGOUT_WND_F ( DBGOUT_0, U"1p_pos = {},{}"_fmt( pos.x, pos.y ) );
+		}
+
+
 
 		//位置が基準より下だったら
 		if ( (float)PLAYER_BASE_Y < pos.y )
@@ -709,6 +743,14 @@ namespace GAME
 	}
 
 
+	void BtlParam::OnGuard ()
+	{
+		//ガードストップ
+		UINT hitstop = HITSTOP_TIME;
+		m_tmrHitstop->Start ( hitstop );		//ヒットストップの設定
+	}
+
+
 	//============================================================
 	//相殺時 (自分：攻撃、相手：攻撃)
 	void BtlParam::OnOffset_AA ()
@@ -760,19 +802,37 @@ namespace GAME
 	void BtlParam::OnHit ()
 	{
 		m_hitEst = T;		//攻撃成立フラグ
-		m_tmrHitstop->Start ( HITSTOP_TIME );		//ヒットストップの設定
 
-//		m_tmrHitPitch->WaitStart ( HITSTOP_TIME );	//ヒット間隔のカウント
+		//ヒットストップ
+		UINT hitstop = HITSTOP_TIME;
+
+		//技指定
+		if ( m_pAction->IsName ( U"波動" ) )
+		{
+			hitstop += 10;
+		}
+
+		m_tmrHitstop->Start ( hitstop );		//ヒットストップの設定
+
+//		m_tmrHitPitch->WaitStart ( hitstop );	//ヒット間隔のカウント
 		//※ヒットストップ分を待機してからスタート
-		HitPitchWaitStart ( HITSTOP_TIME );
-
+		HitPitchWaitStart ( hitstop );
 
 		//同一アクション内ヒット数
 		++ m_hitNum;
 
-
 		//@info 連続ヒット数は常に加算し、ニュートラル状態で「相手(m_pOther)」の値を０に戻す
+		//ガード時は加算しない
 
+#if 0
+		//連続ヒット数
+		++ m_chainHitNum;
+		m_pParam->UpdateIfMax_Chain ( m_playerID, m_chainHitNum );
+#endif // 0
+	}
+
+	void BtlParam::IncChainHitNum ()
+	{
 		//連続ヒット数
 		++ m_chainHitNum;
 		m_pParam->UpdateIfMax_Chain ( m_playerID, m_chainHitNum );

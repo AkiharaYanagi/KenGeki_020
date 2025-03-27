@@ -45,7 +45,7 @@ namespace GAME
 	FTG_DM_Greeting::FTG_DM_Greeting ()
 	{
 		m_timer = std::make_shared < Timer > ();
-		m_timer->SetTargetTime ( 120 );
+		m_timer->SetTargetTime ( 180 );
 	}
 
 	void FTG_DM_Greeting::Start ()
@@ -157,17 +157,16 @@ namespace GAME
 		P_MutualChara pMutual = GetpMutualChara ();
 
 
-		//一時停止解除
-		bool bStop_last =  GetpFtgGrp()->IsLast_ScpSopt ();
-		if ( bStop_last )
+		//一時停止
+		if ( GetpFtgGrp()->IsStart_ScpStop () )
 		{
-			//pMutual->ShiftScpStop ();
-			//@info 開始はExeCharaで行う
+			pMutual->ShiftScpStop ();
 		}
-		else
+		//最終時に通常状態に戻す
+		if ( GetpFtgGrp()->IsLast_ScpStop () )
 		{
-			//pMutual->ShiftFightingMain ();
-			pMutual->RestoreScpStop ();
+			GetpFtgGrp()->ClearTmr_ScpStop ();
+			pMutual->ShiftFightingMain ();
 		}
 
 
@@ -280,8 +279,48 @@ namespace GAME
 	{
 		m_grpDown = MakeGrpValue ( U"Demo_Down.png" );
 		m_grpDown->SetPos ( VEC2 ( ( WINDOW_WIDTH - 617 ) * 0.5f, 400.f ) );
-		m_grpDown->SetValid ( F );
 		m_grpDown->SetEnd ( 120 );
+
+
+		m_grp_Ketsu = std::make_shared < GrpDemo > ();
+		m_grp_Ketsu->AddTexture_FromArchive ( U"decision_ketsu.png" );
+		m_grp_Ketsu->SetPos ( VEC2 ( 200, 150 ) );
+		m_grp_Ketsu->SetZ ( Z_SYS );	//@info SetZはGRPLST_INSERT()の後では行わない(リストが崩れる)
+		m_grp_Ketsu->SetStartScaling ( VEC2 ( 8.f, 8.f ) );
+		m_grp_Ketsu->SetTargetScaling ( VEC2 ( 1.5f, 1.5f ) );
+		m_grp_Ketsu->SetSecondVel ( VEC2 ( -0.001f, -0.001f ) );
+		m_grp_Ketsu->SetValid ( F );
+		m_grp_Ketsu->SetEnd ( 120 );
+		AddpTask ( m_grp_Ketsu );
+		GRPLST_INSERT ( m_grp_Ketsu );
+
+		m_grp_chaku = std::make_shared < GrpDemo > ();
+		m_grp_chaku->AddTexture_FromArchive ( U"decision_chaku.png" );
+		m_grp_chaku->SetPos ( VEC2 ( 800, 600 ) );
+		m_grp_chaku->SetZ ( Z_SYS );	//@info SetZはGRPLST_INSERT()の後では行わない(リストが崩れる)
+		m_grp_chaku->SetStartScaling ( VEC2 ( 8.f, 8.f ) );
+		m_grp_chaku->SetTargetScaling ( VEC2 ( 1.5f, 1.5f ) );
+		m_grp_chaku->SetSecondVel ( VEC2 ( -0.001f, -0.001f ) );
+		m_grp_chaku->SetValid ( F );
+		m_grp_chaku->SetEnd ( 120 );
+		AddpTask ( m_grp_chaku );
+		GRPLST_INSERT ( m_grp_chaku );
+
+		m_grpLight0 = std::make_shared < GrpDemo > ();
+		m_grpLight0->AddTexture_FromArchive ( U"decision_light0.png" );
+		m_grpLight0->SetShader ( T );
+		m_grpLight0->SetPos ( VEC2 ( 800, 480 ) );
+		m_grpLight0->SetZ ( Z_SYS );	//@info SetZはGRPLST_INSERT()の後では行わない(リストが崩れる)
+		m_grpLight0->SetStartScaling ( VEC2 ( 2.f, 2.f ) );
+		m_grpLight0->SetVel ( VEC2 ( 0.f, 0.f ) );
+		m_grpLight0->SetAcc ( VEC2 ( 0.1f, 0.f ) );
+		m_grpLight0->SetTargetScaling ( VEC2 ( 10.f, 2.f ) );
+		m_grpLight0->SetSecondVel ( VEC2 ( 0.f, 0.f ) );
+		m_grpLight0->SetValid ( F );
+		m_grpLight0->SetEnd ( 120 );
+		AddpTask ( m_grpLight0 );
+		GRPLST_INSERT ( m_grpLight0 );
+
 
 		m_timer = std::make_shared < Timer > ( 120 );
 	}
@@ -296,6 +335,9 @@ namespace GAME
 
 		//Demo
 		m_grpDown->Start ();
+		m_grp_Ketsu->Start ();
+		m_grp_chaku->Start ();
+		m_grpLight0->Start ();
 	}
 
 	void FTG_DM_Down::Do ()
@@ -440,9 +482,7 @@ namespace GAME
 
 		//キャラ
 		GetpMutualChara ()->StartWinner ( );
-#if 0
-		GetwpFighting().lock()->WinnerDemo ();
-#endif // 0
+//		GetwpFighting().lock()->WinnerDemo ();
 
 
 		//勝者表示

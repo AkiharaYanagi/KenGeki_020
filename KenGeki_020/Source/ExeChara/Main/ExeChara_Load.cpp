@@ -100,7 +100,8 @@ namespace GAME
 
 		//--------------------------------------------
 		//アクタ・ステートに用いる状態パラメータに登録
-		m_actor.SetwpExeChara ( shared_from_this () );
+		m_pActor->SetwpExeChara ( shared_from_this () );
+		m_pActor->Load ();
 
 		//--------------------------------------------
 		//キャラ表示初期化
@@ -170,7 +171,7 @@ namespace GAME
 		m_nameChangeOther = U"ノーリアクション";
 
 		//アクタ
-		m_actor.Init ();
+		m_pActor->Init ();
 
 		//表示
 		// 特殊演出初期化
@@ -263,13 +264,29 @@ namespace GAME
 		//--------------------------------------------
 		//m_pCharaのデータ読込
 
+#if 0
+
+		PLAYER_ID id = GetPlayerID ();
+
 		//パラメータによるキャラの選択
 		switch ( m_name )
 		{
-		case CHARA_OUKA:		m_pChara = m_pParam->GetpChara_Ouka ();			break;
-		case CHARA_SAE:			m_pChara = m_pParam->GetpChara_Sae ();			 break;
-		case CHARA_RETSUDOU:	m_pChara = m_pParam->GetpChara_Retsudou ();		 break;
-		case CHARA_GABADARUGA:	m_pChara = m_pParam->GetpChara_Retsudou2 ();		 break;
+		case CHARA_OUKA:		m_pChara = m_pParam->GetpChara_Ouka ( id );		break;
+		case CHARA_SAE:			m_pChara = m_pParam->GetpChara_Sae ( id );		 break;
+		case CHARA_RETSUDOU:	m_pChara = m_pParam->GetpChara_Retsudou ( id );	 break;
+		case CHARA_GABADARUGA:	m_pChara = m_pParam->GetpChara_Gabadaruga ( id );	 break;
+		default: break;
+		}
+
+#endif // 0
+
+		//パラメータによるキャラの選択
+		switch ( m_name )
+		{
+		case CHARA_OUKA:		m_pChara = m_pParam->GetpChara_Ouka (  );		break;
+		case CHARA_SAE:			m_pChara = m_pParam->GetpChara_Sae (  );		 break;
+		case CHARA_RETSUDOU:	m_pChara = m_pParam->GetpChara_Retsudou (  );	 break;
+		case CHARA_GABADARUGA:	m_pChara = m_pParam->GetpChara_Gabadaruga (  );	 break;
 		default: break;
 		}
 
@@ -348,12 +365,18 @@ namespace GAME
 		UINT32 i_air = 0;
 		for ( P_Branch pBrc : vpBrc )
 		{
+			//条件：空中行動可能アクションのみ
+			//現在は不可
+#if 0
 			//条件：コマンド入力のみ
 			if ( BRC_CMD == pBrc->GetCondition () )
 			{
 				//リストに追加
 				m_vOfstCncl_Air.push_back ( i_air );
 			}
+
+#endif // 0
+
 
 			++ i_air;
 		}

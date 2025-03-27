@@ -90,7 +90,8 @@ namespace GAME
 	//画面描画用 初期位置
 	enum PLAYER_BASE_PT
 	{
-		GAME_WIDTH = 2048,		//ゲーム上で扱う幅
+//		GAME_WIDTH = 2048,		//ゲーム上で扱う幅
+		GAME_WIDTH = 1920,		//ゲーム上で扱う幅
 		GAME_HEIGHT = 1024,
 
 		GAME_WIDTH_HALF = GAME_WIDTH / 2,		//ゲーム上で扱う幅
@@ -126,6 +127,7 @@ namespace GAME
 		//ゲージ類
 		LIFE_MAX = 10000,
 		LIFE_START = 10000,
+		LIFE_HALF = LIFE_MAX / 2,
 
 		BALANCE_MAX = 10000,
 		BALANCE_START = 5000,
@@ -140,13 +142,16 @@ namespace GAME
 
 		//停止
 //		HITSTOP_TIME = 15,
-		HITSTOP_TIME = 7,
+		HITSTOP_TIME = 10,
+//		HITSTOP_TIME = 7,
 //		HITSTOP_TIME = 700,
 		OFFSET_TIME = 14,
 		DOWN_TIME = 120 + 60,
 		END_TIME = 60,
 
 		OFST_CNCL = 15,		//相殺キャンセル可能時間
+
+		TAIKOU_TIME = 6,	//剣撃対抗受付時間( start==1フレからなので、値が6で[5フレーム間])
 	};
 }
 

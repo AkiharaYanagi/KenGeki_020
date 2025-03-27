@@ -66,6 +66,7 @@ namespace GAME
 		AddpTask ( m_thunder0 );
 		GRPLST_INSERT ( m_thunder0 );
 
+#if 0
 
 		//-------------------------------
 		//test
@@ -88,6 +89,8 @@ namespace GAME
 		AddpTask ( m_test );
 //		GRPLST_INSERT ( m_test );
 
+
+#endif // 0
 
 
 #if 0

@@ -31,8 +31,12 @@ namespace GAME
 		P_PrmRect		m_bg_White;			//白転用
 
 
+
+
 		bool	m_WhiteOut { F };	//白転
 		P_FadeRect	m_fade_white;
+
+
 
 
 		bool	m_wallbreak { F };	//壁割
@@ -65,7 +69,9 @@ namespace GAME
 		//---------------------------------------
 		void StartScpStop ( UINT i ) { m_tmrScpStop.Start ( i ); }
 		bool IsActive_ScpStop () const { return m_tmrScpStop.IsActive (); }
-		bool IsLast_ScpSopt () const { return m_tmrScpStop.IsLast (); }
+		bool IsStart_ScpStop () const { return m_tmrScpStop.IsStart (); }
+		bool IsLast_ScpStop () const { return m_tmrScpStop.IsLast (); }
+		void ClearTmr_ScpStop () { m_tmrScpStop.Clear (); }
 
 		//---------------------------------------
 		void StartBlackOut ( UINT i ) { m_tmrBlackOut.Start ( i ); }

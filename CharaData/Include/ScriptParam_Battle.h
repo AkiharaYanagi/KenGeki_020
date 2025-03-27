@@ -30,7 +30,7 @@ namespace GAME
 		VEC2 Vel { 0, 0 };		//速度
 		VEC2 Acc { 0, 0 };		//加速度
 		int Power { 0 };		//攻撃値
-		int Warp { 0 };			//ヒット時のけぞり[F]
+		int Warp { 0 };			//ヒット時のけぞり[F] == ヒットストップ追加(相手)
 		int Recoil_I { 0 };		//反動(x,y)(自分)
 		int Recoil_E { 0 };		//反動(x,y)(相手)
 		int Balance_I { 0 };	//バランス増減(自分)
@@ -39,7 +39,11 @@ namespace GAME
 		int Gauge_I { 0 };		//ゲージ増減(自分)
 		int Gauge_E { 0 };		//ゲージ増減(相手)
 
-		int DirectDamage { 0 };	//直接ダメージ
+		int DirectDamage { 0 };	//直接ダメージ(相手)
+		//直接ダメージ(自分)
+		
+		//ヒットストップ追加(自分)
+		//ガード硬直（自分・相手）
 	};
 
 

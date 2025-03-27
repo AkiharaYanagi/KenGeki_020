@@ -88,6 +88,17 @@ namespace GAME
 		AddpTask ( m_charaFace );
 		GRPLST_INSERT ( m_charaFace );
 
+#if TRIAL
+		//体験版用キャラ隠し
+		m_hidden = std::make_shared < PrmRect > ();
+		m_hidden->SetSize ( 150, 150 );
+		m_hidden->SetPos ( 415 + 300, 70 );
+		m_hidden->SetColor ( 0xa0000000 );
+		m_hidden->SetZ ( Z_EFF - 0.01f );
+		AddpTask ( m_hidden );
+		GRPLST_INSERT ( m_hidden );
+#endif // TRIAL
+
 
 
 		//プレイヤ別の位置など
@@ -187,6 +198,7 @@ namespace GAME
 		m_stageSelect->AddTexture_FromArchive ( U"CharaSele\\BG_Preview_Noon.png" );
 		m_stageSelect->AddTexture_FromArchive ( U"CharaSele\\BG_Preview_Evening.png" );
 		m_stageSelect->AddTexture_FromArchive ( U"CharaSele\\BG_Preview_Night.png" );
+		m_stageSelect->AddTexture_FromArchive ( U"CharaSele\\BG_Preview_School.png" );
 		m_stageSelect->SetPos ( VEC2 ( STG_X, STG_Y ) );
 		m_stageSelect->SetZ ( Z_EFF );
 		AddpTask ( m_stageSelect );
@@ -282,7 +294,7 @@ namespace GAME
 		m_chsl_pl_2p->AssignName ( charaName2p );
 
 		//ステージ
-		STAGE_NAME stageName = p->GetStageName ();
+		STAGE_NAME stageName = p->GetStage_Name ();
 		AssignStage ( stageName );
 
 		//BGM
@@ -370,7 +382,7 @@ namespace GAME
 		P_Param pPrm = Scene::GetpParam ();
 		pPrm->SetCharaName1p ( m_chsl_pl_1p->GetName() );
 		pPrm->SetCharaName2p ( m_chsl_pl_2p->GetName() );
-		pPrm->SetStageName ( GetStageName () );
+		pPrm->SetStage_Name ( GetStageName () );
 		pPrm->Set_BGM_ID ( m_bgm_id );
 
 		//設定ファイルに書出
@@ -489,9 +501,12 @@ namespace GAME
 	void CharaSele::Input ()
 	{
 		//BackSpaceでタイトルに戻る (ESCは直接終了)
+		//コントローラ(7:リセットボタン)でも戻る
 		if ( ! m_fade_toTitle->IsActive () )
 		{
-			if ( WND_UTL::AscKey ( VK_BACK ) )
+			bool bBackSpace = WND_UTL::AscKey ( VK_BACK );
+			bool bCtrlReset = CFG_PUSH_KEY_12 ( PLAYER_INPUT::PLY_BTN7 );
+			if ( bBackSpace || bCtrlReset )
 			{
 				SND_PLAY_ONESHOT_SE ( SE_select_Cancel );
 
@@ -588,6 +603,7 @@ namespace GAME
 		case 0: ret = STAGE_ASAHINO_HARA; break;
 		case 1: ret = STAGE_YUUHINO_HARA; break;
 		case 2: ret = STAGE_YORUNO_HARA; break;
+		case 3: ret = STAGE_SCHOOL_NOON; break;
 		}
 
 		return ret;

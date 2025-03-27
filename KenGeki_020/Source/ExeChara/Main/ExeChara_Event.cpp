@@ -85,6 +85,7 @@ namespace GAME
 
 		//@todo 相殺２撃目にアサート（名前指定？）
 
+
 		//キャラの持つルート,ブランチの参照
 		const VP_Route vpRoute = m_pChara->GetvpRoute ();
 		const VP_Branch vpBranch = m_pChara->GetvpBranch ();
@@ -125,6 +126,26 @@ namespace GAME
 	//==========================================
 	void ExeChara::OnHit ()
 	{
+		//相手
+		P_ExeChara pOther = m_pOther.lock ();
+
+		//-----------------------------------------------------
+		//ゲージ増減 (超必殺以外)
+		if ( ! IsActCtg ( AC_OVERDRIVE ) )
+		{
+			//攻撃値を超必殺技ゲージに加算
+			int p = m_pScript->m_prmBattle.Power;
+
+			//アクセルゲージ補正 ( -1.000倍 ~ +2.000倍 )
+			//( -500 ~ +1000 )
+			double dp = p * 0.002f * m_btlPrm.GetAccel();
+
+			m_btlPrm.AddMana ( (int)dp );
+
+			//バランス固定回復
+			m_btlPrm.AddBalance ( 100 );
+		}
+
 
 		//-----------------------------------------------------
 		//避けを直前成立させるとスロウ
@@ -147,6 +168,9 @@ namespace GAME
 			}
 		}
 #endif // 0
+
+		//ガード成立時、分岐しない
+//		if ( pOther->CanGuard () ) { return; }
 
 		//-----------------------------------------------------
 		//条件分岐 (相手→自分でないとスクリプトが変わってしまう)
@@ -179,23 +203,6 @@ namespace GAME
 		OnKnockBack ();
 		
 		//-----------------------------------------------------
-		//ゲージ増減 (超必殺以外)
-		if ( ! IsActCtg ( AC_OVERDRIVE ) )
-		{
-			//攻撃値を超必殺技ゲージに加算
-			int p = m_pScript->m_prmBattle.Power;
-
-			//アクセルゲージ補正 ( -1.000倍 ~ +2.000倍 )
-			//( -500 ~ +1000 )
-			double dp = p * 0.002f * m_btlPrm.GetAccel();
-
-			m_btlPrm.AddMana ( (int)dp );
-
-			//バランス固定回復
-			m_btlPrm.AddBalance ( 100 );
-		}
-
-		//-----------------------------------------------------
 		//パラメータ
 		m_btlPrm.OnHit ();
 	}
@@ -208,40 +215,49 @@ namespace GAME
 		// 実効値 (float) = (float)1/10
 
 		float recoil_i = 0.1f * m_pScript->m_prmBattle.Recoil_I;
-
 //		float pre_rcl = recoil_i;
 
+#if 0
 
-		//★★★ 剣撃抵抗 (打撃時にいずれかの入力で距離離し)
+		//----------------------------------------------------------
+		//★★★ 剣撃対抗 (打撃時にいずれかの入力で距離離し)
 		P_ExeChara pOther =  m_pOther.lock();
-		if ( pOther->m_pCharaInput->PushSomething () )
+
+		bool bTaikou = pOther->m_btlPrm.GetTmr_Taikou()->IsActive ();
+		if ( bTaikou )
 		{
-			//@info スタミナゲージ消費
-			//バランス消費で移項可能かチェック
-
-			//現在値と比較
-			int balance = pOther->m_btlPrm.GetBalance ();
-			const int COST = 500;
-			if ( balance < COST )
+			if ( pOther->m_pCharaInput->PushSomething () )
 			{
-				//足りないとき遷移しない
-			}
-			else
-			{
-				//必要量があれば消費して遷移する
-				pOther->m_btlPrm.AddBalance ( -1 * COST );
+				//@info スタミナゲージ消費
+				//バランス消費で移項可能かチェック
 
-				//成立時
-				recoil_i *= 10;
-				recoil_i += -10;
+				//現在値と比較
+				int balance = pOther->m_btlPrm.GetBalance ();
+				const int COST = 500;
+				if ( balance < COST )
+				{
+					//足りないとき遷移しない
+				}
+				else
+				{
+					//必要量があれば消費して遷移する
+					pOther->m_btlPrm.AddBalance ( -1 * COST );
 
-				//成立フラグ
-				pOther->m_btlPrm.SetKouAtsu ( T );
-				//フレーム最初にFalse、以降同一フレーム処理で判定に用いる
-				//主にエフェクト発生
+					//成立時
+					recoil_i *= 10;
+					recoil_i += -10;
+
+					//成立フラグ
+					pOther->m_btlPrm.SetTaikou ( T );
+					//フレーム最初にFalse、以降同一フレーム処理で判定に用いる
+					//主にエフェクト発生
+				}
 			}
 		}
-			
+
+
+#endif // 0
+
 
 		//距離ヒット数補正
 		UINT chain = m_btlPrm.GetChainHitNum ();
@@ -382,6 +398,27 @@ namespace GAME
 #endif // 0
 		bool bGuard = CheckGuard ();
 
+		if ( bGuard )
+		{
+			//ガード成立時、分岐しない
+			pOther->m_nameChangeMine = U"ノーリアクション";
+		}
+
+		//-------------------------------------------------
+		//★★★ 剣撃対抗 (打撃時にいずれかの入力で距離離し)
+
+		if ( ! pOther->IsOverdrive () )	//攻撃した相手が超必殺でないとき
+		{
+			//受付タイマをON
+			m_btlPrm.GetTmr_Taikou()->Start ( TAIKOU_TIME );
+		}
+
+		//-------------------------------------------------
+		//相手(攻撃側)のヒット数加算 ガード時を除く
+		if ( ! bGuard )
+		{
+			pOther->m_btlPrm.IncChainHitNum ();
+		}
 
 		//-------------------------------------------------
 		//ダメージ処理
@@ -396,36 +433,65 @@ namespace GAME
 		if ( chain > 100 ) { chain = 100; }		//上限100
 
 		float d_revise = ( 100.f - (float)chain ) * 0.01f;	//%に換算
-		if ( 10 <= chain ) { d_revise *= d_revise; }	//10hit以降補正
-		if ( d_revise < 0 ) { d_revise = 0.01f; }	//０にはしない
+		if ( 10 <= chain ) { d_revise *= d_revise; }	//10hit以降追加補正
+		if ( d_revise < 0 ) { d_revise = 0.01f; }	//０未満にはしない
 
+		//-------------------------------------------------
 		//ガード成立時のダメージ補正
 		float g = bGuard ? 0.1f : 1.f;
 
-		damage = (int) ( d_revise * damage * g );
-#if 0
-		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_2 )
+		//-------------------------------------------------
+		//特殊補正
+		//相手(攻撃側)が投げ 保存した値を使う
+		float throwRvs = pOther->m_btlPrm.GetReviseThrow ();
+		if ( pOther->IsThrow () )
 		{
-			DBGOUT_WND_F ( DBGOUT_0, U"pre_dmg = {}"_fmt ( pre_dmg ) );
-			DBGOUT_WND_F ( DBGOUT_1, U"rev = {}"_fmt ( d_revise ) );
-			DBGOUT_WND_F ( DBGOUT_2, U"damage = {}"_fmt ( damage ) );
+			//補正を保存
+			throwRvs = 0.5f;
+			pOther->m_btlPrm.SetReviseThrow ( throwRvs );
 		}
-#endif // 0
 
+		//-------------------------------------------------
+		//特殊補正
+		//49.9% -> 45%補正
+		int32 chainDamage = pOther->m_btlPrm.GetChainDamage ();
+		float d_45 = 1.f;
+		if ( chainDamage > 4500 )
+		{
+			d_45 = 0.1f;
+		}
+		//-------------------------------------------------
+		//超必殺補正
+		float rev_od = pOther->m_btlPrm.GetReviseOverDrive ();
+		//-------------------------------------------------
 
-		m_btlPrm.OnDamage ( - damage );	//power は＋の値、ダメージ計算はマイナスにして加算
+		//最終確定補正値
+		pOther->m_btlPrm.SetCnfmRvs ( d_revise * throwRvs * rev_od * g * d_45 );
+
+		//-------------------------------------------------
+
+		//最終確定値
+		float confirmed_revise = pOther->m_btlPrm.GetCnfmRvs ();
+		int confirmed_damage = (int) ( confirmed_revise * damage );
+
+		m_btlPrm.OnDamage ( - confirmed_damage );	//power は＋の値、ダメージ計算はマイナスにして加算
+
+		//スタミナ反映
+		m_btlPrm.AddBalance ( (int)(confirmed_damage * 0.1f ) );
+
 
 
 		//◆ 相手・攻撃 → 自分・くらい
 		//@info 連続ヒットダメージ数は常に加算し、相手のニュートラル状態で０に戻す
 		//相手の連続ヒットダメージ数
-		pOther->m_btlPrm.AddChainDamage ( damage );
+		pOther->m_btlPrm.AddChainDamage ( confirmed_damage );
 
 		int32 chnDmg = pOther->m_btlPrm.GetChainDamage ();
 		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_2 )	//相手
 		{
 			DBGOUT_WND_F ( DBGOUT_0, U"ダメージ = {}"_fmt( damage ) );
 			DBGOUT_WND_F ( DBGOUT_1, U"連続ヒットダメージ = {}"_fmt( chnDmg ) );
+			DBGOUT_WND_F ( DBGOUT_2, U"rev_od = {}"_fmt( rev_od ) );
 		}
 
 		//リザルト用に保存 (相手の値)
@@ -448,17 +514,34 @@ namespace GAME
 		//ヒットストップ
 
 		//相手スクリプトによる追加止め時間
-		P_Action pAct = m_pOther.lock()->GetpAction();
-		P_Script pScp = m_pOther.lock()->GetpScript();
-		int warp = pScp->m_prmBattle.Warp;
-
+		P_Action pAct = pOther->GetpAction();
+		P_Script pScp = pOther->GetpScript();
 		UINT stopTime = HITSTOP_TIME;
+
+		int warp = pScp->m_prmBattle.Warp;
 		if( warp != 0 )
 		{
 			stopTime += warp;
 		}
 
-		m_btlPrm.GetTmr_HitStop ()->Start ( stopTime );	//ヒットストップの設定
+
+		//ガード時
+		if ( bGuard )
+		{
+			//個別
+			bool bRai0 = pOther->IsNameAction ( U"雷電蹴_1" );
+			bool bKuuRai0 = pOther->IsNameAction ( U"空中雷電蹴_1" );
+			bool bKuuRai1 = pOther->IsNameAction ( U"空中雷電蹴_持続" );
+			if ( bRai0 || bKuuRai0 || bKuuRai1 )
+			{
+				m_btlPrm.GetTmr_HitStop ()->Start ( stopTime );	//ヒットストップの設定
+			}
+		}
+		//ガード時以外(ヒット時)
+		else
+		{
+			m_btlPrm.GetTmr_HitStop ()->Start ( stopTime );	//ヒットストップの設定
+		}
 
 
 		//-------------------------------------------------
@@ -607,6 +690,8 @@ namespace GAME
 		{
 			m_btlPrm.SetAccRecoil ( recoil_e );
 		}
+
+
 	}
 
 

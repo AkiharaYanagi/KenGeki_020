@@ -118,6 +118,7 @@ namespace GAME
 			m_fighting->DemoRestart ();
 		}
 
+#if 0
 		//トレーニングリセット
 		bool p1Reset = CFG_PUSH_KEY ( P1_BTN7 );
 		bool p2Reset = CFG_PUSH_KEY ( P2_BTN7 );
@@ -126,6 +127,7 @@ namespace GAME
 		{
 			m_fighting->TrainingRestart ();
 		}
+#endif // 0
 
 		//通常動作
 		Scene::Move ();

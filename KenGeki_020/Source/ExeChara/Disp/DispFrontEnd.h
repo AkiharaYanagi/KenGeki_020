@@ -48,7 +48,7 @@ namespace GAME
 		CHARA_NAME	m_chara_name { CHARA_OUKA };	//キャラ名保存
 
 		//剣撃抗圧
-		P_EfKouAtsu	m_kouatsu;
+		P_EfKouAtsu	m_taikou;
 
 		//-----------------------------------------------------
 
@@ -121,10 +121,10 @@ namespace GAME
 #endif // 0
 
 		//ヒット数
-		void UpdateHitNum ( UINT n );
+		void UpdateHitNum ( const BtlParam & btlPrm );
 
 		//アクション名表示
-		void UpdateActionName ( s3d::String actionName );
+		void UpdateActionName ( s3d::String actionName, UINT frame );
 
 		//アクション名表示
 		void UpdateStateName ( s3d::String stateName );
@@ -164,7 +164,7 @@ namespace GAME
 		static const float NAME_SAE_W;
 		static const float NAME_RETSUDOU_W;
 
-		static const float NAME_W [ 3 ];
+		static const float NAME_W [ 4 ];
 
 		static const float DMG_X;
 		static const float DMG_Y;

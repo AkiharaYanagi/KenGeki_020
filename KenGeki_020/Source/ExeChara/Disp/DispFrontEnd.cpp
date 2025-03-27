@@ -37,7 +37,7 @@ namespace GAME
 	const float DispFrontEnd::DMG_Y = 180;
 
 	//各ファイルサイズから幅を指定
-	const float DispFrontEnd::NAME_W[3] = { 167.f, 118.f, 179.f };
+	const float DispFrontEnd::NAME_W[4] = { 167.f, 118.f, 179.f, 130.f };
 
 
 	//@todo Z値のまとめ
@@ -142,7 +142,7 @@ namespace GAME
 		m_grpHitNum->AddObject ();
 
 		m_grpStrHit = std::make_shared < GameGraphic > ();
-		m_grpStrHit->AddTexture_FromArchive ( U"Hit.png" );
+		m_grpStrHit->AddTexture_FromArchive ( U"hit\\Geki.png" );
 		m_grpStrHit->SetZ ( Z_EFB + 0.01f );
 		m_grpStrHit->SetValid ( F );
 		AddpTask ( m_grpStrHit );
@@ -199,6 +199,7 @@ namespace GAME
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Ouka.png" );
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Sae.png" );
 		m_face->AddTexture_FromArchive ( U"Battle\\Face_Retsudou.png" );
+		m_face->AddTexture_FromArchive ( U"Battle\\Face_Gabadaruga.png" );
 		m_face->SetIndexTexture ( 0 );
 		m_face->SetZ ( Z_SHADOW + 0.01f );
 		AddpTask ( m_face );
@@ -216,15 +217,16 @@ namespace GAME
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_HIYODORI_OUKA.png" );
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_TOMOE_SAE.png" );
 		m_name->AddTexture_FromArchive ( U"Battle\\Name_REKKA_RETSUDOU.png" );
+		m_name->AddTexture_FromArchive ( U"Battle\\Name_GABADARUGA.png" );
 		m_name->SetZ ( Z_SYS - 0.01f );
 		AddpTask ( m_name );
 		GRPLST_INSERT ( m_name );
 
 		//-----------------------------------------
 		//剣撃抗圧
-		m_kouatsu = std::make_shared < EfKouAtsu > ();
-		AddpTask ( m_kouatsu );
-		GRPLST_INSERT ( m_kouatsu );
+		m_taikou = std::make_shared < EfKouAtsu > ();
+		AddpTask ( m_taikou );
+		GRPLST_INSERT ( m_taikou );
 	}
 
 	//オブジェクト生成用
@@ -295,7 +297,7 @@ namespace GAME
 		if ( PLAYER_ID_1 == playerID )
 		{
 			m_grpHitNum->SetPos ( VEC2 ( 100, 200 ) );
-			m_grpStrHit->SetPos ( VEC2 ( 100 + 128, 200 ) );
+			m_grpStrHit->SetPos ( VEC2 ( 100 + 128, 180 ) );
 			m_strDmg->SetPos ( VEC2 ( DMG_X, DMG_Y ) );
 			m_strDmg->SetStr ( U"P1_Dmg" );
 			m_strRevise->SetPos ( VEC2 ( DMG_X, DMG_Y - 30 ) );
@@ -312,7 +314,7 @@ namespace GAME
 		else if ( PLAYER_ID_2 == playerID )
 		{
 			m_grpHitNum->SetPos ( VEC2 ( WINDOW_WIDTH - 384 -100, 200 ) );
-			m_grpStrHit->SetPos ( VEC2 ( WINDOW_WIDTH - 256 -100, 200 ) );
+			m_grpStrHit->SetPos ( VEC2 ( WINDOW_WIDTH - 256 -100, 180 ) );
 			m_strDmg->SetPos ( VEC2 ( WINDOW_WIDTH - 250, DMG_Y ) );
 			m_strDmg->SetStr ( U"P2_Dmg" );
 			m_strRevise->SetPos ( VEC2 (  WINDOW_WIDTH - 250, DMG_Y - 30 ) );
@@ -338,8 +340,8 @@ namespace GAME
 		}
 		else if ( PLAYER_ID_2 == playerID )
 		{
-			m_strAction->SetPos ( VEC2 ( 640 + 390, 120 ) );
-			m_strState->SetPos ( VEC2 ( 640 + 390, 160 ) );
+			m_strAction->SetPos ( VEC2 ( 640 + 200, 120 ) );
+			m_strState->SetPos ( VEC2 ( 640 + 200, 160 ) );
 		}
 
 	}
@@ -362,6 +364,7 @@ namespace GAME
 		case CHARA_OUKA: break;
 		case CHARA_SAE: break;
 		case CHARA_RETSUDOU: break;
+		case CHARA_GABADARUGA: break;
 		default: charaName = CHARA_OUKA; break;
 		}
 		m_face->SetIndexTexture ( (uint32)charaName - 1 );
@@ -424,34 +427,22 @@ namespace GAME
 		m_gaugeAccel->Update ( btlPrm.GetAccel () );
 
 
-		//抗圧
-		if ( btlPrm.GetKouAtsu () )
+		//対抗
+		if ( btlPrm.GetTaikou () )
 		{
-			m_kouatsu->On ( btlPrm );
+			m_taikou->On ( btlPrm );
 		}
 	}
 
 	//ダメージ更新
 	void DispFrontEnd::UpdateDamage ( const BtlParam & btlPrm )
 	{
-		//ダメージ
+		//ダメージ(相手)
 		int32 chnDmg = btlPrm.GetChainDamage ();
 		m_strDmg->SetStr ( U"{} Damage"_fmt( chnDmg ) );
 
-		//ヒット数による補正表示
-		UINT chain = btlPrm.GetChainHitNum ();
-		if ( chain == 1 ) { chain = 0; }		//1hit目は補正なし
-		if ( chain > 100 ) { chain = 100; }		//上限100
-
-		float d_revise = ( 100.f - (float)chain ) * 0.01f;	//%に換算
-		if ( 10 <= chain ) { d_revise *= d_revise; }	//10hit以降補正
-		if ( d_revise < 0 ) { d_revise = 0.01f; }	//０にはしない
-
-
-		std::ostringstream oss;
-		oss << std::fixed << std::setprecision ( 3 ) << d_revise * 100;
-
-		m_strRevise->SetStr ( U"{}%"_fmt( s3d::Unicode::Widen ( oss.str() ) ) );
+		//補正
+		m_strRevise->SetStr ( U"{0:.2f}%"_fmt( btlPrm.GetCnfmRvs () * 100 ) );
 	}
 
 	void DispFrontEnd::UpdateMainImage ( VEC2 posChara )
@@ -484,8 +475,10 @@ namespace GAME
 
 
 	//ヒット数
-	void DispFrontEnd::UpdateHitNum ( UINT n )
+	void DispFrontEnd::UpdateHitNum ( const BtlParam & btlPrm )
 	{
+		int n = btlPrm.GetChainHitNum ();
+
 		if ( n < 0 || 100 <= n ) { return; }
 
 		int n1 = n % 10;	//1桁目
@@ -529,9 +522,14 @@ namespace GAME
 
 	//-------------------------------------------------------------------
 	//状態表示
-	void DispFrontEnd::UpdateActionName ( s3d::String actionName )
+	void DispFrontEnd::UpdateActionName ( s3d::String actionName, UINT frame )
 	{
-		m_strAction->SetStr ( actionName );
+		if ( PLAYER_ID_2 == m_playerID )
+		{
+			size_t ln = actionName.length ();
+			m_strAction->SetPos ( VEC2 ( 640 + 100 - 20.f * ln, 120 ) );
+		}
+		m_strAction->SetStr ( actionName + U"[{}]"_fmt( frame ) );
 	}
 
 	void DispFrontEnd::UpdateStateName ( s3d::String stateName )

@@ -38,6 +38,9 @@ namespace GAME
 		m_efSouha = std::make_shared < EfSouha > ();
 		AddpTask ( m_efSouha );
 		GRPLST_INSERT ( m_efSouha );
+
+		//アクタ
+		m_pActor = std::make_shared < ExeChara_Actor > ();
 	}
 
 	//デストラクタ
@@ -61,13 +64,13 @@ namespace GAME
 
 
 	//■	毎フレーム スクリプト前処理
-	void ExeChara::PreScriptMove () { m_actor.PreScriptMove (); }
+	void ExeChara::PreScriptMove () { m_pActor->PreScriptMove (); }
 
 	//■	両者の接触判定後に攻撃・相殺・当り判定枠を設定
-	void ExeChara::RectMove () { m_actor.RectMove (); }
+	void ExeChara::RectMove () { m_pActor->RectMove (); }
 
 	//■	毎フレーム スクリプト後処理
-	void ExeChara::PostScriptMove () { m_actor.PostScriptMove (); }
+	void ExeChara::PostScriptMove () { m_pActor->PostScriptMove (); }
 
 
 	//===========================================================
@@ -141,6 +144,11 @@ namespace GAME
 	}
 
 	//================================================
+	//バトルパラメータ入力処理
+//	void ExeChara::BtlPrm_Move_Input ()
+	//-> "ExeChara_Func.cpp"
+
+	//================================================
 	//エフェクト スクリプト処理 後
 	void ExeChara::PostMove_Effect ()
 	{
@@ -191,7 +199,7 @@ namespace GAME
 	void ExeChara::UpdateGraphic ()
 	{
 		m_dispChara->Update ( m_pAction, m_pScript, m_btlPrm, m_pCharaInput );
-		m_dispChara->UpdateStateName ( m_actor.GetStateName() );
+		m_dispChara->UpdateStateName ( m_pActor->GetStateName() );
 	}
 
 	//================================================
@@ -307,6 +315,11 @@ namespace GAME
 	//スクリプトからパラメータに反映する
 	void ExeChara::SetParamFromScript ()
 	{
+		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
+		{
+			DBGOUT_WND_F ( DBGOUT_8, U"y = {}"_fmt( m_btlPrm.GetPos().y ) );
+		}
+
 		//------------------------------------------------
 		//アクションとスクリプトをバトルパラメータに渡す
 		m_btlPrm.Update ( m_pAction, m_pScript );
@@ -316,6 +329,19 @@ namespace GAME
 		int drctDmg = m_pScript->m_prmBattle.DirectDamage;
 		if ( drctDmg != 0 )
 		{
+
+			if ( IsNameAction ( U"超必殺Bヒット" ) )
+			{
+				bool b = m_pOther.lock()->IsNameAction ( U"烈堂_超必Bやられ" );
+				if ( ! b )
+				{
+					drctDmg /= 10;
+				}
+			}
+
+#if 0
+#endif // 0
+
 			m_pOther.lock()->m_btlPrm.OnDamage ( - drctDmg );
 
 			//自分の連続ヒットダメージ数
@@ -366,6 +392,9 @@ namespace GAME
 			{
 				//全体グラフィックに値を指定する
 				m_pFtgGrp->StartScpStop ( scpStop );
+
+				//相手にも時間を指定する
+				m_pOther.lock ()->m_btlPrm.SetScpStop ( scpStop );
 
 				//互いに時間停止ステートにシフト
 				ShiftScpStop ();

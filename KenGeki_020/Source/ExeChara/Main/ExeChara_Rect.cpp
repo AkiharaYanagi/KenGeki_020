@@ -51,7 +51,7 @@ namespace GAME
 //		bool bHit = m_btlPrm.GetHitEst ();
 
 		//デバッグ表示あり
-#if 1
+#if 0
 		if ( m_btlPrm.GetPlayerID() == PLAYER_ID_1 )
 		{
 			DBGOUT_WND_F ( DBGOUT_4, U"bHit = {}"_fmt( bHit ? 1 : 0) );

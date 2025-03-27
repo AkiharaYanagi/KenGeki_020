@@ -74,7 +74,8 @@ namespace GAME
 		bool	m_damaged { F };		//くらいフラグ
 		bool	m_hitEst { F };			//攻撃成立フラグ
 		bool	m_FirstEf { F };		//初回Efフラグ
-		bool	m_FirstSE { F };		//初回SEフラグ
+		bool	m_FirstSE { F };		//初回SEフラグ (一時停止 : state)
+		bool	m_FirstSE_HS { F };		//初回SEフラグ (ヒットストップ)
 		bool	m_FirstVC { F };		//初回VCフラグ
 		bool	m_ForcedChange { F };	//強制変更
 		bool	m_clang { F };			//打合発生フラグ
@@ -92,6 +93,7 @@ namespace GAME
 		P_Timer		m_tmrLurch;			//のけぞりタイマ
 		P_Timer		m_tmrVib;			//個別振動タイマ
 		P_Timer		m_tmrOfstCncl;		//相殺キャンセルタイマ
+		P_Timer		m_tmrTaikou;		//剣撃対抗受付タイマ
 
 		UINT	m_blackOut { 0 };		//暗転
 		UINT	m_scpStop { 0 };		//スクリプトからの停止
@@ -116,7 +118,11 @@ namespace GAME
 		//Result用
 		int		m_nActTransit { 0 };	//アクション移行回数
 
-		bool	m_kouatsu { F };		//剣撃抗圧
+		bool	m_taikou { F };			//剣撃対抗
+
+		float	m_reviseThrow { 1.f };		//投げ後の連続技中補正
+		float	m_reviseOverDrive { 1.f };	//超必後の連続技中補正
+		float	m_confirmed_revise { 1.f };	//最終確定補正値
 
 	public:
 		BtlParam ();
@@ -151,6 +157,10 @@ namespace GAME
 
 		void PosInit ();
 
+		//バトルパラメータにおける毎フレームの入力による動作
+		void Move_Input ();
+
+
 		//--------------------------------------------------------------------
 		//各パラメータ
 		GET_SET ( PLAYER_ID, GetPlayerID, SetPlayerID, m_playerID )	//プレイヤID
@@ -181,6 +191,7 @@ namespace GAME
 		GET_SET ( bool, GetTrangit, SetTrangit, m_transit )		//スクリプト遷移
 		GET_SET ( bool, GetFirstEf, SetFirstEf, m_FirstEf )		//エフェクト発生初回
 		GET_SET ( bool, GetFirstSE, SetFirstSE, m_FirstSE )		//SE発生初回
+		GET_SET ( bool, GetFirstSE_HS, SetFirstSE_HS, m_FirstSE_HS )	//SE発生初回(ヒットストップ)
 		GET_SET ( bool, GetFirstVC, SetFirstVC, m_FirstVC )		//VC発生初回
 		GET_SET ( bool, GetWait, SetWait, m_wait )				//待機(入力を停止)
 		GET_SET ( bool, GetStop, SetStop, m_stop )				//停止(入力、スクリプト処理を停止)
@@ -206,7 +217,10 @@ namespace GAME
 
 		GET_SET ( _CLR, GetColor, SetColor, m_color )
 
-		GET_SET ( int, GetKouAtsu, SetKouAtsu, m_kouatsu )	//剣撃抗圧
+		GET_SET ( int, GetTaikou, SetTaikou, m_taikou )	//剣撃対抗
+		GET_SET ( float, GetReviseThrow, SetReviseThrow, m_reviseThrow )
+		GET_SET ( float, GetReviseOverDrive, SetReviseOverDrive, m_reviseOverDrive )
+		GET_SET ( float, GetCnfmRvs, SetCnfmRvs, m_confirmed_revise )
 
 		//--------------------------------------------------------------------
 		//タイマ
@@ -217,6 +231,7 @@ namespace GAME
 		P_Timer GetTmr_End () { return m_tmrEnd; }
 		P_Timer GetTmr_Lurch () { return m_tmrLurch; }
 		P_Timer GetTmr_OfstCncl () { return m_tmrOfstCncl; }
+		P_Timer GetTmr_Taikou () { return m_tmrTaikou; }
 
 		void AllTmr_Clear () { for ( P_Timer ptmr : m_timers ) { ptmr->Clear (); } }
 
@@ -238,6 +253,7 @@ namespace GAME
 		void DirZeroAccel ( int n );	//０方向に向かう
 		void AddNActTrs ( int n ) { m_nActTransit += n; }
 		void AddChainDamage ( int32 n ) { m_chainDamage += n; }
+		void IncChainHitNum ();
 
 		//----
 		//処理まとめ
@@ -245,6 +261,7 @@ namespace GAME
 		void HitPitchWaitStart ( UINT time );	//ヒット間隔再スタート
 		void CalcBalance ( P_Script pScp );
 		void OnDamage ( int damage );	//ダメージ時
+		void OnGuard ();	//ガード時
 
 		void OnOffset_AA ();	//相殺時 (自分：攻撃、相手：攻撃)
 		void OnOffset_AO ();	//相殺時 (自分：攻撃、相手：相殺)

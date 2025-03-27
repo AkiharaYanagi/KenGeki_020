@@ -104,13 +104,13 @@ namespace GAME
 		UpdateGauge ( btlPrm );
 
 		//ヒット数更新
-		UpdateChainHitNum ( btlPrm.GetChainHitNum () );
+		UpdateChainHitNum ( btlPrm );
 
 		//ダメージ更新
 		m_frontEnd->UpdateDamage ( btlPrm );
 
 		//アクション名更新
-		m_frontEnd->UpdateActionName ( pAct->GetName ().c_str () );
+		m_frontEnd->UpdateActionName ( pAct->GetName ().c_str (), pScp->GetFrame() );
 	}
 
 
@@ -141,15 +141,15 @@ namespace GAME
 
 
 	//ゲージ類更新
-	void DispChara::UpdateGauge ( BtlParam btlPrm )
+	void DispChara::UpdateGauge ( const BtlParam & btlPrm )
 	{
 		m_frontEnd->UpdateGauge ( btlPrm );
 	}
 
 	//ヒット数更新
-	void DispChara::UpdateChainHitNum ( UINT n )
+	void DispChara::UpdateChainHitNum ( const BtlParam & btlPrm )
 	{
-		m_frontEnd->UpdateHitNum ( n );
+		m_frontEnd->UpdateHitNum ( btlPrm );
 	}
 
 	//終了時

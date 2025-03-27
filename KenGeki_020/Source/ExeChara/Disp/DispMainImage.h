@@ -49,6 +49,9 @@ namespace GAME
 		//影化
 		void TurnShadow ( bool b );
 
+		//メインイメージを同一Z値で先頭にする
+		void TopByZ ();
+
 	};
 
 	using P_DispMainImage = std::shared_ptr < DispMainImage >;

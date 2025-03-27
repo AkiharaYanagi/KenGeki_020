@@ -40,7 +40,7 @@ namespace GAME
 		P_Grp			m_chara_stand;			//キャラ立絵
 		bool			m_decided { F };		//決定
 		P_Grp			m_chara_stand_light;	//キャラ立絵(明度)
-		P_Grp			m_chara_stand_shade;	//キャラ立絵(影)
+//		P_Grp			m_chara_stand_shade;	//キャラ立絵(影)
 		P_Grp			m_chara_name;			//キャラ名前
 		P_GrpBlink		m_cursor;				//カーソル
 		float			m_x { 0 };				//カットイン位置

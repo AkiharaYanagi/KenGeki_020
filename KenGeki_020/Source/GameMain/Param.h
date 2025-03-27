@@ -38,8 +38,16 @@ namespace GAME
 		P_Chara			m_pChara_Ouka { nullptr };
 		P_Chara			m_pChara_Sae { nullptr };
 		P_Chara			m_pChara_Retsudou { nullptr };
-		P_Chara			m_pChara_Retsudou_2 { nullptr };
+		P_Chara			m_pChara_Gabadaruga { nullptr };
 		bool			m_read_chara { F };
+
+		//キャラカラー
+		PAP_Tx			m_pCH_CLR_Ouka_1 { nullptr };
+		PAP_Tx			m_pCH_CLR_Ouka_2 { nullptr };
+		PAP_Tx			m_pCH_CLR_Sae_1 { nullptr };
+		PAP_Tx			m_pCH_CLR_Sae_2 { nullptr };
+		PAP_Tx			m_pCH_CLR_Retsu_1 { nullptr };
+		PAP_Tx			m_pCH_CLR_Retsu_2 { nullptr };
 
 		//リザルト用
 		PLAYER_ID		m_winner { PLAYER_ID_1 };		//勝者
@@ -94,11 +102,14 @@ namespace GAME
 		}
 		void SetRandomChara ();
 
-		GET_SET ( STAGE_NAME, GetStageName, SetStageName, m_stage_name	)		//bgm
+//		GET_SET ( STAGE_NAME, GetStageName, SetStageName, m_stage_name	)		//bgm
 
 		//設定ファイルにも記録
 		BGM_ID Get_BGM_ID () const { return m_setting.GetBGM_ID (); }
 		void Set_BGM_ID ( BGM_ID id ) { m_setting.SetBGM_ID ( id ); }
+
+		STAGE_NAME GetStage_Name () const { return m_setting.GetStage_Name (); }
+		void SetStage_Name ( STAGE_NAME stage ) { m_setting.SetStage_Name ( stage ); }
 
 		bool GetDemo () const { return m_setting.GetDemo (); }
 		void SetDemo ( bool b ) { m_setting.SetDemo ( b ); }
@@ -109,9 +120,27 @@ namespace GAME
 		P_Chara GetpChara_Ouka ();
 		P_Chara GetpChara_Sae ();
 		P_Chara GetpChara_Retsudou ();
-		P_Chara GetpChara_Retsudou2 ();
+		P_Chara GetpChara_Gabadaruga ();
 		bool IsReadChara () const { return m_read_chara; }
 
+		//プレイヤ指定
+		P_Chara GetpChara_Ouka ( PLAYER_ID player );
+		P_Chara GetpChara_Sae ( PLAYER_ID player );
+		P_Chara GetpChara_Retsudou ( PLAYER_ID player );
+		P_Chara GetpChara_Gabadaruga ( PLAYER_ID player );
+
+		//キャラカラー
+		void SetCharaColor1p ( CHARA_COLOR clr ) { m_setting.SetCharaColor1p ( clr ); }
+		void SetCharaColor2p ( CHARA_COLOR clr ) { m_setting.SetCharaColor2p ( clr ); }
+
+		//プレイヤ側でカラー番号を取得
+		CHARA_COLOR GetClr ( PLAYER_ID id ) const;
+		//キャラとプレイヤ側でカラー番号別テクスチャ配列の参照
+		PAP_Tx & GetPAP_Tx ( CHARA_NAME name, PLAYER_ID id );
+		//キャラ名とプレイヤ側とカラー番号で読込ファイル名を取得
+		LPCUSTR GetImgFileName ( CHARA_NAME name, PLAYER_ID id ) const;
+		//ファイル名とキャラポインタで、指定カラー番号のテクスチャ配列を設置
+		void SetImgClr ( P_Chara r_pch, CHARA_NAME name, PLAYER_ID id );
 
 		//リザルト用
 		void ResetBattleParam ();

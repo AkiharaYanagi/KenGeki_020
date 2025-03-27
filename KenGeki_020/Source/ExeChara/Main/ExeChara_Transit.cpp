@@ -45,14 +45,24 @@ namespace GAME
 		// 特殊条件による分岐
 		TranditAction_Special ();
 
+
+		//-----------------------------------------------------
+		//現在スクリプトが現在アクションにおける最終フレーム ならば
+		if ( m_pAction->IsOverScript ( m_frame ) )
+		{
+			EndAction ();	//アクション終了処理
+			//次アクション m_frame = 0に遷移
+		}
+
 		//-----------------------------------------------------
 		// スクリプト通常処理
 		ExeScript ();
 
 
+		//通常処理：スクリプトを１つ進める
+		++ m_frame;
 
 
-		//-----------------------------------------------------
 		//スロウのとき
 #if 0
 
@@ -81,36 +91,9 @@ namespace GAME
 		}
 
 #endif // 0
-	}
 
-
-	void ExeChara::EndScript ()
-	{
-		if ( Is1P () )
-		{
-			DBGOUT_WND_F ( DBGOUT_8, U"PreScriptMove: m_frame = {}"_fmt( m_frame ) );
-		}
-
-		//-----------------------------------------------------
-		//通常処理：スクリプトを１つ進める
-		++ m_frame;
-
-		//-----------------------------------------------------
-		//次スクリプトがオーバー
-		// -> 現在アクションにおける最終フレーム ならば
-		if ( m_pAction->IsOverScript ( m_frame ) )
-		{
-			EndAction ();	//アクション終了処理
-			//次アクション m_frame = 0に遷移
-		}
-
-		if ( Is1P () )
-		{
-			DBGOUT_WND_F ( DBGOUT_9, U"PreScriptMove: m_frame = {}"_fmt( m_frame ) );
-		}
 
 	}
-
 
 	//アクション移項（コマンドに関する処理）
 	bool ExeChara::TranditAction_Command ()
@@ -143,25 +126,31 @@ namespace GAME
 		//相殺キャンセルチェック
 		if ( m_btlPrm.GetTmr_OfstCncl()->IsActive () )
 		{
-			//コマンドが完成したIDを優先順に保存したリスト
-
-			m_pCharaInput->MakeTransitIDList ( *m_pChara, m_vOfstCncl, m_btlPrm.GetDirRight () );
-			const V_UINT & vCompID_Offset = m_pCharaInput->GetvCompID ();
-
-			for ( UINT id : vCompID_Offset )
+			//空中は現在不可
+			if ( ! IsAir () )
 			{
-				//遷移先チェック
-				P_Action pAct = m_pChara->GetpAction ( id );
 
-				//特殊アクション 除外 指定　：　不可能なら次をチェック
-				if ( ! TranditAction_Exclusion ( pAct ) )
+				//コマンドが完成したIDを優先順に保存したリスト
+
+				m_pCharaInput->MakeTransitIDList ( *m_pChara, m_vOfstCncl, m_btlPrm.GetDirRight () );
+				const V_UINT & vCompID_Offset = m_pCharaInput->GetvCompID ();
+
+				for ( UINT id : vCompID_Offset )
 				{
-					continue;
+					//遷移先チェック
+					P_Action pAct = m_pChara->GetpAction ( id );
+
+					//特殊アクション 除外 指定　：　不可能なら次をチェック
+					if ( ! TranditAction_Exclusion ( pAct ) )
+					{
+						continue;
+					}
+
+					//可能なら遷移先に指定して終了
+					transitID = id;
+					break;
 				}
 
-				//可能なら遷移先に指定して終了
-				transitID = id;
-				break;
 			}
 		}
 
@@ -187,7 +176,7 @@ namespace GAME
 
 			//次フレームのスクリプトを１つ進める
 			//今回フレームは取得済みのm_pScriptを用いる
-//			++ m_frame;
+			++ m_frame;
 
 			//終了
 			return T;
@@ -232,8 +221,8 @@ namespace GAME
 	void  ExeChara::TransitAction_Condition_I ( BRANCH_CONDITION CONDITION, bool forced )
 	{
 		(void)forced;
-#if 0
-		//条件を満たしたときに自身を変更する
+
+		//ヒット・相手
 		UINT indexAction = Check_TransitAction_Condition ( CONDITION );
 		if ( NO_COMPLETE != indexAction )
 		{
@@ -241,37 +230,26 @@ namespace GAME
 			P_Action pAct = m_pChara->GetpAction ( indexAction );
 			P_Script pScr = pAct->GetpScript ( 0 );
 
+
+			s3d::String nameAction = Check_TransitAction_Condition_str ( CONDITION );
+
+			//=================================================================
+			//自身の変更先アクション名を保存
+			m_nameChangeMine = nameAction;
+
 			//自身を変更
-			SetAction ( indexAction );	//遷移
-			m_btlPrm.SetForcedChange ( forced );	//強制
+//			SetAction ( indexAction );	//遷移
+//			m_btlPrm.SetForcedChange ( forced );	//強制
 		}
-#endif // 0
-
-		//アクション名を取得
-		s3d::String nameAction = Check_TransitAction_Condition_str ( CONDITION );
-
-		//=================================================================
-		//遷移先チェック
-
-		//該当無しは"ノーリアクション"にして変更なし
-		UINT index = m_pChara->GetActionID ( nameAction );
-		if ( NO_ACTION == index )
-		{
-			nameAction = U"ノーリアクション";
-		}
-
-		//=================================================================
-		//自身の変更先アクション名を保存
-		m_nameChangeMine = nameAction;
 	}
-
 
 	//アクション移行 ( 自分攻撃、相手ヒット )
 	void  ExeChara::TransitAction_Condition_E ( BRANCH_CONDITION CONDITION, bool forced )
 	{
-		if ( forced ) { int i = 0; ++ i; }
+		(void)forced;
 
 #if 0
+		if ( forced ) { int i = 0; ++ i; }
 		UINT indexAction = Check_TransitAction_Condition ( CONDITION );
 
 		//該当無しは何もしない
@@ -346,15 +324,42 @@ namespace GAME
 #endif // 0
 	}
 
-	//----------------------------------------------
-	//判定後、自身の強制変更
+
+	void ExeChara::ChangeOhter ()
+	{
+		//ノーリアクション
+		if ( 0 == m_nameChangeOther.compare ( U"ノーリアクション" ) )
+		{
+			//変更せず続行
+			return;
+		}
+
+
+		//移行先名前チェック
+		if ( ! m_pOther.lock ()->ExistActionName ( m_nameChangeOther ) )
+		{
+			TRACE_F ( _T("ChangeOther(): Error : name = %s\n"), m_nameChangeOther.toWstr().c_str () );
+			//対象なしのときアサート
+			//assert ( m_nameChangeOther );
+			return;
+		}
+
+		//相手を変更
+		m_pOther.lock ()->m_btlPrm.SetForcedChange ( T );	//強制
+		m_pOther.lock ()->SetAction ( m_nameChangeOther );	//遷移
+		m_nameChangeOther = U"ノーリアクション";
+
+		m_pOther.lock()->m_btlPrm.SetFirstSE_HS ( F );
+	}
+
 	void ExeChara::ChangeMine ()
 	{
 		if ( ! ExistActionName ( m_nameChangeMine ) )
 		{
 			TRACE_F ( _T("ChangeOther(): Error : name = %s\n"), m_nameChangeMine.toWstr().c_str () );
 			//対象なしのときアサート
-			//assert ( m_nameChangeOther );
+			//assert ( m_nameChangeMine );
+			return;
 		}
 
 		//ノーリアクション
@@ -364,34 +369,11 @@ namespace GAME
 			return;
 		}
 
-		//相手を変更
+		//自身を変更
 		m_btlPrm.SetForcedChange ( T );	//強制
 		SetAction ( m_nameChangeMine );	//遷移
+		m_nameChangeMine = U"ノーリアクション";
 	}
-
-
-	//判定後、相手の強制変更
-	void ExeChara::ChangeOhter ()
-	{
-		if ( ! m_pOther.lock ()->ExistActionName ( m_nameChangeOther ) )
-		{
-			TRACE_F ( _T("ChangeOther(): Error : name = %s\n"), m_nameChangeOther.toWstr().c_str () );
-			//対象なしのときアサート
-			//assert ( m_nameChangeOther );
-		}
-
-		//ノーリアクション
-		if ( 0 == m_nameChangeOther.compare ( U"ノーリアクション" ) )
-		{
-			//変更せず続行
-			return;
-		}
-
-		//相手を変更
-		m_pOther.lock ()->m_btlPrm.SetForcedChange ( T );	//強制
-		m_pOther.lock ()->SetAction ( m_nameChangeOther );	//遷移
-	}
-	//----------------------------------------------
 
 
 	//アクション移行(条件チェック)
@@ -448,18 +430,39 @@ namespace GAME
 	// 特殊条件による分岐
 	void ExeChara::TranditAction_Special ()
 	{
+#if 0
+		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_2 )
+		{
+			float edge_L = G_FTG()->GetEdgeLeft () + (float)FIELD_EDGE + 50;
+			float edge_R = -50 - (float)FIELD_EDGE + G_FTG()->GetEdgeRight ();
+			float x = m_btlPrm.GetPos().x;
+			DBGOUT_WND_F ( DBGOUT_0, U"edge_R = {}, 2p_x = {}, edge_R = {}"_fmt( edge_L, x, edge_R ) );
+			float base_x = G_FTG()->GetPosMutualBase().x;
+			DBGOUT_WND_F ( DBGOUT_1, U"base_x = {}"_fmt( base_x ) );
+		}
+#endif // 0
+
 		//条件：壁到達のブランチをチェック
 		s3d::String ActionName = Check_TransitAction_Condition_str ( BRC_WALL );
 		if ( ActionName.compare ( U"" ) != 0 )
 		{
+#if 0
 			//壁位置
 			float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
 			float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
 
-
 			//壁位置に達していたら
 			bool b_R = wall_R <= m_btlPrm.GetPos().x;
 			bool b_L = m_btlPrm.GetPos().x <= wall_L;
+#endif // 0
+			//画面端位置
+			float edge_L = G_FTG()->GetEdgeLeft () + (float)FIELD_EDGE + 50;
+			float edge_R = -50 - (float)FIELD_EDGE + G_FTG()->GetEdgeRight ();
+
+
+			//壁位置に達していたら
+			bool b_L = m_btlPrm.GetPos().x <= edge_L;
+			bool b_R = edge_R <= m_btlPrm.GetPos().x;
 
 			if ( b_L || b_R )
 			{
@@ -473,8 +476,8 @@ namespace GAME
 					m_pOther.lock()->SetAction ( U"ホーミング" );
 
 					//ステートの変更
-					m_actor.ShiftWallBreak ();
-					m_pOther.lock()->m_actor.ShiftWallBreak ();
+					m_pActor->ShiftWallBreak ();
+					m_pOther.lock()->m_pActor->ShiftWallBreak ();
 
 					//グラフィックからFTG全体に反映
 					m_pFtgGrp->SetWallBreak ( T );

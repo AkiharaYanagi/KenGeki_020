@@ -30,7 +30,11 @@ namespace GAME
 		CHARA_NAME		m_name1p { CHARA_TEST };		//選択キャラ
 		CHARA_NAME		m_name2p { CHARA_TEST };
 
+		CHARA_COLOR		m_color1p { CH_CLR_1 };
+		CHARA_COLOR		m_color2p { CH_CLR_2 };
+
 		BGM_ID			m_bgm_id { BGM_ID_GABA };			//BGM_ID
+		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };	//STAGE_NAME
 
 
 	public:
@@ -79,11 +83,20 @@ namespace GAME
 		void SetCharaName1p ( CHARA_NAME name ) { m_name1p = name; }
 		void SetCharaName2p ( CHARA_NAME name ) { m_name2p = name; }
 
+		//キャラカラー
+		CHARA_COLOR GetColor1p() const { return m_color1p; }
+		void SetCharaColor1p ( CHARA_COLOR clr ) { m_color1p = clr; }
+		CHARA_COLOR GetColor2p() const { return m_color2p; }
+		void SetCharaColor2p ( CHARA_COLOR clr ) { m_color2p = clr; }
+
 		//デモ (設定ファイルにも記録)
 		GET_SET ( bool, GetDemo, SetDemo, m_demo )
 		 
 		//BGM
 		GET_SET ( BGM_ID, GetBGM_ID, SetBGM_ID, m_bgm_id )
+		 
+		//Stage
+		GET_SET ( STAGE_NAME, GetStage_Name, SetStage_Name, m_stage_name )
 		 
 		//-----------------------------------------
 

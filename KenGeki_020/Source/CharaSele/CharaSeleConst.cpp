@@ -75,6 +75,7 @@ namespace GAME
 	//---------------------------------------------------------
 	//枠位置定数
 	//	キャラID, 名前, セレクト位置x, セレクト位置y, 上移動先, 下移動先, 左移動先, 右移動先
+
 	const ChSlct CharaSele_Player::m_pos [ CHARA_SELE_NUM ] = 
 	{
 { CHSLID_00, CHARA_OUKA,		FACE_X_0, FACE_Y_0, CHSLID_03, CHSLID_03, CHSLID_02, CHSLID_02 }, 
@@ -90,6 +91,7 @@ namespace GAME
 { CHSLID_10, CHARA_TEST,		FACE_X_1, FACE_Y_3, CHSLID_07, CHSLID_01, CHSLID_09, CHSLID_11 }, 
 { CHSLID_11, CHARA_TEST,		FACE_X_2, FACE_Y_3, CHSLID_08, CHSLID_02, CHSLID_10, CHSLID_09 }, 
 	};
+
 
 
 }	//namespace GAME

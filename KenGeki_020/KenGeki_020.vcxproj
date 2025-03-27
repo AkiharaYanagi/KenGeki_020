@@ -406,7 +406,10 @@
   <ItemGroup>
     <ClInclude Include="Source\CharaSele\CharaSele.h" />
     <ClInclude Include="Source\CharaSele\CharaSeleConst.h" />
+    <ClInclude Include="Source\CharaSele\CharaSele_Image.h" />
     <ClInclude Include="Source\CharaSele\CharaSele_Player.h" />
+    <ClInclude Include="Source\CharaSele\_CharaSele.h" />
+    <ClInclude Include="Source\CharaSele\_CharaSele_Player.h" />
     <ClInclude Include="Source\ExeChara\BtlParam.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispAccel.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h" />
@@ -430,10 +433,14 @@
     <ClInclude Include="Source\ExeChara\Rect\CharaRect.h" />
     <ClInclude Include="Source\ExeChara\TimerSlow.h" />
     <ClInclude Include="Source\FtgMain\Ef\EfClang.h" />
+    <ClInclude Include="Source\FtgMain\Ef\EfHitLine.h" />
     <ClInclude Include="Source\FtgMain\Ef\EfKouAtsu.h" />
     <ClInclude Include="Source\FtgMain\Ef\EfSouha.h" />
     <ClInclude Include="Source\FtgMain\Fighting\BattleTime.h" />
     <ClInclude Include="Source\FtgMain\Fighting\BG.h" />
+    <ClInclude Include="Source\FtgMain\Fighting\BG\BG_Base.h" />
+    <ClInclude Include="Source\FtgMain\Fighting\BG\BG_Yuuhi_no_hara.h" />
+    <ClInclude Include="Source\FtgMain\Fighting\BG\_BG.h" />
     <ClInclude Include="Source\FtgMain\Fighting\Fighting.h" />
     <ClInclude Include="Source\FtgMain\Fighting\FtgDemo_Actor.h" />
     <ClInclude Include="Source\FtgMain\Fighting\FtgDemo_State.h" />
@@ -469,7 +476,10 @@
   <ItemGroup>
     <ClCompile Include="Source\CharaSele\CharaSele.cpp" />
     <ClCompile Include="Source\CharaSele\CharaSeleConst.cpp" />
+    <ClCompile Include="Source\CharaSele\CharaSele_Image.cpp" />
     <ClCompile Include="Source\CharaSele\CharaSele_Player.cpp" />
+    <ClCompile Include="Source\CharaSele\_CharaSele.cpp" />
+    <ClCompile Include="Source\CharaSele\_CharaSele_Player.cpp" />
     <ClCompile Include="Source\ExeChara\BtlParam.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispAccel.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />
@@ -490,6 +500,7 @@
     <ClCompile Include="Source\ExeChara\Main\ExCh_State.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Event.cpp" />
+    <ClCompile Include="Source\ExeChara\Main\ExeChara_Func.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Load.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Rect.cpp" />
     <ClCompile Include="Source\ExeChara\Main\ExeChara_Sound.cpp" />
@@ -499,10 +510,14 @@
     <ClCompile Include="Source\ExeChara\Rect\CharaRect.cpp" />
     <ClCompile Include="Source\ExeChara\TimerSlow.cpp" />
     <ClCompile Include="Source\FtgMain\Ef\EfClang.cpp" />
+    <ClCompile Include="Source\FtgMain\Ef\EfHitLine.cpp" />
     <ClCompile Include="Source\FtgMain\Ef\EfKouAtsu.cpp" />
     <ClCompile Include="Source\FtgMain\Ef\EfSouha.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\BattleTime.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\BG.cpp" />
+    <ClCompile Include="Source\FtgMain\Fighting\BG\BG_Base.cpp" />
+    <ClCompile Include="Source\FtgMain\Fighting\BG\BG_Yuuhi_no_hara.cpp" />
+    <ClCompile Include="Source\FtgMain\Fighting\BG\_BG.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\Fighting.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\FtgDemo_Actor.cpp" />
     <ClCompile Include="Source\FtgMain\Fighting\FtgDemo_State.cpp" />

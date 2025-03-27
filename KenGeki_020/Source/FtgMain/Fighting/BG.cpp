@@ -17,11 +17,14 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
-	const float BG::BG_SIZE_W = 2048;
-	const float BG::BG_SIZE_H = 1024;
-	const float BG::BG_POS_X = 0 - ( 2048 - 1280 ) / 2;
+//	const float BG::BG_SIZE_W = 2048;
+	const float BG::BG_SIZE_W = 1920;
+//	const float BG::BG_SIZE_H = 1024;
+	const float BG::BG_SIZE_H = 960;
+	const float BG::BG_POS_X = 0 - ( BG_SIZE_W - 1280 ) / 2;
 //	const float BG::BG_POS_Y = 0 - ( 1024 - 960 );
-	const float BG::BG_POS_Y = 0 - ( 1080 - 960 );
+//	const float BG::BG_POS_Y = 0 - ( 1080 - 960 );
+	const float BG::BG_POS_Y = 0 - ( 960 - BG_SIZE_H );
 
 	BG::BG ()
 	{
@@ -36,7 +39,7 @@ namespace GAME
 		//------------------------------------------------
 		//背景 左
 		m_bg_L = std::make_shared < GameGraphic > ();
-		m_bg_L->SetPos ( -2048, BG_POS_Y );
+		m_bg_L->SetPos ( -BG_SIZE_W, BG_POS_Y );
 		m_bg_L->SetZ ( Z_BG );
 		AddpTask ( m_bg_L );
 		GRPLST_INSERT ( m_bg_L );
@@ -44,7 +47,7 @@ namespace GAME
 		//------------------------------------------------
 		//背景 右
 		m_bg_R = std::make_shared < GameGraphic > ();
-		m_bg_R->SetPos ( 2048, BG_POS_Y );
+		m_bg_R->SetPos ( BG_SIZE_W, BG_POS_Y );
 		m_bg_R->SetZ ( Z_BG );
 		AddpTask ( m_bg_R );
 		GRPLST_INSERT ( m_bg_R );
@@ -167,27 +170,34 @@ namespace GAME
 
 	void BG::ParamInit ( P_Param pParam )
 	{
-		m_stage_name = pParam->GetStageName ();
+		m_stage_name = pParam->GetStage_Name ();
 
 		switch ( m_stage_name )
 		{
 		case STAGE_ASAHINO_HARA:
 			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_noon_C.png" );
-			m_bg_L->AddTexture_FromArchive ( U"BG\\BG_noon_L.png" );
-			m_bg_R->AddTexture_FromArchive ( U"BG\\BG_noon_R.png" );
+			m_bg_L->AddTexture_FromArchive ( U"16_16_Padding.png" );
+			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
 		break;
 
 		case STAGE_YUUHINO_HARA:
 			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_evening_C.png" );
-			m_bg_L->AddTexture_FromArchive ( U"BG\\BG_evening_L.png" );
-			m_bg_R->AddTexture_FromArchive ( U"BG\\BG_evening_R.png" );
+			m_bg_L->AddTexture_FromArchive ( U"16_16_Padding.png" );
+			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
 		break;
 
 		case STAGE_YORUNO_HARA :
 			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_night_C.png" );
-			m_bg_L->AddTexture_FromArchive ( U"BG\\BG_night_L.png" );
-			m_bg_R->AddTexture_FromArchive ( U"BG\\BG_night_R.png" );
+			m_bg_L->AddTexture_FromArchive ( U"16_16_Padding.png" );
+			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
 		break;
+
+		case STAGE_SCHOOL_NOON:
+			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_Taishou_morning.png" );
+			m_bg_L->AddTexture_FromArchive ( U"16_16_Padding.png" );
+			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
+		break;
+
 		}
 	}
 
@@ -209,8 +219,11 @@ namespace GAME
 
 	void BG::Move ()
 	{
+#if 0
 		m_front->SetDispBase ( G_BASE_POS () );
 		m_front->NextIndexTexture ();
+#endif // 0
+
 
 #if 0
 		//--------------------------
@@ -441,6 +454,8 @@ namespace GAME
 
 	void BG::LoadFrontOb ()
 	{
+#if 0
+
 		//------------------------------------------------
 		m_front = std::make_shared < GrpEf > ();
 		m_front->AddTexture_FromArchive ( U"front_loop\\Front_Ob_00.png" );
@@ -492,6 +507,8 @@ namespace GAME
 		m_front->On ();
 		AddpTask ( m_front );
 		GRPLST_INSERT ( m_front );
+
+#endif // 0
 	}
 
 

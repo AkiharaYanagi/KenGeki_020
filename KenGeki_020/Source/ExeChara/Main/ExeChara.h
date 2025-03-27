@@ -82,7 +82,8 @@ namespace GAME
 
 		//------------------------------------------------
 		//ゲーム進行状態(アクタ, ステートを保持する)
-		ExeChara_Actor	m_actor;
+		//ExeChara_Actor	m_actor;
+		P_ExeChara_Actor	m_pActor;	//shared_from_this()のためにポインタでオブジェクトを保持	
 
 		//------------------------------------------------
 		//スクリプト実行
@@ -167,12 +168,12 @@ namespace GAME
 		void PreMove_Effect ();		//スクリプト処理 前 エフェクト動作
 
 		//PostScriptMove
+		void BtlPrm_Move_Input ();	//バトルパラメータ入力処理
 		void PostMove_Effect ();	//スクリプト処理 後 エフェクト動作
 		void MoveTimer ();			//タイマ稼働
 		void CheckLife ();			//ライフ判定
 		void UpdateGraphic ();		//グラフィック更新
 		void SoundPlay ();			//音の再生(SE, VC)
-		void EndScript ();			//スクリプト終了、次へ移行
 		//===========================================================
 
 		void SE_Play ();			//SE再生
@@ -283,20 +284,21 @@ namespace GAME
 		//----------------------
 
 		//デモ用ステート指定
-		void StartGreeting () { m_actor.StartGreeting (); }
-		void StartGetReady () { m_actor.StartGetReady (); }
-		void StartFighting () { m_actor.StartFighting (); }
-		void StartTimeUp   () { m_actor.StartTimeUp (); }
-		void StartEndWait  () { m_actor.StartEndWait (); }
-		void StartDown		() { m_actor.StartDown (); }
+		void StartGreeting () { m_pActor->StartGreeting (); }
+		void StartGetReady () { m_pActor->StartGetReady (); }
+		void StartFighting () { m_pActor->StartFighting (); }
+		void StartTimeUp   () { m_pActor->StartTimeUp (); }
+		void StartEndWait  () { m_pActor->StartEndWait (); }
+		void StartDown		() { m_pActor->StartDown (); }
 		bool IsDown_Calm () { return IsNameAction ( U"敗北ダウン" ); }
-		void StartWinner	() { m_actor.StartWinner (); }
+		void StartWinner	() { m_pActor->StartWinner (); }
 
-		void ShiftFightingMain () { m_actor.ShiftFightingMain (); }
-		void ShiftScpStop () { m_actor.ShiftScpStop (); }
-		void RestoreScpStop ();	//一時停止からの復旧
+		void ShiftFightingMain () { m_pActor->ShiftFightingMain (); }
+		void ShiftFightingMain_PreScriptMove () { m_pActor->ShiftFightingMain_PreScriptMove (); }
+		void ShiftScpStop () { m_pActor->ShiftScpStop (); }
+		void RestoreScpStop () { m_pActor->ShiftScpStop (); }
 
-		bool SkipDecision () const { return m_actor.SkipDecision (); }
+		bool SkipDecision () const { return m_pActor->SkipDecision (); }
 		void ClearInput () { m_pCharaInput->ClearInput (); }
 		void SetLose () { m_btlPrm.SetLose (); }
 
@@ -512,6 +514,10 @@ namespace GAME
 	public:
 		//終了のための待機状態かどうか
 		bool IsWait () { return IsStand (); }
+
+		
+		//メインイメージを同一Z値で先頭にする
+		void TopByZ () { m_dispChara->TopByZ (); }
 
 
 	};

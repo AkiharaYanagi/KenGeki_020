@@ -208,6 +208,13 @@ namespace GAME
 	//エフェクトリストに新規追加
 	void OperateEffect::AddListEffect ( P_Effect pEffect, P_EfGnrt pEfGnrt, VEC2 ptChara, bool dirRight )
 	{
+		//名前チェック
+		if ( ! m_pChara->ExistEffect ( pEffect->GetName () ) )
+		{
+			return;
+		}
+
+		//生成
 		P_ExEf pExeEffect = std::make_shared < ExeEffect > ( pEffect, m_pChara, pEfGnrt, ptChara, dirRight );
 		m_plpExeEffect->push_back ( pExeEffect );
 		AddpTask ( pExeEffect );	//タスクリスト
@@ -217,6 +224,30 @@ namespace GAME
 		//	Ef個別指定
 		//----------------------------------
 		if ( pEffect->GetName () == U"空中竜巻_鞘" )
+		{
+			pExeEffect->SetShader ( F );
+		}
+		if ( pEffect->GetName () == U"HitLine0" )
+		{
+//			pExeEffect->SetShader ( F );
+		}
+		if ( pEffect->GetName () == U"HitLine1" )
+		{
+//			pExeEffect->SetShader ( F );
+		}
+		if ( pEffect->GetName () == U"HitSmoke" )
+		{
+			pExeEffect->SetShader ( F );
+		}
+		if ( pEffect->GetName () == U"HitSmoke1" )
+		{
+			pExeEffect->SetShader ( F );
+		}
+		if ( pEffect->GetName () == U"DustCloud" )
+		{
+			pExeEffect->SetShader ( F );
+		}
+		if ( pEffect->GetName () == U"Guard" )
 		{
 			pExeEffect->SetShader ( F );
 		}

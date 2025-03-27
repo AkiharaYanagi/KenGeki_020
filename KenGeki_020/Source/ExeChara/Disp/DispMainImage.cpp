@@ -108,9 +108,17 @@ namespace GAME
 	}
 
 
+	//影化
 	void DispMainImage::TurnShadow ( bool b )
 	{
 		m_mainGraphic->SetColor ( b ? 0xff000000 : 0xffffffff );
+	}
+
+
+	//メイングラフィックを同一Z値で先頭にする
+	void DispMainImage::TopByZ ()
+	{
+		GrpLst::Inst()->TopByZ ( m_mainGraphic );
 	}
 
 

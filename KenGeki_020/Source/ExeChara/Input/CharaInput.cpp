@@ -346,8 +346,8 @@ namespace GAME
 		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_3 ) ) { return T; }
 		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_4 ) ) { return T; }
 		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_5 ) ) { return T; }
-		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_6 ) ) { return T; }
-		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_7 ) ) { return T; }
+//		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_6 ) ) { return T; }
+//		if ( m_vGameKey [ 0 ].PushBtn ( GameKey::BTN_7 ) ) { return T; }
 
 		return F;
 	}

@@ -1,3 +1,7 @@
+*.atls
+*.img
+*.bin
+*.png
 *.exe
 *.lib
 *.idb
@@ -367,14 +371,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-KenGeki_Setup/剣撃クロスゾーン_セットアップ.msi
+*.msi
+*.nsi
 *.zip
-/KenGeki_020/App/old
+KenGeki_Setup/old/*
 KenGeki_020/App/chara_Retsudou_.txt
 /KenGeki_020/App/Image1
-KenGeki_Setup/KenGekiCrossZone_Setup.msi
-KenGeki_Setup/KenGekiCrossZone_Setup/KenGekiCrossZone_Setup.msi
-KenGeki_Setup/old/KenGekiCrossZone_Setup/KenGekiCrossZone_Setup.msi
-KenGeki_Setup/old/KenGekiCrossZone_Setup.msi
-KenGeki_020/App/Patch/Install.nsi
-KenGeki_020/App/Patch/Install.nsi
+/KenGeki_020/App/old
+/KenGeki_020/App/Screenshot
+*.lz4
+KenGeki_020/App/chara_Sae_bhv..lz4
+*.lzh
+*.lzh

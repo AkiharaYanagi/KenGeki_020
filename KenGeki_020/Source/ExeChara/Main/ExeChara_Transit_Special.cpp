@@ -36,6 +36,32 @@ namespace GAME
 			{ return F; }
 		}
 
+		//空中ダッシュ高度制限
+		if ( AirDash )
+		{
+			//左上原点(0,0), 地上高さ == GROUND_Y, 上方向にマイナス
+
+			float height = 200;
+
+			//キャラ別
+			switch ( m_name )
+			{
+			case CHARA_OUKA:		height = 160; break;
+			case CHARA_SAE:			height = 80; break;
+			case CHARA_RETSUDOU:	height = 240; break;
+			case CHARA_GABADARUGA:	height = 320; break;
+			default: break;
+			}
+
+			//現在値と比較して低かったらFALSE
+			float pos_y = m_btlPrm.GetPos().y;
+			if ( pos_y > - height + (float)GROUND_Y )
+			{
+				return F;
+			}
+		}
+
+
 		//------------------------------------------
 		//対象IDがバランス消費で移項不可能なら次へ
 		int Nextbalance = pNextAct->GetBalance ();
