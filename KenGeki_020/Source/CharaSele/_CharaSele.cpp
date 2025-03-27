@@ -111,6 +111,24 @@ namespace GAME
 		AddpTask ( m_txt_CharacterSelect );
 		GRPLST_INSERT ( m_txt_CharacterSelect );
 
+		m_txt_StageSelect = std::make_shared < GrpBlink > ();
+		m_txt_StageSelect->AddTexture_FromArchive ( U"CharaSele\\Text_STAGE_SELECT.png" );
+		m_txt_StageSelect->SetPos ( VEC2 ( TXT_STSL_X, TXT_STSL_Y ) );
+		m_txt_StageSelect->SetZ ( Z_SYS );
+		m_txt_StageSelect->Stop ();
+		m_txt_StageSelect->SetHalf ( T );
+		AddpTask ( m_txt_StageSelect );
+		GRPLST_INSERT ( m_txt_StageSelect );
+
+		m_txt_BGMSelect = std::make_shared < GrpBlink > ();
+		m_txt_BGMSelect->AddTexture_FromArchive ( U"CharaSele\\Text_BGM_SELECT.png" );
+		m_txt_BGMSelect->SetPos ( VEC2 ( TXT_BGM_X, TXT_BGM_Y ) );
+		m_txt_BGMSelect->SetZ ( Z_SYS );
+		m_txt_BGMSelect->Stop ();
+		m_txt_BGMSelect->SetHalf ( T );
+		AddpTask ( m_txt_BGMSelect );
+		GRPLST_INSERT ( m_txt_BGMSelect );
+
 
 	}
 

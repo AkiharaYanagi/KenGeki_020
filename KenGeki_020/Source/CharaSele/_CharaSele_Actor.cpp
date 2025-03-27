@@ -33,11 +33,37 @@ namespace GAME
 	}
 
 
-
+	//=====================================================
+	//ステート変更
+	
 	//キャラクタ選択
-	void _CharaSele_Actor::StartCh ()
+	void _CharaSele_Actor::Start_Ch ()
 	{
 		m_state = m_state_Ch;
+	}
+
+	//カラー選択
+	void _CharaSele_Actor::Start_Clr ()
+	{
+		m_state = m_state_Clr;
+	}
+
+	//ステージ選択
+	void _CharaSele_Actor::Start_Stg ()
+	{
+		m_state = m_state_Stg;
+	}
+
+	//BGM選択
+	void _CharaSele_Actor::Start_BGM ()
+	{
+		m_state = m_state_BGM;
+	}
+
+	//選択完了
+	void _CharaSele_Actor::Start_OK ()
+	{
+		m_state = m_state_OK;
 	}
 
 

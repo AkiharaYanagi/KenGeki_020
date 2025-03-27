@@ -38,8 +38,15 @@ namespace GAME
 		P_Grp			m_index_1p;
 		P_Grp			m_index_2p;
 
-		//文字表示
+		//キャラクターセレクト 文字表示
 		P_GrpBlink		m_txt_CharacterSelect;
+
+		//ステージセレクト
+		P_GrpBlink		m_txt_StageSelect;
+
+		//BGMセレクト
+		P_GrpBlink		m_txt_BGMSelect;
+
 
 	public:
 		_CharaSele ();

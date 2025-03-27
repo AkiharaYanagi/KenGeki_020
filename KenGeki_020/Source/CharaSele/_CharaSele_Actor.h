@@ -37,7 +37,11 @@ namespace GAME
 		~_CharaSele_Actor ();
 
 		//状態変更
-		void StartCh ();
+		void Start_Ch ();
+		void Start_Clr ();
+		void Start_Stg ();
+		void Start_BGM ();
+		void Start_OK ();
 	};
 
 

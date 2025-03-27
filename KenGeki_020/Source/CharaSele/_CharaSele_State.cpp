@@ -15,6 +15,28 @@
 namespace GAME
 {
 
+	void ChSl_St_Chara::Input ()
+	{
+	}
+
+	void ChSl_St_Color::Input ()
+	{
+	}
+
+	void ChSl_St_Stage::Input ()
+	{
+	}
+
+	void ChSl_St_BGM::Input ()
+	{
+	}
+
+	void ChSl_St_OK::Input ()
+	{
+	}
+
+
+
 
 }	//namespace GAME
 
