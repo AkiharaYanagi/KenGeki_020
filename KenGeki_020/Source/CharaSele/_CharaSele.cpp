@@ -15,6 +15,47 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+#pragma region CONST
+
+	//キャラセレ
+	const float _CharaSele::TXT_CHSL_X = 640 - 270 / 2;
+	const float _CharaSele::TXT_CHSL_Y = 24;
+
+	//キャラ別
+	const float _CharaSele::CH_INDEX_X_1P = 0    + 100;
+	const float _CharaSele::CH_INDEX_X_2P = 1280 - 100 - 194;
+	const float _CharaSele::CH_INDEX_Y = 5;
+
+	const float _CharaSele::CH_BAR_X_1P = 405;
+	const float _CharaSele::CH_BAR_X_2P = 405;
+	const float _CharaSele::CH_BAR_Y = 0;
+
+	//ステージセレクト
+	const float _CharaSele::STG_BG_X = 0;
+	const float _CharaSele::STG_BG_Y = 385;
+	const float _CharaSele::TXT_STSL_X = 640 - 260 / 2;
+	const float _CharaSele::TXT_STSL_Y = 390;
+	const float _CharaSele::STG_X = 640 - 256 / 2;
+	const float _CharaSele::STG_Y = 420;
+	const float _CharaSele::STG_TRI_X = (1280 - 335) * 0.5f;
+	const float _CharaSele::STG_TRI_Y = STG_Y + 50;
+
+	//BGMセレクト
+	const float _CharaSele::BGM_SCROLL_X = 1280;
+	const float _CharaSele::BGM_SCROLL_Y = 570;
+	const float _CharaSele::TXT_BGM_X  = 640 - 184 / 2;
+	const float _CharaSele::TXT_BGM_Y  = 572;
+	const float _CharaSele::BGM_X = 640 - 225;
+	const float _CharaSele::BGM_Y = 605;
+	const float _CharaSele::BGM_TRI_X = (1280 - 450) * 0.5f;
+	const float _CharaSele::BGM_TRI_Y = BGM_Y + 4;
+
+	//操作説明
+	const float _CharaSele::INST_X = 0;
+	const float _CharaSele::INST_Y = 960 - 27;
+
+#pragma endregion
+
 
 	_CharaSele::_CharaSele ()
 	{
@@ -45,6 +86,32 @@ namespace GAME
 		m_player_2p = std::make_shared < _CharaSele_Player > ();
 		m_player_2p->PlayerInit ( PLAYER_ID_2 );
 		m_player_2p->LoadTx ( m_img_cmn );
+
+		//1P2P表示
+		m_index_1p = std::make_shared < GameGraphic > ();
+		m_index_1p->AddTexture_FromArchive ( U"CharaSele\\1P_Index.png" );
+		m_index_1p->SetPos ( CH_INDEX_X_1P, CH_INDEX_Y );
+		AddpTask ( m_index_1p );
+		GRPLST_INSERT ( m_index_1p );
+
+		m_index_2p = std::make_shared < GameGraphic > ();
+		m_index_2p->AddTexture_FromArchive ( U"CharaSele\\2P_Index.png" );
+		m_index_2p->SetPos ( CH_INDEX_X_2P, CH_INDEX_Y );
+		AddpTask ( m_index_2p );
+		GRPLST_INSERT ( m_index_2p );
+
+		//-----------------------------------------------------------------------
+		//文字表示
+		m_txt_CharacterSelect = std::make_shared < GrpBlink > ();
+		m_txt_CharacterSelect->AddTexture_FromArchive ( U"CharaSele\\Text_CHARACTER_SELECT.png" );
+		m_txt_CharacterSelect->SetPos ( VEC2 ( TXT_CHSL_X, TXT_CHSL_Y ) );
+		m_txt_CharacterSelect->SetZ ( Z_SYS );
+//		m_txt_CharacterSelect->Start ();
+		m_txt_CharacterSelect->SetHalf ( T );
+		AddpTask ( m_txt_CharacterSelect );
+		GRPLST_INSERT ( m_txt_CharacterSelect );
+
+
 	}
 
 

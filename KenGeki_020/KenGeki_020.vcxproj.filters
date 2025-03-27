@@ -1044,6 +1044,12 @@
     <ClInclude Include="Source\CharaSele\_CharaSele_Player.h">
       <Filter>02_CharaSele</Filter>
     </ClInclude>
+    <ClInclude Include="Source\CharaSele\_CharaSele_State.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\_CharaSele_Actor.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1254,6 +1260,12 @@
       <Filter>02_CharaSele</Filter>
     </ClCompile>
     <ClCompile Include="Source\CharaSele\_CharaSele_Player.cpp">
+      <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\_CharaSele_Actor.cpp">
+      <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\_CharaSele_State.cpp">
       <Filter>02_CharaSele</Filter>
     </ClCompile>
   </ItemGroup>
