@@ -358,7 +358,6 @@ namespace GAME
 		}
 
 #if 0
-
 		//フェード待機後、遷移開始
 		if ( m_fade_toFighting->IsLast () )
 		{
@@ -374,7 +373,6 @@ namespace GAME
 			}
 			++ m_plus_wait;
 		}
-
 #endif // 0
 
 		return Scene::Transit (); 
@@ -486,6 +484,7 @@ namespace GAME
 		Input ();
 
 
+		//----------------------------------------------------------
 		//両者すべてを決定したらFtgMainに移行
 		bool bOK1 = stt1p == CharaSele_Player::STT_OK;
 		bool bOK2 = stt2p == CharaSele_Player::STT_OK;

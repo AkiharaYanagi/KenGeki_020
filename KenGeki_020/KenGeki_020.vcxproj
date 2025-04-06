@@ -406,10 +406,14 @@
   <ItemGroup>
     <ClInclude Include="Source\CharaSele\CharaSele.h" />
     <ClInclude Include="Source\CharaSele\CharaSeleConst.h" />
+    <ClInclude Include="Source\CharaSele\CharaSele_BGM.h" />
+    <ClInclude Include="Source\CharaSele\CharaSele_Cursor.h" />
     <ClInclude Include="Source\CharaSele\CharaSele_Image.h" />
     <ClInclude Include="Source\CharaSele\CharaSele_Player.h" />
+    <ClInclude Include="Source\CharaSele\CharaSele_Stage.h" />
     <ClInclude Include="Source\CharaSele\_CharaSele.h" />
     <ClInclude Include="Source\CharaSele\_CharaSele_Actor.h" />
+    <ClInclude Include="Source\CharaSele\_CharaSele_Const.h" />
     <ClInclude Include="Source\CharaSele\_CharaSele_Player.h" />
     <ClInclude Include="Source\CharaSele\_CharaSele_State.h" />
     <ClInclude Include="Source\ExeChara\BtlParam.h" />
@@ -472,16 +476,21 @@
     <ClInclude Include="Source\Menu\YesNo_Menu.h" />
     <ClInclude Include="Source\Result\Result.h" />
     <ClInclude Include="Source\Result\ResultMenu.h" />
+    <ClInclude Include="Source\template.h" />
     <ClInclude Include="Source\Title\Title.h" />
     <ClInclude Include="Source\Training\Training.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\CharaSele\CharaSele.cpp" />
     <ClCompile Include="Source\CharaSele\CharaSeleConst.cpp" />
+    <ClCompile Include="Source\CharaSele\CharaSele_BGM.cpp" />
+    <ClCompile Include="Source\CharaSele\CharaSele_Cursor.cpp" />
     <ClCompile Include="Source\CharaSele\CharaSele_Image.cpp" />
     <ClCompile Include="Source\CharaSele\CharaSele_Player.cpp" />
+    <ClCompile Include="Source\CharaSele\CharaSele_Stage.cpp" />
     <ClCompile Include="Source\CharaSele\_CharaSele.cpp" />
     <ClCompile Include="Source\CharaSele\_CharaSele_Actor.cpp" />
+    <ClCompile Include="Source\CharaSele\_CharaSele_Const.cpp" />
     <ClCompile Include="Source\CharaSele\_CharaSele_Player.cpp" />
     <ClCompile Include="Source\CharaSele\_CharaSele_State.cpp" />
     <ClCompile Include="Source\ExeChara\BtlParam.cpp" />

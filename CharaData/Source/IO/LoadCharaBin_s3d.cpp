@@ -22,6 +22,7 @@ namespace GAME
 	//	LoadChara
 	//		スクリプトとイメージリストを保存したキャラデータ ".dat"ファイル から、Charaを読み込む
 	//==================================================================================
+#if 0
 	LoadCharaBin_s3d::LoadCharaBin_s3d ( const s3d::String & filename, Chara & chara )
 	{
 		try
@@ -41,6 +42,12 @@ namespace GAME
 			TRACE_F ( _T("Error LoadCharaBin_s3d.\n") );
 		}
 	}
+#endif // 0
+
+	LoadCharaBin_s3d::LoadCharaBin_s3d ()
+	{
+	}
+
 
 	//----------------------------------
 	//	デストラクタ
@@ -49,6 +56,26 @@ namespace GAME
 	{
 	}
 
+	//----------------------------------
+	void LoadCharaBin_s3d::Load ( const s3d::String & filename, Chara & chara )
+	{
+		try
+		{
+			_Load ( filename, chara );
+		}
+		catch ( s3d::Error err )
+		{
+			TRACE_F_S ( err );
+		}
+		catch ( LPCTSTR lpctstr )
+		{
+			TRACE_F ( lpctstr );
+		}
+		catch (...)
+		{
+			TRACE_F ( _T("Error LoadCharaBin_s3d.\n") );
+		}
+	}
 
 	//------------------------------------------
 	//	try用実行関数
@@ -87,7 +114,7 @@ namespace GAME
 		//スクリプト
 		m_func.LoadCharaScript ( std::move ( buffer ), pos, chara );
 
-#if 1
+#if 0
 		//イメージ
 		m_func.LoadCharaImage ( std::move ( buffer ), pos, chara );
 #endif // 0
@@ -140,6 +167,42 @@ namespace GAME
 #endif // 0
 	}
 
+
+
+	//scp
+	void LoadCharaBin_s3d::_Load_scp ( const s3d::String & filename, Chara & chara )
+	{
+		std::filesystem::path current_path = std::filesystem::current_path();
+
+		//ファイル存在確認
+		if ( ! std::filesystem::exists  ( filename.str() ) ) { return; }
+
+		//---------------------------------------------------------------------
+		//ファイル読込
+		s3d::BinaryReader br ( filename );
+
+		//---------------------------------------------------------------------
+		//バージョン
+		UINT32 version = 0;
+		br.read ( version );
+
+		//---------------------------------------------------------------------
+		//全体のサイズ
+		UINT32 scriptSize = 0;
+		br.read ( scriptSize );
+		if ( scriptSize > 1000000000u ) { assert (0); };	//1[GB]以上はアサート
+
+		//全体を一時読込
+		UP_BYTE buffer = std::make_unique < byte [] > ( scriptSize );
+		br.read ( buffer.get(), scriptSize );
+
+		//------------------------------------------
+		//キャラ読込
+		UINT pos = 0;	//メモリポインタ
+
+		//スクリプト
+		m_func.LoadCharaScript ( std::move ( buffer ), pos, chara );
+	}
 
 }	//namespace GAME
 

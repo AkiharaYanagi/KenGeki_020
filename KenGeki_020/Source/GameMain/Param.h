@@ -44,10 +44,15 @@ namespace GAME
 		//キャラカラー
 		PAP_Tx			m_pCH_CLR_Ouka_1 { nullptr };
 		PAP_Tx			m_pCH_CLR_Ouka_2 { nullptr };
+		PAP_Tx			m_pCH_CLR_Ouka_gns { nullptr };
+
 		PAP_Tx			m_pCH_CLR_Sae_1 { nullptr };
 		PAP_Tx			m_pCH_CLR_Sae_2 { nullptr };
+		PAP_Tx			m_pCH_CLR_Sae_gns { nullptr };
+
 		PAP_Tx			m_pCH_CLR_Retsu_1 { nullptr };
 		PAP_Tx			m_pCH_CLR_Retsu_2 { nullptr };
+		PAP_Tx			m_pCH_CLR_Retsu_gns { nullptr };
 
 		//リザルト用
 		PLAYER_ID		m_winner { PLAYER_ID_1 };		//勝者
@@ -131,7 +136,9 @@ namespace GAME
 
 		//キャラカラー
 		void SetCharaColor1p ( CHARA_COLOR clr ) { m_setting.SetCharaColor1p ( clr ); }
+		CHARA_COLOR GetCharaColor1p () const { return m_setting.GetColor1p (); }
 		void SetCharaColor2p ( CHARA_COLOR clr ) { m_setting.SetCharaColor2p ( clr ); }
+		CHARA_COLOR GetCharaColor2p () const { return m_setting.GetColor2p (); }
 
 		//プレイヤ側でカラー番号を取得
 		CHARA_COLOR GetClr ( PLAYER_ID id ) const;
@@ -142,6 +149,11 @@ namespace GAME
 		//ファイル名とキャラポインタで、指定カラー番号のテクスチャ配列を設置
 		void SetImgClr ( P_Chara r_pch, CHARA_NAME name, PLAYER_ID id );
 
+		//キャラとカラーを指定して事前読込
+		void LoadCharaColor ( CHARA_NAME name, CHARA_COLOR clr );
+		void SetPAP_Clr ( LPCUSTR filename, PAP_Tx & tgtPapBhv, PAP_Tx & tgtPapGns );
+
+		//--------------------------------------------------------
 		//リザルト用
 		void ResetBattleParam ();
 

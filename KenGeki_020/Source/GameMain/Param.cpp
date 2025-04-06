@@ -22,18 +22,24 @@ namespace GAME
 #pragma region FILE_NAME
 
 	//キャラメインデータファイル
+#if 0
 	constexpr char32_t CHARA_DAT_OUKA []		= U"chara_Ouka.dat";
 	constexpr char32_t CHARA_DAT_SAE []			= U"chara_Sae.dat";
 	constexpr char32_t CHARA_DAT_RETSUDOU []	= U"chara_Retsudou.dat";
 	constexpr char32_t CHARA_DAT_GABADARUGA []	= U"chara_Gabadaruga.dat";
+#endif // 0
+	constexpr char32_t CHARA_DAT_OUKA []		= U"chara_Ouka.scp";
+	constexpr char32_t CHARA_DAT_SAE []			= U"chara_Sae.scp";
+	constexpr char32_t CHARA_DAT_RETSUDOU []	= U"chara_Retsudou.scp";
+	constexpr char32_t CHARA_DAT_GABADARUGA []	= U"chara_Gabadaruga.scp";
 
 	//キャライメージファイル
 	constexpr char32_t CHARA_IMG1_OUKA []		= U"chara_Ouka_bhv.lz4";
-	constexpr char32_t CHARA_IMG2_OUKA []		= U"chara_Ouka_bhv.lz4";
+	constexpr char32_t CHARA_IMG2_OUKA []		= U"chara_Ouka_2p_bhv.lz4";
 	constexpr char32_t CHARA_IMG1_SAE []		= U"chara_Sae_bhv.lz4";
 	constexpr char32_t CHARA_IMG2_SAE []		= U"chara_Sae_bhv.lz4";
 	constexpr char32_t CHARA_IMG1_RETSUDOU []	= U"chara_Retsudou_bhv.lz4";
-	constexpr char32_t CHARA_IMG2_RETSUDOU []	= U"chara_Retsudou2p_bhv.lz4";
+	constexpr char32_t CHARA_IMG2_RETSUDOU []	= U"chara_Retsudou_2p_bhv.lz4";
 	constexpr char32_t CHARA_IMG1_GABADARUGA []	= U"chara_Gabadaruga_bhv.lz4";
 	constexpr char32_t CHARA_IMG2_GABADARUGA []	= U"chara_Gabadaruga_bhv.lz4";
 
@@ -80,6 +86,14 @@ namespace GAME
 		m_pChara_Sae = GetpChara_Sae ();
 		m_pChara_Retsudou = GetpChara_Retsudou ();
 		m_pChara_Gabadaruga = GetpChara_Gabadaruga ();
+
+		LoadCharaColor ( CHARA_OUKA, CH_CLR_1 );
+		LoadCharaColor ( CHARA_OUKA, CH_CLR_2 );
+		LoadCharaColor ( CHARA_SAE, CH_CLR_1 );
+		LoadCharaColor ( CHARA_SAE, CH_CLR_2 );
+		LoadCharaColor ( CHARA_RETSUDOU, CH_CLR_1 );
+		LoadCharaColor ( CHARA_RETSUDOU, CH_CLR_2 );
+
 
 		m_read_chara = T;
 	}
@@ -156,7 +170,8 @@ namespace GAME
 		if ( m_pChara_Ouka == nullptr )
 		{
 			m_pChara_Ouka = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb ( CHARA_DAT_OUKA, * m_pChara_Ouka );
+			LoadCharaBin_s3d lcb;
+			lcb.Load ( CHARA_DAT_OUKA, * m_pChara_Ouka );
 		}
 		return m_pChara_Ouka;
 	}
@@ -175,7 +190,8 @@ namespace GAME
 		if ( m_pChara_Sae == nullptr )
 		{
 			m_pChara_Sae = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb ( CHARA_DAT_SAE, * m_pChara_Sae );
+			LoadCharaBin_s3d lcb;
+			lcb.Load ( CHARA_DAT_SAE, * m_pChara_Sae );
 		}
 		return m_pChara_Sae;
 	}
@@ -194,7 +210,8 @@ namespace GAME
 		if ( m_pChara_Retsudou == nullptr )
 		{
 			m_pChara_Retsudou = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb ( CHARA_DAT_RETSUDOU, * m_pChara_Retsudou );
+			LoadCharaBin_s3d lcb;
+			lcb.Load ( CHARA_DAT_RETSUDOU, * m_pChara_Retsudou );
 		}
 		return m_pChara_Retsudou;
 	}
@@ -214,7 +231,8 @@ namespace GAME
 		if ( m_pChara_Gabadaruga == nullptr )
 		{
 			m_pChara_Gabadaruga = std::make_shared < Chara > ();	//キャラデータ実体
-			LoadCharaBin_s3d lcb ( CHARA_DAT_GABADARUGA, * m_pChara_Gabadaruga );
+			LoadCharaBin_s3d lcb;
+			lcb.Load ( CHARA_DAT_GABADARUGA, * m_pChara_Gabadaruga );
 		}
 		return m_pChara_Gabadaruga;
 	}
@@ -291,6 +309,12 @@ namespace GAME
 		case CHARA_GABADARUGA:	filename = GABA_clr [ clr ];	break;
 		}
 
+
+#if DEBUG_DISP
+		PRINT_F_S ( U"{}:{}:{}:{}"_fmt ( id, name, clr, filename );
+#endif	//DEBUG_DISP
+
+
 		return filename;
 	}
 
@@ -311,6 +335,66 @@ namespace GAME
 			pch->SetpapTx_Ef ( lif.LoadLz4_Gns ( fn_gns ) );
 		}
 		pch->SetpapTx_Main ( r_paptx );
+	}
+
+
+	void Param::LoadCharaColor ( CHARA_NAME name, CHARA_COLOR clr )
+	{
+		s3d::String fn;
+
+		if ( CH_CLR_1 == clr )
+		{
+			//キャラ名で分岐
+			switch ( name )
+			{
+			case CHARA_OUKA:
+				SetPAP_Clr ( OUKA_clr [ clr ], m_pCH_CLR_Ouka_1, m_pCH_CLR_Ouka_gns );
+			break;
+
+			case CHARA_SAE:
+				SetPAP_Clr ( SAE_clr [ clr ], m_pCH_CLR_Sae_1, m_pCH_CLR_Sae_gns );
+			break;
+
+			case CHARA_RETSUDOU:
+				SetPAP_Clr ( RETSU_clr [ clr ], m_pCH_CLR_Retsu_1, m_pCH_CLR_Retsu_gns );
+			break;
+
+			case CHARA_GABADARUGA:
+			break;
+			}
+		}
+		else if ( CH_CLR_2 == clr  )
+		{
+			//キャラ名で分岐
+			switch ( name )
+			{
+			case CHARA_OUKA:
+				SetPAP_Clr ( OUKA_clr [ clr ], m_pCH_CLR_Ouka_2, m_pCH_CLR_Ouka_gns );
+			break;
+
+			case CHARA_SAE:
+				SetPAP_Clr ( SAE_clr [ clr ], m_pCH_CLR_Sae_2, m_pCH_CLR_Sae_gns );
+			break;
+
+			case CHARA_RETSUDOU:
+				SetPAP_Clr ( RETSU_clr [ clr ], m_pCH_CLR_Retsu_2, m_pCH_CLR_Retsu_gns );
+			break;
+
+			case CHARA_GABADARUGA:
+			break;
+			}
+		}
+	}
+
+	void Param::SetPAP_Clr ( LPCUSTR filename, PAP_Tx & tgtPapBhv, PAP_Tx & tgtPapGns )
+	{
+		LoadImgFile lif;
+
+		s3d::String fn ( filename );
+		tgtPapBhv = lif.LoadLz4_Bhv ( filename );
+
+		s3d::String fn_gns = fn.substr ( 0, fn.length() - 8 ) + U"_gns.lz4";
+		tgtPapGns = lif.LoadLz4_Gns ( fn_gns );
 	}
 
 

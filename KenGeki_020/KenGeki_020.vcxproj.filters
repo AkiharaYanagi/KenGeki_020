@@ -1050,6 +1050,21 @@
     <ClInclude Include="Source\CharaSele\_CharaSele_Actor.h">
       <Filter>02_CharaSele</Filter>
     </ClInclude>
+    <ClInclude Include="Source\CharaSele\CharaSele_Cursor.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\_CharaSele_Const.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\template.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\CharaSele_Stage.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CharaSele\CharaSele_BGM.h">
+      <Filter>02_CharaSele</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1266,6 +1281,18 @@
       <Filter>02_CharaSele</Filter>
     </ClCompile>
     <ClCompile Include="Source\CharaSele\_CharaSele_State.cpp">
+      <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\CharaSele_Cursor.cpp">
+      <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\_CharaSele_Const.cpp">
+      <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\CharaSele_Stage.cpp">
+      <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CharaSele\CharaSele_BGM.cpp">
       <Filter>02_CharaSele</Filter>
     </ClCompile>
   </ItemGroup>

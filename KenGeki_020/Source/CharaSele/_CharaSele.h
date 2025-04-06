@@ -12,6 +12,8 @@
 #include "../GameMain/Scene.h"
 #include "CharaSele_Image.h"
 #include "_CharaSele_Player.h"
+#include "CharaSele_Stage.h"
+#include "CharaSele_BGM.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -21,32 +23,51 @@ namespace GAME
 {
 	class _CharaSele : public Scene, public std::enable_shared_from_this < _CharaSele >
 	{
-		//BG
-		P_Grp			m_bg;
-
-		//CharaFace
-		P_Grp			m_charaFace;
-
-		//CharaTx
-		P_ChSl_Img_Cmn	m_img_cmn;
-
+		//-----------------------------------------------
 		//キャラセレ　プレイヤ別処理
 		P_ChSl_Pl		m_player_1p;
 		P_ChSl_Pl		m_player_2p;
+
+
+		//-----------------------------------------------
+		//BG
+		P_Grp			m_bg;
+		P_Grp			m_charaFace;
+
+		//Scroll
+		P_Grp			m_scroll;
+		float			m_scrl_y { 0 };
+
+		//フェード (シーン移行フラグを兼ねる)
+		P_FadeRect		m_fade_toTitle;
+		P_FadeRect		m_fade_toFighting;
+//		bool			m_endWait { F };
+		uint32			m_plus_wait { 0 };
+
+
+		//-----------------------------------------------
+		//共有テクスチャ
+		P_ChSl_Img_Cmn	m_img_cmn;
 
 		//1P2P表示
 		P_Grp			m_index_1p;
 		P_Grp			m_index_2p;
 
-		//キャラクターセレクト 文字表示
-		P_GrpBlink		m_txt_CharacterSelect;
+		//文字表示
+		P_GrpBlink		m_txt_CharacterSelect;	//キャラクターセレクト 
+		P_GrpBlink		m_txt_BGMSelect;		//BGMセレクト
 
+		//-----------------------------------------------
 		//ステージセレクト
-		P_GrpBlink		m_txt_StageSelect;
+		P_CharaSele_Stage	m_stage;
 
 		//BGMセレクト
-		P_GrpBlink		m_txt_BGMSelect;
+		P_CharaSele_BGM		m_bgm;
 
+		//-----------------------------------------------
+		//OK表示
+		P_Grp			m_OK;
+	
 
 	public:
 		_CharaSele ();
@@ -55,11 +76,40 @@ namespace GAME
 
 		void ParamInit ();
 		void Load ();
+		void Move ();
+
 		P_GameScene Transit ();
 
 
-#pragma region CONST
+		//ステージ
+		void Stage_On () { m_stage->On (); }
+		void Stage_Prev () { m_stage->Prev (); }
+		void Stage_Next () { m_stage->Next (); }
+		void Stage_Decide () { m_stage->Decide (); }
+		void Stage_Off () { m_stage->Off (); }
 
+		//BGM
+		void BGM_On () { m_bgm->On (); }
+		void BGM_Prev () { m_bgm->Prev (); }
+		void BGM_Next () { m_bgm->Next (); }
+		void BGM_Decide () { m_bgm->Decide (); }
+		void BGM_Off () { m_bgm->Off (); }
+
+		//OK
+		void OK_On_1p ();
+		void OK_Off_1p ();
+		void OK_On_2p ();
+		void OK_Off_2p ();
+
+		//-----------------------------------------------
+		//文字表示グラフィックの作成
+		static P_GrpBlink MakeTxtGrp ( VEC2 pos, const s3d::String & filename );
+
+	private:
+		//内部関数
+		void Save ();
+		void Input ();
+#pragma region CONST
 		//位置
 		static const float TXT_CHSL_X;
 		static const float TXT_CHSL_Y;
@@ -72,29 +122,20 @@ namespace GAME
 		static const float CH_BAR_X_2P;
 		static const float CH_BAR_Y;
 
-		static const float STG_BG_X;
-		static const float STG_BG_Y;
-		static const float TXT_STSL_X;
-		static const float TXT_STSL_Y;
-		static const float STG_X;
-		static const float STG_Y;
-		static const float STG_TRI_X;
-		static const float STG_TRI_Y;
-
-		static const float BGM_SCROLL_X;
-		static const float BGM_SCROLL_Y;
-		static const float TXT_BGM_X;
-		static const float TXT_BGM_Y;
-		static const float BGM_X;
-		static const float BGM_Y;
-		static const float BGM_TRI_X;
-		static const float BGM_TRI_Y;
-
+		//操作説明
 		static const float INST_X;
 		static const float INST_Y;
 
+		//OK
+		static const float OK_X_1P;
+		static const float OK_X_2P;
+		static const float OK_Y;
+
 #pragma endregion
 	};
+
+
+	using WP_CharaSele = std::weak_ptr < _CharaSele >;
 
 
 }	//namespace GAME

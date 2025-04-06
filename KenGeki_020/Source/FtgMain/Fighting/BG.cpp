@@ -192,8 +192,41 @@ namespace GAME
 			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
 		break;
 
+		//------------------------------------------------------------------
+		case STAGE_SCHOOL_MORNING:
+			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_school_morning.png" );
+			m_bg_L->AddTexture_FromArchive ( U"16_16_Padding.png" );
+			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
+		break;
+
 		case STAGE_SCHOOL_NOON:
+			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_school_noon.png" );
+			m_bg_L->AddTexture_FromArchive ( U"16_16_Padding.png" );
+			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
+		break;
+
+		case STAGE_SCHOOL_NIGHT:
+			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_school_night.png" );
+			m_bg_L->AddTexture_FromArchive ( U"16_16_Padding.png" );
+			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
+		break;
+
+
+		//------------------------------------------------------------------
+		case STAGE_TAISHOU_MORNING:
 			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_Taishou_morning.png" );
+			m_bg_L->AddTexture_FromArchive ( U"16_16_Padding.png" );
+			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
+		break;
+
+		case STAGE_TAISHOU_NOON:
+			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_Taishou_noon.png" );
+			m_bg_L->AddTexture_FromArchive ( U"16_16_Padding.png" );
+			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
+		break;
+
+		case STAGE_TAISHOU_NINGT:
+			m_bg_C->AddTexture_FromArchive ( U"BG\\BG_Taishou_night.png" );
 			m_bg_L->AddTexture_FromArchive ( U"16_16_Padding.png" );
 			m_bg_R->AddTexture_FromArchive ( U"16_16_Padding.png" );
 		break;

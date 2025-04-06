@@ -241,7 +241,9 @@ namespace GAME
 		if ( PLAYER_ID_1  == id )
 		{		
 			//バイナリデータ読込
-			LoadCharaBin_s3d loadCharaBin ( filename, * m_pChara );
+			//LoadCharaBin_s3d loadCharaBin ( filename, * m_pChara );
+			LoadCharaBin_s3d loadCharaBin;
+			loadCharaBin.Load( filename, * m_pChara );
 		}
 		else if ( PLAYER_ID_2  == id )
 		{
@@ -252,7 +254,8 @@ namespace GAME
 			}
 			else
 			{
-				LoadCharaBin_s3d loadCharaBin ( filename, * m_pChara );
+				LoadCharaBin_s3d loadCharaBin;
+				loadCharaBin.Load ( filename, * m_pChara );
 			}
 		}
 
@@ -264,7 +267,6 @@ namespace GAME
 		//--------------------------------------------
 		//m_pCharaのデータ読込
 
-#if 0
 
 		PLAYER_ID id = GetPlayerID ();
 
@@ -278,8 +280,8 @@ namespace GAME
 		default: break;
 		}
 
-#endif // 0
 
+#if 0
 		//パラメータによるキャラの選択
 		switch ( m_name )
 		{
@@ -289,6 +291,7 @@ namespace GAME
 		case CHARA_GABADARUGA:	m_pChara = m_pParam->GetpChara_Gabadaruga (  );	 break;
 		default: break;
 		}
+#endif // 0
 
 	}
 

@@ -223,34 +223,15 @@ namespace GAME
 		//----------------------------------
 		//	Ef個別指定
 		//----------------------------------
-		if ( pEffect->GetName () == U"空中竜巻_鞘" )
-		{
-			pExeEffect->SetShader ( F );
-		}
-		if ( pEffect->GetName () == U"HitLine0" )
-		{
-//			pExeEffect->SetShader ( F );
-		}
-		if ( pEffect->GetName () == U"HitLine1" )
-		{
-//			pExeEffect->SetShader ( F );
-		}
-		if ( pEffect->GetName () == U"HitSmoke" )
-		{
-			pExeEffect->SetShader ( F );
-		}
-		if ( pEffect->GetName () == U"HitSmoke1" )
-		{
-			pExeEffect->SetShader ( F );
-		}
-		if ( pEffect->GetName () == U"DustCloud" )
-		{
-			pExeEffect->SetShader ( F );
-		}
-		if ( pEffect->GetName () == U"Guard" )
-		{
-			pExeEffect->SetShader ( F );
-		}
+		if ( pEffect->GetName () == U"空中竜巻_鞘" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"HitLine0" ) { /* pExeEffect->SetShader ( F ); */ }
+		if ( pEffect->GetName () == U"HitLine1" ) { /* pExeEffect->SetShader ( F ); */ }
+		if ( pEffect->GetName () == U"HitSmoke" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"HitSmoke1" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"DustCloud" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"Guard" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"地面" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"Ukemi" ) { pExeEffect->SetShader ( F ); }
 			 
 	}
 

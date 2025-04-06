@@ -18,7 +18,7 @@
 namespace GAME
 {
 
-	class _CharaSele_Actor	: public GameTaskVector
+	class _CharaSele_Actor	: public TASK_VEC, public std::enable_shared_from_this < _CharaSele_Actor >
 	{
 		//現在のステート
 		P_ChSl_St	m_state;
@@ -30,11 +30,21 @@ namespace GAME
 		P_ChSlSt_BGM	m_state_BGM;
 		P_ChSlSt_OK		m_state_OK;
 
+		//すべてのステート
+		s3d::Array < P_ChSl_St >	m_aryState;
+
 
 	public:
 		_CharaSele_Actor ();
 		_CharaSele_Actor ( const _CharaSele_Actor & rhs ) = delete;
 		~_CharaSele_Actor ();
+
+		void PlayerInit ( PLAYER_ID id );
+		void Load ();
+		void Move ();
+
+		void Input ();
+
 
 		//状態変更
 		void Start_Ch ();
@@ -42,7 +52,19 @@ namespace GAME
 		void Start_Stg ();
 		void Start_BGM ();
 		void Start_OK ();
+
+		bool Is_OK () const { return m_state_OK == m_state; }
+
+
+		//参照
+		void SetwpCharaSele ( WP_CharaSele wp );
+		void SetwpChSl_Player ( WP_ChSl_Player wp );
+		void SetpCursor ( P_ChSl_Cursor p );
 	};
+
+	using P_ChSl_Actor = std::shared_ptr < _CharaSele_Actor >;
+	using WP_ChSl_Actor = std::weak_ptr < _CharaSele_Actor >;
+
 
 
 }	//namespace GAME

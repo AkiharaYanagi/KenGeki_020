@@ -17,6 +17,8 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+#if 0
+
 	//---------------------------------------------------------
 	// @info	switch文の条件に用いるとき、externで別ファイルに記述するとコンパイルエラーとなるので
 	//			同ファイルに記述する。
@@ -38,6 +40,8 @@ namespace GAME
 	//	const CHARA_SELE_ID		 CHARA_SELE_NUM = 12;
 	//	const CHARA_SELE_ID	CharaSele_Player::CHARA_SELE_NUM = 12;
 
+#endif // 0
+
 	const float CharaSele_Player::CH_STT_X_1P = 402;
 	const float CharaSele_Player::CH_STT_X_2P = 405;
 	const float CharaSele_Player::CH_STT_CHARA_Y = 8;
@@ -55,7 +59,7 @@ namespace GAME
 		//キャラ立絵
 		m_chara_stand = std::make_shared < GameGraphic > ();
 		m_chara_stand->AddTexture_FromArchive ( U"CharaSele\\Stand_Ouka.png" );
-		m_chara_stand->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
+		m_chara_stand->AddTexture_FromArchive ( U"16_16_Padding.png" );	//Padding
 		m_chara_stand->AddTexture_FromArchive ( U"CharaSele\\Stand_Sae.png" );
 		m_chara_stand->AddTexture_FromArchive ( U"CharaSele\\Stand_Retsudou.png" );
 		AddpTask ( m_chara_stand );
@@ -64,7 +68,7 @@ namespace GAME
 		//キャラ立絵(明度)
 		m_chara_stand_light = std::make_shared < GameGraphic > ();
 		m_chara_stand_light->AddTexture_FromArchive ( U"CharaSele\\Stand_Ouka_light.png" );
-		m_chara_stand_light->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
+		m_chara_stand_light->AddTexture_FromArchive ( U"16_16_Padding.png" );	//Padding
 		m_chara_stand_light->AddTexture_FromArchive ( U"CharaSele\\Stand_Sae_light.png" );
 		m_chara_stand_light->AddTexture_FromArchive ( U"CharaSele\\Stand_Retsudou_light.png" );
 		AddpTask ( m_chara_stand_light );
@@ -74,7 +78,7 @@ namespace GAME
 		//キャラ名前
 		m_chara_name = std::make_shared < GameGraphic > ();
 		m_chara_name->AddTexture_FromArchive ( U"CharaSele\\Name_Ouka.png" );
-		m_chara_name->AddTexture_FromArchive ( U"hit\\0.png" );	//Padding
+		m_chara_name->AddTexture_FromArchive ( U"16_16_Padding.png" );	//Padding
 		m_chara_name->AddTexture_FromArchive ( U"CharaSele\\Name_Sae.png" );
 		m_chara_name->AddTexture_FromArchive ( U"CharaSele\\Name_Retsudou.png" );
 		AddpTask ( m_chara_name );

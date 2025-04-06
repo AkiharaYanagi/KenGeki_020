@@ -131,7 +131,7 @@ namespace GAME
 
 
 		//test
-		startMode = START_CHARA_SELE;
+//		startMode = START_CHARA_SELE;
 
 
 
@@ -148,6 +148,10 @@ namespace GAME
 #if DEBUG_DISP		
 		DBGOUT_WND_ON ();
 //		DBGOUT_WND_OFF ();
+
+		DebugOutPrint::Create ();
+		PRINT_F_S ( U"start DebugOutPrint.\n" );
+
 #else
 		DBGOUT_WND_OFF ();
 #endif	//DEBUG_DISP

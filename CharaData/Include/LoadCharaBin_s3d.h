@@ -24,12 +24,23 @@ namespace GAME
 		LoadCharaBinFunc		m_func;
 
 	public:
-		LoadCharaBin_s3d ( const s3d::String & filename,  Chara & chara );
-		LoadCharaBin_s3d ( const LoadCharaBin_s3d& rhs ) = delete;
+//		LoadCharaBin_s3d ( const s3d::String & filename,  Chara & chara );
+//		LoadCharaBin_s3d ( const LoadCharaBin_s3d& rhs ) = delete;
+		LoadCharaBin_s3d ();
 		~LoadCharaBin_s3d ();
 
+		void Load ( const s3d::String & filename,  Chara & chara );
+
+	private:
 		//try用
+
+		//.dat
 		void _Load ( const s3d::String & filename,  Chara & chara );
+
+		//.scp
+		void _Load_scp ( const s3d::String & filename,  Chara & chara );
+
+
 	};
 
 

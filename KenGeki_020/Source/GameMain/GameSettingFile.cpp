@@ -30,6 +30,8 @@ namespace GAME
 		m_playerMode2p	= rhs.m_playerMode2p;
 		m_name1p		= rhs.m_name1p;
 		m_name2p		= rhs.m_name2p;
+		m_color1p		= rhs.m_color1p;
+		m_color2p		= rhs.m_color2p;
 		m_bgm_id		= rhs.m_bgm_id;
 		m_stage_name	= rhs.m_stage_name;
 	}
@@ -66,6 +68,13 @@ namespace GAME
 			m_name1p = (CHARA_NAME)tempName1p;
 			m_name2p = (CHARA_NAME)tempName2p;
 
+			byte tempColor1p = 0;
+			byte tempColor2p = 0;
+			ifstrm.read( (char*)&tempColor1p, sizeof( byte ) );
+			ifstrm.read( (char*)&tempColor2p, sizeof( byte ) );
+			m_color1p = (CHARA_COLOR)tempColor1p;
+			m_color2p = (CHARA_COLOR)tempColor2p;
+
 			byte bgm = 0;
 			ifstrm.read( (char*)&bgm, sizeof( byte ) );
 			m_bgm_id = (BGM_ID)bgm;
@@ -101,6 +110,8 @@ namespace GAME
 			ofstrm.write ( (char*)&m_playerMode2p, sizeof ( byte ) );
 			ofstrm.write ( (char*)&m_name1p, sizeof ( byte ) );
 			ofstrm.write ( (char*)&m_name2p, sizeof ( byte ) );
+			ofstrm.write ( (char*)&m_color1p, sizeof ( byte ) );
+			ofstrm.write ( (char*)&m_color2p, sizeof ( byte ) );
 			ofstrm.write ( (char*)&m_bgm_id, sizeof ( byte ) );
 			ofstrm.write ( (char*)&m_stage_name, sizeof ( byte ) );
 
@@ -121,6 +132,8 @@ namespace GAME
 		m_playerMode2p = MODE_PLAYER;
 		m_name1p = CHARA_OUKA;
 		m_name2p = CHARA_OUKA;
+		m_color1p = CH_CLR_1;
+		m_color2p = CH_CLR_2;
 		m_bgm_id = BGM_ID_GABA;
 		m_stage_name = STAGE_YUUHINO_HARA;
 	}

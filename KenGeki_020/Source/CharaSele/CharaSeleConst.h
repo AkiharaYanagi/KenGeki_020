@@ -17,32 +17,23 @@
 namespace GAME
 {
 	//キャラ枠位置( 0 ~ 11 )
-#if 0
-	enum CHARA_SELE_ID
-	{
-		CHSLID_00, CHSLID_01, CHSLID_02, CHSLID_03, CHSLID_04, CHSLID_05, 
-		CHSLID_06, CHSLID_07, CHSLID_08, CHSLID_09, CHSLID_10, CHSLID_11, 
-	};
-#endif // 0
-
 	using CHARA_SELE_ID = uint32;
 
-	extern const CHARA_SELE_ID		 CHSLID_00;
-	extern const CHARA_SELE_ID		 CHSLID_01;
-	extern const CHARA_SELE_ID		 CHSLID_02;
-	extern const CHARA_SELE_ID		 CHSLID_03;
-	extern const CHARA_SELE_ID		 CHSLID_04;
-	extern const CHARA_SELE_ID		 CHSLID_05;
-	extern const CHARA_SELE_ID		 CHSLID_06;
-	extern const CHARA_SELE_ID		 CHSLID_07;
-	extern const CHARA_SELE_ID		 CHSLID_08;
-	extern const CHARA_SELE_ID		 CHSLID_09;
-	extern const CHARA_SELE_ID		 CHSLID_10;
-	extern const CHARA_SELE_ID		 CHSLID_11;
+	constexpr CHARA_SELE_ID	CHSLID_00 = 0;
+	constexpr CHARA_SELE_ID	CHSLID_01 = 1;
+	constexpr CHARA_SELE_ID	CHSLID_02 = 2;
+	constexpr CHARA_SELE_ID	CHSLID_03 = 3;
+	constexpr CHARA_SELE_ID	CHSLID_04 = 4;
+	constexpr CHARA_SELE_ID	CHSLID_05 = 5;
+	constexpr CHARA_SELE_ID	CHSLID_06 = 6;
+	constexpr CHARA_SELE_ID	CHSLID_07 = 7;
+	constexpr CHARA_SELE_ID	CHSLID_08 = 8;
+	constexpr CHARA_SELE_ID	CHSLID_09 = 9;
+	constexpr CHARA_SELE_ID	CHSLID_10 = 10;
+	constexpr CHARA_SELE_ID	CHSLID_11 = 11;
 
 	//個数
-//	enum CHARA_SELE_ID			 { CHARA_SELE_NUM = 12 }
-//	constexpr CHARA_SELE_ID			CHARA_SELE_NUM = 12;
+	constexpr CHARA_SELE_ID	CHARA_SELE_NUM = 12;
 
 
 	//表示位置定数
@@ -109,6 +100,16 @@ namespace GAME
 		CHARA_SELE_ID RIGHT	 = CHSLID_01;	//右移動先
 	};
 
+	inline CHARA_SELE_ID CharaName_To_ChSlId ( CHARA_NAME name )
+	{
+		switch ( name )
+		{
+		case CHARA_OUKA:		return CHSLID_00;
+		case CHARA_SAE:			return CHSLID_02;
+		case CHARA_RETSUDOU:	return CHSLID_03;
+		}
+		return CHARA_SELE_NUM;
+	};
 
 }	//namespace GAME
 
