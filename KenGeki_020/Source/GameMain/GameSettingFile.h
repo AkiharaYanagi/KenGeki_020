@@ -72,18 +72,14 @@ namespace GAME
 		void SetPlayerMode2p ( PLAYER_MODE mode ) { m_playerMode2p = mode; }
 
 		//キャラ名
-		CHARA_NAME GetName ( PLAYER_ID pid ) const
-		{
-			if ( pid == PLAYER_ID_1 ) { return m_name1p; }
-			if ( pid == PLAYER_ID_2 ) { return m_name2p; }
-			return CHARA_NAME_NUM;
-		}
+		CHARA_NAME GetName ( PLAYER_ID pid ) const;
 		CHARA_NAME GetName1p () const { return m_name1p; }
 		CHARA_NAME GetName2p () const { return m_name2p; }
 		void SetCharaName1p ( CHARA_NAME name ) { m_name1p = name; }
 		void SetCharaName2p ( CHARA_NAME name ) { m_name2p = name; }
 
 		//キャラカラー
+		CHARA_COLOR GetColor ( PLAYER_ID pid ) const;
 		CHARA_COLOR GetColor1p() const { return m_color1p; }
 		void SetCharaColor1p ( CHARA_COLOR clr ) { m_color1p = clr; }
 		CHARA_COLOR GetColor2p() const { return m_color2p; }

@@ -465,6 +465,7 @@
     <ClInclude Include="Source\GameMain\GameSettingFile.h" />
     <ClInclude Include="Source\GameMain\G_Ftg.h" />
     <ClInclude Include="Source\GameMain\Param.h" />
+    <ClInclude Include="Source\GameMain\Prm_Chara.h" />
     <ClInclude Include="Source\GameMain\Scene.h" />
     <ClInclude Include="Source\GameMain\SeConst.h" />
     <ClInclude Include="Source\GameMain\SoundConst.h" />
@@ -546,6 +547,7 @@
     <ClCompile Include="Source\GameMain\G_Ftg.cpp" />
     <ClCompile Include="Source\GameMain\Main.cpp" />
     <ClCompile Include="Source\GameMain\Param.cpp" />
+    <ClCompile Include="Source\GameMain\Prm_Chara.cpp" />
     <ClCompile Include="Source\GameMain\Scene.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>

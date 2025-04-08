@@ -12,6 +12,7 @@
 #include "LoadCharaBin_s3d.h"
 #include "../FtgMain/FtgConst.h"
 #include "LoadImgFile.h"
+#include "../GameMain/DebugDisp.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -19,6 +20,8 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+#if 0
+
 #pragma region FILE_NAME
 
 	//キャラメインデータファイル
@@ -58,6 +61,8 @@ namespace GAME
 
 #pragma endregion
 
+#endif // 0
+
 
 	Param::Param ()
 	{
@@ -77,25 +82,6 @@ namespace GAME
 
 	Param::~Param ()
 	{
-	}
-
-	void Param::LoadCharaData_All ()
-	{
-		//キャラ事前読込
-		m_pChara_Ouka = GetpChara_Ouka ();
-		m_pChara_Sae = GetpChara_Sae ();
-		m_pChara_Retsudou = GetpChara_Retsudou ();
-		m_pChara_Gabadaruga = GetpChara_Gabadaruga ();
-
-		LoadCharaColor ( CHARA_OUKA, CH_CLR_1 );
-		LoadCharaColor ( CHARA_OUKA, CH_CLR_2 );
-		LoadCharaColor ( CHARA_SAE, CH_CLR_1 );
-		LoadCharaColor ( CHARA_SAE, CH_CLR_2 );
-		LoadCharaColor ( CHARA_RETSUDOU, CH_CLR_1 );
-		LoadCharaColor ( CHARA_RETSUDOU, CH_CLR_2 );
-
-
-		m_read_chara = T;
 	}
 
 	void Param::SetMutchMode ( MUTCH_MODE mode )
@@ -163,8 +149,48 @@ namespace GAME
 
 	//-----------------------------------------------------------------
 	//各キャラの読込
+
+
 	//	タイトルから開始時は全キャラ先に読込
+	void Param::LoadCharaData_All ()
+	{
+#if 0
+		//キャラ事前読込
+		m_pChara_Ouka = GetpChara_Ouka ();
+		m_pChara_Sae = GetpChara_Sae ();
+		m_pChara_Retsudou = GetpChara_Retsudou ();
+		m_pChara_Gabadaruga = GetpChara_Gabadaruga ();
+
+		LoadCharaColor ( CHARA_OUKA, CH_CLR_1 );
+		LoadCharaColor ( CHARA_OUKA, CH_CLR_2 );
+		LoadCharaColor ( CHARA_SAE, CH_CLR_1 );
+		LoadCharaColor ( CHARA_SAE, CH_CLR_2 );
+		LoadCharaColor ( CHARA_RETSUDOU, CH_CLR_1 );
+		LoadCharaColor ( CHARA_RETSUDOU, CH_CLR_2 );
+		LoadCharaColor ( CHARA_GABADARUGA, CH_CLR_1 );
+		LoadCharaColor ( CHARA_GABADARUGA, CH_CLR_2 );
+
+
+		m_read_chara = T;
+#endif // 0
+		m_prmChara_all.LoadAll ();
+	}
+
+
+	//-----------------------------------------------------------------
 	//	テスト用バトルから開始時は各使用キャラのみ
+
+	//キャラ指定データ取得
+	P_Chara Param::GetpChara ( CHARA_NAME name, PLAYER_ID pl_id )
+	{
+		//プレイヤ側でカラー番号を取得
+		CHARA_COLOR clr = m_setting.GetColor ( pl_id );
+		return m_prmChara_all.GetpChara ( name, clr );
+	}
+
+
+#if 0
+
 	P_Chara Param::GetpChara_Ouka ()
 	{
 		if ( m_pChara_Ouka == nullptr )
@@ -245,22 +271,16 @@ namespace GAME
 		return pCh;
 	}
 
+#endif // 0
+
+#if 0
 	//-----------------------------------------------------------------
 	//プレイヤ側でカラー番号を取得
-	CHARA_COLOR Param::GetClr ( PLAYER_ID id ) const
+	CHARA_COLOR Param::GetClr ( PLAYER_ID pl_id ) const
 	{
-		//プレイヤ側でカラー番号を取得
-		CHARA_COLOR clr = CH_CLR_1;
-		if ( PLAYER_ID_1 == id )
-		{
-			clr = m_setting.GetColor1p ();
-		}
-		else if ( PLAYER_ID_2 == id  )
-		{
-			clr = m_setting.GetColor2p ();
-		}
-		return clr;
+		return m_setting.GetColor ( pl_id );
 	}
+
 
 
 	//キャラとプレイヤ側でカラー番号別テクスチャ配列の参照
@@ -286,8 +306,8 @@ namespace GAME
 		break;
 
 		case CHARA_GABADARUGA:
-			if ( CH_CLR_1 == clr ) { return m_pCH_CLR_Sae_1; }
-			else if ( CH_CLR_2 == clr ) { return m_pCH_CLR_Sae_2; }
+			if ( CH_CLR_1 == clr ) { return m_pCH_CLR_Gaba_1; }
+			else if ( CH_CLR_2 == clr ) { return m_pCH_CLR_Gaba_2; }
 		break;
 		}
 		return m_pCH_CLR_Ouka_1;
@@ -311,7 +331,9 @@ namespace GAME
 
 
 #if DEBUG_DISP
-		PRINT_F_S ( U"{}:{}:{}:{}"_fmt ( id, name, clr, filename );
+		PRINT_F_S ( U"P{}:name = {}, CLR:{}, file:{}\n"_fmt ( id, name, clr, filename ) );
+#else
+		BREAK_POINT;
 #endif	//DEBUG_DISP
 
 
@@ -360,6 +382,7 @@ namespace GAME
 			break;
 
 			case CHARA_GABADARUGA:
+				SetPAP_Clr ( GABA_clr [ clr ], m_pCH_CLR_Gaba_1, m_pCH_CLR_Gaba_gns );
 			break;
 			}
 		}
@@ -381,6 +404,7 @@ namespace GAME
 			break;
 
 			case CHARA_GABADARUGA:
+				SetPAP_Clr ( GABA_clr [ clr ], m_pCH_CLR_Gaba_2, m_pCH_CLR_Gaba_gns );
 			break;
 			}
 		}
@@ -397,6 +421,8 @@ namespace GAME
 		tgtPapGns = lif.LoadLz4_Gns ( fn_gns );
 	}
 
+
+#endif // 0
 
 	//-----------------------------------------------------------------
 	void Param::ResetBattleParam ()

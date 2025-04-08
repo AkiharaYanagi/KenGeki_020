@@ -1065,6 +1065,9 @@
     <ClInclude Include="Source\CharaSele\CharaSele_BGM.h">
       <Filter>02_CharaSele</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameMain\Prm_Chara.h">
+      <Filter>90_GameMain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1294,6 +1297,9 @@
     </ClCompile>
     <ClCompile Include="Source\CharaSele\CharaSele_BGM.cpp">
       <Filter>02_CharaSele</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameMain\Prm_Chara.cpp">
+      <Filter>90_GameMain</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

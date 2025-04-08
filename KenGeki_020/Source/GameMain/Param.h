@@ -15,6 +15,7 @@
 //#include "SceneCommon.h"
 #include "Chara.h"
 #include "SoundConst.h"
+#include "Prm_Chara.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -33,6 +34,10 @@ namespace GAME
 		CHARA_NAME		m_chara_name_1p { CHARA_TEST };
 		CHARA_NAME		m_chara_name_2p { CHARA_TEST };
 		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };
+
+
+		//キャラデータ
+#if 0
 
 		//キャラ事前読込
 		P_Chara			m_pChara_Ouka { nullptr };
@@ -53,6 +58,14 @@ namespace GAME
 		PAP_Tx			m_pCH_CLR_Retsu_1 { nullptr };
 		PAP_Tx			m_pCH_CLR_Retsu_2 { nullptr };
 		PAP_Tx			m_pCH_CLR_Retsu_gns { nullptr };
+
+		PAP_Tx			m_pCH_CLR_Gaba_1 { nullptr };
+		PAP_Tx			m_pCH_CLR_Gaba_2 { nullptr };
+		PAP_Tx			m_pCH_CLR_Gaba_gns { nullptr };
+
+#endif // 0
+		Prm_Chara_all	m_prmChara_all;
+
 
 		//リザルト用
 		PLAYER_ID		m_winner { PLAYER_ID_1 };		//勝者
@@ -120,8 +133,16 @@ namespace GAME
 		void SetDemo ( bool b ) { m_setting.SetDemo ( b ); }
 
 
-		//データ事前読込1
+		//キャラデータ事前読込
 		void LoadCharaData_All ();
+
+		//キャラ指定データ取得
+		P_Chara GetpChara ( CHARA_NAME name, PLAYER_ID player );
+
+		//プレイヤ別　カラー取得
+		CHARA_COLOR GetCharaColor ( PLAYER_ID pl_id ) const { return m_setting.GetColor ( pl_id ); }
+
+#if 0
 		P_Chara GetpChara_Ouka ();
 		P_Chara GetpChara_Sae ();
 		P_Chara GetpChara_Retsudou ();
@@ -134,14 +155,15 @@ namespace GAME
 		P_Chara GetpChara_Retsudou ( PLAYER_ID player );
 		P_Chara GetpChara_Gabadaruga ( PLAYER_ID player );
 
+		//プレイヤ側でカラー番号を取得
+		CHARA_COLOR GetClr ( PLAYER_ID id ) const;
+
 		//キャラカラー
 		void SetCharaColor1p ( CHARA_COLOR clr ) { m_setting.SetCharaColor1p ( clr ); }
 		CHARA_COLOR GetCharaColor1p () const { return m_setting.GetColor1p (); }
 		void SetCharaColor2p ( CHARA_COLOR clr ) { m_setting.SetCharaColor2p ( clr ); }
 		CHARA_COLOR GetCharaColor2p () const { return m_setting.GetColor2p (); }
 
-		//プレイヤ側でカラー番号を取得
-		CHARA_COLOR GetClr ( PLAYER_ID id ) const;
 		//キャラとプレイヤ側でカラー番号別テクスチャ配列の参照
 		PAP_Tx & GetPAP_Tx ( CHARA_NAME name, PLAYER_ID id );
 		//キャラ名とプレイヤ側とカラー番号で読込ファイル名を取得
@@ -152,6 +174,7 @@ namespace GAME
 		//キャラとカラーを指定して事前読込
 		void LoadCharaColor ( CHARA_NAME name, CHARA_COLOR clr );
 		void SetPAP_Clr ( LPCUSTR filename, PAP_Tx & tgtPapBhv, PAP_Tx & tgtPapGns );
+#endif // 0
 
 		//--------------------------------------------------------
 		//リザルト用

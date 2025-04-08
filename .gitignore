@@ -1,3 +1,4 @@
+*.lz4
 *.atls
 *.img
 *.bin
@@ -5,6 +6,15 @@
 *.lib
 *.idb
 *.dat
+
+
+/KenGeki_020/App/old
+/KenGeki_020/App/Image1
+/KenGeki_020/App/old
+/KenGeki_020/App/Screenshot
+/KenGeki_020/App/img
+/KenGeki_Setup/old
+
 
 
 ## Ignore Visual Studio temporary files, build results, and
@@ -373,12 +383,3 @@ FodyWeavers.xsd
 *.msi
 *.nsi
 *.zip
-KenGeki_Setup/old/*
-KenGeki_020/App/chara_Retsudou_.txt
-/KenGeki_020/App/Image1
-/KenGeki_020/App/old
-/KenGeki_020/App/Screenshot
-*.lz4
-KenGeki_020/App/chara_Sae_bhv..lz4
-*.lzh
-*.lzh

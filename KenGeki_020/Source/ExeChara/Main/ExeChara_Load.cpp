@@ -264,13 +264,12 @@ namespace GAME
 
 	void ExeChara::LoadCharaData ()
 	{
-		//--------------------------------------------
 		//m_pCharaのデータ読込
+		m_pChara = m_pParam->GetpChara ( m_name, GetPlayerID () );
 
-
-		PLAYER_ID id = GetPlayerID ();
-
+#if 0
 		//パラメータによるキャラの選択
+		PLAYER_ID id = GetPlayerID ();
 		switch ( m_name )
 		{
 		case CHARA_OUKA:		m_pChara = m_pParam->GetpChara_Ouka ( id );		break;
@@ -279,7 +278,7 @@ namespace GAME
 		case CHARA_GABADARUGA:	m_pChara = m_pParam->GetpChara_Gabadaruga ( id );	 break;
 		default: break;
 		}
-
+#endif // 0
 
 #if 0
 		//パラメータによるキャラの選択

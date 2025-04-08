@@ -139,5 +139,21 @@ namespace GAME
 	}
 
 
+	//プレイヤ別　キャラ名
+	CHARA_NAME GameSettingFile::GetName ( PLAYER_ID pid ) const
+	{
+		if ( pid == PLAYER_ID_1 ) { return m_name1p; }
+		if ( pid == PLAYER_ID_2 ) { return m_name2p; }
+		return CHARA_NAME_NUM;
+	}
+
+	//プレイヤ別　キャラカラー
+	CHARA_COLOR GameSettingFile::GetColor ( PLAYER_ID pid ) const
+	{
+		if ( pid == PLAYER_ID_1 ) { return m_color1p; }
+		if ( pid == PLAYER_ID_2 ) { return m_color2p; }
+		return CH_CLR_1;
+	}
+
 }	//namespace GAME
 

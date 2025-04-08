@@ -13,7 +13,7 @@ namespace FS = std::filesystem;
 namespace GAME
 {
 
-	PAP_Tx LoadImgFile::Do ( s3d::String filepath )
+	PAP_Tx LoadImgFile::Do ( const s3d::String & filepath )
 	{
 		//Unicode ロケールの設定
 		::setlocale ( LC_ALL, "japanese" );
@@ -73,7 +73,7 @@ namespace GAME
 	}
 
 
-	void LoadImgFile::Conversion ( s3d::String filepath )
+	void LoadImgFile::Conversion ( const s3d::String & filepath )
 	{
 
 		//ファイル存在確認
@@ -167,7 +167,7 @@ namespace GAME
 	}
 
 	//Atlas->PAP_Tx
-	PAP_Tx LoadImgFile::LoadAtlas ( s3d::String filepath )
+	PAP_Tx LoadImgFile::LoadAtlas ( const s3d::String & filepath )
 	{
 		//atlasをデシリアライズ
 		Atlas atlas;
@@ -185,7 +185,14 @@ namespace GAME
 
 
 	//LZ4 -> PAP_Tx
-	PAP_Tx LoadImgFile::LoadLz4 ( s3d::String filepath )
+	PAP_Tx LoadImgFile::LoadLz4 ( LPCUSTR filepath )
+	{
+		return LoadLz4 ( s3d::String ( filepath ) );
+	}
+
+
+	//LZ4 -> PAP_Tx
+	PAP_Tx LoadImgFile::LoadLz4 ( const s3d::String & filepath )
 	{
 		//ファイル読込
 		s3d::BinaryReader br { filepath };
@@ -209,7 +216,7 @@ namespace GAME
 		//解凍
 		LZ4_decompress_safe ( (const char *)cmprsBlob.data(), (char*)dcmprsBuf.data(), (int)cmprsdSz, dcmprsSz );
 
-		size_t szDmprsBuf = dcmprsBuf.size ();
+//		size_t szDmprsBuf = dcmprsBuf.size ();
 		s3d::MemoryReader mr { dcmprsBuf };
 
 		Atlas atlas;
@@ -220,25 +227,36 @@ namespace GAME
 
 	
 	//LZ4 -> PAP_Tx
-	PAP_Tx LoadImgFile::LoadLz4_Bhv ( s3d::String filepath )
+	PAP_Tx LoadImgFile::LoadLz4_Bhv ( const s3d::String & filepath )
 	{
 		return LoadLz4 ( filepath );
 	}
 
-	PAP_Tx LoadImgFile::LoadLz4_Bhv_Name ( s3d::String filepath )
+	PAP_Tx LoadImgFile::LoadLz4_Bhv ( LPCUSTR filepath )
+	{
+		return LoadLz4 ( filepath );
+	}
+
+	PAP_Tx LoadImgFile::LoadLz4_Bhv_Name ( const s3d::String & filepath )
 	{
 		s3d::String fn = filepath.substr ( 0, filepath.length() - 4 );
 		s3d::String filename_bhv = fn + U"_bhv.lz4";
 		return LoadLz4 ( filename_bhv );
 	}
 
+
 	//LZ4 -> PAP_Tx
-	PAP_Tx LoadImgFile::LoadLz4_Gns ( s3d::String filepath )
+	PAP_Tx LoadImgFile::LoadLz4_Gns ( const s3d::String & filepath )
 	{
 		return LoadLz4 ( filepath );
 	}
 
-	PAP_Tx LoadImgFile::LoadLz4_Gns_Name ( s3d::String filepath )
+	PAP_Tx LoadImgFile::LoadLz4_Gns ( LPCUSTR filepath )
+	{
+		return LoadLz4 ( filepath );
+	}
+
+	PAP_Tx LoadImgFile::LoadLz4_Gns_Name ( const s3d::String & filepath )
 	{
 		s3d::String fn = filepath.substr ( 0, filepath.length() - 4 );
 		s3d::String filename_gns = fn + U"_gns.lz4";

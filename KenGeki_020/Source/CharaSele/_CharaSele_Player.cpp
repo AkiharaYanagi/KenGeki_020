@@ -113,6 +113,10 @@ namespace GAME
 
 	void _CharaSele_Player::ParamInit ( P_Param prm )
 	{
+		AssignName ( prm->GetCharaName ( m_player_id ) );
+		SelectColor ( prm->GetCharaColor ( m_player_id ) );
+
+#if 0
 		//プレイヤ側別初期化
 		if ( PLAYER_ID_1 == m_player_id )
 		{
@@ -124,6 +128,7 @@ namespace GAME
 			AssignName ( prm->GetCharaName2p () );
 			SelectColor ( prm->GetCharaColor2p () );
 		}
+#endif // 0
 	}
 
 
