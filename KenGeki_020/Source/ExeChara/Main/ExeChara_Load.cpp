@@ -267,6 +267,7 @@ namespace GAME
 		//m_pCharaのデータ読込
 		m_pChara = m_pParam->GetpChara ( m_name, GetPlayerID () );
 
+
 #if 0
 		//パラメータによるキャラの選択
 		PLAYER_ID id = GetPlayerID ();

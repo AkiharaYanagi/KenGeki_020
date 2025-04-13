@@ -114,6 +114,12 @@ namespace GAME
 		m_mainGraphic->SetColor ( b ? 0xff000000 : 0xffffffff );
 	}
 
+		//乗算カラー指定
+	void DispMainImage::SetColor ( uint32 clr )
+	{
+		m_mainGraphic->SetColor ( clr );
+	}
+
 
 	//メイングラフィックを同一Z値で先頭にする
 	void DispMainImage::TopByZ ()

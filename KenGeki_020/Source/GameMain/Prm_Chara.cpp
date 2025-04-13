@@ -91,6 +91,7 @@ namespace GAME
 	//個別キャラデータを取得 (未ロード時はロードしてから取得)
 	P_Chara Prm_Chara::GetpChara ( CHARA_COLOR clr )
 	{
+		PRINT_F_S( U"スクリプト" );
 		//スクリプト部
 		if ( nullptr == m_pChara )
 		{
@@ -98,10 +99,12 @@ namespace GAME
 			LoadCharaBin_s3d lcb;
 			lcb.Load ( m_filename_scp, * m_pChara );
 		}
+		PRINT_F_S( U"OK\n" );
 
 
-		LoadImgFile lif;
+		PRINT_F_S( U"カラー" );
 		//カラー別
+		LoadImgFile lif;
 		if ( CH_CLR_1 == clr )
 		{
 			if ( nullptr == m_papTx_clr1 )
@@ -118,7 +121,11 @@ namespace GAME
 			}
 			m_pChara->SetpapTx_Main ( m_papTx_clr2 );
 		}
+		PRINT_F_S( U"OK\n" );
 
+
+
+		PRINT_F_S( U"エフェクト" );
 		//共通エフェクト
 		if ( nullptr == m_papTx_gns )
 		{
@@ -126,6 +133,9 @@ namespace GAME
 			m_papTx_gns = lif.LoadLz4_Gns ( m_filename_gns );
 		}
 		m_pChara->SetpapTx_Ef ( m_papTx_gns );
+		PRINT_F_S( U"OK\n" );
+
+
 
 
 		return m_pChara;

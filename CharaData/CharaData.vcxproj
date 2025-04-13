@@ -52,6 +52,7 @@
     <LocalDebuggerWorkingDirectory>$(ProjectDir)App</LocalDebuggerWorkingDirectory>
     <IncludePath>$(SIV3D_0_6_13)\include;$(SIV3D_0_6_13)\include\ThirdParty;$(IncludePath)</IncludePath>
     <LibraryPath>$(SIV3D_0_6_13)\lib\Windows;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Library</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -59,6 +60,7 @@
     <LocalDebuggerWorkingDirectory>$(ProjectDir)App</LocalDebuggerWorkingDirectory>
     <IncludePath>$(SIV3D_0_6_13)\include;$(SIV3D_0_6_13)\include\ThirdParty;$(IncludePath)</IncludePath>
     <LibraryPath>$(SIV3D_0_6_13)\lib\Windows;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Library</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -134,6 +136,7 @@
     <ClCompile Include="Source\IO\LoadCharaBinFunc.cpp" />
     <ClCompile Include="Source\IO\LoadCharaBinUtl.cpp" />
     <ClCompile Include="Source\IO\LoadCharaBin_s3d.cpp" />
+    <ClCompile Include="Source\IO\LoadCharaUtl.cpp" />
     <ClCompile Include="Source\IO\LoadImgFile.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -334,27 +337,28 @@
     <Xml Include="App\example\xml\test.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Action.h" />
-    <ClInclude Include="include\Behavior.h" />
-    <ClInclude Include="include\Branch.h" />
-    <ClInclude Include="include\Chara.h" />
-    <ClInclude Include="include\CharaData.h" />
-    <ClInclude Include="include\Chara_Const.h" />
-    <ClInclude Include="include\Chara_Define.h" />
-    <ClInclude Include="include\Command.h" />
-    <ClInclude Include="include\Compend.h" />
-    <ClInclude Include="include\Effect.h" />
-    <ClInclude Include="include\EffectGenerate.h" />
-    <ClInclude Include="include\IOCharaDefine.h" />
-    <ClInclude Include="include\LoadCharaBinFunc.h" />
-    <ClInclude Include="include\LoadCharaBinUtl.h" />
-    <ClInclude Include="include\LoadCharaBin_s3d.h" />
-    <ClInclude Include="Include\LoadImgFile.h" />
-    <ClInclude Include="include\Route.h" />
-    <ClInclude Include="include\Script.h" />
-    <ClInclude Include="include\ScriptParam_Battle.h" />
-    <ClInclude Include="include\ScriptParam_Staging.h" />
-    <ClInclude Include="include\Sequence.h" />
+    <ClInclude Include="..\Include\Action.h" />
+    <ClInclude Include="..\Include\Behavior.h" />
+    <ClInclude Include="..\Include\Branch.h" />
+    <ClInclude Include="..\Include\Chara.h" />
+    <ClInclude Include="..\Include\CharaData.h" />
+    <ClInclude Include="..\Include\Chara_Const.h" />
+    <ClInclude Include="..\Include\Chara_Define.h" />
+    <ClInclude Include="..\Include\Command.h" />
+    <ClInclude Include="..\Include\Compend.h" />
+    <ClInclude Include="..\Include\Effect.h" />
+    <ClInclude Include="..\Include\EffectGenerate.h" />
+    <ClInclude Include="..\Include\IOCharaDefine.h" />
+    <ClInclude Include="..\Include\LoadCharaBinFunc.h" />
+    <ClInclude Include="..\Include\LoadCharaBinUtl.h" />
+    <ClInclude Include="..\Include\LoadCharaBin_s3d.h" />
+    <ClInclude Include="..\Include\LoadCharaUtl.h" />
+    <ClInclude Include="..\Include\LoadImgFile.h" />
+    <ClInclude Include="..\Include\Route.h" />
+    <ClInclude Include="..\Include\Script.h" />
+    <ClInclude Include="..\Include\ScriptParam_Battle.h" />
+    <ClInclude Include="..\Include\ScriptParam_Staging.h" />
+    <ClInclude Include="..\Include\Sequence.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

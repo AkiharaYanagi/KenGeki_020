@@ -972,13 +972,7 @@
     <ClInclude Include="Source\GameMain\SoundConst.h">
       <Filter>90_GameMain</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CharaSele\CharaSele_Player.h">
-      <Filter>02_CharaSele</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CharaSele\CharaSeleConst.h">
-      <Filter>02_CharaSele</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CharaSele\CharaSele.h">
       <Filter>02_CharaSele</Filter>
     </ClInclude>
     <ClInclude Include="Source\Result\Result.h">
@@ -1207,15 +1201,6 @@
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Effect\OperateEffect.cpp">
       <Filter>03_FtgMain\ExeChara\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CharaSele\CharaSele_Player.cpp">
-      <Filter>02_CharaSele</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CharaSele\CharaSele.cpp">
-      <Filter>02_CharaSele</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CharaSele\CharaSeleConst.cpp">
-      <Filter>02_CharaSele</Filter>
     </ClCompile>
     <ClCompile Include="Source\Result\Result.cpp">
       <Filter>05_Result</Filter>

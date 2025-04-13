@@ -86,6 +86,9 @@ namespace GAME
 	//ボイスの再生
 	void ExeChara::VC_Play ()
 	{
+		//空欄は何もしない
+		if ( m_pScript->m_prmStaging.VC_Name.compare ( U"" ) == 0 ) { return; }
+
 		//一時停止中は１回のみ
 		if ( m_btlPrm.GetFirstVC () )
 		{

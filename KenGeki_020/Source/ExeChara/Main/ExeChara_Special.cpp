@@ -160,11 +160,11 @@ namespace GAME
 				m_pOther.lock()->m_dispChara->TurnShadow ( T );
 			}
 
-		}
-		if ( ! m_pFtgGrp->IsActive_WhiteOut () )
-		{
-			m_dispChara->TurnShadow ( F );
-			m_pOther.lock()->m_dispChara->TurnShadow ( F );
+			if ( ! m_pFtgGrp->IsActive_WhiteOut () )
+			{
+				m_dispChara->TurnShadow ( F );
+				m_pOther.lock()->m_dispChara->TurnShadow ( F );
+			}
 		}
 
 		//-----------------------------------------------------
@@ -221,6 +221,36 @@ namespace GAME
 					m_pOther.lock()->SetPos ( VEC2 ( my_pos.x + ( bDir * 250 ), GROUND_Y ) );
 				}
 			}
+
+
+#if 0
+			//EX時乗算カラー変更
+			bool b_ex0 = IsNameAction ( U"竜巻EX0" );
+			bool b_ex1 = IsNameAction ( U"竜巻EX1" );
+			bool b_ex2 = IsNameAction ( U"竜巻EX2" );
+			if ( b_ex0 || b_ex1 || b_ex2 )
+			{
+				if ( m_frame == 0 )
+				{
+					m_dispChara->SetColor ( 0xffffff00 );
+				}
+				if ( m_frame % 2 == 0 )
+				{
+					//m_dispChara->TurnShadow ( T );
+				}
+				else
+				{
+					m_dispChara->SetColor ( 0xffffffff );
+				}
+
+				//最終スクリプト
+				if ( m_pAction->IsEndScript ( m_frame ) )
+				{
+					m_dispChara->SetColor ( 0xffffffff );
+				}
+			}
+#endif // 0
+
 		}
 
 		//-----------------------------------------------------

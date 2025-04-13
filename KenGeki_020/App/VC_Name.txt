@@ -99,3 +99,6 @@ VC03_04_0_Gaba_投げ.wav
 VC03_05_0_Gaba_激突のヘルアビス.wav
 VC03_06_0_Gaba_激動の.wav
 VC03_06_1_Gaba_グラビトンクラッチ.wav
+VC03_07_1_Gaba_虫けらが.wav
+VC03_07_2_Gaba_竜巻EX２いつまで寝てんだ！！！.wav
+VC03_07_3_Gaba_竜巻EX３寝てろ！！　寝てんじゃねぇ！！.wav

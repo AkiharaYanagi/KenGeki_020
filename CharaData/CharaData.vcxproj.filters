@@ -136,6 +136,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Chara\Action.cpp">
       <Filter>Chara</Filter>
     </ClCompile>
@@ -175,16 +178,16 @@
     <ClCompile Include="Source\Chara\Sequence.cpp">
       <Filter>Chara</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\IO\LoadCharaBin_s3d.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IO\LoadCharaBinFunc.cpp">
       <Filter>IO</Filter>
     </ClCompile>
     <ClCompile Include="Source\IO\LoadCharaBinUtl.cpp">
       <Filter>IO</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IO\LoadCharaBinFunc.cpp">
+    <ClCompile Include="Source\IO\LoadCharaUtl.cpp">
       <Filter>IO</Filter>
     </ClCompile>
     <ClCompile Include="Source\IO\LoadImgFile.cpp">
@@ -821,70 +824,73 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Route.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Script.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ScriptParam_Battle.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ScriptParam_Staging.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Sequence.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Compend.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Effect.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\EffectGenerate.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Action.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Behavior.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Branch.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Chara.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Chara_Const.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CharaData.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Command.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IOCharaDefine.h">
-      <Filter>IO</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Chara_Define.h">
-      <Filter>Chara</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LoadCharaBin_s3d.h">
+    <ClInclude Include="..\Include\Action.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Behavior.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Branch.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Chara.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Chara_Const.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Chara_Define.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\CharaData.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Command.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Compend.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Effect.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EffectGenerate.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Script.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptParam_Battle.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptParam_Staging.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Sequence.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Route.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\LoadCharaBin_s3d.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="include\LoadCharaBinUtl.h">
+    <ClInclude Include="..\Include\LoadCharaBinFunc.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="include\LoadCharaBinFunc.h">
+    <ClInclude Include="..\Include\LoadCharaBinUtl.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="Include\LoadImgFile.h">
+    <ClInclude Include="..\Include\LoadCharaUtl.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\LoadImgFile.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IOCharaDefine.h">
       <Filter>IO</Filter>
     </ClInclude>
   </ItemGroup>

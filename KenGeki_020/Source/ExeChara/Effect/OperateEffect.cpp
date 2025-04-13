@@ -232,6 +232,7 @@ namespace GAME
 		if ( pEffect->GetName () == U"Guard" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"地面" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"Ukemi" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"EX" ) { pExeEffect->SetShader ( F ); }
 			 
 	}
 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Ctrl_Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <LastDirectory>F:\Projects\KenGeki_020\KenGeki_020\App</LastDirectory>
-  <LastFilepath>F:\Projects\KenGeki_020\KenGeki_020\App\chara_Retsudou.dat</LastFilepath>
+  <LastFilepath>F:\Projects\KenGeki_020\KenGeki_020\App\chara_Sae.dat</LastFilepath>
   <File_ActionList>ActionList.txt</File_ActionList>
   <Dir_ImageListAct>Image</Dir_ImageListAct>
   <File_EffectList>EffectList.txt</File_EffectList>

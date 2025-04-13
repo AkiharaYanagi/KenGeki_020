@@ -14,7 +14,7 @@
 #include "../FtgMain/FtgMain.h"
 #include "../Title/Title.h"
 #include "../Training/Training.h"
-#include "../CharaSele/CharaSele.h"
+//#include "../CharaSele/CharaSele.h"
 #include "../CharaSele/_CharaSele.h"
 #include "../Result/Result.h"
 

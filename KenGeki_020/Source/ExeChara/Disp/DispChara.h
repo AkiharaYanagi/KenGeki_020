@@ -95,6 +95,9 @@ namespace GAME
 		//影化
 		void TurnShadow ( bool b ) { m_mainImage->TurnShadow ( b ); }
 
+		//乗算カラー指定
+		void SetColor ( uint32 clr ) { m_mainImage->SetColor ( clr ); }
+
 		//メインイメージを同一Z値で先頭にする
 		void TopByZ () { m_mainImage->TopByZ (); }
 

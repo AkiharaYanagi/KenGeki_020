@@ -24,6 +24,11 @@ namespace GAME
 	//キャラ個別データ
 	class Prm_Chara
 	{
+		//test
+		//非同期処理
+
+
+
 		//ポインタのみ
 		P_Chara		m_pChara { nullptr };
 

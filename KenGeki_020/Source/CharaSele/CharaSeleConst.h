@@ -107,6 +107,7 @@ namespace GAME
 		case CHARA_OUKA:		return CHSLID_00;
 		case CHARA_SAE:			return CHSLID_02;
 		case CHARA_RETSUDOU:	return CHSLID_03;
+		case CHARA_GABADARUGA:	return CHSLID_05;
 		}
 		return CHARA_SELE_NUM;
 	};
