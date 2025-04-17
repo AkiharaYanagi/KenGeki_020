@@ -24,10 +24,6 @@ namespace GAME
 	//キャラ個別データ
 	class Prm_Chara
 	{
-		//test
-		//非同期処理
-
-
 
 		//ポインタのみ
 		P_Chara		m_pChara { nullptr };
@@ -76,6 +72,20 @@ namespace GAME
 	//全キャラ分
 	class Prm_Chara_all
 	{
+		//非同期処理
+		s3d::AsyncTask < void >	m_asyncLoad_Ouka;
+		s3d::AsyncTask < void >	m_asyncLoad_Sae_;
+		s3d::AsyncTask < void >	m_asyncLoad_Retu;
+		s3d::AsyncTask < void >	m_asyncLoad_Gaba;
+
+		//終了ミューテックス
+		std::mutex				m_mutex;
+
+		//中断フラグ
+		std::atomic < bool >	m_abort { F };
+
+
+		//キャラデータ
 		Prm_Chara		m_Ouka;
 		Prm_Chara		m_Sae;
 		Prm_Chara		m_Retsu;
@@ -92,6 +102,15 @@ namespace GAME
 
 		//キャラ名とカラーからデータポインタを取得
 		P_Chara GetpChara ( CHARA_NAME name, CHARA_COLOR clr );
+
+
+	private:
+		static void _LoadAll ( Prm_Chara_all * pThis );
+
+		static void _Load_Ouka ( Prm_Chara_all * pThis );
+		static void _Load_Sae_ ( Prm_Chara_all * pThis );
+		static void _Load_Retu ( Prm_Chara_all * pThis );
+		static void _Load_Gaba ( Prm_Chara_all * pThis );
 	};
 
 

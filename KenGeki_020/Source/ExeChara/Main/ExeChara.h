@@ -454,6 +454,8 @@ namespace GAME
 		void SetParamFromScript ();	//スクリプトからパラメータを反映する
 		void SpecialAction ();		//特殊アクション指定
 
+
+	public:
 		//------------------------------------------------
 		//アクション体勢
 		bool Is_AP_Stand () const { return m_pAction->GetPosture () == AP_STAND; }
@@ -490,6 +492,10 @@ namespace GAME
 
 		bool IsAir ()		 const { return m_pAction->GetPosture () == AP_JUMP; }
 		bool IsThrow () const;
+
+		//終了のための待機状態かどうか
+		bool IsWait () { return IsStand (); }
+
 		bool Have_TransitAction_Condition ( BRANCH_CONDITION BRC_CND ) const;
 #if 0
 	public:
@@ -508,13 +514,6 @@ namespace GAME
 	public:
 		void RevertSlow ();
 #endif // 0
-
-	public:
-
-	public:
-		//終了のための待機状態かどうか
-		bool IsWait () { return IsStand (); }
-
 		
 		//メインイメージを同一Z値で先頭にする
 		void TopByZ () { m_dispChara->TopByZ (); }

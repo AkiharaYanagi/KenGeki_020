@@ -284,6 +284,34 @@ namespace GAME
 
 #endif // 0
 
+		//----------------------------------------------
+		//最後に相手と逆向き修正
+		float ox = m_pOther.lock()->GetPos ().x;
+		float mx = GetPos ().x;
+
+		//同位置のときは向きは持続
+		if ( mx != ox )
+		{
+			bool bPosLeft = mx < ox;	//自身が左位置のとき
+			float dir = bPosLeft ? -1.f : 1.f;	//自分の向きによらず左方向
+
+			//絶対値に符号(向き)を乗算
+			recoil_i = dir * std::abs ( recoil_i );
+
+			if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
+			{
+				DBGOUT_WND_F ( DBGOUT_6, U"recoil_i = {} * {}"_fmt ( dir, recoil_i ) );
+			}
+		}
+		else
+		{
+			if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
+			{
+				DBGOUT_WND_F ( DBGOUT_6, U"recoil_i = (*) {}"_fmt ( recoil_i ) );
+			}
+		}
+
+		//----------------------------------------------
 		//パラメータに反映
 		m_btlPrm.SetAccRecoil ( recoil_i );
 

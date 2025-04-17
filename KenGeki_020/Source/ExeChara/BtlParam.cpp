@@ -394,7 +394,8 @@ namespace GAME
 
 		//---------------
 		//反動(ノックバック)
-		m_vel_recoil += dir * m_acc_recoil;
+//		m_vel_recoil += dir * m_acc_recoil;
+		m_vel_recoil += m_acc_recoil;		//向きはヒット時に相対位置で決める
 		m_posChara.x += m_vel_recoil;
 		m_vel_recoil *= 0.8f;	//Velは減衰
 		if ( std::abs ( m_vel_recoil ) < 0.01f ) { m_vel_recoil = 0; } 
@@ -639,7 +640,13 @@ namespace GAME
 		if ( m_pAction->IsName ( U"前歩き")		) { return T; }
 		if ( m_pAction->IsName ( U"後歩き")		) { return T; }
 		if ( m_pAction->IsName ( U"着地")		) {	return T; }
+#if 0
+		if ( m_pAction->IsName ( U"ダメージ小")	) {	return T; }
 		if ( m_pAction->IsName ( U"空中やられ")	) {	return T; }
+		if ( m_pAction->IsName ( U"ダメージ大")	) {	return T; }
+#endif // 0
+		if ( m_pExeChara.lock()->IsDamaged () ) { return T; } 
+
 		if ( m_pAction->IsName ( U"起き上がり")	) {	return T; }
 
 		//特殊

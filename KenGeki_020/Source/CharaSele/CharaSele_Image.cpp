@@ -168,13 +168,6 @@ namespace GAME
 
 	void CharaSele_Image::SelectChara ( CHARA_SELE_ID id )
 	{
-		if ( id == CHARA_SELE_NUM )
-		{
-			int i = 0;
-			++ i;
-		}
-
-
 		m_chara_id = id;
 
 		m_chara_stand->SetValid ( T );

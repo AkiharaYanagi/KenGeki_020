@@ -135,26 +135,33 @@ namespace GAME
 
 
 
+		//デバッグ表示オン/オフ 初期状態
+		//ExeChara 1p/2p のとき、1pの値を2pで上書きに注意
+#if DEBUG_DISP		
+		//ゲーム内表示のオフ
+		DBGOUT_WND_ON ();
+
+		//コマンドプロンプト表示
+//		DebugOutPrint::Create ();
+		DebugOutPrint::OpenPrompt ();
+		PRINT_F_S ( U"start DebugOutPrint.\n" );
+
+#else
+		//Siv3D IDE出力 Loggerの非表示
+		s3d::Logger.disable ();
+
+		//ゲーム内表示のオフ
+		DBGOUT_WND_OFF ();
+		Print;
+#endif	//DEBUG_DISP
+
+
 		if ( startMode == START_TITLE )
 		{
 			//全キャラデータを事前読込
 //			// ここで読込しないとき、バトルメインでキャラの個別読込
 			m_pParam->LoadCharaData_All ();
 		}
-
-
-		//デバッグ表示オン/オフ 初期状態
-		//ExeChara 1p/2p のとき、1pの値を2pで上書きに注意
-#if DEBUG_DISP		
-		DBGOUT_WND_ON ();
-//		DBGOUT_WND_OFF ();
-
-		DebugOutPrint::Create ();
-		PRINT_F_S ( U"start DebugOutPrint.\n" );
-
-#else
-		DBGOUT_WND_OFF ();
-#endif	//DEBUG_DISP
 
 
 		//開始シーンの選択

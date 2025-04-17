@@ -50,6 +50,7 @@ namespace GAME
 		bool bHit = m_btlPrm.GetHitEst () || m_btlPrm.GetClang ();
 //		bool bHit = m_btlPrm.GetHitEst ();
 
+#if 0
 		//デバッグ表示あり
 		if ( m_btlPrm.GetPlayerID() == PLAYER_ID_1 )
 		{
@@ -63,7 +64,6 @@ namespace GAME
 			UINT hitnum = m_btlPrm.GetHitNum ();
 			DBGOUT_WND_F ( DBGOUT_7, U"hitnum = {} / {}"_fmt( hitnum, hitmax ) );
 		}
-#if 0
 #endif // 0
 
 #if DEBUG_DISP

@@ -286,7 +286,6 @@ namespace GAME
 		//@info 特殊状態　（特定技やられなど）は除く
 		bool bDai = U"ダメージ大" == nameAction ;
 		bool bSyou = U"ダメージ小" == nameAction ;
-		if ( bDai || bSyou )
 #if 0
 
 
@@ -298,6 +297,8 @@ namespace GAME
 
 		if ( bAir )
 #endif // 0
+
+#if 0
 		{
 			ACTION_POSTURE ap = m_pOther.lock()->GetPosture ();
 			if ( ap == ACTION_POSTURE::AP_JUMP )
@@ -305,6 +306,17 @@ namespace GAME
 				nameAction = U"空中やられ";
 			}
 		}
+#endif // 0
+		if ( bDai || bSyou )
+		{
+			//相手が空中( GROUND_Y < pos_y )
+			float e_pos_y = m_pOther.lock()->GetPos().y;
+			if ( e_pos_y < (float)GROUND_Y )
+			{
+				nameAction = U"空中やられ";
+			}
+		}
+
 
 		//@info のけぞり時間を指定してある場合、相手に適用
 

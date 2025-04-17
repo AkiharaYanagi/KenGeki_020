@@ -4,7 +4,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <OutDir>.\App\</OutDir>
-    <TargetExt>.lib</TargetExt>
+    <TargetExt>
+    </TargetExt>
     <IncludePath>$(SIV3D_0_6_16)\include;$(SIV3D_0_6_16)\include\ThirdParty;$(IncludePath)</IncludePath>
     <LibraryPath>$(SIV3D_0_6_16)\lib\Windows;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
