@@ -129,6 +129,11 @@ namespace GAME
 			SelectColor ( prm->GetCharaColor2p () );
 		}
 #endif // 0
+
+		//test
+		//カラーを１に戻す
+		SelectColor ( CH_CLR_1 );
+
 	}
 
 
@@ -208,6 +213,12 @@ namespace GAME
 
 	void _CharaSele_Player::To_Color ()
 	{
+
+		//test
+		//カラーを１に戻す
+		SelectColor ( CH_CLR_1 );
+
+
 		if ( PLAYER_ID_1 == m_player_id )
 		{
 			m_state_Disp->SetPos ( CH_STT_COLOR_1P_X, CH_STT_COLOR_Y );

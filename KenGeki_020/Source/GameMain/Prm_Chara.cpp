@@ -37,10 +37,11 @@ namespace GAME
 	constexpr char32_t CHARA_IMG2_SAE []	= U"Chara\\Sae_1p_bhv.lz4";
 
 	constexpr char32_t CHARA_IMG1_RETSU []	= U"Chara\\Retsudou_1p_bhv.lz4";
-	constexpr char32_t CHARA_IMG2_RETSU []	= U"Chara\\Retsudou_2p_bhv.lz4";
+//	constexpr char32_t CHARA_IMG2_RETSU []	= U"Chara\\Retsudou_2p_bhv.lz4";
+	constexpr char32_t CHARA_IMG2_RETSU []	= U"Chara\\Retsudou_1p_bhv.lz4";
 
-	constexpr char32_t CHARA_IMG1_GABA []	= U"Chara\\Gabadaruga_bhv.lz4";
-	constexpr char32_t CHARA_IMG2_GABA []	= U"Chara\\Gabadaruga_bhv.lz4";
+	constexpr char32_t CHARA_IMG1_GABA []	= U"Chara\\Gabadaruga_1p_bhv.lz4";
+	constexpr char32_t CHARA_IMG2_GABA []	= U"Chara\\Gabadaruga_1p_bhv.lz4";
 
 	//キャラエフェクトイメージファイル
 	constexpr char32_t CHARA_GNS_OUKA []	= U"Chara\\Ouka_gns.lz4";
@@ -233,7 +234,7 @@ namespace GAME
 	}
 
 
-	//すべて読込
+	//すべて読込(非同期処理)
 	void Prm_Chara_all::LoadAll ()
 	{
 		PRINT_F_S ( U"Prm_Chara_all::LoadAll\n" );
@@ -242,6 +243,28 @@ namespace GAME
 		m_asyncLoad_Sae_ = s3d::Async ( _Load_Sae_, this );
 		m_asyncLoad_Retu = s3d::Async ( _Load_Retu, this );
 		m_asyncLoad_Gaba = s3d::Async ( _Load_Gaba, this );
+	}
+
+	//すべて読込(同期処理)
+	void Prm_Chara_all::_LoadAll ()
+	{
+		PRINT_F_S ( U"Start Prm_Chara_all::_LoadAll\n" );
+
+		PRINT_F_S ( U"Start Prm_Chara_all::_Load_Ouka\n" );
+		m_Ouka.Load ();
+		PRINT_F_S ( U"End Prm_Chara_all::_Load_Ouka\n" );
+
+		PRINT_F_S ( U"Start Prm_Chara_all::_Load_Sae_\n" );
+		m_Sae.Load ();
+		PRINT_F_S ( U"End Prm_Chara_all::_Load_Sae_\n" );
+
+		PRINT_F_S ( U"Start Prm_Chara_all::_Load_Retu\n" );
+		m_Retsu.Load ();
+		PRINT_F_S ( U"End Prm_Chara_all::_Load_Retu\n" );
+
+//		m_Gaba.Load ();
+
+		PRINT_F_S ( U"End Prm_Chara_all::_LoadAll\n" );
 	}
 
 

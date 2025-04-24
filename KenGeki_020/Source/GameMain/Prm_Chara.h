@@ -99,6 +99,7 @@ namespace GAME
 
 		//すべて読込
 		void LoadAll ();
+		void _LoadAll ();
 
 		//キャラ名とカラーからデータポインタを取得
 		P_Chara GetpChara ( CHARA_NAME name, CHARA_COLOR clr );

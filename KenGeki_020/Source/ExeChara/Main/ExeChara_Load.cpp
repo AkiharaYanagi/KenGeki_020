@@ -37,44 +37,9 @@ namespace GAME
 		//バトルパラメータ
 		m_btlPrm.ParamInit ( pParam );
 
-#if 0
-
-		//ゲーム設定ファイル
-		GameSettingFile stg = pParam->GetGameSetting ();
-
-		//キャラ名
-
-		if ( stg.GetDemo () )
-		{
-			//デモ時はランダム
-			int rnd = s3d::Random ( 1 );
-			switch ( rnd )
-			{
-			case 0: m_name = CHARA_NAME::CHARA_SAE;			break;
-			case 1: m_name = CHARA_NAME::CHARA_RETSUDOU;	break;
-			};
-
-			//キャラを記録
-			if ( Is1P () )
-			{
-				pParam->SetCharaName1p ( m_name );
-			}
-			else if ( Is2P () )
-			{
-				pParam->SetCharaName2p ( m_name );
-			}
-			stg.Save ();
-		}
-		else
-		{
-	//		m_name = stg.GetName ( m_playerID );
-			m_name = pParam->GetCharaName ( m_btlPrm.GetPlayerID () );
-	//		m_name = CHARA_SAE;
-	//		m_name = CHARA_RETSUDOU;
-		}
-
-#endif // 0
-
+		//他
+		m_OnHit.SetpParam ( pParam );
+		m_OnDamaged.SetpParam ( pParam );
 	}
 
 

@@ -412,7 +412,6 @@
     <ClInclude Include="Source\CharaSele\CharaSele_Stage.h" />
     <ClInclude Include="Source\CharaSele\_CharaSele.h" />
     <ClInclude Include="Source\CharaSele\_CharaSele_Actor.h" />
-    <ClInclude Include="Source\CharaSele\_CharaSele_Const.h" />
     <ClInclude Include="Source\CharaSele\_CharaSele_Player.h" />
     <ClInclude Include="Source\CharaSele\_CharaSele_State.h" />
     <ClInclude Include="Source\ExeChara\BtlParam.h" />
@@ -427,6 +426,8 @@
     <ClInclude Include="Source\ExeChara\Effect\DispEffect.h" />
     <ClInclude Include="Source\ExeChara\Effect\ExeEffect.h" />
     <ClInclude Include="Source\ExeChara\Effect\OperateEffect.h" />
+    <ClInclude Include="Source\ExeChara\Event\ExeChara_OnDamaged.h" />
+    <ClInclude Include="Source\ExeChara\Event\ExeChara_OnHit.h" />
     <ClInclude Include="Source\ExeChara\Input\CharaInput.h" />
     <ClInclude Include="Source\ExeChara\Input\CPUInput.h" />
     <ClInclude Include="Source\ExeChara\Input\NewCPUInput.h" />
@@ -487,7 +488,6 @@
     <ClCompile Include="Source\CharaSele\CharaSele_Stage.cpp" />
     <ClCompile Include="Source\CharaSele\_CharaSele.cpp" />
     <ClCompile Include="Source\CharaSele\_CharaSele_Actor.cpp" />
-    <ClCompile Include="Source\CharaSele\_CharaSele_Const.cpp" />
     <ClCompile Include="Source\CharaSele\_CharaSele_Player.cpp" />
     <ClCompile Include="Source\CharaSele\_CharaSele_State.cpp" />
     <ClCompile Include="Source\ExeChara\BtlParam.cpp" />
@@ -501,6 +501,8 @@
     <ClCompile Include="Source\ExeChara\Effect\DispEffect.cpp" />
     <ClCompile Include="Source\ExeChara\Effect\ExeEffect.cpp" />
     <ClCompile Include="Source\ExeChara\Effect\OperateEffect.cpp" />
+    <ClCompile Include="Source\ExeChara\Event\ExeChara_OnDamaged.cpp" />
+    <ClCompile Include="Source\ExeChara\Event\ExeChara_OnHit.cpp" />
     <ClCompile Include="Source\ExeChara\Input\CharaInput.cpp" />
     <ClCompile Include="Source\ExeChara\Input\CPUInput.cpp" />
     <ClCompile Include="Source\ExeChara\Input\NewCPUInput.cpp" />

@@ -56,22 +56,27 @@ namespace GAME
 
 	void ChSl_St_Color::Input ()
 	{
+		//test
 		//左右で色指定
 		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_LEFT ) )
 		{
 			SND_PLAY_ONESHOT_SE ( SE_select_move );
+#if 0
 			CHARA_COLOR clr = mwp_Player.lock()->GetColor ();
 			CHARA_COLOR prev_clr = CH_CLR_2;
 			if ( clr == CH_CLR_2 ) { prev_clr = CH_CLR_1; }
 			mwp_Player.lock()->SelectColor_cutin ( prev_clr );
+#endif // 0
 		}
 		if ( CFG_PUSH_KEY_PL ( m_player_id, PLY_RIGHT ) )
 		{
 			SND_PLAY_ONESHOT_SE ( SE_select_move );
+#if 0
 			CHARA_COLOR clr = mwp_Player.lock()->GetColor ();
 			CHARA_COLOR next_clr = CH_CLR_2;
 			if ( clr == CH_CLR_2 ) { next_clr = CH_CLR_1; }
 			mwp_Player.lock()->SelectColor_cutin ( next_clr );
+#endif // 0
 		}
 
 		//ボタン0で決定

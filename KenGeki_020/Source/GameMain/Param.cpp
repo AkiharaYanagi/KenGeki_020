@@ -173,7 +173,12 @@ namespace GAME
 
 		m_read_chara = T;
 #endif // 0
-		m_prmChara_all.LoadAll ();
+
+		//非同期処理
+//		m_prmChara_all.LoadAll ();
+
+		//同期処理
+		m_prmChara_all._LoadAll ();
 	}
 
 

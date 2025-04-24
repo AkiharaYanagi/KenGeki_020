@@ -73,6 +73,7 @@ namespace GAME
 		int		m_power { 0 };			//実効攻撃値
 		bool	m_damaged { F };		//くらいフラグ
 		bool	m_hitEst { F };			//攻撃成立フラグ
+		bool	m_guardEst { F };		//ガード成立フラグ
 		bool	m_FirstEf { F };		//初回Efフラグ
 		bool	m_FirstSE { F };		//初回SEフラグ (一時停止 : state)
 		bool	m_FirstSE_HS { F };		//初回SEフラグ (ヒットストップ)
@@ -185,7 +186,8 @@ namespace GAME
 		//--------------------------------------------------------------------
 		//単純フラグ { get; set; }
 		GET_SET ( bool, GetDamaged, SetDamaged, m_damaged )		//くらい
-		GET_SET ( bool, GetHitEst, SetHitEst, m_hitEst )			//ヒット成立
+		GET_SET ( bool, GetHitEst, SetHitEst, m_hitEst )		//ヒット成立
+		GET_SET ( bool, GetGuardEst, SetGuardEst, m_guardEst )	//ガード成立
 		GET_SET ( bool, GetForcedChange, SetForcedChange, m_ForcedChange )		//強制変更
 		GET_SET ( bool, GetClang, SetClang, m_clang )				//打合
 		GET_SET ( bool, GetTrangit, SetTrangit, m_transit )		//スクリプト遷移

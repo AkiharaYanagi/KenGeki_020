@@ -28,10 +28,11 @@ namespace GAME
 		//2024/12/15 変な格ゲー会 ver0.15
 		//2024/12/30 冬コミ ver0.20
 		//2024/12/31 冬コミ修正 ver0.21
-		//2024/02/10 Steam ver0.22
-		//2024/02/20 修正 ver0.23
+		//2025/02/10 Steam ver0.22
+		//2025/02/20 修正 ver0.23
+		//2025/04/19 バトル修正 ver0.24
 #endif // 0
-	const char32_t Title::Ver[] = U"ver 0.23";
+	const char32_t Title::Ver[] = U"ver 0.24";
 
 	const float Title::BG_X = 0;
 	const float Title::BG_Y = 0;

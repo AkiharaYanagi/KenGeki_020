@@ -132,7 +132,7 @@ namespace GAME
 
 
 	//---------------------------------------------------
-	UINT Chara::GetActionID ( s3d::String name ) const
+	UINT Chara::GetActionID ( const s3d::String & name ) const
 	{
 		UINT index = 0;
 		for ( auto p : *mpap_Action )
@@ -147,11 +147,11 @@ namespace GAME
 		return NO_ACTION;
 	}
 
-	bool Chara::ExistAction ( s3d::String name ) const
+	bool Chara::ExistAction ( const s3d::String & name ) const
 	{
 		for ( auto p : * mpap_Action )
 		{
-			s3d::String actionName = p->GetName ();
+			const s3d::String & actionName = p->GetcrName ();
 			if ( 0 == name.compare ( actionName ) )
 			{
 				return T;
@@ -160,7 +160,7 @@ namespace GAME
 		return F;
 	}
 
-	bool Chara::ExistEffect ( s3d::String name ) const
+	bool Chara::ExistEffect ( const s3d::String & name ) const
 	{
 		for ( auto p : * mpap_Ef )
 		{

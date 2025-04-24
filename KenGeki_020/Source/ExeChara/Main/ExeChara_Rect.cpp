@@ -66,10 +66,6 @@ namespace GAME
 		}
 #endif // 0
 
-#if DEBUG_DISP
-#else
-		//デバッグ表示なし
-#endif // DEBUG_DISP
 
 		//--------------------------------------------------
 		//ヒットしていない時(通常時)、攻撃枠を設定して終了
@@ -106,6 +102,7 @@ namespace GAME
 		//多段可能なアクションは、ヒット間隔をチェックして攻撃枠を再設定する
 		P_Timer ptHitPitch = m_btlPrm.GetTmr_HitPitch ();
 		UINT pitch = m_pAction->GetHitPitch ();
+
 		//タイマが指定間隔未満なら枠を設定しない
 		if ( pitch > ptHitPitch->GetTime () )
 		{
@@ -113,7 +110,6 @@ namespace GAME
 			m_charaRect->ResetARect ();
 			return;
 		}
-
 		else
 		{
 			//再スタート

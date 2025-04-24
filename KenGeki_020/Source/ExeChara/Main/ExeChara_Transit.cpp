@@ -317,6 +317,21 @@ namespace GAME
 			}
 		}
 
+		if ( IsNameAction ( U"乱舞超必殺技発生" ) )
+		{
+//			if ( m_pScript->GetFrame () == 0 )
+			{
+				//相手を地上ヒットにする
+
+				//高さ０
+				VEC2 pos = m_pOther.lock()->GetPos ();
+				m_pOther.lock()->SetPos ( VEC2 ( pos.x, GROUND_Y ) );
+
+				//相手の「相手の変更先アクション」を指定
+				nameAction = U"ダメージ大";
+			}
+		}
+
 
 		//@info のけぞり時間を指定してある場合、相手に適用
 
@@ -517,29 +532,20 @@ namespace GAME
 		{
 			assert ( 0 );
 		}
+#if 0
 		if ( ! ExistActionName ( U"ボタンダッシュ開始" ) )
 		{
 			assert ( 0 );
 		}
+#endif // 0
 
 		bool bDash = IsNameAction ( U"前ダッシュ開始" );
-		bool bBtnDash = IsNameAction ( U"ボタンダッシュ開始" );
-		if ( bDash || bBtnDash )
+//		bool bBtnDash = IsNameAction ( U"ボタンダッシュ開始" );
+//		if ( bDash || bBtnDash )
+		if ( bDash )
 		{
 			m_btlPrm.SetDashInertial ( VEC2 ( 10.f, 0 ) );
 		}
-#if 0
-
-		if ( m_pChara->GetActionID ( U"FrontDash" ) == m_actionID )
-		{
-			m_btlPrm.SetDashInertial ( VEC2 ( 10.f, 0 ) );
-		}
-		if ( m_pChara->GetActionID ( U"BackDash" ) == m_actionID )
-		{
-			m_btlPrm.SetDashInertial ( VEC2 ( -8.f, 0 ) );
-		}
-
-#endif // 0
 		//------------------------------------------------
 
 		//各種状態の終了

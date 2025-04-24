@@ -52,6 +52,7 @@ namespace GAME
 		m_power = rhs.m_power;			//実効攻撃値
 		m_damaged = rhs.m_damaged;		//くらいフラグ
 		m_hitEst = rhs.m_hitEst;		//攻撃成立フラグ
+		m_guardEst = rhs.m_guardEst;	//ガード成立フラグ
 		m_FirstEf = rhs.m_FirstEf;		//初回Efフラグ
 		m_FirstSE = rhs.m_FirstSE;		//初回SEフラグ
 		m_FirstSE_HS = rhs.m_FirstSE_HS;		//初回SEフラグ(ヒットストップ)
@@ -171,6 +172,7 @@ namespace GAME
 		m_power = 0;
 
 		m_hitEst = false;
+		m_guardEst = false;
 		m_FirstEf = false;
 		m_FirstSE = false;
 		m_FirstSE_HS = false;
@@ -234,6 +236,7 @@ namespace GAME
 	{
 		m_clang = false;
 		m_hitEst = false;
+		m_guardEst = false;
 		m_FirstEf = false;
 		m_FirstSE = false;
 		m_FirstSE_HS = false;
@@ -645,7 +648,16 @@ namespace GAME
 		if ( m_pAction->IsName ( U"空中やられ")	) {	return T; }
 		if ( m_pAction->IsName ( U"ダメージ大")	) {	return T; }
 #endif // 0
-		if ( m_pExeChara.lock()->IsDamaged () ) { return T; } 
+		if ( m_pExeChara.lock()->IsDamaged () )
+		{
+			//空中吹き飛び時　ループを防ぐ
+			if ( m_pAction->IsName ( U"手前に大きく吹き飛びダウン持続")	) {	return F; }
+			if ( m_pScript->GetFrame () == 0 )
+			{
+				//初回のみT
+				return T;
+			}
+		} 
 
 		if ( m_pAction->IsName ( U"起き上がり")	) {	return T; }
 
@@ -796,8 +808,51 @@ namespace GAME
 		//-------------------------------------------------
 		//ノックバック処理		// 値は (float) = (int)1/10
 		float recoil_i = 0.1f * m_pScript->m_prmBattle.Recoil_I;
+#if 0
 		SetAccRecoil ( recoil_i );
+#endif // 0
 
+		//----------------------------------------------
+		//最後に相手と逆向き修正
+		float ox = m_pOther.lock()->GetPos ().x;
+		float mx = GetPos ().x;
+
+		//相手との位置で方向を決める(キャラ向きによらない)
+		if ( mx != ox )
+		{
+			bool bPosLeft = mx < ox;	//自身が左位置のとき
+			float dir = bPosLeft ? -1.f : 1.f;	//自分の向きによらず左方向
+
+			//絶対値に符号(向き)を乗算
+			float abs = std::abs ( recoil_i );
+			float recoil_dir = dir * abs;
+
+			if ( GetPlayerID () == PLAYER_ID_1 )
+			{
+				DBGOUT_WND_F ( DBGOUT_5, U"p1:recoil_i {} = {} * {}"_fmt ( recoil_dir, dir, abs ) );
+			}
+			if ( GetPlayerID () == PLAYER_ID_2 )
+			{
+				DBGOUT_WND_F ( DBGOUT_6, U"p2:recoil_i {} = {} * {}"_fmt ( recoil_dir, dir, abs ) );
+			}
+
+			//保存
+			recoil_i = recoil_dir;
+		}
+		else
+		{
+			//同位置のときは向きは自分の向き
+			float dir = m_dirRight ? -1.f : 1.f;
+
+			//絶対値に符号(向き)を乗算
+			float abs = std::abs ( recoil_i );
+			float recoil_dir = dir * abs;
+
+			//保存
+			recoil_i = recoil_dir;
+		}
+
+		SetAccRecoil ( recoil_i );
 	}
 	//============================================================
 

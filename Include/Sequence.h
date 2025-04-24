@@ -43,9 +43,10 @@ namespace GAME
 //		void SetName ( tstring name ) { m_name.assign ( name ); }
 //		tstring GetName () const { return m_name; }
 //		bool IsName ( tstring name ) const { return m_name == name; }
-		void SetName ( s3d::String name ) { m_name.assign ( name ); }
+		void SetName ( const s3d::String & name ) { m_name.assign ( name ); }
+		const s3d::String & GetcrName () const { return m_name; }
 		s3d::String GetName () const { return m_name; }
-		bool IsName ( s3d::String name ) { return m_name == name; }
+		bool IsName ( const s3d::String & name ) const { return m_name == name; }
 
 		//-----------------------------------------------------------------
 		//スクリプトの追加

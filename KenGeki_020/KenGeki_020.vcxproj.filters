@@ -185,6 +185,9 @@
     <Filter Include="03_FtgMain\Fighting\BG">
       <UniqueIdentifier>{08607420-6e1f-4aee-a046-c426a948a105}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03_FtgMain\ExeChara\Event">
+      <UniqueIdentifier>{adcf6dd9-e2fa-4fbe-a07b-adbc85b5a12a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -1047,9 +1050,6 @@
     <ClInclude Include="Source\CharaSele\CharaSele_Cursor.h">
       <Filter>02_CharaSele</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CharaSele\_CharaSele_Const.h">
-      <Filter>02_CharaSele</Filter>
-    </ClInclude>
     <ClInclude Include="Source\template.h">
       <Filter>02_CharaSele</Filter>
     </ClInclude>
@@ -1061,6 +1061,12 @@
     </ClInclude>
     <ClInclude Include="Source\GameMain\Prm_Chara.h">
       <Filter>90_GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\Event\ExeChara_OnDamaged.h">
+      <Filter>03_FtgMain\ExeChara\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExeChara\Event\ExeChara_OnHit.h">
+      <Filter>03_FtgMain\ExeChara\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1274,9 +1280,6 @@
     <ClCompile Include="Source\CharaSele\CharaSele_Cursor.cpp">
       <Filter>02_CharaSele</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CharaSele\_CharaSele_Const.cpp">
-      <Filter>02_CharaSele</Filter>
-    </ClCompile>
     <ClCompile Include="Source\CharaSele\CharaSele_Stage.cpp">
       <Filter>02_CharaSele</Filter>
     </ClCompile>
@@ -1285,6 +1288,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameMain\Prm_Chara.cpp">
       <Filter>90_GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Event\ExeChara_OnHit.cpp">
+      <Filter>03_FtgMain\ExeChara\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Event\ExeChara_OnDamaged.cpp">
+      <Filter>03_FtgMain\ExeChara\Event</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

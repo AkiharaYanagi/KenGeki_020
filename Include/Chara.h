@@ -79,7 +79,7 @@ namespace GAME
 		void AddpMainTexture ( P_Tx pTexture ) { mpap_txMain->push_back ( pTexture ); }
 
 		//メインイメージ テクスチャポインタの取得
-		P_Tx GetpMainTexture ( UINT index ) { return mpap_txMain->at ( index ); }
+		P_Tx GetpMainTexture ( UINT index ) const { return mpap_txMain->at ( index ); }
 
 		//テクスチャ配列の設定
 		void SetpapTx_Main ( PAP_Tx paptx ) { mpap_txMain = paptx; }
@@ -87,7 +87,7 @@ namespace GAME
 
 		//-----------------------------------------------------------------
 		//アクション配列ポインタを取得
-		PAP_Action GetpvpAction () { return mpap_Action; }
+		PAP_Action GetpvpAction () const { return mpap_Action; }
 
 		//アクション配列に追加
 		void AddpAction ( P_Action pAction ) { mpap_Action->push_back ( pAction ); }
@@ -99,21 +99,21 @@ namespace GAME
 
 		//---------------------------------------------------------------------
 		//名前からアクションIDを取得する(無いときはNO_ACTION(0x7FFF0001)を返す)
-		UINT GetActionID ( s3d::String name ) const;
+		UINT GetActionID ( const s3d::String & name ) const;
 
 		//指定アクション名が存在するかどうか
-		bool ExistAction ( s3d::String name ) const;
+		bool ExistAction ( const s3d::String & name ) const;
 
 		//アクションポインタを取得
-		P_Action GetpAction ( UINT index ) { return mpap_Action->at ( index ); }
-		P_Action GetpAction ( s3d::String name ) { return GetpAction ( GetActionID ( name ) ); }
+		P_Action GetpAction ( UINT index ) const { return mpap_Action->at ( index ); }
+		P_Action GetpAction ( const s3d::String & name ) const { return GetpAction ( GetActionID ( name ) ); }
 
 		//---------------------------------------------------------------------
 		//スクリプトポインタを取得
 		P_Script GetpScript ( UINT indexAction, UINT indexScript ) { return mpap_Action->at ( indexAction )->GetpScript( indexScript ); }
 
 		//次スクリプトが存在するかどうか
-		bool IsNextScript ( UINT indexAction, UINT indexScript )
+		bool IsNextScript ( UINT indexAction, UINT indexScript ) const
 		{
 			return mpap_Action->at ( indexAction )->IsNextScript( indexScript );
 		}
@@ -130,7 +130,7 @@ namespace GAME
 		void AddpEffect ( const std::vector < P_Effect > & arypEffect, rsize_t size );
 
 		//指定エフェクト名が存在するかどうか
-		bool ExistEffect ( s3d::String name ) const;
+		bool ExistEffect ( const s3d::String & name ) const;
 
 		//Efイメージ テクスチャポインタの取得
 		P_Tx GetpEfTexture ( UINT index ) { return mpap_txEf->at ( index ); }

@@ -73,8 +73,15 @@ namespace GAME
 
 
 		//直接キー取得
-		bool IsLvr4 () const { return m_vGameKey[0].GetLvr ( GameKey::LVR_4 ); }
+		bool IsLvr1 () const { return m_vGameKey[0].GetLvr ( GameKey::LVR_1 ); }
+		bool IsLvr2 () const { return m_vGameKey[0].GetLvr ( GameKey::LVR_2 ); }
 		bool IsLvr3 () const { return m_vGameKey[0].GetLvr ( GameKey::LVR_3 ); }
+		bool IsLvr4 () const { return m_vGameKey[0].GetLvr ( GameKey::LVR_4 ); }
+
+		bool IsLvr6 () const { return m_vGameKey[0].GetLvr ( GameKey::LVR_6 ); }
+		bool IsLvr7 () const { return m_vGameKey[0].GetLvr ( GameKey::LVR_7 ); }
+		bool IsLvr8 () const { return m_vGameKey[0].GetLvr ( GameKey::LVR_8 ); }
+		bool IsLvr9 () const { return m_vGameKey[0].GetLvr ( GameKey::LVR_9 ); }
 
 		//何れかのキーが入力されているかどうか
 		bool IsSomething () const;

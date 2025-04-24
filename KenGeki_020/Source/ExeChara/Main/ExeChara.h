@@ -31,6 +31,8 @@
 #include "../../FtgMain/Ef/EfSouha.h"
 //#include "../FtgMain/Ef/EfPart.h"
 
+#include "../Event/ExeChara_OnHit.h"
+#include "../Event/ExeChara_OnDamaged.h"
 #if 0
 #include "TimerSlow.h"
 #endif // 0
@@ -121,6 +123,10 @@ namespace GAME
 		//剣撃走破
 		P_EfSouha		m_efSouha;
 
+		//イベント
+		ExeChara_OnHit		m_OnHit { m_btlPrm };
+		ExeChara_OnDamaged	m_OnDamaged { m_btlPrm };
+
 	public:
 		ExeChara () = delete;
 		ExeChara ( PLAYER_ID m_playerID );	//プレイヤID指定コンストラクタのみ
@@ -181,10 +187,16 @@ namespace GAME
 
 		//------------------------------------------------------------
 		//相手を設定
-		void SetpOther ( WP_ExeChara p ) { m_pOther = p; }
+		void SetpOther ( WP_ExeChara p );
 
 		//全体画像処理を設定
 		void SetpFtgGrp ( P_FtgGrp p ) { m_pFtgGrp = p; }
+
+		//パラメータ
+		P_Param GetpParam () const { return m_pParam; }
+
+		//Input
+		P_CharaInput GetpCharaInput () const { return m_pCharaInput; }
 
 		//---------------------------------------------
 
@@ -237,6 +249,7 @@ namespace GAME
 
 		//パラメータ
 		//@todo スクリプトの持つ　ScriptParam_Battle と ExeCharaの持つ実効値 BtlPrm の整理
+		BtlParam& GetrBtlPrm () { return m_btlPrm; }
 		BtlParam GetBtlPrm () const { return m_btlPrm; }
 
 		void SetPos ( VEC2 v ) { m_btlPrm.SetPos ( v ); }
@@ -267,7 +280,6 @@ namespace GAME
 		bool CanBeThrown () const;		//投げられ判定
 		bool IsThrowAction () const;	//投げ判定
 		bool IsNotOffset () const;		//相殺しない判定
-		bool CanGuard () const;			//ガードできる状態かどうか
 
 		//特殊アクション（名前指定）
 		bool IsNameAction ( s3d::String name ) const { return m_pAction->IsName ( name ); }
@@ -329,7 +341,9 @@ namespace GAME
 		bool IsHit () const { return m_btlPrm.GetHitEst (); }
 		void SetHit ( bool b ) { m_btlPrm.SetHitEst ( b ); }
 		void OnHit ();
+#if 0
 		void OnEfHit ();
+#endif // 0
 
 		//相手・攻撃 → 自分・くらい
 		//くらい発生
@@ -337,11 +351,14 @@ namespace GAME
 		void SetDamaged ( bool b ) { m_btlPrm.SetDamaged ( b ); }
 //		void OnDamaged ( int damage );
 		void OnDamaged ();
-		void OnDamaged_After ();	//相手ダメージ処理の後
 
+#if 0
+		bool CanGuard () const;			//ガードできる状態かどうか
 		bool CheckGuard ();		//ガード成立判定
 		void OnGuard ();		//ガード成立後の処理
 		void OnKnockBack ();
+#endif // 0
+		void OnDamaged_After ();	//相手ダメージ処理の後
 
 		//-------------------------
 		//判定後、自身の強制変更
@@ -441,10 +458,10 @@ namespace GAME
 //		bool TranditAction_Command_Special ();	//アクション移項（コマンドに関する処理）限定
 		void TranditAction_Special ();	//特殊条件移行
 
-	private:
 		//アクションの移項
 		void TransitAction_Condition_I ( BRANCH_CONDITION CONDITION, bool forced );	//条件をチェックして移行
 		void TransitAction_Condition_E ( BRANCH_CONDITION CONDITION, bool forced );	//条件をチェックして移行
+	private:
 		bool TranditAction_Command ();	//アクション移項（コマンドに関する処理）
 		bool TranditAction_Exclusion ( P_Action pNextAct );	//特定アクションの除外
 		void EndAction ();	//アクション移項時、前アクションの最後の処理
@@ -518,7 +535,18 @@ namespace GAME
 		//メインイメージを同一Z値で先頭にする
 		void TopByZ () { m_dispChara->TopByZ (); }
 
+		//------------------------------------------------
+		//必殺・超必殺時に相手の白ダメージ確定
+		void DecisionWhiteDamage () { m_btlPrm.DecisionWhiteDamage (); }
 
+		//------------------------------------------------
+		//自身変更指定の一時保存
+		void SetNameChangeMine ( s3d::String name ) { m_nameChangeMine = name; }
+
+		//相手変更指定の一時保存
+		void SetNameChangeOther ( s3d::String name ) { m_nameChangeOther = name; }
+
+		//------------------------------------------------
 	};
 
 

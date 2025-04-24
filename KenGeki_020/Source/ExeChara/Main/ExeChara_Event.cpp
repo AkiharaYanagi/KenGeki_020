@@ -77,10 +77,8 @@ namespace GAME
 	//相殺発生	//自分：Offset, 相手：Attack
 	void ExeChara::OnOffset_Common ()
 	{
-
 		//全体振動
 		m_pFtgGrp->StartVibration ( 10 );
-
 
 
 		//@todo 相殺２撃目にアサート（名前指定？）
@@ -124,6 +122,13 @@ namespace GAME
 	//◆ 自分・攻撃 -> 相手・くらい
 	//ヒット発生(攻撃成立側)
 	//==========================================
+	void ExeChara::OnHit ()
+	{
+		m_OnHit.OnHit ();
+	}
+
+#if 0
+
 	void ExeChara::OnHit ()
 	{
 		//相手
@@ -318,6 +323,16 @@ namespace GAME
 	}
 
 
+	//エフェクトヒット発生(攻撃成立側)
+	void ExeChara::OnEfHit ()
+	{
+		m_btlPrm.SetHitEst ( true );		//攻撃成立フラグ
+//		m_tmrHitstop->Start ();		//エフェクトはヒットストップしない
+		m_btlPrm.GetTmr_HitPitch ()->Start ();
+	}
+#endif // 0
+
+
 	//投げられ判定
 	bool ExeChara::CanBeThrown () const 
 	{
@@ -342,6 +357,7 @@ namespace GAME
 		return T;
 	}
 
+	
 	//投げ判定
 	bool ExeChara::IsThrowAction () const
 	{
@@ -351,7 +367,7 @@ namespace GAME
 
 		return ( i != NO_COMPLETE ) || ( e != NO_COMPLETE );
 	}
-	
+
 
 	//相殺しない判定
 	bool ExeChara::IsNotOffset () const
@@ -369,18 +385,17 @@ namespace GAME
 	}
 
 
-	//エフェクトヒット発生(攻撃成立側)
-	void ExeChara::OnEfHit ()
-	{
-		m_btlPrm.SetHitEst ( true );		//攻撃成立フラグ
-//		m_tmrHitstop->Start ();		//エフェクトはヒットストップしない
-		m_btlPrm.GetTmr_HitPitch ()->Start ();
-	}
-
 	//==========================================
 	//◆ 相手・攻撃 → 自分・くらい
 	//くらい状態・ダメージ処理
 	//==========================================
+	void ExeChara::OnDamaged ()
+	{
+		m_OnDamaged.OnDamaged ();
+	}
+
+#if 0
+
 	void ExeChara::OnDamaged ()
 	{
 		//相手
@@ -723,6 +738,9 @@ namespace GAME
 	}
 
 
+
+#endif // 0
+
 	//相手ダメージ処理の後
 	void ExeChara::OnDamaged_After ()
 	{
@@ -736,7 +754,6 @@ namespace GAME
 		}
 
 	}
-
 
 
 }	//namespace GAME

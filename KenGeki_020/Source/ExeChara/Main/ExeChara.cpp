@@ -49,6 +49,18 @@ namespace GAME
 	}
 
 
+	//------------------------------------------------------------
+	//相手を設定
+	void ExeChara::SetpOther ( WP_ExeChara p )
+	{
+		m_pOther = p;
+
+		//イベントの初期化
+		m_OnHit.SetEnvironment ( shared_from_this (), p );
+		m_OnDamaged.SetEnvironment ( shared_from_this (), p );
+	}
+
+
 	//===========================================================
 	//***********************************************************
 	//	毎フレームMutualCharaから呼ばれる主なスクリプト処理関数の一連
