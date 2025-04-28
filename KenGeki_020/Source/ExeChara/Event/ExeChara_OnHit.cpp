@@ -99,7 +99,7 @@ namespace GAME
 		//-----------------------------------------------------
 		//条件分岐 (相手→自分でないとスクリプトが変わってしまう)
 
-		if ( pSelf->IsThrow () )
+		if ( pSelf->IsThrowCheck () )
 		{
 			//投げのとき、相手の状態によっては移項しない　（投げ不能状態）
 			pSelf->TransitAction_Condition_E ( BRC_THR_E, T );	//投げ・相手
@@ -186,6 +186,7 @@ namespace GAME
 			float abs = std::abs ( recoil_i );
 			float recoil_dir = dir * abs;
 
+#if 0
 			if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
 			{
 				DBGOUT_WND_F ( DBGOUT_5, U"p1:recoil_i {} = {} * {}"_fmt ( recoil_dir, dir, abs ) );
@@ -194,6 +195,7 @@ namespace GAME
 			{
 				DBGOUT_WND_F ( DBGOUT_6, U"p2:recoil_i {} = {} * {}"_fmt ( recoil_dir, dir, abs ) );
 			}
+#endif // 0
 
 			//保存
 			recoil_i = recoil_dir;

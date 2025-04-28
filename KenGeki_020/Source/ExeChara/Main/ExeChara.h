@@ -103,7 +103,7 @@ namespace GAME
 		//入力
 		P_CharaInput	m_pCharaInput;	//入力
 		P_PlayerInput	m_pPlayerInput;	//プレイヤ
-		P_CPUInput		m_pCPUInput;	//CPU
+		//P_CPUInput		m_pCPUInput;	//CPU
 		P_NewCPUInput	m_pNewCPUInput;	//New_CPU
 
 		//------------------------------------------------
@@ -486,18 +486,15 @@ namespace GAME
 		//現在アクションカテゴリ取得
 		ACTION_CATEGORY ActCtg () const { return m_pAction->GetCategory (); }
 		bool IsActCtg ( ACTION_CATEGORY ac ) const { return ac == ActCtg (); }
+
 		//各アクションかどうか
-		bool IsAttacking () const
-		{
-			return
-				m_pAction->GetCategory ()  == AC_ATTACK_L 
-			||	m_pAction->GetCategory ()  == AC_ATTACK_M
-			||	m_pAction->GetCategory ()  == AC_ATTACK_H; 
-		}
 		bool IsAttack_L ()	 const { return m_pAction->GetCategory () == AC_ATTACK_L; }
+		bool IsAttack_M ()	 const { return m_pAction->GetCategory () == AC_ATTACK_M; }
+		bool IsAttack_H ()	 const { return m_pAction->GetCategory () == AC_ATTACK_H; }
 		bool IsStand ()		 const { return m_pAction->GetCategory () == AC_NEUTRAL; }
 		bool IsMove ()		 const { return m_pAction->GetCategory () == AC_MOVE; }
 		bool IsDash ()		 const { return m_pAction->GetCategory () == AC_DASH; }
+		bool IsSkill ()		 const { return m_pAction->GetCategory () == AC_SKILL; }
 		bool IsSpecial ()	 const { return m_pAction->GetCategory () == AC_SPECIAL; }
 		bool IsOverdrive ()	 const { return m_pAction->GetCategory () == AC_OVERDRIVE; }
 		bool IsPoised ()	 const { return m_pAction->GetCategory () == AC_POISED; }
@@ -507,8 +504,17 @@ namespace GAME
 		bool IsDamaged ()	 const { return m_pAction->GetCategory () == AC_DAMAGED; }
 		bool IsGuard ()		 const { return m_pAction->GetCategory () == AC_GUARD; }
 
-		bool IsAir ()		 const { return m_pAction->GetPosture () == AP_JUMP; }
-		bool IsThrow () const;
+		//攻撃中かどうか
+		bool IsAttacking () const;
+
+		//空中かどうか
+		bool IsAir () const { return m_pAction->GetPosture () == AP_JUMP; }
+
+		//投げかどうか(アクション単位なので必殺技などは別カテゴリ)
+		bool IsThrow () const { return m_pAction->GetCategory () == AC_THROW; }
+
+		//投げ(ガード不能)判定かどうか(必殺投げなど)
+		bool IsThrowCheck () const;
 
 		//終了のための待機状態かどうか
 		bool IsWait () { return IsStand (); }

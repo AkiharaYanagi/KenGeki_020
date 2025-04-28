@@ -44,6 +44,9 @@ namespace GAME
 		if ( IsNameAction ( U"立ち" ) )
 		{
 			m_pOther.lock()->m_btlPrm.ChainReset ();
+
+			//基準スタミナ回復
+			//m_btlPrm.AddBalance ( 10 );
 		}
 
 		//ダメージでないときもリセット
@@ -70,6 +73,14 @@ namespace GAME
 			{
 				m_pOther.lock()->SetAction ( U"立ち" );
 			}
+		}
+
+		//-----------------------------------------------------
+		//起き上がり
+		if ( IsNameAction ( U"起き上がり" ) )
+		{
+			//基準スタミナ回復
+			//m_btlPrm.AddBalance ( 20 );
 		}
 
 		//-----------------------------------------------------

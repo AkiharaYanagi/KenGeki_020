@@ -272,10 +272,11 @@ namespace GAME
 		s3d::String nameAction = Check_TransitAction_Condition_str ( CONDITION );
 
 		//該当無しは"ダメージ大"にして処理
+		// 空中で地上くらいになるため空中やられに変更
 		UINT index = m_pOther.lock()->m_pChara->GetActionID ( nameAction );
 		if ( NO_ACTION == index )
 		{
-			nameAction = U"ダメージ大";
+			nameAction = U"空中やられ";
 		}
 
 		//=================================================================
@@ -286,27 +287,7 @@ namespace GAME
 		//@info 特殊状態　（特定技やられなど）は除く
 		bool bDai = U"ダメージ大" == nameAction ;
 		bool bSyou = U"ダメージ小" == nameAction ;
-#if 0
 
-
-		//相手がダメージかつ空中なら
-		//bool bDmg = IsDamaged ();
-		//bool bJump = Is_AP_Jump ();
-//		if ( bDmg && bAir )
-		bool bAir = m_pOther.lock()->m_btlPrm.GetPos().y < (float)GROUND_Y;
-
-		if ( bAir )
-#endif // 0
-
-#if 0
-		{
-			ACTION_POSTURE ap = m_pOther.lock()->GetPosture ();
-			if ( ap == ACTION_POSTURE::AP_JUMP )
-			{
-				nameAction = U"空中やられ";
-			}
-		}
-#endif // 0
 		if ( bDai || bSyou )
 		{
 			//相手が空中( GROUND_Y < pos_y )
@@ -317,6 +298,7 @@ namespace GAME
 			}
 		}
 
+		//特殊処理
 		if ( IsNameAction ( U"乱舞超必殺技発生" ) )
 		{
 //			if ( m_pScript->GetFrame () == 0 )

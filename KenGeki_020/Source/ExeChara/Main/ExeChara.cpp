@@ -500,15 +500,29 @@ namespace GAME
 		m_dispChara->SetControl_PLAYER ();
 	}
 
+	//攻撃中かどうか
+	bool ExeChara::IsAttacking () const
+	{
+		ACTION_CATEGORY ac = m_pAction->GetCategory ();
 
-	bool ExeChara::IsThrow () const
+		bool nm =
+			( ac == AC_ATTACK_L || ac == AC_ATTACK_M || ac == AC_ATTACK_H );
+		bool sp = ( ac == AC_SPECIAL );
+		bool od = ( ac == AC_OVERDRIVE );
+
+		return nm || sp || od;
+	}
+
+	//投げ(ガード不能)かどうか
+	bool ExeChara::IsThrowCheck () const
 	{
 		//カテゴリ
 		if ( m_pAction->GetCategory () == AC_THROW ) { return T; }
 		
-		//または攻撃状態かつブランチ条件にTHRを持つ
+		//または攻撃状態かつブランチ条件にTHRを持つ (必殺投げなど)
 		bool bThrI = Have_TransitAction_Condition ( BRC_THR_I );
 		bool bThrE = Have_TransitAction_Condition ( BRC_THR_E );
+
 		return bThrI || bThrE;
 	}
 

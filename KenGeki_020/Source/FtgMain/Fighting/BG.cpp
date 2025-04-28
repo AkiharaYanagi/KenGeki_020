@@ -55,6 +55,7 @@ namespace GAME
 		//------------------------------------------------
 
 
+#if 0
 
 		//------------------------------------------------
 		//test 壁位置
@@ -72,6 +73,8 @@ namespace GAME
 		m_wall_R->SetZ ( Z_BG );
 		AddpTask ( m_wall_R );
 		//		GRPLST_INSERT ( m_wall_R );
+
+#endif // 0
 
 
 		//------------------------------------------------
@@ -369,6 +372,9 @@ namespace GAME
 
 
 #endif // 0
+
+#if 0
+
 		//-------------------------------------------------------
 		//カベ位置
 		float wall_l = G_FTG()->GetWallLeft ();
@@ -378,6 +384,8 @@ namespace GAME
 		float wall_r = G_FTG()->GetWallRight ();
 		m_wall_R->SetPos ( wall_r + G_BASE_POS ().x, 0 );
 //		m_wall_R->SetPos ( -2048 + G_BASE_POS ().x, 0 );
+
+#endif // 0
 
 
 #if 0

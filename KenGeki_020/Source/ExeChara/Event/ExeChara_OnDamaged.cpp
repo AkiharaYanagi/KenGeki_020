@@ -128,11 +128,11 @@ namespace GAME
 		}
 
 		//-------------------------------------------------
-		//特殊補正
+		//特殊補正（今回の仮定ダメージが超えたとき）
 		//49.9% -> 45%補正
 		int32 chainDamage = btlPrmOhter.GetChainDamage ();
 		float d_45 = 1.f;
-		if ( chainDamage > 4500 )
+		if ( damage + chainDamage > 4500 )
 		{
 			d_45 = 0.1f;
 		}
@@ -155,7 +155,7 @@ namespace GAME
 		//スタミナ反映（くらい時増加、ガード時減少）
 		if ( bGuard )
 		{
-			m_btlPrm.AddBalance ( (int)( -1.f * confirmed_damage ) );
+			m_btlPrm.AddBalance ( (int)( -10.f * confirmed_damage ) );
 		}
 		else
 		{
@@ -264,6 +264,15 @@ namespace GAME
 		P_ExeChara pOther = m_pOther.lock ();		//相手
 
 
+		//----------------------------------------------
+		// 動作中判定
+		//----------------------------------------------
+
+		//ガード硬直中は入力なしでも自動的にガード
+		bool bGuard = pSelf->IsGuard ();
+		if ( bGuard ) { return T; }
+
+		//----------------------------------------------
 		//空中は不可
 		bool bAir = pSelf->IsAir ();
 		if ( bAir ) { return F; }
@@ -272,28 +281,107 @@ namespace GAME
 		bool bDamaged = pSelf->IsDamaged ();
 		if ( bDamaged ) { return F; }
 
-		//相手が投げ判定は不可
-		bool bThrow = pOther->IsThrow ();
-		if ( bThrow ) { return F; }
+		//「相手」が投げ判定は不可
+		bool bThrowCheck = pOther->IsThrowCheck ();
+		if ( bThrowCheck ) { return F; }
 
 #if 0
 		//立ち状態は可能
 		if ( IsStand () ) { return T; }
 #endif // 0
 
-		//----------------------------------------------------
+		//特殊行動中は不可(特大攻撃、足払い、避けなど)
+		bool bSkill = pSelf->IsSkill ();
+		if ( bSkill ) { return F; }
+
+		//自身の「投げ」隙は不可
+		bool bThrow_self = pSelf->IsThrow ();
+		if ( bThrow_self ) { return F; }
+
+		// 攻撃中は不可
+		bool bAttacking = pSelf->IsAttacking ();
+		if ( bAttacking ) { return F; }
+
+
+		//----------------------------------------------
 		// レバー入れ判定
+		//----------------------------------------------
+
+		bool bStandGurad = F;	//立ちガード
+		bool bCrouchGurad = F;	//しゃがみガード
+
+		//※相手と逆向き
 		P_CharaInput pChInp = pSelf->GetpCharaInput();
-		bool bLvr4 = pChInp->IsLvr4 ();	//後方向が入力されているとき
-		bool bLvr1 = pChInp->IsLvr1 ();	// 後下 方向が入力されているとき
-		bool bLvr3 = pChInp->IsLvr3 ();	// 前下 方向が入力されているとき
+		bool bLvr4 = pChInp->IsLvr4 ();	// 後	方向が入力されているとき
+		bool bLvr1 = pChInp->IsLvr1 ();	// 後下	方向が入力されているとき
+		bool bLvr3 = pChInp->IsLvr3 ();	// 前下	方向が入力されているとき
 		bool bLvr13 = bLvr1 || bLvr3;	// 1 or 3 入力
 
+		bool bLvr6 = pChInp->IsLvr6 ();	// 前	方向が入力されているとき
+
+		//相手と逆向き
+		float mx = pSelf ->GetPos ().x;
+		float ox = pOther->GetPos ().x;
+
+		//ほぼ同位置のときは向きは両方
+		if ( std::abs ( mx - ox ) < 5 )
+		{
+			bStandGurad = bLvr4 || bLvr6;
+		}
+		//距離が離れた通常時
+		else
+		{
+			//左位置
+			if ( mx < ox )
+			{
+				//右向
+				if ( pSelf->GetDirRight () )
+				{
+					bStandGurad = bLvr4;
+				}
+				//左向
+				else
+				{
+					bStandGurad = bLvr6;	//相手と逆
+				}
+			}
+			//右位置
+			else if ( ox < mx )
+			{
+				//右向
+				if ( pSelf->GetDirRight () )
+				{
+					bStandGurad = bLvr6;	//相手と逆
+				}
+				//左向
+				else
+				{
+					bStandGurad = bLvr4;
+				}
+			}
+		}
+
+		//下段は両方向
+		bCrouchGurad = bLvr13;
+
+
+		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )
+		{
+			DBGOUT_WND_F ( DBGOUT_5, U"p1 std {},crc {}"_fmt ( bStandGurad, bCrouchGurad ) );
+		}
+		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_2 )
+		{
+			DBGOUT_WND_F ( DBGOUT_6, U"p1 std {},crc {}"_fmt ( bStandGurad, bCrouchGurad ) );
+		}
+
+
+
+		//--------------------------------------------------------
 		//足払いのみ下段
 		bool bUnder = pOther->IsNameAction ( U"足払い初撃" );
 		if ( bUnder )
 		{
-			if ( bLvr13 )
+			if ( bCrouchGurad )
 			{
 				return T;
 			}
@@ -309,8 +397,8 @@ namespace GAME
 
 		if ( bUpper )
 		{
-			// 4入力 かつ 1ではない
-			if ( bLvr4 && ! bLvr1 )
+			// 立ちガード かつ しゃがみガード ではない
+			if ( bStandGurad && ! bCrouchGurad )
 			{
 				return T;
 			}
@@ -323,10 +411,11 @@ namespace GAME
 
 
 		//他一般の両ガード　上段
-		if ( bLvr4 || bLvr3 )
+		if ( bStandGurad || bCrouchGurad )
 		{
 			return T;
 		}
+		//--------------------------------------------------------
 
 
 		return F;
@@ -340,72 +429,33 @@ namespace GAME
 		P_ExeChara pOther = m_pOther.lock ();
 		P_Script pScpOther = pOther->GetpScript ();
 
-#if 0
-
-		//-------------------------------------------------
-		//ガード判定
-		//後方向が入力されているとき
-		//後下方向
-		if ( m_pCharaInput->IsLvr4 () )
-		{
-			//----------------------------
-			//OnHit()
-			//OnDamaaged()
-			// の順番なので後で変更した方が優先
-			//----------------------------
-
-			//アクション変更
-//			SetAction ( U"ガード小" );
-			s3d::String gaurd_Name = U"ガード小";
-
-#if 0
-			int32 gaurd_id = s3d::Random ( 2 );
-#endif // 0
-			static int32 gaurd_id = 0;
-//			if ( ++ gaurd_id >= 3 ) { gaurd_id = 0; }
-
-			switch ( gaurd_id )
-			{
-			case 0: gaurd_Name = U"ガード小"; break;
-			case 1: gaurd_Name = U"ガード中"; break;
-			case 2: gaurd_Name = U"ガード大"; break;
-			}
-
-			//相手の「相手の変更先アクション」を指定
-			m_pOther.lock ()->m_nameChangeOther = gaurd_Name;
-
-
-			//-------------------------------------------------
-			//ガード時相手からのノックバック処理
-			float recoil_e = 0.1f * pScpOther->m_prmBattle.Recoil_E;	// 値は (float) = (int)1/10
-			if ( recoil_e != 0 )
-			{
-				m_btlPrm.SetAccRecoil ( recoil_e );
-			}
-
-
-			return T;
-		}
-#endif // 0
-
 		//-------------------------------------------------
 		//アクション変更
-		s3d::String gaurd_Name = U"ガード小";
+		s3d::String guard_Name = U"ガード小";
 
-		int32 gaurd_id = 0;
+		int32 guard_id = 0;
 
 		//相手の強度によって変化
+		bool bM = pOther->IsAttack_M ();
+		bool bH = pOther->IsAttack_H ();
+		if ( bM || bH ) { guard_id = 1; }
 
 
-		switch ( gaurd_id )
+		bool bSk = pOther->IsSkill ();
+		bool bSp = pOther->IsSpecial ();
+		bool bOd = pOther->IsOverdrive ();
+		if ( bSk || bSp || bOd ) { guard_id = 2; }
+
+
+		switch ( guard_id )
 		{
-		case 0: gaurd_Name = U"ガード小"; break;
-		case 1: gaurd_Name = U"ガード中"; break;
-		case 2: gaurd_Name = U"ガード大"; break;
+		case 0: guard_Name = U"ガード小"; break;
+		case 1: guard_Name = U"ガード中"; break;
+		case 2: guard_Name = U"ガード大"; break;
 		}
 
 		//相手の「相手の変更先アクション」を指定 (1周して自分のアクション)
-		pOther->SetNameChangeOther ( gaurd_Name );
+		pOther->SetNameChangeOther ( guard_Name );
 
 
 		//-------------------------------------------------

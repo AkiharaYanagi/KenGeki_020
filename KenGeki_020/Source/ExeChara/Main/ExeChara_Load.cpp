@@ -268,9 +268,13 @@ namespace GAME
 		m_pPlayerInput = std::make_shared < PlayerInput > ();
 		m_pPlayerInput->SetPlayer ( m_btlPrm.GetPlayerID () );
 
+#if 0
+
 		m_pCPUInput = std::make_shared < CPUInput > ( shared_from_this (), m_pOther );
 		m_pCPUInput->SetPlayer ( m_btlPrm.GetPlayerID () );
 		m_pCPUInput->Load ();
+
+#endif // 0
 
 		m_pNewCPUInput = std::make_shared < NewCPUInput > ();
 		m_pNewCPUInput->SetPlayer ( m_btlPrm.GetPlayerID () );

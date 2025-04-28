@@ -385,18 +385,9 @@ namespace GAME
 		}
 
 
-		//---------------
-		//画面端 (キャラ移動補正)
-		float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
-		float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
-
-		//壁より先には移動しない
-		if ( m_posChara.x < wall_L ) { m_posChara.x = wall_L; }
-		if ( m_posChara.x > wall_R ) { m_posChara.x = wall_R; }
-
 
 		//---------------
-		//反動(ノックバック)
+		//相手からの反動(ノックバック)
 //		m_vel_recoil += dir * m_acc_recoil;
 		m_vel_recoil += m_acc_recoil;		//向きはヒット時に相対位置で決める
 		m_posChara.x += m_vel_recoil;
@@ -412,6 +403,24 @@ namespace GAME
 		}
 #endif // 0
 		m_acc_recoil = 0;		//accは初速のみ
+
+
+		//---------------
+		//画面端 (キャラ移動補正)
+		float wall_L = (float)FIELD_EDGE + G_FTG()->GetWallLeft ();
+		float wall_R = G_FTG()->GetWallRight () - (float)FIELD_EDGE;
+
+		//壁より先には移動しない
+		//左壁
+		if ( m_posChara.x < wall_L )
+		{
+			m_posChara.x = wall_L;
+		}
+		//右壁
+		if ( wall_R < m_posChara.x )
+		{
+			m_posChara.x = wall_R;
+		}
 
 
 		//------------------------------------------------

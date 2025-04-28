@@ -31,8 +31,11 @@ namespace GAME
 		//2025/02/10 Steam ver0.22
 		//2025/02/20 修正 ver0.23
 		//2025/04/19 バトル修正 ver0.24
+		//2025/04/19 ガード修正 ver0.25
+		//2025/04/19 不具合修正 ver0.26
 #endif // 0
-	const char32_t Title::Ver[] = U"ver 0.24";
+	const char32_t Title::Ver[] = U"ver 0.26";
+
 
 	const float Title::BG_X = 0;
 	const float Title::BG_Y = 0;
