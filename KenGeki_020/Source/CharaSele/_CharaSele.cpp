@@ -250,6 +250,8 @@ namespace GAME
 		P_Param pPrm = Scene::GetpParam ();
 		pPrm->SetCharaName1p ( m_player_1p->GetCharaName() );
 		pPrm->SetCharaName2p ( m_player_2p->GetCharaName() );
+		pPrm->SetCharaColor1p ( m_player_1p->GetColor() );
+		pPrm->SetCharaColor2p ( m_player_2p->GetColor() );
 		pPrm->SetStage_Name ( m_stage->GetStageName () );
 		pPrm->Set_BGM_ID ( m_bgm->Get_ID () );
 

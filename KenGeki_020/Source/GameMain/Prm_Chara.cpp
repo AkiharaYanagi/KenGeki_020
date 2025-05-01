@@ -28,8 +28,8 @@ namespace GAME
 
 	//キャライメージファイル img
 	constexpr char32_t CHARA_IMG1_OUKA []	= U"Chara\\Ouka_1p_bhv.lz4";
-//	constexpr char32_t CHARA_IMG2_OUKA []	= U"Chara\\Ouka_2p_bhv.lz4";
-	constexpr char32_t CHARA_IMG2_OUKA []	= U"Chara\\Ouka_1p_bhv.lz4";
+	constexpr char32_t CHARA_IMG2_OUKA []	= U"Chara\\Ouka_2p_bhv.lz4";
+//	constexpr char32_t CHARA_IMG2_OUKA []	= U"Chara\\Ouka_1p_bhv.lz4";
 
 	constexpr char32_t CHARA_IMG1_SAE []	= U"Chara\\Sae_1p_bhv.lz4";
 //	constexpr char32_t CHARA_IMG1_SAE []	= U"Chara\\Feral_bhv.lz4";

@@ -176,7 +176,7 @@ namespace GAME
 	//ダウン
 	class FTG_DM_Down : public FtgDemoState
 	{
-		P_GrpDemo	m_grpDown;
+//		P_GrpDemo	m_grpDown;
 
 		P_GrpDemo	m_grp_Ketsu;
 		P_GrpDemo	m_grp_chaku;

@@ -142,6 +142,11 @@ namespace GAME
 		//プレイヤ別　カラー取得
 		CHARA_COLOR GetCharaColor ( PLAYER_ID pl_id ) const { return m_setting.GetColor ( pl_id ); }
 
+		//カラー設定
+		//void SetCharaColor ();
+		void SetCharaColor1p ( CHARA_COLOR clr ) { m_setting.SetCharaColor1p ( clr ); }
+		void SetCharaColor2p ( CHARA_COLOR clr ) { m_setting.SetCharaColor2p ( clr ); }
+
 #if 0
 		P_Chara GetpChara_Ouka ();
 		P_Chara GetpChara_Sae ();

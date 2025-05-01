@@ -86,6 +86,10 @@ namespace GAME
 
 	void CHST_GetReady::PreScriptMove ()
 	{
+		//入力不可
+		PreScriptMove_NoInput ();
+
+#if 0
 		//@info 入力は可能
 
 		P_ExeChara pExe = GetwpExeChara ().lock ();		//一時参照
@@ -95,6 +99,8 @@ namespace GAME
 //■		pExe->SetCollisionRect ();	//接触枠設定
 		pExe->Generate_Effect ();	//エフェクト生成
 		pExe->PreMove_Effect ();	//エフェクト動作
+
+#endif // 0
 	}
 
 	void CHST_GetReady::PostScriptMove ()

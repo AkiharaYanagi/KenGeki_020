@@ -477,7 +477,6 @@
     <ClInclude Include="Source\Menu\YesNo_Menu.h" />
     <ClInclude Include="Source\Result\Result.h" />
     <ClInclude Include="Source\Result\ResultMenu.h" />
-    <ClInclude Include="Source\template.h" />
     <ClInclude Include="Source\Title\Title.h" />
     <ClInclude Include="Source\Training\Training.h" />
   </ItemGroup>

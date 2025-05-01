@@ -1050,9 +1050,6 @@
     <ClInclude Include="Source\CharaSele\CharaSele_Cursor.h">
       <Filter>02_CharaSele</Filter>
     </ClInclude>
-    <ClInclude Include="Source\template.h">
-      <Filter>02_CharaSele</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CharaSele\CharaSele_Stage.h">
       <Filter>02_CharaSele</Filter>
     </ClInclude>
