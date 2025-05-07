@@ -17,6 +17,8 @@
 namespace GAME
 {
 	//キャラ枠位置( 0 ~ 11 )
+#if 0
+
 	using CHARA_SELE_ID = uint32;
 
 	constexpr CHARA_SELE_ID	CHSLID_00 = 0;
@@ -34,6 +36,24 @@ namespace GAME
 
 	//個数
 	constexpr CHARA_SELE_ID	CHARA_SELE_NUM = 12;
+
+#endif // 0
+	enum CHARA_SELE_ID
+	{
+		CHSLID_00 = 0,
+		CHSLID_01 = 1,
+		CHSLID_02 = 2,
+		CHSLID_03 = 3,
+		CHSLID_04 = 4,
+		CHSLID_05 = 5,
+		CHSLID_06 = 6,
+		CHSLID_07 = 7,
+		CHSLID_08 = 8,
+		CHSLID_09 = 9,
+		CHSLID_10 = 10,
+		CHSLID_11 = 11,
+		CHARA_SELE_NUM = 12,	//個数
+	};
 
 
 	//表示位置定数
@@ -111,6 +131,33 @@ namespace GAME
 		}
 		return CHARA_SELE_NUM;
 	};
+
+	inline CHARA_NAME ChSlId_To_CharaName ( CHARA_SELE_ID id )
+	{
+		switch ( id )
+		{
+		case CHSLID_00: return CHARA_OUKA; break;
+		case CHSLID_01: return CHARA_NAME_NUM; break;
+		case CHSLID_02: return CHARA_SAE; break;
+		case CHSLID_03: return CHARA_RETSUDOU; break;
+		case CHSLID_04: return CHARA_NAME_NUM; break;
+		case CHSLID_05: return CHARA_GABADARUGA; break;
+		case CHSLID_06: return CHARA_NAME_NUM; break;
+		case CHSLID_07: return CHARA_NAME_NUM; break;
+		case CHSLID_08: return CHARA_NAME_NUM; break;
+		case CHSLID_09: return CHARA_NAME_NUM; break;
+		default: break;
+		}
+		return CHARA_OUKA;
+	};
+
+
+	inline CHARA_COLOR NextColor ( CHARA_COLOR clr )
+	{
+		if ( CH_CLR_1 == clr ) { return CH_CLR_2; }
+		return CH_CLR_1;
+	}
+
 
 }	//namespace GAME
 

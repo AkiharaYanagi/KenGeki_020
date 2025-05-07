@@ -8,6 +8,8 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "CharaSele_Image.h"
+#include "_CharaSele_Player.h"
+
 
 //-------------------------------------------------------------------------------------------------
 // 定義
@@ -58,13 +60,31 @@ namespace GAME
 		return TxUtl::MakeTx_FromArchive ( filename );
 	}
 
+	inline P_Tx CharaSele_Image_Common::GetpTx ( CHARA_SELE_ID id, CHARA_COLOR clr )
+	{
+		return (*m_gridTx) [clr][id];
+	}
+
+	P_Tx CharaSele_Image_Common::GetpTx ( CHARA_NAME name, CHARA_COLOR clr )
+	{
+		CHARA_SELE_ID id = CHSLID_00;
+		switch ( name )
+		{
+		case CHARA_OUKA:		 id = CHSLID_00; break;
+		case CHARA_SAE:			 id = CHSLID_02; break;
+		case CHARA_RETSUDOU: 	 id = CHSLID_03; break;
+		case CHARA_GABADARUGA: 	 id = CHSLID_05; break;
+		}
+		return (*m_gridTx) [clr][id];
+	}
+
 
 	//-----------------------------------------------------------
 	CharaSele_Image::CharaSele_Image ()
 	{
 		//キャラ立絵
 		m_chara_stand = std::make_shared < GameGraphic > ();
-		m_chara_stand->AddTexture ();
+		m_chara_stand->AddTexture ();	//Assign用に１つ枠を取る
 		AddpTask ( m_chara_stand );
 		GRPLST_INSERT ( m_chara_stand );
 
@@ -141,7 +161,18 @@ namespace GAME
 				m_chara_stand->SetPos ( m_x, (float)CHARA_2P_POS_Y );
 			}
 		}
+
+		//決定時明度
+		if ( 0 < m_waitDecide )
+		{
+			-- m_waitDecide;
+		}
 	}
+
+
+	//----------------------------------------------------------------------
+
+
 
 	void CharaSele_Image::SelectChara_cutin ( CHARA_SELE_ID chara_id )
 	{
@@ -168,6 +199,30 @@ namespace GAME
 
 	void CharaSele_Image::SelectChara ( CHARA_SELE_ID id )
 	{
+#if 0
+
+		//相手とキャラが同じ時、カラーを異なるものにする
+		CHARA_NAME name = ChSlId_To_CharaName ( id );
+		CHARA_NAME otherName = m_pOther.lock()->GetCharaName ();
+		CHARA_COLOR otherColor = m_pOther.lock()->GetColor ();
+
+		if ( name == otherName )
+		{
+			if ( otherColor == m_chara_clr )
+			{
+				SetColor ( NextColor ( m_chara_clr ) );
+			}
+		}
+
+#endif // 0
+
+		SetChara ( id );
+	}
+
+
+	void CharaSele_Image::SetChara ( CHARA_SELE_ID id )
+	{
+		//反映
 		m_chara_id = id;
 
 		m_chara_stand->SetValid ( T );
@@ -178,8 +233,10 @@ namespace GAME
 	}
 
 
+	//----------------------------------------------------------------------
+
 	//色を指定
-	void CharaSele_Image::SetColor_cutin ( CHARA_COLOR clr )
+	void CharaSele_Image::SelectColor_cutin ( CHARA_COLOR clr )
 	{
 		//選択カットイン
 		StartCutIn();
@@ -189,6 +246,29 @@ namespace GAME
 		m_chara_stand->AssignpTexture ( (*m_gridTx) [clr][m_chara_id] );
 	}
 
+	void CharaSele_Image::SelectColor ( CHARA_COLOR clr )
+	{
+#if 0
+
+		//相手とキャラが同じ時、カラーを異なるものにする
+		CHARA_NAME name = ChSlId_To_CharaName ( m_chara_id );
+		CHARA_NAME otherName = m_pOther.lock()->GetCharaName ();
+		CHARA_COLOR otherColor = m_pOther.lock()->GetColor ();
+
+		if ( name == otherName )
+		{
+			if ( otherColor == clr )
+			{
+				clr = NextColor ( m_chara_clr );
+			}
+		}
+
+#endif // 0
+
+		SetColor ( clr );
+	}
+
+	//色を単純指定
 	void CharaSele_Image::SetColor ( CHARA_COLOR clr )
 	{
 		//値を保存してテクスチャを指定
@@ -196,6 +276,7 @@ namespace GAME
 		m_chara_stand->AssignpTexture ( (*m_gridTx) [clr][m_chara_id] );
 	}
 
+	//----------------------------------------------------------------------
 
 	void CharaSele_Image::StartCutIn ()
 	{
@@ -217,6 +298,12 @@ namespace GAME
 		m_chara_name->SetValid ( F );
 	}
 
+
+	void CharaSele_Image::Decide ()
+	{
+		m_waitDecide = 10;
+//		m_chara_stand->SetColor ( 0xffffffff );
+	}
 
 
 

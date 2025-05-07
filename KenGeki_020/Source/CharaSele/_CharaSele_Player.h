@@ -21,6 +21,12 @@
 //-------------------------------------------------------------------------------------------------
 namespace GAME
 {
+	class _CharaSele_Player;
+	using P_ChSl_Pl = std::shared_ptr < _CharaSele_Player >;
+	using WP_ChSl_Pl = std::weak_ptr < _CharaSele_Player >;
+
+
+
 	class _CharaSele_Player : public TASK_VEC, public std::enable_shared_from_this < _CharaSele_Player >
 	{
 		P_Param			m_pParam;
@@ -31,14 +37,15 @@ namespace GAME
 
 		P_GrpBlink		m_state_Disp;	//状態表示
 
-
-//		CHARA_SELE_ID	m_chsl_id { CHSLID_00 };		//キャラ選択ID
+		WP_ChSl_Pl		m_pOther;		//相手状態
+		
 
 		CHARA_COLOR		m_color { CH_CLR_1 };			//カラー
 		P_GrpBlink		m_txt_ClrSl;	//カラーセレクト文字表示
 		P_GrpBlink		m_Arw_ClrSl;	//カラーセレクト矢印表示
 		P_Grp			m_Num_ClrSl;	//カラーセレクト番号表示
 
+//		CHARA_SELE_ID	m_chsl_id { CHSLID_00 };		//キャラ選択ID
 		P_ChSl_Cursor	m_cursor;		//カーソル
 		P_ChSl_Img		m_chara_img;	//キャラ立絵
 
@@ -57,20 +64,24 @@ namespace GAME
 
 		//参照
 		void SetwpCharaSele ( WP_CharaSele wp ) { m_actor->SetwpCharaSele ( wp ); }
+		void SetwpOther ( WP_ChSl_Pl pOther ) { m_pOther = pOther; }
 
 		//プレイヤ取得
 		PLAYER_ID GetPlayerID () const { return m_player_id; }
 
 
 		//キャラ選択
+		CHARA_NAME GetCharaName () const;
 		void SelectChara_cutin ( CHARA_SELE_ID chara_id );
 		void SelectChara ( CHARA_SELE_ID chara_id );
-		CHARA_NAME GetCharaName () const;
+		void SetChara ( CHARA_SELE_ID chara_id );
 
 		//カラー選択
 		CHARA_COLOR GetColor () const { return m_color; }
 		void SelectColor_cutin ( CHARA_COLOR chara_clr );
 		void SelectColor ( CHARA_COLOR chara_clr );
+		void SetColor ( CHARA_COLOR chara_clr );
+
 
 		//状態を変更
 		void To_Chara ();
@@ -154,9 +165,6 @@ namespace GAME
 
 	};
 
-
-	using P_ChSl_Pl = std::shared_ptr < _CharaSele_Player >;
-	using WP_ChSl_Pl = std::weak_ptr < _CharaSele_Player >;
 
 
 }	//namespace GAME

@@ -111,6 +111,15 @@ namespace GAME
 		AddpTask ( m_OK );
 		GRPLST_INSERT ( m_OK );
 
+		//-----------------------------------------------------------------------
+		//操作説明
+		m_inst = std::make_shared < GameGraphic > ();
+		m_inst->AddTexture_FromArchive ( U"CharaSele\\Inst_CharaSele.png" );
+		m_inst->SetPos ( VEC2 ( INST_X, INST_Y ) );
+		m_inst->SetZ ( Z_SYS );
+		AddpTask ( m_inst );
+		GRPLST_INSERT ( m_inst );
+
 	}
 
 
@@ -141,6 +150,10 @@ namespace GAME
 		//thisの設置
 		m_player_1p->SetwpCharaSele ( shared_from_this () );
 		m_player_2p->SetwpCharaSele ( shared_from_this () );
+
+		//互いの設置
+		m_player_1p->SetwpOther ( m_player_2p );
+		m_player_2p->SetwpOther ( m_player_1p );
 
 		//SOUND
 		SND_STOP_ALL_BGM();
@@ -236,6 +249,37 @@ namespace GAME
 //		return shared_from_this ();
 		//他のシーンが確保されたなら遷移する
 		return Scene::Transit (); 
+	}
+
+
+
+
+	CHARA_NAME _CharaSele::GetOtherChara ( PLAYER_ID id )
+	{
+		CHARA_NAME name = CHARA_OUKA;
+		if ( PLAYER_ID_1 == id )
+		{
+			name = m_player_2p->GetCharaName ();
+		}
+		else if ( PLAYER_ID_2 == id )
+		{
+			name = m_player_1p->GetCharaName ();
+		}
+		return name;
+	}
+
+	CHARA_COLOR _CharaSele::GetOtherColor ( PLAYER_ID id )
+	{
+		CHARA_COLOR color = CH_CLR_2;
+		if ( PLAYER_ID_1 == id )
+		{
+			color = m_player_2p->GetColor ();
+		}
+		else if ( PLAYER_ID_2 == id )
+		{
+			color = m_player_1p->GetColor ();
+		}
+		return color;
 	}
 
 

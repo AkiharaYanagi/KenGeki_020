@@ -67,7 +67,10 @@ namespace GAME
 		//-----------------------------------------------
 		//OK表示
 		P_Grp			m_OK;
-	
+		
+		//操作説明
+		P_Grp			m_inst;
+
 
 	public:
 		_CharaSele ();
@@ -104,6 +107,11 @@ namespace GAME
 		//-----------------------------------------------
 		//文字表示グラフィックの作成
 		static P_GrpBlink MakeTxtGrp ( VEC2 pos, const s3d::String & filename );
+
+
+		//相手のキャラを取得
+		CHARA_NAME GetOtherChara ( PLAYER_ID id );
+		CHARA_COLOR GetOtherColor ( PLAYER_ID id );
 
 	private:
 		//内部関数

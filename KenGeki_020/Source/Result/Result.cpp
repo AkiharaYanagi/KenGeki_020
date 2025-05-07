@@ -59,6 +59,8 @@ namespace GAME
 		AddpTask ( m_mov );
 		GRPLST_INSERT ( m_mov );
 
+#if 0
+
 		m_chara = std::make_shared < GameGraphic > ();
 		m_chara->AddTexture_FromArchive ( U"CharaSele\\Stand_Ouka.png" );
 		m_chara->AddTexture_FromArchive ( U"CharaSele\\Stand_Sae.png" );
@@ -66,6 +68,14 @@ namespace GAME
 		m_chara->SetPos ( CHARA_SX, CHARA_PY );
 		AddpTask ( m_chara );
 		GRPLST_INSERT ( m_chara );
+
+#endif // 0
+		m_stand = std::make_shared < GameGraphic > ();
+		m_stand->AddTexture ();	//Assign用に１つ枠を取る
+		m_stand->SetPos ( CHARA_SX, CHARA_PY );
+		AddpTask ( m_stand );
+		GRPLST_INSERT ( m_stand );
+
 
 		m_state = std::make_shared < GameGraphic > ();
 		m_state->AddTexture_FromArchive ( U"Result\\Result_State.png" );
@@ -186,7 +196,11 @@ namespace GAME
 		P_Param pParam = Scene::GetpParam ();
 		PLAYER_ID win_player = pParam->GetWinner ();
 		CHARA_NAME name = pParam->GetCharaName ( win_player );
+		CHARA_COLOR clr = pParam->GetCharaColor ( win_player );
 
+		//キャラ
+		m_stand->AssignpTexture ( m_img_cmn.GetpTx ( name, clr ) );
+#if 0
 		switch ( name )
 		{
 		case CHARA_OUKA:
@@ -199,6 +213,7 @@ namespace GAME
 			m_chara->SetIndexTexture ( 2 );
 			break;
 		}
+#endif // 0
 	}
 
 	void Result::Init ()
@@ -251,7 +266,9 @@ namespace GAME
 		//フェード中もキャラ表示は移動
 		m_chara_x += CHARA_VX;
 		if ( m_chara_x > CHARA_PX ) { m_chara_x = CHARA_PX; }
-		m_chara->SetPos ( m_chara_x, CHARA_PY );
+
+//		m_chara->SetPos ( m_chara_x, CHARA_PY );
+		m_stand->SetPos ( m_chara_x, CHARA_PY );
 
 
 		//終了

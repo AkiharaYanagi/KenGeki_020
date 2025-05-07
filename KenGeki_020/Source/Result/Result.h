@@ -11,6 +11,7 @@
 #include "Game.h"
 #include "../GameMain/Scene.h"
 #include "ResultMenu.h"
+#include "../CharaSele/CharaSele_Image.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -23,7 +24,13 @@ namespace GAME
 	{
 		P_GrpMovie		m_mov;		//背景ムービー
 
-		P_Grp			m_chara;	//キャラ画像
+//		P_Grp			m_chara;	//キャラ画像
+
+
+		CharaSele_Image_Common		m_img_cmn;	//キャラ立絵 共有テクスチャ
+		P_Grp			m_stand;	//キャラ立絵
+
+
 		P_Grp			m_state;	//ステート(数値群)
 		P_Grp			m_MsgWnd;	//メッセージウィンドウ
 		P_Grp			m_inst;		//操作説明

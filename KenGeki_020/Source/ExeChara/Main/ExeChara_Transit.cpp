@@ -271,12 +271,17 @@ namespace GAME
 //		tstring nameAction = Check_TransitAction_Condition_str ( CONDITION );
 		s3d::String nameAction = Check_TransitAction_Condition_str ( CONDITION );
 
+#if 0
 		//該当無しは"ダメージ大"にして処理
 		// 空中で地上くらいになるため空中やられに変更
+#endif // 0
 		UINT index = m_pOther.lock()->m_pChara->GetActionID ( nameAction );
 		if ( NO_ACTION == index )
 		{
-			nameAction = U"空中やられ";
+			//nameAction = U"空中やられ";
+
+			//該当なしU""は何もしない
+			return;
 		}
 
 		//=================================================================
@@ -299,7 +304,9 @@ namespace GAME
 		}
 
 		//特殊処理
-		if ( IsNameAction ( U"乱舞超必殺技発生" ) )
+		bool b0 = IsNameAction ( U"乱舞超必殺技発生" );	//紗絵
+		bool b1 = IsNameAction ( U"波動必殺発生" );		//桜花
+		if ( b0 || b1 )
 		{
 //			if ( m_pScript->GetFrame () == 0 )
 			{

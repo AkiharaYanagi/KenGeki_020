@@ -33,12 +33,12 @@ namespace GAME
 
 	constexpr char32_t CHARA_IMG1_SAE []	= U"Chara\\Sae_1p_bhv.lz4";
 //	constexpr char32_t CHARA_IMG1_SAE []	= U"Chara\\Feral_bhv.lz4";
-//	constexpr char32_t CHARA_IMG2_SAE []	= U"Chara\\Sae_2p_bhv.lz4";
-	constexpr char32_t CHARA_IMG2_SAE []	= U"Chara\\Sae_1p_bhv.lz4";
+	constexpr char32_t CHARA_IMG2_SAE []	= U"Chara\\Sae_2p_bhv.lz4";
+//	constexpr char32_t CHARA_IMG2_SAE []	= U"Chara\\Sae_1p_bhv.lz4";
 
 	constexpr char32_t CHARA_IMG1_RETSU []	= U"Chara\\Retsudou_1p_bhv.lz4";
-//	constexpr char32_t CHARA_IMG2_RETSU []	= U"Chara\\Retsudou_2p_bhv.lz4";
-	constexpr char32_t CHARA_IMG2_RETSU []	= U"Chara\\Retsudou_1p_bhv.lz4";
+	constexpr char32_t CHARA_IMG2_RETSU []	= U"Chara\\Retsudou_2p_bhv.lz4";
+//	constexpr char32_t CHARA_IMG2_RETSU []	= U"Chara\\Retsudou_1p_bhv.lz4";
 
 	constexpr char32_t CHARA_IMG1_GABA []	= U"Chara\\Gabadaruga_1p_bhv.lz4";
 	constexpr char32_t CHARA_IMG2_GABA []	= U"Chara\\Gabadaruga_1p_bhv.lz4";

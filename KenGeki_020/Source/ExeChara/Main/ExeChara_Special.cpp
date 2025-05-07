@@ -180,7 +180,7 @@ namespace GAME
 
 		//-----------------------------------------------------
 		//烈堂
-//		if ( m_name == CHARA_RETSUDOU )
+		if ( m_name == CHARA_RETSUDOU )
 		{
 		}
 

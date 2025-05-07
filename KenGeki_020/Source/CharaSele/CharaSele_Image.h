@@ -10,8 +10,9 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 #include "Game.h"
-#include "CharaSeleConst.h"
+#include "../GameMain/GameConst.h"
 #include "../GameMain/Param.h"
+#include "CharaSeleConst.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -63,9 +64,17 @@ namespace GAME
 
 		P_Tx GetpTx ( const s3d::String & filename );
 
+		//定数内は範囲保証
+		P_Tx GetpTx ( CHARA_SELE_ID id, CHARA_COLOR clr );
+		P_Tx GetpTx ( CHARA_NAME name, CHARA_COLOR clr );
 	};
 
 	using P_ChSl_Img_Cmn = std::shared_ptr < CharaSele_Image_Common >;
+
+
+	class _CharaSele_Player;
+	using P_ChSl_Pl = std::shared_ptr < _CharaSele_Player >;
+	using WP_ChSl_Pl = std::weak_ptr < _CharaSele_Player >;
 
 
 
@@ -77,27 +86,47 @@ namespace GAME
 		CHARA_SELE_ID	m_chara_id { CHSLID_00 };	//選択キャラ
 		CHARA_COLOR		m_chara_clr { CH_CLR_1 };	//選択カラー
 
+		
+		WP_ChSl_Pl		m_pOther;		//相手状態
+
+
 		P_GridTx		m_gridTx;
 		P_Grp			m_chara_stand;			//キャラ立絵
 		P_Grp			m_chara_name;			//キャラ名前
 
 		float			m_x { 0 };				//カットイン位置
 
+		UINT32			m_waitDecide { 0 };		//決定時明度
+
+
 	public:
 		CharaSele_Image ();
 		CharaSele_Image ( const CharaSele_Image & rhs ) = delete;
 		~CharaSele_Image ();
+
+		//参照
+		void SetwpOther ( WP_ChSl_Pl pOther ) { m_pOther = pOther; }
+
 
 		void LoadTx ( P_ChSl_Img_Cmn pCmn );
 		void PlayerInit ( PLAYER_ID id );
 
 		void Move ();
 
-		void SelectChara_cutin ( CHARA_SELE_ID chara_id );
-		void SelectChara ( CHARA_SELE_ID chara_id );
 
-		void SetColor_cutin ( CHARA_COLOR clr );
-		void SetColor ( CHARA_COLOR clr );
+
+		//Selectは相手チェックが入るのでm_pOther設定後に用いる
+		void SelectChara_cutin ( CHARA_SELE_ID id );
+		void SelectChara ( CHARA_SELE_ID id );
+		void SetChara ( CHARA_SELE_ID id );		//m_pOtherを用いない設置
+
+
+		void SelectColor_cutin ( CHARA_COLOR clr );
+		void SelectColor ( CHARA_COLOR clr );
+		void SetColor ( CHARA_COLOR clr );		//m_pOtherを用いない設置
+
+
+		void Decide ();
 
 	private:
 		void StartCutIn ();

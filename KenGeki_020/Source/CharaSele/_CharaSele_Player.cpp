@@ -111,38 +111,28 @@ namespace GAME
 		}
 	}
 
+
 	void _CharaSele_Player::ParamInit ( P_Param prm )
 	{
-		AssignName ( prm->GetCharaName ( m_player_id ) );
-		SelectColor ( prm->GetCharaColor ( m_player_id ) );
+		//直接指定する(set)
+		CHARA_NAME name = prm->GetCharaName ( m_player_id );
+		CHARA_SELE_ID id = CharaName_To_ChSlId ( name );
+		m_chara_img->SetChara ( id );
+		m_cursor->SetChara ( id );
 
-#if 0
-		//プレイヤ側別初期化
-		if ( PLAYER_ID_1 == m_player_id )
-		{
-			AssignName ( prm->GetCharaName1p () );
-			SelectColor ( prm->GetCharaColor1p () );
-		}
-		else if ( PLAYER_ID_2 == m_player_id )
-		{
-			AssignName ( prm->GetCharaName2p () );
-			SelectColor ( prm->GetCharaColor2p () );
-		}
-#endif // 0
-
-		//test
-		//カラーを１に戻す
-		SelectColor ( CH_CLR_1 );
-
+		SetColor ( prm->GetCharaColor ( m_player_id ) );
 	}
-
 
 	void _CharaSele_Player::Load ()
 	{
 		m_actor->SetwpChSl_Player ( shared_from_this () );
 		m_actor->Load ();
 
+		m_chara_img->SetwpOther ( m_pOther );
+
 		m_cursor->SetwpChSl_Player ( shared_from_this () );
+
+		TASK_VEC::Load ();
 	}
 
 	void _CharaSele_Player::Move ()
@@ -158,37 +148,55 @@ namespace GAME
 		m_actor->Input ();
 	}
 
-	void _CharaSele_Player::SelectChara_cutin ( CHARA_SELE_ID chara_id )
-	{
-//		m_chsl_id = chara_id;
-		m_chara_img->SelectChara_cutin ( chara_id );
-	}
 
-	void _CharaSele_Player::SelectChara ( CHARA_SELE_ID chara_id )
-	{
-//		m_chsl_id = chara_id;
-		m_chara_img->SelectChara ( chara_id );
-	}
-
+	//----------------------------------------------------------------------
+	//キャラ選択
 	CHARA_NAME _CharaSele_Player::GetCharaName () const
 	{
 		return m_cursor->GetCharaName ();
 	}
 
 
+	void _CharaSele_Player::SelectChara_cutin ( CHARA_SELE_ID chara_id )
+	{
+		m_chara_img->SelectChara_cutin ( chara_id );
+	}
+
+	void _CharaSele_Player::SelectChara ( CHARA_SELE_ID chara_id )
+	{
+		m_chara_img->SelectChara ( chara_id );
+	}
+
+	void _CharaSele_Player::SetChara ( CHARA_SELE_ID chara_id )
+	{
+		m_chara_img->SetChara ( chara_id );
+	}
+
+
+	//----------------------------------------------------------------------
+	//カラー選択
 	void _CharaSele_Player::SelectColor_cutin ( CHARA_COLOR chara_clr )
 	{
 		m_color = chara_clr;
-		m_chara_img->SetColor_cutin ( chara_clr );
+		m_chara_img->SelectColor_cutin ( chara_clr );
 		m_Num_ClrSl->SetIndexTexture ( chara_clr );
 	}
 
 	void _CharaSele_Player::SelectColor ( CHARA_COLOR chara_clr )
 	{
 		m_color = chara_clr;
+		m_chara_img->SelectColor ( chara_clr );
+		m_Num_ClrSl->SetIndexTexture ( chara_clr );
+	}
+
+	void _CharaSele_Player::SetColor ( CHARA_COLOR chara_clr )
+	{
+		m_color = chara_clr;
 		m_chara_img->SetColor ( chara_clr );
 		m_Num_ClrSl->SetIndexTexture ( chara_clr );
 	}
+
+	//----------------------------------------------------------------------
 
 
 
@@ -204,7 +212,7 @@ namespace GAME
 		}
 
 		//カラーを１に戻す
-		SelectColor ( CH_CLR_1 );
+		//SelectColor ( CH_CLR_1 );
 
 		m_cursor->Start ();
 	}
@@ -216,7 +224,7 @@ namespace GAME
 
 		//test
 		//カラーを１に戻す
-		SelectColor ( CH_CLR_1 );
+		//SelectColor ( CH_CLR_1 );
 
 
 		if ( PLAYER_ID_1 == m_player_id )
@@ -270,7 +278,6 @@ namespace GAME
 	//キャラ名から選択する
 	void _CharaSele_Player::AssignName ( CHARA_NAME name )
 	{
-//		m_chsl_id = CharaName_To_ChSlId ( name );
 		CHARA_SELE_ID id = CharaName_To_ChSlId ( name );
 		SelectChara ( id );
 		m_cursor->SetChara ( id );

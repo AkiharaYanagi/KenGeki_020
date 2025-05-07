@@ -33,8 +33,9 @@ namespace GAME
 		//2025/04/19 バトル修正 ver0.24
 		//2025/04/19 ガード修正 ver0.25
 		//2025/04/19 不具合修正 ver0.26
+		//2025/05/04 2Pカラー ver0.27
 #endif // 0
-	const char32_t Title::Ver[] = U"ver 0.26";
+	const char32_t Title::Ver[] = U"ver 0.27";
 
 
 	const float Title::BG_X = 0;
