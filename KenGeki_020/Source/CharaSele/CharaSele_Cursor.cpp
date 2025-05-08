@@ -34,7 +34,9 @@ namespace GAME
 	//枠位置定数
 	//	キャラID, 名前, セレクト位置x, セレクト位置y, 上移動先, 下移動先, 左移動先, 右移動先
 
-#if 0
+#define GABA	1
+
+#if GABA
 
 	constexpr ChSlct CHSL_POS [ CHARA_SELE_NUM ] = 
 	{

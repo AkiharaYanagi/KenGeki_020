@@ -134,7 +134,17 @@ namespace GAME
 		float d_45 = 1.f;
 		if ( damage + chainDamage > 4500 )
 		{
-			d_45 = 0.1f;
+			//相手のヒット数で補正増加
+			UINT hitnum = m_pOther.lock()->GetBtlPrm().GetChainHitNum ();
+
+			if ( hitnum < 100 )
+			{
+				d_45 = 0.01f * ( 100 - (float)hitnum );
+			}
+			else
+			{
+				d_45 = 0.01f;
+			}
 		}
 		//-------------------------------------------------
 		//超必殺補正

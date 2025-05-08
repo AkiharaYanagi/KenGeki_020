@@ -549,6 +549,10 @@ namespace GAME
 		{
 			DBGOUT_WND_F ( DBGOUT_0, U"1p_pos = {},{}"_fmt( pos.x, pos.y ) );
 		}
+		else
+		{
+			DBGOUT_WND_F ( DBGOUT_1, U"2p_pos = {},{}"_fmt( pos.x, pos.y ) );
+		}
 
 
 

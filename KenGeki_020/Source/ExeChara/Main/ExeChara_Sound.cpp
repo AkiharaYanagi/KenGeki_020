@@ -121,6 +121,8 @@ namespace GAME
 		//空欄は何もしない
 		if ( vc_name.compare ( U"" ) == 0 ) { return; }
 
+#if 0
+#endif // 0
 		//被ダメ時とガード時、小攻撃はランダムに飛ばす
 		bool bDamaged = IsDamaged ();
 		bool bGuard = IsGuard ();
@@ -131,7 +133,8 @@ namespace GAME
 			//初撃は確定、連続ヒット中はランダム
 			UINT hitnum = m_pOther.lock()->GetBtlPrm().GetChainHitNum ();
 
-			if ( 1 < hitnum )
+			//３ヒット以降
+			if ( 2 < hitnum )
 			{
 				//ランダム 0-2 (30%)で再生
 				//ランダム 3-9 (70%)で非再生
@@ -139,6 +142,7 @@ namespace GAME
 				if ( 2 < rnd ) { return; }
 			}
 		}
+
 
 		SND_PLAY_ONESHOT_VC ( vc_name );		//名前から再生
 	}

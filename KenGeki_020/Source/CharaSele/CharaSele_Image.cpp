@@ -187,7 +187,7 @@ namespace GAME
 		case CHSLID_02: SelectChara ( CHSLID_02 ); break;
 		case CHSLID_03: SelectChara ( CHSLID_03 ); break;
 		case CHSLID_04: HiddenCharaStand ();break;
-		case CHSLID_05: HiddenCharaStand ();break;
+		case CHSLID_05: SelectChara ( CHSLID_05 ); break;
 		case CHSLID_06: HiddenCharaStand ();break;
 		case CHSLID_07: HiddenCharaStand ();break;
 		case CHSLID_08: HiddenCharaStand ();break;

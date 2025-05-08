@@ -147,7 +147,28 @@ namespace GAME
 
 		//----------------------------------------------------------
 		// 剣撃対抗 -> ExeChara_Func.cpp に移項
+		
+		//----------------------------------------------------------
+		//画面端距離補正
+		float d_side = 1.f;
 
+		//@todo 相手のノックバック量も参照
+		float self_x = pSelf->GetPos ().x;
+		float other_x = pOther->GetPos ().x;
+		float padding = 300;
+
+		float left = 0 + padding;
+		bool leftSide = self_x < left && other_x < left;
+
+		float right = GAME_WIDTH - padding;
+		bool rightSide = right < self_x && right < other_x;
+
+		if ( leftSide || rightSide )
+		{
+			d_side = 1.2f;
+		}
+
+		//----------------------------------------------------------
 		//距離ヒット数補正
 		UINT chain = m_btlPrm.GetChainHitNum ();
 
@@ -155,12 +176,14 @@ namespace GAME
 		float d_revise = 1.f + (float)chain * 0.1f;
 //		if ( 10 <= chain ) { d_revise *= d_revise; }	//10hit以降補正
 
+		//----------------------------------------------------------
 		//超必殺のみ補正外
 		if ( pSelf->IsOverdrive () )
 		{
 			d_revise = 1.f;
+			d_side = 1.f;
 		}
-		recoil_i = d_revise * recoil_i;
+		recoil_i = d_revise * recoil_i *d_side;
 
 #if 0
 		if ( m_btlPrm.GetPlayerID () == PLAYER_ID_1 )

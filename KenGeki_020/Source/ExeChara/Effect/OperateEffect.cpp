@@ -233,6 +233,11 @@ namespace GAME
 		if ( pEffect->GetName () == U"地面" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"Ukemi" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"EX" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"暁0" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"暁1" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"颯0" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"颯1" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"贐" ) { pExeEffect->SetShader ( F ); }
 			 
 	}
 
