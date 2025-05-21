@@ -239,7 +239,7 @@ namespace GAME
 	{
 		//ルート個数 と メモリの確保
 		UINT nRut = m_utl.LoadUInt ( buf, pos );
-		AUP_P_Route aryRut = std::make_unique < P_Route [] > ( nRut );
+		UP_AP_Route aryRut = std::make_unique < P_Route [] > ( nRut );
 		for ( UINT i = 0; i < nRut; ++ i ) { aryRut [ i ] = std::make_shared < Route > (); }
 
 		//実データ

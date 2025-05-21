@@ -43,6 +43,7 @@ namespace GAME
 		//カラー変更
 		void SetColor ( _CLR clr )
 		{
+			(void)clr;
 		//	m_mainGraphic->SetColor ( clr );
 		}
 

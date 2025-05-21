@@ -21,10 +21,14 @@ namespace GAME
 
 	//　"VC\\"フォルダ内のファイル名で指定する
 
-	//VOICE
+	//タイトルコール
 	constexpr char32_t VC_00_SAE_TITLE_CALL []		= U"VC00_99_紗絵_タイトルコール.wav";
 	constexpr char32_t VC_01_RETSUDOU_TITLE_CALL []	= U"VC01_99_烈堂_タイトルコール.wav";
-	constexpr char32_t VC_02_OUKA_TITLE_CALL []		= U"VC02_33_4_桜花_タイトルコール：剣撃クロスゾーン.wav";
+	constexpr char32_t VC_02_OUKA_TITLE_CALL[] = U"VC02_33_4_桜花_タイトルコール：剣撃クロスゾーン.wav";
+	constexpr char32_t VC_90_CONSOME_TITLE_CALL[] = U"VC90_00_剣撃クロスゾーン.wav";
 
+	constexpr char32_t VC_91_CONSOME_START[] = U"VC90_01_試合前.wav";
+	constexpr char32_t VC_92_CONSOME_MIDDLE[] = U"VC90_02_試合中.wav";
+	constexpr char32_t VC_93_CONSOME_FINISH[] = U"VC90_03_試合終了.wav";
 }
 

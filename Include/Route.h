@@ -19,7 +19,7 @@ namespace GAME
 	class Route
 	{
 		s3d::String		m_name;			//名前
-		V_UINT			m_vIdBranch;	//ブランチIDリスト
+		V_UINT32		m_vIdBranch;	//ブランチIDリスト
 
 	public:
 		Route ();
@@ -45,15 +45,15 @@ namespace GAME
 
 		void AddBranchID ( UINT branchId );
 
-		const V_UINT & GetcvIDBranch () const { return m_vIdBranch; }
-		V_UINT & GetvIDBranch () { return m_vIdBranch; }
+		const V_UINT32 & GetcvIDBranch () const { return m_vIdBranch; }
+		V_UINT32 & GetvIDBranch () { return m_vIdBranch; }
 	};
 
 	using P_Route = std::shared_ptr < Route >;
 	using VP_Route = std::vector < P_Route >;
 	using PVP_Route = std::shared_ptr < VP_Route >;
 
-	using AUP_P_Route = std::unique_ptr < P_Route [] >;
+	using UP_AP_Route = std::unique_ptr < P_Route [] >;
 
 }	//namespace GAME
 

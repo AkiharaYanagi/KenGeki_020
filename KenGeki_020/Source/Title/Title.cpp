@@ -327,9 +327,11 @@ namespace GAME
 			SND_PLAY_LOOP_BGM ( BGM_Title );
 		}
 
+		//タイトルコール
 		m_tmr_title_call->Move ();
 		if ( m_tmr_title_call->IsLast () )
 		{
+#if 0
 			int rnd = s3d::Random ( 0, 2 );
 			switch ( rnd )
 			{
@@ -337,6 +339,9 @@ namespace GAME
 			case 1: SND_PLAY_ONESHOT_VC ( VC_01_RETSUDOU_TITLE_CALL ); break;
 			case 2: SND_PLAY_ONESHOT_VC ( VC_02_OUKA_TITLE_CALL ); break;
 			}
+#endif // 0
+			//SP
+			SND_PLAY_ONESHOT_VC(VC_90_CONSOME_TITLE_CALL);
 		}
 
 		//背景スクロール

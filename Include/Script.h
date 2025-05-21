@@ -12,8 +12,8 @@
 //#include "Game.h"
 //#include "Define.h"
 #include "Define_Siv3D.h"
-
 #include "Rect.h"
+
 #include "Chara_Const.h"
 #include "Route.h"
 #include "EffectGenerate.h"
@@ -85,8 +85,8 @@ namespace GAME
 		//ルート
 		void AddRouteID ( UINT i ) { m_vRouteID.push_back ( i ); }
 		void SetRouteID ( std::unique_ptr < UINT[] > up_aryUint, UINT size );
-		const V_UINT & GetcvRouteID () const { return m_vRouteID; }
-		V_UINT & GetvRouteID () { return m_vRouteID; }
+		const V_UINT32 & GetcvRouteID () const { return m_vRouteID; }
+		V_UINT32 & GetvRouteID () { return m_vRouteID; }
 
 		//EfGnrtリスト
 		PVP_EfGnrt GetpvpEfGnrt () const { return m_pvpEfGnrt; }

@@ -9,6 +9,7 @@
 //-------------------------------------------------------------------------------------------------
 #include "FtgDemo_State.h"
 #include "../../GameMain/SoundConst.h"
+#include "../../GameMain/VoiceConst.h"
 #include "FtgDemo_Actor.h"
 #include "../../GameMain/G_Ftg.h"
 #include "Fighting.h"
@@ -110,6 +111,10 @@ namespace GAME
 
 		m_grpGetReady->Start ();
 		m_timer->Start ();
+
+
+		//SP_VOICE
+		SND_PLAY_ONESHOT_VC(VC_91_CONSOME_START);
 	}
 
 	void FTG_DM_GetReady::Final ()
@@ -204,6 +209,14 @@ namespace GAME
 
 		//キャラ共通一連動作
 		pMutual->Conduct ();
+
+
+		//SP_VOICE
+		if (WND_UTL::AscKey(VK_F11))
+		{
+			SND_PLAY_ONESHOT_VC(VC_92_CONSOME_MIDDLE);
+		}
+
 	}
 
 	void FTG_DM_Main::Final ()
@@ -361,6 +374,10 @@ namespace GAME
 		m_grp_chaku->Start ();
 		m_grpLight0->Start ();
 		m_grpLight1->Start ();
+
+
+		//SP_VOICE
+		SND_PLAY_ONESHOT_VC(VC_93_CONSOME_FINISH);
 	}
 
 	void FTG_DM_Down::Do ()
@@ -534,6 +551,7 @@ namespace GAME
 
 		default: break;
 		}
+
 	}
 
 	void FTG_DM_Winner::Do ()
