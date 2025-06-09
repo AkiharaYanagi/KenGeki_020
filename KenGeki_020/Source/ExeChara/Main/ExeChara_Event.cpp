@@ -93,7 +93,7 @@ namespace GAME
 		{
 			//ルートの取得
 			P_Route pRut = vpRoute [ indexRoute ];
-			const V_UINT vBranchID = vpRoute [ indexRoute ]->GetcvIDBranch ();
+			const V_UINT32 vBranchID = vpRoute [ indexRoute ]->GetcvIDBranch ();
 
 			//対象のブランチリスト
 			for ( UINT indexBranch : vBranchID )
@@ -110,8 +110,48 @@ namespace GAME
 			}
 		}
 
-		//相殺キャンセル開始
+		//相殺キャンセル　タイマー開始
 		m_btlPrm.GetTmr_OfstCncl()->Start ( OFST_CNCL );
+
+
+		//===================================================================
+		//キャラ毎 特殊処理
+		//-----------------------------------------------------
+		//桜花
+		if ( m_name == CHARA_OUKA )
+		{
+			if ( IsNameAction ( U"竜巻必殺技" ) )
+			{
+				P_ExeChara pOther = m_pOther.lock();
+
+				//相手の技によって効果が変わる
+
+				//超必殺技
+				if ( pOther->IsOverdrive () )
+				{
+					SetAction ( U"天照燕・暗転刹" );
+				}
+				//必殺技
+				else if ( pOther->IsSpecial () )
+				{
+					bool bDir = GetDirRight ();
+					SetDirRight ( ! bDir );		//向きを反転
+					SetAction ( U"波動必殺追加2" );
+				}
+				//通常技
+				else if ( pOther->IsNormalAttack () )
+				{
+					//後ろ反動　追加
+					float vRcl = pOther->m_btlPrm.GetVelRecoil ();
+					pOther->m_btlPrm.SetVelRecoil ( vRcl + 50 );
+
+					//アクション内ヒット数を上限にして攻撃判定を消去
+					UINT hitnum = m_pAction->GetHitNum();
+					m_btlPrm.SetHitNum ( hitnum );
+				}
+			}
+		}
+
 	}
 
 

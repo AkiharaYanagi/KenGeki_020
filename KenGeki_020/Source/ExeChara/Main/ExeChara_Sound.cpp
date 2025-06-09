@@ -28,20 +28,36 @@ namespace GAME
 	//サウンドエフェクトの再生
 	void ExeChara::SE_Play ()
 	{
+		//----------------------------------------------------------------
+		//ヒットストップ中(同一スクリプト)は１回のみ
+		P_Timer pTmr_HitStop = m_btlPrm.GetTmr_HitStop();
+
+		//解除は空欄でも行う
+		if ( ! pTmr_HitStop->IsActive () )
+		{
+			//ヒットストップ終了時に解除
+			m_btlPrm.SetFirstSE_HS ( F );
+		}
+		//----------------------------------------------------------------
+
+
+		//----------------------------------------------------------------
 		//空欄は何もしない
 		if ( m_pScript->m_prmStaging.SE_Name.compare ( U"" ) == 0 ) { return; }
+		//----------------------------------------------------------------
 
-//		DBGOUT_WND_F ( DBGOUT_0, U" FirstSE = {}"_fmt(  m_btlPrm.GetFirstSE () ? 1 : 0 ) );
-//		DBGOUT_WND_F ( DBGOUT_1, U" FirstSE = {}"_fmt(  m_btlPrm.GetFirstSE () ? 1 : 0 ) );
 
+		//----------------------------------------------------------------
 		//一時停止中は１回のみ
 		if ( m_btlPrm.GetFirstSE () )
 		{
 			return;
 		}
-		
+		//----------------------------------------------------------------
+
+
+		//----------------------------------------------------------------
 		//ヒットストップ中(同一スクリプト)は１回のみ
-		P_Timer pTmr_HitStop = m_btlPrm.GetTmr_HitStop();
 		if ( pTmr_HitStop->IsActive () )
 		{
 			//初回は鳴らす
@@ -55,19 +71,20 @@ namespace GAME
 				return;
 			}
 		}
-		else
-		{
-			//終了時に解除
-			m_btlPrm.SetFirstSE_HS ( F );
-		}
+		//----------------------------------------------------------------
+
+//		DBGOUT_WND_F ( DBGOUT_0, U" FirstSE = {}"_fmt(  m_btlPrm.GetFirstSE () ? 1 : 0 ) );
+//		DBGOUT_WND_F ( DBGOUT_1, U" FirstSE = {}"_fmt(  m_btlPrm.GetFirstSE () ? 1 : 0 ) );
 		if ( m_btlPrm.GetPlayerID() == PLAYER_ID_1 )
 		{
 			UINT n = m_pScript->GetFrame ();
-			bool b = m_btlPrm.GetFirstSE_HS ();
-			DBGOUT_WND_F ( DBGOUT_7, U"{}: FirstSE_HS = {}"_fmt( n, b ) );
+			bool b = m_btlPrm.GetFirstSE ();
+			bool b_HS = m_btlPrm.GetFirstSE_HS ();
+			DBGOUT_WND_F ( DBGOUT_7, U"[{}]: FirstSE = {}, HS = {}"_fmt( n, b, b_HS ) );
 		}
 
 
+		//----------------------------------------------------------------
 		//スクリプトから名前で指定
 		PlaySE ( m_pScript->m_prmStaging.SE_Name );
 

@@ -320,7 +320,7 @@ namespace GAME
 		{
 			if ( 0 == pRut->GetName ().compare ( U"地上超必殺技" ) )
 			{
-				const V_UINT vBrc = pRut->GetcvIDBranch ();
+				const V_UINT32 vBrc = pRut->GetcvIDBranch ();
 
 				//手動でリストに追加
 				for ( UINT32 iBrc : vBrc )

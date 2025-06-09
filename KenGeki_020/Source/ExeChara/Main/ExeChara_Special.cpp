@@ -226,13 +226,13 @@ namespace GAME
 			{
 				if ( m_pScript->GetFrame () == 0 )
 				{
+					//1p2p表示前後
 					m_pOther.lock()->TopByZ ();
 
 					//位置指定
 					m_pOther.lock()->SetPos ( VEC2 ( my_pos.x + ( bDir * 250 ), GROUND_Y ) );
 				}
 			}
-
 
 #if 0
 			//EX時乗算カラー変更
@@ -261,6 +261,57 @@ namespace GAME
 				}
 			}
 #endif // 0
+
+			//-------------------------------------------------------------------------
+			if ( IsNameAction ( U"超必殺技A0" ) )
+			{
+				if ( m_pAction->IsEndScript ( m_pScript->GetFrame () ) )
+				{
+					//表示前後 (自身を手前に)
+					TopByZ ();
+
+					//位置指定
+					//左右位置チェック
+					if ( GetDirRight () )	//右向 → 左位置
+					{
+						SetPos ( VEC2 ( 960 - 200, GROUND_Y ) );
+						m_pOther.lock()->SetPos ( VEC2 ( 960 + 200, GROUND_Y ) );
+					}
+					else
+					{
+						SetPos ( VEC2 ( 960 + 200, GROUND_Y ) );
+						m_pOther.lock()->SetPos ( VEC2 ( 960 - 200, GROUND_Y ) );
+					}
+				}
+			}
+
+			if ( IsNameAction ( U"超必殺技A1" ) )
+			{
+#if 0
+				if ( m_pScript->GetFrame () == 0 )
+				{
+					//位置指定
+					SetPos ( VEC2 ( 960 - 200, GROUND_Y ) );
+					m_pOther.lock()->SetPos ( VEC2 ( 960 + 200, GROUND_Y ) );
+				}
+#endif // 0
+
+				//状態指定
+				if ( m_pScript->GetFrame () == 121 )
+				{
+					m_pOther.lock()->SetAction ( U"ギャバ_超必殺技Aやられ0" );
+				}
+			}
+			if ( IsNameAction ( U"超必殺技A3" ) )
+			{
+				//状態指定
+				if ( m_pAction->IsEndScript ( m_pScript->GetFrame () ) )
+				{
+					m_pOther.lock()->SetAction ( U"ダウン" );
+				}
+			}
+			//-------------------------------------------------------------------------
+
 
 		}
 

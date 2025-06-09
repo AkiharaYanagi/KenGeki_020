@@ -103,7 +103,7 @@ namespace GAME
 		
 		//コマンドが完成したIDを優先順に保存したリスト
 		m_pCharaInput->MakeTransitIDList ( *m_pChara, m_pScript, m_btlPrm.GetDirRight () );
-		const V_UINT & vCompID = m_pCharaInput->GetvCompID ();
+		const V_UINT32 & vCompID = m_pCharaInput->GetvCompID ();
 
 		uint32 transitID = (uint32)NO_COMPLETE;
 		for ( UINT id : vCompID )
@@ -133,7 +133,7 @@ namespace GAME
 				//コマンドが完成したIDを優先順に保存したリスト
 
 				m_pCharaInput->MakeTransitIDList ( *m_pChara, m_vOfstCncl, m_btlPrm.GetDirRight () );
-				const V_UINT & vCompID_Offset = m_pCharaInput->GetvCompID ();
+				const V_UINT32 & vCompID_Offset = m_pCharaInput->GetvCompID ();
 
 				for ( UINT id : vCompID_Offset )
 				{
@@ -402,7 +402,7 @@ namespace GAME
 		//スクリプトの持つルートリスト
 		for ( UINT indexRut : m_pScript->GetcvRouteID () )
 		{
-			const V_UINT& vBrcID = vpRoute [ indexRut ]->GetcvIDBranch ();
+			const V_UINT32 & vBrcID = vpRoute [ indexRut ]->GetcvIDBranch ();
 
 			//対象のブランチリスト
 			for ( UINT id : vBrcID )
@@ -427,7 +427,7 @@ namespace GAME
 		//スクリプトの持つルートリスト
 		for ( UINT indexRut : m_pScript->GetcvRouteID () )
 		{
-			const V_UINT& vBrcID = vpRoute [ indexRut ]->GetcvIDBranch ();
+			const V_UINT32 & vBrcID = vpRoute [ indexRut ]->GetcvIDBranch ();
 
 			//対象のブランチリスト
 			for ( UINT id : vBrcID )

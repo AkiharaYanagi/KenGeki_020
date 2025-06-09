@@ -52,7 +52,7 @@ namespace GAME
 		PV_RECT	m_pvHRect;		//当り枠リスト
 		PV_RECT	m_pvORect;		//相殺枠リスト
 
-		V_UINT		m_vRouteID;		//ルートリスト
+		V_UINT32		m_vRouteID;		//ルートリスト
 		PVP_EfGnrt	m_pvpEfGnrt;	//Efジェネレートリスト
 
 	public:

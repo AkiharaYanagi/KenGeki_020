@@ -175,7 +175,7 @@ namespace GAME
 		//スクリプトの持つルートリスト
 		for ( UINT indexRoute : pScp->GetcvRouteID () )
 		{
-			const V_UINT vBranchID = vpRoute[indexRoute]->GetcvIDBranch ();
+			const V_UINT32 vBranchID = vpRoute[indexRoute]->GetcvIDBranch ();
 
 			//対象のブランチリスト
 			for ( UINT indexBranch : vBranchID )
@@ -216,7 +216,7 @@ namespace GAME
 		{
 			//ルートの取得
 			P_Route pRut = vpRoute [ indexRoute ];
-			const V_UINT vBranchID = vpRoute [ indexRoute ]->GetcvIDBranch ();
+			const V_UINT32 vBranchID = vpRoute [ indexRoute ]->GetcvIDBranch ();
 
 			//対象のブランチリスト
 			for ( UINT indexBranch : vBranchID )
@@ -248,7 +248,7 @@ namespace GAME
 	
 	//成立リストを生成する
 	//引数：キャラ参照, 特定条件のブランチIDリスト, 向き
-	void CharaInput::MakeTransitIDList ( const Chara & ch, V_UINT vBrc, bool dirRight )
+	void CharaInput::MakeTransitIDList ( const Chara & ch, V_UINT32 vBrc, bool dirRight )
 	{
 		//成立した１つのIDではなく、成立したIDを優先順位で保存したリストを返す
 		m_vCompID.clear ();

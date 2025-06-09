@@ -179,7 +179,7 @@ namespace GAME
 	}
 
 
-	void LoadCharaBinUtl::LoadAryUint ( CUPR_BYTE buf, UINT & pos, V_UINT & refAryUint )
+	void LoadCharaBinUtl::LoadAryUint ( CUPR_BYTE buf, UINT & pos, V_UINT32 & refAryUint )
 	{
 		UINT size = LoadUInt ( std::move ( buf ), pos );
 		refAryUint.resize ( size );

@@ -114,11 +114,11 @@ namespace GAME
 			//スクリプト分岐条件から
 
 			//ルートのチェック
-			V_UINT vec_RouteID = m_pScript->GetcvRouteID ();
+			V_UINT32 vec_RouteID = m_pScript->GetcvRouteID ();
 			for ( UINT indexRoute : vec_RouteID )
 			{
 				//ブランチのチェック
-				V_UINT vBranchID = m_vpRoute[indexRoute]->GetcvIDBranch ();
+				V_UINT32 vBranchID = m_vpRoute[indexRoute]->GetcvIDBranch ();
 				for ( UINT indexBranch : vBranchID )
 				{
 					//終了時以外は飛ばす

@@ -36,7 +36,7 @@ namespace GAME
 		RECT LoadRect ( CUPR_BYTE buf, UINT & pos );
 		void LoadListRect ( CUPR_BYTE buf, UINT & pos, PV_RECT pvRect );
 		L_UINT LoadAryUint ( CUPR_BYTE buf, UINT & pos, UINT & refLength );
-		void LoadAryUint ( CUPR_BYTE buf, UINT & pos, V_UINT & refAryUint );
+		void LoadAryUint ( CUPR_BYTE buf, UINT & pos, V_UINT32 & refAryUint );
 	};
 
 

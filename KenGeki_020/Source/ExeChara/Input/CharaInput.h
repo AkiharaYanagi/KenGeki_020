@@ -26,7 +26,7 @@ namespace GAME
 		bool				m_cpu;			//CPUフラグ
 
 		//コマンドが完成したIDを優先順に保存したリスト
-		V_UINT				m_vCompID;		
+		V_UINT32			m_vCompID;		
 
 	public:
 		CharaInput ();
@@ -60,7 +60,7 @@ namespace GAME
 
 		//成立リストを生成する
 		virtual void MakeTransitIDList ( const Chara & ch, P_Script pScp, bool dirRight );
-		virtual void MakeTransitIDList ( const Chara & ch, V_UINT vBrc, bool dirRight );
+		virtual void MakeTransitIDList ( const Chara & ch, V_UINT32 vBrc, bool dirRight );
  
 		//キーの保存
 		void SetGameKey ( V_GAME_KEY & vKey );

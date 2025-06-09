@@ -441,8 +441,8 @@ namespace GAME
 	//	内部関数
 	//================================================
 	private:
-		V_UINT	m_vOfstCncl;		//相殺キャンセルリスト(地上)
-		V_UINT	m_vOfstCncl_Air;	//相殺キャンセルリスト(空中)
+		V_UINT32	m_vOfstCncl;		//相殺キャンセルリスト(地上)
+		V_UINT32	m_vOfstCncl_Air;	//相殺キャンセルリスト(空中)
 		void MakeOfstCnclList ();	//相殺キャンセルリスト生成
 
 	public:
@@ -506,6 +506,9 @@ namespace GAME
 
 		//攻撃中かどうか
 		bool IsAttacking () const;
+
+		//通常技かどうか
+		bool IsNormalAttack () const;
 
 		//空中かどうか
 		bool IsAir () const { return m_pAction->GetPosture () == AP_JUMP; }

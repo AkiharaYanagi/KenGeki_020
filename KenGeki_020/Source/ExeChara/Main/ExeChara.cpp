@@ -513,6 +513,17 @@ namespace GAME
 		return nm || sp || od;
 	}
 
+	//通常技かどうか
+	bool ExeChara::IsNormalAttack () const
+	{
+		ACTION_CATEGORY ac = m_pAction->GetCategory ();
+
+		bool nm = ( ac == AC_ATTACK_L || ac == AC_ATTACK_M || ac == AC_ATTACK_H );
+		bool air = ( ac == AC_ATTACK_J );
+
+		return nm || air;
+	}
+
 	//投げ(ガード不能)かどうか
 	bool ExeChara::IsThrowCheck () const
 	{
@@ -536,7 +547,7 @@ namespace GAME
 		//スクリプトの持つルートリスト
 		for ( UINT indexRut : m_pScript->GetcvRouteID () )
 		{
-			const V_UINT& vBrcID = vpRoute [ indexRut ]->GetcvIDBranch ();
+			const V_UINT32 & vBrcID = vpRoute [ indexRut ]->GetcvIDBranch ();
 
 			//対象のブランチリスト
 			for ( UINT id : vBrcID )

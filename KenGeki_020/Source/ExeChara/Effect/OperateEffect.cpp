@@ -238,6 +238,7 @@ namespace GAME
 		if ( pEffect->GetName () == U"颯0" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"颯1" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"贐" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"極" ) { pExeEffect->SetShader ( F ); }
 			 
 	}
 
