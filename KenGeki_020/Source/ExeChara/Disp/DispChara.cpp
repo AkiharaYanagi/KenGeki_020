@@ -32,9 +32,15 @@ namespace GAME
 		m_dispRect = std::make_shared < DispRect > ();
 		AddpTask ( m_dispRect );
 
+
 		//フロントエンド
+#if 0
 		m_frontEnd = std::make_shared < DispFrontEnd > ();
 		AddpTask ( m_frontEnd );
+#endif // 0
+		m_frontEnd_all = std::make_shared < DispFrontEnd_all > ();
+		AddpTask ( m_frontEnd_all );
+
 	}
 
 
@@ -50,8 +56,12 @@ namespace GAME
 	//プレイヤIDを設定
 	void DispChara::LoadPlayer ( PLAYER_ID playerID )
 	{
-		m_frontEnd->LoadPlayer ( playerID );
 		m_dispInput->LoadPlayer ( playerID );
+
+#if 0
+		m_frontEnd->LoadPlayer ( playerID );
+#endif // 0
+		m_frontEnd_all->LoadPlayer ( playerID );
 	}
 
 
@@ -59,7 +69,12 @@ namespace GAME
 	//シーンパラメータ関連初期化
 	void DispChara::ParamInit ( P_Param pParam )
 	{
+		(void)pParam;
+#if 0
 		m_frontEnd->ParamInit ( pParam );
+
+#endif // 0
+
 
 #if 0
 
@@ -106,18 +121,25 @@ namespace GAME
 		//ヒット数更新
 		UpdateChainHitNum ( btlPrm );
 
+
+		(void)pAct;
+#if 0
 		//ダメージ更新
 		m_frontEnd->UpdateDamage ( btlPrm );
 
 		//アクション名更新
 		m_frontEnd->UpdateActionName ( pAct->GetName ().c_str (), pScp->GetFrame() );
+#endif // 0
 	}
 
 
 	void DispChara::UpdateStateName ( s3d::String stateName )
 	{
+		(void)stateName;
+#if 0
 		//ステート名更新
 		m_frontEnd->UpdateStateName ( stateName );
+#endif // 0
 	}
 
 	//---------------------------------------------------------------------
@@ -129,8 +151,10 @@ namespace GAME
 		m_mainImage->SetColor ( btlprm.GetColor () );
 		m_mainImage->UpdateMainImage ( pScript, btlprm );
 
+#if 0
 		//フロントエンド更新
 		m_frontEnd->UpdateMainImage ( btlprm.GetPos() );
+#endif // 0
 	}
 
 	//入力更新
@@ -143,19 +167,27 @@ namespace GAME
 	//ゲージ類更新
 	void DispChara::UpdateGauge ( const BtlParam & btlPrm )
 	{
+		(void)btlPrm;
+#if 0
 		m_frontEnd->UpdateGauge ( btlPrm );
+#endif // 0
 	}
 
 	//ヒット数更新
 	void DispChara::UpdateChainHitNum ( const BtlParam & btlPrm )
 	{
+		(void)btlPrm;
+#if 0
 		m_frontEnd->UpdateHitNum ( btlPrm );
+#endif // 0
 	}
 
 	//終了時
 	void DispChara::EndBattle ()
 	{
+#if 0
 		m_frontEnd->EndBattle ();
+#endif // 0
 	}
 
 

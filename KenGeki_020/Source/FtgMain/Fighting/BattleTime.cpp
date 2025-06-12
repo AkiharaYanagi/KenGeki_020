@@ -29,7 +29,9 @@ namespace GAME
 		//背景
 		m_time_bg = std::make_shared < GameGraphic > ();
 		m_time_bg->AddTexture_FromArchive ( U"time\\time_bg0.png" );
-		m_time_bg->SetPos ( VEC2 ( (1280 / 2) - (256 / 2), 12 ) );
+//		m_time_bg->SetPos ( VEC2 ( (1280 / 2) - (256 / 2), 12 ) );
+		//size ( 185, 167 )
+		m_time_bg->SetPos ( VEC2 ( (1280 / 2) - (185 / 2), 0 ) );
 		m_time_bg->SetZ ( Z_BG - 0.01f );
 		AddpTask ( m_time_bg );
 		GRPLST_INSERT ( m_time_bg );

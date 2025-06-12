@@ -419,6 +419,7 @@
     <ClInclude Include="Source\ExeChara\Disp\DispChara.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispChara_Const.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispFrontEnd.h" />
+    <ClInclude Include="Source\ExeChara\Disp\DispFrontEnd_all.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispGauge.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispInput.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h" />
@@ -493,6 +494,7 @@
     <ClCompile Include="Source\ExeChara\Disp\DispAccel.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispChara.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispFrontEnd.cpp" />
+    <ClCompile Include="Source\ExeChara\Disp\DispFrontEnd_all.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispGauge.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispInput.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp" />

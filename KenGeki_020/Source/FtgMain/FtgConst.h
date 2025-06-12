@@ -90,6 +90,11 @@ namespace GAME
 	//画面描画用 初期位置
 	enum PLAYER_BASE_PT
 	{
+		//画面サイズ
+//		GAME_WINDOW_WIDTH = 1280,		//GameLib で定義
+		WND_CNT = GAME_WINDOW_WIDTH / 2,	//画面中心
+
+		//ゲーム上の管理範囲
 //		GAME_WIDTH = 2048,		//ゲーム上で扱う幅
 		GAME_WIDTH = 1920,		//ゲーム上で扱う幅
 		GAME_HEIGHT = 1024,
@@ -101,9 +106,9 @@ namespace GAME
 		PLAYER_BASE_Y = GROUND_Y,
 
 		//開始立ち位置(中心から換算)
-		PLAYER_1_BASE_X = GAME_WIDTH / 2 - GAME_WINDOW_WIDTH / 2 + 200,
+		PLAYER_1_BASE_X = GAME_WIDTH / 2 - WND_CNT + 200,
 		PLAYER_1_BASE_Y = PLAYER_BASE_Y,
-		PLAYER_2_BASE_X = GAME_WIDTH / 2 + GAME_WINDOW_WIDTH / 2 - 200,
+		PLAYER_2_BASE_X = GAME_WIDTH / 2 + WND_CNT - 200,
 		PLAYER_2_BASE_Y = PLAYER_BASE_Y,
 
 		GRP_PLAYER1_X = 0,

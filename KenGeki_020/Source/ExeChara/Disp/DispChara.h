@@ -13,7 +13,6 @@
 #include "DispMainImage.h"
 #include "DispInput.h"
 #include "DispRect.h"
-#include "DispFrontEnd.h"
 #include "../Main/ExCh_State.h"
 
 #if 0
@@ -21,6 +20,16 @@
 #include "../../FtgMain/G_Ftg.h"
 #include "../Input/CharaInput.h"
 #endif // 0
+
+
+
+#if 0
+#include "DispFrontEnd.h"
+#endif // 0
+#include "DispFrontEnd_all.h"
+
+
+
 
 
 //-------------------------------------------------------------------------------------------------
@@ -33,7 +42,14 @@ namespace GAME
 		P_DispMainImage	m_mainImage;	//メインイメージ
 		P_DispInput		m_dispInput;	//入力表示
 		P_DispRect		m_dispRect;		//枠
-		P_DispFrontEnd	m_frontEnd;		//フロントエンド
+
+
+
+		//移行中
+		//P_DispFrontEnd	m_frontEnd;		//フロントエンド
+		P_DispFrontEnd_all	m_frontEnd_all;		//フロントエンド
+		
+
 
 	public:
 		DispChara ();
@@ -71,17 +87,51 @@ namespace GAME
 		void OnRect () { m_dispRect->OnRect (); }		//枠表示ON
 		void OffRect () { m_dispRect->OffRect (); }		//枠表示OFF
 
-		void OnFrontEnd () { m_frontEnd->On (); }
-		void OffFrontEnd () { m_frontEnd->Off (); }
 
-		void On_DispPlayerInput () { m_frontEnd->On_DispPlayerInput (); }
-		void Off_DispPlayerInput () { m_frontEnd->Off_DispPlayerInput (); }
+
+		void OnFrontEnd ()
+		{
+#if 0
+			m_frontEnd->On ();
+#endif // 0
+		}
+		void OffFrontEnd ()
+		{
+#if 0
+			m_frontEnd->Off ();
+#endif // 0
+		}
+
+		void On_DispPlayerInput ()
+		{
+#if 0
+			m_frontEnd->On_DispPlayerInput ();
+#endif // 0
+		}
+		void Off_DispPlayerInput ()
+		{
+#if 0
+			m_frontEnd->Off_DispPlayerInput ();
+#endif // 0
+		}
 
 		//------------------------------------------------
 
 		//PLAYER / CPU
-		void SetControl_PLAYER () { m_frontEnd->SetPlayer (); }
-		void SetControl_CPU () { m_frontEnd->SetCPU (); }
+		void SetControl_PLAYER ()
+		{
+#if 0
+			m_frontEnd->SetPlayer ();
+#endif // 0
+		}
+		void SetControl_CPU ()
+		{
+#if 0
+			m_frontEnd->SetCPU ();
+#endif // 0
+		}
+
+
 
 #if 0
 

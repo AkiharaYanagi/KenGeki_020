@@ -20,16 +20,17 @@ namespace GAME
 	const uint32 Round::TX_0 = 0;
 	const uint32 Round::TX_1 = 1;
 
-	const float Round::POS_BY = 105;
-	const float Round::POS_BX10 = 640 - 100;
-	const float Round::POS_BX11 = 640 - 100 - 40;
-	const float Round::POS_BX20 = 640 + 100 - 64;
-	const float Round::POS_BX21 = 640 + 100 - 64 + 40;
+	//size ( 29, 28 )
+	const float Round::POS_BY = 108.5f;
+	const float Round::POS_BX10 = 640 - 165.7f +  0;
+	const float Round::POS_BX11 = 640 - 165.7f - 43.2f;
+	const float Round::POS_BX20 = 640 + 165.7f +  0 - 29;
+	const float Round::POS_BX21 = 640 + 165.7f + 43.2f - 29;
 
 	Round::Round ()
 	{
 		m_roundDisp_1p = std::make_shared < GameGraphic > ();
-		m_roundDisp_1p->AddTexture_FromArchive ( U"WinMark_Frame.png" );
+		m_roundDisp_1p->AddTexture_FromArchive ( U"WinMark_Win.png" );
 		m_roundDisp_1p->AddTexture_FromArchive ( U"WinMark_Win.png" );
 		m_roundDisp_1p->SetZ ( Z_SHADOW );
 		AddpTask ( m_roundDisp_1p );
@@ -44,7 +45,7 @@ namespace GAME
 		m_roundDisp_1p->AddpObject ( m_ob_1p1 );
 
 		m_roundDisp_2p = std::make_shared < GameGraphic > ();
-		m_roundDisp_2p->AddTexture_FromArchive ( U"WinMark_Frame.png" );
+		m_roundDisp_2p->AddTexture_FromArchive ( U"1_1_transparent.png" );
 		m_roundDisp_2p->AddTexture_FromArchive ( U"WinMark_Win.png" );
 		m_roundDisp_2p->SetZ ( Z_SHADOW );
 		AddpTask ( m_roundDisp_2p );
