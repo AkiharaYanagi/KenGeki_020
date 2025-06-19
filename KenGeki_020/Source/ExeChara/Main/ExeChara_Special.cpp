@@ -265,11 +265,14 @@ namespace GAME
 			//-------------------------------------------------------------------------
 			if ( IsNameAction ( U"超必殺技A0" ) )
 			{
-				if ( m_pAction->IsEndScript ( m_pScript->GetFrame () ) )
+				if (m_pScript->GetFrame() == 0)
 				{
-					//表示前後 (自身を手前に)
-					TopByZ ();
+					//表示前後 (相手を手前に)
+					m_pOther.lock()->TopByZ ();
+				}
 
+				if (m_pAction->IsEndScript(m_pScript->GetFrame()))
+				{
 					//位置指定
 					//左右位置チェック
 					if ( GetDirRight () )	//右向 → 左位置
@@ -291,11 +294,17 @@ namespace GAME
 				if ( m_pScript->GetFrame () == 0 )
 				{
 					//位置指定
-					SetPos ( VEC2 ( 960 - 200, GROUND_Y ) );
-					m_pOther.lock()->SetPos ( VEC2 ( 960 + 200, GROUND_Y ) );
+					SetPos ( VEC2 ( 960 - 20, GROUND_Y ) );
+					m_pOther.lock()->SetPos ( VEC2 ( 960 + 20, GROUND_Y ) );
 				}
 #endif // 0
 
+				//状態指定
+				if ( m_pScript->GetFrame () == 10 )
+				{
+					//表示前後 (自身を手前に)
+					TopByZ ();
+				}
 				//状態指定
 				if ( m_pScript->GetFrame () == 121 )
 				{

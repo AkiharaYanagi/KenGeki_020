@@ -201,6 +201,10 @@ namespace GAME
 		int life = m_btlPrm.GetLife ();
 		int b_max = BALANCE_START + ( LIFE_MAX - life ) / 2;
 		m_btlPrm.SetBalanceMax ( b_max );
+
+
+
+		m_btlPrm.AddMana ( -100 );
 	}
 
 

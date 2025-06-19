@@ -171,6 +171,7 @@ namespace GAME
 #if 0
 		m_frontEnd->UpdateGauge ( btlPrm );
 #endif // 0
+		m_frontEnd_all->UpdateGauge ( btlPrm );
 	}
 
 	//ヒット数更新

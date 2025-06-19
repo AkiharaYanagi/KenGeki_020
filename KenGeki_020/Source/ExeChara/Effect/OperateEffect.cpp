@@ -127,6 +127,7 @@ namespace GAME
 	//スクリプト処理 前 エフェクト全体の動作
 	void OperateEffect::PreMove ( P_Script pScp, BtlParam & btlPrm )
 	{
+		(void)pScp;
 		(void)btlPrm;
 
 		//各エフェクトの動作

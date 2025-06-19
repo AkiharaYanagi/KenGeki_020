@@ -160,7 +160,7 @@ namespace GAME
 		float left = 0 + padding;
 		bool leftSide = self_x < left && other_x < left;
 
-		float right = GAME_WIDTH - padding;
+		float right = (float)GAME_WIDTH - padding;
 		bool rightSide = right < self_x && right < other_x;
 
 		if ( leftSide || rightSide )

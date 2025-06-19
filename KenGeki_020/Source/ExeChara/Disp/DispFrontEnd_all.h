@@ -31,10 +31,15 @@ namespace GAME
 		PLAYER_ID	m_playerID;			//プレイヤによる表示側
 		P_Grp		m_gauge_all_bg;		//総合ゲージ背景
 
-		P_Grp		m_life_value;		//ライフ
-		P_Grp		m_stamina_value;	//スタミナ
+		P_Grp		m_life_value;		//体力
+		P_Grp		m_stamina_value;	//剣撃
 		P_Grp		m_hissatsu_value;	//必殺
 		P_Grp		m_accel_value;		//アクセル
+
+		P_Plgn		m_life_mask;		//ポリゴンマスク 体力
+		P_Plgn		m_stamina_mask;		//ポリゴンマスク 剣撃
+		P_Plgn		m_hissatsu_mask;		//ポリゴンマスク 必殺
+		P_Plgn		m_accel_mask;		//ポリゴンマスク アクセル
 
 		//-----------------------------------------------------
 		enum DISP_FE_CONST
@@ -57,6 +62,9 @@ namespace GAME
 
 		//プレイヤ別(1p,2p)のゲージ類の表示部のみ初期化
 		void LoadPlayer ( PLAYER_ID playerID );
+
+		//ゲージ類更新
+		void UpdateGauge ( const BtlParam & btlPrm );
 
 	private:
 

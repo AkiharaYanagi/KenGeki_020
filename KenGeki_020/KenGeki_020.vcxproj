@@ -424,6 +424,7 @@
     <ClInclude Include="Source\ExeChara\Disp\DispInput.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispMainImage.h" />
     <ClInclude Include="Source\ExeChara\Disp\DispRect.h" />
+    <ClInclude Include="Source\ExeChara\Disp\GrpPlgnMask.h" />
     <ClInclude Include="Source\ExeChara\Effect\DispEffect.h" />
     <ClInclude Include="Source\ExeChara\Effect\ExeEffect.h" />
     <ClInclude Include="Source\ExeChara\Effect\OperateEffect.h" />
@@ -499,6 +500,7 @@
     <ClCompile Include="Source\ExeChara\Disp\DispInput.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispMainImage.cpp" />
     <ClCompile Include="Source\ExeChara\Disp\DispRect.cpp" />
+    <ClCompile Include="Source\ExeChara\Disp\GrpPlgnMask.cpp" />
     <ClCompile Include="Source\ExeChara\Effect\DispEffect.cpp" />
     <ClCompile Include="Source\ExeChara\Effect\ExeEffect.cpp" />
     <ClCompile Include="Source\ExeChara\Effect\OperateEffect.cpp" />
