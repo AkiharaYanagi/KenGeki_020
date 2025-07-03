@@ -45,6 +45,8 @@ namespace GAME
 
 	DispFrontEnd::DispFrontEnd ()
 	{
+#if 0
+
 		//ゲージ類
 
 		//ライフゲージ
@@ -87,6 +89,8 @@ namespace GAME
 		m_gaugeAccel = std::make_shared < DispAccel > ();
 		AddpTask ( m_gaugeAccel );
 
+
+#endif // 0
 
 		//-----------------------------------------------------
 		//プレイヤー表示
@@ -186,6 +190,9 @@ namespace GAME
 		AddpTask ( m_strState );
 		GRPLST_INSERT ( m_strState );
 
+
+#if 0
+
 		//名前背景
 		m_name_bg = std::make_shared < GameGraphic > ();
 		m_name_bg->AddTexture_FromArchive ( U"Battle\\Name_BG.png" );
@@ -222,6 +229,8 @@ namespace GAME
 		AddpTask ( m_name );
 		GRPLST_INSERT ( m_name );
 
+#endif // 0
+
 		//-----------------------------------------
 		//剣撃抗圧
 		m_taikou = std::make_shared < EfKouAtsu > ();
@@ -238,6 +247,13 @@ namespace GAME
 		p->SetZ ( Z_SYS - 0.06f );
 		AddpTask ( p );
 		GRPLST_INSERT ( p );
+
+
+		//test
+		p->SetValid ( F );
+
+
+
 		return p;
 	}
 
@@ -261,10 +277,14 @@ namespace GAME
 	{
 		m_playerID = playerID;
 
+#if 0
+
 		m_gaugeLife->LoadPlayer ( playerID );
 		m_gaugeBalance->LoadPlayer ( playerID );
 		m_gaugeMana->LoadPlayer ( playerID );
 		m_gaugeAccel->LoadPlayer ( playerID );
+
+#endif // 0
 
 
 		//プレイヤー別初期化位置
@@ -305,11 +325,15 @@ namespace GAME
 			
 			pOb->SetPos ( VEC2 ( 0, 200 ) );
 
+#if 0
+
 			m_name_bg->SetPos ( VEC2 ( NAME_BG_X, NAME_BG_Y ) );
 			m_name_bg->SetScaling ( VEC2 ( -1.f, 1.f ) );
 			m_face->SetPos ( VEC2 ( FACE_X, FACE_Y ) );
 			m_ChouHissatsu->SetPos ( VEC2 ( CHOU_X, CHOU_Y ) );
 			m_name->SetPos ( VEC2 ( NAME_X, NAME_Y ) );
+
+#endif // 0
 		}
 		else if ( PLAYER_ID_2 == playerID )
 		{
@@ -322,6 +346,8 @@ namespace GAME
 
 			pOb->SetPos ( VEC2 (  WINDOW_WIDTH - 384 - 200, 200 ) );
 
+#if 0
+
 			m_name_bg->SetPos ( VEC2 ( WINDOW_WIDTH - NAME_BG_W - NAME_BG_X, NAME_BG_Y ) );
 			m_face->SetPos ( VEC2 ( WINDOW_WIDTH - FACE_W - FACE_X, FACE_Y ) );
 			m_ChouHissatsu->SetPos ( VEC2 ( WINDOW_WIDTH - CHOU_W - CHOU_X, CHOU_Y ) );
@@ -329,6 +355,8 @@ namespace GAME
 			//キャラ名によって幅が異なる
 			float w = NAME_W [ - 1 + (int)m_chara_name ];
 			m_name->SetPos ( VEC2 (  WINDOW_WIDTH - w - NAME_X, NAME_Y ) );
+
+#endif // 0
 		}
 
 
@@ -367,8 +395,13 @@ namespace GAME
 		case CHARA_GABADARUGA: break;
 		default: charaName = CHARA_OUKA; break;
 		}
+
+#if 0
+
 		m_face->SetIndexTexture ( (uint32)charaName - 1 );
 		m_name->SetIndexTexture ( (uint32)charaName - 1 );
+
+#endif // 0
 
 
 		//プレイヤモード(入力種類)による初期化
@@ -410,6 +443,8 @@ namespace GAME
 	//ゲージ
 	void DispFrontEnd::UpdateGauge ( const BtlParam & btlPrm )
 	{
+#if 0
+
 		//ライフ
 //		int white = btlPrm.GetWhiteDamage ();
 		m_gaugeLife->Update ( btlPrm.GetLife () );
@@ -426,6 +461,8 @@ namespace GAME
 		//アクセル
 		m_gaugeAccel->Update ( btlPrm.GetAccel () );
 
+
+#endif // 0
 
 		//対抗
 		if ( btlPrm.GetTaikou () )

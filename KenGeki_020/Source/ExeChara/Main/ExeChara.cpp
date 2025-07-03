@@ -41,6 +41,18 @@ namespace GAME
 
 		//アクタ
 		m_pActor = std::make_shared < ExeChara_Actor > ();
+
+
+
+		//テスト
+		m_testCutIn = std::make_shared < GameGraphic > ();
+		m_testCutIn->AddTexture_FromArchive ( U"CharaSele\\Stand_Sae.png" );
+		m_testCutIn->SetZ ( Z_BG - 0.01f );
+		m_testCutIn->SetValid ( F );
+		AddpTask ( m_testCutIn );
+		GRPLST_INSERT ( m_testCutIn );
+
+
 	}
 
 	//デストラクタ
@@ -204,7 +216,9 @@ namespace GAME
 
 
 
-		m_btlPrm.AddMana ( -100 );
+		//テスト
+
+//		m_btlPrm.AddMana ( -100 );
 	}
 
 

@@ -30,21 +30,25 @@ namespace GAME
 		//-----------------------------------------------------
 		PLAYER_ID	m_playerID;			//プレイヤによる表示側
 
+#if	0
+		PrmRect		m_gaugeHitStop;			//ヒットストップ時間表示
+		PrmRect		m_gaugeLurch;			//のけぞり時間表示
+#endif	//0
+
+#if 0
 		//-----------------------------------------------------
 		P_DispGauge	m_gaugeLife;		//ライフゲージ
 		P_DispGauge	m_gaugeBalance;		//バランスゲージ
 		P_DispGauge	m_gaugeMana;		//マナゲージ
 
 		P_DispAccel	m_gaugeAccel;		//アクセルゲージ
-#if	0
-		PrmRect		m_gaugeHitStop;			//ヒットストップ時間表示
-		PrmRect		m_gaugeLurch;			//のけぞり時間表示
-#endif	//0
 
 		P_Grp		m_name_bg;			//名前背景
 		P_Grp		m_name;				//名前
 		P_Grp		m_face;				//顔
 		P_Grp		m_ChouHissatsu;		//超必殺
+#endif // 0
+
 		CHARA_NAME	m_chara_name { CHARA_OUKA };	//キャラ名保存
 
 		//剣撃抗圧

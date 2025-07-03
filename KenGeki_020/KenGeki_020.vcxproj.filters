@@ -1071,6 +1071,9 @@
     <ClInclude Include="Source\ExeChara\Disp\GrpPlgnMask.h">
       <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ExeChara\Disp\DispGauge_all.h">
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1302,6 +1305,9 @@
       <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\GrpPlgnMask.cpp">
+      <Filter>03_FtgMain\ExeChara\Disp</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExeChara\Disp\DispGauge_all.cpp">
       <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
   </ItemGroup>

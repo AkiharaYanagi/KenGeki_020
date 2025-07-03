@@ -20,7 +20,6 @@
 namespace GAME
 {
 
-#pragma region CONST
 
 #if 0
 		//2024/11/03 デジゲー博 Ver 0.10
@@ -37,39 +36,6 @@ namespace GAME
 #endif // 0
 	const char32_t Title::Ver[] = U"ver 0.27";
 
-
-	const float Title::BG_X = 0;
-	const float Title::BG_Y = 0;
-	const float Title::BG_VX = -64.f;
-	const float Title::BG_P = (-7680 + 1920);
-
-	const float Title::LOGO_X = ( WINDOW_WIDTH - 648 ) * 0.5f;
-	const float Title::LOGO_Y = 0;
-
-	const float Title::CURSOR_X = 400;
-	const float Title::CURSOR_Y = 720;
-	const float Title::CURSOR_P = 50;
-
-	const float Title::MENU_X = CURSOR_X + 100;
-	const float Title::MENU_Y = CURSOR_Y - 7;
-	const float Title::MENU_Y0 = MENU_Y  + 0;
-	const float Title::MENU_Y1 = MENU_Y0 + CURSOR_P;
-	const float Title::MENU_Y2 = MENU_Y1 + CURSOR_P;
-	const float Title::MENU_Y3 = MENU_Y2 + CURSOR_P;
-
-	const float Title::INST_X = 0;
-	const float Title::INST_Y = 960 - 27;
-
-	const uint32 Title::FADE_IN_T = 16;
-	const uint32 Title::FADE_OUT_T = 16;
-
-	const uint32 Title::TITLE_CALL_WAIT = 2;
-
-	const int32 Title::WAIT_DEMO = 300;
-//	const int32 Title::WAIT_DEMO = 180;
-	const int32 Title::BAR_DEMO_Y = 752;
-
-#pragma endregion
 
 
 	Title::Title ()
@@ -606,6 +572,41 @@ namespace GAME
 		return ret;
 	}
 
+
+
+#pragma region CONST
+	const float Title::BG_X = 0;
+	const float Title::BG_Y = 0;
+	const float Title::BG_VX = -64.f;
+	const float Title::BG_P = (-7680 + 1920);
+
+	const float Title::LOGO_X = ( WINDOW_WIDTH - 648 ) * 0.5f;
+	const float Title::LOGO_Y = 0;
+
+	const float Title::CURSOR_X = 400;
+	const float Title::CURSOR_Y = 720;
+	const float Title::CURSOR_P = 50;
+
+	const float Title::MENU_X = CURSOR_X + 100;
+	const float Title::MENU_Y = CURSOR_Y - 7;
+	const float Title::MENU_Y0 = MENU_Y  + 0;
+	const float Title::MENU_Y1 = MENU_Y0 + CURSOR_P;
+	const float Title::MENU_Y2 = MENU_Y1 + CURSOR_P;
+	const float Title::MENU_Y3 = MENU_Y2 + CURSOR_P;
+
+	const float Title::INST_X = 0;
+	const float Title::INST_Y = 960 - 27;
+
+	const uint32 Title::FADE_IN_T = 16;
+	const uint32 Title::FADE_OUT_T = 16;
+
+	const uint32 Title::TITLE_CALL_WAIT = 2;
+
+	const int32 Title::WAIT_DEMO = 300;
+//	const int32 Title::WAIT_DEMO = 180;
+	const int32 Title::BAR_DEMO_Y = 752;
+
+#pragma endregion
 
 }	//namespace GAME
 

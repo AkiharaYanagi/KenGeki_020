@@ -1,13 +1,13 @@
 ﻿//=================================================================================================
 //
-// DispFrontEnd_all ソースファイル
+// DispGauge_all ソースファイル
 //
 //=================================================================================================
 
 //-------------------------------------------------------------------------------------------------
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
-#include "DispFrontEnd_all.h"
+#include "DispGauge_all.h"
 #include "DispChara_Const.h"
 #include "../../GameMain/G_Ftg.h"
 
@@ -29,7 +29,7 @@ inline double mapRange
 }
 
 
-	DispFrontEnd_all::DispFrontEnd_all ()
+	DispGauge_all::DispGauge_all ()
 	{
 		//総合ゲージ背景
 		m_gauge_all_bg = std::make_shared < GameGraphic > ();
@@ -71,24 +71,24 @@ inline double mapRange
 		AddpTask ( m_accel_value );
 	}
 
-	DispFrontEnd_all::~DispFrontEnd_all ()
+	DispGauge_all::~DispGauge_all ()
 	{
 	}
 
 
-	void DispFrontEnd_all::Load ()
+	void DispGauge_all::Load ()
 	{
 		TASK_VEC::Load ();
 	}
 
 	//パラメータ初期化
-	void DispFrontEnd_all::ParamInit ( P_Param pParam )
+	void DispGauge_all::ParamInit ( P_Param pParam )
 	{
 		(void)pParam;
 	}
 
 	//プレイヤ側で初期化
-	void DispFrontEnd_all::LoadPlayer ( PLAYER_ID playerID )
+	void DispGauge_all::LoadPlayer ( PLAYER_ID playerID )
 	{
 		m_playerID = playerID;
 
@@ -230,7 +230,7 @@ inline double mapRange
 	//更新
 
 	//ゲージ
-	void DispFrontEnd_all::UpdateGauge ( const BtlParam & btlPrm )
+	void DispGauge_all::UpdateGauge ( const BtlParam & btlPrm )
 	{
 		//体力ゲージ
 		int32 life = btlPrm.GetLife () ;
@@ -361,28 +361,28 @@ inline double mapRange
 
 	//全体枠
 	//Size ( 516, 172 )
-	const VEC2 DispFrontEnd_all::POS_FRAME_ALL_1P ( 0 + 516, 10 );
-	const VEC2 DispFrontEnd_all::POS_FRAME_ALL_2P ( 1280 - 516 - 0, 10 );
+	const VEC2 DispGauge_all::POS_FRAME_ALL_1P ( 0 + 516, 10 );
+	const VEC2 DispGauge_all::POS_FRAME_ALL_2P ( 1280 - 516 - 0, 10 );
 
 	//体力ゲージ
 	//Size ( 320, 20 )
-	const VEC2 DispFrontEnd_all::POS_LIFE_VALUE_1P ( WND_CNT - 151, 62 );
-	const VEC2 DispFrontEnd_all::POS_LIFE_VALUE_2P ( WND_CNT + 151, 62 );
+	const VEC2 DispGauge_all::POS_LIFE_VALUE_1P ( WND_CNT - 151, 62 );
+	const VEC2 DispGauge_all::POS_LIFE_VALUE_2P ( WND_CNT + 151, 62 );
 
 	//剣撃ゲージ
 	//Size ( 309, 16 )
-	const VEC2 DispFrontEnd_all::POS_STAMINA_VALUE_1P ( WND_CNT - 141, 86 );
-	const VEC2 DispFrontEnd_all::POS_STAMINA_VALUE_2P ( WND_CNT + 141, 86 );
+	const VEC2 DispGauge_all::POS_STAMINA_VALUE_1P ( WND_CNT - 141, 86 );
+	const VEC2 DispGauge_all::POS_STAMINA_VALUE_2P ( WND_CNT + 141, 86 );
 
 	//超必殺技ゲージ
 	//Size ( 202, 32 )
-	const VEC2 DispFrontEnd_all::POS_HISSATSU_VALUE_1P ( WND_CNT - 243, 105 );
-	const VEC2 DispFrontEnd_all::POS_HISSATSU_VALUE_2P ( WND_CNT + 243, 105 );
+	const VEC2 DispGauge_all::POS_HISSATSU_VALUE_1P ( WND_CNT - 243, 105 );
+	const VEC2 DispGauge_all::POS_HISSATSU_VALUE_2P ( WND_CNT + 243, 105 );
 
 	//アクセルゲージ
 	//Size ( 90, 139 )
-	const VEC2 DispFrontEnd_all::POS_ACCEL_VALUE_1P ( 0 - 3, 27 );
-	const VEC2 DispFrontEnd_all::POS_ACCEL_VALUE_2P ( 1280 - 75 - 11, 27 );
+	const VEC2 DispGauge_all::POS_ACCEL_VALUE_1P ( 0 - 3, 27 );
+	const VEC2 DispGauge_all::POS_ACCEL_VALUE_2P ( 1280 - 75 - 11, 27 );
 
 #pragma endregion
 

@@ -91,8 +91,8 @@ namespace GAME
 		STAGE_NAME GetStageName_Rnd ();
 		BGM_ID GetBGM_ID_Rnd ();
 
-#pragma region CONST
 		static const char32_t Ver[];	//Version
+#pragma region CONST
 
 		static const float BG_X;	//BG
 		static const float BG_Y;

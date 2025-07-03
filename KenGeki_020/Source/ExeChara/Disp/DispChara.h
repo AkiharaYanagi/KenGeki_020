@@ -24,9 +24,10 @@
 
 
 #if 0
-#include "DispFrontEnd.h"
-#endif // 0
 #include "DispFrontEnd_all.h"
+#endif // 0
+#include "DispFrontEnd.h"
+#include "DispGauge_all.h"
 
 
 
@@ -46,9 +47,9 @@ namespace GAME
 
 
 		//移行中
-		//P_DispFrontEnd	m_frontEnd;		//フロントエンド
-		P_DispFrontEnd_all	m_frontEnd_all;		//フロントエンド
-		
+		P_DispFrontEnd	m_frontEnd;		//フロントエンド
+		//P_DispFrontEnd_all	m_frontEnd_all;		//フロントエンド
+		P_DispGauge_all			m_gauge_all;	//ゲージ類
 
 
 	public:

@@ -127,6 +127,13 @@ namespace GAME
 		ExeChara_OnHit		m_OnHit { m_btlPrm };
 		ExeChara_OnDamaged	m_OnDamaged { m_btlPrm };
 
+
+		//テスト
+		//カットイン
+		P_Grp		m_testCutIn;
+
+
+
 	public:
 		ExeChara () = delete;
 		ExeChara ( PLAYER_ID m_playerID );	//プレイヤID指定コンストラクタのみ

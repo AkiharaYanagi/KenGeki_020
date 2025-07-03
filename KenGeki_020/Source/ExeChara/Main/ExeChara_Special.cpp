@@ -88,13 +88,18 @@ namespace GAME
 		if ( IsNameAction ( U"前ダッシュ" ) )
 		{
 			//ゲージ
+#if 0
 			int balance = m_btlPrm.GetBalance ();
-
 			if ( 20 < balance )
 			{
-				m_btlPrm.AddBalance ( -10 );	//スタミナマイナス
+//				m_btlPrm.AddBalance ( -10 );	//スタミナマイナス
+				m_btlPrm.AddBalance ( 10 );	//剣撃ゲージプラス
 				m_btlPrm.AddMana ( 30 );	//超必殺プラス
 			}
+
+#endif // 0
+			m_btlPrm.AddBalance ( 10 );	//剣撃ゲージプラス
+			m_btlPrm.AddMana ( 30 );	//超必殺プラス
 		}
 
 		//-----------------------------------------------------
@@ -154,6 +159,20 @@ namespace GAME
 		//紗絵
 		if ( IsNameAction ( U"超雷電蹴_発生" ) )
 		{
+#if 0
+
+			//カットイン
+			if ( m_pScript->GetFrame () == 0 )
+			{
+				m_testCutIn->SetValid ( T );
+			}
+			if ( m_pAction->IsEndScript ( m_frame ) )
+			{
+				m_testCutIn->SetValid ( F );
+			}
+
+#endif // 0
+
 			if ( m_pScript->GetFrame () == 1 )
 			{
 				m_pFtgGrp->SetOverDrive ( T );
