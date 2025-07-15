@@ -25,7 +25,7 @@ namespace GAME
 		//暗転
 		m_bg_black = std::make_shared < PrmRect > ();
 		m_bg_black->SetRect ( 0, 0, 1280, 960 );
-		m_bg_black->SetColor ( s3d::Color ( 0, 0, 0, 128 ) );
+		m_bg_black->SetColor ( s3d::Color ( 0, 0, 0, 192 ) );
 		m_bg_black->SetZ ( Z_BG );
 		AddpTask ( m_bg_black );
 		GRPLST_INSERT ( m_bg_black );

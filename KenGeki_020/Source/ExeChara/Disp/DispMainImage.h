@@ -56,6 +56,12 @@ namespace GAME
 		//メインイメージを同一Z値で先頭にする
 		void TopByZ ();
 
+		//影を消す
+		void OffShade() { m_grpShadow->SetValid ( F ); }
+
+		//影を表示する
+		void OnShade() { m_grpShadow->SetValid ( T ); }
+
 	};
 
 	using P_DispMainImage = std::shared_ptr < DispMainImage >;

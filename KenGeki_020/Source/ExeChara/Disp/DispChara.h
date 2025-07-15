@@ -92,28 +92,20 @@ namespace GAME
 
 		void OnFrontEnd ()
 		{
-#if 0
 			m_frontEnd->On ();
-#endif // 0
 		}
 		void OffFrontEnd ()
 		{
-#if 0
 			m_frontEnd->Off ();
-#endif // 0
 		}
 
 		void On_DispPlayerInput ()
 		{
-#if 0
 			m_frontEnd->On_DispPlayerInput ();
-#endif // 0
 		}
 		void Off_DispPlayerInput ()
 		{
-#if 0
 			m_frontEnd->Off_DispPlayerInput ();
-#endif // 0
 		}
 
 		//------------------------------------------------
@@ -152,6 +144,12 @@ namespace GAME
 		//メインイメージを同一Z値で先頭にする
 		void TopByZ () { m_mainImage->TopByZ (); }
 
+
+		//影を消す
+		void OffShade() { m_mainImage->OffShade (); }
+
+		//影を表示する
+		void OnShade() { m_mainImage->OnShade (); }
 
 	private:
 		//メインイメージの更新

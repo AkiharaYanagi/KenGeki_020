@@ -242,6 +242,9 @@ namespace GAME
 		if ( pEffect->GetName () == U"極" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"万雷発生" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"万雷中派生" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"OD_A_R" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"OD_A_L" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"OD_A_G" ) { pExeEffect->SetShader ( F ); }
 			 
 	}
 

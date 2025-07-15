@@ -338,6 +338,49 @@ namespace GAME
 					m_pOther.lock()->SetAction ( U"ダウン" );
 				}
 			}
+
+			//----------------------------------------------------------
+			if ( IsNameAction ( U"超必殺技AA1" ) )	//成立時
+			{
+				//状態指定
+				if (m_pScript->GetFrame() == 0)
+				{
+					OffShade ();		//影を消す
+					m_pOther.lock()->OffShade ();		//影を消す
+					TopByZ ();			//表示前後 (自身を手前に)
+
+					//位置指定
+					//左右位置チェック
+					if ( GetDirRight () )	//右向 → 左位置
+					{
+						SetPos ( VEC2 ( 960 - 200, GROUND_Y ) );
+						m_pOther.lock()->SetPos ( VEC2 ( 960 + 200, GROUND_Y ) );
+					}
+					else
+					{
+						SetPos ( VEC2 ( 960 + 200, GROUND_Y ) );
+						m_pOther.lock()->SetPos ( VEC2 ( 960 - 200, GROUND_Y ) );
+					}
+				}
+			}
+			if ( IsNameAction ( U"超必殺技AA2" ) )
+			{
+				//状態指定
+				if (m_pScript->GetFrame() == 15)
+				{
+					//表示前後 (相手を手前に)
+					m_pOther.lock()->TopByZ ();
+				}
+			}
+			if ( IsNameAction ( U"超必殺技AA3" ) )
+			{
+				//状態指定
+				if (m_pScript->GetFrame() == 15)
+				{
+					OnShade ();		//影を表示する
+					m_pOther.lock()->OnShade ();		//影を表示する
+				}
+			}
 			//-------------------------------------------------------------------------
 
 

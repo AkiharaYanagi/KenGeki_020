@@ -551,6 +551,10 @@ namespace GAME
 		//メインイメージを同一Z値で先頭にする
 		void TopByZ () { m_dispChara->TopByZ (); }
 
+		//メインイメージ影のオン/ オフ
+		void OnShade () { m_dispChara->OnShade (); }
+		void OffShade () { m_dispChara->OffShade (); }
+
 		//------------------------------------------------
 		//必殺・超必殺時に相手の白ダメージ確定
 		void DecisionWhiteDamage () { m_btlPrm.DecisionWhiteDamage (); }
