@@ -21,30 +21,30 @@ namespace GAME
 
 	//キャラメインデータファイル scp
 	constexpr char32_t CHARA_DAT_OUKA []	= U"chara\\Ouka.scp";
+	constexpr char32_t CHARA_DAT_FERA []	= U"Chara\\Ferallia.scp";
 	constexpr char32_t CHARA_DAT_SAE []		= U"Chara\\Sae.scp";
-//	constexpr char32_t CHARA_DAT_SAE []		= U"Chara\\Feral.scp";
 	constexpr char32_t CHARA_DAT_RETSU []	= U"Chara\\Retsudou.scp";
 	constexpr char32_t CHARA_DAT_GABA []	= U"Chara\\Gabadaruga.scp";
 
 	//キャライメージファイル img
 	constexpr char32_t CHARA_IMG1_OUKA []	= U"Chara\\Ouka_1p_bhv.lz4";
 	constexpr char32_t CHARA_IMG2_OUKA []	= U"Chara\\Ouka_2p_bhv.lz4";
-//	constexpr char32_t CHARA_IMG2_OUKA []	= U"Chara\\Ouka_1p_bhv.lz4";
+
+	constexpr char32_t CHARA_IMG1_FERA []	= U"Chara\\Ferallia_1p_bhv.lz4";
+	constexpr char32_t CHARA_IMG2_FERA []	= U"Chara\\Ferallia_2p_bhv.lz4";
 
 	constexpr char32_t CHARA_IMG1_SAE []	= U"Chara\\Sae_1p_bhv.lz4";
-//	constexpr char32_t CHARA_IMG1_SAE []	= U"Chara\\Feral_bhv.lz4";
 	constexpr char32_t CHARA_IMG2_SAE []	= U"Chara\\Sae_2p_bhv.lz4";
-//	constexpr char32_t CHARA_IMG2_SAE []	= U"Chara\\Sae_1p_bhv.lz4";
 
 	constexpr char32_t CHARA_IMG1_RETSU []	= U"Chara\\Retsudou_1p_bhv.lz4";
 	constexpr char32_t CHARA_IMG2_RETSU []	= U"Chara\\Retsudou_2p_bhv.lz4";
-//	constexpr char32_t CHARA_IMG2_RETSU []	= U"Chara\\Retsudou_1p_bhv.lz4";
 
 	constexpr char32_t CHARA_IMG1_GABA []	= U"Chara\\Gabadaruga_1p_bhv.lz4";
 	constexpr char32_t CHARA_IMG2_GABA []	= U"Chara\\Gabadaruga_1p_bhv.lz4";
 
 	//キャラエフェクトイメージファイル
 	constexpr char32_t CHARA_GNS_OUKA []	= U"Chara\\Ouka_gns.lz4";
+	constexpr char32_t CHARA_GNS_FERA []	= U"Chara\\Ferallia_gns.lz4";
 	constexpr char32_t CHARA_GNS_SAE []		= U"Chara\\Sae_gns.lz4";
 	constexpr char32_t CHARA_GNS_RETSU []	= U"Chara\\Retsudou_gns.lz4";
 	constexpr char32_t CHARA_GNS_GABA []	= U"Chara\\Gabadaruga_gns.lz4";
@@ -58,6 +58,7 @@ namespace GAME
 	};
 
 	LPCUSTR OUKA_clr[] { CHARA_IMG1_OUKA, CHARA_IMG2_OUKA };
+	LPCUSTR FERA_clr[] { CHARA_IMG1_FERA, CHARA_IMG2_FERA };
 	LPCUSTR SAE_clr[] { CHARA_IMG1_SAE, CHARA_IMG2_SAE };
 	LPCUSTR RETSU_clr[] { CHARA_IMG1_RETSU, CHARA_IMG2_RETSU };
 	LPCUSTR GABA_clr[] { CHARA_IMG1_GABA, CHARA_IMG2_GABA };
@@ -191,6 +192,11 @@ namespace GAME
 		m_Ouka.SetStrImg_2p ( CHARA_IMG2_OUKA );
 		m_Ouka.SetStrGns ( CHARA_GNS_OUKA );
 
+		m_Fera.SetStrScp ( CHARA_DAT_FERA );
+		m_Fera.SetStrImg_1p ( CHARA_IMG1_FERA );
+		m_Fera.SetStrImg_2p ( CHARA_IMG2_FERA );
+		m_Fera.SetStrGns ( CHARA_GNS_FERA );
+
 		m_Sae.SetStrScp ( CHARA_DAT_SAE );
 		m_Sae.SetStrImg_1p ( CHARA_IMG1_SAE );
 		m_Sae.SetStrImg_2p ( CHARA_IMG2_SAE );
@@ -210,6 +216,7 @@ namespace GAME
 	Prm_Chara_all::Prm_Chara_all ( const Prm_Chara_all & rhs )
 	{
 		m_Ouka = rhs.m_Ouka;
+		m_Fera = rhs.m_Fera;
 		m_Sae = rhs.m_Sae;
 		m_Retsu = rhs.m_Retsu;
 		m_Gaba = rhs.m_Gaba;
@@ -227,6 +234,7 @@ namespace GAME
 #endif // 0
 
 		if ( m_asyncLoad_Ouka.isValid () ) { m_asyncLoad_Ouka.wait (); }
+		if ( m_asyncLoad_Fera.isValid () ) { m_asyncLoad_Fera.wait (); }
 		if ( m_asyncLoad_Sae_.isValid () ) { m_asyncLoad_Sae_.wait (); }
 		if ( m_asyncLoad_Retu.isValid () ) { m_asyncLoad_Retu.wait (); }
 		if ( m_asyncLoad_Gaba.isValid () ) { m_asyncLoad_Gaba.wait (); }
@@ -240,6 +248,7 @@ namespace GAME
 		PRINT_F_S ( U"Prm_Chara_all::LoadAll\n" );
 
 		m_asyncLoad_Ouka = s3d::Async ( _Load_Ouka, this );
+		m_asyncLoad_Fera = s3d::Async ( _Load_Ouka, this );
 		m_asyncLoad_Sae_ = s3d::Async ( _Load_Sae_, this );
 		m_asyncLoad_Retu = s3d::Async ( _Load_Retu, this );
 		m_asyncLoad_Gaba = s3d::Async ( _Load_Gaba, this );
@@ -253,6 +262,10 @@ namespace GAME
 		PRINT_F_S ( U"Start Prm_Chara_all::_Load_Ouka\n" );
 		m_Ouka.Load ();
 		PRINT_F_S ( U"End Prm_Chara_all::_Load_Ouka\n" );
+
+		PRINT_F_S ( U"Start Prm_Chara_all::_Load_m_Fera\n" );
+		m_Fera.Load ();
+		PRINT_F_S ( U"End Prm_Chara_all::_Load_m_Fera\n" );
 
 		PRINT_F_S ( U"Start Prm_Chara_all::_Load_Sae_\n" );
 		m_Sae.Load ();
@@ -273,6 +286,7 @@ namespace GAME
 	{
 		PRINT_F_S ( U"Start Prm_Chara_all::_LoadAll\n" );
 		pThis->m_Ouka.Load ();
+		pThis->m_Fera.Load ();
 		pThis->m_Sae.Load ();
 		pThis->m_Retsu.Load ();
 		pThis->m_Gaba.Load ();
@@ -286,24 +300,31 @@ namespace GAME
 		PRINT_F_S ( U"End Prm_Chara_all::_Load_Ouka\n" );
 	}
 
+	void Prm_Chara_all::_Load_Fera ( Prm_Chara_all * pThis )
+	{
+		PRINT_F_S ( U"Start Prm_Chara_all::_Load_Sae_\n" );
+		pThis->m_Fera.Load ();
+		PRINT_F_S ( U"End Prm_Chara_all::_Load_Sae_\n" );
+	}
+
 	void Prm_Chara_all::_Load_Sae_ ( Prm_Chara_all * pThis )
 	{
 		PRINT_F_S ( U"Start Prm_Chara_all::_Load_Sae_\n" );
-		pThis->m_Ouka.Load ();
+		pThis->m_Sae.Load ();
 		PRINT_F_S ( U"End Prm_Chara_all::_Load_Sae_\n" );
 	}
 
 	void Prm_Chara_all::_Load_Retu ( Prm_Chara_all * pThis )
 	{
 		PRINT_F_S ( U"Start Prm_Chara_all::_Load_Retu\n" );
-		pThis->m_Ouka.Load ();
+		pThis->m_Retsu.Load ();
 		PRINT_F_S ( U"End Prm_Chara_all::_Load_Retu\n" );
 	}
 
 	void Prm_Chara_all::_Load_Gaba ( Prm_Chara_all * pThis )
 	{
 		PRINT_F_S ( U"Start Prm_Chara_all::_Load_Gaba\n" );
-		pThis->m_Ouka.Load ();
+		pThis->m_Gaba.Load ();
 		PRINT_F_S ( U"End Prm_Chara_all::_Load_Gaba\n" );
 	}
 
@@ -320,14 +341,22 @@ namespace GAME
 				m_asyncLoad_Ouka.wait ();
 			}
 			return m_Ouka.GetpChara ( clr );
+
+		case CHARA_FERALLIA:
+			PRINT_F_S ( U"GetpChara ( CHARA_FERA, CLR_{} )\n"_fmt((int32)clr) );
+			if ( m_asyncLoad_Fera.isValid () ) { m_asyncLoad_Fera.wait (); }
+			return m_Fera.GetpChara ( clr );
+
 		case CHARA_SAE:
 			PRINT_F_S ( U"GetpChara ( CHARA_SAE, CLR_{} )\n"_fmt((int32)clr) );
 			if ( m_asyncLoad_Sae_.isValid () ) { m_asyncLoad_Sae_.wait (); }
 			return m_Sae.GetpChara ( clr );
+
 		case CHARA_RETSUDOU:
 			PRINT_F_S ( U"GetpChara ( CHARA_RETSUDOU, CLR_{} )\n"_fmt((int32)clr) );
 			if ( m_asyncLoad_Retu.isValid () ) { m_asyncLoad_Retu.wait (); }
 			return m_Retsu.GetpChara ( clr );
+
 		case CHARA_GABADARUGA:
 			PRINT_F_S ( U"GetpChara ( CHARA_GABADARUGA, CLR_{} )\n"_fmt((int32)clr) );
 			if ( m_asyncLoad_Gaba.isValid () ) { m_asyncLoad_Gaba.wait (); }

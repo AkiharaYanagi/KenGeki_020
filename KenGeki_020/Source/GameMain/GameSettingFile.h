@@ -27,8 +27,8 @@ namespace GAME
 		PLAYER_MODE		m_playerMode1p { MODE_PLAYER };	//１P操作
 		PLAYER_MODE		m_playerMode2p { MODE_PLAYER };	//２P操作
 
-		CHARA_NAME		m_name1p { CHARA_TEST };		//選択キャラ
-		CHARA_NAME		m_name2p { CHARA_TEST };
+		CHARA_NAME		m_name1p { CHARA_NAME_NUM };		//選択キャラ
+		CHARA_NAME		m_name2p { CHARA_NAME_NUM };
 
 		CHARA_COLOR		m_color1p { CH_CLR_1 };
 		CHARA_COLOR		m_color2p { CH_CLR_2 };

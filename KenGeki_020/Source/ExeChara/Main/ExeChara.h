@@ -68,7 +68,7 @@ namespace GAME
 		WP_ExeChara		m_pOther;		//相手キャラ(循環参照なのでweak_ptr)
 
 		PLAYER_MODE		m_playerMode { MODE_PLAYER };	//プレイヤーモード(人,CPU,ネットワーク)
-		CHARA_NAME		m_name { CHARA_TEST };			//キャラ名
+		CHARA_NAME		m_name { CHARA_NAME_NUM };			//キャラ名
 
 		//------------------------------------------------
 		//パラメータ

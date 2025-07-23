@@ -31,8 +31,8 @@ namespace GAME
 		//内部設定
 		GAME_MODE		m_gameMode { MODE_TRAINING };
 		MUTCH_MODE		m_mutchMode { MODE_PLAYER_PLAYER };
-		CHARA_NAME		m_chara_name_1p { CHARA_TEST };
-		CHARA_NAME		m_chara_name_2p { CHARA_TEST };
+		CHARA_NAME		m_chara_name_1p { CHARA_NAME_NUM };
+		CHARA_NAME		m_chara_name_2p { CHARA_NAME_NUM };
 		STAGE_NAME		m_stage_name { STAGE_YUUHINO_HARA };
 
 
@@ -116,7 +116,7 @@ namespace GAME
 		{
 			if ( PLAYER_ID_1 == id ) { return m_chara_name_1p; }
 			else if ( PLAYER_ID_2 == id ) { return m_chara_name_2p; }
-			return CHARA_TEST;
+			return CHARA_NAME_NUM;
 		}
 		void SetRandomChara ();
 

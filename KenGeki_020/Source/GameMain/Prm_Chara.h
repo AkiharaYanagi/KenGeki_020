@@ -74,6 +74,7 @@ namespace GAME
 	{
 		//非同期処理
 		s3d::AsyncTask < void >	m_asyncLoad_Ouka;
+		s3d::AsyncTask < void >	m_asyncLoad_Fera;
 		s3d::AsyncTask < void >	m_asyncLoad_Sae_;
 		s3d::AsyncTask < void >	m_asyncLoad_Retu;
 		s3d::AsyncTask < void >	m_asyncLoad_Gaba;
@@ -87,6 +88,7 @@ namespace GAME
 
 		//キャラデータ
 		Prm_Chara		m_Ouka;
+		Prm_Chara		m_Fera;
 		Prm_Chara		m_Sae;
 		Prm_Chara		m_Retsu;
 		Prm_Chara		m_Gaba;
@@ -109,6 +111,7 @@ namespace GAME
 		static void _LoadAll ( Prm_Chara_all * pThis );
 
 		static void _Load_Ouka ( Prm_Chara_all * pThis );
+		static void _Load_Fera ( Prm_Chara_all * pThis );
 		static void _Load_Sae_ ( Prm_Chara_all * pThis );
 		static void _Load_Retu ( Prm_Chara_all * pThis );
 		static void _Load_Gaba ( Prm_Chara_all * pThis );

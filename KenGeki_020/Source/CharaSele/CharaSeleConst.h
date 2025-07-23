@@ -111,7 +111,7 @@ namespace GAME
 	struct ChSlct
 	{
 		CHARA_SELE_ID ID = CHSLID_00;		//キャラID
-		CHARA_NAME Name = CHARA_TEST;		//名前
+		CHARA_NAME Name = CHARA_NAME_NUM;		//名前
 		float x = 0;						//セレクト位置x
 		float y = 0;						//セレクト位置y
 		CHARA_SELE_ID UP	 = CHSLID_09;	//上移動先
