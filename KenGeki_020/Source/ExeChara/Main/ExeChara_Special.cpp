@@ -204,6 +204,25 @@ namespace GAME
 		}
 
 		//-----------------------------------------------------
+		//フェラリア
+		if ( m_name == CHARA_FERALLIA )
+		{
+			if ( IsNameAction ( U"雷電蹴_0" ) )
+			{
+				UINT frame = m_pScript->GetFrame ();
+				if ( frame == 11 )
+				{
+					m_pFtgGrp->StartAllBlack ();
+				}
+				if ( m_pAction->IsEndScript ( frame ) )
+				{
+					m_pFtgGrp->EndAllBlack ();
+				}
+			}
+
+		}
+
+		//-----------------------------------------------------
 		//ギャバ
 		if ( m_name == CHARA_GABADARUGA )
 		{

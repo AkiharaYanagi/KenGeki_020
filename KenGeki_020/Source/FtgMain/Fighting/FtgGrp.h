@@ -29,13 +29,11 @@ namespace GAME
 //		P_Timer			m_tmrBlackOut;		//暗転
 		P_PrmRect		m_bg_black;			//暗転用
 		P_PrmRect		m_bg_White;			//白転用
-
-
-
-
 		bool	m_WhiteOut { F };	//白転
 		P_FadeRect	m_fade_white;
 
+
+		P_PrmRect		m_bg_All_Black;		//全部黒
 
 
 
@@ -89,6 +87,11 @@ namespace GAME
 
 		//---------------------------------------
 		void StartVibration ( UINT i ) { m_tmrVibration.Start ( i ); }
+
+
+		//---------------------------------------
+		void StartAllBlack () { m_bg_All_Black->SetValid ( T ); }
+		void EndAllBlack () { m_bg_All_Black->SetValid ( F ); }
 	};
 
 	using P_FtgGrp = std::shared_ptr < FtgGrp >;

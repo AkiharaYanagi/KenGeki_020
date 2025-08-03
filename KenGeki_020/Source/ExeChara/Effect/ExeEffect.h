@@ -124,6 +124,10 @@ namespace GAME
 		}
 
 		void CalcPos ();
+
+		//特定エフェクト処理
+		void PreMove_Special ();
+		void PostMove_Special ();
 	};
 
 	//型別定義 エイリアス

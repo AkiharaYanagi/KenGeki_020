@@ -71,6 +71,7 @@ namespace GAME
 //		VEC2 imgPos = VEC2( tempImgPos.x, tempImgPos.y );
 		VEC2 vecEfImg = ptEf + imgPos + G_BASE_POS ();
 
+#if 0
 		//2pのみ
 		DBGOUT_WND_F ( DBGOUT_9,
 			U"({},{}) = ({},{})+({},{})+({}, {})"_fmt(
@@ -83,6 +84,7 @@ namespace GAME
 				G_BASE_POS().x,
 				G_BASE_POS().y )
 			);
+#endif // 0
 
 		//回転
 		float rad = D3DX_PI * 0.01f * pScript->m_prmStaging.Rotate;
@@ -114,7 +116,16 @@ namespace GAME
 //		m_grp->SetPos ( vecEfImg );
 		m_grp->SetBase ( vecEfImg );	//Grp "Ef" Shdは基本位置指定をBaseで行う
 
-		m_grp->SetScaling ( m_w * fDir, 1.f );
+		//拡大
+#if 0
+//		m_grp->SetScaling ( m_w * fDir, 1.f );
+		VEC2 scaling = pScript->m_prmStaging.Scaling;
+		m_grp->SetScaling ( scaling );
+		VEC2 revised = m_grp->GetRevised ();
+		m_grp->SetRevised ( revised + scaling * 0.5f );
+#endif // 0
+
+		//テクスチャID
 		m_grp->SetIndexTexture ( index );
 	}
 

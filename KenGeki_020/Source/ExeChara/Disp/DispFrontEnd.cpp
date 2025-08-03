@@ -106,14 +106,11 @@ namespace GAME
 
 		m_grp_CH_InputCOMPLayer = MakepGrpPlyr ( U"INPUT_PLAYER.png" );
 		m_grp_CH_InputCOMPLayer->AddTexture_FromArchive ( U"INPUT_CPU.png" );
-#if 0
 
-//		m_grp_Cst_Player1P2P->SetValid ( F );
-//		m_grp_Cst_InputPlayerCOM->SetValid ( F );
-		m_grp_CH_Player1P2P->SetValid ( F );
-		m_grp_CH_InputCOMPLayer->SetValid ( F );
 
-#endif // 0
+		//初期値は非表示
+		Off_DispPlayerInput ();
+
 
 #if 0
 		//ヒットストップ時間表示

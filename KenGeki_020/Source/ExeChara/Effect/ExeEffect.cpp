@@ -155,17 +155,8 @@ namespace GAME
 		}
 
 
-		//特殊指定
-		if ( m_pEffect->IsName ( U"Laser_m" ) )
-		{
-			static float w = 1.f;
-			m_dispEffect->SetW ( w += 1.f );
-			m_pScript->m_prmStaging.Rotate_center = VEC2 ( 0, 128 );
-			if ( m_pEffect->IsEndScript ( m_frame ) )
-			{
-				m_dispEffect->SetW ( w = 0 );
-			}
-		}
+		//特定エフェクト処理
+		PreMove_Special ();
 	}
 
 	void ExeEffect::PostScriptMove ( BtlParam & btlprm )
@@ -198,25 +189,12 @@ namespace GAME
 		CalcPos ();
 
 
-
-
-		//----------------------------------
-		//	Ef個別指定
-		//----------------------------------
-		if ( m_pEffect->GetName () == U"空中竜巻_鞘" )
-		{
-			if ( m_ptEffect.y >= (float)GROUND_Y )
-			{
-				m_ptEffect.y = GROUND_Y;
-				m_vel.x = 0;
-				m_vel.y = 0;
-				m_acc.x = 0;
-				m_acc.y = 0;
-			}
-		}
-
+		//特定エフェクト処理
+		PostMove_Special ();
 
 			 
+
+
 
 		//枠設定
 		m_charaRect->SetARect ( m_pScript->GetpvARect (), m_dirRight, m_ptEffect );

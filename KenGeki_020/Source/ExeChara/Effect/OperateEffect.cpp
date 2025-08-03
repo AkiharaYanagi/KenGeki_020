@@ -245,6 +245,7 @@ namespace GAME
 		if ( pEffect->GetName () == U"OD_A_R" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"OD_A_L" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"OD_A_G" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"Ef_ニャムヒー" ) { pExeEffect->SetShader ( F ); }
 			 
 	}
 

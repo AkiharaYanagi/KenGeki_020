@@ -40,6 +40,16 @@ namespace GAME
 		AddpTask ( m_bg_White );
 		GRPLST_INSERT ( m_bg_White );
 		m_bg_White->SetValid ( F );
+
+		//------------------------------------------------
+		//全部黒
+		m_bg_All_Black = std::make_shared < PrmRect > ();
+		m_bg_All_Black->SetRect ( 0, 0, 1280, 960 );
+		m_bg_All_Black->SetColor ( s3d::Color ( 0, 0, 0, 255 ) );
+		m_bg_All_Black->SetZ ( Z_EFF + 0.01f );	//全面エフェクト
+		AddpTask ( m_bg_All_Black );
+		GRPLST_INSERT ( m_bg_All_Black );
+		m_bg_All_Black->SetValid ( F );
 	}
 
 	FtgGrp::~FtgGrp ()

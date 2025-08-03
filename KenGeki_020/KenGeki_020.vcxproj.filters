@@ -1310,5 +1310,8 @@
     <ClCompile Include="Source\ExeChara\Disp\DispGauge_all.cpp">
       <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ExeChara\Effect\ExeEffect_Special.cpp">
+      <Filter>03_FtgMain\ExeChara\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
