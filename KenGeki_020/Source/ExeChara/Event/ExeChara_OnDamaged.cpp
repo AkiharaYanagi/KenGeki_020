@@ -212,7 +212,21 @@ namespace GAME
 		UINT stopTime = HITSTOP_TIME;
 
 		int warp = pScp->m_prmBattle.Warp;
-		if( warp != 0 )
+
+		//マイナス処理
+		if (warp < 0)
+		{
+			//(int)足しても０以下の場合、(uint)最低値０にする
+			if (warp + HITSTOP_TIME <= 0)
+			{
+				stopTime = 0;
+			}
+			else
+			{
+				stopTime += warp;	//マイナスを加算
+			}
+		}
+		else if( warp != 0 )
 		{
 			stopTime += warp;
 		}

@@ -38,6 +38,7 @@ namespace GAME
 		BGM_ID_OUKA,
 		BGM_ID_SAE,
 		BGM_ID_RETSU,
+		BGM_ID_FERA,
 	};
 
 

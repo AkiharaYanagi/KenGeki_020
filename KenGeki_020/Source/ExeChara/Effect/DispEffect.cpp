@@ -20,8 +20,10 @@ namespace GAME
 //		//メイングラフィック
 //		m_grp = std::make_shared < GameGraphic > ();
 		m_grp = std::make_shared < GrpEf > ();
-		m_grp->SetbCenterOfTx ( F );
 		m_grp->SetZ ( z );	//初期位置
+
+		//テクスチャ中心位置で表示
+		m_grp->SetbCenterOfTx ( F );
 
 		AddpTask ( m_grp );
 		GRPLST_INSERT ( m_grp );
@@ -86,9 +88,11 @@ namespace GAME
 			);
 #endif // 0
 
+#if 0
 		//回転
 		float rad = D3DX_PI * 0.01f * pScript->m_prmStaging.Rotate;
 		m_grp->SetRadian ( rad * fDir );
+#endif // 0
 
 #if 0
 		//スクリプトからの指定がなければテクスチャの中心
@@ -116,9 +120,12 @@ namespace GAME
 //		m_grp->SetPos ( vecEfImg );
 		m_grp->SetBase ( vecEfImg );	//Grp "Ef" Shdは基本位置指定をBaseで行う
 
-		//拡大
-#if 0
+		//拡大(向き)
 //		m_grp->SetScaling ( m_w * fDir, 1.f );
+		m_grp->SetScaling ( 1.f * fDir, 1.f );
+
+#if 0
+
 		VEC2 scaling = pScript->m_prmStaging.Scaling;
 		m_grp->SetScaling ( scaling );
 		VEC2 revised = m_grp->GetRevised ();

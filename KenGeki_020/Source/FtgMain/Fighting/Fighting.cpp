@@ -90,6 +90,7 @@ namespace GAME
 		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Ouka.png" );
 		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Sae.png" );
 		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Retsudou.png" );
+		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_FERARIA.png" );
 		m_bgmName->SetPos ( VEC2 ( BGM_X, BGM_Y ) );
 		m_bgmName->SetZ ( Z_EFF );
 		AddpTask ( m_bgmName );
