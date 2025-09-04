@@ -77,13 +77,19 @@ namespace GAME
 #endif // 0
 
 		void Do ();
-#if 0
+
 
 
 	private:
 		//------------------------------------------------------
 		//	内部関数
 		//------------------------------------------------------
+		//エフェクトのヒット枠判定
+		bool DcsHitEf (PLP_ExEf plpExEf1, PV_RECT pvHRect2, P_ExeChara pHitChara, int & refPower);
+
+#if 0
+
+
 		//ダッシュ関連判定
 		bool DashDecision ( P_CharaRect pcr1, P_CharaRect pcr2, VEC2 & center );
 
@@ -95,9 +101,6 @@ namespace GAME
 
 		//エフェクトの相殺枠判定
 		void DcsOffsetEf (PLP_ExEf plpExEf1, PLP_ExEf plpExEf2, P_CharaRect pCharaRect2p);
-
-		//エフェクトのヒット枠判定
-		bool DcsHitEf (PLP_ExEf plpExEf1, PV_RECT pvHRect2, P_ExeChara pHitChara, int & refPower);
 
 
 		//判定後にキャラに反映する

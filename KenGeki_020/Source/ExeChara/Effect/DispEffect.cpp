@@ -134,6 +134,9 @@ namespace GAME
 
 		//テクスチャID
 		m_grp->SetIndexTexture ( index );
+
+		//枠
+		m_dispRect->Update ();
 	}
 
 	void DispEffect::SetpCharaRect ( P_CharaRect pCharaRect )

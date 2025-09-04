@@ -247,6 +247,7 @@ namespace GAME
 		if ( pEffect->GetName () == U"OD_A_G" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"Ef_テル・プム" ) { pExeEffect->SetShader ( F ); }
 		if ( pEffect->GetName () == U"Ef_ニャムヒー" ) { pExeEffect->SetShader ( F ); }
+		if ( pEffect->GetName () == U"4L_Shot" ) { pExeEffect->SetShader ( F ); }
 			 
 	}
 
@@ -261,6 +262,8 @@ namespace GAME
 		return nullptr;
 	}
 
+
+
 	//スクリプト同期
 	void OperateEffect::SynchroScript ( VEC2 ptChara )
 	{
@@ -269,6 +272,38 @@ namespace GAME
 		{
 			p->SynchroScript ( ptChara );
 		}
+	}
+
+	//---------------------------------------------------------------
+	//攻撃判定付きのエフェクトの先頭を取得
+	s3d::String OperateEffect::GetpExeEf_BrcHitE()
+	{
+		//キャラの持つルート,ブランチ,コマンドの参照
+		const VP_Route& vpRoute = m_pChara->GetvpRoute ();
+		const VP_Branch& vpBranch = m_pChara->GetvpBranch ();
+
+		//エフェクト実行リストから検索
+		for ( P_ExEf pExEf : * m_plpExeEffect )
+		{
+			//現在スクリプト
+			P_Script pScp = pExEf->GetpScript ();
+			for (UINT indexRut : pScp->GetcvRouteID())
+			{
+				//ルートリスト
+				const V_UINT32 & vBrcID = vpRoute [ indexRut ]->GetcvIDBranch ();
+
+				//対象のブランチリスト
+				for ( UINT id : vBrcID )
+				{
+					//ヒット条件のみ
+					if ( BRC_HIT_E == vpBranch [ id ]->GetCondition () )
+					{
+						return vpBranch [ id ]->GetNameSequence ();
+					}
+				}
+			}
+		}
+		return U"";
 	}
 
 

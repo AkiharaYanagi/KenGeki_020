@@ -43,6 +43,8 @@ namespace GAME
 		m_dispEffect = std::make_shared < DispEffect > ( pChara->GetpapEfTexture (), pEfGnrt->GetZ () );
 		m_dispEffect->SetpChara ( pChara );
 		AddpTask ( m_dispEffect );
+
+		m_dispEffect->SetpCharaRect ( m_charaRect );
 	}
 
 	ExeEffect::~ExeEffect ()
@@ -81,12 +83,7 @@ namespace GAME
 		//枠表示
 		if ( m_bDispRect )
 		{
-			m_dispEffect->OnRect ();
-			m_dispEffect->SetpCharaRect ( m_charaRect );
-		}
-		else
-		{
-			m_dispEffect->OffRect ();
+			m_dispEffect->Update ( m_pScript, m_ptEffect, m_dirRight );
 		}
 	}
 

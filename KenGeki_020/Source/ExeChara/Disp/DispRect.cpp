@@ -26,7 +26,7 @@ namespace GAME
 			map_GrpARect.push_back ( Make ( RECT_COLOR_A ) );
 			map_GrpORect.push_back ( Make ( RECT_COLOR_O ) );
 		}
-#if 1
+#if 0
 		OnRect ();
 #else
 		OffRect ();
@@ -55,6 +55,11 @@ namespace GAME
 
 	DispRect::~DispRect ()
 	{
+		//終了時にグラフィックタスクを外す (特にEffect)
+		for ( P_PrmRect p : map_GrpCRect ) { GRPLST_REMOVE ( p ); }
+		for ( P_PrmRect p : map_GrpHRect ) { GRPLST_REMOVE ( p ); }
+		for ( P_PrmRect p : map_GrpARect ) { GRPLST_REMOVE ( p ); }
+		for ( P_PrmRect p : map_GrpORect ) { GRPLST_REMOVE ( p ); }
 	}
 
 	//実効枠設定

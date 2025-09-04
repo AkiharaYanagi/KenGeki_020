@@ -83,6 +83,10 @@ namespace GAME
 		void SynchroScript ( VEC2 ptChara );
 
 	public:
+
+		//攻撃判定付きのエフェクトの先頭を取得
+		s3d::String GetpExeEf_BrcHitE ();
+
 		//---------------------------------------------------------------
 		//Rect
 		void OnDispRect ();

@@ -112,8 +112,8 @@ namespace GAME
 
 		//---------------------------------------------------------------
 		//Rect
-		void OnDispRect () { m_bDispRect = true; }
-		void OffDispRect () { m_bDispRect = false; }
+		void OnDispRect() { m_bDispRect = true; m_dispEffect->OnRect(); }
+		void OffDispRect() { m_bDispRect = false; m_dispEffect->OffRect(); }
 
 	private :
 		//xだけ向きを反映する

@@ -170,11 +170,11 @@ namespace GAME
 		PV_RECT pvHRect1 = pCharaRect1p->GetpvHRect ();
 		PV_RECT pvHRect2 = pCharaRect2p->GetpvHRect ();
 
-#if 0
 		//エフェクトリストの取得
 		PLP_ExEf plpExEf1 = m_pExeChara1p->GetplpExEf ();
 		PLP_ExEf plpExEf2 = m_pExeChara2p->GetplpExEf ();
-#endif // 0
+
+
 
 		//重なり中心位置
 		VEC2 center = VEC2 (0, 0);
@@ -213,17 +213,22 @@ namespace GAME
 		DcsOffsetEf (plpExEf1, plpExEf2, pCharaRect2p);		//p1からp2へのチェック
 		DcsOffsetEf (plpExEf2, plpExEf1, pCharaRect1p);		//p2からp1へのチェック
 
+#endif // 0
 		//------------------------------------------------------
 		//エフェクトのヒットチェック
+		bool efHit1p = false;
+		bool efHit2p = false;
 
 		//p1からp2へのチェック
 		int powerEf1p = 0;
-		m_Efhit2P = DcsHitEf ( plpExEf1, pvHRect2, m_pExeChara2p, powerEf1p );
+//		m_Efhit2P = DcsHitEf ( plpExEf1, pvHRect2, m_pExeChara2p, powerEf1p );
+		efHit2p = DcsHitEf ( plpExEf1, pvHRect2, m_pExeChara2p, powerEf1p );
 		
 		//p2からp1へのチェック	
 		int powerEf2p = 0;
-		m_Efhit1P = DcsHitEf ( plpExEf2, pvHRect1, m_pExeChara1p, powerEf2p );
-#endif // 0
+//		m_Efhit1P = DcsHitEf ( plpExEf2, pvHRect1, m_pExeChara1p, powerEf2p );
+		efHit1p = DcsHitEf ( plpExEf2, pvHRect1, m_pExeChara1p, powerEf2p );
+
 
 		//------------------------------------------------------
 		//メインキャラ同士の本体相殺チェック
@@ -328,29 +333,27 @@ namespace GAME
 		}
 
 
-#if 0
 		//------------------------------------------------------
 		//Efヒット処理
-		if (m_Efhit2P)
+		if ( efHit2p )
 		{
 			//SE
-			SOUND->Play_SE ( SE_Btl_Hit );
+			//SOUND->Play_SE ( SE_Btl_Hit );
 
 			m_pExeChara1p->OnEfHit ();		//ヒット状態
-//			m_pExeChara2p->OnDamaged (powerEf1p);		//くらい状態・ダメージ処理
 			m_pExeChara2p->OnDamaged ();		//くらい状態・ダメージ処理
 		}
 
-		if (m_Efhit1P)
+		if ( efHit1p )
 		{
 			//SE
-			SOUND->Play_SE ( SE_Btl_Hit );
+			//SOUND->Play_SE ( SE_Btl_Hit );
 
 			m_pExeChara2p->OnEfHit ();		//ヒット状態
-//			m_pExeChara1p->OnDamaged (powerEf2p);		//くらい状態・ダメージ処理
 			m_pExeChara1p->OnDamaged ();		//くらい状態・ダメージ処理
 		}
-#endif // 0
+
+
 
 		//================================================================
 		//メインヒット処理
@@ -416,12 +419,12 @@ namespace GAME
 		m_efHit->SetDispBase ( G_BASE_POS() );
 
 		//相手の変更を一時取得し、自分の処理が終了したあとに互いに上書きする
-		if ( hit2P )
+		if ( hit2P || efHit2p )
 		{
 			m_pExeChara1p->ChangeOhter ();
 			m_pExeChara1p->ChangeMine ();
 		}
-		if ( hit1P )
+		if ( hit1P || efHit2p )
 		{
 			m_pExeChara2p->ChangeMine ();
 			m_pExeChara2p->ChangeOhter ();
@@ -544,6 +547,8 @@ namespace GAME
 
 	}
 
+#endif // 0
+
 
 	//エフェクトのヒット枠判定
 	bool Decision::DcsHitEf (PLP_ExEf plpExEf1, PV_RECT pvHRect2, P_ExeChara pHitChara, int & refPower)
@@ -581,6 +586,7 @@ namespace GAME
 
 		return ret;
 	}
+#if 0
 
 	//判定後にキャラに反映する
 	void Decision::Propagate ()

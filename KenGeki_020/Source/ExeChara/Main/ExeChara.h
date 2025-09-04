@@ -207,13 +207,16 @@ namespace GAME
 
 		//---------------------------------------------
 
-#if 0
 		//------------------------------------------------
 		//エフェクト
+
+		//エフェクト管理を取得する
+		P_OprEf GetpOprEf () { return m_oprtEf; }
 
 		//エフェクトリスト取得
 		PLP_ExEf GetplpExEf () { return m_oprtEf->GetplpExEf (); }
 
+#if 0
 		//粒子エフェクト
 		void SetpParticle ( P_EfPart p ) { m_efPart = p; }
 #endif // 0
@@ -348,9 +351,8 @@ namespace GAME
 		bool IsHit () const { return m_btlPrm.GetHitEst (); }
 		void SetHit ( bool b ) { m_btlPrm.SetHitEst ( b ); }
 		void OnHit ();
-#if 0
 		void OnEfHit ();
-#endif // 0
+
 
 		//相手・攻撃 → 自分・くらい
 		//くらい発生

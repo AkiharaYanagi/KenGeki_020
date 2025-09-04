@@ -297,9 +297,23 @@ namespace GAME
 	//エフェクトヒット発生(攻撃成立側)
 	void ExeChara_OnHit::OnEfHit ()
 	{
+		P_ExeChara pSelf = m_pSelf.lock ();		//自分
+		P_ExeChara pOther = m_pOther.lock ();	//相手
+
+		//自分のエフェクトからブランチ（相手ヒット）を検索し、遷移先アクション名を取得する
+		P_OprEf pOprtEf = pSelf->GetpOprEf ();
+		const s3d::String& nameAction = pOprtEf->GetpExeEf_BrcHitE ();
+
+		//-----------------------------------------------------
 		m_btlPrm.SetHitEst ( true );		//攻撃成立フラグ
 //		m_tmrHitstop->Start ();		//エフェクトはヒットストップしない
 		m_btlPrm.GetTmr_HitPitch ()->Start ();
+
+		//-----------------------------------------------------
+		//相手の変更先アクション名を保存
+		pSelf->SetNameChangeOther ( nameAction );
+		
+		//-------------------------------------------------
 	}
 
 

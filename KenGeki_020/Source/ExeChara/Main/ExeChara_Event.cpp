@@ -361,8 +361,15 @@ namespace GAME
 		m_btlPrm.SetAccRecoil ( recoil_i );
 
 	}
+#endif // 0
 
 
+	void ExeChara::OnEfHit()
+	{
+		m_OnHit.OnEfHit ();
+	}
+
+#if 0
 	//エフェクトヒット発生(攻撃成立側)
 	void ExeChara::OnEfHit ()
 	{
