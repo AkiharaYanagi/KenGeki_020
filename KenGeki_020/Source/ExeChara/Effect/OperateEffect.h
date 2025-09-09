@@ -82,6 +82,9 @@ namespace GAME
 	private:
 		void SynchroScript ( VEC2 ptChara );
 
+		//特定エフェクト処理
+		void Generate_Special ( P_ExEf pExeEffect, P_Effect pEffect, P_EfGnrt pEfGnrt, VEC2 ptChara, bool dirRight );
+
 	public:
 
 		//攻撃判定付きのエフェクトの先頭を取得

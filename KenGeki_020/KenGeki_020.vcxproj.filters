@@ -1313,5 +1313,8 @@
     <ClCompile Include="Source\ExeChara\Effect\ExeEffect_Special.cpp">
       <Filter>03_FtgMain\ExeChara\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ExeChara\Effect\OperateEffect_Special.cpp">
+      <Filter>03_FtgMain\ExeChara\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

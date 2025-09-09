@@ -199,6 +199,7 @@ namespace GAME
 
 #endif // 0
 
+
 #if 0
 		//------------------------------------------------------
 		//打合：攻撃判定と攻撃判定、または攻撃判定と相殺判定 (相殺と相殺は何もしない)
@@ -212,8 +213,8 @@ namespace GAME
 		//相殺時には各エフェクトに相殺状態をセット(反映はExeEffectがまとめて後に行う)
 		DcsOffsetEf (plpExEf1, plpExEf2, pCharaRect2p);		//p1からp2へのチェック
 		DcsOffsetEf (plpExEf2, plpExEf1, pCharaRect1p);		//p2からp1へのチェック
-
 #endif // 0
+
 		//------------------------------------------------------
 		//エフェクトのヒットチェック
 		bool efHit1p = false;
@@ -546,13 +547,15 @@ namespace GAME
 		}
 
 	}
-
 #endif // 0
+
 
 
 	//エフェクトのヒット枠判定
 	bool Decision::DcsHitEf (PLP_ExEf plpExEf1, PV_RECT pvHRect2, P_ExeChara pHitChara, int & refPower)
 	{
+		(void)pHitChara;
+
 		bool ret = false;
 		VEC2 centeref = VEC2 (0, 0);
 

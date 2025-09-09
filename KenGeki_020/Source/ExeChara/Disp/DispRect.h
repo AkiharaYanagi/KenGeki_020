@@ -42,6 +42,9 @@ namespace GAME
 		DispRect ( const DispRect & rhs ) = delete;
 		~DispRect ();
 
+		//明示的開放
+		void Rele ();
+
 		//実効枠設定
 		void SetCharaRect ( P_CharaRect pCharaRect );
 	

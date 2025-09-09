@@ -507,6 +507,7 @@
     <ClCompile Include="Source\ExeChara\Effect\ExeEffect.cpp" />
     <ClCompile Include="Source\ExeChara\Effect\ExeEffect_Special.cpp" />
     <ClCompile Include="Source\ExeChara\Effect\OperateEffect.cpp" />
+    <ClCompile Include="Source\ExeChara\Effect\OperateEffect_Special.cpp" />
     <ClCompile Include="Source\ExeChara\Event\ExeChara_OnDamaged.cpp" />
     <ClCompile Include="Source\ExeChara\Event\ExeChara_OnHit.cpp" />
     <ClCompile Include="Source\ExeChara\Input\CharaInput.cpp" />

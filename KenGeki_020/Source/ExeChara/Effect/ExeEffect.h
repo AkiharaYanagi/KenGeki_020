@@ -56,6 +56,7 @@ namespace GAME
 		bool		m_offset;		//相殺
 		bool		m_hit;			//ヒット
 
+
 	public:
 		ExeEffect ( P_Effect pEffect, P_Chara pChara, P_EfGnrt pEfGnrt, VEC2 ptChara, bool dirRight );
 		ExeEffect ( const ExeEffect & rhs ) = delete;
@@ -64,6 +65,8 @@ namespace GAME
 		void Init ();
 
 		void Disp ();	//復旧時表示のみ
+
+		void Rele ();	//手動解放
 
 		//---------------------------------------------
 		//枠取得
@@ -126,8 +129,21 @@ namespace GAME
 		void CalcPos ();
 
 		//特定エフェクト処理
+		void Generate_Special ();
 		void PreMove_Special ();
 		void PostMove_Special ();
+
+
+	//====================================================
+	//フェラリア4M
+	private :
+		bool		m_calc_Off { F };
+		VEC2		m_target;
+		INT32		m_count { 0 };
+	public :
+		void SetCalcOff ( bool b ) { m_calc_Off = b; }
+		void SetVel ( VEC2 vel ) { m_vel = vel; }
+	//====================================================
 	};
 
 	//型別定義 エイリアス

@@ -139,7 +139,11 @@ namespace GAME
 	void OperateEffect::PostMove ( BtlParam & btlPrm )
 	{
 		//DBGOUT_WND_F は　ExeChara中で用いると２P側で上書きされる
-		//DBGOUT_WND_F ( 8, _T ( "GRPLST->size() = %d" ), GrpLst::Inst()->GetNumList() );
+		if (PLAYER_ID_1 == btlPrm.GetPlayerID())
+		{
+			size_t grp_size = GrpLst::Inst()->GetNumList();
+			DBGOUT_WND_F ( DBGOUT_8, U"GRPLST->size() = {}"_fmt( grp_size ) );
+		}
 
 
 		//各エフェクトの動作
@@ -157,7 +161,8 @@ namespace GAME
 		{
 			//消去時、後置インクリメントはコピーを渡しイテレータを壊さない
 			if ( (*it)->IsEnd () ) 
-			{ 
+			{
+				(*it)->Rele ();		//手動解放
 				EraseTask ( *it );	//タスクリスト
 				(*it).reset (); 
 				it = m_plpExeEffect->erase ( it ); 
@@ -220,36 +225,10 @@ namespace GAME
 		m_plpExeEffect->push_back ( pExeEffect );
 		AddpTask ( pExeEffect );	//タスクリスト
 
-
-		//----------------------------------
-		//	Ef個別指定
-		//----------------------------------
-		if ( pEffect->GetName () == U"空中竜巻_鞘" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"HitLine0" ) { /* pExeEffect->SetShader ( F ); */ }
-		if ( pEffect->GetName () == U"HitLine1" ) { /* pExeEffect->SetShader ( F ); */ }
-		if ( pEffect->GetName () == U"HitSmoke" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"HitSmoke1" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"DustCloud" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"Guard" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"地面" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"Ukemi" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"EX" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"暁0" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"暁1" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"颯0" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"颯1" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"贐" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"極" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"万雷発生" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"万雷中派生" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"OD_A_R" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"OD_A_L" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"OD_A_G" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"Ef_テル・プム" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"Ef_ニャムヒー" ) { pExeEffect->SetShader ( F ); }
-		if ( pEffect->GetName () == U"4L_Shot" ) { pExeEffect->SetShader ( F ); }
-			 
+		//特定エフェクト処理
+		Generate_Special ( pExeEffect, pEffect, pEfGnrt, ptChara, dirRight );
 	}
+
 
 	//オブジェクトからExeEfを取得
 	P_ExEf OperateEffect::GetpExEf ( P_Effect p ) const

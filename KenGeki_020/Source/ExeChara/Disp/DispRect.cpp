@@ -18,6 +18,7 @@ namespace GAME
 {
 	DispRect::DispRect () 
 	{
+
 		//枠表示を初期化
 		for ( UINT i = 0; i < NUM_RECT; ++i )
 		{
@@ -56,10 +57,17 @@ namespace GAME
 	DispRect::~DispRect ()
 	{
 		//終了時にグラフィックタスクを外す (特にEffect)
-		for ( P_PrmRect p : map_GrpCRect ) { GRPLST_REMOVE ( p ); }
-		for ( P_PrmRect p : map_GrpHRect ) { GRPLST_REMOVE ( p ); }
-		for ( P_PrmRect p : map_GrpARect ) { GRPLST_REMOVE ( p ); }
-		for ( P_PrmRect p : map_GrpORect ) { GRPLST_REMOVE ( p ); }
+		//@info 全体終了時に、GRPLSTが先に解放されてから参照するとエラー
+		//	GrpList::Inst()	もオブジェクトのみ残るのでnullptrチェックができない
+	}
+
+	void DispRect::Rele()
+	{
+		//グラフィックタスクを外す (特にEffect)
+		for ( P_GrpCr p : map_GrpCRect ) { GRPLST_REMOVE ( p ); }
+		for ( P_GrpCr p : map_GrpHRect ) { GRPLST_REMOVE ( p ); }
+		for ( P_GrpCr p : map_GrpARect ) { GRPLST_REMOVE ( p ); }
+		for ( P_GrpCr p : map_GrpORect ) { GRPLST_REMOVE ( p ); }
 	}
 
 	//実効枠設定

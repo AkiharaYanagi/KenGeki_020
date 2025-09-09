@@ -157,6 +157,7 @@ namespace GAME
 
 #endif // 0
 
+
 		TASK_VEC::Init ();
 	}
 

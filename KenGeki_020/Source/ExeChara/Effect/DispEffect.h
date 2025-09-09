@@ -46,11 +46,13 @@ namespace GAME
 		void SetpCharaRect ( P_CharaRect pCharaRect );
 
 		//枠表示
+//		void OnRect () {}
 		void OnRect () { m_dispRect->OnRect (); }
 		//枠非表示
+//		void OffRect () {}
 		void OffRect () { m_dispRect->OffRect (); }
 
-		//P_Grp GetpGrp () { return m_grp; }
+		P_Grp GetpGrp () { return m_grp; }
 		//P_GrpEfShd GetpGrp () { return m_grp; }
 
 		void SetW ( float w ) { m_w = w; }

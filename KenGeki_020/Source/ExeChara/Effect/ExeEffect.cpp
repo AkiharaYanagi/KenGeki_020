@@ -35,6 +35,7 @@ namespace GAME
 
 		//初期位置 (キャラ位置+エフェクト発生位置)
 		m_ptEffect = ptChara + Dir ( m_ptGnrt );
+		m_target = ptChara + VEC2 ( 1200, 0 );
 
 		//枠
 		m_charaRect = std::make_shared < CharaRect > ();
@@ -49,7 +50,6 @@ namespace GAME
 
 	ExeEffect::~ExeEffect ()
 	{
-		m_dispEffect.reset ();
 	}
 
 	void ExeEffect::SetpEfGnrt ( P_EfGnrt p )
@@ -85,6 +85,13 @@ namespace GAME
 		{
 			m_dispEffect->Update ( m_pScript, m_ptEffect, m_dirRight );
 		}
+	}
+
+
+	void ExeEffect::Rele ()
+	{
+		m_dispEffect->Rele ();
+		m_dispEffect.reset ();
 	}
 
 
@@ -208,6 +215,11 @@ namespace GAME
 
 	void ExeEffect::CalcPos ()
 	{
+		//自前で計算する
+		if ( m_calc_Off ) { return; }
+
+
+
 		//スクリプトを取得
 		P_Script pScp = m_pScript;
 		VEC2 vel = pScp->m_prmBattle.Vel;
