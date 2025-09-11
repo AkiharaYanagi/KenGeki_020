@@ -46,6 +46,23 @@ inline double mapRange
 		GRPLST_INSERT ( m_life_value );
 		AddpTask ( m_life_value );
 
+		//ライフゲージ 白
+ 		m_life_white_value = std::make_shared < GameGraphic > ();
+		//m_life_value->AddTexture_FromArchive ( U"Battle\\life_value.png" );
+		m_life_white_value->SetZ ( Z_SHADOW - 0.01f );
+		m_life_white_value->SetbPlgnMask ( T );		//ポリゴンマスク使用
+		GRPLST_INSERT ( m_life_white_value );
+		AddpTask ( m_life_white_value );
+
+ 		//ライフゲージ 赤
+		m_life_red_value = std::make_shared < GameGraphic > ();
+		//m_life_value->AddTexture_FromArchive ( U"Battle\\life_value.png" );
+		m_life_red_value->SetZ ( Z_SHADOW - 0.01f );
+		m_life_red_value->SetbPlgnMask ( T );		//ポリゴンマスク使用
+		GRPLST_INSERT ( m_life_red_value );
+		AddpTask ( m_life_red_value );
+
+
 		//剣撃ゲージ
 		m_stamina_value = std::make_shared < GameGraphic > ();
 		//m_stamina_value->AddTexture_FromArchive ( U"Battle\\stumina_value.png" );
@@ -118,6 +135,20 @@ inline double mapRange
 			m_life_value->SetpPolygon ( m_life_mask );
 			m_life_value->SetPosInMask ( VEC2 (169, 62) );
 			m_life_value->AddTexture_FromArchive_mrr ( U"Battle\\life_value.png" );
+
+
+			//白
+			m_life_white_mask = std::make_shared < s3d::Polygon > ( aryVec_life );
+			m_life_white_value->SetpPolygon ( m_life_mask );
+			m_life_white_value->SetPosInMask ( VEC2 (169, 62) );
+			m_life_white_value->AddTexture_FromArchive_mrr ( U"Battle\\life_value.png" );
+
+
+			//赤
+			m_life_red_mask = std::make_shared < s3d::Polygon > ( aryVec_life );
+			m_life_red_value->SetpPolygon ( m_life_mask );
+			m_life_red_value->SetPosInMask ( VEC2 (169, 62) );
+			m_life_red_value->AddTexture_FromArchive_mrr ( U"Battle\\life_value.png" );
 
 
 			//-----------------------------------------------------------------
