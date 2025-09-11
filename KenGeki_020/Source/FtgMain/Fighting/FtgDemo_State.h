@@ -126,7 +126,15 @@ namespace GAME
 	//メイン
 	class FTG_DM_Main : public FtgDemoState
 	{
-		P_GrpDemo		m_grpAttack;
+//		P_GrpDemo		m_grpAttack;
+		P_GrpDemo		m_grpFight0;
+		P_GrpDemo		m_grpFight1;
+		P_GrpDemo		m_grpFight20;
+		P_GrpDemo		m_grpFight21;
+		float			m_pos20 { 200 };
+		float			m_pos21 { 200 };
+		bool			m_start20 { F };
+		P_GrpDemo		m_grpLight;
 	public:
 		FTG_DM_Main ();
 		void Start ();

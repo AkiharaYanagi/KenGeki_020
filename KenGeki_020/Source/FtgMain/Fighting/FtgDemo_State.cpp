@@ -113,8 +113,10 @@ namespace GAME
 		m_timer->Start ();
 
 
-		//SP_VOICE
+#if 0
+		//SP_VOICE 開幕　コンソメ実況
 		SND_PLAY_ONESHOT_VC(VC_91_CONSOME_START);
+#endif // 0
 	}
 
 	void FTG_DM_GetReady::Final ()
@@ -138,15 +140,56 @@ namespace GAME
 	//メイン
 	FTG_DM_Main::FTG_DM_Main ()
 	{
-		m_grpAttack = MakeGrpValue ( U"Demo_Fight.png" );
-		m_grpAttack->SetEnd ( 90 );
+		//m_grpAttack = MakeGrpValue ( U"Demo_Fight.png" );
+		//m_grpAttack->SetEnd ( 90 );
+
+		float x0 = 45;
+		float y0 = 200;
+		float h20 = 264;
+
+		m_grpFight0 = MakeGrpValue ( U"Fight0.png" );
+		m_grpFight0->SetPos ( VEC2 ( x0, y0 ) );
+		m_grpFight0->SetEnd ( 30 );
+
+		m_grpFight1 = MakeGrpValue ( U"Fight1.png" );
+		m_grpFight1->SetPos ( VEC2 ( x0, y0 ) );
+		m_grpFight1->SetEnd ( 90 );
+//		m_grpFight1->SetColor ( 0xff000000 );
+		m_grpFight1->SetStartScaling ( VEC2 ( 1.f, 1.f ) );
+		m_grpFight1->SetTargetScaling ( VEC2 ( 1.f, 1.f ) );
+
+		m_grpFight20 = MakeGrpValue ( U"Fight20.png" );
+		m_grpFight20->SetPos ( VEC2 ( x0, y0 ) );
+		m_grpFight20->SetEnd ( 60 );
+		m_grpFight20->SetStartScaling ( VEC2 ( 1.f, 1.f ) );
+		m_grpFight20->SetTargetScaling ( VEC2 ( 1.f, 1.f ) );
+		m_grpFight20->SetAcc ( VEC2 ( 0.f, 0.f ) );
+		m_grpFight20->SetSecondVel ( VEC2 ( 0.f, 0.f ) );
+		m_pos20 = y0;
+
+		m_grpFight21 = MakeGrpValue ( U"Fight21.png" );
+		m_grpFight21->SetPos ( VEC2 ( x0, y0 + h20 ) );
+		m_grpFight21->SetEnd ( 60 );
+		m_grpFight21->SetStartScaling ( VEC2 ( 1.f, 1.f ) );
+		m_grpFight21->SetTargetScaling ( VEC2 ( 1.f, 1.f ) );
+		m_grpFight21->SetAcc ( VEC2 ( 0.f, 0.f ) );
+		m_grpFight21->SetSecondVel ( VEC2 ( 0.f, 0.f ) );
+		m_pos21 = y0 + h20;
 	}
 
 
 	void FTG_DM_Main::Start ()
 	{
 		//Fight! 表示
-		m_grpAttack->Start ();
+//		m_grpAttack->Start ();
+		m_grpFight1->Start ();
+
+		float y0 = 200;
+		float h20 = 264;
+		m_pos20 = y0;
+		m_pos21 = y0 + h20;
+		m_start20 = F;
+
 
 		//戦闘開始
 		GetpMutualChara ()->StartFighting ();
@@ -157,7 +200,35 @@ namespace GAME
 
 	void FTG_DM_Main::Do ()
 	{
-		m_grpAttack->Move ();
+		//Fight! 表示
+
+		
+		if ( ! m_start20 )
+		{
+			m_grpFight1->Move ();
+
+			if ( ! m_grpFight1->GetValid() )
+			{
+				m_start20 = T;
+				m_grpFight20->Start ();
+				m_grpFight21->Start ();
+			}
+		}
+		else
+		{
+			const float x0 = 45;
+			const float y0 = 200;
+			const float h20 = 264;
+			const float v = 100;
+
+			m_pos20 -= v;
+			m_grpFight20->SetPos ( VEC2 ( x0, m_pos20 ) );
+			m_grpFight20->Move ();
+
+			m_pos21 += v;
+			m_grpFight21->SetPos ( VEC2 ( x0, m_pos21 ) );
+			m_grpFight21->Move ();
+		}
 
 		P_MutualChara pMutual = GetpMutualChara ();
 
@@ -210,12 +281,13 @@ namespace GAME
 		//キャラ共通一連動作
 		pMutual->Conduct ();
 
-
+#if 0
 		//SP_VOICE
 		if (WND_UTL::AscKey(VK_F11))
 		{
 			SND_PLAY_ONESHOT_VC(VC_92_CONSOME_MIDDLE);
 		}
+#endif // 0
 
 	}
 
@@ -376,8 +448,10 @@ namespace GAME
 		m_grpLight1->Start ();
 
 
+#if 0
 		//SP_VOICE
 		SND_PLAY_ONESHOT_VC(VC_93_CONSOME_FINISH);
+#endif // 0
 	}
 
 	void FTG_DM_Down::Do ()
