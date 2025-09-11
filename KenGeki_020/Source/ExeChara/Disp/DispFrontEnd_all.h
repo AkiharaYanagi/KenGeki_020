@@ -32,11 +32,16 @@ namespace GAME
 		P_Grp		m_gauge_all_bg;		//総合ゲージ背景
 
 		P_Grp		m_life_value;		//体力
+		P_Grp		m_life_white_value;		//白体力
+		P_Grp		m_life_red_value;		//赤体力
+
 		P_Grp		m_stamina_value;	//剣撃
 		P_Grp		m_hissatsu_value;	//必殺
 		P_Grp		m_accel_value;		//アクセル
 
 		P_Plgn		m_life_mask;		//ポリゴンマスク 体力
+		P_Plgn		m_life_white_mask;		//ポリゴンマスク 白体力
+		P_Plgn		m_life_red_mask;		//ポリゴンマスク 赤体力
 		P_Plgn		m_stamina_mask;		//ポリゴンマスク 剣撃
 		P_Plgn		m_hissatsu_mask;		//ポリゴンマスク 必殺
 		P_Plgn		m_accel_mask;		//ポリゴンマスク アクセル
