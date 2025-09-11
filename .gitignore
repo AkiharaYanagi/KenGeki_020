@@ -385,3 +385,4 @@ FodyWeavers.xsd
 *.nsi
 *.zip
 *.exp
+*.dll
