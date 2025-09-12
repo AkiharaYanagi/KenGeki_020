@@ -217,8 +217,8 @@ namespace GAME
 		else
 		{
 			const float x0 = 45;
-			const float y0 = 200;
-			const float h20 = 264;
+//			const float y0 = 200;
+//			const float h20 = 264;
 			const float v = 100;
 
 			m_pos20 -= v;

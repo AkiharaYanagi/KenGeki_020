@@ -150,6 +150,15 @@ namespace GAME
 		//超必殺補正
 		float rev_od = btlPrmOhter.GetReviseOverDrive ();
 		//-------------------------------------------------
+#if 0
+		//--------------------------------------------
+		//ダメージをライフによって補正(根性値)
+		int lf = m_btlPrm.GetLife ();
+		if ( lf < LIFE_MAX * 0.5f )
+		{
+			damage = (int)( damage * ( 0.001f * ( 0.5f * LIFE_MAX + lf ) ) );
+		}
+#endif // 0
 
 		//最終確定補正値
 		btlPrmOhter.SetCnfmRvs ( d_revise * throwRvs * rev_od * g * d_45 );

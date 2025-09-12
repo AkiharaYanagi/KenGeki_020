@@ -67,8 +67,9 @@ namespace GAME
 		int		m_accel { 0 };			//アクセル ( -500 ~ +1000 )
 
 		int		m_balance_max { 0 };	//バランスゲージ変動上限
-		int		m_white_damage { 0 };	//白ダメージ
+		int		m_white_damage { 0 };	//白ダメージ(回復分)
 		P_Timer		m_tmrWhiteDamage;	//白ダメージタイマ
+		int		m_red_damage { 0 };		//赤ダメージ(ダメージ表示)
 
 		int		m_power { 0 };			//実効攻撃値
 		bool	m_damaged { F };		//くらいフラグ
@@ -181,6 +182,7 @@ namespace GAME
 		GET_SET ( int, GetAccel, SetAccel, m_accel )		//アクセル ( -500 ~ +1000 )
 		GET_SET ( int, GetBalanceMax, SetBalanceMax, m_balance_max )	//バランス最大値
 		GET_SET ( int, GetWhiteDamage, SetWhiteDamage, m_white_damage )	//白ダメージ
+		GET_SET ( int, GetRedDamage, SetRedDamage, m_red_damage )	//赤ダメージ
 		GET_SET ( int, GetPower, SetPower, m_power )		//実効攻撃値
 		
 		//--------------------------------------------------------------------
@@ -292,6 +294,7 @@ namespace GAME
 		//白ダメージ
 		static const int RecoveryWhiteDamage_Time;
 		static const int RecoveryWhiteDamage;
+		static const int RecoveryRedDamage_Time;
 	};
 
 

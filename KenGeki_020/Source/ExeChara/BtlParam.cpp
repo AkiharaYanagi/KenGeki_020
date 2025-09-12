@@ -20,6 +20,7 @@ namespace GAME
 	//クラス内定数
 	const int BtlParam::RecoveryWhiteDamage_Time = 1;
 	const int BtlParam::RecoveryWhiteDamage = 4;
+	const int BtlParam::RecoveryRedDamage_Time = 10;
 
 
 	BtlParam::BtlParam ()
@@ -48,6 +49,7 @@ namespace GAME
 
 		m_balance_max = rhs.m_balance_max;	//バランス最大値
 		m_white_damage = rhs.m_white_damage;	//白ダメージ
+		m_red_damage = rhs.m_red_damage;	//赤ダメージ
 
 		m_power = rhs.m_power;			//実効攻撃値
 		m_damaged = rhs.m_damaged;		//くらいフラグ
@@ -110,13 +112,6 @@ namespace GAME
 		m_pOther = pOther;
 	}
 
-#if 0
-	void BtlParam::SetPlayerID ( PLAYER_ID playerID )
-	{
-		m_playerID = playerID;
-		PosInit ();
-	}
-#endif // 0
 
 	void BtlParam::LoadTimer ()
 	{
@@ -168,6 +163,7 @@ namespace GAME
 		m_mana = MANA_START;
 		m_accel = ACCEL_START;
 		m_white_damage = 0;
+		m_red_damage = 0;
 
 		m_power = 0;
 
@@ -394,14 +390,6 @@ namespace GAME
 		m_vel_recoil *= 0.8f;	//Velは減衰
 		if ( std::abs ( m_vel_recoil ) < 0.01f ) { m_vel_recoil = 0; } 
 
-#if 0
-		//デバッグ表示あり
-		if ( m_playerID == PLAYER_ID_1 )
-		{
-			DBGOUT_WND_F ( 4, _T ( "m_acc_recoil = %f" ), m_acc_recoil );
-			DBGOUT_WND_F ( 5, _T ( "m_vel_recoil = %f" ), m_vel_recoil );
-		}
-#endif // 0
 		m_acc_recoil = 0;		//accは初速のみ
 
 
@@ -475,13 +463,11 @@ namespace GAME
 			if ( m_white_damage < 0 ) { m_white_damage = 0; }
 		}
 
-#if 0
-		if ( m_playerID == PLAYER_ID_1 )
+		//赤ダメージ
+		if (0 < m_red_damage)
 		{
-			DBGOUT_WND_F ( 6, _T ( "m_white_damage = %d" ), m_white_damage );
+			m_red_damage -= RecoveryRedDamage_Time;
 		}
-#endif // 0
-
 
 		//----------------------------------------------------------
 		// ゲージ関連
@@ -732,23 +718,16 @@ namespace GAME
 
 	//==========================================
 	//◆ 相手・攻撃 → 自分・くらい
+	// ダメージ確定後
 	//くらい状態・ダメージ処理
 	//==========================================
 	void BtlParam::OnDamage ( int damage )
 	{
+		//--------------------------------------------
+		// ＜！＞　方向に注意
 		//通常ダメージ：マイナスの値
 		//回復		：プラスの値
 		
-#if 0
-		//--------------------------------------------
-		//ダメージをライフによって補正(根性値)
-		int lf = m_btlPrm.GetLife ();
-		if ( lf < LIFE_MAX * 0.5f )
-		{
-			damage = (int)( damage * ( 0.001f * ( 0.5f * LIFE_MAX + lf ) ) );
-		}
-#endif // 0
-
 		//--------------------------------------------
 		//一旦白ダメージに蓄積
 		
@@ -765,14 +744,16 @@ namespace GAME
 		}
 
 		//回復のとき上限チェック
-		if ( m_life + damage > LIFE_MAX ) { m_life = LIFE_MAX; }
+		if ( m_life + damage > LIFE_MAX )
+		{
+			m_life = LIFE_MAX;
+			m_white_damage = 0;
+		}
 
-#if 0
-		m_life += damage;
-		m_white_damage = 0;
-#endif // 0
-
-	}
+		//--------------------------------------------
+		//赤ダメージに蓄積
+		m_red_damage += - damage;
+}
 
 
 	void BtlParam::OnGuard ()
@@ -933,7 +914,7 @@ namespace GAME
 	}
 
 
-	//白ダメージ確定
+	//白ダメージ確定化(必殺技などによるダメージ確定化)
 	void BtlParam::DecisionWhiteDamage ()
 	{
 		m_white_damage = 0;

@@ -1065,9 +1065,6 @@
     <ClInclude Include="Source\ExeChara\Event\ExeChara_OnHit.h">
       <Filter>03_FtgMain\ExeChara\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ExeChara\Disp\DispFrontEnd_all.h">
-      <Filter>03_FtgMain\ExeChara\Disp</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ExeChara\Disp\GrpPlgnMask.h">
       <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClInclude>
@@ -1300,9 +1297,6 @@
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Event\ExeChara_OnDamaged.cpp">
       <Filter>03_FtgMain\ExeChara\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ExeChara\Disp\DispFrontEnd_all.cpp">
-      <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Disp\GrpPlgnMask.cpp">
       <Filter>03_FtgMain\ExeChara\Disp</Filter>
