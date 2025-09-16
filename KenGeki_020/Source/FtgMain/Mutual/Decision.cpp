@@ -425,7 +425,7 @@ namespace GAME
 			m_pExeChara1p->ChangeOhter ();
 			m_pExeChara1p->ChangeMine ();
 		}
-		if ( hit1P || efHit2p )
+		if ( hit1P || efHit1p )
 		{
 			m_pExeChara2p->ChangeMine ();
 			m_pExeChara2p->ChangeOhter ();

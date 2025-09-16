@@ -67,6 +67,10 @@ void Load ()
 	//システム初期化
 	gameSystem.SystemLoad ();
 
+	//開始時一時停止
+	//gameSystem.SetbStop ( T );
+
+
 	//ゲームメイン
 	UP_GameMain gameMain = std::make_unique < GameMain > ();
 	gameMain->Load ();

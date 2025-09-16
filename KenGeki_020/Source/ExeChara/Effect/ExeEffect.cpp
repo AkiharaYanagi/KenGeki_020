@@ -35,7 +35,7 @@ namespace GAME
 
 		//初期位置 (キャラ位置+エフェクト発生位置)
 		m_ptEffect = ptChara + Dir ( m_ptGnrt );
-		m_target = ptChara + VEC2 ( 1200, 0 );
+		m_target = ptChara + VEC2 ( (dirRight ? 1.f : -1.f) * 1000, 0 );
 
 		//枠
 		m_charaRect = std::make_shared < CharaRect > ();
@@ -171,11 +171,15 @@ namespace GAME
 		VEC2 ptChara = btlprm.GetPos ();
 		bool dirRight = btlprm.GetDirRight ();
 
-		//判定後ヒット時or相殺時
-		if ( m_hit || m_offset )
+
+		//判定後ヒット時or相殺時に消滅
+		if ( ! m_immortal )
 		{
-			m_end = true;
-			return;
+			if ( m_hit || m_offset )
+			{
+				m_end = true;
+				return;
+			}
 		}
 
 		//エフェクト基準位置

@@ -21,6 +21,8 @@ namespace GAME
 		//フェラリア
 		if (m_pEffect->IsName(U"4M_Shot"))
 		{
+			float dir = m_dirRight ? 1.f : -1.f;		//向き
+
 			const float	g { 0.60f };
 			float h_str { 0.10f };	//homing Strength
 			float speed { 10.f };
@@ -39,7 +41,7 @@ namespace GAME
 
 			if (TIME_0 <= m_count && m_count < TIME_1)
 			{
-				m_vel.x += 0.5f;
+				m_vel.x += dir * 0.5f;	//初速のみ向き補正
 			}
 			else if (TIME_1 <= m_count && m_count < TIME_2)
 			{
@@ -89,6 +91,10 @@ namespace GAME
 
 			//角度
 			float rad = atan2f ( m_vel.y, m_vel.x );
+
+			//方向調整
+			if ( ! m_dirRight ) { rad += D3DX_PI; }
+
 			P_Grp pGrp = m_dispEffect->GetpGrp ();
 			pGrp->SetRadian ( rad );
 
@@ -96,10 +102,19 @@ namespace GAME
 			//終了
 			++ m_count;
 
-			if ( (float)GROUND_Y < m_ptEffect.y ) { m_end = T; }
+	//		if ( (float)GROUND_Y < m_ptEffect.y ) { m_end = T; }
 			if (180 < m_count) { m_end = T; }
 		}
 		
+		if (m_pEffect->IsName(U"4H_Shot"))
+		{
+			if ( m_hit )
+			{
+				//攻撃枠を空にする
+				m_charaRect->ResetARect ();
+			}
+		}
+
 		//======================================================================
 		//月日星
 		if ( m_pEffect->IsName( U"OD0" ) )

@@ -134,6 +134,28 @@ namespace GAME
 			}
 		}
 
+		if ( IsNameAction ( U"剣撃走破2" ) )
+		{
+			//エフェクト発生
+			if ( m_pScript->GetFrame () == 5 )
+			{
+				VEC2 pos = m_btlPrm.GetPos ();
+				pos.y += -250;
+				m_efSouha->On ( pos );
+			}
+		}
+
+		if ( IsNameAction ( U"剣撃走破3" ) )
+		{
+			//エフェクト発生
+			if ( m_pScript->GetFrame () == 5 )
+			{
+				VEC2 pos = m_btlPrm.GetPos ();
+				pos.y += -250;
+				m_efSouha->On ( pos );
+			}
+		}
+
 		if ( IsNameAction ( U"剣撃走破成立" ) )
 		{
 			//同一アクション内3ヒットで終了

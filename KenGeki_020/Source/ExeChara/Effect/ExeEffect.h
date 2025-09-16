@@ -53,8 +53,9 @@ namespace GAME
 
 		P_CharaRect		m_charaRect;	//枠
 
-		bool		m_offset;		//相殺
-		bool		m_hit;			//ヒット
+		bool		m_offset{F};		//相殺
+		bool		m_hit{F};			//ヒット
+		bool		m_immortal{F};		//相殺やヒットで終了しない
 
 
 	public:
@@ -104,7 +105,7 @@ namespace GAME
 //		void SetZ ( float z ) { m_dispEffect.SetZ ( z ); }
 		void SetShader ( bool b ) { m_dispEffect->SetShader ( b ); }
 
-
+#if 0
 		//相殺
 		void SetOffset ( bool b ) { m_offset = b; }
 		bool GetOffset () const { return m_offset; }
@@ -112,6 +113,12 @@ namespace GAME
 		//ヒット
 		void SetHit ( bool b ) { m_hit = b; }
 		bool GetHit () const { return m_hit; }
+
+#endif // 0
+		GET_SET ( bool, GetOffset, SetOffset, m_offset )	//相殺
+		GET_SET ( bool, GetHit, SetHit, m_hit )				//ヒット
+		GET_SET ( bool, GetImmortal, SetImmortal, m_immortal )		//不滅
+
 
 		//---------------------------------------------------------------
 		//Rect

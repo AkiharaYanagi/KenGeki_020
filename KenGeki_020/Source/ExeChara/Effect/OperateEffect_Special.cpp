@@ -16,8 +16,14 @@ namespace GAME
 {
 
 	//特定エフェクト処理
-	void OperateEffect::Generate_Special ( P_ExEf pExeEffect, P_Effect pEffect, P_EfGnrt pEfGnrt, VEC2 ptChara, bool dirRight )
+	void OperateEffect::Generate_Special
+	(
+		P_ExEf pExeEffect, P_Effect pEffect, P_EfGnrt pEfGnrt,
+		VEC2 ptChara, bool dirRight
+	)
 	{
+		(void)ptChara;
+
 		//----------------------------------
 		//	Ef個別指定
 		//----------------------------------
@@ -47,19 +53,44 @@ namespace GAME
 		if ( pEffect->GetName () == U"4L_Shot" ) { pExeEffect->SetShader ( F ); }
 
 
+
+		if ( pEffect->GetName () == U"4H_Shot" )
+		{
+			pExeEffect->SetImmortal ( T );
+		}
+
+
 		if ( pEffect->GetName () == U"4M_Shot" )
 		{
 			int x = (int)pEfGnrt->GetPos().x;
-			switch ( x )
+
+			if (dirRight)
 			{
-			case  100: pExeEffect->SetVel ( VEC2{  6.0, -10.5 } ); break;
-			case   80: pExeEffect->SetVel ( VEC2{  7.0, -10.5 } ); break;
-			case   60: pExeEffect->SetVel ( VEC2{  8.0, -10.5 } ); break;
-			case -140: pExeEffect->SetVel ( VEC2{ -8.0, -10.5 } ); break;
-			case -150: pExeEffect->SetVel ( VEC2{ -7.0, -10.5 } ); break;
-			case -160: pExeEffect->SetVel ( VEC2{ -6.0, -10.5 } ); break;
-			default: break;
+				switch ( x )
+				{
+				case  100: pExeEffect->SetVel ( VEC2{  6.0, -10.5 } ); break;
+				case   80: pExeEffect->SetVel ( VEC2{  7.0, -10.5 } ); break;
+				case   60: pExeEffect->SetVel ( VEC2{  8.0, -10.5 } ); break;
+				case -140: pExeEffect->SetVel ( VEC2{ -8.0, -10.5 } ); break;
+				case -150: pExeEffect->SetVel ( VEC2{ -7.0, -10.5 } ); break;
+				case -160: pExeEffect->SetVel ( VEC2{ -6.0, -10.5 } ); break;
+				default: break;
+				}
 			}
+			else
+			{
+				switch ( x )
+				{
+				case  100: pExeEffect->SetVel ( VEC2{ -6.0, -10.5 } ); break;
+				case   80: pExeEffect->SetVel ( VEC2{ -7.0, -10.5 } ); break;
+				case   60: pExeEffect->SetVel ( VEC2{ -8.0, -10.5 } ); break;
+				case -140: pExeEffect->SetVel ( VEC2{  8.0, -10.5 } ); break;
+				case -150: pExeEffect->SetVel ( VEC2{  7.0, -10.5 } ); break;
+				case -160: pExeEffect->SetVel ( VEC2{  6.0, -10.5 } ); break;
+				default: break;
+				}
+			}
+
 
 			pExeEffect->SetCalcOff ( T );
 			pExeEffect->SetShader ( F );

@@ -666,7 +666,6 @@ namespace GAME
 	void DispFrontEnd::On ()
 	{
 #if 0
-
 		m_gaugeLife->On ();
 		m_gaugeBalance->On ();
 		m_gaugeMana->On ();
@@ -681,20 +680,12 @@ namespace GAME
 		m_strAction->SetValid ( T );
 		m_strState->SetValid ( T );
 
-#if 0
-		m_grp_Cst_Player1P2P->SetValid ( T );
-		m_grp_Cst_InputPlayerCOM->SetValid ( T );
-
-		m_grp_CH_Player1P2P->SetValid ( T );
-		m_grp_CH_InputCOMPLayer->SetValid ( T );
-#endif // 0
-
+		On_DispPlayerInput ();
 	}
 
 	void DispFrontEnd::Off ()
 	{
 #if 0
-
 		m_gaugeLife->Off ();
 		m_gaugeBalance->Off ();
 		m_gaugeMana->Off ();
@@ -709,14 +700,7 @@ namespace GAME
 		m_strAction->SetValid ( F );
 		m_strState->SetValid ( F );
 
-#if 0
-		m_grp_Cst_Player1P2P->SetValid ( F );
-		m_grp_Cst_InputPlayerCOM->SetValid ( F );
-
-		m_grp_CH_Player1P2P->SetValid ( F );
-		m_grp_CH_InputCOMPLayer->SetValid ( F );
-#endif // 0
-
+		Off_DispPlayerInput ();
 	}
 
 	void DispFrontEnd::On_Debug ()
