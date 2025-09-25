@@ -942,9 +942,6 @@
     <ClInclude Include="Source\FtgMain\Fighting\BattleTime.h">
       <Filter>03_FtgMain\Fighting</Filter>
     </ClInclude>
-    <ClInclude Include="Source\FtgMain\Fighting\BG.h">
-      <Filter>03_FtgMain\Fighting</Filter>
-    </ClInclude>
     <ClInclude Include="Source\FtgMain\Fighting\Fighting.h">
       <Filter>03_FtgMain\Fighting</Filter>
     </ClInclude>
@@ -1071,6 +1068,9 @@
     <ClInclude Include="Source\ExeChara\Disp\DispGauge_all.h">
       <Filter>03_FtgMain\ExeChara\Disp</Filter>
     </ClInclude>
+    <ClInclude Include="Source\FtgMain\Fighting\BG.h">
+      <Filter>03_FtgMain\Fighting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameMain\GameSettingFile.cpp">
@@ -1177,9 +1177,6 @@
     </ClCompile>
     <ClCompile Include="Source\FtgMain\Mutual\Collision.cpp">
       <Filter>03_FtgMain\Mutual</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FtgMain\Fighting\BG.cpp">
-      <Filter>03_FtgMain\Fighting</Filter>
     </ClCompile>
     <ClCompile Include="Source\FtgMain\Fighting\Fighting.cpp">
       <Filter>03_FtgMain\Fighting</Filter>
@@ -1309,6 +1306,9 @@
     </ClCompile>
     <ClCompile Include="Source\ExeChara\Effect\OperateEffect_Special.cpp">
       <Filter>03_FtgMain\ExeChara\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FtgMain\Fighting\BG.cpp">
+      <Filter>03_FtgMain\Fighting</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
