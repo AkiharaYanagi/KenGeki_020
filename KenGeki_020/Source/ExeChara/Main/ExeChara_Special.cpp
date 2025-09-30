@@ -203,6 +203,14 @@ namespace GAME
 
 		//-----------------------------------------------------
 		//桜花
+		if ( IsNameAction ( U"超必殺技A" ) )
+		{
+			if ( m_pScript->GetFrame () == 0 )
+			{
+				m_pFtgGrp->Start_CutIn ();
+			}
+		}
+
 		if ( IsNameAction ( U"超必殺技B成立" ) )
 		{
 			if ( m_pScript->GetFrame () == 2 )

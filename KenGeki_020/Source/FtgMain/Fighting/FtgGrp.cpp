@@ -50,6 +50,21 @@ namespace GAME
 		AddpTask ( m_bg_All_Black );
 		GRPLST_INSERT ( m_bg_All_Black );
 		m_bg_All_Black->SetValid ( F );
+
+
+
+		//test
+		//カットイン
+		m_grpCutIn = std::make_shared < GameGraphic > ();
+		m_grpCutIn->AddTexture_FromArchive ( U"CutIn_Ouka.png" );
+		m_grpCutIn->SetPos ( 0, 100 );
+		m_grpCutIn->SetValid ( F );
+		m_grpCutIn->SetZ ( Z_CH + 0.01f );
+		AddpTask ( m_grpCutIn );
+		GRPLST_INSERT ( m_grpCutIn );
+		m_vel_x_start = 20;
+		m_vel_x = m_vel_x_start;
+		m_acc_x = -1;
 	}
 
 	FtgGrp::~FtgGrp ()
@@ -123,7 +138,18 @@ namespace GAME
 			m_fade_white->SetWhiteOut ( 60 );
 			GrpLst::Inst()->StartVtx ();
 #endif // 0
-			m_overdrive = F;	//条件をオフ
+
+			m_vel_x += m_acc_x;
+			m_pos_x += m_vel_x;
+			m_grpCutIn->SetPos ( m_pos_x, 100 );
+
+			if (m_count > 30)
+			{
+				m_overdrive = F;	//条件をオフ
+				m_grpCutIn->SetValid ( F );
+			}
+
+			++ m_count;
 		}
 
 
@@ -154,6 +180,16 @@ namespace GAME
 
 		TASK_VEC::Move ();
 	}
+
+	void FtgGrp::Start_CutIn()
+	{
+		m_overdrive = T;
+		m_count = 0;
+		m_pos_x = 0;
+		m_vel_x = m_vel_x_start;
+		m_grpCutIn->SetValid ( T );
+	}
+
 
 
 }	//namespace GAME

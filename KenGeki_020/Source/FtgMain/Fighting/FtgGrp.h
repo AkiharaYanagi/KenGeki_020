@@ -46,6 +46,15 @@ namespace GAME
 		std::unique_ptr < s3d::VideoTexture > mp_vtx;
 
 
+		//カットイン
+		P_Grp	m_grpCutIn;
+		float	m_pos_x { 0 };
+		float	m_vel_x_start { 0 };
+		float	m_vel_x { 0 };
+		float	m_acc_x { 0 };
+		_CLR	m_clr { 0xffffffff };
+		INT32	m_count { 0 };
+
 
 	public:
 		FtgGrp ();
@@ -92,6 +101,9 @@ namespace GAME
 		//---------------------------------------
 		void StartAllBlack () { m_bg_All_Black->SetValid ( T ); }
 		void EndAllBlack () { m_bg_All_Black->SetValid ( F ); }
+
+		//cut in
+		void Start_CutIn ();
 	};
 
 	using P_FtgGrp = std::shared_ptr < FtgGrp >;
