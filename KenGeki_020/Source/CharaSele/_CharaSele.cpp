@@ -235,7 +235,7 @@ namespace GAME
 
 			//通常戦闘かトレーニングの分岐
 			P_Param pPrm = Scene::GetpParam ();
-			if ( MODE_MAIN == pPrm->GetGameMode () )
+			if ( MODE_FTG_MAIN == pPrm->GetGameMode () )
 			{
 				Scene::Transit_Fighting ();
 			}

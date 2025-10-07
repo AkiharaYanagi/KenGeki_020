@@ -29,7 +29,7 @@ namespace GAME
 		GameSettingFile		m_setting;
 
 		//内部設定
-		GAME_MODE		m_gameMode { MODE_TRAINING };
+		FTG_MODE		m_gameMode { MODE_TRAINING };
 		MUTCH_MODE		m_mutchMode { MODE_PLAYER_PLAYER };
 		CHARA_NAME		m_chara_name_1p { CHARA_NAME_NUM };
 		CHARA_NAME		m_chara_name_2p { CHARA_NAME_NUM };
@@ -91,8 +91,8 @@ namespace GAME
 		void SetSettingFile ( const GameSettingFile & stg ) { m_setting = stg; }
 
 		//内部設定
-		void SetGameMode ( GAME_MODE mode ) { m_gameMode = mode; }
-		GAME_MODE GetGameMode () const { return m_gameMode; }
+		void SetGameMode ( FTG_MODE mode ) { m_gameMode = mode; }
+		FTG_MODE GetGameMode () const { return m_gameMode; }
 
 		void SetMutchMode ( MUTCH_MODE mode );
 		void SetMutchMode ( PLAYER_MODE mode1p, PLAYER_MODE mode2p );

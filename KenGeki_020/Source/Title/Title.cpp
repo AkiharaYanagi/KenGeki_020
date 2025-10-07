@@ -369,19 +369,19 @@ namespace GAME
 				case TITLE_TO_BATTLE_1PvsCPU:
 					SND_STOP_ALL_BGM ();
 					pParam->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_CPU );
-					pParam->SetGameMode ( GAME_MODE::MODE_MAIN );
+					pParam->SetGameMode ( FTG_MODE::MODE_FTG_MAIN );
 					Scene::Transit_CharaSele ();
 					break;
 				case TITLE_TO_BATTLE_1Pvs2P:
 					SND_STOP_ALL_BGM ();
 					pParam->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_PLAYER );
-					pParam->SetGameMode ( GAME_MODE::MODE_MAIN );
+					pParam->SetGameMode ( FTG_MODE::MODE_FTG_MAIN );
 					Scene::Transit_CharaSele ();
 					break;
 				case TITLE_TO_BATTLE_CPUvsCPU:
 					SND_STOP_ALL_BGM ();
 					pParam->SetMutchMode ( MUTCH_MODE::MODE_CPU_CPU );
-					pParam->SetGameMode ( GAME_MODE::MODE_MAIN );
+					pParam->SetGameMode ( FTG_MODE::MODE_FTG_MAIN );
 					Scene::Transit_CharaSele ();
 					break;
 #if 0
@@ -395,7 +395,7 @@ namespace GAME
 				case TITLE_TO_TRAINING:
 					SND_STOP_ALL_BGM ();
 					pParam->SetMutchMode ( MUTCH_MODE::MODE_PLAYER_PLAYER );
-					pParam->SetGameMode ( GAME_MODE::MODE_TRAINING );
+					pParam->SetGameMode ( FTG_MODE::MODE_TRAINING );
 					Scene::Transit_CharaSele ();
 //					Scene::Transit_Training ();
 					break;
