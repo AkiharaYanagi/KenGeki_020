@@ -193,7 +193,9 @@ namespace GAME
 //		P_Param pParam =  m_prmFtgDemo->GetpSceneParam();
 		BGM_ID bgm_id = m_pParam->Get_BGM_ID ();
 		SND_STOP_ALL_BGM ();
-		SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ bgm_id ] );
+
+
+//		SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ bgm_id ] );
 
 
 	}

@@ -100,6 +100,14 @@ namespace GAME
 		//保存IDとゲーム管理IDは異なるので名前で検索
 		BGM_NAME bgm_name = BGM_ID_TO_NAME [ bgm_id ];
 
+
+
+		//@todo BGMを録画用にオフを追加
+
+#if 0
+
+
+
 		//すでに再生中でなければ再生
 		if ( ! SND()->IsPlayBGM( bgm_name ) )
 		{
@@ -107,6 +115,7 @@ namespace GAME
 			SND_STOP_ALL_BGM ();
 			SND_PLAY_LOOP_BGM ( bgm_name );
 		}
+#endif // 0
 
 
 		m_grpGetReady->Start ();
