@@ -20,6 +20,7 @@ namespace GAME
 	//------------------------------------------
 
 	//BGM
+	constexpr char32_t BGM_NONE []		= U"BGM_NONE";
 	constexpr char32_t BGM_GABA []		= U"00_BGM_GABA.wav";
 	constexpr char32_t BGM_SAE []		= U"01_BGM_SAE.wav";
 	constexpr char32_t BGM_OUKA []		= U"02_BGM_OUKA.wav";
@@ -34,6 +35,7 @@ namespace GAME
 	//ID
 	enum BGM_ID
 	{
+		BGM_ID_NONE,
 		BGM_ID_GABA,
 		BGM_ID_OUKA,
 		BGM_ID_SAE,

@@ -10,6 +10,7 @@
 #include "Game.h"
 #include "GameMain.h"
 #include "G_Ftg.h"
+#include "DebugDisp.h"
 
 
 //-------------------------------------------------------------------------------------------------
@@ -68,7 +69,10 @@ void Load ()
 	gameSystem.SystemLoad ();
 
 	//開始時一時停止
-	//gameSystem.SetbStop ( T );
+#if WAIT_START
+	gameSystem.SetbStop ( T );
+#endif // WAIT_START
+
 
 
 	//ゲームメイン

@@ -86,6 +86,7 @@ namespace GAME
 		//------------------------------------------------
 		//BGM名
 		m_bgmName = std::make_shared < GameGraphic > ();
+		m_bgmName->AddTexture_FromArchive ( U"1_1_transparent.png" );
 		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Gaba.png" );
 		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Ouka.png" );
 		m_bgmName->AddTexture_FromArchive ( U"Battle\\BGM_NAME_main_Sae.png" );
@@ -189,13 +190,14 @@ namespace GAME
 
 
 		//BGM
-//		P_Param pParam = Scene::GetpParam ();
-//		P_Param pParam =  m_prmFtgDemo->GetpSceneParam();
 		BGM_ID bgm_id = m_pParam->Get_BGM_ID ();
 		SND_STOP_ALL_BGM ();
 
-
-//		SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ bgm_id ] );
+		//BGMなし以外は再生開始
+		if ( BGM_ID_NONE != bgm_id )
+		{
+			SND_PLAY_LOOP_BGM ( BGM_ID_TO_NAME [ bgm_id ] );
+		}
 
 
 	}
