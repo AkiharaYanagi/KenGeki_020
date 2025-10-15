@@ -41,7 +41,7 @@ namespace GAME
 //	0 : OFF
 //  1 : ON
 
-#define WAIT_START	1
+#define WAIT_START	0
 
 //====================================================
 
