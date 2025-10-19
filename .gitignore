@@ -386,3 +386,4 @@ FodyWeavers.xsd
 *.zip
 *.exp
 *.dll
+*.scp
