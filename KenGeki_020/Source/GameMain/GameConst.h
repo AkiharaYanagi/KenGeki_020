@@ -52,6 +52,13 @@ namespace GAME
 		TEST_VOID,
 	};
 
+	//戦闘（対戦種類：メイン, トレーニング) モード
+	enum FTG_MODE
+	{
+		MODE_FTG_MAIN,	//対人(メイン)
+		MODE_TRAINING,	//トレーニング
+	};
+
 	//ステージ名
 	enum STAGE_NAME
 	{
