@@ -6,15 +6,15 @@
     <OutDir>.\App\</OutDir>
     <TargetExt>
     </TargetExt>
-    <IncludePath>$(SIV3D_0_6_16)\include;$(SIV3D_0_6_16)\include\ThirdParty;$(IncludePath)</IncludePath>
+    <IncludePath>F:\Programming\SDL3-3.4.8\include;$(SIV3D_0_6_16)\include;$(SIV3D_0_6_16)\include\ThirdParty;$(IncludePath)</IncludePath>
     <LibraryPath>$(SIV3D_0_6_16)\lib\Windows;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\Projects\GameLib020\SDL3-3.4.8\include;F:\Programming\lz4-dev\lib;$(SolutionDir)Include;F:\Projects\GameLib020\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\Programming\SDL3-3.4.8\include;F:\Programming\lz4-dev\lib;$(SolutionDir)Include;F:\Projects\GameLib020\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>F:\Projects\GameLib020\SDL3-3.4.8;F:\Projects\GameLib020\Library;$(SolutionDir)Library;F:\Programming\lz4-dev\build\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>F:\Programming\SDL3-3.4.8\lib\x64;F:\Projects\GameLib020\Library;$(SolutionDir)Library;F:\Programming\lz4-dev\build\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>F:\Programming\lz4-dev\build\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
